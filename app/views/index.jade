@@ -25,15 +25,17 @@ html(lang='en')
 							input(type='text', value='', placeholder='username', name='username')
 							input(type='password', value='', placeholder='password', name='password')
 							.login-right
-								a.go-login.ff-icon-after(href='#') go login
+								a.go-login.ff-icon-after(href='#',onclick="$('#login-body').submit()") go login
 								a#forgot(href='#') forgot?   
-					#process-error
-						h3.ff-icon-before
-							strong error
-						span
-							| Error message text goes in here
-							br
-							| and wraps onto two lines to look balanced.
+					- if(error != '') {
+						#process-error
+							h3.ff-icon-before
+								strong error
+							span
+								= error
+								br
+								| &nbsp;
+					- }
 					#login-facebook.clearfix
 						h3.ff-icon-before
 							| login via
