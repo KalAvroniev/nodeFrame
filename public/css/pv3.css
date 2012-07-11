@@ -854,7 +854,7 @@ fieldset.forgot input[type="text"] {
 }
 
 .login-right .go-login:hover {
-	color: #472f06;
+	color: #5c4003;
 	
 background: #ecb909; /* Old browsers */
 background: -moz-linear-gradient(top,  #ecb909 0%, #e99605 100%); /* FF3.6+ */
@@ -889,7 +889,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	background: #e46503;
 	color: #5c2405;
 	border-radius: 0 0 8px 8px;
-	padding: 20px 30px 20px;
+	padding: 23px 30px 20px;
 	margin: 0 0 -8px;
 	position: relative;
 	box-shadow: 0 3px 5px rgba(0,0,0,0.15);
