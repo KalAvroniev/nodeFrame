@@ -1,6 +1,6 @@
 express = require('express')
-JsonRpcServer = require('./JsonRpcServer.coffee').JsonRpcServer
 fs = require('fs')
+JsonRpcServer = require('./JsonRpcServer.coffee').JsonRpcServer
 
 class exports.Application
 
@@ -12,7 +12,13 @@ class exports.Application
 	
 		# create server
 		@app = express.createServer()
-		@app.use(express.static(__dirname + '/../../public'));
+		@app.use(express.static(__dirname + '/../../public'))
+		
+		# sessions
+		@app.use(express.bodyParser())
+		@app.use(express.cookieParser())
+		@app.use(express.session({ secret: "protrada" }))
+		
 		@registerControllers()
 		@app.post('/jsonrpc', @jsonRpcRequest)
 		@app.set('view engine', 'jade');
@@ -27,20 +33,23 @@ class exports.Application
 	handleRequest: (req, res) ->
 		# clean URL
 		url = req.url.replace(/\/+$/, '')
+		if url.indexOf('?') >= 0
+			url = url.substr(0, url.indexOf('?'))
 		if url == ''
 			url = '/index'
 		
 		# setup ready handler
 		res.setView = (view) ->
-			res.view = view
+			res.renderView = view
 		res.ready = () ->
-			if res.view
-				res.render(res.view)
+			if res.renderView
+				res.render(res.renderView, res.view)
 			else
-				res.render(url.substr(1))
+				res.render(url.substr(1), res.view)
 		
 		# run
 		controller = new (require("../controllers" + url + ".coffee").Controller)
+		res.view = {}
 		controller.run(
 			req,
 			res
@@ -52,7 +61,7 @@ class exports.Application
 	registerControllers: (path = 'controllers') ->
 		if path == 'controllers'
 			console.log("Registering Controllers...")
-			@app.get('/', @handleRequest)
+			@app.all('/', @handleRequest)
 		
 		# read the directory
 		try
@@ -62,4 +71,4 @@ class exports.Application
 					@registerControllers(path + '/' + file)
 			)
 		catch e
-			@app.get(path.substr(11, path.length - 18), @handleRequest)
+			@app.all(path.substr(11, path.length - 18), @handleRequest)
