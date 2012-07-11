@@ -32,11 +32,13 @@ class exports.Application
 	
 	handleRequest: (req, res) ->
 		# clean URL
-		url = req.url.replace(/\/+$/, '')
+		url = req.url
 		if url.indexOf('?') >= 0
 			url = url.substr(0, url.indexOf('?'))
+		url = url.replace(/\/+$/, '')
 		if url == ''
 			url = '/index'
+		console.log(url)
 		
 		# setup ready handler
 		res.setView = (view) ->
