@@ -1,0 +1,22 @@
+/*.tiny-scrollbar { width: 520px; clear: both; margin: 20px 0 10px; }
+.tiny-scrollbar .viewport { width: 500px; height: 200px; overflow: hidden; position: relative; }
+.tiny-scrollbar .overview { list-style: none; position: absolute; left: 0; top: 0; }*/
+.tiny-scrollbar-vert > .viewport { overflow: hidden; }
+.tiny-scrollbar-vert > .viewport > .overview { z-index: 0; list-style: none; position: relative; }
+.tiny-scrollbar-vert > .scrollbar .thumb .end,
+.tiny-scrollbar-vert > .scrollbar .thumb { background-color: #003D5D; }
+.tiny-scrollbar-vert > .scrollbar { z-index: 1; position: relative; float: right; width: 15px; }
+.tiny-scrollbar-vert > .scrollbar .track { background-color: #D8EEFD; height: 100%; width:13px; position: relative; padding: 0 1px; }
+.tiny-scrollbar-vert > .scrollbar .thumb { height: 20px; width: 13px; cursor: pointer; overflow: hidden; position: absolute; top: 0; }
+.tiny-scrollbar-vert > .scrollbar .thumb .end { overflow: hidden; height: 5px; width: 13px; }
+.tiny-scrollbar-vert > .scrollbar.disable { display: none; visibility: hidden; }
+
+.tiny-scrollbar-horiz > .viewport { overflow: hidden; }
+.tiny-scrollbar-horiz > .viewport > .overview { z-index: 0; list-style: none; position: relative; }
+.tiny-scrollbar-horiz > .scrollbar .thumb .end,
+.tiny-scrollbar-horiz > .scrollbar .thumb { background-color: #003D5D; }
+.tiny-scrollbar-horiz > .scrollbar .thumb { height: 15px; cursor: pointer; overflow: hidden; position: absolute; left: 0; }
+.tiny-scrollbar-horiz > .scrollbar .thumb .end{ overflow: hidden; height: 15px; width: 5px;}
+.tiny-scrollbar-horiz > .scrollbar { z-index: 1; position: absolute; height: 15px; top: 100px; }
+.tiny-scrollbar-horiz > .scrollbar .track { background-color: #D8EEFD; width: 100%; height:15px; position: relative; }
+.tiny-scrollbar-horiz > .scrollbar.disable { display: none; visibility: hidden; }
