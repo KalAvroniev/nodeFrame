@@ -321,7 +321,7 @@ html(lang='en')
 										| .
 				#aside-inset-shadow
 		
-	div(id="maincontent")
+		div(id="ajax-container")
 		
 		
 		
@@ -365,7 +365,7 @@ html(lang='en')
 				var module = document.URL.substr(document.URL.lastIndexOf('/') + 1);
 				$.ajax('/modules/' + module + '?ajax=1', {
 					'success': function (data) {
-						$('#maincontent').html(data);
+						$('#ajax-container').html(data);
 					}
-				})
+				});
 			});
