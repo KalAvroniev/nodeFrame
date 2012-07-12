@@ -1797,7 +1797,7 @@ header#main:before {
 }
 
 #status-summary {
-	margin: -2px 0 0 0;
+	margin: 0;
 	background: rgba(0,0,0,0.15);
 	box-shadow: 0 1px 0 rgba(255,255,255,0.7), inset 0 1px 3px rgba(0,0,0,0.15);
 	height: 165px;
@@ -1879,11 +1879,10 @@ header#main:before {
 
 
 
-#h4-status-summary, #h4-trading-summary 
-{
+#h4-status-summary, #h4-trading-summary {
 	font-size: 18px;
 	line-height: 1;
-	margin: 12px 0 0 335px;
+	margin: 7px 0 0 335px;
 	font-weight: 300;
 }
 #h4-trading-summary {

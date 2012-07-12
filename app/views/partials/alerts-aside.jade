@@ -1,9 +1,9 @@
-aside.scrollfix
+aside.scrollfix.active
 	header.alerts-header
 		#live-help-logo.ff-icon-after.ff-icon help live
 		#live-help-info
-			| Chat with our support staff
-			a(href='javascript:void(0);') online now
+			| Chat with our support staff 
+			a(href='javascript:void(0);') online now 
 		#live-help-status.ff-icon-before.online
 	#notifications.tiny-scrollbar-vert
 		.scrollbar
@@ -13,19 +13,19 @@ aside.scrollfix
 		.viewport
 			.overview
 				h3#h3-alerts-title.ff-icon-before
-					strong Important
+					strong Important 
 					| messages
 				p
 					| This is your system-wide activity feed.
 					br
 					| Check this list for items requiring action from you, or for
-					| updates on things that the system has done for you.
-					a#hide-activity-descr(href='') Hide this
+					| updates on things that the system has done for you. 
+					a#hide-activity-descr(href='') Hide this 
 				section#tabbed-alert-msgs
 					ul#alert-msgs.nav.nav-tabs
 						li.devname.center
 							a.ff-icon-before(href='#devname-msgs')
-								span.alert-count(title='# of new msgs') 1
+								span.alert-count(data-alerts='#',title='origin of alerts') 
 						li.active.protrada.left
 							a.ff-icon-before(href='#protrada-msgs')
 								span.alert-count(title='# of new msgs') 4
@@ -34,14 +34,14 @@ aside.scrollfix
 					.tab-content
 						#protrada-msgs.tab-pane.active
 							h4
-								strong Protrada
+								strong Protrada 
 								| notifications
 							article.alert-msg.preview.new
 								span.x-alert-msg(title='Archive this message') x
 								header.clearfix
 									h6
-										strong Alert 1
-										| - 4hrs ago
+										strong Alert 1 
+										| - 4hrs ago 
 									hgroup
 										h5 Website preview is ready
 										h4
@@ -53,7 +53,7 @@ aside.scrollfix
 								span.x-alert-msg(title='Archive this message') x
 								header.clearfix
 									h6
-										strong Alert 3
+										strong Alert 3 
 										| - 4hrs ago
 									hgroup
 										h5 Website preview is ready
