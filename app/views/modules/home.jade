@@ -173,6 +173,92 @@ header#main
 						.thumb
 							.end
 				.viewport
+				
+
+					table.grid-table.overview.floatable
+							thead
+									tr.col-grouping
+										th.sticky(colspan='2')
+											span.on.sticky-pin Stick
+										th(colspan='2') Basic domain info
+										th(colspan='4') Price / value info
+										th(colspan='2') Performance info
+										th(colspan='3') Domain registration info
+									tr.filter
+										th(colspan='2', scope='col')
+											label Bulk
+											#fav-sel-all
+												button.btn.select(title='Select all', data-toggle='button')
+												button.btn.favourite(title='Favourite all', data-toggle='button')
+										th(scope='col')
+											label(for='category') Top action(s)
+											#top-actions.btn-group
+												a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+													| Sort by?
+													span.caret
+												ul.dropdown-menu
+													li
+														a(href='') Action 1
+													li
+														a(href='') Action 2
+													li
+														a(href='') Action 3
+										th.sortable.domain-title(scope='col')
+											label.active-asc(for='domain-title') Domain title
+											#domain-title-inputs
+												input#domain-title.txt-filter.filter-active(value='protrada', type='text')
+												a.disable(href='')
+												#string-mode-selection.btn-group
+													a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+														| Containing
+														span.caret
+													ul.dropdown-menu
+														li
+															a(href='') Containing
+														li
+															a(href='') Ending with
+														li
+															a(href='') Beginning with
+												a#advanced-keyword-filter(href='', title='Advanced keyword filter') advanced keyword filter
+										th.sortable(scope='col')
+											label(for='offers') Offers
+											input#offers.txt-filter(value='', type='text')
+										th.sortable(scope='col')
+											label(for='cost') Cost
+											input#cost.txt-filter(value='', type='text')
+										th.sortable(scope='col')
+											label(for='appraised') Appraised
+											input#appraised.txt-filter(value='', type='text')
+										th(scope='col')
+											label(for='unrealised') Unrealised
+											input#unrealised.txt-filter(value='', type='text')
+										th(scope='col')
+											label(for='income') Income
+											input#income.txt-filter(value='', type='text')
+										th(scope='col')
+											label(for='roi') ROI%
+											input#roi.txt-filter(value='', type='text')
+										th.sortable(scope='col')
+											label(for='acquired') Acquired date
+											input#acquired.txt-filter(value='', type='text')
+										th(scope='col')
+											label(for='expire') Expire date
+											input#expire.txt-filter(value='', type='text')
+										th(scope='col')
+											label(for='status') Status
+											#status.btn-group
+												a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+													| Pending
+													span.caret
+												ul.dropdown-menu
+													li
+														a(href='') Active
+													li
+														a(href='') Expired
+													li
+														a(href='') Dropping
+
+
 		#listed-for-sale.tab-pane
 			h2#complete-listing Domains listed for sale
 			p

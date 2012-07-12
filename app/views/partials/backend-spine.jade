@@ -38,16 +38,21 @@
 				a#mode-rocker(href='#')
 		nav
 			ul
-				li(class='spine_nav',id="home")
-					a#nav-home.ajaxy.ff-icon-before(href="javascript:navigate('home')")
+				li(class='spine_nav')
+					a#nav-home.ff-icon-before(href="javascript:navigate('home')")
 					span home / portfolio dashboard
-				li(class='spine_nav',id="exchange")
-					a#nav-exchange.ajaxy.ff-icon-before(href="javascript:navigate('exchange')")
+				li(class='spine_nav')
+					a#nav-exchange.ff-icon-before(href="javascript:navigate('exchange')")
 					span the domain exchange
-				li(class='spine_nav',id="education")
+				li(class='spine_nav')
+					a#nav-settings.ff-icon-before(href='javascript:void(0);')
+					span user settings		
+					
+				// not active/used yet ----------				
+				li(class='spine_nav')
 					a#nav-education.ff-icon-before(href='javascript:void(0);')
 					span 'domaining' education
-				li(class='spine_nav',id="cart")
+				li(class='spine_nav')
 					a#nav-cart.ff-icon-before(href='javascript:void(0);')
 					span shopping cart
 		a#system-help.ff-icon-after(href='')
