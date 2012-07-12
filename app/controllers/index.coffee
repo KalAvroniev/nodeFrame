@@ -8,3 +8,4 @@ class exports.Controller extends Controller
 			res.redirect('/login')
 		else
 			res.ready()
+	

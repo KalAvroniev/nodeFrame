@@ -1,0 +1,138 @@
+// exchange.jade
+- if(!ajax) {
+!= partial('partials/styles')
+- }
+
+header#main
+	#toggle-side-bar.ff-icon-before
+		span.toggle-title
+			strong Collapse 
+			| sidebar
+		span.toggle-sub * You can also re-open from here
+	#sectional-func.side-open
+		#x-side-bar(title='Toggle display of sidebar')
+			span.left-bars
+				span
+			span.right-bar
+		ul.sectional-tabs
+			li#modal.hidden
+				a(href='javascript:void(0);')
+					span
+						strong Active modal
+						| label in here
+			li#domain-info.hidden
+				a.ff-icon-before(href='javascript:void(0);')
+					strong Detailed
+					| domain info
+			li#watchlist.hidden
+				a.(href='javascript:void(0);')
+					strong My Watchlist
+					| domains you star
+		form#quick-search.well
+			input#quick-search-keyword(value='', placeholder='Quick domain search _')
+			#sale-type.btn-group
+				a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+					| Sale type
+					span.caret
+				ul.dropdown-menu
+					li
+						a(href='') Auctions only
+					li
+						a(href='') PreAuctions only
+					li
+						a(href='') Expiring only
+					li
+						a(href='') Dropping only
+					li.divider
+					li
+						a(href='') New Registrations only
+					li
+						a(href='') Websites only
+			button.btn.ff-icon-before(type='submit') Submit
+
+#section-panel.hidden(data-tab='watchlist')
+	#panel-content
+		a.x-panel(href='')
+		h2.panel-heading
+			strong my watchlist
+			| domains that you have starred
+		p
+			| When you star an auction in The Domain Exchange, It appears here. This allows to you make a shortlist containing only the domains sales/auctions that you are interested in following.
+		ul#watchlist-tabs.nav.nav-tabs
+			li.active
+				a(href='#expiring', data-toggle='tab') Expiring
+			li
+				a(href='#pre-auction', data-toggle='tab') Pre-auctions
+			li
+				a(href='#auction', data-toggle='tab') Auctions
+			li
+				a(href='#buy-it-now', data-toggle='tab') Buy it now
+			li
+				a(href='#websites', data-toggle='tab') Websites
+			li
+				a(href='#history', data-toggle='tab') History
+		.tab-content
+			#expiring.tab-pane.active
+				h2.light-grid-header Watched expiring domains
+				p.clearfix
+					| Expiring listing definition: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies.
+			#pre-auction.tab-pane	
+			#auction.tab-pane	
+			#buy-it-now.tab-pane	
+			#websites.tab-pane	
+			#history.tab-pane	
+
+
+#main-container.side-open.page-exchange
+		h5#bread-crumb trading mode (Protrada)
+			#member-options.btn-group
+				a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+					| previous searches
+					span.caret
+				ul.dropdown-menu
+					li
+						a(href='javascript:void(0);') search 1
+					li
+						a(href='javascript:void(0);') an old search
+					li
+						a(href='javascript:void(0);') another old search
+					li.divider
+					li
+						a(href='javascript:void(0);') search is divided
+			hgroup#section-headings
+				h1 the domain exchange
+				h3
+					| search, sort, analyse and filter domains from the all the major domain resellers / trading houses.
+			ul#exchange-data-tabs.nav.nav-tabs
+				li.active
+					a(href='') Expiring
+				li
+					a(href='') Auctions
+				li
+					a(href='') Dropping
+				li
+					a(href='') Websites
+				li
+					a(href='') History
+				li
+					a(href='') New registrations
+			#exchange-tab-panes.tab-content
+				#expiring.tab-pane.active
+					h2#complete-listing Expiring domains listing
+					p.clearfix
+						| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
+						| andit eget non lacus. Pellentesque a imperdiet diam.
+					#grid-view.tiny-scrollbar-horiz
+						.scrollbar
+							.track
+								.thumb
+									.end
+						.viewport
+				#listed-for-sale.tab-pane
+					h2#complete-listing Domains listed for sale
+					p
+						| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
+						| andit eget non lacus. Pellentesque a imperdiet diam.
+					#temp-for-sale	grid view control goes in here 
+			#thetableclone
+				table.grid-table
