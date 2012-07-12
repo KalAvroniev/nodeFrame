@@ -1,6 +1,7 @@
 express = require('express')
 fs = require('fs')
 JsonRpcServer = require('./JsonRpcServer.coffee').JsonRpcServer
+SessionStore = require('./SessionStore.coffee').SessionStore
 
 class exports.Application
 
@@ -17,7 +18,7 @@ class exports.Application
 		# sessions
 		@app.use(express.bodyParser())
 		@app.use(express.cookieParser())
-		@app.use(express.session({ secret: "protrada" }))
+		@app.use(express.session({ 'secret': "protrada", 'store': new SessionStore() }))
 		
 		@registerControllers()
 		@app.post('/jsonrpc', @jsonRpcRequest)
