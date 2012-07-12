@@ -7,67 +7,6 @@ html(lang='en')
 		title Protrada V3 Proof of Concept
 		
 		!= partial('partials/styles')
-<<<<<<< HEAD
-
-
-	body.sidebar-hidden
-		#spine
-			#spine-inner
-				a#toggle-sys-menu(href='', title='Protrada system menu')
-					span.ff-icon-before
-				#sys-menu.hidden
-					#sys-menu-title-bar
-						a#x-sys-menu.ff-icon-before(href='#')
-						h4
-							| System
-							strong options
-					#user-options
-						h4.side-on user options
-						#credits
-							h3
-								| Your system
-								strong.ff-icon-before credits
-							span.ff-icon-after.credit-count 657
-							a.ff-icon-before(href='#') Buy more
-						a.ff-icon-before(href='#', data-title='user settings')
-						a.ff-icon-before(href='#', data-title='user profile')
-						a.ff-icon-before(href='#', data-title='upgrade membership')
-						a.ff-icon-before(href='#', data-title='sign-out of account')
-					#ui-controls
-						h4.side-on ui controls
-						a#toggle-help-bubbles.ff-icon-before(href='#') toggle display of help bubbles (for new users)
-						a#toggle-condensed.ff-icon-before(href='#') toggle condensed view (for small screens)
-						a#toggle-downgrade.ff-icon-before(href='#') downgrade interface details (for better performance)
-					#system-rocker.clearfix
-						h4.side-on system
-						h3.ff-icon-before.devname.hidden
-							| monetize
-							br
-							| mode
-						h3.ff-icon-before.protrada
-							| trading
-							br
-							| mode
-						a#mode-rocker(href='#')
-				nav
-					ul
-						li(class='spine_nav',id="home")
-							a#nav-home.ajaxy.ff-icon-before(href="javascript:navigate('home')")
-							span home / portfolio dashboard
-						li(class='spine_nav',id="exchange")
-							a#nav-exchange.ajaxy.ff-icon-before(href="javascript:navigate('exchange')")
-							span the domain exchange
-						li
-							a#nav-education.ff-icon-before(href='javascript:void(0);')
-							span 'domaining' education
-						li
-							a#nav-cart.ff-icon-before(href='javascript:void(0);')
-							span shopping cart
-				a#system-help.ff-icon-after(href='')
-					| System
-					strong help
-=======
->>>>>>> 09c647ffae30e176a1fdce68cbdf522aec8f98e3
 		
 		script 	
 			if( navigator.userAgent.match(/Android/i)
@@ -126,7 +65,7 @@ html(lang='en')
 				window.history.pushState('', module, "/" + module);
 				$.ajax('/modules/' + module + '?ajax=1', {
 					'success': function (data) {
-						$('#maincontent').html(data);
+						$('#ajax-container').html(data);
 						$('.spine_nav').removeClass("selected");
 						$('.spine_nav#' + module).addClass("selected");
 					}

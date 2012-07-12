@@ -38,16 +38,16 @@
 				a#mode-rocker(href='#')
 		nav
 			ul
-				li
-					a#nav-home.ajaxy.ff-icon-before(href='home')
+				li(class='spine_nav',id="home")
+					a#nav-home.ajaxy.ff-icon-before(href="javascript:navigate('home')")
 					span home / portfolio dashboard
-				li
-					a#nav-exchange.ajaxy.ff-icon-before(href='exchange')
+				li(class='spine_nav',id="exchange")
+					a#nav-exchange.ajaxy.ff-icon-before(href="javascript:navigate('exchange')")
 					span the domain exchange
-				li
+				li(class='spine_nav',id="education")
 					a#nav-education.ff-icon-before(href='javascript:void(0);')
 					span 'domaining' education
-				li
+				li(class='spine_nav',id="cart")
 					a#nav-cart.ff-icon-before(href='javascript:void(0);')
 					span shopping cart
 		a#system-help.ff-icon-after(href='')
