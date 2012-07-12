@@ -375,6 +375,7 @@ html(lang='en')
 				var module = document.URL.substr(document.URL.lastIndexOf('/') + 1);
 <<<<<<< HEAD
 				navigate(module);
+			});
 =======
 				$.ajax('/modules/' + module + '?ajax=1', {
 					'success': function (data) {
@@ -382,4 +383,3 @@ html(lang='en')
 					}
 				});
 >>>>>>> 65a2f03bbc2c0ca23909822d8c2aa4a11d340fec
-			});
