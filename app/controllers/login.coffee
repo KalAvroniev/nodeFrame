@@ -9,4 +9,4 @@ class exports.Controller
 			}
 			res.redirect('/home')
 		else
-			res.redirect('/?error=' + escape("Your login isn't correct."))
+			res.redirect('/?error=' + escape("Your login information is incorrect. Please try again or use the forgot button."))
