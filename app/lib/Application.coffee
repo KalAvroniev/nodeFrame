@@ -22,10 +22,10 @@ class exports.Application
 		
 		@registerControllers()
 		@app.post('/jsonrpc', @jsonRpcRequest)
-		@app.set('view engine', 'jade');
+		@app.set('view engine', 'jade')
 		
 		# default layout
-		@app.set("view options", { layout: "../layouts/default.jade" });
+		@app.set('view options', { pretty: true, layout: "../layouts/default.jade" });
 		
 		# listen
 		@app.listen(8181)
@@ -74,4 +74,5 @@ class exports.Application
 					@registerControllers(path + '/' + file)
 			)
 		catch e
+			console.log("Registering controller '" + path.substr(11, path.length - 18) + "'")
 			@app.all(path.substr(11, path.length - 18), @handleRequest)
