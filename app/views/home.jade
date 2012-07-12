@@ -1,1 +1,180 @@
-p moo goes the cow
+// home.jade
+
+header#main
+	#toggle-side-bar.ff-icon-before
+		span.toggle-title
+			strong Collapse 
+			| sidebar
+		span.toggle-sub * You can also re-open from here
+	#sectional-func.side-open
+		#x-side-bar(title='Toggle display of sidebar')
+			span.left-bars
+				span
+			span.right-bar
+		ul.sectional-tabs
+			li#modal.hidden
+				a(href='javascript:void(0);')
+					span
+						strong Active modal
+						| label in here
+			li#domain-info.hidden
+				a.ff-icon-before(href='javascript:void(0);')
+					strong Detailed
+					| domain info
+			li#watchlist.hidden
+				a.(href='javascript:void(0);')
+					strong My Watchlist
+					| domains you star
+		form#quick-search.well
+			input#quick-search-keyword(value='', placeholder='Quick domain search _')
+			#sale-type.btn-group
+				a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+					| Sale type
+					span.caret
+				ul.dropdown-menu
+					li
+						a(href='') Auctions only
+					li
+						a(href='') PreAuctions only
+					li
+						a(href='') Expiring only
+					li
+						a(href='') Dropping only
+					li.divider
+					li
+						a(href='') New Registrations only
+					li
+						a(href='') Websites only
+			button.btn.ff-icon-before(type='submit') Submit
+
+#section-panel.hidden(data-tab='watchlist')
+	#panel-content
+		a.x-panel(href='')
+		h2.panel-heading
+			strong my watchlist
+			| domains that you have starred
+		p
+			| When you star an auction in The Domain Exchange, It appears here. This allows to you make a shortlist containing only the domains sales/auctions that you are interested in following.
+		ul#watchlist-tabs.nav.nav-tabs
+			li.active
+				a(href='#expiring', data-toggle='tab') Expiring
+			li
+				a(href='#pre-auction', data-toggle='tab') Pre-auctions
+			li
+				a(href='#auction', data-toggle='tab') Auctions
+			li
+				a(href='#buy-it-now', data-toggle='tab') Buy it now
+			li
+				a(href='#websites', data-toggle='tab') Websites
+			li
+				a(href='#history', data-toggle='tab') History
+		.tab-content
+			#expiring.tab-pane.active
+				h2.light-grid-header Watched expiring domains
+				p.clearfix
+					| Expiring listing definition: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies.
+			#pre-auction.tab-pane	
+			#auction.tab-pane	
+			#buy-it-now.tab-pane	
+			#websites.tab-pane	
+			#history.tab-pane	
+
+#main-container.side-open.page-home
+	h5#bread-crumb trading mode (Protrada)
+	h2#user-greeting hi, Andrew
+	hgroup#member-details
+		h5
+			| You are currently an
+			strong Investor member.
+		h5#member-renewal
+			| Your next membership renewal is:
+			strong.ff-icon-before
+				| 24
+				sup th
+				| May, 2012
+	#health-and-status.clearfix
+		#portfolio-health
+			h3#health-title.ff-icon-before
+				| Portfolio
+				strong health
+			p.ff-icon-before
+				| This section can show you at a glance, how healthy your portfolio is (by charting it's ROI%), and also how it is trending.
+				a(href='#') Read more
+				| to learn how to take advantage of this feature
+			span.demo-spark(title='Graph currently inactive - no data to display')
+		h4#h4-status-summary.ff-icon-before
+			| Your current trading
+			strong status summary
+		#status-summary.tiny-scrollbar-horiz
+			.scrollbar
+				.track
+					.thumb
+						.end
+			.viewport
+				.overview
+					ul#status-data
+						li
+							h5(data-title='watching', data-value='23')
+							span.status-descr domains that you?re currently watching
+						li
+							h5(data-value='2', data-title='losing')
+							span.status-descr auctions that you?re currently losing
+						li
+							h5(data-title='winning', data-value='0')
+							span.status-descr auctions that you?re currently winning
+						li
+							h5(data-title='pre-auction', data-value='0')
+							span.status-descr register your interest for private auctions
+						li.divided
+							h5(data-title='pending', data-value='0')
+							span.status-descr domains pending (not propogated)
+	#trading-and-trending.graph-hidden
+		.graph-legend
+			img(src='img/demo-current-trading.png', alt='demo image of trading graphing functionality')
+		.graph-options
+			h4#h4-trading-summary.ff-icon-before
+				strong Trading
+				| summary
+			#graph-settings.btn-group
+				a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+					| data settings
+					span.caret
+				ul.dropdown-menu
+					li
+						a(href='javascript:void(0);') weekly
+					li
+						a(href='javascript:void(0);') monthly
+					li
+						a(href='javascript:void(0);') quarterly
+					li
+						a(href='javascript:void(0);') yearly
+					li.divider
+					li
+						a(href='javascript:void(0);') only ROI% yearly
+		.graph-container
+			#trading-graph.graph	
+	ul#portfolio-data-tabs.nav.nav-tabs
+		li.active
+			a(href='#whole-portfolio') My portfolio
+		li
+			a(href='#listed-for-sale') Listed for sale (4)
+	#dashboard-tab-panes.tab-content
+		#whole-portfolio.tab-pane.active
+			h2#complete-listing Complete domain listing
+			p.clearfix
+				| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
+				| andit eget non lacus. Pellentesque a imperdiet diam.
+			#grid-view.tiny-scrollbar-horiz
+				.scrollbar
+					.track
+						.thumb
+							.end
+				.viewport
+		#listed-for-sale.tab-pane
+			h2#complete-listing Domains listed for sale
+			p
+				| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
+				| andit eget non lacus. Pellentesque a imperdiet diam.
+			#temp-for-sale	grid view control goes in here 
+	#thetableclone
+		table.grid-table
