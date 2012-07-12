@@ -73,7 +73,7 @@ body {
 	font-size: 13px;
 	line-height: 1;
 	padding: 0;
-	overflow-y: scroll;
+	/*overflow-y: scroll; - not sure why we need this */
 	position: relative;
 	min-width: /* 800px - 75px -27px -27px (54px) = */ 693px;
 	margin: 0 0 0 75px;

@@ -8,364 +8,364 @@ html(lang='en')
 		!= partial('partials/styles')
 
 
-		body.sidebar-hidden
-			#spine
-				#spine-inner
-					a#toggle-sys-menu(href='', title='Protrada system menu')
-						span.ff-icon-before
-					#sys-menu.hidden
-						#sys-menu-title-bar
-							a#x-sys-menu.ff-icon-before(href='#')
-							h4
-								| System
-								strong options
-						#user-options
-							h4.side-on user options
-							#credits
-								h3
-									| Your system
-									strong.ff-icon-before credits
-								span.ff-icon-after.credit-count 657
-								a.ff-icon-before(href='#') Buy more
-							a.ff-icon-before(href='#', data-title='user settings')
-							a.ff-icon-before(href='#', data-title='user profile')
-							a.ff-icon-before(href='#', data-title='upgrade membership')
-							a.ff-icon-before(href='#', data-title='sign-out of account')
-						#ui-controls
-							h4.side-on ui controls
-							a#toggle-help-bubbles.ff-icon-before(href='#') toggle display of help bubbles (for new users)
-							a#toggle-condensed.ff-icon-before(href='#') toggle condensed view (for small screens)
-							a#toggle-downgrade.ff-icon-before(href='#') downgrade interface details (for better performance)
-						#system-rocker.clearfix
-							h4.side-on system
-							h3.ff-icon-before.devname.hidden
-								| monetize
-								br
-								| mode
-							h3.ff-icon-before.protrada
-								| trading
-								br
-								| mode
-							a#mode-rocker(href='#')
-					nav
-						ul
-							li
-								a#nav-home.ajaxy.ff-icon-before(href='home')
-								span home / portfolio dashboard
-							li
-								a#nav-exchange.ajaxy.ff-icon-before(href='exchange')
-								span the domain exchange
-							li
-								a#nav-education.ff-icon-before(href='javascript:void(0);')
-								span 'domaining' education
-							li
-								a#nav-cart.ff-icon-before(href='javascript:void(0);')
-								span shopping cart
-					a#system-help.ff-icon-after(href='')
-						| System
-						strong help
-			
-			
-			
-			
-			aside.scrollfix
-				header.alerts-header
-					#live-help-logo.ff-icon-after.ff-icon help live
-					#live-help-info
-						| Chat with our support staff
-						a(href='javascript:void(0);') online now
-					#live-help-status.ff-icon-before.online
-				#notifications.tiny-scrollbar-vert
-					.scrollbar
-						.track
-							.thumb
-								.end
-					.viewport
-						.overview
-							h3#h3-alerts-title.ff-icon-before
-								strong Important
-								| messages
-							p
-								| This is your system-wide activity feed.
-								br
-								| Check this list for items requiring action from you, or for
-								| updates on things that the system has done for you.
-								a#hide-activity-descr(href='') Hide this
-							section#tabbed-alert-msgs
-								ul#alert-msgs.nav.nav-tabs
-									li.devname.center
-										a.ff-icon-before(href='#devname-msgs')
-											span.alert-count(title='# of new msgs') 1
-									li.active.protrada.left
-										a.ff-icon-before(href='#protrada-msgs')
-											span.alert-count(title='# of new msgs') 4
-									li.archive.right
-										a.ff-icon-before(href='#archive-msgs')
-								.tab-content
-									#protrada-msgs.tab-pane.active
-										h4
-											strong Protrada
-											| notifications
-										article.alert-msg.preview.new
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 1
-													| - 4hrs ago
-												hgroup
-													h5 Website preview is ready
-													h4
-														a(title='view preview now', href='') ohioflights.com
-											section
-												| This domain has just finished being assessed and is now ready to be previewed!
-												a(title='view preview now', href='') View it now (some extra text to make this link double-line)
-										article.alert-msg.preview.new
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 3
-													| - 4hrs ago
-												hgroup
-													h5 Website preview is ready
-													h4
-														a(title='view preview now', href='') webuiltthiscityyyy.com
-											section
-												| This domain has just finished being assessed and is now ready to be previewed!
-												a(title='view preview now', href='') View it now
-										article.alert-msg.domain-won
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 4
-													| - 4hrs ago
-												hgroup
-													h5 You have won a domain auction
-													h4
-														a(title='action description', href='') moo.com
-											section
-												| The auction for this domain finished on 15th Jan, 2012 @ 5:40pm, with you as the high bidder!
-												a(title='view preview now', href='') Go pay for it
-										article.alert-msg.winning
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 5
-													| - 4hrs ago
-												hgroup
-													h5 1 hour left & you're currently winning!
-													h4
-														a(title='action description', href='') icanhazauction.com
-											section
-												| The auction for this domain will finish on 15th Jan, 2012 @ 5:40pm, and you are currently winning! Remember though, this can change very quickly however.
-												a(title='view preview now', href='') Watch this auction live
-										article.alert-msg.lost-domain
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 6
-													| - 4hrs ago
-												hgroup
-													h5 You have lost a domain auction
-													h4
-														a(title='action description', href='') iliketrafficlights.com
-											section
-												| The auction for this domain finished on 15th Jan, 2012 @ 5:40pm, and someone out-bid you!
-												a(title='action description', href='') Find similar domains now
-										article.alert-msg.losing
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 7
-													| - 4hrs ago
-												hgroup
-													h5 1 hour left & you're currently losing!
-													h4
-														a(title='action description', href='') like.com
-											section
-												| The auction for this domain will finish on 15th Jan, 2012 @ 5:40pm, and you are being out-bid!
-												a(title='action description', href='') Increase your bid now
-										article.alert-msg.max-bid-lost
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 8
-													| - 4hrs ago
-												hgroup
-													h5 Your max-bid just was just out-bid!
-													h4
-														a(title='action description', href='') just-like-that.com
-											section
-												| The auction for this domain will finish on 15th Jan, 2012 @ 5:40pm, and you've just been outbid!
-												a(title='action description', href='') Increase your bid now
-										article.alert-msg.for-sale
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 9
-													| - 4hrs ago
-												hgroup
-													h5 Your domain is now listed for sale
-													h4
-														a(title='action description', href='') buy-this-one.com
-											section
-												| This domain has successfully been placed for sale in The Exchange, GoDaddy, Namejet and Snapname.
-												a(title='action description', href='') View auction
-										article.alert-msg.for-sale
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 10
-													| - 4hrs ago
-												hgroup
-													h5 A domain you're watching ends soon!
-													h4
-														a(title='action description', href='') crazy-man.com
-											section
-												| The auction for this domain will finish on 15th Jan, 2012 @ 5:40pm, and is currently
-												strong $50 from 3 bids
-												| .
-												a(title='action description', href='') Bid on this now
-										article.alert-msg.domain-expire
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 11
-													| - 4hrs ago
-												hgroup
-													h5 One of your domains is about to expire!
-													h4
-														a(title='action description', href='') outofdate.com
-											section
-												| This domain is set to expire on the 15th Jan, 2012.
-												a(title='action description', href='') Renew this domain now
-										article.alert-msg.dns-change
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 12
-													| - 4hrs ago
-												hgroup
-													h5 Your DNS settings have changed
-													h4
-														a(title='action description', href='') outofdate.com
-											section
-												| Our system is telling us that this domain's DNS settings have changed. Did you drop this domain?
-												a(title='action description', href='') Remove it from your Portfolio now
-									#devname-msgs.tab-pane
-										h4
-											strong Devname
-											| notifications
-										article.alert-msg.preview.new
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 3
-													| - 4hrs ago
-												hgroup
-													h5 Website preview is ready
-													h4
-														a(title='view preview now', href='') webuiltthiscityyyy.com
-											section
-												| This domain has just finished being assessed and is now ready to be previewed!
-												a(title='view preview now', href='') View it now
-										article.alert-msg.for-sale
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 10
-													| - 4hrs ago
-												hgroup
-													h5 A domain you're watching ends soon!
-													h4
-														a(title='action description', href='') crazy-man.com
-											section
-												| The auction for this domain will finish on 15th Jan, 2012 @ 5:40pm, and is currently
-												strong $50 from 3 bids
-												| .
-												a(title='action description', href='') Bid on this now
-										article.alert-msg.domain-expire
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 11
-													| - 4hrs ago
-												hgroup
-													h5 One of your domains is about to expire!
-													h4
-														a(title='action description', href='') outofdate.com
-											section
-												| This domain is set to expire on the 15th Jan, 2012.
-												a(title='action description', href='') Renew this domain now
-										article.alert-msg.dns-change
-											span.x-alert-msg(title='Archive this message') x
-											header.clearfix
-												h6
-													strong Alert 12
-													| - 4hrs ago
-												hgroup
-													h5 Your DNS settings have changed
-													h4
-														a(title='action description', href='') outofdate.com
-											section
-												| Our system is telling us that this domain's DNS settings have changed. Did you drop this domain?
-												a(title='action description', href='') Remove it from your Portfolio now
-									#archive-msgs.tab-pane
-										h4
-											strong Archived
-											| notifications
-										p
-											strong Archive content goes in here
-										p
-											| Maybe a summary of what is in the archive section, and a
-											a(href='#') link out
+	body.sidebar-hidden
+		#spine
+			#spine-inner
+				a#toggle-sys-menu(href='', title='Protrada system menu')
+					span.ff-icon-before
+				#sys-menu.hidden
+					#sys-menu-title-bar
+						a#x-sys-menu.ff-icon-before(href='#')
+						h4
+							| System
+							strong options
+					#user-options
+						h4.side-on user options
+						#credits
+							h3
+								| Your system
+								strong.ff-icon-before credits
+							span.ff-icon-after.credit-count 657
+							a.ff-icon-before(href='#') Buy more
+						a.ff-icon-before(href='#', data-title='user settings')
+						a.ff-icon-before(href='#', data-title='user profile')
+						a.ff-icon-before(href='#', data-title='upgrade membership')
+						a.ff-icon-before(href='#', data-title='sign-out of account')
+					#ui-controls
+						h4.side-on ui controls
+						a#toggle-help-bubbles.ff-icon-before(href='#') toggle display of help bubbles (for new users)
+						a#toggle-condensed.ff-icon-before(href='#') toggle condensed view (for small screens)
+						a#toggle-downgrade.ff-icon-before(href='#') downgrade interface details (for better performance)
+					#system-rocker.clearfix
+						h4.side-on system
+						h3.ff-icon-before.devname.hidden
+							| monetize
+							br
+							| mode
+						h3.ff-icon-before.protrada
+							| trading
+							br
+							| mode
+						a#mode-rocker(href='#')
+				nav
+					ul
+						li
+							a#nav-home.ajaxy.ff-icon-before(href='home')
+							span home / portfolio dashboard
+						li
+							a#nav-exchange.ajaxy.ff-icon-before(href='exchange')
+							span the domain exchange
+						li
+							a#nav-education.ff-icon-before(href='javascript:void(0);')
+							span 'domaining' education
+						li
+							a#nav-cart.ff-icon-before(href='javascript:void(0);')
+							span shopping cart
+				a#system-help.ff-icon-after(href='')
+					| System
+					strong help
+		
+		
+		
+		
+		aside.scrollfix
+			header.alerts-header
+				#live-help-logo.ff-icon-after.ff-icon help live
+				#live-help-info
+					| Chat with our support staff
+					a(href='javascript:void(0);') online now
+				#live-help-status.ff-icon-before.online
+			#notifications.tiny-scrollbar-vert
+				.scrollbar
+					.track
+						.thumb
+							.end
+				.viewport
+					.overview
+						h3#h3-alerts-title.ff-icon-before
+							strong Important
+							| messages
+						p
+							| This is your system-wide activity feed.
+							br
+							| Check this list for items requiring action from you, or for
+							| updates on things that the system has done for you.
+							a#hide-activity-descr(href='') Hide this
+						section#tabbed-alert-msgs
+							ul#alert-msgs.nav.nav-tabs
+								li.devname.center
+									a.ff-icon-before(href='#devname-msgs')
+										span.alert-count(title='# of new msgs') 1
+								li.active.protrada.left
+									a.ff-icon-before(href='#protrada-msgs')
+										span.alert-count(title='# of new msgs') 4
+								li.archive.right
+									a.ff-icon-before(href='#archive-msgs')
+							.tab-content
+								#protrada-msgs.tab-pane.active
+									h4
+										strong Protrada
+										| notifications
+									article.alert-msg.preview.new
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 1
+												| - 4hrs ago
+											hgroup
+												h5 Website preview is ready
+												h4
+													a(title='view preview now', href='') ohioflights.com
+										section
+											| This domain has just finished being assessed and is now ready to be previewed!
+											a(title='view preview now', href='') View it now (some extra text to make this link double-line)
+									article.alert-msg.preview.new
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 3
+												| - 4hrs ago
+											hgroup
+												h5 Website preview is ready
+												h4
+													a(title='view preview now', href='') webuiltthiscityyyy.com
+										section
+											| This domain has just finished being assessed and is now ready to be previewed!
+											a(title='view preview now', href='') View it now
+									article.alert-msg.domain-won
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 4
+												| - 4hrs ago
+											hgroup
+												h5 You have won a domain auction
+												h4
+													a(title='action description', href='') moo.com
+										section
+											| The auction for this domain finished on 15th Jan, 2012 @ 5:40pm, with you as the high bidder!
+											a(title='view preview now', href='') Go pay for it
+									article.alert-msg.winning
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 5
+												| - 4hrs ago
+											hgroup
+												h5 1 hour left & you're currently winning!
+												h4
+													a(title='action description', href='') icanhazauction.com
+										section
+											| The auction for this domain will finish on 15th Jan, 2012 @ 5:40pm, and you are currently winning! Remember though, this can change very quickly however.
+											a(title='view preview now', href='') Watch this auction live
+									article.alert-msg.lost-domain
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 6
+												| - 4hrs ago
+											hgroup
+												h5 You have lost a domain auction
+												h4
+													a(title='action description', href='') iliketrafficlights.com
+										section
+											| The auction for this domain finished on 15th Jan, 2012 @ 5:40pm, and someone out-bid you!
+											a(title='action description', href='') Find similar domains now
+									article.alert-msg.losing
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 7
+												| - 4hrs ago
+											hgroup
+												h5 1 hour left & you're currently losing!
+												h4
+													a(title='action description', href='') like.com
+										section
+											| The auction for this domain will finish on 15th Jan, 2012 @ 5:40pm, and you are being out-bid!
+											a(title='action description', href='') Increase your bid now
+									article.alert-msg.max-bid-lost
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 8
+												| - 4hrs ago
+											hgroup
+												h5 Your max-bid just was just out-bid!
+												h4
+													a(title='action description', href='') just-like-that.com
+										section
+											| The auction for this domain will finish on 15th Jan, 2012 @ 5:40pm, and you've just been outbid!
+											a(title='action description', href='') Increase your bid now
+									article.alert-msg.for-sale
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 9
+												| - 4hrs ago
+											hgroup
+												h5 Your domain is now listed for sale
+												h4
+													a(title='action description', href='') buy-this-one.com
+										section
+											| This domain has successfully been placed for sale in The Exchange, GoDaddy, Namejet and Snapname.
+											a(title='action description', href='') View auction
+									article.alert-msg.for-sale
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 10
+												| - 4hrs ago
+											hgroup
+												h5 A domain you're watching ends soon!
+												h4
+													a(title='action description', href='') crazy-man.com
+										section
+											| The auction for this domain will finish on 15th Jan, 2012 @ 5:40pm, and is currently
+											strong $50 from 3 bids
 											| .
-					#aside-inset-shadow
-			
-		div(id="maincontent")
-			
-			
-			
+											a(title='action description', href='') Bid on this now
+									article.alert-msg.domain-expire
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 11
+												| - 4hrs ago
+											hgroup
+												h5 One of your domains is about to expire!
+												h4
+													a(title='action description', href='') outofdate.com
+										section
+											| This domain is set to expire on the 15th Jan, 2012.
+											a(title='action description', href='') Renew this domain now
+									article.alert-msg.dns-change
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 12
+												| - 4hrs ago
+											hgroup
+												h5 Your DNS settings have changed
+												h4
+													a(title='action description', href='') outofdate.com
+										section
+											| Our system is telling us that this domain's DNS settings have changed. Did you drop this domain?
+											a(title='action description', href='') Remove it from your Portfolio now
+								#devname-msgs.tab-pane
+									h4
+										strong Devname
+										| notifications
+									article.alert-msg.preview.new
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 3
+												| - 4hrs ago
+											hgroup
+												h5 Website preview is ready
+												h4
+													a(title='view preview now', href='') webuiltthiscityyyy.com
+										section
+											| This domain has just finished being assessed and is now ready to be previewed!
+											a(title='view preview now', href='') View it now
+									article.alert-msg.for-sale
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 10
+												| - 4hrs ago
+											hgroup
+												h5 A domain you're watching ends soon!
+												h4
+													a(title='action description', href='') crazy-man.com
+										section
+											| The auction for this domain will finish on 15th Jan, 2012 @ 5:40pm, and is currently
+											strong $50 from 3 bids
+											| .
+											a(title='action description', href='') Bid on this now
+									article.alert-msg.domain-expire
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 11
+												| - 4hrs ago
+											hgroup
+												h5 One of your domains is about to expire!
+												h4
+													a(title='action description', href='') outofdate.com
+										section
+											| This domain is set to expire on the 15th Jan, 2012.
+											a(title='action description', href='') Renew this domain now
+									article.alert-msg.dns-change
+										span.x-alert-msg(title='Archive this message') x
+										header.clearfix
+											h6
+												strong Alert 12
+												| - 4hrs ago
+											hgroup
+												h5 Your DNS settings have changed
+												h4
+													a(title='action description', href='') outofdate.com
+										section
+											| Our system is telling us that this domain's DNS settings have changed. Did you drop this domain?
+											a(title='action description', href='') Remove it from your Portfolio now
+								#archive-msgs.tab-pane
+									h4
+										strong Archived
+										| notifications
+									p
+										strong Archive content goes in here
+									p
+										| Maybe a summary of what is in the archive section, and a
+										a(href='#') link out
+										| .
+				#aside-inset-shadow
 		
-
-
-			
-
-
+	div(id="maincontent")
+		
+		
+		
 	
 
-	
 
-		// footer area content
-		.ajax-spinner
-			.ball
-				.ball1
 		
-		//if lt IE 9
-		script(language='javascript', type='text/javascript', src='js/jqplot/excanvas.js')
-		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-		script
-			!window.jQuery && document.write("<script src=\\"js/jquery-1.7.2.min.js\"><\/script>");
-		script(src='//balupton.github.com/history.js/scripts/bundled/html4+html5/jquery.history.js')
-		script
-			!window.History && document.write("<script src=\\"js/jquery.history.js\"><\/script>");
-		script(src='js/ajaxify-html5.js')
-		script(src='js/bootstrap.min.js')
-		script(src='js/jquery.ba-resize.min.js')
-		script
-			jQuery.resize.throttleWindow = true;
-		script(src='js/jquery.tinyscrollbar.js')
-		script(src='js/jqplot/jquery.jqplot.js')
-		script(src='js/jqplot/plugins/jqplot.highlighter.min.js')
-		script(src='js/jqplot/plugins/jqplot.dateAxisRenderer.min.js')
-		script(src='js/jqplot/plugins/jqplot.trendline.min.js')
-		script(src='js/jquery.tipTip.js')
-		script(src='js/pv3.js')
-		
-		script
-			$(document).ready(function () {
-				$.ajax('/modules/home?ajax=1', {
-					'success': function (data) {
-						$('#maincontent').html(data);
-					}
-				})
-			});
+
+
+
+
+
+
+	// footer area content
+	.ajax-spinner
+		.ball
+			.ball1
+	
+	//if lt IE 9
+	script(language='javascript', type='text/javascript', src='js/jqplot/excanvas.js')
+	script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+	script
+		!window.jQuery && document.write("<script src=\\"js/jquery-1.7.2.min.js\"><\/script>");
+	script(src='//balupton.github.com/history.js/scripts/bundled/html4+html5/jquery.history.js')
+	script
+		!window.History && document.write("<script src=\\"js/jquery.history.js\"><\/script>");
+	script(src='js/ajaxify-html5.js')
+	script(src='js/bootstrap.min.js')
+	script(src='js/jquery.ba-resize.min.js')
+	script
+		jQuery.resize.throttleWindow = true;
+	script(src='js/jquery.tinyscrollbar.js')
+	script(src='js/jqplot/jquery.jqplot.js')
+	script(src='js/jqplot/plugins/jqplot.highlighter.min.js')
+	script(src='js/jqplot/plugins/jqplot.dateAxisRenderer.min.js')
+	script(src='js/jqplot/plugins/jqplot.trendline.min.js')
+	script(src='js/jquery.tipTip.js')
+	script(src='js/pv3.js')
+	
+	script
+		$(document).ready(function () {
+			$.ajax('/modules/home?ajax=1', {
+				'success': function (data) {
+					$('#maincontent').html(data);
+				}
+			})
+		});
