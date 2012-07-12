@@ -363,7 +363,14 @@ html(lang='en')
 		
 		script
 			$(document).ready(function () {
-				$.ajax('/modules/home?ajax=1', {
+				$('#main-container').on('ajaxLoaded', function() {
+					$('.ajax-spinner').hide();
+				});
+				$('#main-container').on('ajaxUnloading', function() {
+					$('.ajax-spinner').show();
+				});
+				var module = document.URL.substr(document.URL.lastIndexOf('/') + 1);
+				$.ajax('/modules/' + module + '?ajax=1', {
 					'success': function (data) {
 						$('#maincontent').html(data);
 					}
