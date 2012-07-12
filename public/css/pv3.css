@@ -326,7 +326,7 @@ a.ff-icon-before:before {
 }
 #spine-inner #nav-settings:before {
 	content: "f";
-	top: 12px;
+	top: 11px;
 	left: 8px;
 	font-size: 30px;
 }
@@ -339,6 +339,7 @@ a.ff-icon-before:before {
 	content: "-";
 	top: 11px;
 	left: 9px;
+	font-size: 30px;	
 }
 
 
