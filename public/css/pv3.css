@@ -2966,7 +2966,7 @@ aside header.alerts-header {
 
 #main-container .tab-content {
 	background: #fcf9f5;
-	box-shadow: 0 0 15px rgba(0,0,0,0.1);
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
 	border-radius: 0 6px 0 0;	
 }	
 #main-container .tab-content .tab-pane {
