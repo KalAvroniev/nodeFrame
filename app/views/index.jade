@@ -49,11 +49,11 @@ html(lang='en')
 						a#mode-rocker(href='#')
 				nav
 					ul
-						li
-							a#nav-home.ajaxy.ff-icon-before(href='home')
+						li(class='spine_nav',id="home")
+							a#nav-home.ajaxy.ff-icon-before(href="javascript:navigate('home')")
 							span home / portfolio dashboard
-						li
-							a#nav-exchange.ajaxy.ff-icon-before(href='exchange')
+						li(class='spine_nav',id="exchange")
+							a#nav-exchange.ajaxy.ff-icon-before(href="javascript:navigate('exchange')")
 							span the domain exchange
 						li
 							a#nav-education.ff-icon-before(href='javascript:void(0);')
@@ -355,6 +355,16 @@ html(lang='en')
 		script(src='js/pv3.js')
 		
 		script
+			function navigate(module) {
+				window.history.pushState('', module, "/" + module);
+				$.ajax('/modules/' + module + '?ajax=1', {
+					'success': function (data) {
+						$('#maincontent').html(data);
+						$('.spine_nav').removeClass("selected");
+						$('.spine_nav#' + module).addClass("selected");
+					}
+				});
+			}
 			$(document).ready(function () {
 				$('#main-container').on('ajaxLoaded', function() {
 					$('.ajax-spinner').hide();
@@ -363,9 +373,5 @@ html(lang='en')
 					$('.ajax-spinner').show();
 				});
 				var module = document.URL.substr(document.URL.lastIndexOf('/') + 1);
-				$.ajax('/modules/' + module + '?ajax=1', {
-					'success': function (data) {
-						$('#maincontent').html(data);
-					}
-				})
+				navigate(module);
 			});
