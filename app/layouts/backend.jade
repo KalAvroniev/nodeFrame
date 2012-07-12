@@ -12,39 +12,27 @@ html(lang='en')
 		link(rel='stylesheet', href='js/jqplot/jquery.jqplot.css')
 		link(rel='stylesheet', href='css/tipTip.css')
 		link(rel='stylesheet', href='css/pv3.css', media='screen')
+		
+		script 	
+			if( navigator.userAgent.match(/Android/i)
+	
+				|| navigator.userAgent.match(/webOS/i)
+		
+				|| navigator.userAgent.match(/iPhone/i)
+		
+				|| navigator.userAgent.match(/iPad/i)
+		
+				|| navigator.userAgent.match(/iPod/i)
+		
+				|| navigator.userAgent.match(/BlackBerry/i)){
+					document.getElementsByTagName('body')[0].className += " mobile";
+			}
+	
+	
 	body.sidebar-hidden
-		#main-container.sidebar-hidden
-			- theClass=""; if(error != '') theClass = "error"
-				div(class=theClass)#login-container
-					h1#beta-logo.ff-icon-before alpha
-					#login-content
-						#login-title
-							strong Please login to access
-							| Protrada Alpha V3 (AlexKidd)
-						form#login-body(method='post', action='/login')
-							fieldset.login
-								input(type='text', value='', placeholder='username', name='username')
-								input(type='password', value='', placeholder='password', name='password')
-								.login-right
-									a.go-login.ff-icon-after(href='#',onclick="$('#login-body').submit()") go login
-									a#forgot(href='#') forgot?   
-						- if(error != '') {
-							#process-error
-								h3.ff-icon-before
-									| error
-								span
-									= error
-									br
-									| &nbsp;
-						- }
-						#login-facebook.clearfix
-							h3.ff-icon-before
-								| login via 
-								strong Facebook
-							span
-								| Use your facebook profile
-								br
-								| to create a Protrada account				
+		!= body
+
+		// footer area content
 		.ajax-spinner
 			.ball
 				.ball1
@@ -69,3 +57,5 @@ html(lang='en')
 		script(src='js/jqplot/plugins/jqplot.trendline.min.js')
 		script(src='js/jquery.tipTip.js')
 		script(src='js/pv3.js')
+
+

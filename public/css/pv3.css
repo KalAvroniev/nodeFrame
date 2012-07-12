@@ -703,9 +703,9 @@ body.login {
 	margin: 0 auto;
 	position: relative;
 }
-#login-container:hover {
-	-moz-animation: shake 0.5s linear;
-	-webkit-animation: shake 0.5s linear;	
+#login-container.error {
+	-moz-animation: shake 0.7s linear;
+	-webkit-animation: shake 0.7s linear;	
 }
 @-moz-keyframes shake {
 	0% { padding: 0; }
@@ -818,6 +818,7 @@ fieldset.login input, fieldset.forgot input {
 	box-shadow: 0 1px 0 rgba(255,255,255,0.8), inset 0 3px 5px rgba(0,0,0,0.1);
 	display: block; 
 	width: 340px;
+	border-radius: 4px;
 }
 fieldset.login input:focus, fieldset.forgot input:focus {
 	background: #747474;
@@ -865,10 +866,11 @@ fieldset.forgot input[type="text"] {
 	
 }
 .login-right .go-login {
-	padding: 13px 60px 15px 15px;
+	padding: 20px 65px 24px 20px;
 	margin: 0 0 18px;
-	font-size: 27px;
-	line-height: 1.35em;
+	font-size: 21px;
+	line-height: 1.2em;
+	font-weight: 600;
 	letter-spacing: -1px;
 	white-space: normal;
 	text-align: left;
@@ -904,25 +906,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	font-size: 40px;
 	line-height: 1;
 	position: absolute;
-	top: 23px; right: 16px;
+	top: 30px; right: 20px;
 }
 .forgot input[type="submit"] {
 	background: #141211
 }
 .login-right a {	
-	padding: 13px 0 13px 15px;
+	padding: 13px 0 16px 20px;
 	background: #f5f5f5;
 	color: #353535;
 	box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 1px 3px rgba(0,0,0,0.15);
 	font-size: 18px;
-	font-weight: 400;
+	font-weight: 600;
 	display: block;
 }
 #process-error {
 	background: #e46503;
 	color: #5c2405;
 	border-radius: 0 0 8px 8px;
-	padding: 23px 30px 20px;
+	padding: 23px 30px 5px;
 	margin: 0 0 -8px;
 	position: relative;
 	box-shadow: 0 3px 5px rgba(0,0,0,0.15);
