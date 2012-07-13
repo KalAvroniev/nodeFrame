@@ -56,11 +56,10 @@ html(lang='en')
 		// script(src='/js/jquery.tipTip.js')
 		script(src='/js/moo.js')
 		script(src='/js/pv3.js')
-		script(src='/js/jquery.plugins.js')
-		script(src='/js/jade.js')		
-				
-		script	
-			
+		script(src='/socket.io/socket.io.js')
+		script(src='/js/layout.js')
+		
+		script
 			function navigate(module) {
 				window.history.pushState('', module, "/" + module);
 				$.ajax('/modules/' + module + '?ajax=1', {
