@@ -7,6 +7,8 @@ html(lang='en')
 		title Protrada V3 Proof of Concept
 		
 		!= partial('partials/styles')
+
+	body
 		
 		script 	
 			if( navigator.userAgent.match(/Android/i)
@@ -19,17 +21,13 @@ html(lang='en')
 		
 				|| navigator.userAgent.match(/iPod/i)
 		
-				|| navigator.userAgent.match(/BlackBerry/i)){
-					document.getElementsByTagName('body')[0].className += " mobile";
-			}
-
-	body
+				|| navigator.userAgent.match(/BlackBerry/i)){	
+				document.getElementsByTagName('body')[0].className += " mobile";
+				}		
 		
 		!= partial('partials/backend-spine')
 		
-		
 		!= partial('partials/alerts-aside')
-		
 				
 		div(id="ajax-container")
 
