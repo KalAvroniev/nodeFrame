@@ -1946,12 +1946,51 @@ header#main:before {
 	font-size: 46px;
 	letter-spacing: -0.06em;
 }
+#section-headings.search-results h1 {
+	float: left;
+	margin: 0 40px 15px 0;
+}
 #section-headings h3 {
 	font-size: 14px;
 	line-height: 1.4em;
 	letter-spacing: 0;
-	margin: 25px 0 0 0;
-	padding: 0 0 0 30px;
+	margin: 0;
+	padding: 15px 0 0 30px;
+}
+#results-marker {
+	float: left;
+	margin: 4px 0 0 0;
+	padding: 14px 54px 15px 15px;
+	font-size: 15px;
+	background: rgba(255,255,255,0.5);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 2px 7px rgba(0,0,0,0.1);
+	border-radius: 5px;
+	position: relative;
+	max-width: 312px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#results-marker a {
+	position: absolute;
+	padding: 4px 4px 2px;
+	font-size: 12px;
+	line-height: 1;
+	top: 9px; right: 14px;
+	color: inherit;
+	opacity: 0.3;
+}
+#results-marker a:before {
+	content: "y";
+}
+#results-marker a:hover {
+	border-radius: 4px;
+	background: rgba(0,0,0,0.1);
+	opacity: 1;
+}
+
+#section-headings.search-results h3 {
+	clear: both;
 }
 #section-headings h3:before {
 	position: absolute;
@@ -1961,6 +2000,7 @@ header#main:before {
 	font-size: 30px;
 	font-weight: 400;
 }
+
 #prev-searches {
 	float: right;
 	margin: 0 20px;
@@ -3553,7 +3593,7 @@ thead #category {
 .action-buttons a[data-title="List for sale"] {
 	padding: 7px 0 0 4px;	
 }
-.action-buttons a:before {
+.action-buttons a {
 	content: "a"; /* Default action icon */
 	
 	font-family: 'AlexKiddReg';	
@@ -3563,7 +3603,7 @@ thead #category {
 	font-weight: normal;
 	font-style: normal;	
 }
-.action-buttons a[data-title="Build website"]:before {
+/*.action-buttons a[data-title="Build website"]:before {
 	content: "X";
 }
 .action-buttons a[data-title="List for sale"]:before {
@@ -3574,7 +3614,7 @@ thead #category {
 }
 .action-buttons a[data-title="View domain details"]:before {
 	content: "G";
-}
+}*/
 
 
 .action-buttons a:hover {
@@ -3609,20 +3649,32 @@ thead #category {
 	color: rgba(0,0,0,0.2);
 }
 
-.action-buttons a:hover:after {
+.action-buttons a:hover:before {
 	content: attr(data-title);
+	font-family: 'Droid Sans';
 	position: absolute;
 	background: #79AE1F;
 	text-align: center;
 	color: white;
+	font-size: 12px;
 	line-height: 1.2em;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.3);
 	box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 	padding: 7px 10px;
 	border-radius: 20px;
-	top: -35px; left: 0;
+	top: -35px; left: -20px;
 	white-space: nowrap;
 }
+.action-buttons a:hover:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 10px; left: 15px;
+	margin: 0;
+	border: 10px outset transparent;
+	border-bottom: 10px solid rgba(0,0,0,0.4);
+}
+
 
 
 
@@ -4426,6 +4478,9 @@ body.no-bubbles #tiptip_holder {
 
 /* -------------------- Condensed mode styles work here -------------------------- */
 
+.condensed #spine-inner > nav ul li {
+	margin: 0 0 12px;
+}
 .condensed .grid-table tbody td {
 	padding: 6px 10px;
 	line-height: 2em;
@@ -4452,7 +4507,7 @@ body.no-bubbles #tiptip_holder {
 }
 .condensed #section-headings h3 {
 	margin: 0;
-	padding: 9px 0 0 0;
+	padding: 7px 0 0 0;
 }
 .condensed #section-headings h3:before {
 	position: static;
@@ -4475,13 +4530,44 @@ body.no-bubbles #tiptip_holder {
 .condensed .grid-table thead label {
 	margin-bottom: 10px;
 }
-
-
-
-
-
-
-
+.condensed #first-heading {
+	margin-bottom: 10px;
+}
+.condensed #main-container .tab-content .tab-pane {
+	padding: 17px 0 0 0;
+}
+.condensed #grid-view {
+	padding: 17px 0 0 0;	
+}
+.condensed #main-container .nav-tabs a {
+	padding: 10px 15px;
+}
+.condensed #alert-msgs li a {
+	padding: 12px 15px 10px;
+}
+.condensed #alert-msgs li, .condensed #alert-msgs li a, .condensed #alert-msgs li a:before {
+	height: 60px;
+    line-height: 60px;
+}
+.condensed #tabbed-alert-msgs .tab-pane > h4 {
+	padding: 12px 15px 14px;
+	font-size: 16px;
+}
+.condensed #tabbed-alert-msgs article {
+	padding: 12px 17px 14px;
+}
+.condensed #health-and-status {
+	padding: 17px 0;
+}
+.condensed #trading-and-trending {
+	margin: 0 0 17px 0;	
+}
+.condensed #section-headings {
+	margin: 0 210px 25px 0;
+}
+.condensed #first-heading.home {
+	display: none;
+}
 
 
 /* -------------------- Media query reponsive work -------------------------- */
@@ -4502,7 +4588,7 @@ body.no-bubbles #tiptip_holder {
 	}
 	.condensed #section-headings h3 {
 		margin: 0;
-		padding: 9px 0 0 0;
+		padding: 3px 0 0 0;
 	}
 	.condensed #section-headings h3:before {
 		position: static;

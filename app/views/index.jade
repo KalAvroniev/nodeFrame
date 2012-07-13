@@ -8,7 +8,7 @@ html(lang='en')
 		
 		!= partial('partials/styles')
 
-	body.condensed
+	body
 		
 		script 	
 			if( navigator.userAgent.match(/Android/i)
@@ -59,6 +59,7 @@ html(lang='en')
 		script(src='/js/pv3.js')
 		
 		script
+			
 			function navigate(module) {
 				window.history.pushState('', module, "/" + module);
 				$.ajax('/modules/' + module + '?ajax=1', {
@@ -69,6 +70,7 @@ html(lang='en')
 					}
 				});
 			}
+			
 			$(document).ready(function () {
 				$('#main-container').on('ajaxLoaded', function() {
 					$('.ajax-spinner').hide();
@@ -78,4 +80,20 @@ html(lang='en')
 				});
 				var module = document.URL.substr(document.URL.lastIndexOf('/') + 1);
 				navigate(module);
+				$('#toggle-condensed').click(function() {
+					if ($('body').hasClass('condensed')) {
+						$('.condensed').removeClass('condensed');
+						$(this).removeClass('active');
+					} else {
+						$('body').addClass('condensed');
+						$(this).addClass('active');						
+					}
+					return false
+				});
+				if ($('body').hasClass('condensed')) {
+							$('#toggle-condensed').addClass('active');
+						} else {
+							$('#toggle-condensed').removeClass('active');						
+						}
+
 			});
