@@ -1974,9 +1974,9 @@ header#main:before {
 #results-marker a {
 	position: absolute;
 	padding: 4px 4px 2px;
-	font-size: 12px;
+	font-size: 11px;
 	line-height: 1;
-	top: 9px; right: 14px;
+	top: 9px; right: 13px;
 	color: inherit;
 	opacity: 0.3;
 }
@@ -3658,21 +3658,21 @@ thead #category {
 	color: white;
 	font-size: 12px;
 	line-height: 1.2em;
-	text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+	text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 	box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 	padding: 7px 10px;
 	border-radius: 20px;
-	top: -35px; left: -20px;
+	top: -37px; left: -22px;
 	white-space: nowrap;
 }
 .action-buttons a:hover:after {
 	content: "";
 	display: block;
 	position: absolute;
-	top: 10px; left: 15px;
+	top: -8px; left: 8px;
 	margin: 0;
-	border: 10px outset transparent;
-	border-bottom: 10px solid rgba(0,0,0,0.4);
+	border: 6px outset transparent;
+	border-top: 6px solid #79AE1F;
 }
 
 
@@ -4513,7 +4513,7 @@ body.no-bubbles #tiptip_holder {
 	position: static;
 	float: left;
 	vertical-align: bottom;
-	margin: 7px 12px 15px 0;
+	margin: 5px 12px 15px 0;
 }
 .condensed .sticky-pin:after {
 	height: 16px;
@@ -4568,6 +4568,9 @@ body.no-bubbles #tiptip_holder {
 .condensed #first-heading.home {
 	display: none;
 }
+
+
+
 
 
 /* -------------------- Media query reponsive work -------------------------- */
