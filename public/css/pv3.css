@@ -73,8 +73,6 @@ body {
 	font-size: 13px;
 	line-height: 1;
 	padding: 0;
-	
-	overflow-y: hidden;
 	position: relative;
 	min-width: /* 800px - 75px -27px -27px (54px) = */ 693px;
 	margin: 0 0 0 75px;
@@ -123,10 +121,8 @@ p {
 
 
 #main-container {
-	padding: 30px 305px 0 30px;
+	padding: 100px 305px 0 30px;
 	background: url(../img/bg-noise.png);
-	overflow-y: auto;
-	height: 100%;
 }
 #main-container:after {
 	content: "";
@@ -147,7 +143,7 @@ p {
 
 }	
 .sidebar-hidden #main-container {
-	padding: 103px 27px 0 30px;	
+	padding: 100px 30px 0 30px;	
 }
 
 
@@ -1416,7 +1412,7 @@ header#main:before {
 	background: #FCF9F5;
 	color: #333333;
 	
-	box-shadow: 0 0 12px rgba(255,255,255,0.65), inset 0 1px 0px rgba(255,255,255,1);	
+	box-shadow: 0 0 12px rgba(255,255,255,0.7), inset 0 1px 0px rgba(255,255,255,1);	
 }
 #quick-search .btn-group {
 	display: inline-block;
@@ -1491,7 +1487,7 @@ header#main:before {
 	color: #333333;
 	text-shadow: none;
 	
-	box-shadow: 0 0 12px rgba(255,255,255,0.65), inset 0 1px 0px rgba(255,255,255,1);	
+	box-shadow: 0 0 12px rgba(255,255,255,0.7), inset 0 1px 0px rgba(255,255,255,1);	
 }
 #x-side-bar {
 	width: 90px;
@@ -1617,12 +1613,13 @@ header#main:before {
 /* ---------------------- Home / portfolio dashboard main content work ---------------------------- */
 
 #ajax-container {
-	padding: 73px 0 0 0;
-	height: 100%;
 }
-#bread-crumb {
+#first-heading {
 	font-size: 14px;
 	margin-bottom: 20px;
+}
+#first-heading sup {
+	font-size: 11px;
 }
 #user-greeting {
 	font-size: 46px;
@@ -1889,7 +1886,7 @@ header#main:before {
 #h4-status-summary, #h4-trading-summary {
 	font-size: 18px;
 	line-height: 1;
-	margin: 7px 0 0 335px;
+	margin: 7px 0 2px 335px;
 	font-weight: 300;
 }
 #h4-trading-summary {
@@ -1904,7 +1901,7 @@ header#main:before {
 	content: "<";
 	display: inline-block;
 	margin: 0 15px 0 0;
-	font-size: 26px;
+	font-size: 29px;
 	vertical-align: middle;
 }
 #h4-trading-summary:before {
@@ -1943,7 +1940,7 @@ header#main:before {
 #section-headings {
 	display: block;
 	vertical-align: top;	
-	margin: 0 200px 40px 0;
+	margin: 0 210px 40px 0;
 }
 #section-headings h1 {		
 	font-size: 46px;
@@ -2648,7 +2645,7 @@ aside header.alerts-header {
 	font-size: 30px;
 	color: #1d1b1a;
 	display: block;
-	margin: -9px 0 0 11px;
+	margin: -12px 0 0 12px;
 }
 #alert-msgs li.protrada a:before {
 	content: "#";
@@ -2656,11 +2653,12 @@ aside header.alerts-header {
 }
 #alert-msgs li.devname a:before {
 	content: "l";	
-	margin: -9px 0 0 14px;	
+	margin: -12px 0 0 14px;
+	
 }
 #alert-msgs li.archive a:before {
 	content: "7";	
-	margin: -8px 0 0 10px;	
+	margin: -12px 0 0 10px;	
 	font-size: 31px;		
 	
 }
@@ -2668,9 +2666,7 @@ aside header.alerts-header {
 	display: block;
 	position: absolute;
 	text-align: center;
-	top: -9px;
-	right: 32px;
-	margin-left: -8px;
+	top: -9px; right: 30px;
 	min-width: 10px;
 	padding: 4px 8px 6px;
 	border-radius: 20px;
@@ -2681,11 +2677,16 @@ aside header.alerts-header {
 	background: #a3a2a2;
 	color: #1d1b1a; 
 }
+.alert-count:before {
+	content: attr(data-alerts);
+}
+.alert-count[data-alerts="0"] {
+	display: none;
+}
 .active > a .alert-count {
 	background: #1d1b1a;
 	color: #ec8c04;
 }
-
 #tabbed-alert-msgs .tab-pane > h4 {
 	background: #ec8c04;
 	color: #1d1b1a;
@@ -3089,6 +3090,7 @@ thead tr {
 	box-shadow: inset -1px 0 0 rgba(0,0,0,0.15), inset 1px 0 0 rgba(255,255,255,0.08), inset 0 1px 0 #282828, inset 0 -1px 0 #282828;
 	padding: 16px 15px 18px;
 	background: transparent;
+	white-space: nowrap;
 }
 .grid-table thead .col-grouping th.sticky {
 	
@@ -3104,7 +3106,6 @@ thead tr {
 .grid-table thead label {
 	display: block;
 	font-weight: 300;
-	font-size: 14px;
 	white-space: nowrap;
 	margin: 0 0 19px;
 	position: relative;
@@ -3170,6 +3171,7 @@ thead tr {
 	padding: 11px 9px;
 	width: auto;
 	margin: 0 0 5px;
+	display: inline-block;
 
 	box-shadow: 0 1px 0 rgba(255,255,255,0.14), inset 0 2px 1px rgba(0,0,0,0.15);
 }
@@ -3298,19 +3300,19 @@ thead tr {
 	
 }
 .grid-table tbody tr, .grid-table tfoot tr {
-	box-shadow: inset 0 -2px 0 rgba(0,0,0,0.05);
+	box-shadow: inset 0 -2px 0 #e3e3e3;
 }
 .grid-table tbody td, .grid-table tfoot td {
-	padding: 13px 15px;		
+	padding: 10px 15px;		
 	white-space: no-wrap;
 	line-height: 1.7em;
 	
 	border-top: 1px solid white; 
 	border-bottom: 1px solid #bebebe; 
 	border-left: 1px solid white;
-	border-right: 1px solid #ebebeb;
-		
+	border-right: 1px solid #ebebeb;		
 }
+
 .grid-table tfoot td {
 	padding: 13px 15px 28px;
 }
@@ -3403,13 +3405,15 @@ td.categ[data-title="electronics"]:before {
 
 /* -------- Grid and Grid column width customisation ---------- */
 
-
+.grid-table th.date .btn-group {
+	width: 130px
+}
 #fav-sel-all {
 	margin: 5px 0 0 0;
 	width: 80px;
 }
 thead input#domain-title {
-	width: 170px;
+	width: 120px;
 	vertical-align: top;
 }
 thead input#expire {
@@ -3419,9 +3423,9 @@ thead #category {
 	width: 95px;
 }
 #domain-title-inputs {
-	width: 349px;
 	vertical-align: top;
 	position: relative;
+	white-space: nowrap;
 }
 #advanced-keyword-filter {
 	display: inline-block;
@@ -3525,11 +3529,12 @@ thead #category {
 }
 
 .action-buttons a {
-	display: block;
-	position: absolute;
-	top: -2px; left: 2px;
-	padding: 5px 0 0 7px;
+	float: left;
+	margin: 0 0 0 5px;
+	padding: 6px 0 0 5px;
 	width: 28px; height: 28px;
+	line-height: 1;
+	position: relative;
 	
 	background: #FCF9F5;
 	color: #79ae1f;
@@ -3537,28 +3542,38 @@ thead #category {
 		
 	border-radius: 20px;
 }
-.action-buttons a[title="List for sale"]  {
-	right: 2px; left: auto;
-	padding: 6px 0 0 5px;
+.action-buttons a:last-child {
+	float: right;
+	margin: 0 5px 0 0;	
+}
+.action-buttons a[data-title="View domain details"] {
+	padding: 6px 0 0 6px;	
+	color: #a4a4a4;
+}
+.action-buttons a[data-title="List for sale"] {
+	padding: 7px 0 0 4px;	
 }
 .action-buttons a:before {
 	content: "a"; /* Default action icon */
 	
 	font-family: 'AlexKiddReg';	
-	font-size: 15px;
+	font-size: 16px;
 	line-height: 1;	
 	letter-spacing: 0px;
 	font-weight: normal;
 	font-style: normal;	
 }
-.action-buttons a[title="Build website"]:before  {
+.action-buttons a[data-title="Build website"]:before {
 	content: "X";
 }
-.action-buttons a[title="List for sale"]:before  {
+.action-buttons a[data-title="List for sale"]:before {
 	content: "W";
 }
-.action-buttons a[title="Place bid / Buy"]:before  {
+.action-buttons a[data-title="Place bid / Buy"]:before {
 	content: "-";
+}
+.action-buttons a[data-title="View domain details"]:before {
+	content: "G";
 }
 
 
@@ -3592,6 +3607,21 @@ thead #category {
 .row-sel .action-buttons a.disabled, .row-sel .action-buttons a.disabled:hover {
 	box-shadow: inset 0 1px 1px rgba(0,0,0,0.25), 0 1px 0 rgba(255,255,255,0.3);
 	color: rgba(0,0,0,0.2);
+}
+
+.action-buttons a:hover:after {
+	content: attr(data-title);
+	position: absolute;
+	background: #79AE1F;
+	text-align: center;
+	color: white;
+	line-height: 1.2em;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+	box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+	padding: 7px 10px;
+	border-radius: 20px;
+	top: -35px; left: 0;
+	white-space: nowrap;
 }
 
 
@@ -3936,7 +3966,7 @@ thead #category {
 
 .grid-table th #domain-title-inputs .btn-group {
 	display: inline-block;
-	margin: 0 10px;
+	margin: 0 10px 0 7px;
 }
 .grid-table th #domain-title-inputs .btn-group:before, .grid-table th #domain-title-inputs .btn-group:after {
 	display: none;
@@ -4353,21 +4383,6 @@ body.no-bubbles #tiptip_holder {
 
 /* -------------------- Detuned mode styles work here -------------------------- */
 
-/* IOS and android only seem to GPU accelerate scrolling on the body */ 
-body.mobile {
-	overflow-y: auto;
-}
-.mobile #ajax-container {
-	padding: 0;
-	height: auto;
-}
-.mobile #main-container {
-	overflow-y: auto;
-	height: auto;
-	padding-top: 105px;
-}
-
-
 .mobile #spine-inner {
 	box-shadow: none;
 }
@@ -4375,7 +4390,7 @@ body.mobile {
 	background: #2c2c2c;
 }
 .mobile #quick-search input {
-	background: #474747;
+	background-image: none;
 }
 .mobile #zero-alert span {
 	background: #E15903; 
@@ -4412,25 +4427,18 @@ body.mobile {
 /* -------------------- Condensed mode styles work here -------------------------- */
 
 .condensed .grid-table tbody td {
-	padding: 8px 10px;
+	padding: 6px 10px;
+	line-height: 2em;
 }
 .condensed .grid-table thead th {
-	padding: 8px 10px;
+	padding: 10px;
 }
-.condensed #tabbed-alert-msgs article {
-	padding: 13px 17px 17px;
+.condensed .grid-table thead .col-grouping th {
+	padding: 12px 10px;
 }
-.condensed #alert-msgs li a {
-	padding: 10px 17px 10px;
-}
-.condensed .tab-pane > h4 {
-	padding: 10px 17px 15px;
-}
+
 .condensed #h3-alerts-title {
-	padding: 15px 0 22px 17px;
-}
-.condensed #alert-msgs li a:before {
-	margin: 6px 0 10px;
+	padding: 15px 0 15px 17px;
 }
 .condensed .alert-msg:first-of-type header hgroup {
 	padding: 10px 0 8px 70px;
@@ -4438,6 +4446,39 @@ body.mobile {
 .condensed .alert-msg header hgroup {
 	padding: 10px 0 7px;
 }
+.condensed #section-headings h1 {
+	float: left;
+	margin: 0 40px 15px 0;
+}
+.condensed #section-headings h3 {
+	margin: 0;
+	padding: 9px 0 0 0;
+}
+.condensed #section-headings h3:before {
+	position: static;
+	float: left;
+	vertical-align: bottom;
+	margin: 7px 12px 15px 0;
+}
+.condensed .sticky-pin:after {
+	height: 16px;
+	width: 16px;
+	font-size: 12px;
+	margin: -16px 0 0 -25px;
+}
+.condensed .sticky-pin {
+	padding: 0 0 0 25px;
+}
+.condensed .grid-table .btn.favourite, .condensed .grid-table .btn.select {
+	margin: 2px 0 0 4px;
+}
+.condensed .grid-table thead label {
+	margin-bottom: 10px;
+}
+
+
+
+
 
 
 
@@ -4455,6 +4496,22 @@ body.mobile {
 	}
 
 
+	.condensed #section-headings h1 {
+		float: none;
+		margin: 0 0 15px 0;
+	}
+	.condensed #section-headings h3 {
+		margin: 0;
+		padding: 9px 0 0 0;
+	}
+	.condensed #section-headings h3:before {
+		position: static;
+		float: left;
+		vertical-align: bottom;
+		margin: 4px 12px 15px 0;
+	}
+
+
 	.sectional-tabs li a strong {
 		display: inline;
 	}	
@@ -4463,6 +4520,9 @@ body.mobile {
 		white-space: nowrap;
 		padding: 18px 30px 0;
 		height: 55px;
+	}
+	.sectional-tabs li:first-child a {
+		height: 90px;
 	}	
 	.sectional-tabs li.active a, .sectional-tabs.singular li.active a {
 		height: 61px;

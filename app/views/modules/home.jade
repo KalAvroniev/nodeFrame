@@ -83,7 +83,7 @@ header#main
 			#history.tab-pane	
 
 #main-container.page-home
-	h5#bread-crumb trading mode (Protrada)
+	h5#first-heading welcome to Protrada
 	h2#user-greeting hi, Andrew 
 	hgroup#member-details
 		h5
@@ -107,7 +107,7 @@ header#main
 				| to learn how to take advantage of this feature
 			span.demo-spark(title='Graph currently inactive - no data to display')
 		h4#h4-status-summary.ff-icon-before
-			| Your current trading
+			| Your current trading 
 			strong status summary
 		#status-summary.tiny-scrollbar-horiz
 			.scrollbar
@@ -137,7 +137,7 @@ header#main
 			img(src='img/demo-current-trading.png', alt='demo image of trading graphing functionality')
 		.graph-options
 			h4#h4-trading-summary.ff-icon-before
-				strong Trading
+				strong Trading 
 				| summary
 			#graph-settings.btn-group
 				a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
@@ -195,7 +195,7 @@ header#main
 											label(for='category') Top action(s)
 											#top-actions.btn-group
 												a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-													| Sort by?
+													| sort by?
 													span.caret
 												ul.dropdown-menu
 													li
@@ -211,19 +211,18 @@ header#main
 												a.disable(href='')
 												#string-mode-selection.btn-group
 													a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-														| Containing
+														| contains
 														span.caret
 													ul.dropdown-menu
 														li
-															a(href='') Containing
+															a(href='') Contains
 														li
 															a(href='') Ending with
 														li
 															a(href='') Beginning with
 												a#advanced-keyword-filter(href='', title='Advanced keyword filter') advanced keyword filter
-										th.sortable(scope='col')
-											label(for='offers') Offers
-											input#offers.txt-filter(value='', type='text')
+										th(scope='col')
+											label Offers
 										th.sortable(scope='col')
 											label(for='cost') Cost
 											input#cost.txt-filter(value='', type='text')
@@ -231,33 +230,193 @@ header#main
 											label(for='appraised') Appraised
 											input#appraised.txt-filter(value='', type='text')
 										th(scope='col')
-											label(for='unrealised') Unrealised
-											input#unrealised.txt-filter(value='', type='text')
+											label Unrealised
 										th(scope='col')
-											label(for='income') Income
-											input#income.txt-filter(value='', type='text')
+											label Income
 										th(scope='col')
-											label(for='roi') ROI%
-											input#roi.txt-filter(value='', type='text')
-										th.sortable(scope='col')
+											label ROI%
+										th.date.sortable(scope='col')
 											label(for='acquired') Acquired date
-											input#acquired.txt-filter(value='', type='text')
-										th(scope='col')
+											#accquired.btn-group
+												a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+													| today
+													span.caret
+												ul.dropdown-menu
+													li
+														a(href='') tomorrow
+													li
+														a(href='') 2 days
+													li
+														a(href='') date range
+										th.date.sortable(scope='col')
 											label(for='expire') Expire date
-											input#expire.txt-filter(value='', type='text')
+											#expiring.btn-group
+												a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+													| today
+													span.caret
+												ul.dropdown-menu
+													li
+														a(href='') tomorrow
+													li
+														a(href='') 2 days
+													li
+														a(href='') date range
+
 										th(scope='col')
 											label(for='status') Status
 											#status.btn-group
 												a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-													| Pending
+													| pending
 													span.caret
 												ul.dropdown-menu
 													li
-														a(href='') Active
+														a(href='') active
 													li
-														a(href='') Expired
+														a(href='') expired
 													li
-														a(href='') Dropping
+														a(href='') dropping
+								tbody
+									tr
+										td
+												button.btn.select(data-toggle='button')
+											td
+												button.btn.favourite(data-toggle='button')
+											td.actions
+												span.action-buttons
+													//a(href='#', data-title='Build website')
+													a(href='#', data-title='View domain details')
+													a(href='#', data-title='List for sale')
+											td.domain-title
+												span.domain-title-cntnr
+													| 353cards
+													span.tld com
+											td 3
+											td.currency 1584
+											td n/a
+											td 8
+											td.currency 200
+											td 20%
+											td.date 1st Jan '70 10:00am
+											td.date 1st Jan '70 10:00am
+											td No
+											td 0
+											td 0
+											td 0
+											td 0
+
+									tr
+										td
+												button.btn.select(data-toggle='button')
+											td
+												button.btn.favourite(data-toggle='button')
+											td.actions
+												span.action-buttons
+													//a(href='#', data-title='Build website')
+													a(href='#', data-title='View domain details')
+													a(href='#', data-title='List for sale')
+											td.domain-title
+												span.domain-title-cntnr
+													| 353cards
+													span.tld com
+											td 3
+											td.currency 1584
+											td n/a
+											td 8
+											td.currency 200
+											td 20%
+											td.date 1st Jan '70 10:00am
+											td.date 1st Jan '70 10:00am
+											td No
+											td 0
+											td 0
+											td 0
+											td 0
+											
+									tr
+										td
+												button.btn.select(data-toggle='button')
+											td
+												button.btn.favourite(data-toggle='button')
+											td.actions
+												span.action-buttons
+													//a(href='#', data-title='Build website')
+													a(href='#', data-title='View domain details')
+													a(href='#', data-title='List for sale')
+											td.domain-title
+												span.domain-title-cntnr
+													| 353cards
+													span.tld com
+											td 3
+											td.currency 1584
+											td n/a
+											td 8
+											td.currency 200
+											td 20%
+											td.date 1st Jan '70 10:00am
+											td.date 1st Jan '70 10:00am
+											td No
+											td 0
+											td 0
+											td 0
+											td 0											
+											
+									tr
+										td
+												button.btn.select(data-toggle='button')
+											td
+												button.btn.favourite(data-toggle='button')
+											td.actions
+												span.action-buttons
+													//a(href='#', data-title='Build website')
+													a(href='#', data-title='View domain details')
+													a(href='#', data-title='List for sale')
+											td.domain-title
+												span.domain-title-cntnr
+													| 353cards
+													span.tld com
+											td 3
+											td.currency 1584
+											td n/a
+											td 8
+											td.currency 200
+											td 20%
+											td.date 1st Jan '70 10:00am
+											td.date 1st Jan '70 10:00am
+											td No
+											td 0
+											td 0
+											td 0
+											td 0											
+											
+											
+									tr
+										td
+												button.btn.select(data-toggle='button')
+											td
+												button.btn.favourite(data-toggle='button')
+											td.actions
+												span.action-buttons
+													//a(href='#', data-title='Build website')
+													a(href='#', data-title='View domain details')
+													a(href='#', data-title='List for sale')
+											td.domain-title
+												span.domain-title-cntnr
+													| 353cards
+													span.tld com
+											td 3
+											td.currency 1584
+											td n/a
+											td 8
+											td.currency 200
+											td 20%
+											td.date 1st Jan '70 10:00am
+											td.date 1st Jan '70 10:00am
+											td No
+											td 0
+											td 0
+											td 0
+											td 0											
+
 
 
 		#listed-for-sale.tab-pane
