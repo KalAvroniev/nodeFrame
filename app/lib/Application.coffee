@@ -43,7 +43,7 @@ class exports.Application
 		return url
 	
 	handleJadeRequest: (req, res) ->
-		url = 'views/' + @Application.realUrl(req.url)
+		url = 'views' + @Application.realUrl(req.url)
 		console.log(url)
 		
 		# fetch the raw jade
@@ -53,7 +53,7 @@ class exports.Application
 				console.error(err)
 			else
 				# compile the jade
-				jc = jade.compile(data, { client: true }).toString()
+				jc = jade.compile(data, { client: true, filename: url, debug: true, compileDebug: true }).toString()
 				res.write(jc)
 			res.end()
 		)
