@@ -1652,7 +1652,7 @@ header#main:before {
 	margin: 1px;
 	border: none;
 	padding: 10px 12px;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.4);
 	background: rgba(255,255,255,0.5) url(../img/elements-noise.png);
 	z-index: 0;	
 }
@@ -1963,7 +1963,7 @@ header#main:before {
 	margin: 6px 0 0 0;
 	padding: 14px 54px 15px 15px;
 	font-size: 15px;
-	background: rgba(255,255,255,0.5);
+	background: rgba(255,255,255,0.35);
 	box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 2px 7px rgba(0,0,0,0.1);
 	border-radius: 5px;
 	position: relative;
@@ -3110,7 +3110,6 @@ thead tr {
 	color: #afafaf;
 	text-align: left;
 }
-
 .grid-table thead th {
 	border: none;
 	box-shadow: inset -1px 0 0 rgba(0,0,0,0.15), inset 1px 0 0 rgba(255,255,255,0.08), inset 0 1px 0 #717171;
@@ -3137,7 +3136,6 @@ thead tr {
 	white-space: nowrap;
 }
 .grid-table thead .col-grouping th.sticky {
-	
 	background: rgb(61,61,61); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(61,61,61,1) 0%, rgba(42,42,42,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(61,61,61,1)), color-stop(100%,rgba(42,42,42,1))); /* Chrome,Safari4+ */
@@ -3253,7 +3251,7 @@ thead tr {
 	box-shadow: none;
 	border: none;
 }
-.grid-table #filter-params span, .grid-table  #zero-alert span {
+#filter-params span, #zero-alert span, #bulk-actions .bulk-wrapper {
 	padding: 15px 20px 17px;
 	display: block;
 	color: rgba(0,0,0,0.6);
@@ -3270,7 +3268,7 @@ thead tr {
 	background: linear-gradient(top, #e77103 0%, #e15903 100%); /* W3C */
  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e77103', endColorstr='#e15903', GradientType=0 ); /* IE6-9 */
 }
-.grid-table #filter-params span {
+#filter-params span {
 	border-top-color: #fff;
 	box-shadow: inset 0px -1px 0 #cdcdcd, inset 0px -2px 0 #e6e6e6;
 	background: #f5f5f5; /* Old browsers */
@@ -3282,20 +3280,51 @@ thead tr {
 	background: linear-gradient(top, #f5f5f5 0%, #e2e2e2 100%); /* W3C */
  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e2e2e2', GradientType=0 ); /* IE6-9 */
 }
-.grid-table #filter-params span:before {
+#bulk-actions .bulk-wrapper {
+	border-top-color: rgba(255,255,255,0.3);
+	box-shadow: inset 0px -1px 0 rgba(0,0,0,0.3), inset 0px -2px 0 rgba(0,0,0,0.08);
+	
+	background: rgb(122,122,122); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(122,122,122,1) 0%, rgba(91,91,91,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(122,122,122,1)), color-stop(100%,rgba(91,91,91,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(122,122,122,1) 0%,rgba(91,91,91,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(122,122,122,1) 0%,rgba(91,91,91,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(122,122,122,1) 0%,rgba(91,91,91,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(122,122,122,1) 0%,rgba(91,91,91,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7a7a7a', endColorstr='#5b5b5b',GradientType=0 ); /* IE6-9 */
+
+}
+#filter-params span:before {
 	content: "K";
 	float: left;
 	font-size: 20px;
 	line-height: 1;
 	margin: 1px 20px 5px 0;
 }
-.grid-table #zero-alert span:before {
+#zero-alert span:before {
 	content: "N";
 	font-size: 30px;
 	line-height: 1;
 	float: left;
-	margin: -3px 25px 0px 0;
+	margin: 3px 25px 0px 0;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+}
+#bulk-actions .bulk-wrapper:before {
+	content: "X";
+	font-size: 30px;
+	line-height: 1;
+	float: left;
+	margin: 3px 25px 0px 0;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+}
+.bulk-wrapper span {
+	display: inline-block;
+	vertical-align: top;
+}
+#bulk-action-menu {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 0 0 50px;
 }
 .x-zero-alert, .x-row-sel {
 	display: block;
@@ -3450,7 +3479,10 @@ td.categ[data-title="electronics"]:before {
 /* -------- Grid and Grid column width customisation ---------- */
 
 .grid-table th.date .btn-group {
-	width: 130px
+	width: 130px;
+}
+#top-actions {
+	width: 105px;
 }
 #fav-sel-all {
 	margin: 15px 0 0 0;
@@ -3473,6 +3505,7 @@ thead #category {
 }
 #advanced-keyword-filter {
 	display: inline-block;
+	display: none;
 	vertical-align: top;
 	text-indent: -3000em;
 	width: 30px;
@@ -3574,7 +3607,7 @@ thead #category {
 
 .action-buttons a {
 	float: left;
-	margin: 0 0 0 5px;
+	margin: 0;
 	padding: 6px 0 0 5px;
 	width: 28px; height: 28px;
 	line-height: 1;
@@ -3585,6 +3618,28 @@ thead #category {
 	box-shadow: 0 1px 1px rgba(0,0,0,0.35), inset 0 1px 0 white;
 		
 	border-radius: 20px;
+	
+	content: "a"; /* Default action icon */
+	
+	font-family: 'AlexKiddReg';	
+	font-size: 16px;
+	line-height: 1;	
+	letter-spacing: 0px;
+	font-weight: normal;
+	font-style: normal;	
+}
+.actions .action-buttons a.main-action {
+	position: relative;
+	width: auto; height: auto;
+	padding: 6px 0 7px 8px;
+	margin: 0;
+}
+.action-buttons a.main-action .label {
+	font-size: 12px;
+	line-height: 16px;
+	display: inline-block;
+	vertical-align: top;	
+	padding: 0 11px 0 3px;
 }
 .action-buttons a:last-child {
 	float: right;
@@ -3597,16 +3652,7 @@ thead #category {
 .action-buttons a[data-title="List for sale"] {
 	padding: 7px 0 0 4px;	
 }
-.action-buttons a {
-	content: "a"; /* Default action icon */
-	
-	font-family: 'AlexKiddReg';	
-	font-size: 16px;
-	line-height: 1;	
-	letter-spacing: 0px;
-	font-weight: normal;
-	font-style: normal;	
-}
+
 /*.action-buttons a[data-title="Build website"]:before {
 	content: "X";
 }
@@ -3619,7 +3665,6 @@ thead #category {
 .action-buttons a[data-title="View domain details"]:before {
 	content: "G";
 }*/
-
 
 .action-buttons a:hover {
 	background: #79ae1f;
@@ -3678,7 +3723,12 @@ thead #category {
 	border: 6px outset transparent;
 	border-top: 6px solid #79AE1F;
 }
-
+.action-buttons a.main-action:hover:before {
+	left: -12px;
+}
+.action-buttons a.main-action:hover:after {
+	left: 21px;
+}
 
 
 
@@ -4022,12 +4072,12 @@ thead #category {
 
 .grid-table th #domain-title-inputs .btn-group {
 	display: inline-block;
-	margin: 0 10px 0 7px;
+	margin: 0 0 0 7px;
 }
 .grid-table th #domain-title-inputs .btn-group:before, .grid-table th #domain-title-inputs .btn-group:after {
 	display: none;
 }
-.grid-table th .btn {
+.grid-table th .btn, #bulk-action-menu .btn {
 	color: #b3b3b3;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.15);
 	border-radius: 4px;
@@ -4046,7 +4096,19 @@ thead #category {
 	background: linear-gradient(top,  rgba(110,110,110,1) 0%,rgba(93,93,93,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e6e6e', endColorstr='#5d5d5d',GradientType=0 ); /* IE6-9 */
 }
-.grid-table th .open .dropdown-toggle {
+#bulk-action-menu .btn {
+	color: #ddd;
+	
+	background: rgb(137,137,137); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(137,137,137,1) 0%, rgba(114,114,114,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(137,137,137,1)), color-stop(100%,rgba(114,114,114,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(137,137,137,1) 0%,rgba(114,114,114,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(137,137,137,1) 0%,rgba(114,114,114,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(137,137,137,1) 0%,rgba(114,114,114,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(137,137,137,1) 0%,rgba(114,114,114,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#898989', endColorstr='#727272',GradientType=0 ); /* IE6-9 */
+}
+.grid-table th .open .dropdown-toggle, #bulk-action-menu.open .dropdown-toggle {
 	box-shadow: inset 0 1px 3px rgba(0,0,0,0.35), 0 1px 0 rgba(255,255,255,0.15);
 
 	background: rgb(65,65,65); /* Old browsers */
