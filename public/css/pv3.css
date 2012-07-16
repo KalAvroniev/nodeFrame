@@ -2049,8 +2049,8 @@ header#main:before {
 .x-panel {
     position: absolute;
     line-height: 1;
-    right: 35px;
-    top: 35px;
+    right: 33px; top: 30px;
+    padding: 7px;
     
 	font-size: 45px;
    	font-family: 'AlexKiddReg';
@@ -2058,6 +2058,11 @@ header#main:before {
     font-weight: normal;
     letter-spacing: 0;
     color: #161413;
+}
+.x-panel:hover {
+	border-radius: 5px;
+	color: rgba(0,0,0,0.4);
+	background: rgba(0,0,0,0.07);
 }
 .x-panel:after {
 	content: "y";
