@@ -65,8 +65,8 @@ html(lang='en')
 				$.ajax('/modules/' + module + '?ajax=1', {
 					'success': function (data) {
 						$('#ajax-container').html(data);
-						$('.spine_nav').removeClass("selected");
-						$('.spine_nav#' + module).addClass("selected");
+						$('.selected').removeClass("selected");
+						$('#spine-inner nav li a#nav-' + module).parent().addClass("selected");
 					}
 				});
 			}
@@ -97,3 +97,14 @@ html(lang='en')
 						}
 
 			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			

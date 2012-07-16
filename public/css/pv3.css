@@ -1973,20 +1973,18 @@ header#main:before {
 }
 #results-marker a {
 	position: absolute;
-	padding: 4px 4px 2px;
-	font-size: 11px;
+	padding: 2px 4px;
 	line-height: 1;
-	top: 9px; right: 13px;
+	top: 11px; right: 13px;
 	color: inherit;
-	opacity: 0.3;
 }
 #results-marker a:before {
 	content: "y";
+	font-size: 14px;	
 }
 #results-marker a:hover {
 	border-radius: 4px;
-	background: rgba(0,0,0,0.1);
-	opacity: 1;
+	background: rgba(0,0,0,0.08);
 }
 
 #section-headings.search-results h3 {
@@ -3234,7 +3232,7 @@ thead tr {
 }
 .disable {
 	position: absolute;
-	margin: 14px 0 0 -30px;
+	margin: 14px 0 0 -25px;
 	color: #999999;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.3);
 	font-family: 'AlexKiddReg';
@@ -3449,7 +3447,7 @@ td.categ[data-title="electronics"]:before {
 	width: 130px
 }
 #fav-sel-all {
-	margin: 5px 0 0 0;
+	margin: 15px 0 0 0;
 	width: 80px;
 }
 thead input#domain-title {
@@ -4146,9 +4144,10 @@ thead #category {
 	float: right;
 	color: rgba(47,47,47,0.85);
 	text-shadow: 0 1px 1px #4a4a4a, 0 0 0 #000000, 0 1px 1px #4a4a4a, 0 1px 0px rgba(255,255,255,0.4);	
-	margin: 6px 2px 0 0;
+	margin: 6px -2px 0 0;
 	font-size: 25px;
 }
+
 
 .grid-table thead .btn.select.active {
 	background: #fcf9f5;
@@ -4486,7 +4485,7 @@ body.no-bubbles #tiptip_holder {
 	line-height: 2em;
 }
 .condensed .grid-table thead th {
-	padding: 10px;
+	padding: 10px 10px 12px;
 }
 .condensed .grid-table thead .col-grouping th {
 	padding: 12px 10px;
@@ -4525,8 +4524,15 @@ body.no-bubbles #tiptip_holder {
 	padding: 0 0 0 25px;
 }
 .condensed .grid-table .btn.favourite, .condensed .grid-table .btn.select {
-	margin: 2px 0 0 4px;
+	margin: -2px 0 0 3px;
 }
+.condensed .grid-table thead .btn.favourite {
+	margin: 2px 3px 0 0;		
+}
+.condensed .grid-table thead .btn.select {
+	margin: 5px 0 0 4px;
+}
+
 .condensed .grid-table thead label {
 	margin-bottom: 10px;
 }
