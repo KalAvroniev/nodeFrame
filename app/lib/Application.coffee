@@ -30,15 +30,33 @@ class exports.Application
 		# listen
 		@app.listen(8181)
 		console.log("Server started.")
-	
-	handleRequest: (req, res) ->
-		# clean URL
-		url = req.url
+		
+	@realUrl: (url) ->
 		if url.indexOf('?') >= 0
 			url = url.substr(0, url.indexOf('?'))
 		url = url.replace(/\/+$/, '')
 		if url == ''
 			url = '/index'
+			
+		console.log(url)
+		return url
+	
+	handleJadeRequest: (req, res) ->
+		url = 'views/' + @Application.realUrl(req.url)
+		console.log(url)
+		
+		# fetch the raw jade
+		fs.readFile(url, 'utf8', (err, data) ->
+			if err
+				res.write(err)
+				console.error(err)
+			else
+				res.write(data)
+			res.end()
+		)
+	
+	handleRequest: (req, res) ->
+		url = @Application.realUrl(req.url)
 		console.log(url)
 		
 		# setup ready handler
@@ -76,3 +94,4 @@ class exports.Application
 		catch e
 			console.log("Registering controller '" + path.substr(11, path.length - 18) + "'")
 			@app.all(path.substr(11, path.length - 18), @handleRequest)
+			@app.all(path.substr(11, path.length - 18) + ".jade", @handleJadeRequest)
