@@ -3306,7 +3306,7 @@ thead tr {
 	font-size: 30px;
 	line-height: 1;
 	float: left;
-	margin: 3px 25px 0px 0;
+	margin: 5px 25px 0px 0;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
 }
 #bulk-actions .bulk-wrapper:before {
@@ -3329,11 +3329,21 @@ thead tr {
 .x-zero-alert, .x-row-sel {
 	display: block;
 	float: right;
-	margin: 2px 0 0 0;
+	margin: 3px 0 0 0;
+	padding: 6px 6px 0;
 	color: black;
-	text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+	text-shadow: 0 1px 0 rgba(255,255,255,0.4);
 	opacity: 0.5;
-	font-size: 25px; 
+}
+.x-zero-alert:after, .x-row-sel:after {
+	line-height: 1;
+	font-size: 22px; 
+}
+.x-zero-alert:hover, .x-row-sel:hover {
+	background: rgba(0,0,0,0.2);
+	border-radius: 4px;
+	opacity: 0.7;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.2);	
 }
 .x-zero-alert:after, .x-row-sel:after {
 	content: "y";
