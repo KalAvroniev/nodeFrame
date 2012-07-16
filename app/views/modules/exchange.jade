@@ -53,31 +53,30 @@ header#main
 			button.btn.ff-icon-before(type='submit') Submit
 
 	
-!= partial('modules/exchange/panels/watchlist')
+!= partial('partials/panel')
 
-#main-container.page-exchange
+#main-container.page-exchange.search-results
 
 		h5#first-heading.ff-icon-before wednesday 21
 			sup st 
 			| jul 2012,  
 			strong 21:35
-
-		#member-options.btn-group
-			a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-				| previous searches
-				span.caret
-			ul.dropdown-menu
-				li
-					a(href='javascript:void(0);') search 1
-				li
-					a(href='javascript:void(0);') an old search
-				li
-					a(href='javascript:void(0);') another old search
-				li.divider
-				li
-					a(href='javascript:void(0);') search is divided
 		
-		hgroup#section-headings.search-results
+		div#section-headings.search-results
+			#member-options.btn-group
+				a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+					| previous searches
+					span.caret
+				ul.dropdown-menu
+					li
+						a(href='javascript:void(0);') search 1
+					li
+						a(href='javascript:void(0);') an old search
+					li
+						a(href='javascript:void(0);') another old search
+					li.divider
+					li
+						a(href='javascript:void(0);') search is divided
 			h1 the domain exchange
 			span#results-marker 
 				a(href='#').ff-icon-before 
