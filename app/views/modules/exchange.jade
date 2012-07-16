@@ -7,9 +7,9 @@ header#main
 
 	#toggle-side-bar.ff-icon-before
 		span.toggle-title
-			strong collapse 
+			strong Collapse 
 			| sidebar
-		span.toggle-sub * you can also re-open from here
+		span.toggle-sub * You can also re-open from here
 	
 	#sectional-func.side-open	
 		#x-side-bar(title='Toggle display of sidebar')
@@ -20,21 +20,21 @@ header#main
 			li#modal
 				a(href='javascript:void(0);')
 					span
-						strong active modal
+						strong Active modal
 						| label in here
 			li#domain-info
 				a(href='javascript:void(0);').ff-icon-before
-					strong detailed
+					strong Detailed
 					| domain info
 			li#watchlist
-				a(href='javascript:void(0);')
-					strong my watchlist
+				a(href="javascript:$.restorePanel('/modules/exchange/panels/watchlist', {'firstname':'Elliot'});")
+					strong My Watchlist
 					| domains you star
 		form#quick-search.well
-			input#quick-search-keyword(value='', placeholder='quick domain search _')
+			input#quick-search-keyword(value='', placeholder='Quick domain search _')
 			#sale-type.btn-group
 				a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-					| sale type
+					| Sale type
 					span.caret
 				ul.dropdown-menu
 					li
@@ -50,7 +50,7 @@ header#main
 						a(href='') New Registrations only
 					li
 						a(href='') Websites only
-			button.btn.ff-icon-before(type='submit') submit
+			button.btn.ff-icon-before(type='submit') Submit
 
 	
 != partial('partials/panel')
@@ -87,23 +87,21 @@ header#main
 		
 		ul#exchange-data-tabs.nav.nav-tabs
 			li.active
-				a(href='') search
+				a(href='') Expiring
 			li
-				a(href='') expiring			
+				a(href='') Auctions
 			li
-				a(href='') auctions
+				a(href='') Dropping
 			li
-				a(href='') dropping
+				a(href='') Websites
 			li
-				a(href='') websites
+				a(href='') History
 			li
-				a(href='') history
-			li
-				a(href='') new registrations
+				a(href='') New registrations
 		
 		#exchange-tab-panes.tab-content
 			#expiring.tab-pane.active
-				h2#complete-listing expiring domains listing
+				h2#complete-listing Expiring domains listing
 				p.clearfix
 					| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
 					| andit eget non lacus. Pellentesque a imperdiet diam.
