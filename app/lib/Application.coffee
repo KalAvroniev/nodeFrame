@@ -1,5 +1,6 @@
 express = require('express')
 fs = require('fs')
+jade = require('jade')
 JsonRpcServer = require('./JsonRpcServer.coffee').JsonRpcServer
 SessionStore = require('./SessionStore.coffee').SessionStore
 
@@ -51,7 +52,9 @@ class exports.Application
 				res.write(err)
 				console.error(err)
 			else
-				res.write(data)
+				# compile the jade
+				jc = jade.compile(data, { client: true }).toString()
+				res.write(jc)
 			res.end()
 		)
 	
