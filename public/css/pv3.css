@@ -1011,7 +1011,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	position: fixed;
 	width: 75px;
 	height: 100%;
-	z-index: 4;
+	z-index: 6;
 }
 #spine-inner {
 	height: 100%;
@@ -1245,7 +1245,7 @@ header#main {
 	background: url(../img/app-bar-texture.png);
 	width: 100%;
 	position: fixed;
-	z-index: 2;
+	z-index: 5;
 	left: 0; top: 0;
 	
 	height: 74px;
