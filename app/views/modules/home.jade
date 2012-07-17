@@ -274,13 +274,13 @@ header#main
 													li
 														a(href='') dropping
 									tr
-										td(colspan="8")#bulk-actions 
+										td(colspan="9")#bulk-actions 
 											div.ff-icon-before.bulk-wrapper 
 												a.ff-icon-after.x-zero-alert(href="#")
 												span 
 													strong Bulk actions menu
 													br
-													| for selected items
+													| for all selected items
 
 												#bulk-action-menu.btn-group
 													a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
@@ -294,7 +294,7 @@ header#main
 															li
 																a(href='') go 'moo' like a cow										 
 									tr	
-										td(colspan="8")#zero-alert
+										td(colspan="9")#zero-alert
 											span.ff-icon-before
 												a.ff-icon-after.x-zero-alert(href="#")
 												strong Sorry
@@ -305,13 +305,18 @@ header#main
 												strong new registrations
 									
 									tr
-										td(colspan="8")#filter-params
-											span.ff-icon-before Showing similar domains from 
+										td(colspan="9")#filter-params
+											span.ff-icon-before 
+												a#save-search.ff-icon-before.btn(data-toggle='dropdown', href='javascript:void(0);')	
+													strong save 
+													| this search
+												| showing similar domains from 
 												strong all sources 
 												| ending 
 												strong today
 												|, containing keywords 
-												strong 'protrada'		
+												strong 'protrada'	
+												
 								tbody
 									tr
 										td
@@ -322,7 +327,7 @@ header#main
 												span.action-buttons
 													//a.ff-icon(href='#', data-title='Build website') X
 													a.ff-icon(href='#', data-title='View domain details') G
-													a.ff-icon.main-action(href='#', data-title='List domain for sale') W
+													a.ff-icon.main-action(href='#', data-title='List domain for sale') ^
 														span.label Sell
 													//a.ff-icon(href='#', data-title='Place bid / Buy') -
 											td.domain-title
@@ -342,11 +347,79 @@ header#main
 											td 0
 											td 0
 											td 0
-
+											
+									tr
+										td
+												button.btn.select(data-toggle='button')
+											td
+												button.btn.favourite(data-toggle='button')
+											td.actions
+												span.action-buttons
+													//a.ff-icon(href='#', data-title='Build website') X
+													a.ff-icon(href='#', data-title='View domain details') G
+													a.ff-icon.main-action(href='#', data-title='Bid on domain') W
+														span.label Bid
+													//a.ff-icon(href='#', data-title='Place bid / Buy') -
+											td.domain-title
+												span.domain-title-cntnr
+													| 353cards
+													span.tld com
+											td 3
+											td.currency 1584
+											td n/a
+											td 8
+											td.currency 200
+											td 20%
+											td.date 1st Jan '70 10:00am
+											td.date 1st Jan '70 10:00am
+											td No
+											td 0
+											td 0
+											td 0
+											td 0											
+											
+									tr.row-sel.parent-open
+										td
+												button.btn.select(data-toggle='button')
+											td
+												button.btn.favourite(data-toggle='button')
+											td.actions
+												span.action-buttons
+													//a.ff-icon(href='#', data-title='Build website') X
+													a.ff-icon(href='#', data-title='View domain details') G
+													a.ff-icon.main-action(href='#', data-title='List domain for sale') ^
+														span.label Sell
+													//a.ff-icon(href='#', data-title='Place bid / Buy') -
+											td.domain-title
+												span.domain-title-cntnr
+													| 353cards
+													span.tld com
+											td 3
+											td.currency 1584
+											td n/a
+											td 8
+											td.currency 200
+											td 20%
+											td.date 1st Jan '70 10:00am
+											td.date 1st Jan '70 10:00am
+											td No
+											td 0
+											td 0
+											td 0
+											td 0
 																				
-																				
-
-
+									tr.row-sel.child
+										td(colspan="9")
+											div.child-inner
+												a.x-row-sel.ff-icon-after
+												p 
+													strong selected domain content 
+													| to be placed in here
+										
+										
+										
+										
+										
 
 		#listed-for-sale.tab-pane
 			h2#complete-listing Domains listed for sale

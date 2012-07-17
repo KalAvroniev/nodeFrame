@@ -7,9 +7,9 @@ header#main
 
 	#toggle-side-bar.ff-icon-before
 		span.toggle-title
-			strong Collapse 
+			strong collapse 
 			| sidebar
-		span.toggle-sub * You can also re-open from here
+		span.toggle-sub * you can also re-open from here
 	
 	#sectional-func.side-open	
 		#x-side-bar(title='Toggle display of sidebar')
@@ -20,21 +20,21 @@ header#main
 			li#modal
 				a(href='javascript:void(0);')
 					span
-						strong Active modal
+						strong active modal
 						| label in here
 			li#domain-info
 				a(href='javascript:void(0);').ff-icon-before
-					strong Detailed
+					strong detailed
 					| domain info
 			li#watchlist
 				a(href='javascript:void(0);')
-					strong My Watchlist
+					strong my watchlist
 					| domains you star
 		form#quick-search.well
-			input#quick-search-keyword(value='', placeholder='Quick domain search _')
+			input#quick-search-keyword(value='', placeholder='quick domain search _')
 			#sale-type.btn-group
 				a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-					| Sale type
+					| sale type
 					span.caret
 				ul.dropdown-menu
 					li
@@ -50,7 +50,7 @@ header#main
 						a(href='') New Registrations only
 					li
 						a(href='') Websites only
-			button.btn.ff-icon-before(type='submit') Submit
+			button.btn.ff-icon-before(type='submit') submit
 
 	
 != partial('partials/panel')
@@ -87,21 +87,23 @@ header#main
 		
 		ul#exchange-data-tabs.nav.nav-tabs
 			li.active
-				a(href='') Expiring
+				a(href='') search
 			li
-				a(href='') Auctions
+				a(href='') expiring			
 			li
-				a(href='') Dropping
+				a(href='') auctions
 			li
-				a(href='') Websites
+				a(href='') dropping
 			li
-				a(href='') History
+				a(href='') websites
 			li
-				a(href='') New registrations
+				a(href='') history
+			li
+				a(href='') new registrations
 		
 		#exchange-tab-panes.tab-content
 			#expiring.tab-pane.active
-				h2#complete-listing Expiring domains listing
+				h2#complete-listing expiring domains listing
 				p.clearfix
 					| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
 					| andit eget non lacus. Pellentesque a imperdiet diam.
