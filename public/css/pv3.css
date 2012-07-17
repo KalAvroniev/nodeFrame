@@ -1561,6 +1561,7 @@ header#main:before {
     font-weight: 600;
     line-height: 13px;
     min-width: 12px;
+  	margin: 4px;  
     padding: 5px 0 0 0;	
 }
 .alerts-summary > span:before {
@@ -1569,12 +1570,19 @@ header#main:before {
 .alerts-summary > span[data-title="Devname Alerts"] {
 	background: #297FCD;
 	box-shadow: inset 0 -1px 0 rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 4px rgba(41,127,205,0.7);
-	margin: 0 0 0 5px;
 }
 .alerts-summary > span:hover {
 	background: #FCF9F5;
+	border: 4px solid #ddd;
+	font-weight: 700;
+	width: 27px; height: 27px;
+    padding: 3px 0 0 0;
+    margin: 0 0 0 4px;		
 	color: #212121;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+}
+.alerts-summary > span[data-title="Devname Alerts"]:hover {
+    margin: 0 4px 0 0;		
 }
 /*.alerts-summary > span[data-title="Devname Alerts"]:hover {
 	background: #1963a6;
@@ -1602,7 +1610,7 @@ header#main:before {
 	color: rgba(0,0,0,0.55);
 	text-shadow: none;	
 	box-shadow: inset 0 -1px 0 rgba(0,0,0,0.2), 0 2px 4px rgba(228,101,3,0.7);
-	padding: 7px 10px 7px 30px;
+	padding: 7px 10px 10px 30px;
 	text-align: left;
 	left: 0; bottom: -60px;
 }
@@ -2527,6 +2535,9 @@ aside .viewport {
 }
 .sidebar-hidden #toggle-side-bar {
 	display: none;	
+}
+#toggle-side-bar:hover {
+	opacity: 0.75;
 }
 #toggle-side-bar:before {
 	content: "y";
