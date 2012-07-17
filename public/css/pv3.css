@@ -1537,7 +1537,102 @@ header#main:before {
 .sidebar-hidden #x-side-bar {
 	display: block;
 	padding: 24px 0 0 33px;
+	position: relative;
 }
+.alerts-summary {
+	display: none;
+}
+.sidebar-hidden .alerts-summary {
+	display: block;
+	position: absolute;
+	width: 100% !important;
+	bottom: -16px; left: 3px;
+	text-align: center;
+}
+.alerts-summary > span {
+	display: inline-block;
+	border-radius: 15px;
+	background: #E46503;
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4), 0 2px 4px rgba(228,101,3,0.7);
+	
+	color: rgba(0,0,0,0.55);
+	width: 23px; height: 23px;
+	font-size: 12px;
+    font-weight: 600;
+    line-height: 13px;
+    min-width: 12px;
+    padding: 5px 0 0 0;	
+}
+.alerts-summary > span:before {
+	content: attr(data-alerts);
+}
+.alerts-summary > span[data-title="Devname Alerts"] {
+	background: #297FCD;
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 4px rgba(41,127,205,0.7);
+	margin: 0 0 0 5px;
+}
+.alerts-summary > span:hover {
+	background: #FCF9F5;
+	color: #212121;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+}
+/*.alerts-summary > span[data-title="Devname Alerts"]:hover {
+	background: #1963a6;
+	color: #fff;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+.alerts-summary > span[data-title="Protrada Alerts"]:hover {
+	background: #c05605;
+	color: #fff;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.3);	
+}*/
+
+.alerts-summary > span[data-alerts="0"] {
+	display: none;
+}
+.alerts-summary > span span.hover-bubble {
+	display: none;
+}
+.alerts-summary > span:hover span.hover-bubble {
+	display: block;
+	position: absolute;
+	font-size: 11px;
+	border-radius: 8px 0 0 8px;
+	background: #E46503;
+	color: rgba(0,0,0,0.55);
+	text-shadow: none;	
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,0.2), 0 2px 4px rgba(228,101,3,0.7);
+	padding: 7px 10px 7px 30px;
+	text-align: left;
+	left: 0; bottom: -60px;
+}
+.alerts-summary > span:hover span.hover-bubble:before {
+	position: absolute;
+	top: 11px; left: 7px;
+	content: "l";
+}
+.alerts-summary > span[data-title="Protrada Alerts"]:hover span.hover-bubble:before {
+	content: "#";
+}
+
+.alerts-summary > span:hover span.hover-bubble:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: -14px;	left: 42%;
+	margin: 0;
+	border: 7px outset transparent;
+	border-bottom: 7px solid #E46503;
+}
+.alerts-summary > span[data-title="Devname Alerts"]:hover span.hover-bubble {
+	background: #297FCD;
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,0.3), 0 2px 4px rgba(41,127,205,0.7);
+}
+.alerts-summary > span[data-title="Devname Alerts"]:hover span.hover-bubble:after {
+	border-bottom: 7px solid #297FCD;	
+}	
+
+
 .sidebar-hidden #x-side-bar:before {
 	display: none;	
 }
@@ -1553,8 +1648,8 @@ header#main:before {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#232323', endColorstr='#323232',GradientType=0 ); /* IE6-9 */
 		
 }
-.sidebar-hidden #x-side-bar:hover > span {
-	opacity: 0.8;
+.sidebar-hidden #x-side-bar:hover .left-bars, .sidebar-hidden #x-side-bar:hover .right-bar {
+	opacity: 0.75;
 }
 .sidebar-hidden #x-side-bar > span {
 	float: left;
@@ -1626,6 +1721,10 @@ header#main:before {
 	display: inline-block;
 	vertical-align: top;	
 	letter-spacing: -0.06em;
+	max-width: 55%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 #member-details {
 	display: inline-block;
@@ -4709,6 +4808,13 @@ body.no-bubbles #tiptip_holder {
 
 @media only screen and (max-width: 1287px) {
 
+	
+	aside.scrollfix {
+	}
+	aside.active {
+		display: block;
+	}
+	
 	header#main:before {
 		left: 40%;
 	}
@@ -4750,7 +4856,7 @@ body.no-bubbles #tiptip_holder {
 		padding: 20px 30px 0;
 	}
 	.sectional-tabs li a:before {
-		margin: 0 0 0 -10px;
+		margin: 4px 0 0 -10px;
 	}	
 	
 	
@@ -4767,8 +4873,11 @@ body.no-bubbles #tiptip_holder {
 		padding: 14px 15px 45px 45px;
 	}
 	.sidebar-hidden .sectional-tabs li a:before {
-		margin: 4px 0 0 -30px;
+		margin-left: -30px;
 	}	
+	.sectional-tabs li:first-child a {
+		height: 90px;
+	}
 	
 	
 	#section-headings.search-results {	
@@ -4787,6 +4896,15 @@ body.no-bubbles #tiptip_holder {
 		margin: 0;
 		top: 60px; right: -210px;	
 	}	
+	
+	#user-greeting {
+		max-width: 100%;
+	}
+
+	.sidebar-hidden #member-details {
+		display: inline-block;
+		margin: 9px 0 0 60px;	
+	}
 	
 }
 
@@ -4808,9 +4926,9 @@ body.no-bubbles #tiptip_holder {
 		vertical-align: top;
 		margin: 9px 0 0 60px;
 	}
-	#member-details {
-		display: block;
-		margin: 20px 0 0 0;
+	.sidebar-hidden #member-details {
+		display: inline-block;
+		margin: 9px 0 0 60px;	
 	}
 
 
@@ -4826,7 +4944,7 @@ body.no-bubbles #tiptip_holder {
 	.sidebar-hidden .sectional-tabs li a {
 		text-indent: -3000em;
 		white-space: nowrap;
-		padding: 18px 30px 0;
+		padding: 14px 30px 0;
 		height: 55px;
 	}	
 	.sidebar-hidden .sectional-tabs li.active a, .sectional-tabs.singular li.active a {
@@ -4834,25 +4952,27 @@ body.no-bubbles #tiptip_holder {
 		padding: 20px 30px 0;
 	}
 	.sidebar-hidden .sectional-tabs li a:before {
-		margin: 0 0 0 -10px;
+		margin-left: -10px;
 	}	
 	.sectional-tabs.singular li a, .sectional-tabs li:first-of-type a {
 		height: 91px;
 	}
+	
 }
 
 @media only screen and (max-width: 1024px) {
 	
-	aside.scrollfix {
-	}
-	aside.active {
-		display: block;
-	}
+	#main-container {
+		padding: 100px 30px 0 30px;
+	}	
 	#notifications {
 		box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 	}
 	#notifications .overview {
 		background: rgba(252,249,245,0.96);
+	}
+	#notifications, aside header.alerts-header {
+		right: 30px;
 	}
 	aside.active:before {
 		content: "";
@@ -4899,12 +5019,6 @@ body.no-bubbles #tiptip_holder {
 	.sectional-tabs.singular li a {
 		padding-right: 30px;
 	}
-	
-	#member-details {
-		margin: 9px 0 0 0px;
-	}
-	
-
 
 
 		
@@ -4921,16 +5035,6 @@ body.no-bubbles #tiptip_holder {
 
 @media only screen and (max-width: 890px) {
 
-	#member-details {
-		display: block;
-		margin: 20px 0 0 0;
-	}
-
-	.sidebar-hidden #member-details {
-		display: block;
-		margin: 20px 0 0 0;
-	}
-	
 	#h4-status-summary, #h4-trading-summary {
 		font-size: 16px;
 	}

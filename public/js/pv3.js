@@ -98,42 +98,6 @@ $(document).ready(function () {
     });
 
 
-    // Setup open/close sidebar element functions       
-    $('#toggle-side-bar, #x-side-bar').click(function () {
-
-		var aside = $('aside');
-
-        if (aside.hasClass('active')) {
-			
-			// work around webkit not redrawing when innerHtml altered
-			var mainContainer = $('#main-container')[0];
-			mainContainer.style.display = 'none';
-			mainContainer.offsetHeight;
-			mainContainer.style.display = 'block';
-
-            aside.removeClass('active');
-            $('body').addClass('sidebar-hidden');
-            
-
-        } else {
-       		//show the sidebar
-        
-			// work around webkit not redrawing when innerHtml altered
-			var mainContainer = $('#main-container')[0];
-			mainContainer.style.display = 'none';
-			mainContainer.offsetHeight;
-			mainContainer.style.display = 'block';
-
-            aside.addClass('active');
-			$('body').removeClass('sidebar-hidden');
-			
-	    	$('aside #notifications:not(.native)').tinyscrollbar_update('relative');
-			
-        }
-        
-    });
-
-
     $('#spine-inner nav a').mouseup(function () {
         $(this).removeClass('active');
     }).mousedown(function () {

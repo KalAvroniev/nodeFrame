@@ -8,7 +8,7 @@ html(lang='en')
 		
 		!= partial('partials/styles')
 
-	body
+	body.sidebar-hidden
 		
 		script 	
 			if( navigator.userAgent.match(/Android/i)
@@ -56,9 +56,10 @@ html(lang='en')
 		script(src='/js/jqplot/plugins/jqplot.dateAxisRenderer.min.js')
 		script(src='/js/jqplot/plugins/jqplot.trendline.min.js')
 		script(src='/js/jquery.tipTip.js')
+		script(src='/js/moo.js')
 		script(src='/js/pv3.js')
 		
-		script
+		script	
 			
 			function navigate(module) {
 				window.history.pushState('', module, "/" + module);
@@ -71,35 +72,10 @@ html(lang='en')
 				});
 			}
 			
-			$(document).ready(function () {
-				$('#main-container').on('ajaxLoaded', function() {
-					$('.ajax-spinner').hide();
-				});
-				$('#main-container').on('ajaxUnloading', function() {
-					$('.ajax-spinner').show();
-				});
-				var module = document.URL.substr(document.URL.lastIndexOf('/') + 1);
-				navigate(module);
-				$('#toggle-condensed').click(function() {
-					if ($('body').hasClass('condensed')) {
-						$('.condensed').removeClass('condensed');
-						$(this).removeClass('active');
-					} else {
-						$('body').addClass('condensed');
-						$(this).addClass('active');						
-					}
-					return false
-				});
-				if ($('body').hasClass('condensed')) {
-							$('#toggle-condensed').addClass('active');
-						} else {
-							$('#toggle-condensed').removeClass('active');						
-						}
-
-			});
+		
 			
 			
-			
+	
 			
 			
 			

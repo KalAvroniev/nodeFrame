@@ -12,9 +12,17 @@ header#main
 		span.toggle-sub * you can also re-open from here
 	#sectional-func.side-open
 		#x-side-bar(title='Toggle display of sidebar')
+			
+			span.alerts-summary 
+				span(data-alerts="2", data-title="Protrada Alerts") 
+					span.ff-icon-before.hover-bubble Protrada alerts
+				span(data-alerts="4", data-title="Devname Alerts") 
+					span.ff-icon-before.hover-bubble Devname alerts
+					
 			span.left-bars
 				span
 			span.right-bar
+		
 		ul.sectional-tabs
 			li#modal
 				a(href='javascript:void(0);')
