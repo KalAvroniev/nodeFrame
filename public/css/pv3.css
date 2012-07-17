@@ -518,7 +518,7 @@ a.ff-icon-before:before {
 	content: "S";
 	display: block;
 	position: absolute;
-	top: 10px; right: 0px;
+	top: 7px; right: 0px;
 	font-size: 19px;
 }
 #credits a {
@@ -1298,7 +1298,7 @@ header#main:before {
 }
 
 .sectional-tabs {
-	margin: 12px 0 0 0;
+	margin: 11px 0 0 0;
 	position: relative;
 	/*display: none;*/
 	float: right;
@@ -1777,7 +1777,7 @@ header#main:before {
 	background: url(../img/default-health-spark-grainy.png);
 	width: 290px; height: 77px;
 }
-.demo-spark:hover {
+#portfolio-health:hover .demo-spark {
 	background: url(../img/default-health-spark-hover.png);
 	bottom: -8px;	
 }
@@ -1819,7 +1819,7 @@ header#main:before {
 	height: 100%;
 	width: 140px;
 	margin: 0 20px 0 0;
-	padding: 10px;
+	padding: 15px 10px 0;
 	position: relative;	
 	cursor: pointer;
 
@@ -1858,7 +1858,7 @@ header#main:before {
 	content: attr(data-value);
 	display: block;
 	position: relative;
-	top: -5px;
+	top: -8px;
 	margin: 0;
 	font-size: 60px;
 	font-weight: 400;
@@ -1871,8 +1871,7 @@ header#main:before {
 	display: block;
 	font-size: 12px;
 	line-height: 14px;
-	margin: 10px 0 0 0;
-	
+	margin: 12px 0 0 0;
 }
 
 
@@ -3419,6 +3418,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82b42c', end
 	font-weight: 400;
 	box-shadow: inset 0px 1px 0 rgba(0,0,0,0.3);
 	border: none;	
+	padding: 12px 15px;
 }
 .grid-table tbody .row-sel.child td, .grid-table tbody .row-sel.child:hover td {
 	border: none;
@@ -3620,8 +3620,7 @@ thead #category {
 .action-buttons a {
 	float: left;
 	margin: 0;
-	padding: 6px 0 0 5px;
-	width: 28px; height: 28px;
+	width: 30px; height: 30px;
 	line-height: 1;
 	position: relative;
 	
@@ -3659,7 +3658,7 @@ thead #category {
 	margin: 0 5px 0 0;	
 }
 .action-buttons a[data-title="View domain details"] {
-	padding: 6px 0 0 6px;	
+	padding: 7px 0 0 7px;	
 	color: #a4a4a4;
 }
 .action-buttons a[data-title="List for sale"] {
@@ -3724,23 +3723,23 @@ thead #category {
 	box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 	padding: 7px 10px;
 	border-radius: 20px;
-	top: -37px; left: -22px;
+	top: -37px; left: -50%;
 	white-space: nowrap;
 }
 .action-buttons a:hover:after {
 	content: "";
 	display: block;
 	position: absolute;
-	top: -8px; left: 8px;
+	top: -8px; left: 30%;
 	margin: 0;
 	border: 6px outset transparent;
 	border-top: 6px solid #79AE1F;
 }
 .action-buttons a.main-action:hover:before {
-	left: -12px;
+	left: -50%;
 }
 .action-buttons a.main-action:hover:after {
-	left: 21px;
+	left: 40%;
 }
 
 
@@ -4285,12 +4284,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#657f0f', end
 	background: rgba(0,0,0,0.55);
 	text-shadow: none;
 	box-shadow: 0 1px 0 rgba(255,255,255,0.2), inset 0 1px 3px rgba(0,0,0,0.3);
-	margin: 0 0 0 2px;	
+	margin: 2px 0 0 2px;	
 }
 .grid-table .row-sel .btn.favourite {
 	color: rgba(0,0,0,0.55);
 	text-shadow: 0 1px 1px #E46503, 0 0 0 rgba(0,0,0,0.4), 0 1px 1px #E46503, 0 1px 0px rgba(255,255,255,0.2);
-	margin: 0 0 0 3px;	
+	margin: 2px 0 0 3px;	
 	font-size: 25px;
 }
 
@@ -4690,6 +4689,19 @@ body.no-bubbles #tiptip_holder {
 .condensed #first-heading.home {
 	display: none;
 }
+.condensed #filter-params span, .condensed #zero-alert span, .condensed #bulk-actions .bulk-wrapper {
+	padding: 8px 20px 10px;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

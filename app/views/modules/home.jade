@@ -4,21 +4,22 @@
 - }
 
 header#main
+
 	#toggle-side-bar.ff-icon-before
 		span.toggle-title
-			strong Collapse 
+			strong collapse 
 			| sidebar
-		span.toggle-sub * You can also re-open from here
+		span.toggle-sub * you can also re-open from here
 	#sectional-func.side-open
 		#x-side-bar(title='Toggle display of sidebar')
 			span.left-bars
 				span
 			span.right-bar
 		ul.sectional-tabs
-			li#modal.hidden
+			li#modal
 				a(href='javascript:void(0);')
 					span
-						strong Active modal 
+						strong active modal 
 						| label in here
 			li#domain-info.hidden
 				a.ff-icon-before(href='javascript:void(0);')
@@ -28,11 +29,12 @@ header#main
 				a.(href='javascript:void(0);')
 					strong My Watchlist 
 					| domains you star
+		
 		form#quick-search.well
-			input#quick-search-keyword(value='', placeholder='Quick domain search _')
+			input#quick-search-keyword(value='', placeholder='quick domain search _')
 			#sale-type.btn-group
 				a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-					| Sale type 
+					| sale type 
 					span.caret
 				ul.dropdown-menu
 					li
@@ -87,10 +89,10 @@ header#main
 	h2#user-greeting hi, Andrew 
 	hgroup#member-details
 		h5
-			| You are currently an 
+			| you are currently an 
 			strong Investor member.
 		h5#member-renewal
-			| Your next membership renewal is: 
+			| your next membership renewal is: 
 			strong.ff-icon-before
 				| 24
 				sup th 
@@ -98,7 +100,7 @@ header#main
 	#health-and-status.clearfix
 		#portfolio-health
 			h3#health-title.ff-icon-before
-				| Portfolio 
+				| portfolio 
 				strong health
 			p.ff-icon-before
 				| This section can show you at a glance, how healthy your portfolio is (by charting it's ROI%), and also how it is trending. 
@@ -107,7 +109,7 @@ header#main
 				| to learn how to take advantage of this feature
 			span.demo-spark(title='Graph currently inactive - no data to display')
 		h4#h4-status-summary.ff-icon-before
-			| Your current trading 
+			| your current trading 
 			strong status summary
 		#status-summary.tiny-scrollbar-horiz
 			.scrollbar
@@ -132,12 +134,14 @@ header#main
 						li.divided
 							h5(data-title='pending', data-value='0')
 							span.status-descr domains pending (not propogated)
-	#trading-and-trending.graph-hidden
+	
+	
+	#trading-and-trending.graph-hidden.hidden
 		.graph-legend
 			img(src='img/demo-current-trading.png', alt='demo image of trading graphing functionality')
 		.graph-options
 			h4#h4-trading-summary.ff-icon-before
-				strong Trading 
+				strong trading 
 				| summary
 			#graph-settings.btn-group
 				a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
@@ -157,11 +161,13 @@ header#main
 						a(href='javascript:void(0);') only ROI% yearly
 		.graph-container
 			#trading-graph.graph	
+	
+	
 	ul#portfolio-data-tabs.nav.nav-tabs
 		li.active
-			a(href='#whole-portfolio') My portfolio
+			a(href='#whole-portfolio') my portfolio
 		li
-			a(href='#listed-for-sale') Listed for sale (4)
+			a(href='#listed-for-sale') listed for sale (4)
 	#dashboard-tab-panes.tab-content
 		#whole-portfolio.tab-pane.active
 			h2#complete-listing Complete domain listing
@@ -310,7 +316,7 @@ header#main
 												a#save-search.ff-icon-before.btn(data-toggle='dropdown', href='javascript:void(0);')	
 													strong save 
 													| this search
-												| showing similar domains from 
+												| Showing similar domains from 
 												strong all sources 
 												| ending 
 												strong today
