@@ -82,7 +82,6 @@ body {
 
 
 body * {
-	color: #161413;
 	font-family: 'Open Sans', san-serif;
 }
 strong {
@@ -790,6 +789,7 @@ body.login {
 }
 #login-title strong {
 	display: block;
+	color: rgba(255,255,255,0.45);		
 }
 #login-content {
 	box-shadow: 0 0 20px rgba(0,0,0,0.15);
@@ -836,7 +836,7 @@ fieldset.login input:not(.hidden), fieldset.forgot input:not(.hidden) {
 	border: none;
 	box-shadow: 0 1px 0 rgba(255,255,255,0.8), inset 0 3px 5px rgba(0,0,0,0.1);
 	display: block; 
-	width: 340px;
+	width: 340px; height: auto;
 	border-radius: 4px;
 }
 fieldset.login input:focus, fieldset.forgot input:focus {
@@ -844,7 +844,9 @@ fieldset.login input:focus, fieldset.forgot input:focus {
 	color: rgba(0,0,0,0.7);	
 	box-shadow: 0 1px 0 rgba(255,255,255,0.8), inset 0 3px 5px rgba(0,0,0,0.2);
 }
-
+fieldset.login input.hidden {
+	display: none;
+}
 fieldset.login input[type="password"] {
 	margin: 0;
 }
@@ -925,6 +927,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	padding: 13px 0 16px 20px;
 	background: #f5f5f5;
 	color: #353535;
+	border-radius: 5px;
 	box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 1px 3px rgba(0,0,0,0.15);
 	font-size: 18px;
 	font-weight: 600;
@@ -948,6 +951,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	font-weight: 700;
 	letter-spacing: -2px;
 	position: relative;
+	color: rgba(0,0,0,0.5);
 }
 #process-error h3:before {
 	content: "/";
@@ -962,6 +966,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	padding: 3px 0 0 220px;
 	font-size: 13px;
 	line-height: 1.4em;
+	color: rgba(0,0,0,0.65);
+
 }
 
 #login-facebook {
@@ -986,9 +992,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	letter-spacing: -1px;
 	position: relative;
 	white-space: nowrap;
+	color: #fff;
 }
 #login-facebook h3 strong {
 	font-weight: 700;
+	color: #fff;
+	
 }
 #login-facebook h3:before {
 	content: "Y";
@@ -1003,6 +1012,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	padding: 2px 0 0 350px;
 	font-size: 13px;
 	line-height: 1.4em;
+	color: #fff;		
 }
 
 
@@ -2230,6 +2240,11 @@ header#main:before {
 	content: "W";
 	font-size: 25px;	
 }
+.panel-heading .make-offer:before {
+	content: "C";
+	font-size: 26px;
+	margin: -3px 10px 0 6px;	
+}
 .domain-details-table {
 	float: left;
 	width: 310px;
@@ -2555,10 +2570,10 @@ header#main:before {
 	margin-left: -25px;
 	width: auto;
 }
-#section-panel .btn-group {
+.mini-panel .btn-group {
 	float: right;
 } 
-#section-panel .btn-group .btn {
+.mini-panel .btn-group .btn-success {
 	border: none;
 	box-shadow: inset 0 3px 0 rgba(0,0,0,0.1), 0 1px 0 white, 0 -3px 0 rgba(0,0,0,0.08)	;
 	font-weight: 600;
@@ -2586,7 +2601,7 @@ header#main:before {
 	font-weight: 400;	
 }
 
-#section-panel .btn-group .btn:hover {
+#section-panel .btn-group .btn-success:hover {
 	background: #8ebf36;
 	z-index: auto;
 	box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15), 0 1px 0 white, -1px 0 0 rgba(255,255,255,0.3), 0 -3px 0 rgba(0,0,0,0.08);	
@@ -2606,7 +2621,7 @@ header#main:before {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#657f0f', endColorstr='#3a5603',GradientType=0 ); /* IE6-9 */
 }
 
-#section-panel .btn-group .btn.dropdown-toggle {
+#section-panel .btn-group .btn-success.dropdown-toggle {
 	border-left: 1px solid rgba(0,0,0,0.2);
 	box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15), 0 1px 0 white, -1px 0 0 rgba(255,255,255,0.3),0 -3px 0 rgba(0,0,0,0.08);
 	border-radius: 0 5px 5px 0;
@@ -2620,12 +2635,12 @@ header#main:before {
 	background: linear-gradient(to bottom,  #70a220 0%,#8ebf36 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70a220', endColorstr='#8ebf36',GradientType=0 ); /* IE6-9 */
 }
-#section-panel .btn-group .btn.dropdown-toggle:hover {
+#section-panel .btn-group .btn-success.dropdown-toggle:hover {
 	background: #8ebf36;
 	border-left: 1px solid rgba(0,0,0,0.2);	
 	box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15), 0 1px 0 white, -1px 0 0 rgba(255,255,255,0.3),0 -3px 0 rgba(0,0,0,0.08)	;	
 }
-#section-panel .btn-group .btn.dropdown-toggle:active, #section-panel .btn-group.open .btn.dropdown-toggle {
+#section-panel .btn-group .btn-success.dropdown-toggle:active, #section-panel .btn-group.open .btn-success.dropdown-toggle {
 	border-left: 1px solid rgba(0,0,0,0.2);	
 	box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15), 0 1px 0 white, -1px 0 0 rgba(255,255,255,0.3),0 -3px 0 rgba(0,0,0,0.08);		
 	
@@ -2639,7 +2654,7 @@ header#main:before {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a5603', endColorstr='#657f0f',GradientType=0 ); /* IE6-9 */	
 }
 
-#section-panel .btn-large .caret {
+#section-panel .btn-success.btn-large .caret {
 	padding: 8px 3px 0;
 	color: #36520f;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.3);
@@ -2654,9 +2669,12 @@ header#main:before {
 	text-shadow: 0 1px 0 rgba(0,0,0,0.3);	
 }
 
+/* ------------------------------ Global connect popup styles work ------------------------------------- */
 
-
-
+#connect-popup {
+	position: absolute;
+	top: 0; left: 0;
+}
 
 
 
@@ -4052,7 +4070,7 @@ thead #category {
 	content: "";
 	display: block;
 	position: absolute;
-	top: -8px; left: 30%;
+	top: -9px; left: 30%;
 	margin: 0;
 	border: 6px outset transparent;
 	border-top: 6px solid #79AE1F;
@@ -4072,6 +4090,7 @@ thead #category {
 
 
 /* ------------------------------ default content page ------------------------------------- */
+
 .page-default h2#user-greeting {
 	margin-bottom: 50px;
 }
