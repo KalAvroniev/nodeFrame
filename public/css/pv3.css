@@ -2673,9 +2673,19 @@ header#main:before {
 
 #connect-popup {
 	position: absolute;
-	top: 0; left: 0;
+	z-index: 3;
+	top: 90px; left: 30px;
+	width: 260px;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 2px 12px rgba(0,0,0,0.15);
 }
-
+#connect-popup form {
+	background: #fff;
+	border-radius: 8px 8px 0 0;
+	margin: 0;	
+	padding: 10px;
+}
 
 
 
@@ -4529,8 +4539,8 @@ thead #category {
 }
 .dropdown-menu {
 	margin: 6px 0 0;
-	background: #FCF9F5;
-	border: none;
+	background: rgba(255,255,255,0.95);
+	border: 1px solid rgba(0,0,0,0.3);
 }
 #bulk-action-menu .btn {
 	color: rgba(0,0,0,0.6);
