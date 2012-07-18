@@ -12,8 +12,10 @@ class exports.JsonRpcServer
 	constructor: () ->
 		@registeredMethods = {}
 		
-	registerMethods: (path = 'api') ->
-		if path == 'api'
+	registerMethods: (basePath = 'api', path = null) ->
+		if path == null
+			path = basePath
+		if path == basePath
 			console.log("Registering JSON-RPC methods...")
 		
 		# read the directory
@@ -21,17 +23,17 @@ class exports.JsonRpcServer
 			files = fs.readdirSync(path)
 			files.forEach((file) =>
 				if file.substr(0, 1) != '.'
-					@registerMethods(path + '/' + file)
+					@registerMethods(basePath, path + '/' + file)
 			)
 		catch e
-			console.error(path.substr(4, path.length - 11))
-			@registerMethod(path.substr(4, path.length - 11), require('../' + path).Controller)
+			@registerMethod(path.substr(basePath.length + 1, path.length - 8 - basePath.length), require('../' + path).Controller)
 			
 		# print
-		if path == 'api'
-			console.log(@registeredMethods)
+		if path == basePath
+			console.log()
 		
 	registerMethod: (name, func) ->
+		console.log("  JSON-RPC Method '" + name + "'")
 		@registeredMethods[name] = func
 	
 	handleRequest: (req, res) ->
