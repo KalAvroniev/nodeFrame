@@ -1,4 +1,5 @@
 express = require('express')
+connect = require('connect')
 fs = require('fs')
 jade = require('jade')
 JsonRpcServer = require('./JsonRpcServer.coffee').JsonRpcServer
@@ -17,7 +18,6 @@ class exports.Application
 		@app.use(express.static(__dirname + '/../../public'))
 		
 		# sessions
-		@app.use(express.bodyParser())
 		@app.use(express.cookieParser())
 		@app.use(express.session({ 'secret': "protrada", 'store': new SessionStore() }))
 		
@@ -44,17 +44,16 @@ class exports.Application
 	
 	handleJadeRequest: (req, res) ->
 		url = 'views' + @Application.realUrl(req.url)
-		console.log(url)
 		
 		# fetch the raw jade
 		fs.readFile(url, 'utf8', (err, data) ->
 			if err
 				res.write(err)
-				console.error(err)
 			else
 				# compile the jade
 				jc = jade.compile(data, { client: true, filename: url, debug: true, compileDebug: true }).toString()
-				res.write(jc)
+				fn = url.replace(/\.jade$/, '').replace(/\//g, '_');
+				res.write('document.' + fn + ' = ' + jc);
 			res.end()
 		)
 	
@@ -85,7 +84,7 @@ class exports.Application
 	registerControllers: (path = 'controllers') ->
 		if path == 'controllers'
 			console.log("Registering Controllers...")
-			@app.all('/', @handleRequest)
+			@app.all('/', express.bodyParser(), @handleRequest)
 		
 		# read the directory
 		try
@@ -96,5 +95,5 @@ class exports.Application
 			)
 		catch e
 			console.log("Registering controller '" + path.substr(11, path.length - 18) + "'")
-			@app.all(path.substr(11, path.length - 18), @handleRequest)
-			@app.all(path.substr(11, path.length - 18) + ".jade", @handleJadeRequest)
+			@app.all(path.substr(11, path.length - 18), express.bodyParser(), @handleRequest)
+			@app.all(path.substr(11, path.length - 18) + ".jade", express.bodyParser(), @handleJadeRequest)

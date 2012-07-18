@@ -1,22 +1,18 @@
 h2.panel-heading
 	strong my watchlist
-	em= firstname
 	| domains that you have starred
 p
 	| When you star an auction in The Domain Exchange, It appears here. This allows to you make a shortlist containing only the domains sales/auctions that you are interested in following.
 ul#watchlist-tabs.nav.nav-tabs
-	li.active
-		a(href='#expiring', data-toggle='tab') Expiring
-	li
-		a(href='#pre-auction', data-toggle='tab') Pre-auctions
-	li
-		a(href='#auction', data-toggle='tab') Auctions
-	li
-		a(href='#buy-it-now', data-toggle='tab') Buy it now
-	li
-		a(href='#websites', data-toggle='tab') Websites
-	li
-		a(href='#history', data-toggle='tab') History
+	- for(var i = 0; i < tabs.length; ++i) {
+		- var theClass = (active_tab == tabs[i].href ? 'active' : '')
+		li(class=theClass)
+			a(href=tabs[i].href, data-toggle='tab')= tabs[i].title
+	- }
+!= '<script>'
+!= "$('.tab-content .tab-pane').removeClass('active');"
+!= "$('.tab-content " + active_tab + "').addClass('active');"
+!= '</script>'
 .tab-content
 	#expiring.tab-pane.active
 		h2.light-grid-header Watched expiring domains
