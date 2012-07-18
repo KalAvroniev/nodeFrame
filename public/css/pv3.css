@@ -123,6 +123,10 @@ p {
 #main-container {
 	padding: 100px 305px 0 30px;
 	background: url(../img/bg-noise.png);
+	
+	-moz-transition: padding .3s ease-in-out;
+	-webkit-transition: padding .3s linear;
+   	transition: padding .3s linear;	
 }
 #main-container:after {
 	content: "";
@@ -349,12 +353,15 @@ a.ff-icon-before:before {
 	width: 350px;
 	position: absolute;
 	z-index: 3;
-	top: 85px;
-	left: 10px;
+	top: 85px; left: -378px;
 	
 	border-radius: 5px;
 	/*background: url(../img/demo-sys-menu.png);*/
 	box-shadow: 0 0 30px rgba(0,0,0,0.3);
+
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+   	transition: all .2s ease-in-out;	
 }
 
 #sys-menu:before {
@@ -372,7 +379,7 @@ a.ff-icon-before:before {
 }
 
 #sys-menu.active {
-	display: block;
+	left: 10px;
 }	
 #sys-menu-title-bar {
 	border-radius: 5px 5px 0 0;
@@ -1546,7 +1553,7 @@ header#main:before {
 	display: block;
 	position: absolute;
 	width: 100% !important;
-	bottom: -16px; left: 3px;
+	bottom: -18px; left: 3px;
 	text-align: center;
 }
 .alerts-summary > span {
@@ -1568,8 +1575,8 @@ header#main:before {
 	content: attr(data-alerts);
 }
 .alerts-summary > span[data-title="Devname Alerts"] {
-	background: #297FCD;
-	box-shadow: inset 0 -1px 0 rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 4px rgba(41,127,205,0.7);
+	background: #808080;
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 4px rgba(128,128,128,0.6);
 }
 .alerts-summary > span:hover {
 	background: #FCF9F5;
@@ -2462,12 +2469,16 @@ header#main:before {
 aside {
 	z-index: 3;
 	position: fixed;
-	right: 0px;
+	right: -300px;
 	
 	height: 100%;
-	/*padding: 105px 0 22px 0; */
-	display: none;
+	/*padding: 105px 0 22px 0;
+	display: none;*/
 	pointer-events: none;
+	
+	-moz-transition: right .3s ease-in-out;
+	-webkit-transition: right .3s ease-in-out;
+   	transition: right .3s ease-in-out;	
 }
 /* arrow */
 aside:before {
@@ -2480,7 +2491,7 @@ aside:before {
 	border-bottom: 10px solid rgba(0,0,0,0.4);
 }
 aside.active {
-	display: block;
+	right: 0;
 }
 
 #notifications, aside header.alerts-header {

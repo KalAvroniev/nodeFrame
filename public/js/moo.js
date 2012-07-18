@@ -32,12 +32,60 @@ $(document).ready(function () {
 	}
 			
 		 
-	
+	$('#toggle-sys-menu').click(function () {
+
+        if ($('#sys-menu').hasClass('active')) {
+
+	        // hide the sys-menu
+            $('#sys-menu').removeClass('active');
+            $(this).removeClass('active');
+
+        } else {
+
+	        // show the sys menu
+            $('#sys-menu').addClass('active')
+            $(this).addClass('active');
+
+        }
+        return false;
+    });	
 	
 
-						
+	$('#mode-rocker').on('click', function () {
+	
+		if ($(this).hasClass('active')) {
 			
-});
+			// switch to devname mode
+			$(this).removeClass('active');
+			$('h3.protrada.hidden').removeClass('hidden');
+			$('h3.devname').addClass('hidden');
+		
+		} else {
+		
+			// switch to protrada mode
+			$(this).addClass('active');
+			$('h3.protrada').addClass('hidden');
+			$('h3.devname.hidden').removeClass('hidden');			
+	 
+		}
+		
+		return false;
+		
+	});	
+	
+	$('#x-sys-menu').on('click', function () {
+	
+		$('#sys-menu').removeClass('active');
+        $('#toggle-sys-menu.active').removeClass('active');
+	
+		return false;
+	
+	});
+	
+	
+							
+			
+}); // ------------------------------------- Close doc-ready
 
 // Setup open/close sidebar element functions	
 $(document).on("click","#toggle-side-bar, #x-side-bar",function(e){
@@ -48,11 +96,13 @@ $(document).on("click","#toggle-side-bar, #x-side-bar",function(e){
 	
 	if (aside.hasClass('active')) {
 	
+		//hide the sidebar
+		
 		// work around webkit not redrawing when innerHtml altered
-		var mainContainer = $('#main-container')[0];
+		/*var mainContainer = $('#main-container')[0];
 		mainContainer.style.display = 'none';
 		mainContainer.offsetHeight;
-		mainContainer.style.display = 'block';
+		mainContainer.style.display = 'block';*/
 		
 		aside.removeClass('active');
 		$('body').addClass('sidebar-hidden');
@@ -60,11 +110,12 @@ $(document).on("click","#toggle-side-bar, #x-side-bar",function(e){
 	} else {
 	
  		//show the sidebar
+ 		
  		// work around webkit not redrawing when innerHtml altered
- 		var mainContainer = $('#main-container')[0];
+ 		/*var mainContainer = $('#main-container')[0];
 		mainContainer.style.display = 'none';
 		mainContainer.offsetHeight;
-		mainContainer.style.display = 'block';
+		mainContainer.style.display = 'block';*/
 	
 		aside.addClass('active');
 		$('body').removeClass('sidebar-hidden');
