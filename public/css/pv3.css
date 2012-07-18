@@ -812,7 +812,7 @@ body.login {
 .login fieldset input {
 	border-radius: 4px;
 }
-fieldset.login input, fieldset.forgot input {
+fieldset.login input:not(.hidden), fieldset.forgot input:not(.hidden) {
 	background: #d5d5d5;
 	color: rgba(0,0,0,0.3);
 	font-size: 27px;
@@ -854,15 +854,6 @@ fieldset.forgot input[type="text"] {
     color: #5c2405;
 }
 
-
-
-.login-right input[type="submit"], .login-right a, .forgot input[type="submit"]
-{	
-	display: block;	
-	border: none;
-	width: 100%;
-	border-radius: 4px;
-}
 #login-body .forgot input[type="submit"] {
 	float: right;
 	width: 200px;
@@ -1970,6 +1961,7 @@ header#main:before {
 #status-data li > h5 {
 	font-weight: 600;
 	font-size: 16px;
+	line-height: 1;
 	margin: 0;
 }
 #status-data li > h5:before {
@@ -2180,16 +2172,7 @@ header#main:before {
     letter-spacing: 0;
     color: #161413;
 }
-.mini-panel .x-panel {
-	position: static;
-	font-size: 38px;	
-	top: auto; right: auto;
-	display: inline-block;
-	margin: 3px 0 15px -4px;
-}
-.mini-panel .panel-heading {
-	margin: 0 0 20px;
-}
+
 .x-panel:hover {
 	border-radius: 5px;
 	color: rgba(0,0,0,0.4);
@@ -2214,6 +2197,7 @@ header#main:before {
 }
 .panel-heading .ff-icon-before {
 	display: inline-block;
+	vertical-align: top;
 	max-width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
@@ -2225,7 +2209,7 @@ header#main:before {
 	content: "L";
 	font-size: 23px;
 	line-height: 1;
-	margin: -3px 13px 0 10px;
+	margin: -3px 9px 0 6px;
 	color: rgba(0,0,0,0.13);
 }
 .panel-heading .place-bid:before {
@@ -2246,8 +2230,6 @@ header#main:before {
 .domain-details-table tr:nth-child(even) {
 	background: #f0ede9;
 }
-
-
 #section-panel .nav-tabs {
 	margin: 25px 0 0 0;
 	border: none;
@@ -2365,9 +2347,6 @@ header#main:before {
 .source-container .protrada {
 	background: #565656 url(../img/sources/dropping[20x20].png) 3px 3px no-repeat;
 }
-
-
-
 #section-panel .tab-content h2, #section-panel .tab-content p {
 	color: #999999;
 }
@@ -2496,6 +2475,62 @@ header#main:before {
 .light-gridview #top-actions {
 	width: 98px;
 }
+.ajax-panel-content {
+	padding: 0 0 30px;
+}
+
+
+/* ------------------------ Mini-panels styles work ---------------------------------- */
+
+.mini-panel .x-panel {
+	position: static;
+	font-size: 38px;	
+	top: auto; right: auto;
+	display: inline-block;
+	margin: 3px 0 15px -4px;
+}
+.mini-panel .panel-heading {
+	margin: 0 0 20px;
+}
+#bid-amount-form {
+	
+}
+.panel-form input {
+	height: auto; width: auto;
+}
+
+
+
+
+/* ------------------------ Panel form styles work ---------------------------------- */
+
+.form-horizontal input {
+	font-size: 19px;
+	font-weight: 400;
+	color: #4c4b4a;
+	border-radius: 8px;
+	padding: 12px 0 12px 15px;
+}
+.mini-panel-form.form-horizontal input {
+	width: 140px;
+}
+.form-horizontal .control-label {
+	font-size: 14px;
+	font-weight: 300;
+	color: #4c4b4a;
+}
+.radio, .checkbox { 
+	padding-left: 25px;
+}
+.mini-panel-form .checkbox input[type="checkbox"] {
+	margin-left: -25px;
+	width: auto;
+}
+
+
+
+
+
 
 
 
@@ -3375,7 +3410,7 @@ thead tr {
 	width: auto;
 	margin: 0 0 5px;
 	display: inline-block;
-
+	height: auto;
 	box-shadow: 0 1px 0 rgba(255,255,255,0.14), inset 0 2px 1px rgba(0,0,0,0.15);
 }
 .grid-table thead input.txt-filter {
@@ -3808,7 +3843,7 @@ thead #category {
 	padding: 7px 0 7px 8px;
 	margin: 0;
 }
-.action-buttons a.main-action .label {
+.action-buttons a.main-action .action-label {
 	font-size: 12px;
 	line-height: 16px;
 	display: inline-block;
@@ -4280,6 +4315,11 @@ thead #category {
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 300;
 }
+a:hover {
+	text-decoration: none;
+}
+
+
 .btn {
 	white-space: nowrap;
 	text-align: left;
@@ -4324,6 +4364,7 @@ h1, h2, h3, h4, h5, h6 {
 	box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 1px 0 rgba(0,0,0,0.35);
 	z-index: 0;
 	font-size: 13px;
+	font-weight: 300;
 
 	background: rgb(110,110,110); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(110,110,110,1) 0%, rgba(93,93,93,1) 100%); /* FF3.6+ */
