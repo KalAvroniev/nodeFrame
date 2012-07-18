@@ -50,11 +50,11 @@ a {
 <table>
 <tr>
 <td>result:</td>
-<td>passed</td>
+<td>failed</td>
 </tr>
 <tr>
 <td>totalTime:</td>
-<td>3</td>
+<td>4</td>
 </tr>
 <tr>
 <td>numTestTotal:</td>
@@ -62,15 +62,15 @@ a {
 </tr>
 <tr>
 <td>numTestPasses:</td>
-<td>7</td>
+<td>6</td>
 </tr>
 <tr>
 <td>numTestFailures:</td>
-<td>0</td>
+<td>1</td>
 </tr>
 <tr>
 <td>numCommandPasses:</td>
-<td>7</td>
+<td>9</td>
 </tr>
 <tr>
 <td>numCommandFailures:</td>
@@ -78,7 +78,7 @@ a {
 </tr>
 <tr>
 <td>numCommandErrors:</td>
-<td>0</td>
+<td>1</td>
 </tr>
 <tr>
 <td>Selenium Version:</td>
@@ -91,13 +91,13 @@ a {
 <tr>
 <td>
 <table id="suiteTable" class="selenium" border="1" cellpadding="1" cellspacing="1"><tbody>
-<tr class="title status_passed"><td><b>Test Suite</b></td></tr>
-<tr class="  status_passed"><td><a href="#testresult0">Init</a></td></tr>
-<tr class="  status_passed"><td><a href="#testresult1">LoginPasswordOnly</a></td></tr>
-<tr class="  status_passed"><td><a href="#testresult2">LoginSuccessful</a></td></tr>
-<tr class="  status_passed"><td><a href="#testresult3">LoginUserOnly</a></td></tr>
+<tr class="title status_failed"><td><b>Test Suite</b></td></tr>
+<tr class="  status_passed"><td><a href="#testresult0">LoginPasswordOnly</a></td></tr>
+<tr class="  status_passed"><td><a href="#testresult1">LoginSuccessful</a></td></tr>
+<tr class="  status_passed"><td><a href="#testresult2">LoginUserOnly</a></td></tr>
+<tr class="  status_passed"><td><a href="#testresult3">SystemOptionsCondensed</a></td></tr>
 <tr class="  status_passed"><td><a href="#testresult4">ModuleExchange</a></td></tr>
-<tr class="  status_passed"><td><a href="#testresult5">ModuleHome</a></td></tr>
+<tr class="  status_failed"><td><a href="#testresult5">ModuleHome</a></td></tr>
 <tr class="  status_passed"><td><a href="#testresult6">Finish</a></td></tr>
 </tbody></table>
 
@@ -106,18 +106,7 @@ a {
 <td>&nbsp;</td>
 </tr>
 </table><table><tr>
-<td><a name="testresult0">tests/Init.html</a><br/><div>
-<table border="1" cellpadding="1" cellspacing="1">
-<thead>
-<tr class="title status_passed"><td rowspan="1" colspan="3">Init</td></tr>
-</thead><tbody>
-</tbody></table>
-
-
-</div></td>
-<td>&nbsp;</td>
-</tr><tr>
-<td><a name="testresult1">tests/LoginPasswordOnly.html</a><br/><div>
+<td><a name="testresult0">tests/LoginPasswordOnly.html</a><br/><div>
 <table border="1" cellpadding="1" cellspacing="1">
 <thead>
 <tr class="title status_passed"><td rowspan="1" colspan="3">LoginPasswordOnly</td></tr>
@@ -153,7 +142,7 @@ a {
 </div></td>
 <td>&nbsp;</td>
 </tr><tr>
-<td><a name="testresult2">tests/LoginSuccessful.html</a><br/><div>
+<td><a name="testresult1">tests/LoginSuccessful.html</a><br/><div>
 <table border="1" cellpadding="1" cellspacing="1">
 <thead>
 <tr class="title status_passed"><td rowspan="1" colspan="3">LoginSuccessful</td></tr>
@@ -189,7 +178,7 @@ a {
 </div></td>
 <td>&nbsp;</td>
 </tr><tr>
-<td><a name="testresult3">tests/LoginUserOnly.html</a><br/><div>
+<td><a name="testresult2">tests/LoginUserOnly.html</a><br/><div>
 <table border="1" cellpadding="1" cellspacing="1">
 <thead>
 <tr class="title status_passed"><td rowspan="1" colspan="3">LoginUserOnly</td></tr>
@@ -218,6 +207,52 @@ a {
 	<td>assertTextPresent</td>
 	<td>Your login information is incorrect</td>
 	<td></td>
+</tr>
+</tbody></table>
+
+
+</div></td>
+<td>&nbsp;</td>
+</tr><tr>
+<td><a name="testresult3">tests/SystemOptionsCondensed.html</a><br/><div>
+<table border="1" cellpadding="1" cellspacing="1">
+<thead>
+<tr class="title status_passed"><td rowspan="1" colspan="3">SystemOptionsCondensed</td></tr>
+</thead><tbody>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>open</td>
+	<td>/home</td>
+	<td></td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>click</td>
+	<td>css=span.ff-icon-before</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertXpathCount</td>
+	<td>//body[contains(@class, "condensed")]</td>
+	<td>0</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>click</td>
+	<td>id=toggle-condensed</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertXpathCount</td>
+	<td>//body[contains(@class, "condensed")]</td>
+	<td>1</td>
+</tr>
+<tr class="  status_done" style="cursor: pointer;">
+	<td>click</td>
+	<td>id=toggle-condensed</td>
+	<td></td>
+</tr>
+<tr class="  status_passed" style="cursor: pointer;">
+	<td>assertXpathCount</td>
+	<td>//body[contains(@class, "condensed")]</td>
+	<td>0</td>
 </tr>
 </tbody></table>
 
@@ -254,7 +289,7 @@ a {
 <td><a name="testresult5">tests/ModuleHome.html</a><br/><div>
 <table border="1" cellpadding="1" cellspacing="1">
 <thead>
-<tr class="title status_passed"><td rowspan="1" colspan="3">ModuleHome</td></tr>
+<tr class="title status_failed"><td rowspan="1" colspan="3">ModuleHome</td></tr>
 </thead><tbody>
 <tr class="  status_done" style="cursor: pointer;">
 	<td>open</td>
@@ -266,10 +301,10 @@ a {
 	<td>id=nav-home</td>
 	<td></td>
 </tr>
-<tr class="  status_passed" style="cursor: pointer;">
+<tr class="  status_failed" style="cursor: pointer;">
 	<td>assertTextPresent</td>
 	<td>This section can show you at a glance</td>
-	<td></td>
+	<td>false</td>
 </tr>
 </tbody></table>
 
@@ -289,7 +324,6 @@ a {
 </div></td>
 <td>&nbsp;</td>
 </tr></table><pre>
-info: Starting test /selenium-server/tests/tests/Init.html
 info: Starting test /selenium-server/tests/tests/LoginPasswordOnly.html
 info: Executing: |open | /login |  |
 info: Executing: |type | name=password | test |
@@ -308,6 +342,14 @@ info: Executing: |type | name=username | protrada |
 info: Executing: |clickAndWait | link=go login |  |
 info: Executing: |assertLocation | regexp:.*/login\?error=.* |  |
 info: Executing: |assertTextPresent | Your login information is incorrect |  |
+info: Starting test /selenium-server/tests/tests/SystemOptionsCondensed.html
+info: Executing: |open | /home |  |
+info: Executing: |click | css=span.ff-icon-before |  |
+info: Executing: |assertXpathCount | //body[contains(@class, &quot;condensed&quot;)] | 0 |
+info: Executing: |click | id=toggle-condensed |  |
+info: Executing: |assertXpathCount | //body[contains(@class, &quot;condensed&quot;)] | 1 |
+info: Executing: |click | id=toggle-condensed |  |
+info: Executing: |assertXpathCount | //body[contains(@class, &quot;condensed&quot;)] | 0 |
 info: Starting test /selenium-server/tests/tests/ModuleExchange.html
 info: Executing: |open | /home |  |
 info: Executing: |click | id=nav-exchange |  |
@@ -316,5 +358,7 @@ info: Starting test /selenium-server/tests/tests/ModuleHome.html
 info: Executing: |open | /home |  |
 info: Executing: |click | id=nav-home |  |
 info: Executing: |assertTextPresent | This section can show you at a glance |  |
+error: false
+warn: currentTest.recordFailure: false
 info: Starting test /selenium-server/tests/tests/Finish.html
 </pre></body></html>
