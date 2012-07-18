@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# get the branch being modified
+export GIT_BRANCH=`git branch | grep \* | cut -f2 -d' '`
+
+# we only care abotu operations to the master branch
+if [ "$GIT_BRANCH" == "master" ]; then
+	# if merging to the master we need to run tests first
+	#if [ -f 
+
+	# stop commits to master
+	echo "You cannot commit directly to '$GIT_BRANCH'. Commit to 'working' and merge."
+    exit 1
+fi
