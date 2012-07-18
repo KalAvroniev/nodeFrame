@@ -1329,7 +1329,7 @@ header#main:before {
 .sectional-tabs li a {
 	display: block;
 	margin: 6px 0 0 0;
-	padding: 10px 15px 16px 45px;
+	padding: 10px 15px 12px 45px;
 	
 	border-radius: 4px 4px 0 0;
 	box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 0 10px rgba(0,0,0,0.3);
@@ -4277,6 +4277,9 @@ thead #category {
 
 /* ------------------------------ Bootstrap Over-write styles work ------------------------------------- */
 
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 300;
+}
 .btn {
 	white-space: nowrap;
 	text-align: left;
@@ -4539,7 +4542,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#657f0f', end
 	border-bottom-color: rgba(0,0,0,0.05);
 	background: transparent;
 }
-.control-group .controls input[type="text"]
+.control-group .controls input[] {
+
+
+}
 
 
 

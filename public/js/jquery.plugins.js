@@ -70,12 +70,12 @@ $.restorePanel = function (url, options) {
 					var fn = 'views' + url.replace(/\//g, '_');
 					$('#section-panel').removeClass('hidden');
 					var compiler = new jade.Compiler({});
-					$('#panel-content').html(document[fn](
+					$('.ajax-panel-content').html(document[fn](
 						obj,
 						attrs,
 						function (val) { return val; },
 						function (err, file, line) {
-							$('#panel-content').html("Error in " + file + " at line " + line + ": " + err);
+							$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
 						}
 					));
 				},
