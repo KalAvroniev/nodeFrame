@@ -1606,12 +1606,10 @@ header#main:before {
 	display: none;
 }
 .alerts-summary > span span.hover-bubble {
-	display: none;
-}
-.alerts-summary > span:hover span.hover-bubble {
-	display: block;
-	position: absolute;
+	left: 150px; bottom: -60px;	
+	position: absolute;	
 	font-size: 11px;
+	font-weight: 400;
 	border-radius: 8px 0 0 8px;
 	background: #E46503;
 	color: rgba(0,0,0,0.55);
@@ -1619,7 +1617,13 @@ header#main:before {
 	box-shadow: inset 0 -1px 0 rgba(0,0,0,0.2), 0 2px 4px rgba(228,101,3,0.7);
 	padding: 7px 10px 10px 30px;
 	text-align: left;
-	left: 0; bottom: -60px;
+		
+	-moz-transition: left .3s ease-in-out;
+	-webkit-transition: left .3s ease-in-out;
+   	transition: left .3s ease-in-out;	
+}
+.alerts-summary > span:hover span.hover-bubble {
+	left: 0; 	
 }
 .alerts-summary > span:hover span.hover-bubble:before {
 	position: absolute;
@@ -2130,13 +2134,14 @@ header#main:before {
 /* ------------------------ Sectional overlay panel styles work ---------------------------------- */
 
 #section-panel {
-	width: 900px;
+	max-width: 1000px;
 	position: fixed;
 	right: 305px; top: 0;
 	z-index: 4;
 	pointer-events: none;
 	height: 100%;
 	padding: 74px 0 0;	
+	margin: 0 0 0 105px;
 }
 #section-panel #panel-content {
 	background: #fcf9f5;
@@ -2147,7 +2152,7 @@ header#main:before {
 	position: relative;
 	pointer-events: auto;		
 	box-shadow: 0 10px 12px rgba(0,0,0,0.15);
-	border-radius: 6px 0 0 0;	
+	border-radius: 15px 0 0 0;	
 }
 #section-panel.modal {
 	width: 450px;
@@ -2190,6 +2195,18 @@ header#main:before {
 .panel-heading strong {
 	font-weight: 400;
 	display: block;
+}
+.panel-heading .ff-icon-before {
+	display: inline-block;
+}
+.panel-heading .ff-icon-before:before {
+	display: inline-block;
+	vertical-align: middle;
+	content: "L";
+	font-size: 23px;
+	line-height: 1;
+	margin: -3px 12px 0 10px;
+	color: rgba(0,0,0,0.1);
 }
 .domain-details-table {
 	float: left;
@@ -2361,14 +2378,14 @@ header#main:before {
 	text-shadow: 0 0 5px rgba(81,81,81,0.65);
 }
 .light-gridview #domain-title-inputs {
-	width: 230px;	
+	width: 196px;	
 }
 .light-gridview #string-mode-selection {
 	display: inline-block;
 	margin: 0 0 0 5px;
 }
 .light-gridview thead input#domain-title {
-	width: 110px;
+	width: 85px;
 	vertical-align: top;
 }
 .action-buttons a[title="Place bid / Buy"] {
@@ -2446,14 +2463,15 @@ header#main:before {
 	box-shadow: inset 0 1px 0 rgba(255,255,255,1), 0 0 8px rgba(255,255,255,0.55);
 }
 .light-gridview .disable {
-	margin: 5px 0 0 -25px;
+	margin: 5px 0 0 -20px;
 	color: rgba(0,0,0,0.4);
 	text-shadow: none;
 	font-family: 'AlexKiddReg';
 	font-size: 11px;
 }
-
-
+.light-gridview #top-actions {
+	width: 98px;
+}
 
 
 
@@ -3469,7 +3487,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82b42c', end
 	content: "y";
 }
 .x-row-sel {
-	margin: 0;
+	margin: -5px 0 0 0;
 }
 .grid-table tbody {
 	position: relative;
@@ -3517,7 +3535,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82b42c', end
 }
 
 .grid-table tfoot td {
-	padding: 13px 15px 28px;
+	padding: 15px 15px 30px;
 }
 .grid-table tbody tr:hover {
 	background: #e5e5e5;
@@ -4022,16 +4040,13 @@ thead #category {
 
 .ajax-spinner {
 	position: fixed;
-	width: 90px;
-	height: 90px;
-	left: 50%;
-	top: 50%;
+	width: 90px; height: 90px;
+	left: 50%; top: 50%;
 	margin-left: -45px;
 	margin-top: -45px;
 	overflow: visible;
 	display: none;
 }
-
 .ajax-spinner .ball {
 	background-color: rgba(0,0,0,0);
 	border: 8px solid rgba(0,0,0,0.9);
@@ -4125,6 +4140,56 @@ thead #category {
 	0% { transform:rotate(0deg); }
 	100% { transform:rotate(-360deg); }
 }
+
+#foot-pager {
+	position: relative;
+	padding: 0 0 0 50px;
+}
+#foot-pager .ajax-spinner {
+	display: block;
+	position: absolute;
+	width: 35px; height: 35px;
+	left: 0; top: -5px;
+	margin: 0;
+}
+#foot-pager .ball {
+	background-color: rgba(0,0,0,0);
+	border: 4px solid rgba(0,0,0,0.9);
+	border-top-color: rgba(0,0,0,0);
+	border-left-color: rgba(0,0,0,0);
+	opacity:.3;
+	
+	box-shadow: 0px 0px 15px rgba(0,0,0,0.3); /* Opera 10.5, IE9, FF4+, Chrome 6+, iOS 5 */
+
+	width:35px; height:35px;
+	margin:0 auto;
+}
+
+#foot-pager .ball1 {
+	background-color: rgba(0,0,0,0);
+	border: 4px solid rgba(0,0,0,0.9);
+	border-top-color: rgba(0,0,0,0);
+	border-left-color: rgba(0,0,0,0);
+	opacity:.9;
+
+	box-shadow: 0px 0px 8px rgba(0,0,0,0.3); /* Opera 10.5, IE9, FF4+, Chrome 6+, iOS 5 */
+
+	width:18px; height:18px;
+	margin:0 auto;
+	position:relative;
+	top:-26px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ------------------------------ jqPlot Over-write styles work ------------------------------------- */
