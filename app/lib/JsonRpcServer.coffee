@@ -42,8 +42,21 @@ class exports.JsonRpcServer
 		req.on 'end', () =>
 			console.log(JSON.parse(data))
 			@handleCall(JSON.parse(data), res)
-	
-	handleCall: (call, res) ->
+			
+	call: (method, params, callback) ->
+		return @handleRawCall(
+			{
+				'jsonrpc': '2.0',
+				'method': method,
+				'params': params,
+				'id': 1
+			},
+			(data) ->
+				res = JSON.parse(data)
+				return callback(res.result, res.error)
+		)
+			
+	handleRawCall: (call, callback) ->
 		# validate
 		if call.id == undefined
 			result = JsonRpcServer.Error(null, "No 'id' provided.", JsonRpcServer.INVALID_REQUEST)
@@ -61,9 +74,7 @@ class exports.JsonRpcServer
 				JsonRpcServer.METHOD_NOT_FOUND)
 		
 		if result
-			res.write(JSON.stringify(result))
-			res.end()
-			return
+			return callback(JSON.stringify(result))
 
 		# execute the method
 		obj = new @registeredMethods[call.method]
@@ -74,8 +85,15 @@ class exports.JsonRpcServer
 			else
 				r = JsonRpcServer.Success(call.id, result)
 			
-			res.write(JSON.stringify(r))
-			res.end()
+			return callback(JSON.stringify(r))
+		)
+	
+	handleCall: (call, res) ->
+		return @handleRawCall(
+			call,
+			(raw_result) ->
+				res.write(raw_result)
+				res.end()
 		)
 
 	@Success: (id, result) ->

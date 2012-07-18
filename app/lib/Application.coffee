@@ -57,6 +57,40 @@ class exports.Application
 			res.end()
 		)
 	
+	handleDemoRequest: (req, res) ->
+		url = @Application.realUrl(req.url)
+		console.log(url)
+		
+		# setup ready handler
+		res.setView = (view) ->
+			res.renderView = view
+		res.ready = () ->
+			if res.renderView
+				res.render(res.renderView, res.view)
+			else
+				res.render(url.substr(1, url.length - 9), res.view)
+		
+		# run
+		controller = new (require("../controllers" + url.substr(0, url.length - 8) + ".coffee").Controller)
+		
+		# get data for view
+		jsonRpcServer.call(
+			url.substr(9, url.length - 17),
+			{},
+			(result, error) ->
+				if error
+					console.error(error)
+					res.write('Error ' + error.code + ": " + error.message)
+					return res.end()
+				
+				res.view = result
+				
+				return controller.run(
+					req,
+					res
+				)
+		)
+	
 	handleRequest: (req, res) ->
 		url = @Application.realUrl(req.url)
 		console.log(url)
@@ -97,3 +131,4 @@ class exports.Application
 			console.log("Registering controller '" + path.substr(11, path.length - 18) + "'")
 			@app.all(path.substr(11, path.length - 18), express.bodyParser(), @handleRequest)
 			@app.all(path.substr(11, path.length - 18) + ".jade", express.bodyParser(), @handleJadeRequest)
+			@app.all(path.substr(11, path.length - 18) + ".jsonrpc", express.bodyParser(), @handleDemoRequest)
