@@ -2143,6 +2143,9 @@ header#main:before {
 	padding: 74px 0 0;	
 	margin: 0 0 0 105px;
 }
+#section-panel.mini-panel { 
+	max-width: 400px;	
+}
 #section-panel #panel-content {
 	background: #fcf9f5;
 	height: 100%;
@@ -2177,6 +2180,16 @@ header#main:before {
     letter-spacing: 0;
     color: #161413;
 }
+.mini-panel .x-panel {
+	position: static;
+	font-size: 38px;	
+	top: auto; right: auto;
+	display: inline-block;
+	margin: 3px 0 15px -4px;
+}
+.mini-panel .panel-heading {
+	margin: 0 0 20px;
+}
 .x-panel:hover {
 	border-radius: 5px;
 	color: rgba(0,0,0,0.4);
@@ -2196,8 +2209,15 @@ header#main:before {
 	font-weight: 400;
 	display: block;
 }
+.panel-heading strong { 
+
+}
 .panel-heading .ff-icon-before {
 	display: inline-block;
+	max-width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;	
 }
 .panel-heading .ff-icon-before:before {
 	display: inline-block;
@@ -2205,8 +2225,12 @@ header#main:before {
 	content: "L";
 	font-size: 23px;
 	line-height: 1;
-	margin: -3px 12px 0 10px;
-	color: rgba(0,0,0,0.1);
+	margin: -3px 13px 0 10px;
+	color: rgba(0,0,0,0.13);
+}
+.panel-heading .place-bid:before {
+	content: "W";
+	font-size: 25px;	
 }
 .domain-details-table {
 	float: left;
@@ -4365,10 +4389,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#657f0f', end
 }
 
 
-
-
-
-
 #thetableclone .dropdown-menu {
 	float: none;
 	top: -50px; left: 120px;
@@ -4491,9 +4511,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#657f0f', end
 	color: #fcf9f5;
 	text-shadow: 0 2px 5px rgba(0,0,0,0.6);
 }
-
-
-
 .btn .caret {
 	border: none;
 	opacity: 1;
@@ -4522,8 +4539,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#657f0f', end
 	border-bottom-color: rgba(0,0,0,0.05);
 	background: transparent;
 }
-
-
+.control-group .controls input[type="text"]
 
 
 
