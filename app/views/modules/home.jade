@@ -167,6 +167,7 @@ header#main
 					li.divider
 					li
 						a(href='javascript:void(0);') only ROI% yearly
+		
 		.graph-container
 			#trading-graph.graph	
 	
@@ -430,8 +431,15 @@ header#main
 													strong selected domain content 
 													| to be placed in here
 										
-										
-										
+								tfoot
+									tr
+										td(colspan='9')
+											#foot-pager
+												strong Loading more 
+												| domain results ...
+												.ajax-spinner
+													.ball
+													.ball1 										
 										
 										
 

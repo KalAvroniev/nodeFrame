@@ -24,7 +24,8 @@ class exports.JsonRpcServer
 					@registerMethods(path + '/' + file)
 			)
 		catch e
-			@registerMethod(path.substr(8, path.length - 15), require('../' + path).Controller)
+			console.error(path.substr(4, path.length - 11))
+			@registerMethod(path.substr(4, path.length - 11), require('../' + path).Controller)
 			
 		# print
 		if path == 'api'
@@ -60,10 +61,10 @@ class exports.JsonRpcServer
 				JsonRpcServer.METHOD_NOT_FOUND)
 		
 		if result
-			res.write(JSON.stringify(result));
+			res.write(JSON.stringify(result))
 			res.end()
 			return
-				
+
 		# execute the method
 		obj = new @registeredMethods[call.method]
 		console.log(new @registeredMethods[call.method])
@@ -73,7 +74,7 @@ class exports.JsonRpcServer
 			else
 				r = JsonRpcServer.Success(call.id, result)
 			
-			res.write(cache)
+			res.write(JSON.stringify(r))
 			res.end()
 		)
 
