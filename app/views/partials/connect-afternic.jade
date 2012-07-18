@@ -1,16 +1,23 @@
 #connect-popup
 
 	#connect-error-msg
-		span.ff-icon-before you have not yet linked an afternic account
+		span.ff-icon-before 
+			strong error:
+			| you have not yet linked an afternic account
 	
 	form.connect-account-form#afternic
 	
 		a.x-connect(href="#")
-		h3 connect with
+		h3 connect with 
 			strong Afternic	
 	
-		input#username(type="text", placeholder="placed in USD")
+		input#username(type="text", placeholder="Username")
 		span.hint-text some hint text which differs from account to account goes in here
 		
-		input#password(type="password", placeholder="placed in USD")
+		input#password(type="password", placeholder="Password")
 		span.hint-text some hint text which differs from account to account goes in here		
+		
+		a.btn.btn-success.btn-large.ff-icon-before connect
+		
+		p.create-account Or create an account 
+			a(href="") here
