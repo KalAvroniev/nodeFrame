@@ -14,22 +14,79 @@ $(document).ready(function () {
 	
 	navigate(module);
 	
-	$('#toggle-condensed').click(function() {
-		if ($('body').hasClass('condensed')) {
-			$('.condensed').removeClass('condensed');
+	
+	$('#ui-controls a').on('click', function () {
+	
+		if ($(this).hasClass('active')) {
+			
 			$(this).removeClass('active');
+		
 		} else {
-			$('body').addClass('condensed');
-			$(this).addClass('active');						
+		
+			$(this).addClass('active');
+	 
 		}
+		
+		return false;
+		
+	});
+		
+	
+	$('#toggle-condensed').click(function() {
+		
+		if ($('body').hasClass('condensed')) {
+			
+			// turn off condensed mode
+			console.log('condensed off');
+			$('body').removeClass('condensed');
+			//$(this).removeClass('active');
+		
+		} else {
+		
+			// turn on condensed mode
+			console.log('condensed on');		
+			$('body').addClass('condensed');
+			//$(this).addClass('moo');						
+		}
+		
 		return false
 	});
+
+	$('#toggle-downgrade').click(function() {
+		
+		if ($('body').hasClass('mobile')) {
+			
+			// turn off low-fi mode
+			console.log('low-fi off');
+			$('body').removeClass('mobile');
+			//$(this).removeClass('active');
+		
+		} else {
+		
+			// turn on low-fi mode
+			console.log('low-fi on');		
+			$('body').addClass('mobile');
+			//$(this).addClass('moo');						
+		}
+		
+		return false
+	});	
 	
 	if ($('body').hasClass('condensed')) {
-			$('#toggle-condensed').addClass('active');
+		console.log('condensed on')			
+		$('#toggle-condensed').addClass('active');
 	} else {
-			$('#toggle-condensed').removeClass('active');						
+		console.log('condensed off')			
+		$('#toggle-condensed').removeClass('active');						
 	}
+	
+	if ($('body').hasClass('mobile')) {
+		console.log('low-fi on');		
+		$('#toggle-downgrade').addClass('active');
+	} else {
+		console.log('low-fi off');
+		$('#toggle-downgrade').removeClass('active');						
+	}	
 			
 		 
 	$('#toggle-sys-menu').click(function () {
