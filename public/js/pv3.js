@@ -250,7 +250,7 @@ NotificationsController.prototype.render = function () {
 	$.jade.getTemplate(
 		'notifications/generic',
 		function (fn) {
-			$('#protrada-msgs').html('');
+			$('#protrada-msgs').html('<h4><strong>Protrada</strong> notifications</h4>');
 			for(var i = 0; i < ns.length; ++i) {
 				var notif = $.jade.renderSync(fn, ns[i]);
 				$('#protrada-msgs').append(notif);
