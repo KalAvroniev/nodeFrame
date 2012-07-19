@@ -272,7 +272,9 @@ NotificationsController.prototype.render = function () {
 			}
 			
 			// update counter
-			$('.alert-count').attr('data-alerts', ns.length);
+			$('.protrada .alert-count').attr('data-alerts', ns.length);
+			
+			$('aside #notifications:not(.native)').tinyscrollbar_update('relative');
 		},
 		function (error) {
 			alert(error);
@@ -288,12 +290,15 @@ $(document).ready(function () {
 		function (data) {
 			notif = new NotificationsController(data.notifications);
 			notif.render();
+	
+			// now setup the socket for push notifications
+			document.socketio = io.connect('http://' + location.host);
+			document.socketio.on('notification', function (msg) {
+				notif.notifications.unshift(msg.data);
+				notif.render();
+				
+				//socket.emit('my other event', { my: 'data' });
+			});
 		}
 	);
-	/*document.socketio = io.connect('http://' + location.host);
-	document.socketio.on('notification', function (data) {
-		console.log(data);
-		//$('#protrada-msgs').append(data.html);
-		//socket.emit('my other event', { my: 'data' });
-	});*/
 });

@@ -38,11 +38,11 @@ class exports.Application
 		)
 		
 		# setup the auto broadcaster
-		setInterval(
-			() ->
-				socketIoServer.broadcastToAll()
-			, 3000
-		)
+		#setInterval(
+		#	() ->
+		#		socketIoServer.broadcastToAll()
+		#	, 3000
+		#)
 		
 		# listen
 		@app.listen(8181)
