@@ -1,6 +1,9 @@
 class exports.Controller
+
+	validate: {
+	}
 	
-	run: (params, callback) ->
+	run: (req) ->
 		r = {}
 		
 		# restore state here
@@ -32,6 +35,15 @@ class exports.Controller
 				'href': '#history'
 			}
 		]
-		r.active_tab = '#pre-auction'
+		r.active_tab = '#expiring'
 		
-		return callback(r)
+		return req.success(r)
+		
+	testBasic: (test) ->
+		test.run(
+			{},
+			(result) ->
+				test.assert.equal(result.tabs.length, 6)
+			, (error) ->
+				test.fail(error)
+		)

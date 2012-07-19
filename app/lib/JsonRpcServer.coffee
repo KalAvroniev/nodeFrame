@@ -1,5 +1,33 @@
 fs = require('fs')
 
+class exports.JsonRpcRequest
+
+	constructor: (call, @callback) ->
+		@version = call.jsonrpc
+		@method = call.method
+		@params = call.params
+		@id = call.id
+
+	validate: (definition, success) ->
+		for field, def of definition
+			# is the field required
+			if def.required == undefined or not def.required
+				# if it doesnt exist but we do have a default value to fill in
+				if @params[field] == undefined and def.default != undefined
+					@params[field] = def.default
+			else
+				if @params[field] == undefined
+					return @error("Parameter '" + field + "' is required.")
+		
+		# run success handler
+		success()
+		
+	success: (result) ->
+		@callback(result)
+		
+	error: (message, code = -32603) ->
+		@callback(null, message)
+
 class exports.JsonRpcServer
 
 	# error codes
@@ -11,9 +39,11 @@ class exports.JsonRpcServer
 	
 	constructor: () ->
 		@registeredMethods = {}
-		
-	registerMethods: (path = 'api') ->
-		if path == 'api'
+
+	registerMethods: (basePath = 'api', path = null) ->
+		if path == null
+			path = basePath
+		if path == basePath
 			console.log("Registering JSON-RPC methods...")
 		
 		# read the directory
@@ -21,17 +51,17 @@ class exports.JsonRpcServer
 			files = fs.readdirSync(path)
 			files.forEach((file) =>
 				if file.substr(0, 1) != '.'
-					@registerMethods(path + '/' + file)
+					@registerMethods(basePath, path + '/' + file)
 			)
 		catch e
-			console.error(path.substr(4, path.length - 11))
-			@registerMethod(path.substr(4, path.length - 11), require('../' + path).Controller)
+			@registerMethod(path.substr(basePath.length + 1, path.length - 8 - basePath.length), require('../' + path).Controller)
 			
 		# print
-		if path == 'api'
-			console.log(@registeredMethods)
+		if path == basePath
+			console.log()
 		
 	registerMethod: (name, func) ->
+		console.log("  JSON-RPC Method '" + name + "'")
 		@registeredMethods[name] = func
 	
 	handleRequest: (req, res) ->
@@ -75,17 +105,26 @@ class exports.JsonRpcServer
 		
 		if result
 			return callback(JSON.stringify(result))
-
-		# execute the method
-		obj = new @registeredMethods[call.method]
-		console.log(new @registeredMethods[call.method])
-		obj.run(call.params, (result, error = null) =>
-			if error
-				r = JsonRpcServer.Error(call.id, error, JsonRpcServer.INTERNAL_ERROR)
-			else
-				r = JsonRpcServer.Success(call.id, result)
 			
-			return callback(JSON.stringify(r))
+		# build the request
+		req = new exports.JsonRpcRequest(
+			call,
+			(result, error = null) =>
+				if error
+					r = JsonRpcServer.Error(call.id, error, JsonRpcServer.INTERNAL_ERROR)
+				else
+					r = JsonRpcServer.Success(call.id, result)
+				
+				return callback(JSON.stringify(r))
+		)
+		
+		# validate
+		obj = new @registeredMethods[call.method]
+		req.validate(
+			obj.validate,
+			() ->
+				# execute the method
+				obj.run(req)
 		)
 	
 	handleCall: (call, res) ->

@@ -38,6 +38,39 @@ $.ajaxPanel = function (url, success, failure) {
 	});
 }
 
+$.jade = {};
+$.jade.getTemplate = function (url, success, options) {
+	$.ajax({
+		url: url + ".jade",
+		dataType: "script",
+		success: function () {
+			var fn = 'views_' + url.replace(/\//g, '_');
+			console.log(fn);
+			//document[fn] = fn;
+			success(fn);
+		},
+		failure: function (error) {
+			alert(error);
+		}
+	});
+}
+$.jade.renderSync = function (fn, obj, failure) {
+	var attrs = function (o) {
+		var r = " ";
+		$.each(o, function (i, n) {
+			r += i + '="' + n + '"';
+		});
+		return r;
+	}
+	
+	return document[fn](
+		obj,
+		attrs,
+		function (val) { return val; },
+		failure
+	);
+}
+
 $.restorePanel = function (url, options) {
 	if(options == undefined) {
 		options = {
@@ -54,34 +87,11 @@ $.restorePanel = function (url, options) {
 			console.log(obj);
 			console.log(url + ".jade");
 			
-			$.ajax({
-				url: url + ".jade",
-				dataType: "script",
-				success: function () {
-					var attrs = function (o) {
-						var r = " ";
-						$.each(o, function (i, n) {
-							r += i + '="' + n + '"';
-						});
-						console.log(r);
-						return r;
-					}
-					
-					var fn = 'views' + url.replace(/\//g, '_');
-					$('#section-panel').removeClass('hidden');
-					var compiler = new jade.Compiler({});
-					$('.ajax-panel-content').html(document[fn](
-						obj,
-						attrs,
-						function (val) { return val; },
-						function (err, file, line) {
-							$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
-						}
-					));
-				},
-				failure: function (error) {
-					alert(error);
-				}
+			$.jade.getTemplate(function (fn) {
+				$('#section-panel').removeClass('hidden');
+				$('.ajax-panel-content').html($.jade.renderSync(fn, obj, function (err, file, line) {
+					$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
+				}));
 			});
 		}
 	);

@@ -4,10 +4,12 @@ fs = require('fs')
 jade = require('jade')
 JsonRpcServer = require('./JsonRpcServer.coffee').JsonRpcServer
 SessionStore = require('./SessionStore.coffee').SessionStore
+SocketIoServer = require('./SocketIoServer.coffee').SocketIoServer
 
 class exports.Application
 
 	jsonRpcServer = new JsonRpcServer()
+	socketIoServer = new SocketIoServer()
 	
 	start: () ->
 		# register JSON-RPC methods
@@ -27,6 +29,20 @@ class exports.Application
 		
 		# default layout
 		@app.set('view options', { pretty: true, layout: "../layouts/default.jade" });
+		
+		# setup socket.io
+		socketIoServer.setJsonRpcServer(jsonRpcServer)
+		io = require('socket.io').listen(@app)
+		io.sockets.on('connection', (socket) ->
+			socketIoServer.addClient(socket)
+		)
+		
+		# setup the auto broadcaster
+		#setInterval(
+		#	() ->
+		#		socketIoServer.broadcastToAll()
+		#	, 3000
+		#)
 		
 		# listen
 		@app.listen(8181)

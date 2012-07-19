@@ -233,3 +233,57 @@ function togglePanel(selectorName, contentCallback) {
 	
 
 }
+
+
+// ---
+// PUSH/FETCH NOTIFICATIONS
+// ---
+
+function NotificationsController(notifications) {
+	this.notifications = notifications;
+}
+
+NotificationsController.prototype.render = function () {
+	var ns = this.notifications;
+	
+	// if there is data, fetch the template and render
+	$.jade.getTemplate(
+		'notifications/generic',
+		function (fn) {
+			$('#protrada-msgs').html('');
+			for(var i = 0; i < ns.length; ++i) {
+				var notif = $.jade.renderSync(fn, ns[i]);
+				$('#protrada-msgs').append(notif);
+			}
+			
+			// update counter
+			$('.protrada .alert-count').attr('data-alerts', ns.length);
+			
+			$('aside #notifications:not(.native)').tinyscrollbar_update('relative');
+		},
+		function (error) {
+			alert(error);
+		}
+	);
+}
+
+$(document).ready(function () {
+	// the first thing we need to do is fetch the recent notifications
+	$.jsonrpc(
+		'notifications/fetch',
+		{},
+		function (data) {
+			notif = new NotificationsController(data.notifications);
+			notif.render();
+	
+			// now setup the socket for push notifications
+			document.socketio = io.connect('http://' + location.host);
+			document.socketio.on('notification', function (msg) {
+				notif.notifications.unshift(msg.data);
+				notif.render();
+				
+				//socket.emit('my other event', { my: 'data' });
+			});
+		}
+	);
+});

@@ -1,0 +1,13 @@
+article.alert-msg.winning
+	span.x-alert-msg(title='Archive this message') x
+	header.clearfix
+		h6
+			strong= title
+			| - 
+			= time_ago
+		hgroup
+			h5= h5
+			h4
+				a(title=action_description, href=domain)= domain
+	section
+		!= description
