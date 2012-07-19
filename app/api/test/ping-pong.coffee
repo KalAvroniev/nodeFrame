@@ -1,9 +1,15 @@
 class exports.Controller
+
+	validate: {
+		"name": {
+			"description": "A persons name.",
+			"type": "string"
+			"required": true
+		}
+	}
 	
-	run: (params, callback) ->
-		if params.name == undefined
-			return callback(null, "No 'name' provided.")
-		return callback("Hello " + params.name)
+	run: (req) ->
+		return req.success("Hello " + req.params.name)
 		
 	testWithName: (test) ->
 		params = {
@@ -11,16 +17,17 @@ class exports.Controller
 		}
 		test.run(
 			params,
-			(result, error) ->
-				if error
-					test.fail(error)
+			(result) ->
 				test.assert.equal("Hello " + params.name, result)
+			, (error) ->
+				test.fail(error.message)
 		)
 		
 	testNoName: (test) ->
 		test.run(
 			{},
-			(result, error) ->
-				if not error
-					test.fail("No error message was returned, when one was expected.")
+			(result) ->
+				test.fail("This test is supposed to fail, instead got " + result)
+			, (error) ->
+				# this is supposed to happen
 		)

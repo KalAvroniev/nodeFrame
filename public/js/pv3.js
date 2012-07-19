@@ -248,3 +248,17 @@ function togglePanel(selectorName, contentCallback) {
 	
 
 }
+
+
+// ---
+// PUSH NOTIFICATIONS
+// ---
+
+$(document).ready(function () {
+	document.socketio = io.connect('http://' + location.host);
+	document.socketio.on('notification', function (data) {
+		console.log(data);
+		//$('#protrada-msgs').append(data.html);
+		//socket.emit('my other event', { my: 'data' });
+	});
+});

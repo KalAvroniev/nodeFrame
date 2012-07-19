@@ -1,5 +1,33 @@
 fs = require('fs')
 
+class exports.JsonRpcRequest
+
+	constructor: (call, @callback) ->
+		@version = call.jsonrpc
+		@method = call.method
+		@params = call.params
+		@id = call.id
+
+	validate: (definition, success) ->
+		for field, def of definition
+			# is the field required
+			if def.required == undefined or not def.required
+				# if it doesnt exist but we do have a default value to fill in
+				if @params[field] == undefined and def.default != undefined
+					@params[field] = def.default
+			else
+				if @params[field] == undefined
+					return @error("Parameter '" + field + "' is required.")
+		
+		# run success handler
+		success()
+		
+	success: (result) ->
+		@callback(result)
+		
+	error: (message, code = -32603) ->
+		@callback(null, message)
+
 class exports.JsonRpcServer
 
 	# error codes
@@ -11,7 +39,7 @@ class exports.JsonRpcServer
 	
 	constructor: () ->
 		@registeredMethods = {}
-		
+
 	registerMethods: (basePath = 'api', path = null) ->
 		if path == null
 			path = basePath
@@ -77,17 +105,26 @@ class exports.JsonRpcServer
 		
 		if result
 			return callback(JSON.stringify(result))
-
-		# execute the method
-		obj = new @registeredMethods[call.method]
-		console.log(new @registeredMethods[call.method])
-		obj.run(call.params, (result, error = null) =>
-			if error
-				r = JsonRpcServer.Error(call.id, error, JsonRpcServer.INTERNAL_ERROR)
-			else
-				r = JsonRpcServer.Success(call.id, result)
 			
-			return callback(JSON.stringify(r))
+		# build the request
+		req = new exports.JsonRpcRequest(
+			call,
+			(result, error = null) =>
+				if error
+					r = JsonRpcServer.Error(call.id, error, JsonRpcServer.INTERNAL_ERROR)
+				else
+					r = JsonRpcServer.Success(call.id, result)
+				
+				return callback(JSON.stringify(r))
+		)
+		
+		# validate
+		obj = new @registeredMethods[call.method]
+		req.validate(
+			obj.validate,
+			() ->
+				# execute the method
+				obj.run(req)
 		)
 	
 	handleCall: (call, res) ->
