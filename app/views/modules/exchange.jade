@@ -57,10 +57,26 @@ header#main
 
 #main-container.page-exchange.search-results
 
-		h5#first-heading.ff-icon-before wednesday 21
-			sup st 
-			| jul 2012,  
-			strong 21:35
+		h5#first-heading.ff-icon-before
+		script
+			function refreshExchangeDate() {
+				function pad(num) {
+					if(num < 10)
+						return '0' + num;
+					return num;
+				}
+				
+				var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+				var postDate = ['st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th','th', 'th', 'th',
+					'th', 'th', 'th', 'th', 'th', 'th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'st'];
+				var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+				var now = new Date();
+				$('#first-heading').html(days[now.getDay()] + " " + now.getDate() + '<sup>' +
+					postDate[now.getDate()] + '</sup> ' + months[now.getMonth()] + ' ' + now.getFullYear() +
+					' <strong>' + now.getHours() + ':' + pad(now.getMinutes()) + '</strong>');
+			}
+			refreshExchangeDate();
+			setInterval(refreshExchangeDate, 1000);
 		
 		div#section-headings.search-results
 			//#member-options.btn-group
