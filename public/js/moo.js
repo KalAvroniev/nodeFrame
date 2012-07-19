@@ -146,38 +146,52 @@ $(document).ready(function () {
 
 // Setup open/close sidebar element functions	
 $(document).on("click","#toggle-side-bar, #x-side-bar",function(e){
-	
-	console.log('moooooo');
-	
+		
 	var aside = $('aside');
 	
 	if (aside.hasClass('active')) {
 	
-		//hide the sidebar
-		
+		// hide the sidebar
+				
 		// work around webkit not redrawing when innerHtml altered
+		//$('#main-container').redraw();		
+		
 		/*var mainContainer = $('#main-container')[0];
 		mainContainer.style.display = 'none';
 		mainContainer.offsetHeight;
 		mainContainer.style.display = 'block';*/
-		
+				
 		aside.removeClass('active');
 		$('body').addClass('sidebar-hidden');
-	
+		$('#main-container').animate({ 'width' : '100%' }, 200);		
+		
+			
 	} else {
 	
- 		//show the sidebar
+ 		// show the sidebar
  		
  		// work around webkit not redrawing when innerHtml altered
- 		/*var mainContainer = $('#main-container')[0];
-		mainContainer.style.display = 'none';
-		mainContainer.offsetHeight;
-		mainContainer.style.display = 'block';*/
-	
+		//$('#main-container').redraw();		
+ 			 		
 		aside.addClass('active');
 		$('body').removeClass('sidebar-hidden');
+		$('#main-container').animate({ 'width' : '99.999%' }, 300);		
     	$('aside #notifications:not(.native)').tinyscrollbar_update('relative');
  	
  	}
 	
 });	
+
+
+(function($){
+    $.fn.redraw = function(){
+    	console.log('forcing redraw');
+        return $(this).each(function(){
+            var n = document.createTextNode(' ');
+            $(this).append(n);
+            setTimeout(function(){n.parentNode.removeChild(n)}, 0);
+        });
+    }
+})(jQuery)
+
+
