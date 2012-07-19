@@ -254,33 +254,40 @@ function togglePanel(selectorName, contentCallback) {
 // PUSH/FETCH NOTIFICATIONS
 // ---
 
+function NotificationsController(notifications) {
+	this.notifications = notifications;
+}
+
+NotificationsController.prototype.render = function () {
+	var ns = this.notifications;
+	
+	// if there is data, fetch the template and render
+	$.jade.getTemplate(
+		'notifications/generic',
+		function (fn) {
+			$('#protrada-msgs').html('');
+			for(var i = 0; i < ns.length; ++i) {
+				var notif = $.jade.renderSync(fn, ns[i]);
+				$('#protrada-msgs').append(notif);
+			}
+			
+			// update counter
+			$('.alert-count').attr('data-alerts', ns.length);
+		},
+		function (error) {
+			alert(error);
+		}
+	);
+}
+
 $(document).ready(function () {
 	// the first thing we need to do is fetch the recent notifications
 	$.jsonrpc(
 		'notifications/fetch',
 		{},
 		function (data) {
-			// if there is data, fetch the template and render
-			$.jade.getTemplate(
-				'notifications/generic',
-				function (fn) {
-					var notif = $.jade.renderSync(fn, {
-						'title': 'bla!',
-						'time_ago': '4 hours',
-						'h5': "1 hour left & you're currently winning!",
-						'domain': 'icanhazauction.com',
-						'action_description': 'do something',
-						'description': "The auction for this domain will finish on 15th Jan, " +
-							"2012 @ 5:40pm, and you are currently winning! Remember though, this " +
-							'can change very quickly however. <a title="view preview now" href="">Watch this auction live</a>',
-					});
-					$('#protrada-msgs').append(notif);
-				},
-				function (error) {
-					alert(error);
-				}
-			);
-			console.log(data)
+			notif = new NotificationsController(data.notifications);
+			notif.render();
 		}
 	);
 	/*document.socketio = io.connect('http://' + location.host);
