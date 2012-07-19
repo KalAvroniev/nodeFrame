@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8181/" />
+<title>NotificationTabs</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">NotificationTabs</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.left-bars &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.protrada.left &gt; a.ff-icon-before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#protrada-msgs &gt; h4 &gt; strong</td>
+	<td>Protrada</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.devname.center &gt; a.ff-icon-before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#devname-msgs &gt; h4 &gt; strong</td>
+	<td>Devname</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.archive.right &gt; a.ff-icon-before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#archive-msgs &gt; h4 &gt; strong</td>
+	<td>Archived</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
