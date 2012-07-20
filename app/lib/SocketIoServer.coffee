@@ -8,10 +8,27 @@ class exports.SocketIoServer
 		
 	setJsonRpcServer: (jsonRpcServer) ->
 		@jsonRpcServer = jsonRpcServer
+		
+	setupListeners: (client) ->
+		#client.on('update-state', (data) =>
+		#	data.user_id = 123
+		#	@jsonRpcServer.call(
+		#		'user/update-state',
+		#		data,
+		#		(result, error) ->
+		#			if error
+		#				console.error(error)
+		#			console.log(result)
+		#	)
+		#)
 
 	addClient: (client) ->
 		console.log("SocketIOServer: addClient " + client)
+		@setupListeners(client)
 		@clients.push(client)
+		
+	receive: (data) ->
+		console.log(data)
 
 	broadcastToAll: () ->
 		console.log("BROADCASTING TO " + @clients.length + " CLIENTS")
@@ -29,9 +46,4 @@ class exports.SocketIoServer
 						'can change very quickly however. <a title="view preview now" href="">Watch this auction live</a>'
 				}
 			})
-			
-			#receive
-			#socket.on('my other event', (data) ->
-			#	console.log("SOCKET: " + data);
-			#)
 		)

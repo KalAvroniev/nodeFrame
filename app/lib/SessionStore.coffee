@@ -42,6 +42,7 @@ class exports.SessionStore extends require('connect').session.Store
 	#all: (cb = defaultCallback) ->
 	
 	clear: (cb = defaultCallback) ->
+		console.log("SessionStore: clear()")
 		@sessions = {}
 		cb()
 	

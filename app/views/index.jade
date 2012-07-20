@@ -61,25 +61,19 @@ html(lang='en')
 		
 		script
 			function navigate(module) {
-				window.history.pushState('', module, "/" + module);
-				$.ajax('/modules/' + module + '?ajax=1', {
-					'success': function (data) {
-						$('#ajax-container').html(data);
-						$('.selected').removeClass("selected");
-						$('#spine-inner nav li a#nav-' + module).parent().addClass("selected");
-					}
-				});
+				if(module == '') {
+					// restore state from server
+					$.pv3.restoreState();
+				}
+				else {
+					window.history.pushState('', module, "/" + module);
+					$.pv3.updateState('module', module);
+					$.ajax('/modules/' + module + '?ajax=1', {
+						'success': function (data) {
+							$('#ajax-container').html(data);
+							$('.selected').removeClass("selected");
+							$('#spine-inner nav li a#nav-' + module).parent().addClass("selected");
+						}
+					});
+				}
 			}
-			
-		
-			
-			
-	
-			
-			
-			
-			
-			
-			
-			
-			

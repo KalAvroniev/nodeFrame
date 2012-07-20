@@ -40,6 +40,12 @@ $.ajaxPanel = function (url, success, failure) {
 
 $.jade = {};
 $.jade.getTemplate = function (url, success, options) {
+	// is it already loaded?
+	var fn = 'views_' + url.replace(/\//g, '_');
+	if(document[fn] != undefined)
+		return success(fn);
+	
+	// we need to load it
 	$.ajax({
 		url: url + ".jade",
 		dataType: "script",
@@ -93,6 +99,34 @@ $.restorePanel = function (url, options) {
 					$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
 				}));
 			});
+		}
+	);
+}
+
+$.pv3 = {};
+$.pv3.restoreState = function () {
+	$(document).ready(function () {
+		$.jsonrpc(
+			'user/get-state',
+			{},
+			function (data) {
+				navigate(data.module);
+			},
+			function (error) {
+				console.error(error);
+			}
+		);
+	});
+}
+$.pv3.updateState = function (stateName, stateValue) {
+	$.jsonrpc(
+		'user/update-state',
+		{ 'name': stateName, 'value': stateValue },
+		function (result) {
+			// do nothing
+		},
+		function (error) {
+			console.error(error);
 		}
 	);
 }
