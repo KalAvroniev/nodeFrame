@@ -102,3 +102,8 @@ $.restorePanel = function (url, options) {
 		}
 	);
 }
+
+$.pv3 = {};
+$.pv3.restoreState = function () {
+	console.log("restore state");
+}

@@ -4,16 +4,17 @@ fs = require('fs')
 jade = require('jade')
 JsonRpcServer = require('./JsonRpcServer.coffee').JsonRpcServer
 SessionStore = require('./SessionStore.coffee').SessionStore
+StateStore = require('./StateStore.coffee').StateStore
 SocketIoServer = require('./SocketIoServer.coffee').SocketIoServer
 
 class exports.Application
 
-	jsonRpcServer = new JsonRpcServer()
 	socketIoServer = new SocketIoServer()
 	
 	start: () ->
 		# register JSON-RPC methods
-		jsonRpcServer.registerMethods()
+		@jsonRpcServer = new JsonRpcServer(this)
+		@jsonRpcServer.registerMethods()
 	
 		# create server
 		@app = express.createServer()
@@ -23,15 +24,22 @@ class exports.Application
 		@app.use(express.cookieParser())
 		@app.use(express.session({ 'secret': "protrada", 'store': new SessionStore() }))
 		
+		# prepare user states
+		@states = new StateStore()
+		
 		@registerControllers()
-		@app.post('/jsonrpc', @jsonRpcRequest)
+		@app.post(
+			'/jsonrpc',
+			(req, res) =>
+				@jsonRpcRequest(req, res)
+		)
 		@app.set('view engine', 'jade')
 		
 		# default layout
 		@app.set('view options', { pretty: true, layout: "../layouts/default.jade" });
 		
 		# setup socket.io
-		socketIoServer.setJsonRpcServer(jsonRpcServer)
+		socketIoServer.setJsonRpcServer(@jsonRpcServer)
 		io = require('socket.io').listen(@app)
 		io.sockets.on('connection', (socket) ->
 			socketIoServer.addClient(socket)
@@ -90,7 +98,7 @@ class exports.Application
 		controller = new (require("../controllers" + url.substr(0, url.length - 8) + ".coffee").Controller)
 		
 		# get data for view
-		jsonRpcServer.call(
+		@jsonRpcServer.call(
 			url.substr(9, url.length - 17),
 			{},
 			(result, error) ->
@@ -129,7 +137,7 @@ class exports.Application
 		)
 	
 	jsonRpcRequest: (req, res) ->
-		jsonRpcServer.handleRequest(req, res)
+		@jsonRpcServer.handleRequest(req, res)
 		
 	registerControllers: (path = 'controllers') ->
 		if path == 'controllers'
