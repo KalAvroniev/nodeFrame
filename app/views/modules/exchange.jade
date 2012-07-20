@@ -58,6 +58,7 @@ header#main
 #main-container.page-exchange.search-results
 
 		h5#first-heading.ff-icon-before
+		
 		script
 			function refreshExchangeDate() {
 				function pad(num) {
@@ -71,9 +72,10 @@ header#main
 					'th', 'th', 'th', 'th', 'th', 'th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'st'];
 				var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 				var now = new Date();
+				
 				$('#first-heading').html(days[now.getDay()] + " " + now.getDate() + '<sup>' +
 					postDate[now.getDate()] + '</sup> ' + months[now.getMonth()] + ' ' + now.getFullYear() +
-					' <strong>' + now.getHours() + ':' + pad(now.getMinutes()) + '</strong>');
+					', <strong>' + now.getHours() + ':' + pad(now.getMinutes()) + '</strong>');
 			}
 			refreshExchangeDate();
 			setInterval(refreshExchangeDate, 1000);
