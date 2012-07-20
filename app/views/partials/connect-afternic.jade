@@ -1,13 +1,13 @@
 #connect-popup
 
 	#connect-error-msg
-		span.ff-icon-before 
-			strong error:
-			| you have not yet linked an afternic account
+		strong.ff-icon-before error 
+		span you have not yet linked an 
+			strong afternic account
 	
-	form.connect-account-form#afternic
+	form.connect-account-form.clearfix#afternic
 	
-		a.x-connect(href="#")
+		a.ff-icon-before.x-connect(href="#")
 		h3 connect with 
 			strong Afternic	
 	
@@ -15,7 +15,6 @@
 		span.hint-text some hint text which differs from account to account goes in here
 		
 		input#password(type="password", placeholder="Password")
-		span.hint-text some hint text which differs from account to account goes in here		
 		
 		a.btn.btn-success.btn-large.ff-icon-before connect
 		
