@@ -105,5 +105,28 @@ $.restorePanel = function (url, options) {
 
 $.pv3 = {};
 $.pv3.restoreState = function () {
-	console.log("restore state");
+	$(document).ready(function () {
+		$.jsonrpc(
+			'user/get-state',
+			{},
+			function (data) {
+				navigate(data.module);
+			},
+			function (error) {
+				console.error(error);
+			}
+		);
+	});
+}
+$.pv3.updateState = function (stateName, stateValue) {
+	$.jsonrpc(
+		'user/update-state',
+		{ 'name': stateName, 'value': stateValue },
+		function (result) {
+			// do nothing
+		},
+		function (error) {
+			console.error(error);
+		}
+	);
 }

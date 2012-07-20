@@ -40,6 +40,18 @@ class exports.JsonRpcRequest
 				(state) ->
 					return callback(state)
 			)
+	
+	updateState: (name, value, success, error, userId) ->
+		if(userId == undefined)
+			return error("No user ID.")
+		else
+			@options.application.states.update(
+				userId,
+				name,
+				value,
+				() ->
+					return success()
+			)
 
 class exports.JsonRpcServer
 

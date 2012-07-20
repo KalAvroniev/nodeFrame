@@ -67,6 +67,7 @@ html(lang='en')
 				}
 				else {
 					window.history.pushState('', module, "/" + module);
+					$.pv3.updateState('module', module);
 					$.ajax('/modules/' + module + '?ajax=1', {
 						'success': function (data) {
 							$('#ajax-container').html(data);

@@ -281,9 +281,10 @@ $(document).ready(function () {
 			document.socketio.on('notification', function (msg) {
 				notif.notifications.unshift(msg.data);
 				notif.render();
-				
-				//socket.emit('my other event', { my: 'data' });
 			});
 		}
 	);
+	
+	// restore the users state
+	$.pv3.restoreState();
 });

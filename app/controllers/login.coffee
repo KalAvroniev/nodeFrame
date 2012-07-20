@@ -8,6 +8,7 @@ class exports.Controller
 				req.session.user = {
 					'user_id': 123
 				}
+				req.session.save()
 				res.redirect('/home')
 			else
 				res.redirect('/login?error=' + escape("Your login information is incorrect. Please try again or use the forgot button."))

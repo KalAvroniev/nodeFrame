@@ -33,6 +33,15 @@ class exports.StateStore
 			cb(null)
 		)
 	
+	update: (user_id, name, value, cb) ->
+		if not @users[user_id]
+			@users[user_id] = {}
+		console.log("StateStore: " + name + " = " + value)
+		@users[user_id][name] = value
+		@save(() ->
+			cb(null)
+		)
+	
 	save: (cb = @defaultCallback) ->
 		fs.writeFile("state_data", JSON.stringify(@users), (err) ->
 			if err
