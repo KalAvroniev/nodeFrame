@@ -27,6 +27,19 @@ class exports.JsonRpcRequest
 		
 	error: (message, code = -32603) ->
 		@callback(null, message)
+	
+	getSession: () ->
+		return @options.req.session
+	
+	getState: (callback, userId) ->
+		if(userId == undefined)
+			return callback(null)
+		else
+			@options.application.states.get(
+				userId,
+				(state) ->
+					return callback(state)
+			)
 
 class exports.JsonRpcServer
 
@@ -37,7 +50,7 @@ class exports.JsonRpcServer
 	@INVALID_PARAMS = -32602
 	@INTERNAL_ERROR = -32603
 	
-	constructor: () ->
+	constructor: (@app = false) ->
 		@registeredMethods = {}
 
 	registerMethods: (basePath = 'api', path = null) ->
@@ -71,7 +84,7 @@ class exports.JsonRpcServer
 			data += chunk
 		req.on 'end', () =>
 			console.log(JSON.parse(data))
-			@handleCall(JSON.parse(data), res)
+			@handleCall(JSON.parse(data), res, req)
 			
 	call: (method, params, callback) ->
 		return @handleRawCall(
@@ -86,7 +99,7 @@ class exports.JsonRpcServer
 				return callback(res.result, res.error)
 		)
 			
-	handleRawCall: (call, callback) ->
+	handleRawCall: (call, callback, options = {}) ->
 		# validate
 		if call.id == undefined
 			result = JsonRpcServer.Error(null, "No 'id' provided.", JsonRpcServer.INVALID_REQUEST)
@@ -117,6 +130,8 @@ class exports.JsonRpcServer
 				
 				return callback(JSON.stringify(r))
 		)
+		req.options = options
+		req.options.application = @app
 		
 		# validate
 		obj = new @registeredMethods[call.method]
@@ -127,12 +142,16 @@ class exports.JsonRpcServer
 				obj.run(req)
 		)
 	
-	handleCall: (call, res) ->
+	handleCall: (call, res, req) ->
 		return @handleRawCall(
 			call,
 			(raw_result) ->
 				res.write(raw_result)
 				res.end()
+			, {
+				'res': res,
+				'req': req
+			}
 		)
 
 	@Success: (id, result) ->
