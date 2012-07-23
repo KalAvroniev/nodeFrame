@@ -114,7 +114,10 @@ header#main
 							h5(data-title='pending', data-value='0')
 							span.status-descr domains pending (not propogated)
 
-	//!= partial('partials/home-trending')
+
+	- if(showTradingSummary) {
+		!= partial('partials/home-trending')
+	- }
 	
 	ul#portfolio-data-tabs.nav.nav-tabs
 		li.active

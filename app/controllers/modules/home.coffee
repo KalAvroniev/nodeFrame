@@ -7,4 +7,7 @@ class exports.Controller extends Controller
 		res.view.ajax = false
 		if req.query.ajax
 			res.view.ajax = req.query.ajax
+			
+		res.view.showTradingSummary = false
+		
 		res.ready()
