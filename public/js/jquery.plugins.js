@@ -83,7 +83,10 @@ $.jade.renderSync = function (fn, obj, failure) {
 	);
 }
 
-$.restorePanel = function (url, options) {
+$.pv3 = {};
+
+$.pv3.panel = {};
+$.pv3.panel.show = function (url, options) {
 	if(options == undefined)
 		options = {};
 	if(options.jsonrpcMethod == undefined)
@@ -110,8 +113,11 @@ $.restorePanel = function (url, options) {
 		}
 	);
 }
+$.pv3.panel.hide = function (url, options) {
+	$('.sectional-tabs li').removeClass('active');
+	$('#section-panel').addClass('hidden');
+}
 
-$.pv3 = {};
 $.pv3.restoreState = function () {
 	$(document).ready(function () {
 		$.jsonrpc(

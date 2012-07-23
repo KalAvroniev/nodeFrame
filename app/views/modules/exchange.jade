@@ -20,7 +20,7 @@ header#main
 			- for(var i = 0; i < tabs.length; ++i) {
 				- var tab = tabs[i];
 				li(id=tab.id)
-					a(href="javascript:$.restorePanel('" + tab.panel + "', {'tabid':'" + tab.id + "'});")
+					a(href="javascript:$.pv3.panel.show('" + tab.panel + "', {'tabid':'" + tab.id + "'});")
 						strong= tab.h1
 						= tab.h2
 			- }
@@ -41,7 +41,8 @@ header#main
 					li
 						a(href='') Dropping only
 					li.divider
-					li
+	
+	li
 						a(href='') New Registrations only
 					li
 						a(href='') Websites only
