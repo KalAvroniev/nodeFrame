@@ -2237,6 +2237,9 @@ header#main:before {
 	margin: -3px 9px 0 6px;
 	color: rgba(0,0,0,0.13);
 }
+
+/* --------------- define icons for different panel states -------------- */ 
+
 .panel-heading .place-bid:before {
 	content: "W";
 	font-size: 25px;	
@@ -2245,6 +2248,10 @@ header#main:before {
 	content: "C";
 	font-size: 26px;
 	margin: -3px 10px 0 6px;	
+}
+.panel-heading .import-export:before {
+	content: "1";
+	font-size: 25px;	
 }
 .domain-details-table {
 	float: left;
@@ -2528,6 +2535,18 @@ header#main:before {
 }
 .panel-form input {
 	height: auto; width: auto;
+}
+#download-xls {
+	margin: 10px 0 0 0;
+}
+#download-xls:before {
+	content: "_";
+	display: inline-block;
+	vertical-align: middle;
+	margin: -4px 12px 0 0;
+	font-size: 17px;
+	line-height: 1;
+	font-weight: 400;		
 }
 
 
