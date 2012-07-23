@@ -1331,7 +1331,7 @@ header#main:before {
 .sectional-tabs li {
 	display: inline-block;
 	vertical-align: top;
-	margin: 0 -2px 0 0;
+	margin: 0;
 }
 
 /*.sectional-tabs li:first-of-type {
@@ -1351,7 +1351,7 @@ header#main:before {
 }
 
 
-.sectional-tabs.singular li a, .sectional-tabs li:first-of-type a
+.sectional-tabs.singular li a, .sectional-tabs li.standout-tab a
 {
 	margin: 0;
 	padding-top: 14px;
