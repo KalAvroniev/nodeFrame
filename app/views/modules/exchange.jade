@@ -17,19 +17,14 @@ header#main
 				span
 			span.right-bar
 		ul.sectional-tabs
-			li#modal
-				a(href='javascript:void(0);')
-					span
-						strong Active modal
-						| label in here
-			li#domain-info
-				a(href='javascript:void(0);').ff-icon-before
-					strong Detailed
-					| domain info
-			li#watchlist
-				a(href="javascript:$.restorePanel('/modules/exchange/panels/watchlist');")
-					strong My Watchlist
-					| domains you star
+			- for(var i = 0; i < tabs.length; ++i) {
+				- var tab = tabs[i];
+				li(id=tab.id)
+					a(href="javascript:$.restorePanel('" + tab.panel + "', {'tabid':'" + tab.id + "'});")
+						strong= tab.h1
+						= tab.h2
+			- }
+			
 		form#quick-search.well
 			input#quick-search-keyword(value='', placeholder='Quick domain search _')
 			#sale-type.btn-group

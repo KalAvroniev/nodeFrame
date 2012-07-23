@@ -1334,11 +1334,11 @@ header#main:before {
 	margin: 0 -2px 0 0;
 }
 
-.sectional-tabs li:first-of-type {
+/*.sectional-tabs li:first-of-type {
 	float: right;
 	display: block;
 	margin: 0 0 0 3px;
-}
+}*/
 .sectional-tabs li a {
 	display: block;
 	margin: 8px 0 0 0;

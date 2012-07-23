@@ -41,7 +41,7 @@ $.ajaxPanel = function (url, success, failure) {
 $.jade = {};
 $.jade.getTemplate = function (url, success, options) {
 	// is it already loaded?
-	var fnRaw = url.replace(/\//g, '_');
+	var fnRaw = url.replace(/[\/-]/g, '_');
 	if(fnRaw.charAt(0) == '_')
 		fnRaw = fnRaw.substr(1);
 	var fn = 'views_' + fnRaw;
@@ -53,7 +53,7 @@ $.jade.getTemplate = function (url, success, options) {
 		url: url + ".jade",
 		dataType: "script",
 		success: function () {
-			var fnRaw = url.replace(/\//g, '_');
+			var fnRaw = url.replace(/[\/-]/g, '_');
 			if(fnRaw.charAt(0) == '_')
 				fnRaw = fnRaw.substr(1);
 			var fn = 'views_' + fnRaw;
@@ -84,12 +84,10 @@ $.jade.renderSync = function (fn, obj, failure) {
 }
 
 $.restorePanel = function (url, options) {
-	if(options == undefined) {
-		options = {
-			'jsonrpcMethod': url.replace(/^\/modules\//, '')
-		};
-	}
-	console.log(options);
+	if(options == undefined)
+		options = {};
+	if(options.jsonrpcMethod == undefined)
+		options.jsonrpcMethod = url.replace(/^\/modules\//, '');
 	
 	// make the JSON-RPC call
 	$.jsonrpc(
@@ -100,6 +98,10 @@ $.restorePanel = function (url, options) {
 			console.log(url + ".jade");
 			
 			$.jade.getTemplate(url, function (fn) {
+				// set active tab
+				$('.sectional-tabs li').removeClass('active');
+				$('.sectional-tabs #' + options.tabid).addClass('active');
+				
 				$('#section-panel').removeClass('hidden');
 				$('.ajax-panel-content').html($.jade.renderSync(fn, obj, function (err, file, line) {
 					$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
@@ -116,7 +118,8 @@ $.pv3.restoreState = function () {
 			'user/get-state',
 			{},
 			function (data) {
-				navigate(data.module);
+				if(data != undefined)
+					navigate(data.module);
 			},
 			function (error) {
 				console.error(error);
