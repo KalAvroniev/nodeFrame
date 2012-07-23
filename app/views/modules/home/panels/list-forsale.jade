@@ -1,0 +1,86 @@
+h2.panel-heading
+	strong list domains
+	| in your porfolio
+	span.ff-icon-before.forsale for-sale
+
+#forsale-header.clearfix
+	table#min-amounts
+		tr
+			th selling channel
+			th min amount (usd)
+			th commission
+		tr
+			td GoDaddy
+			td no-limit 
+			td 30
+				sup %
+		tr
+			td Sedo
+			td.currency 100
+			td 0
+				sup %
+		tr
+			td Afternic
+			td.currency 250 
+			td 15
+				sup %
+		tr
+			td Protrada
+			td.currency 100 
+			td 20
+				sup %
+	
+	p
+		| To complete listing the selected domains for-sale, you simply need to specify a price for each selling channel. 
+	p	
+		strong * Please note: 
+		| the minimum amount on each selling channel is shown in the table to the right: 
+	
+
+form#forsale-listing-amounts
+
+	table#edit-data-grid
+		thead
+			tr
+				th(colspan="2") domain details
+				th(colspan="4") listing amounts (usd)
+			
+			tr
+				th.sortable.domain-name 
+					label domain name
+				th.sortable.domain-value 
+					label estimated value
+				th 
+					label GoDaddy
+				th 
+					label Sedo
+				th 
+					label Afternic
+				th 
+					label Protrada
+		tbody
+			tr
+				td cats
+					span.tld com
+				td.currency 560 
+				td.interactive
+					input(type="number",placeholder="250")
+				td.interactive
+					input(type="number",placeholder="100")
+				td.interactive
+					input(type="number",placeholder="60")
+				td.interactive
+					input(type="number",placeholder="100")
+
+
+a.btn.btn-success.btn-large.ff-icon-before list sites for-sale
+
+
+
+
+
+
+
+
+
+
