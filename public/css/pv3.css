@@ -4546,13 +4546,15 @@ thead #category {
 
 .ajax-spinner {
 	position: fixed;
-	width: 90px; height: 90px;
-	left: 50%; top: 50%;
+	width: 90px;
+	height: 90px;
+	left: 50%;
+	top: 50%;
 	margin-left: -45px;
 	margin-top: -45px;
 	overflow: visible;
-	display: none;
 }
+
 .ajax-spinner .ball {
 	background-color: rgba(0,0,0,0);
 	border: 8px solid rgba(0,0,0,0.9);
@@ -4647,6 +4649,8 @@ thead #category {
 	100% { transform:rotate(-360deg); }
 }
 
+/* ------------ cusotmisations to make the little grid-row footer spinner ------------- */
+
 #foot-pager {
 	position: relative;
 	padding: 0 0 0 50px;
@@ -4655,7 +4659,7 @@ thead #category {
 	display: block;
 	position: absolute;
 	width: 35px; height: 35px;
-	left: 0; top: -5px;
+	left: 0; top: -2px;
 	margin: 0;
 }
 #foot-pager .ball {

@@ -1,58 +1,54 @@
-(function(){
-
+(function() {
 	var domLoaded = 0;
 
-	$(document).one({
+	/*$(document).one({
 		ready: onDomLoad
 	});
 
 	$('#main-container').one({
 		ajaxLoaded: onDomLoad
-	});
+	});*/
 
-	$('#main-container').one({
-		ajaxUnloading: onDomUnload
-	});
+	$("#main-container").one({ ajaxUnload: onDomUnload });
 
 	function onDomLoad() {
-
 		domLoaded++;
 
-		if (domLoaded > 1) {
+		/*if (domLoaded > 1) {
 			return;
-		}
+		}*/
 
 		// tabs
-		$('#portfolio-data-tabs a').click(function (e) {
+		$("#portfolio-data-tabs a").click(function( e ) {
 			e.preventDefault();
-			$(this).tab('show');
+			$( this ).tab("show");
 		})
 
 		// show the two tabs for this page
-		$('.sectional-tabs li').addClass('hidden');
-		$('.sectional-tabs li#watchlist').removeClass('hidden');
+		$(".sectional-tabs li").addClass("hidden");
+		$(".sectional-tabs li#watchlist").removeClass("hidden");
 
-		$('.sectional-tabs').addClass('singular');
+		$(".sectional-tabs").addClass("singular");
 
-		$(window).on('resize', windowResize);
-		$(window).on('scroll', windowScroll);
-
+		$( window ).on( "resize", windowResize );
+		$( window ).on( "scroll", windowScroll );
 	}
 
 	function onDomUnload() {
+		$(".ajax-spinner").show();
 
-		$(window).off('resize', windowResize);
-		$(window).off('scroll', windowScroll);
+		$( window ).off( "resize", windowResize );
+		$( window ).off( "scroll", windowScroll );
 
-		// Note that we don't bother deleting the tinyscrollbar, as it will be
+		// note that we don't bother deleting the tinyscrollbar, as it will be
 		// removed when the DOM elements are.
-
 	}
 
 	function windowResize() {
+		// stub
 	}
 
 	function windowScroll() {
+		// stub
 	}
-
 })();

@@ -4,61 +4,61 @@
 		scrollContainer,
 		tradingGraph = null;
 
-	$(document).one({
+	/*$(document).one({
 		ready: onDomLoad
 	});
 
 	$('#main-container').one({
 		ajaxLoaded: onDomLoad
-	});
+	});*/
 
-	$('#main-container').one({
-		ajaxUnloading: onDomUnload
+	$("#main-container").one( "ajaxLoad", function() {
+		$(".ajax-spinner").show();
 	});
+	$("#main-container").one({ ajaxUnload: onDomUnload });
 
 	function onDomLoad() {
 
 		domLoaded++;
 
-		if (domLoaded > 1) {
+		/*if (domLoaded > 1) {
 			return;
-		}
+		}*/
 
-		$('#status-summary').tinyscrollbar({
-			axis: 'x',
+		$("#status-summary").tinyscrollbar({
+			axis: "x",
 			scroll: false
 		});
 
-		$('#trading-and-trending .graph-options').on('click', toggleGraphVisible);
+		$("#trading-and-trending .graph-options").on( "click", toggleGraphVisible );
 
 		// show the two tabs for this page
-		$('.sectional-tabs').removeClass('singular');
-		$('.sectional-tabs li').addClass('hidden');
-		$('.sectional-tabs li#watchlist').removeClass('hidden');
+		$(".sectional-tabs").removeClass("singular");
+		$(".sectional-tabs li").addClass("hidden");
+		$(".sectional-tabs li#watchlist").removeClass("hidden");
 
-		$('.sectional-tabs').on('click', 'li#watchlist', showWatchlist);
+		$(".sectional-tabs").on( "click", "li#watchlist", showWatchlist );
 
 		// update the scrollable area on window resize
-		$(window).on('resize', windowResize);
-		$(window).on('scroll', windowScroll);
+		$( window ).on( "resize", windowResize );
+		$( window ).on( "scroll", windowScroll );
 
 		setupTradingGraph();
 	}
 
 	function setupTradingGraph() {
-
-		if (tradingGraph != null || !$('#trading-and-trending .graph-container').is(':visible')) {
+		if ( tradingGraph != null || !$("#trading-and-trending .graph-container").is(":visible") ) {
 			return;
 		}
 
 		createDateGraph(
-			'trading-graph',
+			"trading-graph",
 			[
 				{
-					label: 'Profit',
-					lineColor: '#c4c4c4',
-					fillColor: '#fff',
-					markerColor: '#161413',
+					label: "Profit",
+					lineColor: "#c4c4c4",
+					fillColor: "#fff",
+					markerColor: "#161413",
 					data: [
 						[new Date(2012,  0, 12), 9],
 						[new Date(2012,  1, 12), 20],
@@ -67,10 +67,10 @@
 					]
 				},
 				{
-					label: 'Sales',
-					lineColor: '#5d8b10',
-					fillColor: '#7fb91c',
-					markerColor: '#3b6303',
+					label: "Sales",
+					lineColor: "#5d8b10",
+					fillColor: "#7fb91c",
+					markerColor: "#3b6303",
 					data: [
 						[new Date(2012,  0, 12), 7],
 						[new Date(2012,  1, 12), 17],
@@ -79,10 +79,10 @@
 					]
 				},
 				{
-					label: 'Cost Price',
-					lineColor: '#b2540c',
-					fillColor: '#d66108',
-					markerColor: '#753504',
+					label: "Cost Price",
+					lineColor: "#b2540c",
+					fillColor: "#d66108",
+					markerColor: "#753504",
 					data: [
 						[new Date(2012,  0, 12), 5],
 						[new Date(2012,  1, 12), 7],
@@ -91,77 +91,74 @@
 					]
 				}
 			],
-			'%s: <strong>$%s</strong>',
-			'1 month',
+			"%s: <strong>$%s</strong>",
+			"1 month",
 			300
 		);
-
 	}
 
+	onDomLoad();
+
 	function onDomUnload() {
+		$(".ajax-spinner").show();
 
-		$(window).off('resize', windowResize);
-		$(window).off('scroll', windowScroll);
-		$('.sectional-tabs').off('click', 'li#watchlist', showWatchlist);
+		$( window ).off( "resize", windowResize );
+		$( window ).off( "scroll", windowScroll );
+		$(".sectional-tabs").off( "click", "li#watchlist", showWatchlist );
 
-		$('#trading-and-trending .graph-options').off('click', toggleGraphVisible);
+		$("#trading-and-trending .graph-options").off( "click", toggleGraphVisible );
 
-		if (tradingGraph != null) {
+		if ( tradingGraph != null ) {
 			tradingGraph.destroy();
 			tradingGraph = null;
 		}
 
-		// Note that we don't bother deleting the tinyscrollbar, as it will be
+		// note that we don't bother deleting the tinyscrollbar, as it will be
 		// removed when the DOM elements are.
-
 	}
 
 	function showWatchlist() {
-		togglePanel.call(this, $(this).attr('id'), getWatchlistContent);
+		togglePanel.call( this, $(this).attr("id"), getWatchlistContent );
 	}
 
 	function getWatchlistContent() {
-		return 'Watchlist content here';
+		return "Watchlist content here";
 	}
 
 	function toggleGraphVisible() {
+		var container = $( this ).closest("#trading-and-trending");
 
-		var container = $(this).closest('#trading-and-trending');
-		if (container.hasClass('graph-hidden')) {
+		if ( container.hasClass("graph-hidden") ) {
 			// show graph
-			container.removeClass('graph-hidden');
+			container.removeClass("graph-hidden");
 			// initialize the graph if necessary
 			setupTradingGraph();
 		} else {
-			container.addClass('graph-hidden');
+			container.addClass("graph-hidden");
 		}
-
 	}
 
 	function windowResize() {
+		var width = $("#main-container").width();
 
-		var width = $('#main-container').width();
-
-		resizeScrollToWidth('#status-summary', width);
-		resizeScrollToWidth(scrollContainer, width);
-
+		resizeScrollToWidth( "#status-summary", width );
+		resizeScrollToWidth( scrollContainer, width );
 	}
 
-	function resizeScrollToWidth(scrollSelector, containerWidth) {
-
-		var scrollContainer = $(scrollSelector)
+	function resizeScrollToWidth( scrollSelector, containerWidth ) {
+		var scrollContainer = $( scrollSelector ),
 			scrollWidth = scrollContainer.width();
 
-		if (containerWidth != scrollWidth) {
-			scrollContainer.css({width: containerWidth + 'px'});
+		if ( containerWidth != scrollWidth ) {
+			scrollContainer.css({ width: containerWidth + "px" });
 		}
 
-		scrollContainer.tinyscrollbar_update('relative');
+		scrollContainer.tinyscrollbar_update("relative");
 	}
 
 	function windowScroll() {
+		// thank heavens! nothing!
 	}
-
 
 	function createDateGraph(elementId, settings, tooltipFormat, tickInterval, minWidthBetweenMarks) {
 
@@ -363,7 +360,5 @@
 		// shift the graph so the dots aren't visible on the left hand side
 		var tickSteps = graph.width() / tradingGraph.axes.x2axis.numberTicks;
 		graph.css('margin-left', '-' + (tickSteps / 2) + 'px');
-
 	}
-
 })();

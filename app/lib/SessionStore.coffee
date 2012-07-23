@@ -17,10 +17,10 @@ class exports.SessionStore extends require('connect').session.Store
 	defaultCallback: (err) ->
 		# nothing
 	
-	get: (sid, cb = defaultCallback) ->
+	get: (sid, cb = @defaultCallback) ->
 		cb(null, @sessions[sid])
 	
-	set: (sid, data, cb = defaultCallback) ->
+	set: (sid, data, cb = @defaultCallback) ->
 		@sessions[sid] = data
 		@save(() ->
 			cb(null)
@@ -35,16 +35,16 @@ class exports.SessionStore extends require('connect').session.Store
 			cb()
 		)
 	
-	destroy: (sid, cb = defaultCallback) ->
+	destroy: (sid, cb = @defaultCallback) ->
 		delete @sessions[sid]
 		cb(null)
 	
-	#all: (cb = defaultCallback) ->
+	#all: (cb = @defaultCallback) ->
 	
-	clear: (cb = defaultCallback) ->
+	clear: (cb = @defaultCallback) ->
 		console.log("SessionStore: clear()")
 		@sessions = {}
 		cb()
 	
-	#length: (cb = defaultCallback) ->
+	#length: (cb = @defaultCallback) ->
 	#	cb(@sessions.length)

@@ -34,7 +34,7 @@ html(lang='en')
 		// footer area content
 		.ajax-spinner
 			.ball
-				.ball1
+			.ball1
 		
 		//if lt IE 9
 		
@@ -67,12 +67,14 @@ html(lang='en')
 				}
 				else {
 					window.history.pushState('', module, "/" + module);
+					$("#main-container").trigger("ajaxUnload");
 					$.pv3.updateState('module', module);
 					$.ajax('/modules/' + module + '?ajax=1', {
 						'success': function (data) {
 							$('#ajax-container').html(data);
 							$('.selected').removeClass("selected");
 							$('#spine-inner nav li a#nav-' + module).parent().addClass("selected");
+							$(".ajax-spinner").hide();
 						}
 					});
 				}

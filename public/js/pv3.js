@@ -1,110 +1,122 @@
-// Derived from http://stackoverflow.com/a/2866613
-Number.prototype.toMoney = function(decimals, decimal_sep, thousands_sep)
-{
+// derived from http://stackoverflow.com/a/2866613
+Number.prototype.toMoney = function( decimals, decimal_sep, thousands_sep ) {
 	var n = this,
-		c = isNaN(decimals) ? 2 : Math.abs(decimals), //if decimal is zero we must take it, it means user does not want to show any decimal
-		d = decimal_sep || '.', //if no decimal separetor is passed we use the comma as default decimal separator (we MUST use a decimal separator)
+		c = isNaN( decimals ) ? 2 : Math.abs( decimals ), // if decimal is zero we must take it, it means user does not want to show any decimal
+		d = decimal_sep || ".", // if no decimal separator is passed we use the comma as default decimal separator (we MUST use a decimal separator)
 
-		/*
-			according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
-		   the fastest way to check for not defined parameter is to use typeof value === 'undefined'
-		   rather than doing value === undefined.
-		   */   
-		t = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep, //if you don't want ot use a thousands separator you can pass empty string as thousands_sep value
+		// according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
+		// the fastest way to check for not defined parameter is to use typeof value === "undefined"
+		// rather than doing value === undefined.
+		t = ( typeof thousands_sep === "undefined" ) ? "," : thousands_sep, // if you don't want ot use a thousands separator you can pass empty string as thousands_sep value
 
-		sign = (n < 0) ? '-' : '',
+		sign = ( n < 0 ) ? "-" : "",
 
-		//extracting the absolute value of the integer part of the number and converting to string
-		i = parseInt(n = Math.abs(n).toFixed(c)) + '',
+		// extracting the absolute value of the integer part of the number and converting to string
+		i = parseInt( n = Math.abs(n).toFixed(c) ) + "",
 
-		j = ((j = i.length) > 3) ? j % 3 : 0;
-	return sign + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : '');
+		j = ( ( j = i.length ) > 3 ) ? j % 3 : 0;
+
+	return sign + ( j ? i.substr( 0, j ) + t : "" ) + i.substr( j ).replace( /(\d{3})(?=\d)/g, "$1" + t ) + ( c ? d + Math.abs( n - i ).toFixed( c ).slice( 2 ) : "" );
 }
 
-var verticalScroll = 'body';
+var verticalScroll = "body";
 
 // --------------------------- OPEN READY CALL
 
-$(document).ready(function () {
-
+$( document ).ready(function() {
 	// special class for the side-bar on mobile devices
-	if( navigator.userAgent.match(/Android/i)
+	// user agent sniffing is frowned upon :(
+	if ( navigator.userAgent.match(/Android/i)
 		|| navigator.userAgent.match(/webOS/i)
 		|| navigator.userAgent.match(/iPhone/i)
 		|| navigator.userAgent.match(/iPad/i)
 		|| navigator.userAgent.match(/iPod/i)
 		|| navigator.userAgent.match(/BlackBerry/i)
-	){
-		$('aside #notifications' ).addClass('native');;
+	) {
+		$("aside #notifications").addClass("native");
 	}	
 
-	// Innit bootstrap components below
-	
+	// init bootstrap components below
+
 	// tabs
-	$('#watchlist-tabs a, #portfolio-data-tabs a').click(function (e) {
+	$("#watchlist-tabs a, #portfolio-data-tabs a").click(function( e ) {
 		e.preventDefault();
-		$(this).tab('show');
-	});	
-	$('#alert-msgs a').click(function (e) {
+		$( this ).tab("show");
+	});
+
+	$("#alert-msgs a").click(function( e ) {
 		e.preventDefault();
-		$(this).tab('show');
-		$('aside #notifications:not(.native)').tinyscrollbar_update('relative');
+		$( this ).tab("show");
+		$("aside #notifications:not(.native)").tinyscrollbar_update("relative");
 	});	
-	
-    // dropdowns
-    $('.dropdown-toggle').dropdown();
 
-	$('aside #notifications:not(.native)' ).tinyscrollbar();
+	// dropdowns
+	$(".dropdown-toggle").dropdown();
 
-    // UX improvement on the spine nav buttons
-    $('#spine-inner nav a').mouseup(function () {
-        $(this).removeClass('active');
-    }).mousedown(function () {
-        $(this).addClass('active');
-    }).mouseout(function () {
-        $(this).removeClass('active');
-    });
+	$("aside #notifications:not(.native)").tinyscrollbar();
 
-    $('#import-export, .x-panel').click(function () {
-                
-        if ($('#section-panel').hasClass('hidden')) {
+	// UX improvement on the spine nav buttons
+	$('#spine-inner nav a').mouseup(function() {
+		$( this ).removeClass("active");
+	}).mousedown(function() {
+		$( this ).addClass("active");
+	}).mouseout(function() {
+		$( this ).removeClass("active");
+	});
 
-            $('#section-panel').removeClass('hidden');
-            $(this).addClass('active');
+	$("#import-export, .x-panel").click(function() {
+		if ( $("#section-panel").hasClass("hidden") ) {
+			$("#section-panel").removeClass("hidden");
+			$( this ).addClass("active");
+		} else {
+			$("#section-panel").addClass("hidden")
+			$(".sectional-tabs .active").removeClass("active");
+		}
 
-        } else {
+		return false;
+	});
 
-            $('#section-panel').addClass('hidden')
-            $('.sectional-tabs .active').removeClass('active');
+	$("#spine-inner nav a").mouseup(function() {
+		$( this ).removeClass("active");
+	}).mousedown(function() {
+		$( this ).addClass("active");
+	});
 
-        }
-        return false;
-    });
-
-
-    $('#spine-inner nav a').mouseup(function () {
-        $(this).removeClass('active');
-    }).mousedown(function () {
-        $(this).addClass('active');
-    });
-
-
-    $(window).resize(function () {
-        $('aside #notifications:not(.native)').tinyscrollbar_update('relative');
-    });
-
+	$( window ).resize(function() {
+		$("aside #notifications:not(.native)").tinyscrollbar_update("relative");
+	});
 
 	// SETUP Tiptip "training wheel" tooltips
-	var lipsum = " This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum aucto <a href='#' class='hide-bubbles' title='Permanently hide all help bubbles'>Turn off all bubbles</a>"
+	var lipsum = " This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum aucto <a href='#' class='hide-bubbles' title='Permanently hide all help bubbles'>Turn off all bubbles</a>";
 
-	$('#tiptip_holder .hide-bubbles').live('click', function(e) {
-    	$('body').addClass('no-bubbles');
+	$("#tiptip_holder .hide-bubbles").live( "click", function( e ) {
+    	$("body").addClass("no-bubbles");
 		e.preventDefault();
 		return false;
 	});
-	
-/*
-	$(".sectional-tabs").tipTip(
+
+	// the first thing we need to do is fetch the recent notifications
+	$.jsonrpc(
+		"notifications/fetch",
+		{},
+		function ( data ) {
+			var notif = new NotificationsController( data.notifications );
+
+			notif.render();
+
+			// now setup the socket for push notifications
+			document.socketio = io.connect( "http://" + location.host );
+			document.socketio.on( "notification", function( msg ) {
+				notif.notifications.unshift( msg.data );
+				notif.render();
+			});
+		}
+	);
+
+	// restore the users state
+	$.pv3.restoreState();
+
+	/*$(".sectional-tabs").tipTip(
 		{
 			defaultPosition: "bottom", 
 			maxWidth: "165px", 
@@ -114,7 +126,6 @@ $(document).ready(function () {
 			delay: 1000	
 		}
 	);
-
 	$("#member-options").tipTip(
 		{
 			defaultPosition: "left", 
@@ -125,7 +136,6 @@ $(document).ready(function () {
 			delay: 1000
 		}
 	);
-
 	$('#sale-type').tipTip(
 		{
 			defaultPosition: "bottom", 
@@ -136,7 +146,7 @@ $(document).ready(function () {
 			delay: 1000
 		}
 	);
-	
+
 	$('#graph-settings').tipTip(
 		{
 			defaultPosition: "top", 
@@ -147,7 +157,7 @@ $(document).ready(function () {
 			delay: 1000
 		}
 	);
-	
+
 	$('#grid-view input#domain-title').tipTip(
 		{
 			defaultPosition: "top", 
@@ -158,7 +168,7 @@ $(document).ready(function () {
 			delay: 1000
 		}
 	);	
-	
+
 	$('#thetableclone input#domain-title').tipTip(
 		{
 			defaultPosition: "bottom", 
@@ -168,112 +178,63 @@ $(document).ready(function () {
 			content: lipsum,
 			delay: 1000
 		}
-	);	
-*/
+	);*/
+});
 
+// END READY CALL
 
-	
-	
-	$('#main-container').on('ajaxLoaded', function() {
-		$('.ajax-spinner').hide();
-	});
-
-	$('#main-container').on('ajaxUnloading', function() {
-		$('.ajax-spinner').show();
-	});
-	
-
-	
-
-	
-	
-	
-
-}); // END READY CALL
-
-function togglePanel(selectorName, contentCallback) {
-
-	var panel = $('#section-panel');
+function togglePanel( selectorName, contentCallback ) {
+	var panel = $("#section-panel");
 
 	// already visible
-	if (panel.attr('data-tab') == selectorName) {
-
-		panel.addClass('hidden');
-		panel.attr('data-tab', '');
-
+	if ( panel.attr("data-tab") == selectorName ) {
+		panel.addClass("hidden").attr( "data-tab", "" );
 	} else {
-
-		if (panel.hasClass('hidden')) {
-			panel.removeClass('hidden');
+		if ( panel.hasClass("hidden") ) {
+			panel.removeClass("hidden");
 		} else {
-			$(this).parent().find('.active').removeClass('active');
+			$( this ).parent().find(".active").removeClass("active");
 		}
 
-		panel.html(contentCallback());
-		panel.attr('data-tab', selectorName);
+		panel.html( contentCallback() ).attr( "data-tab", selectorName );
 	}
 
-	if (panel.hasClass('hidden')) {
-		$(this).removeClass('active');
+	if ( panel.hasClass("hidden") ) {
+		$( this ).removeClass("active");
 	} else {
-		$(this).addClass('active');
+		$( this ).addClass("active");
 	}
-	
-	
-
 }
-
 
 // ---
 // PUSH/FETCH NOTIFICATIONS
 // ---
 
-function NotificationsController(notifications) {
+function NotificationsController( notifications ) {
 	this.notifications = notifications;
 }
 
-NotificationsController.prototype.render = function () {
+NotificationsController.prototype.render = function() {
 	var ns = this.notifications;
-	
+
 	// if there is data, fetch the template and render
 	$.jade.getTemplate(
-		'notifications/generic',
-		function (fn) {
-			$('#protrada-msgs').html('<h4><strong>Protrada</strong> notifications</h4>');
-			for(var i = 0; i < ns.length; ++i) {
-				var notif = $.jade.renderSync(fn, ns[i]);
-				$('#protrada-msgs').append(notif);
-			}
-			
-			// update counter
-			$('.protrada .alert-count').attr('data-alerts', ns.length);
-			
-			$('aside #notifications:not(.native)').tinyscrollbar_update('relative');
-		},
-		function (error) {
-			alert(error);
-		}
-	);
-}
+		"notifications/generic",
+		function( fn ) {
+			$("#protrada-msgs").html("<h4><strong>Protrada</strong> notifications</h4>");
 
-$(document).ready(function () {
-	// the first thing we need to do is fetch the recent notifications
-	$.jsonrpc(
-		'notifications/fetch',
-		{},
-		function (data) {
-			notif = new NotificationsController(data.notifications);
-			notif.render();
-	
-			// now setup the socket for push notifications
-			document.socketio = io.connect('http://' + location.host);
-			document.socketio.on('notification', function (msg) {
-				notif.notifications.unshift(msg.data);
-				notif.render();
-			});
+			for ( var i = 0; i < ns.length; ++i ) {
+				var notif = $.jade.renderSync( fn, ns[i] );
+				$("#protrada-msgs").append( notif );
+			}
+
+			// update counter
+			$(".protrada .alert-count").attr( "data-alerts", ns.length );
+			
+			$("aside #notifications:not(.native)").tinyscrollbar_update("relative");
+		},
+		function( error ) {
+			alert( error );
 		}
 	);
-	
-	// restore the users state
-	$.pv3.restoreState();
-});
+};

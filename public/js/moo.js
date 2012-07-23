@@ -1,94 +1,75 @@
-$(document).ready(function () {
-	
+$( document ).ready(function() {
 	/* this code doesnt work 
 	$('#main-container').on('ajaxLoaded', function() {
 		$('.ajax-spinner').hide();
 	});
-	
+
 	$('#main-container').on('ajaxUnloading', function() {
 		$('.ajax-spinner').show();
-	});
-	*/
-	
-	var module = document.URL.substr(document.URL.lastIndexOf('/') + 1);
-	
-	navigate(module);
-	
-	
-	$('#ui-controls a').on('click', function () {
-	
-		if ($(this).hasClass('active')) {
-			
-			$(this).removeClass('active');
-		
+	});*/
+
+	var module = document.URL.substr( document.URL.lastIndexOf("/") + 1 );
+
+	navigate( module );
+
+	$("#ui-controls a").on( "click", function() {
+		if ( $( this ).hasClass("active") ) {
+			$( this ).removeClass("active");
 		} else {
-		
-			$(this).addClass('active');
-	 
+			$( this ).addClass("active");
 		}
-		
+
 		return false;
-		
 	});
-		
-	
-	$('#toggle-condensed').click(function() {
-		
-		if ($('body').hasClass('condensed')) {
-			
+
+	$("#toggle-condensed").click(function() {
+		if ( $("body").hasClass('condensed') ) {
 			// turn off condensed mode
-			console.log('condensed off');
-			$('body').removeClass('condensed');
-			//$(this).removeClass('active');
-		
+			console.log("condensed off");
+			$("body").removeClass("condensed");
+			//$( this ).removeClass("active");
 		} else {
-		
 			// turn on condensed mode
-			console.log('condensed on');		
-			$('body').addClass('condensed');
-			//$(this).addClass('moo');						
+			console.log("condensed on");
+			$("body").addClass("condensed");
+			//$( this ).addClass("moo");
 		}
-		
+
 		return false
 	});
 
-	$('#toggle-downgrade').click(function() {
-		
-		if ($('body').hasClass('mobile')) {
-			
+	$("#toggle-downgrade").click(function() {
+		if ( $("body").hasClass("mobile") ) {
 			// turn off low-fi mode
-			console.log('low-fi off');
-			$('body').removeClass('mobile');
-			//$(this).removeClass('active');
-		
+			console.log("low-fi off");
+			$("body").removeClass("mobile");
+			//$( this ).removeClass("active");
 		} else {
-		
 			// turn on low-fi mode
-			console.log('low-fi on');		
-			$('body').addClass('mobile');
-			//$(this).addClass('moo');						
+			console.log("low-fi on");
+			$("body").addClass("mobile");
+			//$( this ).addClass("moo");
 		}
-		
+
 		return false
 	});	
-	
-	if ($('body').hasClass('condensed')) {
-		console.log('condensed on')			
-		$('#toggle-condensed').addClass('active');
+
+	if ( $("body").hasClass("condensed") ) {
+		console.log("condensed on")
+		$("#toggle-condensed").addClass("active");
 	} else {
-		console.log('condensed off')			
-		$('#toggle-condensed').removeClass('active');						
+		console.log("condensed off")
+		$("#toggle-condensed").removeClass("active");
 	}
-	
+
 	if ($('body').hasClass('mobile')) {
-		console.log('low-fi on');		
+		console.log('low-fi on');
 		$('#toggle-downgrade').addClass('active');
 	} else {
 		console.log('low-fi off');
-		$('#toggle-downgrade').removeClass('active');						
+		$('#toggle-downgrade').removeClass('active');
 	}	
-			
-		 
+
 	$('#toggle-sys-menu').click(function () {
 
         if ($('#sys-menu').hasClass('active')) {
@@ -122,7 +103,7 @@ $(document).ready(function () {
 			// switch to protrada mode
 			$(this).addClass('active');
 			$('h3.protrada').addClass('hidden');
-			$('h3.devname.hidden').removeClass('hidden');			
+			$('h3.devname.hidden').removeClass('hidden');
 	 
 		}
 		
@@ -138,10 +119,7 @@ $(document).ready(function () {
 		return false;
 	
 	});
-	
 
-							
-			
 }); // ------------------------------------- Close doc-ready
 
 // Setup open/close sidebar element functions	
@@ -163,7 +141,7 @@ $(document).on("click","#toggle-side-bar, #x-side-bar",function(e){
 				
 		aside.removeClass('active');
 		$('body').addClass('sidebar-hidden');
-		$('#main-container').animate({ 'width' : '100%' }, 200);		
+		$('#main-container').animate({ 'width' : '100%' }, 200);
 		
 			
 	} else {
@@ -171,11 +149,11 @@ $(document).on("click","#toggle-side-bar, #x-side-bar",function(e){
  		// show the sidebar
  		
  		// work around webkit not redrawing when innerHtml altered
-		//$('#main-container').redraw();		
+		//$('#main-container').redraw();
  			 		
 		aside.addClass('active');
 		$('body').removeClass('sidebar-hidden');
-		$('#main-container').animate({ 'width' : '99.999%' }, 300);		
+		$('#main-container').animate({ 'width' : '99.999%' }, 300);
     	$('aside #notifications:not(.native)').tinyscrollbar_update('relative');
  	
  	}
@@ -191,6 +169,4 @@ $(document).on("click",".x-alert-msg",function(e){
 	    	$('aside #notifications:not(.native)').tinyscrollbar_update('relative');
     		
    		});
-});	
-
-
+});
