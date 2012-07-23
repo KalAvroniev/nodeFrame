@@ -2255,7 +2255,8 @@ header#main:before {
 }
 .panel-heading .import:before {
 	content: "m";
-	font-size: 25px;	
+	font-size: 25px;
+	margin: 0 12px 0 6px;			
 }
 
 
@@ -2558,12 +2559,12 @@ header#main:before {
 	font-weight: 400;		
 }
 #download-csv {
-	margin: 4px 0 0 20px;
-	padding: 9px 15px 9px 52px; 
+	margin: 7px 0 0 20px;
+	padding: 9px 15px 11px 52px; 
 	float: right;
-	width: 128px;
+	width: 164px;
 	font-size: 13px;
-	line-height: 1.2em;
+	line-height: 1.3em;
 	white-space: normal;
 	border: none;
 	color: #fff;
@@ -2571,21 +2572,35 @@ header#main:before {
 #download-csv:before {
 	content: "n";
 	position: absolute;
-	margin: 5px 0 0 -38px;
+	margin: 1px 0 0 -38px;
 	font-size: 33px;
 	line-height: 1;
 	font-weight: 400;		
 }
-.ajax-panel-content a {
+a.default {
 	display: inline-block;
 	padding: 0;
 	border-bottom: 3px solid #e6e6e6;
 	color: #49AFCD;
 }
-.ajax-panel-content a.download {
+a.download {
 	border-bottom: 3px solid #e6e6e6;
 	color: #49AFCD;
 }
+.panel-subhead {
+	font-weight: 400;
+	font-size: 14px;
+	margin: 0 0 15px;
+}
+.ajax-panel-content p {
+	margin: 0 0 1.6em;	
+}
+
+
+
+
+
+
 
 
 /* ------------------------ Panel form styles work ---------------------------------- */
@@ -2607,9 +2622,30 @@ header#main:before {
 	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
 	color: #161413;
 }
-
+.form-horizontal textarea {
+	font-size: 14px;
+	line-height: 1.4em;
+	font-weight: 400;
+	color: #4c4b4a;
+	border-radius: 8px;
+	padding: 12px;
+	margin: 0 0 25px;
+	box-shadow: inset 0 1px 0px white;
+	background: transparent;
+	border-color: rgba(119,110,105,0.3);
+}
+.form-horizontal textarea:focus {
+	background: rgba(255,255,255,0.37);
+	border-color: white;
+	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
+	color: #161413;
+}
 .mini-panel-form.form-horizontal input {
 	width: 180px;
+}
+.mini-panel-form.form-horizontal textarea {
+	width: 325px;
+	min-height: 100px;
 }
 .form-horizontal .control-label {
 	font-size: 14px;
@@ -2627,9 +2663,102 @@ header#main:before {
 	margin-left: -25px;
 	width: auto;
 }
-.mini-panel .btn-group {
+.mini-panel .btn-success {
 	float: right;
 } 
+.mini-panel .btn-group .btn-success {
+	float: left;
+}
+.mini-panel .btn-group {
+	float: right;
+}
+#file-upload-area {
+	padding: 25px;
+	background: rgba(0,0,0,0.06);
+	box-shadow: inset 0 2px 4px rgba(0,0,0,0.08), 0 1px white;	
+	border-radius: 10px;
+}
+#drag-n-drop {
+	padding: 12px 16px 14px 18px;
+	border: 4px dashed white;
+	color: #161413;
+	opacity: 0.45;	
+	border-radius: 10px;
+	margin: 0 0 25px;
+	
+	-moz-transition: all .3s ease-in-out;
+	-webkit-transition: all .3s ease-in-out;
+   	transition: all .3s ease-in-out;		
+}
+#drag-n-drop:hover {
+	border-color: rgba(0,0,0,0.4);
+	opacity: 0.7;	
+	cursor: pointer;
+}
+#drag-n-drop p {
+	margin: 0;
+	padding: 0 0 0 70px;
+	position: relative;
+	text-indent: 16px;	
+}
+#drag-n-drop p:before {
+	position: absolute;
+	top: 1px; left: 69px;
+	content: "*";
+	margin: 3px 7px 0 0;
+	font-size: 20px;
+	font-weight: 400;
+	text-indent: 0;	
+}
+#drag-n-drop .ff-icon-after:after {
+	content: "o";
+	position: absolute;
+	top: 25px; left: 5px;
+	margin: 0;
+	font-size: 40px;
+	text-indent: 0;		
+	color: rgba(0,0,0,0.4);
+	text-shadow: 0 1px 0 white;	
+	
+	-moz-transition: all .3s ease-in-out;
+	-webkit-transition: all .3s ease-in-out;
+   	transition: all .3s ease-in-out;		
+}
+#drag-n-drop:hover .ff-icon-after:after {
+	color: rgba(0,0,0,0.7);
+}
+#file-upload-area input[type="file"] {
+	font-size: 13px;
+	letter-spacing: 0;
+	background: white;
+}
+.or-txt {
+	text-align: center;
+	position: relative;
+	margin: 20px 0;	
+}
+.or-txt span {
+	display: inline-block;
+	position: relative;
+	padding: 0 15px;
+	background: #FCF9F5;
+	font-size: 25px;
+	color: #bfbfbf;
+}
+.or-txt:before {
+	content: "";
+	position: absolute;
+	left: 0; top: 14px;
+	width: 100%;
+	height: 1px;
+	background: #e1e1e1;
+	box-shadow: 0 1px 0 white;
+}
+
+
+
+
+
 
 
 /* ------------------------------ Global connect popup styles work ------------------------------------- */
@@ -4539,6 +4668,9 @@ thead #category {
 	content: "";
 	border: none;
 }
+select, input[type="file"] {
+	height: auto;	
+}
 .btn {
 	white-space: nowrap;
 	text-align: left;
@@ -4549,7 +4681,7 @@ thead #category {
 .btn-group .btn-success {
 	border-radius: 5px 0 0 5px;
 }
-.btn-success, .ajax-panel-content .btn-success {
+.btn-success {
 	border: none;
 	box-shadow: inset 0 3px 0 rgba(0,0,0,0.1), 0 1px 0 white, 0 -3px 0 rgba(0,0,0,0.08)	;
 	font-weight: 600;
@@ -4567,7 +4699,7 @@ thead #category {
 	background: linear-gradient(to bottom,  #8ebf36 0%,#70a220 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8ebf36', endColorstr='#70a220',GradientType=0 ); /* IE6-9 */
 }
-.btn-success:first-of-type:before, .ajax-panel-content .btn-success:first-of-type:before {
+.btn-success:first-of-type:before {
 	content: "D";
 	display: inline-block;
 	vertical-align: middle;
@@ -4576,13 +4708,13 @@ thead #category {
 	line-height: 1;
 	font-weight: 400;	
 }
-.btn-success:hover, .ajax-panel-content .btn-success:hover {
+.btn-success:hover {
 	background: #8ebf36;
 	color: #36520f;	
 	text-shadow: 0 1px 0 rgba(255,255,255,0.3);	
 	box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15), 0 1px 0 white, -1px 0 0 rgba(255,255,255,0.3), 0 -3px 0 rgba(0,0,0,0.08);	
 }
-.btn-success:active, .ajax-panel-content .btn-success:active {
+.btn-success:active {
 	box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15), 0 1px 0 white, -1px 0 0 rgba(255,255,255,0.2), 0 -3px 0 rgba(0,0,0,0.08);	
 	color: #eff4d3;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.3);		
