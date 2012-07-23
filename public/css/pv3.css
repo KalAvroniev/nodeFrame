@@ -2797,8 +2797,15 @@ table#edit-data-grid {
 	width: 100%;
 	margin: 0 0 25px;
 }
+#edit-data-grid tbody tr:first-child td {
+	padding: 10px 12px 5px;
+
+}
 #edit-data-grid td {
-	padding: 10px 12px 0;
+	padding: 5px 12px;
+}
+#edit-data-grid tbody tr:hover {
+	background: rgba(0,0,0,0.03);
 }
 #edit-data-grid td.currency {
 	text-align: right;
@@ -2846,7 +2853,6 @@ table#edit-data-grid {
 
 #edit-data-grid input::-webkit-input-placeholder  { color:rgba(0,0,0,0.2); }
 #edit-data-grid input:-moz-placeholder { color:rgba(0,0,0,0.2); }
-
 
 #edit-data-grid input:focus {
 	background: rgba(255,255,255,0.37);
