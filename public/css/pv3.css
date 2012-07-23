@@ -2644,7 +2644,7 @@ a.download {
 	width: 180px;
 }
 .mini-panel-form.form-horizontal textarea {
-	width: 325px;
+	width: 100%;
 	min-height: 100px;
 }
 .form-horizontal .control-label {
