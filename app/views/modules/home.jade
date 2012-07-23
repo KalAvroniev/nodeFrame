@@ -64,32 +64,44 @@ header#main
 != partial('partials/connect-afternic')
 
 #main-container.page-home
+
 	h5#first-heading.home welcome to Protrada
+
 	h2#user-greeting hi, Andrew 
+
 	hgroup#member-details
+
 		h5
 			| you are currently an 
 			strong Investor member.
+
 		h5#member-renewal
 			| your next membership renewal is: 
 			strong.ff-icon-before
 				| 24
 				sup th 
 				| May, 2012 
+
 	#health-and-status.clearfix
+
 		#portfolio-health
+
 			h3#health-title.ff-icon-before
 				| portfolio 
 				strong health
+
 			p.ff-icon-before
 				| This section can show you at a glance, how healthy your portfolio is (by charting it's ROI%), and also how it is trending. 
 				a(href='#') Read more
 				| 
 				| to learn how to take advantage of this feature
+
 			span.demo-spark(title='Graph currently inactive - no data to display')
+
 		h4#h4-status-summary.ff-icon-before
 			| your current trading 
 			strong status summary
+		
 		#status-summary.tiny-scrollbar-horiz
 			.scrollbar
 				.track
@@ -114,6 +126,7 @@ header#main
 							h5(data-title='pending', data-value='0')
 							span.status-descr domains pending (not propogated)
 
+
 	- if(showTradingSummary) {
 		!= partial('partials/home-trending')
 	- }
@@ -125,276 +138,33 @@ header#main
 			a(href='#listed-for-sale') listed for sale (4)
 	
 	#dashboard-tab-panes.tab-content
+		
 		#whole-portfolio.tab-pane.active
+		
 			h2#complete-listing Complete domain listing
+		
 			p.clearfix
 				| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
 				| andit eget non lacus. Pellentesque a imperdiet diam.
+		
 			#grid-view.tiny-scrollbar-horiz
 				.scrollbar
 					.track
 						.thumb
 							.end
 				.viewport
-					table.grid-table.overview.floatable
-							thead
-									tr.col-grouping
-										th.sticky(colspan='2')
-											span.on.sticky-pin Stick
-										th(colspan='2') Basic domain info
-										th(colspan='4') Price / value info
-										th(colspan='2') Performance info
-										th(colspan='3') Domain registration info
-									tr.filter
-										th(colspan='2', scope='col')
-											label Bulk
-											#fav-sel-all
-												button.btn.select(title='Select all', data-toggle='button')
-												button.btn.favourite(title='Favourite all', data-toggle='button')
-										th(scope='col')
-											label(for='category') Top action(s)
-											#top-actions.btn-group
-												a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-													| sort by?
-													span.caret
-												ul.dropdown-menu
-													li
-														a(href='') Action 1
-													li
-														a(href='') Action 2
-													li
-														a(href='') Action 3
-										th.sortable.domain-title(scope='col')
-											label.active-asc(for='domain-title') Domain title
-											#domain-title-inputs
-												input#domain-title.txt-filter.filter-active(value='protrada', type='text')
-												a.disable(href='')
-												#string-mode-selection.btn-group
-													a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-														| contains
-														span.caret
-													ul.dropdown-menu
-														li
-															a(href='') Contains
-														li
-															a(href='') Ending with
-														li
-															a(href='') Beginning with
-												a#advanced-keyword-filter(href='', title='Advanced keyword filter') advanced keyword filter
-										th(scope='col')
-											label Offers
-										th.sortable(scope='col')
-											label(for='cost') Cost
-											input#cost.txt-filter(value='', type='text')
-										th.sortable(scope='col')
-											label(for='appraised') Appraised
-											input#appraised.txt-filter(value='', type='text')
-										th(scope='col')
-											label Unrealised
-										th(scope='col')
-											label Income
-										th(scope='col')
-											label ROI%
-										th.date.sortable(scope='col')
-											label(for='acquired') Acquired date
-											#accquired.btn-group
-												a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-													| today
-													span.caret
-												ul.dropdown-menu
-													li
-														a(href='') tomorrow
-													li
-														a(href='') 2 days
-													li
-														a(href='') date range
-										th.date.sortable(scope='col')
-											label(for='expire') Expire date
-											#expiring.btn-group
-												a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-													| today
-													span.caret
-												ul.dropdown-menu
-													li
-														a(href='') tomorrow
-													li
-														a(href='') 2 days
-													li
-														a(href='') date range
+					!= partial('partials/grid-styleguide')
 
-										th(scope='col')
-											label(for='status') Status
-											#status.btn-group
-												a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-													| pending
-													span.caret
-												ul.dropdown-menu
-													li
-														a(href='') active
-													li
-														a(href='') expired
-													li
-														a(href='') dropping
-									tr
-										td(colspan="9")#bulk-actions 
-											div.ff-icon-before.bulk-wrapper 
-												a.ff-icon-after.x-zero-alert(href="#")
-												span 
-													strong Bulk actions menu
-													br
-													| for all selected items
-
-												#bulk-action-menu.btn-group
-													a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-															| sell all
-															span.caret
-														ul.dropdown-menu
-															li
-																a(href='') another action
-															li
-																a(href='') sell all
-															li
-																a(href='') go 'moo' like a cow										 
-									tr	
-										td(colspan="9")#zero-alert
-											span.ff-icon-before
-												a.ff-icon-after.x-zero-alert(href="#")
-												strong Sorry
-												|, we couldnt find any matches for this keyword 
-												strong under expired domains.
-												br 
-												| Perhaps instead try searching under 
-												strong new registrations
-									
-									tr
-										td(colspan="9")#filter-params
-											span.ff-icon-before 
-												a#save-search.ff-icon-before.btn(data-toggle='dropdown', href='javascript:void(0);')	
-													strong save 
-													| this search
-												| Showing similar domains from 
-												strong all sources 
-												| ending 
-												strong today
-												|, containing keywords 
-												strong 'protrada'	
-												
-								tbody
-									tr
-										td
-												button.btn.select(data-toggle='button')
-											td
-												button.btn.favourite(data-toggle='button')
-											td.actions
-												span.action-buttons
-													//a.ff-icon(href='#', data-title='Build website') X
-													a.ff-icon(href='#', data-title='View domain details') G
-													a.ff-icon.main-action(href='#', data-title='List domain for sale') ^
-														span.action-label Sell
-													//a.ff-icon(href='#', data-title='Place bid / Buy') -
-											td.domain-title
-												span.domain-title-cntnr
-													| 353cards
-													span.tld com
-											td 3
-											td.currency 1584
-											td n/a
-											td 8
-											td.currency 200
-											td 20%
-											td.date 1st Jan '70 10:00am
-											td.date 1st Jan '70 10:00am
-											td No
-											td 0
-											td 0
-											td 0
-											td 0
-											
-									tr
-										td
-												button.btn.select(data-toggle='button')
-											td
-												button.btn.favourite(data-toggle='button')
-											td.actions
-												span.action-buttons
-													//a.ff-icon(href='#', data-title='Build website') X
-													a.ff-icon(href='#', data-title='View domain details') G
-													a.ff-icon.main-action(href='#', data-title='Bid on domain') W
-														span.action-label Bid
-													//a.ff-icon(href='#', data-title='Place bid / Buy') -
-											td.domain-title
-												span.domain-title-cntnr
-													| 353cards
-													span.tld com
-											td 3
-											td.currency 1584
-											td n/a
-											td 8
-											td.currency 200
-											td 20%
-											td.date 1st Jan '70 10:00am
-											td.date 1st Jan '70 10:00am
-											td No
-											td 0
-											td 0
-											td 0
-											td 0											
-											
-									tr.row-sel.parent-open
-										td
-												button.btn.select(data-toggle='button')
-											td
-												button.btn.favourite(data-toggle='button')
-											td.actions
-												span.action-buttons
-													//a.ff-icon(href='#', data-title='Build website') X
-													a.ff-icon(href='#', data-title='View domain details') G
-													a.ff-icon.main-action(href='#', data-title='List domain for sale') ^
-														span.action-label Sell
-													//a.ff-icon(href='#', data-title='Place bid / Buy') -
-											td.domain-title
-												span.domain-title-cntnr
-													| 353cards
-													span.tld com
-											td 3
-											td.currency 1584
-											td n/a
-											td 8
-											td.currency 200
-											td 20%
-											td.date 1st Jan '70 10:00am
-											td.date 1st Jan '70 10:00am
-											td No
-											td 0
-											td 0
-											td 0
-											td 0
-																				
-									tr.row-sel.child
-										td(colspan="9")
-											div.child-inner
-												a.x-row-sel.ff-icon-after
-												p 
-													strong selected domain content 
-													| to be placed in here
-										
-								tfoot
-									tr
-										td(colspan='9')
-											#foot-pager
-												strong Loading more 
-												| domain results ...
-												.ajax-spinner
-													.ball
-													.ball1 										
-										
-										
 
 		#listed-for-sale.tab-pane
+			
 			h2#complete-listing Domains listed for sale
+			
 			p
 				| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
 				| andit eget non lacus. Pellentesque a imperdiet diam.
+			
 			#temp-for-sale	grid view control goes in here 
+	
 	#thetableclone
 		table.grid-table
