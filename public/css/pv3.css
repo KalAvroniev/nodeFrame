@@ -2531,10 +2531,10 @@ header#main:before {
 
 .mini-panel .x-panel {
 	position: static;
-	font-size: 38px;	
+	font-size: 33px;	
 	top: auto; right: auto;
 	display: inline-block;
-	margin: 3px 0 15px -4px;
+	margin: 3px 0 10px -4px;
 }
 .mini-panel .panel-heading {
 	margin: 0 0 20px;
