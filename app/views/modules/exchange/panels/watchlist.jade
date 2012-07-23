@@ -1,169 +1,173 @@
-h2.panel-heading
-	strong my watchlist
-	| domains that you have 
-	span.ff-icon-before starred
-p
-	| When you star an auction in The Domain Exchange, It appears here. This allows to you make a shortlist containing only the domains sales/auctions that you are interested in following.
-
-ul#watchlist-tabs.nav.nav-tabs
-	- for(var i = 0; i < tabs.length; ++i) {
-		- var theClass = (active_tab == tabs[i].href ? 'active' : '')
-		li(class=theClass)
-			a(href=tabs[i].href, data-toggle='tab')= tabs[i].title
-	- }
-
-!= '<script>'
-!= "$('.tab-content .tab-pane').removeClass('active');"
-!= "$('.tab-content " + active_tab + "').addClass('active');"
-!= '</script>'
-
-.tab-content
-	#expiring.tab-pane.active
-		h2.light-grid-header Watched expiring domains
-		p.clearfix
-			| Expiring listing definition: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies.
-		
-		
-		
-		table.light-gridview.table
-			thead
-				tr.col-grouping
-					th(colspan='2') Options
-					th(colspan='4') Basic domain info
-					th(colspan='5') Bids
-				tr.filter
-					th(scope='col')
-						label Bulk
-						#fav-sel-all
-							button.btn.favourite(title='Favourite all', data-toggle='button')
-					th(scope='col')
-						label(for='category') Top action
-						#top-actions.btn-group
-							a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-								| sort by?
-								span.caret
-							ul.dropdown-menu
-								li
-									a(href='') moo
-								li
-									a(href='') another action
-								li
-									a(href='') somthing here						
-					th(scope='col')
-						label(for='category') Source
-						#source-selection.btn-group
-							a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-								| All
-								span.caret
-							ul.dropdown-menu
-								li
-									a(href='') Protrada
-								li
-									a(href='') Godaddy
-								li
-									a(href='') Namejet
-					th.sortable.domain-title(scope='col')
-						label.active-asc(for='domain-title') Domain title
-						#domain-title-inputs
-							input#domain-title.txt-filter.filter-active(value='protrada', type='text')
-							a.disable(href='')
-							#string-mode-selection.btn-group
-								a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-									| Containing
-									span.caret
-								ul.dropdown-menu
-									li
-										a(href='') Containing
-									li
-										a(href='') Ending with
-									li
-										a(href='') Beginning with
-					th(scope='col')
-						label(for='category') Status
-						#source-selection.btn-group
-							a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-								| All
-								span.caret
-							ul.dropdown-menu
-								li
-									a(href='') Watching
-								li
-									a(href='') Winning
-								li
-									a(href='') Losing
-								li
-									a(href='') Won
-								li
-									a(href='') Lost
-								li
-									a(href='') Secured
-					th.time-left.sortable(scope='col')
-						label(for='time-left') Time left
-						#time-left.btn-group
-							a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-								| Time left
-								span.caret
-							ul.dropdown-menu
-								li
-									a(href='') 1 day
-								li
-									a(href='') Date picker
-					th.max-bid.sortable(scope='col')
-						label(for='max-bid') Max
-						input#max-bid.txt-filter(value='', type='text')
-					th.int-bid.sortable(scope='col')
-						label Int.
-					th.ext-bid.sortable(scope='col')
-						label Ext.
-					th.current-bid.sortable(scope='col')
-						label(for='current-bid') Current
-						input#current-bid.txt-filter(value='', type='text')
-					th.next-bid.sortable(scope='col')
-						label(for='next-bid') Next
-	
-			tbody
-				tr
-					td
-						button.btn.favourite.active(data-toggle='button')
-					td.actions
-						span.action-buttons
-							//a.ff-icon(href='#', data-title='Build website') X
-							a.ff-icon(href='#', data-title='View domain details') G
-							a.ff-icon.main-action(href='#', data-title='List domain for sale') ^
-								span.action-label Sell
-							//a.ff-icon(href='#', data-title='Place bid / Buy') -
-						
-					td.domain-source
-						.source-container
-							span.protrada
-					td.domain-title
-						span.domain-title-cntnr(data-text='protrada-me.com')
-							| protrada-me
-							span.tld com
-					td secured
-					td 0hrs, 3mins
-					td.currency 550
-					td 1
-					td 0
-					td.currency 450
-					td.currency 500
-
-
-			tfoot
-				tr
-					td#foot-pager(colspan='13')
-						strong Table footer functionality goes in here 
-						| (eg. Pagination/Lazyload spinner, bulk actions etc)
-		
-		
-		
-		
-		
-		
-		
-		
-	#pre-auction.tab-pane	
-	#auction.tab-pane	
-	#buy-it-now.tab-pane	
-	#websites.tab-pane	
-	#history.tab-pane
+#section-panel.panel
+	#panel-content
+		a.x-panel(href='#')	
+		.ajax-panel-content.clearfix
+			h2.panel-heading
+				strong my watchlist
+				| domains that you have 
+				span.ff-icon-before starred
+			p
+				| When you star an auction in The Domain Exchange, It appears here. This allows to you make a shortlist containing only the domains sales/auctions that you are interested in following.
+			
+			ul#watchlist-tabs.nav.nav-tabs
+				- for(var i = 0; i < tabs.length; ++i) {
+					- var theClass = (active_tab == tabs[i].href ? 'active' : '')
+					li(class=theClass)
+						a(href=tabs[i].href, data-toggle='tab')= tabs[i].title
+				- }
+			
+			!= '<script>'
+			!= "$('.tab-content .tab-pane').removeClass('active');"
+			!= "$('.tab-content " + active_tab + "').addClass('active');"
+			!= '</script>'
+			
+			.tab-content
+				#expiring.tab-pane.active
+					h2.light-grid-header Watched expiring domains
+					p.clearfix
+						| Expiring listing definition: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies.
+					
+					
+					
+					table.light-gridview.table
+						thead
+							tr.col-grouping
+								th(colspan='2') Options
+								th(colspan='4') Basic domain info
+								th(colspan='5') Bids
+							tr.filter
+								th(scope='col')
+									label Bulk
+									#fav-sel-all
+										button.btn.favourite(title='Favourite all', data-toggle='button')
+								th(scope='col')
+									label(for='category') Top action
+									#top-actions.btn-group
+										a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+											| sort by?
+											span.caret
+										ul.dropdown-menu
+											li
+												a(href='') moo
+											li
+												a(href='') another action
+											li
+												a(href='') somthing here						
+								th(scope='col')
+									label(for='category') Source
+									#source-selection.btn-group
+										a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+											| All
+											span.caret
+										ul.dropdown-menu
+											li
+												a(href='') Protrada
+											li
+												a(href='') Godaddy
+											li
+												a(href='') Namejet
+								th.sortable.domain-title(scope='col')
+									label.active-asc(for='domain-title') Domain title
+									#domain-title-inputs
+										input#domain-title.txt-filter.filter-active(value='protrada', type='text')
+										a.disable(href='')
+										#string-mode-selection.btn-group
+											a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+												| Containing
+												span.caret
+											ul.dropdown-menu
+												li
+													a(href='') Containing
+												li
+													a(href='') Ending with
+												li
+													a(href='') Beginning with
+								th(scope='col')
+									label(for='category') Status
+									#source-selection.btn-group
+										a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+											| All
+											span.caret
+										ul.dropdown-menu
+											li
+												a(href='') Watching
+											li
+												a(href='') Winning
+											li
+												a(href='') Losing
+											li
+												a(href='') Won
+											li
+												a(href='') Lost
+											li
+												a(href='') Secured
+								th.time-left.sortable(scope='col')
+									label(for='time-left') Time left
+									#time-left.btn-group
+										a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+											| Time left
+											span.caret
+										ul.dropdown-menu
+											li
+												a(href='') 1 day
+											li
+												a(href='') Date picker
+								th.max-bid.sortable(scope='col')
+									label(for='max-bid') Max
+									input#max-bid.txt-filter(value='', type='text')
+								th.int-bid.sortable(scope='col')
+									label Int.
+								th.ext-bid.sortable(scope='col')
+									label Ext.
+								th.current-bid.sortable(scope='col')
+									label(for='current-bid') Current
+									input#current-bid.txt-filter(value='', type='text')
+								th.next-bid.sortable(scope='col')
+									label(for='next-bid') Next
+				
+						tbody
+							tr
+								td
+									button.btn.favourite.active(data-toggle='button')
+								td.actions
+									span.action-buttons
+										//a.ff-icon(href='#', data-title='Build website') X
+										a.ff-icon(href='#', data-title='View domain details') G
+										a.ff-icon.main-action(href='#', data-title='List domain for sale') ^
+											span.action-label Sell
+										//a.ff-icon(href='#', data-title='Place bid / Buy') -
+									
+								td.domain-source
+									.source-container
+										span.protrada
+								td.domain-title
+									span.domain-title-cntnr(data-text='protrada-me.com')
+										| protrada-me
+										span.tld com
+								td secured
+								td 0hrs, 3mins
+								td.currency 550
+								td 1
+								td 0
+								td.currency 450
+								td.currency 500
+			
+			
+						tfoot
+							tr
+								td#foot-pager(colspan='13')
+									strong Table footer functionality goes in here 
+									| (eg. Pagination/Lazyload spinner, bulk actions etc)
+					
+					
+					
+					
+					
+					
+					
+					
+				#pre-auction.tab-pane	
+				#auction.tab-pane	
+				#buy-it-now.tab-pane	
+				#websites.tab-pane	
+				#history.tab-pane
