@@ -2589,8 +2589,8 @@ a.download {
 }
 .panel-subhead {
 	font-weight: 400;
-	font-size: 14px;
-	margin: 0 0 15px;
+	font-size: 15px;
+	margin: 0 0 1.2em;
 }
 .ajax-panel-content p {
 	margin: 0 0 1.6em;	
