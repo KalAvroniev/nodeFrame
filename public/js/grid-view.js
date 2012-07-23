@@ -222,6 +222,11 @@
 		UpdateTableHeaders();
 	}
 
+	$( document ).on( "click", "#toggle-side-bar, #x-side-bar", function( e ) {
+		windowResize();
+		windowScroll();
+	});
+
 	function getInnerOuterOffset() {
 		var scrollOffset = $(verticalScroll).scrollTop(),
 			vertOffset = $(verticalScroll).offset().top,
