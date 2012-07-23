@@ -3283,13 +3283,13 @@ aside header.alerts-header {
 	background: rgba(0,0,0,0.09);
 }
 .alert-msg header h4, .alert-msg header h5, .alert-msg header hgroup:before {
-	opacity: 0.45;
+	opacity: 0.55;
 }
 .alert-msg.new header h4, .alert-msg.new header h5, .alert-msg header hgroup:before {
 	opacity: 1;
 }
 .alert-msg header h6 {
-	opacity: 0.45;
+	opacity: 0.5;
 }
 .alert-msg header h6:before {
 	opacity: 1;	
@@ -3298,7 +3298,7 @@ aside header.alerts-header {
 	opacity: 1;
 }
 .alert-msg section {
-	opacity: 0.55;
+	opacity: 0.6;
 }
 .alert-msg.new section {
 	opacity: 1;
