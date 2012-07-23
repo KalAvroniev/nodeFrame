@@ -7,7 +7,7 @@
 		domLoaded = 0,
 		stickyHeaderEnabled = true;
 
-	$(document).one({
+	/*$(document).one({
 		ready: onDomLoad
 	});
 
@@ -17,15 +17,15 @@
 
 	$('#main-container').one({
 		ajaxUnloading: onDomUnload
-	});
+	});*/
 
 	function onDomLoad() {
 
 		domLoaded++;
 
-		if (domLoaded > 1) {
+		/*if (domLoaded > 1) {
 			return;
-		}
+		}*/
 
 		loadDataIntoTable();
 
@@ -129,6 +129,8 @@
 		UpdateTableHeaders();
 
 	}
+
+	onDomLoad();
 
 	function onDomUnload() {
 
@@ -315,39 +317,35 @@
 	// This function relies on a variable exchangeDomainResults defined in the
 	// global scope
 	function loadDataIntoTable() {
+		var tableData, table;
 
-		if (typeof exchangeDomainResults === "undefined" || exchangeDomainResults == null) {
+		if ( typeof exchangeDomainResults === "undefined" || exchangeDomainResults == null ) {
 			return;
 		}
 
-		var tableData = $.parseJSON(exchangeDomainResults);
-
-		var table = $('.grid-table tbody');
+		tableData = $.parseJSON( exchangeDomainResults );
+		table = $(".grid-table tbody");
 
 		// clean up the table
-		table.find('tr').remove();
+		table.find("tr").remove();
 
-		if (!tableData || tableData.error) {
-
-			if (tableData) {
-				console.log("Error retreiving domain data: " + tableData.error);
+		if ( !tableData || tableData.error ) {
+			if ( tableData ) {
+				console.log( "Error retreiving domain data: " + tableData.error );
 			}
 
 			table.append('<tr> \
 				<td id="zero-alert" colspan="17"><span class="ff-icon-before"><a class="ff-icon x-zero-alert" href="javascript:void(0);"></a><strong>Sorry</strong>, there was an error retreiving domain listings. Please try again.</td> \
-			</tr>')
+			</tr>');
 
 			return;
 		}
 
-		if (tableData.length == 0) {
-
+		if ( tableData.length === 0 ) {
 			table.append('<tr> \
 				<td id="zero-alert" colspan="17"><span class="ff-icon-before"><a class="ff-icon x-zero-alert" href="javascript:void(0);"></a><strong>Sorry</strong>, we couldn\'t find any exact matches for this keyword.</td> \
-			</tr>')
-
+			</tr>');
 		} else {
-
 			for (var i = 0; i < tableData.length; i++) {
 				var domain = tableData[i];
 				table.append('<tr> \
@@ -370,8 +368,6 @@
 					<td>' + domain.backlinks.google + '</td> \
 				</tr>');
 			}
-
 		}
 	}
-
 })();
