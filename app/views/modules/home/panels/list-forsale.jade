@@ -32,6 +32,7 @@ h2.panel-heading
 	
 	p
 		| To complete listing the selected domains for-sale, you simply need to specify a price for each selling channel. 
+		strong Any channel entry that is left blank will not be listed. 
 	p	
 		strong * Please note: 
 		| the minimum amount on each selling channel is shown in the table to the right: 
@@ -49,7 +50,7 @@ form#forsale-listing-amounts
 				th.sortable.domain-name 
 					label domain name
 				th.sortable.domain-value 
-					label estimated value
+					label est. value
 				th 
 					label GoDaddy
 				th 
@@ -60,18 +61,49 @@ form#forsale-listing-amounts
 					label Protrada
 		tbody
 			tr
-				td cats
-					span.tld com
+				td 
+					span.domain-title-cntnr
+						| cats
+						span.tld com
 				td.currency 560 
 				td.interactive
-					input(type="number",placeholder="250")
+					input(type="number",placeholder="not selected")
 				td.interactive
-					input(type="number",placeholder="100")
+					input(type="number",placeholder="not selected")
 				td.interactive
-					input(type="number",placeholder="60")
+					input(type="number",placeholder="not selected")
 				td.interactive
-					input(type="number",placeholder="100")
+					input(type="number",placeholder="not selected")
 
+			tr
+				td 
+					span.domain-title-cntnr
+						| longer-domain-name-up-in-this-shiz
+						span.tld com
+				td.currency 560 
+				td.interactive
+					input(type="number",placeholder="not selected")
+				td.interactive
+					input(type="number",placeholder="not selected")
+				td.interactive
+					input(type="number",placeholder="not selected")
+				td.interactive
+					input(type="number",placeholder="not selected")
+
+			tr
+				td 
+					span.domain-title-cntnr
+						| this-is-an-epic-long-domain-name-right-in-here
+						span.tld com
+				td.currency 560 
+				td.interactive
+					input(type="number",placeholder="not selected")
+				td.interactive
+					input(type="number",placeholder="not selected")
+				td.interactive
+					input(type="number",placeholder="not selected")
+				td.interactive
+					input(type="number",placeholder="not selected")
 
 a.btn.btn-success.btn-large.ff-icon-before list sites for-sale
 
