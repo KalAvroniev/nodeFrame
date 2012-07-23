@@ -3,6 +3,9 @@
 != partial('partials/styles')
 - }
 
+script(src='/js/home.js')
+script(src='/js/grid-view.js')
+
 header#main
 
 	#toggle-side-bar.ff-icon-before
@@ -34,7 +37,7 @@ header#main
 					strong Detailed 
 					| domain info
 			li#watchlist.hidden
-				a.(href='javascript:void(0);')
+				a(href='javascript:void(0);')
 					strong My Watchlist 
 					| domains you star
 		
