@@ -2249,10 +2249,19 @@ header#main:before {
 	font-size: 26px;
 	margin: -3px 10px 0 6px;	
 }
-.panel-heading .import-export:before {
+.panel-heading .export:before {
 	content: "1";
 	font-size: 25px;	
 }
+.panel-heading .import:before {
+	content: "m";
+	font-size: 25px;	
+}
+
+
+/* --------------------- */
+
+
 .domain-details-table {
 	float: left;
 	width: 310px;
@@ -2548,7 +2557,18 @@ header#main:before {
 	line-height: 1;
 	font-weight: 400;		
 }
-
+#download-csv {
+	margin: 10px 0 0 0;
+}
+#download-csv:before {
+	content: "n";
+	display: inline-block;
+	vertical-align: middle;
+	margin: -4px 12px 0 0;
+	font-size: 17px;
+	line-height: 1;
+	font-weight: 400;		
+}
 
 
 
