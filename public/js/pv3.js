@@ -172,18 +172,7 @@ $(document).ready(function () {
 */
 
 
-	// onclick Close alert item out of the sidebar
-
-	$('.x-alert-msg').on('click', function () {
 	
-		$(this).parent().slideUp(450, function() {
-    		
-    		$(this).remove();
-	    	$('aside #notifications:not(.native)').tinyscrollbar_update('relative');
-    		
-   		});
-		
-	});
 	
 	$('#main-container').on('ajaxLoaded', function() {
 		$('.ajax-spinner').hide();

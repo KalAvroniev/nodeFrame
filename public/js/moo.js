@@ -139,7 +139,7 @@ $(document).ready(function () {
 	
 	});
 	
-	
+
 							
 			
 }); // ------------------------------------- Close doc-ready
@@ -182,16 +182,15 @@ $(document).on("click","#toggle-side-bar, #x-side-bar",function(e){
 	
 });	
 
+// onclick Close alert item out of the sidebar
+$(document).on("click",".x-alert-msg",function(e){
 
-(function($){
-    $.fn.redraw = function(){
-    	console.log('forcing redraw');
-        return $(this).each(function(){
-            var n = document.createTextNode(' ');
-            $(this).append(n);
-            setTimeout(function(){n.parentNode.removeChild(n)}, 0);
-        });
-    }
-})(jQuery)
+		$(this).parent().slideUp(450, function() {
+    		
+    		$(this).remove();
+	    	$('aside #notifications:not(.native)').tinyscrollbar_update('relative');
+    		
+   		});
+});	
 
 
