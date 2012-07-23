@@ -22,7 +22,3 @@ class exports.Controller
 				return req.success(state)
 			, user_id
 		);
-		#return req.success(state)
-		
-		# cool
-		#return req.success(session)
