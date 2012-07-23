@@ -41,7 +41,10 @@ $.ajaxPanel = function (url, success, failure) {
 $.jade = {};
 $.jade.getTemplate = function (url, success, options) {
 	// is it already loaded?
-	var fn = 'views_' + url.replace(/\//g, '_');
+	var fnRaw = url.replace(/\//g, '_');
+	if(fnRaw.charAt(0) == '_')
+		fnRaw = fnRaw.substr(1);
+	var fn = 'views_' + fnRaw;
 	if(document[fn] != undefined)
 		return success(fn);
 	
@@ -50,7 +53,10 @@ $.jade.getTemplate = function (url, success, options) {
 		url: url + ".jade",
 		dataType: "script",
 		success: function () {
-			var fn = 'views_' + url.replace(/\//g, '_');
+			var fnRaw = url.replace(/\//g, '_');
+			if(fnRaw.charAt(0) == '_')
+				fnRaw = fnRaw.substr(1);
+			var fn = 'views_' + fnRaw;
 			console.log(fn);
 			//document[fn] = fn;
 			success(fn);
@@ -93,7 +99,7 @@ $.restorePanel = function (url, options) {
 			console.log(obj);
 			console.log(url + ".jade");
 			
-			$.jade.getTemplate(function (fn) {
+			$.jade.getTemplate(url, function (fn) {
 				$('#section-panel').removeClass('hidden');
 				$('.ajax-panel-content').html($.jade.renderSync(fn, obj, function (err, file, line) {
 					$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
