@@ -3950,6 +3950,74 @@ aside header.alerts-header {
 #main-container .nav-tabs a#sys-notifications-btn:before {
 	content: "r";
 }
+#main-container .tab-content.tabs-in-tabs {
+	box-shadow: none;		
+}
+#main-container .tab-content.tabs-in-tabs {
+	padding: 22px;	
+}
+#main-container .tab-content.tabs-in-tabs .tab-pane { 
+	padding: 0;
+}
+#main-container .tabs-in-tabs .tab-pane .tab-pane {
+	background: #efece8;
+	padding: 30px 20px 15px;	
+}
+#main-container .tab-pane .tab-content.tabs-in-tabs {
+	padding: 0;	
+}
+#main-container .nav-tabs.tabs-in-tabs a {
+	color: #898785;
+}
+#main-container .nav-tabs.tabs-in-tabs > .active > a, #main-container .nav-tabs.tabs-in-tabs > .active > a:hover {
+	background: #efece8;
+	box-shadow: none;	
+	font-weight: 400;
+}
+#main-container .nav-tabs.tabs-in-tabs a:hover {
+	background: #f6f3ee;
+	color: #4C4B4A;	
+}
+.tabs-in-tabs #right-col {
+	width: 300px;
+	float: right;
+}
+.tabs-in-tabs #left-col {
+	margin: 0 330px 0 0;
+}
+#tabs-in-tabs-headings {
+	color: #4c4b4a;
+	border-bottom: 10px solid #dcd9d6;	
+	padding: 0;
+	margin: 0 0 30px 0;
+}
+#tabs-in-tabs-headings h2 {
+	margin: 0;
+	padding: 0;
+	font-weight: 300;
+	font-size: 30px;
+	line-height: 1;
+	float: none;
+}
+#tabs-in-tabs-headings h3 {
+	margin: 20px 0 25px;
+	font-size: 15px;
+	padding: 0 0 0 35px;
+	position: relative;
+}
+#tabs-in-tabs-headings h3:before {
+	content: "*";
+	position: absolute;
+	top: -2px; left: 0;
+	font-size: 32px;
+	font-weight: 400;
+}
+
+
+
+
+
+
 
 
 
@@ -3957,7 +4025,7 @@ aside header.alerts-header {
 
 .form-horizontal input {
 	font-size: 18px;
-	height: auto;
+	height: auto; width: 100%;
 	letter-spacing: -1px;
 	font-weight: 400;
 	color: #4c4b4a;
@@ -3994,11 +4062,20 @@ aside header.alerts-header {
 .form-horizontal .controls {
     margin-left: 240px;
 }
+.form-horizontal .control-group:before, .form-horizontal .control-group:after {
+	
+	/* 
+	
+	this selector is set to 'display:table' by the bootstrap... dunno why that's needed.
+	it's also causing styling issues, so for now it's gone. 
+	
+	*/
+	
+	display: none; 
+}
 #panel-content .form-horizontal .controls {
     margin-left: 160px;
 }
-
-
 .form-horizontal .control-label {
 	font-size: 14px;
 	font-weight: 300;
@@ -4015,9 +4092,18 @@ aside header.alerts-header {
 
 
 
+
+
 /* -------------------- Grid view control styles work ------------------------------------ */ 
 
-body table { /* over-write stupid freekin reset styles */
+body table { 
+	
+	/* 
+	
+	over-write stupid freekin reset styles 
+	
+	*/
+	
 	border-collapse: separate;
 }
 
