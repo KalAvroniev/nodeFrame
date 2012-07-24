@@ -191,69 +191,66 @@ $( document ).ready(function() {
 
 		graphContainer = graph.parent();
 			
-		// Scrolling area
-		if (minWidthBetweenMarks * dataMarks < containerWidth) {
+		// scrolling area
+		if ( minWidthBetweenMarks * dataMarks < containerWidth ) {
 			// recalculate the difference between the graph marks
 			minWidthBetweenMarks = containerWidth / dataMarks;
 		}
 
 		scrollContainer = $('<div class="tiny-scrollbar-horiz" style="position: relative; width: ' + containerWidth + 'px; height: ' + containerHeight + 'px"><div class="viewport"><div class="overview"></div></div></div>');
 
-		graphContainer.wrap(scrollContainer);
+		graphContainer.wrap( scrollContainer );
 
-		scrollContainer = graphContainer.closest('.tiny-scrollbar-horiz');
+		scrollContainer = graphContainer.closest(".tiny-scrollbar-horiz");
 
-		$('<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>')
-			.prependTo(scrollContainer);
+		$("<div class=\"scrollbar\"><div class=\"track\"><div class=\"thumb\"><div class=\"end\"></div></div></div></div>").prependTo( scrollContainer );
 
 		// widen the graph area to be able to fit the whole graph
 		containerWidth = minWidthBetweenMarks * dataMarks;
-		graph.css('width', containerWidth);
-		graphContainer.closest('.overview').css('width', containerWidth);
+		graph.css( "width", containerWidth );
+		graphContainer.closest( ".overview" ).css( "width", containerWidth );
 
 		$(scrollContainer).tinyscrollbar({
-			axis: 'x',
+			axis: "x",
 			scroll: false
 		});
 
 		// resize the graph and shift it so that the first and last marks are
 		// hidden
-		graphContainer.css('width', containerWidth);
+		graphContainer.css( "width", containerWidth );
 		graph.css({
 			width: containerWidth + minWidthBetweenMarks,
-			marginLeft: -(minWidthBetweenMarks / 2)
+			marginLeft: -( minWidthBetweenMarks / 2 )
 		});
 
-		for (var set = 0; set < settings.length; set++) {
-
+		for ( var set = 0; set < settings.length; ++set ) {
 			var dataSet = [],
+			// calculations for going back / forward in a time interval
+			first = settings[ set ].data[0],
+			last = settings[ set ].data[ settings[set].data.length -1 ],
+			newFirstDate = new $.jsDate( first[0].getTime() ).add( -tickIntervalParts[0], tickIntervalParts[1] ),
+			newLastDate = new $.jsDate( last[0].getTime() ).add( tickIntervalParts[0], tickIntervalParts[1] );
 
-				// calculations for going back / forward in a time interval
-				first = settings[set].data[0],
-				last = settings[set].data[settings[set].data.length -1],
-				newFirstDate = new $.jsDate(first[0].getTime()).add(-tickIntervalParts[0], tickIntervalParts[1]),
-				newLastDate = new $.jsDate(last[0].getTime()).add(tickIntervalParts[0], tickIntervalParts[1]);
-
-			// 'back' 1 time interval
-			dataSet.push([newFirstDate, first[1]]);
+			// "back" 1 time interval
+			dataSet.push([ newFirstDate, first[1] ]);
 
 			// all the intervals between
-			for (var valueIndex = 0; valueIndex < settings[set].data.length; valueIndex++) {
-				dataSet.push(settings[set].data[valueIndex]);
+			for ( var valueIndex = 0; valueIndex < settings[ set ].data.length; ++valueIndex ) {
+				dataSet.push( settings[set].data[valueIndex] );
 			}
 
 			// 'forward' 1 time interval
-			dataSet.push([newLastDate, last[1]]);
+			dataSet.push([ newLastDate, last[1] ]);
 
-			dataArray.push(dataSet);
+			dataArray.push( dataSet );
 
 			// setup the series info to pass to jqplot
 			series.push({
-				label: settings[set].label,
-				color: settings[set].lineColor,
-				fillColor: settings[set].fillColor || settings[set].lineColor,
+				label: settings[ set ].label,
+				color: settings[ set ].lineColor,
+				fillColor: settings[ set ].fillColor || settings[ set ].lineColor,
 				markerOptions: {
-					color: settings[set].markerColor || settings[set].lineColor
+					color: settings[ set ].markerColor || settings[ set ].lineColor
 				}
 			});
 		}
