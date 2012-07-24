@@ -1,8 +1,7 @@
-(function(){
-
+$( document ).ready(function() {
 	var domLoaded = 0,
-		scrollContainer,
-		tradingGraph = null;
+		tradingGraph = null,
+		scrollContainer;
 
 	/*$(document).one({
 		ready: onDomLoad
@@ -18,7 +17,6 @@
 	$("#main-container").one({ ajaxUnload: onDomUnload });
 
 	function onDomLoad() {
-
 		domLoaded++;
 
 		/*if (domLoaded > 1) {
@@ -118,7 +116,7 @@
 	}
 
 	function showWatchlist() {
-		togglePanel.call( this, $(this).attr("id"), getWatchlistContent );
+		togglePanel.call( this, this.id, getWatchlistContent );
 	}
 
 	function getWatchlistContent() {

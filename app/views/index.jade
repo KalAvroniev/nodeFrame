@@ -9,6 +9,7 @@ html(lang='en')
 
 	body.sidebar-hidden.task-status-on
 		script
+			// user agent sniffing is frowned upon :(
 			if ( /Android|webOS|BlackBerry|iP(hone|ad|od)/i.test( navigator.userAgent ) ) {
 				document.body.className += " mobile";
 			}
