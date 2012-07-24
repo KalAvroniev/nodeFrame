@@ -160,6 +160,10 @@
 		// thank heavens! nothing!
 	}
 
+	$( document ).on( "click", "#toggle-side-bar, #x-side-bar", function( e ) {
+		windowResize();
+	});
+
 	function createDateGraph(elementId, settings, tooltipFormat, tickInterval, minWidthBetweenMarks) {
 
 		var tooltipFormat = (typeof tooltipFormat === "undefined") ? '%s: <strong>$%s</strong>' : tooltipFormat,

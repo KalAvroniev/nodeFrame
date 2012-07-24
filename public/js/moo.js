@@ -122,51 +122,41 @@ $( document ).ready(function() {
 
 }); // ------------------------------------- Close doc-ready
 
-// Setup open/close sidebar element functions	
-$(document).on("click","#toggle-side-bar, #x-side-bar",function(e){
-		
-	var aside = $('aside');
-	
-	if (aside.hasClass('active')) {
-	
+// setup open/close sidebar element functions	
+$( document ).on( "click", "#toggle-side-bar, #x-side-bar", function( e ) {
+	var aside = $("aside");
+
+	if ( aside.hasClass("active") ) {
 		// hide the sidebar
-				
+
 		// work around webkit not redrawing when innerHtml altered
-		//$('#main-container').redraw();		
-		
-		/*var mainContainer = $('#main-container')[0];
-		mainContainer.style.display = 'none';
+		//$("#main-container").redraw();		
+
+		/*var mainContainer = $("#main-container")[0];
+		mainContainer.style.display = "none";
 		mainContainer.offsetHeight;
-		mainContainer.style.display = 'block';*/
-				
-		aside.removeClass('active');
-		$('body').addClass('sidebar-hidden');
-		$('#main-container').animate({ 'width' : '100%' }, 200);
-		
-			
+		mainContainer.style.display = "block";*/
+
+		aside.removeClass("active");
+		$("body").addClass("sidebar-hidden");
+		$("#main-container").animate( { width: "100%" }, 200 );
 	} else {
-	
- 		// show the sidebar
- 		
- 		// work around webkit not redrawing when innerHtml altered
-		//$('#main-container').redraw();
- 			 		
-		aside.addClass('active');
-		$('body').removeClass('sidebar-hidden');
-		$('#main-container').animate({ 'width' : '99.999%' }, 300);
-    	$('aside #notifications:not(.native)').tinyscrollbar_update('relative');
- 	
- 	}
-	
-});	
+		// show the sidebar
+
+		// work around webkit not redrawing when innerHtml altered
+		//$("#main-container").redraw();
+
+		aside.addClass("active");
+		$("body").removeClass("sidebar-hidden");
+		$("#main-container").animate( { width: "99.999%" }, 300 );
+		$("aside #notifications:not(.native)").tinyscrollbar_update("relative");
+	}
+});
 
 // onclick Close alert item out of the sidebar
-$(document).on("click",".x-alert-msg",function(e){
-
-		$(this).parent().slideUp(450, function() {
-    		
-    		$(this).remove();
-	    	$('aside #notifications:not(.native)').tinyscrollbar_update('relative');
-    		
-   		});
+$( document ).on( "click", ".x-alert-msg", function( e ) {
+	$( this ).parent().slideUp( 450, function() {
+		$( this ).remove();
+	   	$("aside #notifications:not(.native)").tinyscrollbar_update("relative");
+	});
 });
