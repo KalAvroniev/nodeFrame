@@ -2,7 +2,7 @@
 $.jsonrpc = function (method, params, success, failure) {
 	if(failure == undefined) {
 		failure = function (errMsg, errCode) {
-			alert("Error " + errCode + ": " + errMsg);
+			console.error("Error " + errCode + ": " + errMsg);
 		}
 	}
 	
@@ -17,9 +17,14 @@ $.jsonrpc = function (method, params, success, failure) {
 			'id': 1
 		}),
 		success: function (result) {
+			if(result.error != undefined && result.error.message)
+				return failure(result.error.message, result.error.code);
 			return success(result.result);
 		},
-		dataType: 'json'
+		dataType: 'json',
+		error: function (jqXHR, textStatus, errorThrown) {
+			return failure(textStatus, 0);
+		}
 	});
 }
 
@@ -41,7 +46,10 @@ $.ajaxPanel = function (url, success, failure) {
 $.jade = {};
 $.jade.getTemplate = function (url, success, options) {
 	// is it already loaded?
-	var fn = 'views_' + url.replace(/\//g, '_');
+	var fnRaw = url.replace(/[\/-]/g, '_');
+	if(fnRaw.charAt(0) == '_')
+		fnRaw = fnRaw.substr(1);
+	var fn = 'views_' + fnRaw;
 	if(document[fn] != undefined)
 		return success(fn);
 	
@@ -50,7 +58,10 @@ $.jade.getTemplate = function (url, success, options) {
 		url: url + ".jade",
 		dataType: "script",
 		success: function () {
-			var fn = 'views_' + url.replace(/\//g, '_');
+			var fnRaw = url.replace(/[\/-]/g, '_');
+			if(fnRaw.charAt(0) == '_')
+				fnRaw = fnRaw.substr(1);
+			var fn = 'views_' + fnRaw;
 			console.log(fn);
 			//document[fn] = fn;
 			success(fn);
@@ -77,40 +88,16 @@ $.jade.renderSync = function (fn, obj, failure) {
 	);
 }
 
-$.restorePanel = function (url, options) {
-	if(options == undefined) {
-		options = {
-			'jsonrpcMethod': url.replace(/^\/modules\//, '')
-		};
-	}
-	console.log(options);
-	
-	// make the JSON-RPC call
-	$.jsonrpc(
-		options.jsonrpcMethod,
-		{},
-		function (obj) {
-			console.log(obj);
-			console.log(url + ".jade");
-			
-			$.jade.getTemplate(function (fn) {
-				$('#section-panel').removeClass('hidden');
-				$('.ajax-panel-content').html($.jade.renderSync(fn, obj, function (err, file, line) {
-					$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
-				}));
-			});
-		}
-	);
-}
-
 $.pv3 = {};
+
 $.pv3.restoreState = function () {
 	$(document).ready(function () {
 		$.jsonrpc(
 			'user/get-state',
 			{},
 			function (data) {
-				navigate(data.module);
+				if(data != undefined)
+					navigate(data.module);
 			},
 			function (error) {
 				console.error(error);
@@ -129,4 +116,54 @@ $.pv3.updateState = function (stateName, stateValue) {
 			console.error(error);
 		}
 	);
+}
+
+$.pv3.panel = {};
+$.pv3.panel.show = function (url, options) {
+	if(options == undefined)
+		options = {};
+	if(options.jsonrpcMethod == undefined)
+		options.jsonrpcMethod = 'view' + url;
+	
+	// make the JSON-RPC call
+	$.jsonrpc(
+		options.jsonrpcMethod,
+		{},
+		function (obj) {
+			console.log(obj);
+			console.log(url + ".jade");
+			
+			$.jade.getTemplate(url, function (fn) {
+				// nofify the server that the active tab has changed
+				$.pv3.updateState('module.panel', options.tabid);
+				
+				// set active tab
+				$('.sectional-tabs li').removeClass('active');
+				$('.sectional-tabs #' + options.tabid).addClass('active');
+				
+				$('#section-panel').removeClass('hidden');
+				$('.ajax-panel-content').html($.jade.renderSync(fn, obj, function (err, file, line) {
+					$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
+				}));
+					
+				// fix close handler
+				$("#import-export, .x-panel").unbind('click');
+				$("#import-export, .x-panel").click(function () {
+					return $.pv3.panel.hide();
+				});
+			});
+		}
+	);
+}
+$.pv3.panel.hide = function () {
+	if ( $("#section-panel").hasClass("hidden") ) {
+		$("#section-panel").removeClass("hidden");
+		$( this ).addClass("active");
+	} else {
+		$("#section-panel").addClass("hidden")
+		$(".sectional-tabs .active").removeClass("active");
+	}
+	
+	// nofify the server that the active tab has changed
+	//$.pv3.updateState('module.panel', options.tabid);
 }

@@ -76,7 +76,7 @@ class exports.Application
 			else
 				# compile the jade
 				jc = jade.compile(data, { client: true, filename: url, debug: true, compileDebug: true }).toString()
-				fn = url.replace(/\.jade$/, '').replace(/\//g, '_');
+				fn = url.replace(/\.jade$/, '').replace(/[\/-]/g, '_');
 				res.write('document.' + fn + ' = ' + jc);
 			res.end()
 		)

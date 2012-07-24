@@ -64,7 +64,8 @@ $( document ).ready(function() {
 		$( this ).removeClass("active");
 	});
 
-	$("#import-export, .x-panel").click(function() {
+	// this must be assigned after the jade template is loaded in, see $.pv3.panel.show()
+	/*$("#import-export, .x-panel").click(function() {
 		if ( $("#section-panel").hasClass("hidden") ) {
 			$("#section-panel").removeClass("hidden");
 			$( this ).addClass("active");
@@ -74,7 +75,7 @@ $( document ).ready(function() {
 		}
 
 		return false;
-	});
+	});*/
 
 	$("#spine-inner nav a").mouseup(function() {
 		$( this ).removeClass("active");
