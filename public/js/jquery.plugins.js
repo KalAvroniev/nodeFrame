@@ -2,7 +2,7 @@
 $.jsonrpc = function (method, params, success, failure) {
 	if(failure == undefined) {
 		failure = function (errMsg, errCode) {
-			alert("Error " + errCode + ": " + errMsg);
+			console.error("Error " + errCode + ": " + errMsg);
 		}
 	}
 	
@@ -17,9 +17,14 @@ $.jsonrpc = function (method, params, success, failure) {
 			'id': 1
 		}),
 		success: function (result) {
+			if(result.error != undefined && result.error.message)
+				return failure(result.error.message, result.error.code);
 			return success(result.result);
 		},
-		dataType: 'json'
+		dataType: 'json',
+		error: function (jqXHR, textStatus, errorThrown) {
+			return failure(textStatus, 0);
+		}
 	});
 }
 
@@ -85,39 +90,6 @@ $.jade.renderSync = function (fn, obj, failure) {
 
 $.pv3 = {};
 
-$.pv3.panel = {};
-$.pv3.panel.show = function (url, options) {
-	if(options == undefined)
-		options = {};
-	if(options.jsonrpcMethod == undefined)
-		options.jsonrpcMethod = url.replace(/^\/modules\//, '');
-	
-	// make the JSON-RPC call
-	$.jsonrpc(
-		options.jsonrpcMethod,
-		{},
-		function (obj) {
-			console.log(obj);
-			console.log(url + ".jade");
-			
-			$.jade.getTemplate(url, function (fn) {
-				// set active tab
-				$('.sectional-tabs li').removeClass('active');
-				$('.sectional-tabs #' + options.tabid).addClass('active');
-				
-				$('#section-panel').removeClass('hidden');
-				$('.ajax-panel-content').html($.jade.renderSync(fn, obj, function (err, file, line) {
-					$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
-				}));
-			});
-		}
-	);
-}
-$.pv3.panel.hide = function (url, options) {
-	$('.sectional-tabs li').removeClass('active');
-	$('#section-panel').addClass('hidden');
-}
-
 $.pv3.restoreState = function () {
 	$(document).ready(function () {
 		$.jsonrpc(
@@ -144,4 +116,43 @@ $.pv3.updateState = function (stateName, stateValue) {
 			console.error(error);
 		}
 	);
+}
+
+$.pv3.panel = {};
+$.pv3.panel.show = function (url, options) {
+	if(options == undefined)
+		options = {};
+	if(options.jsonrpcMethod == undefined)
+		options.jsonrpcMethod = url.replace(/^\/modules\//, '');
+	
+	// make the JSON-RPC call
+	$.jsonrpc(
+		options.jsonrpcMethod,
+		{},
+		function (obj) {
+			console.log(obj);
+			console.log(url + ".jade");
+			
+			$.jade.getTemplate(url, function (fn) {
+				// nofify the server that the active tab has changed
+				$.pv3.updateState('module.panel', options.tabid);
+				
+				// set active tab
+				$('.sectional-tabs li').removeClass('active');
+				$('.sectional-tabs #' + options.tabid).addClass('active');
+				
+				$('#section-panel').removeClass('hidden');
+				$('.ajax-panel-content').html($.jade.renderSync(fn, obj, function (err, file, line) {
+					$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
+				}));
+			});
+		}
+	);
+}
+$.pv3.panel.hide = function () {
+	$('.sectional-tabs li').removeClass('active');
+	$('#section-panel').addClass('hidden');
+	
+	// nofify the server that the active tab has changed
+	//$.pv3.updateState('module.panel', options.tabid);
 }
