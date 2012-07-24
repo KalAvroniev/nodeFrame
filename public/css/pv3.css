@@ -2082,8 +2082,13 @@ header#main:before {
 	margin: 0 0 40px 0;
 }
 #section-headings h1 {		
-	font-size: 46px;
+	font-size: 44px;
+	line-height: 1.2em;
 	letter-spacing: -0.06em;
+}
+#section-headings h1 strong {
+	display: block;
+	font-weight: 400;
 }
 #section-headings.search-results h1 {
 	float: left;
@@ -2611,46 +2616,8 @@ a.download {
 
 
 
+/* -------------------------------------- Panel form styles work ------------------------ */
 
-
-
-/* ------------------------ Panel form styles work ---------------------------------- */
-
-.form-horizontal input {
-	font-size: 18px;
-	letter-spacing: -1px;
-	font-weight: 400;
-	color: #4c4b4a;
-	border-radius: 8px;
-	padding: 12px 14px;
-	box-shadow: inset 0 1px 0px white;
-	background: transparent;
-	border-color: rgba(119,110,105,0.3);
-}
-.form-horizontal input:focus {
-	background: rgba(255,255,255,0.37);
-	border-color: white;
-	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
-	color: #161413;
-}
-.form-horizontal textarea {
-	font-size: 14px;
-	line-height: 1.4em;
-	font-weight: 400;
-	color: #4c4b4a;
-	border-radius: 8px;
-	padding: 12px;
-	margin: 0 0 25px;
-	box-shadow: inset 0 1px 0px white;
-	background: transparent;
-	border-color: rgba(119,110,105,0.3);
-}
-.form-horizontal textarea:focus {
-	background: rgba(255,255,255,0.37);
-	border-color: white;
-	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
-	color: #161413;
-}
 .mini-panel-form.form-horizontal input {
 	width: 180px;
 }
@@ -2658,14 +2625,7 @@ a.download {
 	width: 100%;
 	min-height: 100px;
 }
-.form-horizontal .control-label {
-	font-size: 14px;
-	font-weight: 300;
-	color: #4c4b4a;
-}
-.form-horizontal .txt-input-row .control-label {
-	margin: 13px 0 0 0;
-}
+
 .radio, .checkbox { 
 	padding-left: 25px;
 	font-weight: 300;
@@ -3970,6 +3930,88 @@ aside header.alerts-header {
 	text-align: center;
 	color: black;
 }
+
+/* --------------------------------- User settings styles work ------------------------------------ */ 
+
+#main-container .nav-tabs a.ff-icon-before {
+}
+#main-container .nav-tabs a.ff-icon-before:before {
+	content: "p";
+	font-size: 16px;
+	line-height: 1;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 10px 0 0;
+	font-weight: 300;
+}
+#main-container .nav-tabs a#external-accounts-btn:before {
+	content: "q";
+}
+#main-container .nav-tabs a#sys-notifications-btn:before {
+	content: "r";
+}
+
+
+
+/* ---------------------------- Generic form styles work ---------------------------- */
+
+.form-horizontal input {
+	font-size: 18px;
+	height: auto;
+	letter-spacing: -1px;
+	font-weight: 400;
+	color: #4c4b4a;
+	border-radius: 8px;
+	padding: 12px 14px;
+	box-shadow: inset 0 1px 0px white;
+	background: transparent;
+	border-color: rgba(119,110,105,0.3);
+}
+.form-horizontal input:focus {
+	background: rgba(255,255,255,0.37);
+	border-color: white;
+	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
+	color: #161413;
+}
+.form-horizontal textarea {
+	font-size: 14px;
+	line-height: 1.4em;
+	font-weight: 400;
+	color: #4c4b4a;
+	border-radius: 8px;
+	padding: 12px;
+	margin: 0 0 25px;
+	box-shadow: inset 0 1px 0px white;
+	background: transparent;
+	border-color: rgba(119,110,105,0.3);
+}
+.form-horizontal textarea:focus {
+	background: rgba(255,255,255,0.37);
+	border-color: white;
+	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
+	color: #161413;
+}
+.form-horizontal .controls {
+    margin-left: 240px;
+}
+#panel-content .form-horizontal .controls {
+    margin-left: 160px;
+}
+
+
+.form-horizontal .control-label {
+	font-size: 14px;
+	font-weight: 300;
+	color: #4c4b4a;
+	width: 220px;
+}
+#panel-content .form-horizontal .control-label {
+	width: 140px;
+}
+.form-horizontal .txt-input-row .control-label {
+	margin: 13px 0 0 0;
+}
+
 
 
 
