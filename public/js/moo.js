@@ -140,6 +140,8 @@ $( document ).on( "click", "#toggle-side-bar, #x-side-bar", function( e ) {
 		aside.removeClass("active");
 		$("body").addClass("sidebar-hidden");
 		$("#main-container").animate( { width: "100%" }, 200 );
+		$(".task-status").animate( { width: "100%" }, 200 );
+		
 	} else {
 		// show the sidebar
 
@@ -149,6 +151,7 @@ $( document ).on( "click", "#toggle-side-bar, #x-side-bar", function( e ) {
 		aside.addClass("active");
 		$("body").removeClass("sidebar-hidden");
 		$("#main-container").animate( { width: "99.999%" }, 300 );
+		$(".task-status").animate( { width: "99.999%" }, 300 );
 		$("aside #notifications:not(.native)").tinyscrollbar_update("relative");
 	}
 });
