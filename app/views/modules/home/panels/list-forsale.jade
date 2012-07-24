@@ -5,34 +5,40 @@ h2.panel-heading
 
 #forsale-header.clearfix
 	table#min-amounts
-		tr
-			th selling channel
-			th min amount (usd)
-			th commission
-		tr
-			td GoDaddy
-			td no-limit 
-			td 30
-				sup %
-		tr
-			td Sedo
-			td.currency 100
-			td 0
-				sup %
-		tr
-			td Afternic
-			td.currency 250 
-			td 15
-				sup %
-		tr
-			td Protrada
-			td.currency 100 
-			td 20
-				sup %
+		thead
+			tr
+				th selling channel
+				th min amount (usd)
+				th commission
+		tbody
+			tr
+				td 
+					label.sources-sprite(source="Go Daddy")
+				td no-limit 
+				td 30
+					sup %
+			tr
+				td 
+					label.sources-sprite(source="Sedo")
+				td.currency 100
+				td 0
+					sup %
+			tr
+				td 
+					label.sources-sprite(source="Afternic")
+				td.currency 250 
+				td 15
+					sup %
+			tr
+				td 
+					label.sources-sprite(source="Protrada")
+				td.currency 100 
+				td 20
+					sup %
 	
 	p
 		| To complete listing the selected domains for-sale, you simply need to specify a price for each selling channel. 
-		strong Any channel entry that is left blank will not be listed. 
+		strong Any channel entry that is left blank will not be used for listing. 
 	p	
 		strong * Please note: 
 		| the minimum amount on each selling channel is shown in the table to the right: 
@@ -52,13 +58,13 @@ form#forsale-listing-amounts
 				th.sortable.domain-value 
 					label est. value
 				th 
-					label GoDaddy
+					label.sources-sprite(source="Go Daddy")
 				th 
-					label Sedo
+					label.sources-sprite(source="Sedo")
 				th 
-					label Afternic
+					label.sources-sprite(source="Afternic")
 				th 
-					label Protrada
+					label.sources-sprite(source="Protrada")
 		tbody
 			tr
 				td 
@@ -67,13 +73,13 @@ form#forsale-listing-amounts
 						span.tld com
 				td.currency 560 
 				td.interactive
-					input(type="number",placeholder="not selected")
+					input(type="number",placeholder="not used")
 				td.interactive
-					input(type="number",placeholder="not selected")
+					input(type="number",placeholder="not used")
 				td.interactive
-					input(type="number",placeholder="not selected")
+					input(type="number",placeholder="not used")
 				td.interactive
-					input(type="number",placeholder="not selected")
+					input(type="number",placeholder="not used")
 
 			tr
 				td 
@@ -82,13 +88,13 @@ form#forsale-listing-amounts
 						span.tld com
 				td.currency 560 
 				td.interactive
-					input(type="number",placeholder="not selected")
+					input(type="number",placeholder="not used")
 				td.interactive
-					input(type="number",placeholder="not selected")
+					input(type="number",placeholder="not used")
 				td.interactive
-					input(type="number",placeholder="not selected")
+					input(type="number",placeholder="not used")
 				td.interactive
-					input(type="number",placeholder="not selected")
+					input(type="number",placeholder="not used")
 
 			tr
 				td 
@@ -97,13 +103,13 @@ form#forsale-listing-amounts
 						span.tld com
 				td.currency 560 
 				td.interactive
-					input(type="number",placeholder="not selected")
+					input(type="number",placeholder="not used")
 				td.interactive
-					input(type="number",placeholder="not selected")
+					input(type="number",placeholder="not used")
 				td.interactive
-					input(type="number",placeholder="not selected")
+					input(type="number",placeholder="not used")
 				td.interactive
-					input(type="number",placeholder="not selected")
+					input(type="number",placeholder="not used")
 
 a.btn.btn-success.btn-large.ff-icon-before list sites for-sale
 
