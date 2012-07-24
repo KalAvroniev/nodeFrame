@@ -90,27 +90,57 @@ $.jade.renderSync = function (fn, obj, failure) {
 
 $.pv3 = {};
 
-$.pv3.restoreState = function () {
-	$(document).ready(function () {
-		$.jsonrpc(
-			'user/get-state',
-			{},
-			function (data) {
-				if(data != undefined)
-					navigate(data.module);
-			},
-			function (error) {
-				console.error(error);
+$.pv3.state = {};
+$.pv3.state.get = function (success) {
+	$.jsonrpc(
+		'user/get-state',
+		{},
+		function (data) {
+			if(data != undefined) {
+				$.pv3.state.current = data;
+				if(success)
+					success();
 			}
-		);
+		},
+		function (error) {
+			console.error(error);
+		}
+	);
+}
+$.pv3.state.restoreModule = function (modules) {
+	var module = (!modules.selected || modules.selected == '') ? 'home' : modules.selected;
+	window.history.pushState('', module, "/" + module);
+	$("#main-container").trigger("ajaxUnload");
+	$.pv3.state.update('modules.selected', module);
+	$.ajax('/modules/' + module + '?ajax=1', {
+		'success': function (data) {
+			$('#ajax-container').html(data);
+			$('.selected').removeClass("selected");
+			$('#spine-inner nav li a#nav-' + module).parent().addClass("selected");
+			$(".ajax-spinner").hide();
+			
+			// restore panels
+			if(modules[modules.selected].panel != '')
+				$.pv3.panel.show(modules[modules.selected].panel);
+		}
 	});
 }
-$.pv3.updateState = function (stateName, stateValue) {
+$.pv3.state.restore = function () {
+	$(document).ready(function () {
+		if($.pv3.state.current == undefined) {
+			$.pv3.state.get(function () {
+				if($.pv3.state.current.modules != undefined && $.pv3.state.current.modules.selected != undefined)
+					$.pv3.state.restoreModule($.pv3.state.current.modules);
+			});
+		}
+	});
+}
+$.pv3.state.update = function (stateName, stateValue) {
 	$.jsonrpc(
 		'user/update-state',
 		{ 'name': stateName, 'value': stateValue },
 		function (result) {
-			// do nothing
+			$.pv3.state.current = result;
 		},
 		function (error) {
 			console.error(error);
@@ -130,12 +160,10 @@ $.pv3.panel.show = function (url, options) {
 		options.jsonrpcMethod,
 		{},
 		function (obj) {
-			console.log(obj);
-			console.log(url + ".jade");
-			
 			$.jade.getTemplate(url, function (fn) {
 				// nofify the server that the active tab has changed
-				$.pv3.updateState('module.panel', options.tabid);
+				console.log($.pv3.state.current);
+				$.pv3.state.update('modules.' + $.pv3.state.current.modules.selected + '.panel', url);
 				
 				// set active tab
 				$('.sectional-tabs li').removeClass('active');
@@ -164,6 +192,6 @@ $.pv3.panel.hide = function () {
 		$(".sectional-tabs .active").removeClass("active");
 	}
 	
-	// nofify the server that the active tab has changed
-	//$.pv3.updateState('module.panel', options.tabid);
+	// notify the server that the active tab has changed
+	$.pv3.state.update('modules.' + $.pv3.state.current.modules.selected + '.panel', null);
 }

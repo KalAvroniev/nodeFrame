@@ -9,8 +9,8 @@ $( document ).ready(function() {
 	});*/
 
 	var module = document.URL.substr( document.URL.lastIndexOf("/") + 1 );
-
-	navigate( module );
+	if(module != '')
+		$.pv3.state.restoreModule( { 'selected': module } );
 
 	$("#ui-controls a").on( "click", function() {
 		if ( $( this ).hasClass("active") ) {

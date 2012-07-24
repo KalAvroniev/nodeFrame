@@ -49,8 +49,8 @@ class exports.JsonRpcRequest
 				userId,
 				name,
 				value,
-				() ->
-					return success()
+				(state) ->
+					return success(state)
 			)
 
 class exports.JsonRpcServer

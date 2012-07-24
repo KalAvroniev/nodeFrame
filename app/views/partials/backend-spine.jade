@@ -46,10 +46,10 @@
 		nav
 			ul
 				li
-					a#nav-home.ff-icon-before(href="javascript:navigate('home')")
+					a#nav-home.ff-icon-before(href="javascript:$.pv3.state.restoreModule({ 'selected': 'home' })")
 					span home / portfolio dashboard
 				li
-					a#nav-exchange.ff-icon-before(href="javascript:navigate('exchange')")
+					a#nav-exchange.ff-icon-before(href="javascript:$.pv3.state.restoreModule({ 'selected': 'exchange' })")
 					span the domain exchange
 					
 				// not active/in-use yet ----------	
