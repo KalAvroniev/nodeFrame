@@ -37,11 +37,19 @@ class exports.StateStore
 		if not @users[user_id]
 			@users[user_id] = {}
 		console.log("StateStore: " + name + " = " + value)
-		@users[user_id][name] = value
-		@save(() ->
-			cb(null)
+		
+		parts = name.split(/\./)
+		for part, i in parts
+			if i == 0
+				continue;
+			path = parts.slice(0, i).join("']['");
+			eval("if(this.users[user_id]['" + path + "'] == undefined) this.users[user_id]['" + path + "'] = {};")
+		eval("this.users[user_id]['" + parts.join("']['") + "'] = value;")
+		
+		@save(() =>
+			cb(@users[user_id])
 		)
-	
+
 	save: (cb = @defaultCallback) ->
 		fs.writeFile("state_data", JSON.stringify(@users), (err) ->
 			if err

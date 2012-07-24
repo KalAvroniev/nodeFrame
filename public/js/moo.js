@@ -1,6 +1,12 @@
 $( document ).ready(function() {
-	// first things first! navigate to the selected module
-	navigate( document.URL.substr(document.URL.lastIndexOf("/") + 1) );
+	var module = document.URL.substr( document.URL.lastIndexOf("/") + 1 );
+
+	if ( module !== "" ) {
+		$.pv3.state.update( "modules.selected", module );
+		$.pv3.state.get(function() {
+			$.pv3.state.restoreModule();
+		});
+	}
 
 	$("#ui-controls").on( "click", "a", function( e ) {
 		var classes = {
@@ -53,7 +59,7 @@ $( document ).on( "click", "#toggle-side-bar, #x-side-bar", function() {
 	$( document.body ).toggleClass("sidebar-hidden");
 
 	// animate main body
-	$("#main-container").animate( { width: ($aside.hasClass("active") ? "99.999" : "100") + "%" }, 200 );
+	$("#main-container, .task-status").animate( { width: ($aside.hasClass("active") ? "99.999" : "100") + "%" }, 200 );
 
 	// update fake scrollbars
 	$("#notifications").not(".native").tinyscrollbar_update("relative");

@@ -46,16 +46,20 @@
 		nav
 			ul
 				li
-					a#nav-home.ff-icon-before(href="javascript:navigate('home')")
+					a#nav-home.ff-icon-before(href="javascript:$.pv3.state.current.modules.selected = 'home'; $.pv3.state.restoreModule()")
 					span home / portfolio dashboard
 				li
-					a#nav-exchange.ff-icon-before(href="javascript:navigate('exchange')")
+					a#nav-exchange.ff-icon-before(href="javascript:$.pv3.state.current.modules.selected = 'exchange'; $.pv3.state.restoreModule()")
 					span the domain exchange
 					
+				li
+					a#nav-user-settings.ff-icon-before(href="javascript:$.pv3.state.current.modules.selected = 'user-settings'; $.pv3.state.restoreModule()")
+					span user settings					
+					
+					
+					
 				// not active/in-use yet ----------	
-				//li
-				//	a#nav-settings.ff-icon-before(href='javascript:void(0);')
-				//	span user settings		
+				//		
 				//li
 				//	a#nav-education.ff-icon-before(href='javascript:void(0);')
 				//	span 'domaining' education

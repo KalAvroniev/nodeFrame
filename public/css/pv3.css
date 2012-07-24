@@ -135,6 +135,7 @@ form input.hidden {
 #main-container {
 	padding: 100px 305px 0 30px;
 	background: url(../img/bg-noise.png);
+	position: relative;
 	
 /*  have to use jquery.animate for this to force the redrawe in webkit :(
 
@@ -341,7 +342,7 @@ a.ff-icon-before:before {
 	top: 10px;
 	left: 10px;
 }
-#spine-inner #nav-settings:before {
+#spine-inner #nav-user-settings:before {
 	content: "f";
 	top: 11px;
 	left: 8px;
@@ -1271,6 +1272,9 @@ header#main {
 	height: 74px;
 	border-bottom: 1px solid white;	
 }
+.task-status-on header#main {
+	border: none;
+}
 header#main:before {
 
 	/* hidden for the moment, because of secitonal tabs overlapping */
@@ -2078,8 +2082,13 @@ header#main:before {
 	margin: 0 0 40px 0;
 }
 #section-headings h1 {		
-	font-size: 46px;
+	font-size: 44px;
+	line-height: 1.2em;
 	letter-spacing: -0.06em;
+}
+#section-headings h1 strong {
+	display: block;
+	font-weight: 400;
 }
 #section-headings.search-results h1 {
 	float: left;
@@ -2607,46 +2616,8 @@ a.download {
 
 
 
+/* -------------------------------------- Panel form styles work ------------------------ */
 
-
-
-/* ------------------------ Panel form styles work ---------------------------------- */
-
-.form-horizontal input {
-	font-size: 18px;
-	letter-spacing: -1px;
-	font-weight: 400;
-	color: #4c4b4a;
-	border-radius: 8px;
-	padding: 12px 14px;
-	box-shadow: inset 0 1px 0px white;
-	background: transparent;
-	border-color: rgba(119,110,105,0.3);
-}
-.form-horizontal input:focus {
-	background: rgba(255,255,255,0.37);
-	border-color: white;
-	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
-	color: #161413;
-}
-.form-horizontal textarea {
-	font-size: 14px;
-	line-height: 1.4em;
-	font-weight: 400;
-	color: #4c4b4a;
-	border-radius: 8px;
-	padding: 12px;
-	margin: 0 0 25px;
-	box-shadow: inset 0 1px 0px white;
-	background: transparent;
-	border-color: rgba(119,110,105,0.3);
-}
-.form-horizontal textarea:focus {
-	background: rgba(255,255,255,0.37);
-	border-color: white;
-	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
-	color: #161413;
-}
 .mini-panel-form.form-horizontal input {
 	width: 180px;
 }
@@ -2654,14 +2625,7 @@ a.download {
 	width: 100%;
 	min-height: 100px;
 }
-.form-horizontal .control-label {
-	font-size: 14px;
-	font-weight: 300;
-	color: #4c4b4a;
-}
-.form-horizontal .txt-input-row .control-label {
-	margin: 13px 0 0 0;
-}
+
 .radio, .checkbox { 
 	padding-left: 25px;
 	font-weight: 300;
@@ -2998,17 +2962,26 @@ input[type=number] {
 
 /* ----------------------------- Global notice / growl msgs styles work --------------------------------- */
 
-.notice {
+.task-status {
 	position: absolute;
 	z-index: 3; /* should be 3 in production */
 	width: 100%;
-	padding: 17px 20px 20px 30px;
-	top: 73px; left: 0;
-	box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(0,0,0,0.15);		
+	padding: 0 305px 0 0;		
+	top: 74px; left: 0;					
 }
-.notice:after {
+.sidebar-hidden .task-status {
+	padding: 0;		
+}
+.status-content {
+	position: relative;
+	z-index: -1;
+	padding: 17px 20px 20px;	
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -2px 0 rgba(0,0,0,0.15);	
+}
+.status-content:after {
 	content: "";
 	position: absolute;
+	z-index: -1;
 	width: 100%; height: 100%;
 	top: 0; left: 0;	
 	
@@ -3017,27 +2990,27 @@ input[type=number] {
 	background-size: 70px 70px;
 	
 	background-image: -webkit-gradient(linear, 0 0, 100% 100%,
-							color-stop(.25, rgba(255, 255, 255, .1)), color-stop(.25, transparent),
-							color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .1)),
-							color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent),
+							color-stop(.25, rgba(255, 255, 255, .07)), color-stop(.25, transparent),
+							color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .07)),
+							color-stop(.75, rgba(255, 255, 255, .07)), color-stop(.75, transparent),
 	 						to(transparent));
-	background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, .1) 25%, transparent 25%,
-						transparent 50%, rgba(255, 255, 255, .1) 50%, rgba(255, 255, 255, .1) 75%,
+	background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, .07) 25%, transparent 25%,
+						transparent 50%, rgba(255, 255, 255, .07) 50%, rgba(255, 255, 255, .07) 75%,
 						transparent 75%, transparent);
-	background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .1) 25%, transparent 25%,
-						transparent 50%, rgba(255, 255, 255, .1) 50%, rgba(255, 255, 255, .1) 75%,
+	background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .07) 25%, transparent 25%,
+						transparent 50%, rgba(255, 255, 255, .07) 50%, rgba(255, 255, 255, .07) 75%,
 						transparent 75%, transparent);
-	background-image: -ms-linear-gradient(-45deg, rgba(255, 255, 255, .1) 25%, transparent 25%,
-						transparent 50%, rgba(255, 255, 255, .1) 50%, rgba(255, 255, 255, .1) 75%,
+	background-image: -ms-linear-gradient(-45deg, rgba(255, 255, 255, .07) 25%, transparent 25%,
+						transparent 50%, rgba(255, 255, 255, .07) 50%, rgba(255, 255, 255, .07) 75%,
 						transparent 75%, transparent);
-	background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, .1) 25%, transparent 25%,
-						transparent 50%, rgba(255, 255, 255, .1) 50%, rgba(255, 255, 255, .1) 75%,
+	background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, .07) 25%, transparent 25%,
+						transparent 50%, rgba(255, 255, 255, .07) 50%, rgba(255, 255, 255, .07) 75%,
 						transparent 75%, transparent);
-	background-image: linear-gradient(-45deg, rgba(255, 255, 255, .1) 25%, transparent 25%,
-						transparent 50%, rgba(255, 255, 255, .1) 50%, rgba(255, 255, 255, .1) 75%,
+	background-image: linear-gradient(-45deg, rgba(255, 255, 255, .07) 25%, transparent 25%,
+						transparent 50%, rgba(255, 255, 255, .07) 50%, rgba(255, 255, 255, .07) 75%,
 						transparent 75%, transparent);	
 }
-.notice.success {
+.success .status-content {
 	background: #49c0f0; /* Old browsers */
 	background: -moz-linear-gradient(top,  #49c0f0 0%, #0e8bc9 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#49c0f0), color-stop(100%,#0e8bc9)); /* Chrome,Safari4+ */
@@ -3047,7 +3020,7 @@ input[type=number] {
 	background: linear-gradient(to bottom,  #49c0f0 0%,#0e8bc9 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#49c0f0', endColorstr='#0e8bc9',GradientType=0 ); /* IE6-9 */
 }
-.notice.error {
+.error .status-content {
 	background: #e77103; /* Old browsers */
 	background: -moz-linear-gradient(top,  #e77103 0%, #d85204 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e77103), color-stop(100%,#d85204)); /* Chrome,Safari4+ */
@@ -3057,37 +3030,38 @@ input[type=number] {
 	background: linear-gradient(to bottom,  #e77103 0%,#d85204 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e77103', endColorstr='#d85204',GradientType=0 ); /* IE6-9 */
 }
-.notice-content {
-	position: relative;
-	z-index: 4;	
-}
-.notice h2 {
+
+.task-status h2 {
 	font-size: 33px;
 	font-weight: 600;
 	float: left;
 	margin: 3px 35px 0 75px;
 }
-.notice.success h2:before {
+.task-status.success h2:before {
 	content: "D";
 	position: absolute;
-	top: 5px; left: 2px;
+	top: 21px; left: 30px;
 	font-size: 34px;
 	line-height: 1;
 	font-weight:  normal;	
 }
-.notice.error h2:before {
+.task-status.error h2:before {
 	content: "/";
 	position: absolute;
-	top: 5px; left: 2px;
+	top: 22px; left: 30px;
 	font-size: 34px;
 	line-height: 1;
 	font-weight:  normal;	
 }
-.notice p {
+.task-status p {
 	font-size: 14px;
-	margin: 0;
+	font-weight: 400;
+	margin: 0 60px 0 180px;
 }
-.x-notice.ff-icon-before {
+.task-status.success p {
+	margin: 0 60px 0 210px;
+}
+.x-task-status.ff-icon-before {
 	float: right;
 	color: rgba(0,0,0,0.6);
 	margin: 4px 3px 0 10px;
@@ -3096,19 +3070,19 @@ input[type=number] {
 	position: relative;
 	z-index: 4;	
 }
-.x-notice:before {
+.x-task-status:before {
 	content: "y";
 	font-size: 30px;
 	line-height: 1;
 }
-.x-notice:hover {
+.x-task-status:hover {
 	background: rgba(0,0,0,0.1);
 }
-.notice.success * {
+.task-status.success * {
 	color: #054667;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.2);	
 }
-.notice.error * {
+.task-status.error * {
 	color: #551a05;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
 }
@@ -3956,6 +3930,88 @@ aside header.alerts-header {
 	text-align: center;
 	color: black;
 }
+
+/* --------------------------------- User settings styles work ------------------------------------ */ 
+
+#main-container .nav-tabs a.ff-icon-before {
+}
+#main-container .nav-tabs a.ff-icon-before:before {
+	content: "p";
+	font-size: 16px;
+	line-height: 1;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 10px 0 0;
+	font-weight: 300;
+}
+#main-container .nav-tabs a#external-accounts-btn:before {
+	content: "q";
+}
+#main-container .nav-tabs a#sys-notifications-btn:before {
+	content: "r";
+}
+
+
+
+/* ---------------------------- Generic form styles work ---------------------------- */
+
+.form-horizontal input {
+	font-size: 18px;
+	height: auto;
+	letter-spacing: -1px;
+	font-weight: 400;
+	color: #4c4b4a;
+	border-radius: 8px;
+	padding: 12px 14px;
+	box-shadow: inset 0 1px 0px white;
+	background: transparent;
+	border-color: rgba(119,110,105,0.3);
+}
+.form-horizontal input:focus {
+	background: rgba(255,255,255,0.37);
+	border-color: white;
+	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
+	color: #161413;
+}
+.form-horizontal textarea {
+	font-size: 14px;
+	line-height: 1.4em;
+	font-weight: 400;
+	color: #4c4b4a;
+	border-radius: 8px;
+	padding: 12px;
+	margin: 0 0 25px;
+	box-shadow: inset 0 1px 0px white;
+	background: transparent;
+	border-color: rgba(119,110,105,0.3);
+}
+.form-horizontal textarea:focus {
+	background: rgba(255,255,255,0.37);
+	border-color: white;
+	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
+	color: #161413;
+}
+.form-horizontal .controls {
+    margin-left: 240px;
+}
+#panel-content .form-horizontal .controls {
+    margin-left: 160px;
+}
+
+
+.form-horizontal .control-label {
+	font-size: 14px;
+	font-weight: 300;
+	color: #4c4b4a;
+	width: 220px;
+}
+#panel-content .form-horizontal .control-label {
+	width: 140px;
+}
+.form-horizontal .txt-input-row .control-label {
+	margin: 13px 0 0 0;
+}
+
 
 
 

@@ -1,0 +1,168 @@
+// user-settings.jade
+- if(!ajax) {
+!= partial('partials/styles')
+- }
+
+header#main
+
+	#toggle-side-bar.ff-icon-before
+		span.toggle-title
+			strong Collapse 
+			| sidebar
+		span.toggle-sub * You can also re-open from here
+	
+	#sectional-func.side-open	
+		#x-side-bar(title='Toggle display of sidebar',onclick=)
+			span.left-bars
+				span
+			span.right-bar
+		- var klass = (tabs.length == 1 ? 'singular' : '');
+		ul.sectional-tabs(class=klass)
+			- for(var i = 0; i < tabs.length; ++i) {
+				- var tab = tabs[i];
+				li(id=tab.id)
+					a(href="javascript:$.pv3.panel.show('" + tab.panel + "', {'tabid':'" + tab.id + "'});")
+						strong= tab.h1
+						= tab.h2
+			- }
+			
+		form#quick-search.well
+			input#quick-search-keyword(value='', placeholder='Quick domain search _')
+			#sale-type.btn-group
+				a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+					| Sale type
+					span.caret
+				ul.dropdown-menu
+					li
+						a(href='') Auctions only
+					li
+						a(href='') Pre-auctions only
+					li
+						a(href='') Expiring only
+					li
+						a(href='') Dropping only
+					li.divider
+	
+					li
+						a(href='') New Registrations only
+					li
+						a(href='') Websites only
+			button.btn.ff-icon-before(type='submit') Submit
+
+	
+!= partial('partials/panel')
+
+#main-container.page-settings
+
+		h5#first-heading.ff-icon-before moo goes the cow
+
+		a#go-pro(href="#")
+			strong.title.ff-icon-after Go Pro! 
+			span.sub-text Soo many features, 
+				strong just $xx a month!
+		
+		div#section-headings
+			
+			h1 
+				strong user settings 
+				| &amp; control panel area
+		
+		ul#user-settings-tabs.nav.nav-tabs
+
+			li.active
+				a(href='')#general-btn.ff-icon-before General / user settings
+			li
+				a(href='')#external-accounts-btn.ff-icon-before External account linkage
+			li
+				a(href='')#sys-notifications-btn.ff-icon-before System notification settings (coming soon)
+
+		
+		#user-settings-tab-panes.tab-content
+			#general.tab-pane.active
+				// h3#tab-section-heading 	
+								
+				ul#general-tabs.nav.nav-tabs.tabs-in-tabs
+		
+					li.active
+						a(href='') User profile &amp; membership
+					li
+						a(href='') Login information
+					li
+						a(href='') Purchase history &amp; invoicies
+					li
+						a(href='') Credit usage / history
+				
+				#general-tab-panes.tab-content.tabs-in-tabs
+					#general.tab-pane.active
+					
+						#right-col
+							#account
+								a.btn.btn-success.btn-large.ff-icon-before switch accounts
+								h4 account details
+								h5 
+									strong free member
+									| (this will never expire)
+							#avatar
+								h4 your avatar
+								h5 some details about where this is seen maybe?								
+								
+								#avatar-img-container
+									\\ image goes in here
+								
+								a.btn.btn-success.btn-large.ff-icon-before change
+								a.btn.btn-large.ff-icon-before delete
+							
+							#social-media
+								h4 link up social media accounts
+								h5 some details about Protrada can use them							
+								
+								a.btn.btn-success.btn-large.ff-icon-before link accounts
+								a.btn.btn-large.ff-icon-before unlink all
+							
+						#left-col
+							hgroup#tabs-in-tabs-headings
+								h2 update your details below
+								h3 use this section to update/edit any of your personal details
+							
+							form#update-details.form-horizontal
+								
+								.control-group.txt-input-row
+									label(for="text").control-label this is a text input
+									.controls
+										input#text(type="text", placeholder="anything goes")							
+								.control-group.txt-input-row
+									label(for="number").control-label this input is number only
+									.controls
+										input#number(type="number", placeholder="numeric only")						
+								.control-group		
+									label(for="instant-bid").control-label place as 'instant bid'?		
+									.controls
+										label.checkbox
+											input#instant-bid(type="checkbox")	
+											| words in here about what an instant bid actually is
+		
+		
+								#form-save.btn-group
+									a.btn.btn-large.dropdown-toggle(href='javascript:void(0);', data-toggle='dropdown')
+											| sort by?
+											span.caret
+										ul.dropdown-menu
+											li
+												a(href='') Action 1
+											li
+												a(href='') Action 2
+											li
+												a(href='') Action 3
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
