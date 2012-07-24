@@ -843,9 +843,9 @@ fieldset.login input:not(.hidden), fieldset.forgot input:not(.hidden) {
 	border-radius: 4px;
 }
 fieldset.login input:focus, fieldset.forgot input:focus {
-	background: #747474;
-	color: rgba(0,0,0,0.7);	
-	box-shadow: 0 1px 0 rgba(255,255,255,0.8), inset 0 3px 5px rgba(0,0,0,0.2);
+	background: #939393;
+	color: rgba(0,0,0,0.8);	
+	box-shadow: 0 1px 0 rgba(255,255,255,0.8), inset 0 3px 5px rgba(0,0,0,0.3);
 }
 fieldset.login input[type="password"] {
 	margin: 0;
