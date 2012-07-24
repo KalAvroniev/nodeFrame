@@ -107,8 +107,8 @@ $.pv3.state.get = function (success) {
 		}
 	);
 }
-$.pv3.state.restoreModule = function (modules) {
-	var module = (!modules.selected || modules.selected == '') ? 'home' : modules.selected;
+$.pv3.state.restoreModule = function () {
+	var module = (!$.pv3.state.current.modules.selected || $.pv3.state.current.modules.selected == '') ? 'home' : $.pv3.state.current.modules.selected;
 	window.history.pushState('', module, "/" + module);
 	$("#main-container").trigger("ajaxUnload");
 	$.pv3.state.update('modules.selected', module);
@@ -120,8 +120,9 @@ $.pv3.state.restoreModule = function (modules) {
 			$(".ajax-spinner").hide();
 			
 			// restore panels
-			if(modules[modules.selected].panel != '')
-				$.pv3.panel.show(modules[modules.selected].panel);
+			var modules = $.pv3.state.current.modules;
+			if(modules[modules.selected].panel.active != null)
+				$.pv3.panel.show(modules[modules.selected].panel.active.url, modules[modules.selected].panel.active.options);
 		}
 	});
 }
@@ -163,7 +164,7 @@ $.pv3.panel.show = function (url, options) {
 			$.jade.getTemplate(url, function (fn) {
 				// nofify the server that the active tab has changed
 				console.log($.pv3.state.current);
-				$.pv3.state.update('modules.' + $.pv3.state.current.modules.selected + '.panel', url);
+				$.pv3.state.update('modules.' + $.pv3.state.current.modules.selected + '.panel.active', {'url': url, 'options': options});
 				
 				// set active tab
 				$('.sectional-tabs li').removeClass('active');
@@ -173,7 +174,7 @@ $.pv3.panel.show = function (url, options) {
 				$('.ajax-panel-content').html($.jade.renderSync(fn, obj, function (err, file, line) {
 					$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
 				}));
-					
+				
 				// fix close handler
 				$("#import-export, .x-panel").unbind('click');
 				$("#import-export, .x-panel").click(function () {
@@ -193,5 +194,5 @@ $.pv3.panel.hide = function () {
 	}
 	
 	// notify the server that the active tab has changed
-	$.pv3.state.update('modules.' + $.pv3.state.current.modules.selected + '.panel', null);
+	$.pv3.state.update('modules.' + $.pv3.state.current.modules.selected + '.panel.active', null);
 }

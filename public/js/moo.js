@@ -9,8 +9,12 @@ $( document ).ready(function() {
 	});*/
 
 	var module = document.URL.substr( document.URL.lastIndexOf("/") + 1 );
-	if(module != '')
-		$.pv3.state.restoreModule( { 'selected': module } );
+	if(module != '') {
+		$.pv3.state.update('modules.selected', module);
+		$.pv3.state.get(function () {
+			$.pv3.state.restoreModule();
+		});
+	}
 
 	$("#ui-controls a").on( "click", function() {
 		if ( $( this ).hasClass("active") ) {
