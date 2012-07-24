@@ -145,13 +145,24 @@ $.pv3.panel.show = function (url, options) {
 				$('.ajax-panel-content').html($.jade.renderSync(fn, obj, function (err, file, line) {
 					$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
 				}));
+					
+				// fix close handler
+				$("#import-export, .x-panel").unbind('click');
+				$("#import-export, .x-panel").click(function () {
+					return $.pv3.panel.hide();
+				});
 			});
 		}
 	);
 }
 $.pv3.panel.hide = function () {
-	$('.sectional-tabs li').removeClass('active');
-	$('#section-panel').addClass('hidden');
+	if ( $("#section-panel").hasClass("hidden") ) {
+		$("#section-panel").removeClass("hidden");
+		$( this ).addClass("active");
+	} else {
+		$("#section-panel").addClass("hidden")
+		$(".sectional-tabs .active").removeClass("active");
+	}
 	
 	// nofify the server that the active tab has changed
 	//$.pv3.updateState('module.panel', options.tabid);
