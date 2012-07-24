@@ -24,6 +24,19 @@ html(lang='en')
 				document.getElementsByTagName('body')[0].className += " mobile";
 				}		
 		
+		.notice.success
+			.notice-content
+				a.ff-icon-before.x-notice 
+				h2.ff-icon-before Success
+				p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a nisi purus. Sed scelerisque magna quis quam consectetur fermentum. Quisque et nisi libero.
+				
+		.notice.error
+			.notice-content
+				a.ff-icon-before.x-notice 
+				h2.ff-icon-before Error
+				p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a nisi purus. Sed scelerisque magna quis quam consectetur fermentum. Quisque et nisi libero.
+				
+		
 		!= partial('partials/backend-spine')
 		
 		!= partial('partials/alerts-aside')
