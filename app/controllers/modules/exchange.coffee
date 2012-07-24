@@ -10,6 +10,18 @@ class exports.Controller extends Controller
 			
 		# tabs
 		res.view.tabs = [
+			#{
+			#	'id': 'modal'
+			#	'h1': 'Active Modal',
+			#	'h2': 'label in here',
+			#	'panel': ''
+			#},
+			#{
+			#	'id': 'domain-info'
+			#	'h1': 'Detailed',
+			#	'h2': 'domain info',
+			#	'panel': '/modules/exchange/panels/place-bid'
+			#},
 			{
 				'id': 'watchlist'
 				'h1': 'My Watchlist',

@@ -123,7 +123,7 @@ $.pv3.panel.show = function (url, options) {
 	if(options == undefined)
 		options = {};
 	if(options.jsonrpcMethod == undefined)
-		options.jsonrpcMethod = url.replace(/^\/modules\//, '');
+		options.jsonrpcMethod = 'view' + url;
 	
 	// make the JSON-RPC call
 	$.jsonrpc(

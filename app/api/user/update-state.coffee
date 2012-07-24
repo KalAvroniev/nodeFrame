@@ -20,6 +20,7 @@ class exports.Controller
 	run: (req) ->
 		user_id = req.params.user_id
 		session = req.getSession()
+		console.log(session);
 		if not user_id
 			# permission checking
 			if session.user == undefined or session.user.user_id == undefined
@@ -28,7 +29,7 @@ class exports.Controller
 		
 		req.updateState(
 			req.params.name,
-			req.params.value,
+			{ "value": req.params.value },
 			() ->
 				return req.success()
 			, (error) ->

@@ -12,11 +12,12 @@ header#main
 		span.toggle-sub * You can also re-open from here
 	
 	#sectional-func.side-open	
-		#x-side-bar(title='Toggle display of sidebar')
+		#x-side-bar(title='Toggle display of sidebar',onclick=)
 			span.left-bars
 				span
 			span.right-bar
-		ul.sectional-tabs
+		- var klass = (tabs.length == 1 ? 'singular' : '');
+		ul.sectional-tabs(class=klass)
 			- for(var i = 0; i < tabs.length; ++i) {
 				- var tab = tabs[i];
 				li(id=tab.id)
