@@ -1,3 +1,6 @@
+// always declare variables first
+var verticalScroll = "body";
+
 // derived from http://stackoverflow.com/a/2866613
 Number.prototype.toMoney = function( decimals, decimal_sep, thousands_sep ) {
 	var n = this,
@@ -17,24 +20,14 @@ Number.prototype.toMoney = function( decimals, decimal_sep, thousands_sep ) {
 		j = ( ( j = i.length ) > 3 ) ? j % 3 : 0;
 
 	return sign + ( j ? i.substr( 0, j ) + t : "" ) + i.substr( j ).replace( /(\d{3})(?=\d)/g, "$1" + t ) + ( c ? d + Math.abs( n - i ).toFixed( c ).slice( 2 ) : "" );
-}
-
-var verticalScroll = "body";
-
-// --------------------------- OPEN READY CALL
+};
 
 $( document ).ready(function() {
 	// special class for the side-bar on mobile devices
 	// user agent sniffing is frowned upon :(
-	if ( navigator.userAgent.match(/Android/i)
-		|| navigator.userAgent.match(/webOS/i)
-		|| navigator.userAgent.match(/iPhone/i)
-		|| navigator.userAgent.match(/iPad/i)
-		|| navigator.userAgent.match(/iPod/i)
-		|| navigator.userAgent.match(/BlackBerry/i)
-	) {
-		$("aside #notifications").addClass("native");
-	}	
+	if ( /Android|webOS|BlackBerry|iP(hone|ad|od)/i.test( navigator.userAgent ) ) {
+		$("#notifications").addClass("native");
+	}
 
 	// init bootstrap components below
 

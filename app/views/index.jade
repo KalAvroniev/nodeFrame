@@ -8,49 +8,34 @@ html(lang='en')
 		!= partial('partials/styles')
 
 	body.sidebar-hidden
-		
-		script 	
-			if( navigator.userAgent.match(/Android/i)
-		
-				|| navigator.userAgent.match(/webOS/i)
-		
-				|| navigator.userAgent.match(/iPhone/i)
-		
-				|| navigator.userAgent.match(/iPad/i)
-		
-				|| navigator.userAgent.match(/iPod/i)
-		
-				|| navigator.userAgent.match(/BlackBerry/i)){	
-				document.getElementsByTagName('body')[0].className += " mobile";
-				}		
-		
+		script
+			if ( /Android|webOS|BlackBerry|iP(hone|ad|od)/i.test( navigator.userAgent ) ) {
+				document.body.className += " mobile";
+			}
+
 		.notice.success
 			.notice-content
-				a.ff-icon-before.x-notice 
+				a.ff-icon-before.x-notice
 				h2.ff-icon-before Success
 				p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a nisi purus. Sed scelerisque magna quis quam consectetur fermentum. Quisque et nisi libero.
-				
+
 		.notice.error
 			.notice-content
-				a.ff-icon-before.x-notice 
+				a.ff-icon-before.x-notice
 				h2.ff-icon-before Error
 				p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a nisi purus. Sed scelerisque magna quis quam consectetur fermentum. Quisque et nisi libero.
-				
-		
-		!= partial('partials/backend-spine')
-		
-		!= partial('partials/alerts-aside')
-				
-		div(id="ajax-container")
 
+		!= partial('partials/backend-spine')
+
+		!= partial('partials/alerts-aside')
+
+		div(id="ajax-container")
 
 		// footer area content
 		.ajax-spinner
 			.ball
 			.ball1
-		
-		//if lt IE 9
-		
+
 		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
 		script
 			!window.jQuery && document.write("<script src=\"js/jquery-1.7.2.min.js\"><\/script>");
@@ -59,7 +44,7 @@ html(lang='en')
 			!window.History && document.write("<script src=\"js/jquery.history.js\"><\/script>");
 		script(src='/js/bootstrap.min.js')
 		script(src='/js/jquery.tinyscrollbar.js')
-		// script(src='/js/jquery.ba-resize.min.js')		
+		// script(src='/js/jquery.ba-resize.min.js')
 		// script(src='/js/jqplot/jquery.jqplot.js')
 		// script(src='/js/jqplot/excanvas.js')
 		// script(src='/js/jqplot/plugins/jqplot.highlighter.min.js')
@@ -71,22 +56,21 @@ html(lang='en')
 		script(src='/js/jquery.plugins.js')
 		script(src='/js/pv3.js')
 		script(src='/socket.io/socket.io.js')
-		
+
 		script
-			function navigate(module) {
-				if(module == '') {
+			function navigate( module ) {
+				if ( module === "" ) {
 					// restore state from server
 					$.pv3.restoreState();
-				}
-				else {
-					window.history.pushState('', module, "/" + module);
+				} else {
+					window.history.pushState( "", module, "/" + module );
 					$("#main-container").trigger("ajaxUnload");
-					$.pv3.updateState('module', module);
-					$.ajax('/modules/' + module + '?ajax=1', {
-						'success': function (data) {
-							$('#ajax-container').html(data);
-							$('.selected').removeClass("selected");
-							$('#spine-inner nav li a#nav-' + module).parent().addClass("selected");
+					$.pv3.updateState( "module", module );
+					$.ajax( "/modules/" + module + "?ajax=1", {
+						success: function( data ) {
+							$("#ajax-container").html( data );
+							$(".selected").removeClass("selected");
+							$( "#nav-" + module ).parent().addClass("selected");
 							$(".ajax-spinner").hide();
 						}
 					});

@@ -1,162 +1,70 @@
 $( document ).ready(function() {
-	/* this code doesnt work 
-	$('#main-container').on('ajaxLoaded', function() {
-		$('.ajax-spinner').hide();
+	// first things first! navigate to the selected module
+	navigate( document.URL.substr(document.URL.lastIndexOf("/") + 1) );
+
+	$("#ui-controls").on( "click", "a", function( e ) {
+		var classes = {
+			condensed: "condensed",
+			downgrade: "mobile",
+			helpbubbles: "help"
+		};
+
+		e.preventDefault();
+
+		// toggle body class
+		$( document.body ).toggleClass( classes[this.id.replace(/toggle|-/g, "")] );
+
+		// toggle active UI state
+		$( this ).toggleClass("active");
 	});
 
-	$('#main-container').on('ajaxUnloading', function() {
-		$('.ajax-spinner').show();
-	});*/
+	// TODO: this should all be replaced with code that relies on the <user/state> JSONRPC call (when it's implemented)
+	$("#toggle-condensed").toggleClass( "active", $(document.body).hasClass("condensed") );
+	$("#toggle-downgrade").toggleClass( "active", $(document.body).hasClass("mobile") );
 
-	var module = document.URL.substr( document.URL.lastIndexOf("/") + 1 );
+	$("#toggle-sys-menu").on( "click", function( e ) {
+		e.preventDefault();
 
-	navigate( module );
+		$( this ).add("#sys-menu").toggleClass("active");
+    });
 
-	$("#ui-controls a").on( "click", function() {
-		if ( $( this ).hasClass("active") ) {
-			$( this ).removeClass("active");
-		} else {
-			$( this ).addClass("active");
-		}
+	$("#x-sys-menu").on( "click", function( e ) {
+		e.preventDefault();
 
-		return false;
+		$("#sys-menu, #toggle-sys-menu").removeClass("active");
 	});
 
-	$("#toggle-condensed").click(function() {
-		if ( $("body").hasClass('condensed') ) {
-			// turn off condensed mode
-			console.log("condensed off");
-			$("body").removeClass("condensed");
-			//$( this ).removeClass("active");
-		} else {
-			// turn on condensed mode
-			console.log("condensed on");
-			$("body").addClass("condensed");
-			//$( this ).addClass("moo");
-		}
+	$("#mode-rocker").on( "click", function( e ) {
+		e.preventDefault();
 
-		return false
+		// toggle between Protrada and Devname
+		$("#system-rocker").find("h3").toggleClass("hidden");
+
+		// toggle active UI state
+		$( this ).toggleClass("active");
 	});
-
-	$("#toggle-downgrade").click(function() {
-		if ( $("body").hasClass("mobile") ) {
-			// turn off low-fi mode
-			console.log("low-fi off");
-			$("body").removeClass("mobile");
-			//$( this ).removeClass("active");
-		} else {
-			// turn on low-fi mode
-			console.log("low-fi on");
-			$("body").addClass("mobile");
-			//$( this ).addClass("moo");
-		}
-
-		return false
-	});	
-
-	if ( $("body").hasClass("condensed") ) {
-		console.log("condensed on")
-		$("#toggle-condensed").addClass("active");
-	} else {
-		console.log("condensed off")
-		$("#toggle-condensed").removeClass("active");
-	}
-
-	if ($('body').hasClass('mobile')) {
-		console.log('low-fi on');
-		$('#toggle-downgrade').addClass('active');
-	} else {
-		console.log('low-fi off');
-		$('#toggle-downgrade').removeClass('active');
-	}	
-
-	$('#toggle-sys-menu').click(function () {
-
-        if ($('#sys-menu').hasClass('active')) {
-
-	        // hide the sys-menu
-            $('#sys-menu').removeClass('active');
-            $(this).removeClass('active');
-
-        } else {
-
-	        // show the sys menu
-            $('#sys-menu').addClass('active')
-            $(this).addClass('active');
-
-        }
-        return false;
-    });	
-	
-
-	$('#mode-rocker').on('click', function () {
-	
-		if ($(this).hasClass('active')) {
-			
-			// switch to devname mode
-			$(this).removeClass('active');
-			$('h3.protrada.hidden').removeClass('hidden');
-			$('h3.devname').addClass('hidden');
-		
-		} else {
-		
-			// switch to protrada mode
-			$(this).addClass('active');
-			$('h3.protrada').addClass('hidden');
-			$('h3.devname.hidden').removeClass('hidden');
-	 
-		}
-		
-		return false;
-		
-	});	
-	
-	$('#x-sys-menu').on('click', function () {
-	
-		$('#sys-menu').removeClass('active');
-        $('#toggle-sys-menu.active').removeClass('active');
-	
-		return false;
-	
-	});
-
-}); // ------------------------------------- Close doc-ready
-
-// setup open/close sidebar element functions	
-$( document ).on( "click", "#toggle-side-bar, #x-side-bar", function( e ) {
-	var aside = $("aside");
-
-	if ( aside.hasClass("active") ) {
-		// hide the sidebar
-
-		// work around webkit not redrawing when innerHtml altered
-		//$("#main-container").redraw();		
-
-		/*var mainContainer = $("#main-container")[0];
-		mainContainer.style.display = "none";
-		mainContainer.offsetHeight;
-		mainContainer.style.display = "block";*/
-
-		aside.removeClass("active");
-		$("body").addClass("sidebar-hidden");
-		$("#main-container").animate( { width: "100%" }, 200 );
-	} else {
-		// show the sidebar
-
-		// work around webkit not redrawing when innerHtml altered
-		//$("#main-container").redraw();
-
-		aside.addClass("active");
-		$("body").removeClass("sidebar-hidden");
-		$("#main-container").animate( { width: "99.999%" }, 300 );
-		$("aside #notifications:not(.native)").tinyscrollbar_update("relative");
-	}
 });
 
-// onclick Close alert item out of the sidebar
-$( document ).on( "click", ".x-alert-msg", function( e ) {
+// setup open/close sidebar element functions
+$( document ).on( "click", "#toggle-side-bar, #x-side-bar", function() {
+	var $aside = $("aside");
+
+	$aside.toggleClass("active");
+	$( document.body ).toggleClass("sidebar-hidden");
+
+	// animate main body
+	$("#main-container").animate( { width: ($aside.hasClass("active") ? "99.999" : "100") + "%" }, 200 );
+
+	// update fake scrollbars
+	$("#notifications").not(".native").tinyscrollbar_update("relative");
+});
+
+// remove alert item from sidebar
+$( document ).on( "click", ".x-alert-msg", function() {
 	$( this ).parent().slideUp( 450, function() {
 		$( this ).remove();
-	   	$("aside #notifications:not(.native)").tinyscrollbar_update("relative");
+
+		// update fake scrollbars
+		$("#notifications").not(".native").tinyscrollbar_update("relative");
 	});
 });
