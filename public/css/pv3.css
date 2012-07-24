@@ -2163,16 +2163,20 @@ header#main:before {
 #section-panel.mini-panel { 
 	max-width: 400px;	
 }
-#section-panel #panel-content {
+#panel-content {
 	background: #fcf9f5;
 	height: 100%;
 	padding: 22px 30px;
+	margin: 0 0 30px 0;
 	overflow-y: auto;	
 	overflow-x: hidden;
 	position: relative;
 	pointer-events: auto;		
 	box-shadow: 0 10px 12px rgba(0,0,0,0.15);
 	border-radius: 15px 0 0 0;	
+}
+#panel-content > .clearfix {
+	padding: 0 0 30px 0;
 }
 #section-panel.modal {
 	width: 450px;
@@ -2527,9 +2531,7 @@ header#main:before {
 .light-gridview #top-actions {
 	width: 98px;
 }
-.ajax-panel-content {
-	padding: 0 0 30px;
-}
+
 
 
 /* ------------------------ Mini-panels styles work ---------------------------------- */
@@ -2597,7 +2599,7 @@ a.download {
 	font-size: 15px;
 	margin: 0 0 1.2em;
 }
-.ajax-panel-content p {
+#panel-content p {
 	margin: 0 0 1.6em;	
 }
 
@@ -2668,13 +2670,13 @@ a.download {
 	margin-left: -25px;
 	width: auto;
 }
-.ajax-panel-content .btn-success {
+#panel-content .btn-success {
 	float: right;
 } 
-.mini-panel .btn-group .btn-success {
+#panel-content .btn-group .btn-success {
 	float: left;
 }
-.mini-panel .btn-group {
+#panel-content .btn-group {
 	float: right;
 }
 #file-upload-area {
@@ -2793,7 +2795,7 @@ table#min-amounts th:last-child {
 }
 #forsale-listing-amounts {
 	clear: both;
-	border-radius: 8px 8px 0 0;
+	border-radius: 12px 0 0 0;
 	overflow: hidden;
 	margin: 25px 0 0 0;	
 }
@@ -2846,7 +2848,7 @@ table#edit-data-grid {
 	position: relative;
 }
 #edit-data-grid input {
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 1;
 	font-weight: 400;	
 	width: 88px; height: auto;
