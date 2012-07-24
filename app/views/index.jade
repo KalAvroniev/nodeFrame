@@ -60,24 +60,3 @@ html(lang='en')
 		script(src='/js/jquery.plugins.js')
 		script(src='/js/pv3.js')
 		script(src='/socket.io/socket.io.js')
-		
-		script
-			function navigate(module) {
-				if(module == '') {
-					// restore state from server
-					$.pv3.restoreState();
-				}
-				else {
-					window.history.pushState('', module, "/" + module);
-					$("#main-container").trigger("ajaxUnload");
-					$.pv3.updateState('module', module);
-					$.ajax('/modules/' + module + '?ajax=1', {
-						'success': function (data) {
-							$('#ajax-container').html(data);
-							$('.selected').removeClass("selected");
-							$('#spine-inner nav li a#nav-' + module).parent().addClass("selected");
-							$(".ajax-spinner").hide();
-						}
-					});
-				}
-			}

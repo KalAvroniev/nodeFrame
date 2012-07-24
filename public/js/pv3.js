@@ -115,7 +115,7 @@ $( document ).ready(function() {
 	);
 
 	// restore the users state
-	$.pv3.restoreState();
+	$.pv3.state.restore();
 
 	/*$(".sectional-tabs").tipTip(
 		{

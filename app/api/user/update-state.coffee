@@ -29,9 +29,9 @@ class exports.Controller
 		
 		req.updateState(
 			req.params.name,
-			{ "value": req.params.value },
-			() ->
-				return req.success()
+			req.params.value,
+			(state) ->
+				return req.success(state)
 			, (error) ->
 				return req.error(error)
 			, user_id
