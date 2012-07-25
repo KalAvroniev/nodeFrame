@@ -2276,6 +2276,11 @@ header#main:before {
 	font-size: 25px;
 	margin: -3px 12px 0 10px;			
 }
+.panel-heading .backorder:before {
+	content: "s";
+	font-size: 25px;
+	margin: -3px 12px 0 10px;			
+}
 
 
 /* --------------------- */
@@ -2958,6 +2963,25 @@ input[type=number] {
 	background-position: -185px -9px;
 	background-color: #3f3f3f;
 }
+.form-horizontal .sources-sprite[source="Namejet"] {
+	color: #627c96;
+}
+.sources-sprite[source="Namejet"]:before {
+	background-position: -242px -9px;
+	background-color: #627c96;
+}
+.form-horizontal .sources-sprite[source="Snap Names"] {
+	color: #dd5120;
+}
+.sources-sprite[source="Snap Names"]:before {
+	background-position: -304px -15px;
+	background-color: #dd5120;
+}
+
+
+
+
+
 
 
 /* -------------------------- Global task status / growl msgs styles work ----------------------------- */

@@ -3,26 +3,44 @@
 		.clearfix
 			a.x-panel(href='#')	
 			h2.panel-heading
-				strong make an offer
+				strong place a backorder
 				| on 
-				span.ff-icon-before.make-offer 'i-like-to-floss.com'
+				span.ff-icon-before.backorder 'benderama.com'
 			
-			p	Protrada will bid in domain auctions automatically on your behalf, all you have to do is set the maximum amount that you are willing to bid for this domain. 
-				strong * Unless "Place as Instant bid" is checked, Protrada will automatically place this bid within the last 3 mins of the domain auction.
+			p	
+				strong Bids will be placed immediately by default, 
+				| unless you choose to 'Sniper' (only available to 
+				a(href="").default	pro-users 
+				| ). 'Sniper' bids be placed 5 minutes before the end of the auction.
+				
+			p	
+				strong * You will be charged (by the winning platform) only if you win the domain.
+			
 			
 			form#bid-amount-form.form-horizontal.panel-form.mini-panel-form
 				
+				
+				
 				.control-group.txt-input-row
-					label(for="max-bid-value").control-label max-bid value
+					label.sources-sprite(for="max-bid-value",source="Namejet").control-label 
 					.controls
 						input#max-bid-value(type="number", placeholder="placed in USD")
 				
 				.control-group		
-					label(for="instant-bid").control-label place as 'instant bid'?		
+					label(for="instant-bid").control-label place as 'sniper' bid?		
 					.controls
 						label.checkbox
 							input#instant-bid(type="checkbox")	
-							| words in here about what an instant bid actually is
+							
+					
+					
+					
+					
+					
+					
+					
+					
+				// mobile notification stuff	
 							
 				.control-group.txt-input-row		
 					label(for="cell-number-captcha").control-label txt me with updates		
@@ -38,7 +56,7 @@
 							
 							
 			#submit-bid-button.btn-group.dropup
-				a.btn.btn-success.btn-large.ff-icon-before make offer &amp; watch
+				a.btn.btn-success.btn-large.ff-icon-before place backorder &amp; watch
 				a.btn.btn-success.btn-large.dropdown-toggle(data-toggle='dropdown')
 					span.caret
 				ul.dropdown-menu.pull-right
