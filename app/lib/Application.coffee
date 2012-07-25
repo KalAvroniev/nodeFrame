@@ -1,5 +1,4 @@
 express = require('express')
-connect = require('connect')
 fs = require('fs')
 jade = require('jade')
 JsonRpcServer = require('./JsonRpcServer.coffee').JsonRpcServer
@@ -28,7 +27,7 @@ class exports.Application
 		@app.use(express.session({
 			'secret': "protrada",
 			'store': new SessionStore(),
-			'maxAge': new Date(Date.now() + 1209600000)
+			'maxAge': 1209600000
 		}))
 		
 		# prepare user states

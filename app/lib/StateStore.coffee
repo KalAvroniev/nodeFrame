@@ -7,12 +7,11 @@ class exports.StateStore
 		@users = {}
 		
 		# try and load the previous session
-		fs.readFile('state_data', 'utf8', (err, data) ->
+		fs.readFile('state_data', 'utf8', (err, data) =>
 			if err
 				return console.error(err)
 			else
-				console.log(data)
-				@sessions = JSON.parse(data)
+				@users = JSON.parse(data)
 		)
 		
 	defaultCallback: () ->
@@ -36,7 +35,6 @@ class exports.StateStore
 	update: (user_id, name, value, cb) ->
 		if not @users[user_id]
 			@users[user_id] = {}
-		console.log("StateStore: " + name + " = " + value)
 		
 		parts = name.split(/\./)
 		for part, i in parts
