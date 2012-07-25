@@ -1337,7 +1337,9 @@ header#main:before {
 	vertical-align: top;
 	margin: 0;
 }
-
+.sectional-tabs li.active {
+	float: right;
+}
 /*.sectional-tabs li:first-of-type {
 	float: right;
 	display: block;
@@ -4024,7 +4026,7 @@ aside header.alerts-header {
 	float: right;
 }
 .tabs-in-tabs #left-col {
-	margin: 0 330px 0 0;
+	margin: 0 340px 0 0;
 }
 #tabs-in-tabs-headings {
 	color: #4c4b4a;
@@ -4063,20 +4065,58 @@ aside header.alerts-header {
 #go-pro {
 	float: right;
 	position: relative;
-	padding: 20px;
-
-	
-	background: #e87f03; /* Old browsers */
-	background: url("../img/bg-noise.png"), -moz-linear-gradient(top,  #e87f03 0%, #ee9606 100%); /* FF3.6+ */
+	z-index: 1;
+	margin: 20px 0 0 0;
+	padding: 23px 20px;
+	border-radius: 4px;
+	color: #6e3312;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+	box-shadow: inset 0 2px 0 rgba(0,0,0,0.13), 0 1px 0 rgba(255,255,255,0.5);
+		
+	background: #e87f03;
+	background: url("../img/bg-noise.png"), -moz-linear-gradient(top,  #e87f03 0%, #ee9606 100%);
 	background: url("../img/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e87f03), color-stop(100%,#ee9606)); /* Chrome,Safari4+ */
-	background: url("../img/bg-noise.png"), -webkit-linear-gradient(top,  #e87f03 0%,#ee9606 100%); /* Chrome10+,Safari5.1+ */
-	background: url("../img/bg-noise.png"), -o-linear-gradient(top,  #e87f03 0%,#ee9606 100%); /* Opera 11.10+ */
-	background: url("../img/bg-noise.png"), -ms-linear-gradient(top,  #e87f03 0%,#ee9606 100%); /* IE10+ */
-	background: url("../img/bg-noise.png"), linear-gradient(to bottom,  #e87f03 0%,#ee9606 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e87f03', endColorstr='#ee9606',GradientType=0 ); /* IE6-9 */
+	background: url("../img/bg-noise.png"), -webkit-linear-gradient(top,  #e87f03 0%,#ee9606 100%); 
+	background: url("../img/bg-noise.png"), -o-linear-gradient(top,  #e87f03 0%,#ee9606 100%); 
+	background: url("../img/bg-noise.png"), -ms-linear-gradient(top,  #e87f03 0%,#ee9606 100%); 
+	background: url("../img/bg-noise.png"), linear-gradient(to bottom,  #e87f03 0%,#ee9606 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e87f03', endColorstr='#ee9606',GradientType=0 );
+}
+#go-pro:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 28px;	left: -20px;
+	margin: 0;
+	border: 10px outset transparent;
+	border-right: 10px solid #6e3312;
+}
+#go-pro .title {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 30px;
+	line-height: 1;
+	letter-spacing: -1px;
+	font-weight: 700;
 }
 
-
+#go-pro .ff-icon-after:after {
+	content: "1";
+	font-size: 28px;
+	line-height: 1;	
+	font-weight: 400;
+	margin: -3px 17px 0 14px;
+	display: inline-block;
+	vertical-align: middle;
+}
+#go-pro .sub-text {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 1.25em;
+}
+#go-pro .sub-text strong {
+	display: block;
+}
 
 
 
@@ -4175,9 +4215,16 @@ aside header.alerts-header {
 	padding: 0 0 20px;
 	border-bottom: 10px solid rgba(0,0,0,0.03);
 }
-
-
-
+.form-horizontal .form-actions {
+	background: rgba(0,0,0,0.07);
+	box-shadow: inset 0 3px 0 rgba(0,0,0,0.07), 0 1px 0 rgba(255,255,255,0.2);
+	border: none;
+	padding: 20px 0 20px 240px;
+	margin: 30px 0 15px;
+}
+.form-actions .btn-success {
+	box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255,255,255,0.3), 0 -3px 0 rgba(0, 0, 0, 0.08);
+}
 
 
 
