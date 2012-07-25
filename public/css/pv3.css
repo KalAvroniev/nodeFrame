@@ -3036,6 +3036,7 @@ input[type=number] {
 	font-weight: 600;
 	float: left;
 	margin: 0 35px 0 75px;
+	padding: 0 0 10px 0;
 }
 .task-status.success h2:before {
 	content: "D";
@@ -3056,7 +3057,6 @@ input[type=number] {
 .task-status p {
 	font-size: 14px;
 	font-weight: 400;
-	min-height: 42px;
 	margin: 0 60px 0 180px;
 }
 .task-status.success p {
@@ -4379,7 +4379,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82b42c', end
 	font-weight: 400;
 	box-shadow: inset 0px 1px 0 rgba(0,0,0,0.3);
 	border: none;	
-	padding: 12px 15px;
 }
 .grid-table tbody .row-sel.child td, .grid-table tbody .row-sel.child:hover td {
 	border: none;
