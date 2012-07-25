@@ -2248,7 +2248,7 @@ header#main:before {
 	font-size: 23px;
 	line-height: 1;
 	margin: -3px 9px 0 6px;
-	color: rgba(0,0,0,0.13);
+	color: rgba(0,0,0,0.16);
 }
 
 /* --------------- define icons for different panel states -------------- */ 
@@ -2624,13 +2624,15 @@ a.download {
 /* -------------------------------------- Panel form styles work ------------------------ */
 
 .mini-panel-form.form-horizontal input {
-	width: 180px;
+	width: 100%;
 }
 .mini-panel-form.form-horizontal textarea {
 	width: 100%;
 	min-height: 100px;
 }
-
+#panel-content .form-horizontal .help-block {
+	margin: 9px 0 0 0;
+}
 .radio, .checkbox { 
 	padding-left: 25px;
 	font-weight: 300;
@@ -2730,6 +2732,11 @@ a.download {
 	background: #e1e1e1;
 	box-shadow: 0 1px 0 white;
 }
+#panel-content .form-horizontal .control-label {
+	width: 140px;
+}
+
+
 
 
 
@@ -2963,18 +2970,20 @@ input[type=number] {
 	background-position: -185px -9px;
 	background-color: #3f3f3f;
 }
-.form-horizontal .sources-sprite[source="Namejet"] {
+.sources-sprite[source="Namejet"] {
 	color: #627c96;
 }
+
 .sources-sprite[source="Namejet"]:before {
 	background-position: -242px -9px;
 	background-color: #627c96;
 }
-.form-horizontal .sources-sprite[source="Snap Names"] {
+.sources-sprite[source="Snap Names"] {
 	color: #dd5120;
 }
+
 .sources-sprite[source="Snap Names"]:before {
-	background-position: -304px -15px;
+	background-position: -298px -10px;
 	background-color: #dd5120;
 }
 
@@ -4029,19 +4038,35 @@ aside header.alerts-header {
 #panel-content .form-horizontal .controls {
     margin-left: 160px;
 }
-
-
 .form-horizontal .control-label {
 	font-size: 14px;
 	font-weight: 300;
+	margin: 0;
 	color: #4c4b4a;
 	width: 220px;
 }
-#panel-content .form-horizontal .control-label {
-	width: 140px;
-}
 .form-horizontal .txt-input-row .control-label {
-	margin: 13px 0 0 0;
+	padding: 16px 0 0 0;
+}
+.form-horizontal .sources-sprite {
+	margin: 0 0 20px;
+}
+.form-horizontal .control-label.source {
+	padding: 9px 0 0 0;
+	font-weight: 600;
+}
+.form-horizontal .control-label[source="Snap Names"] {
+	color: #dd5120;
+}
+.form-horizontal .control-label[source="Namejet"] {
+	color: #627c96;	
+}
+.form-horizontal h4.sources-sprite {
+	margin: 0;
+}
+.form-horizontal .control-group.divider-after {
+	padding: 0 0 20px;
+	border-bottom: 10px solid rgba(0,0,0,0.03);
 }
 
 
