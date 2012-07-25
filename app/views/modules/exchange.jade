@@ -16,15 +16,8 @@ header#main
 			span.left-bars
 				span
 			span.right-bar
-		- var klass = (tabs.length == 1 ? 'singular' : '');
-		ul.sectional-tabs(class=klass)
-			- for(var i = 0; i < tabs.length; ++i) {
-				- var tab = tabs[i];
-				li(id=tab.id)
-					a(href="javascript:$.pv3.panel.show('" + tab.panel + "', {'tabid':'" + tab.id + "'});")
-						strong= tab.h1
-						= tab.h2
-			- }
+			
+		!= partial('partials/tabs')
 			
 		form#quick-search.well
 			input#quick-search-keyword(value='', placeholder='Quick domain search _')

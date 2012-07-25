@@ -5,4 +5,4 @@ class exports.UserState
 	constructor: () ->
 		# setup the default state
 		@modules = {}
-		@modules.selected = 'exchange'
+		@modules.selected = 'home'

@@ -1,5 +1,4 @@
 express = require('express')
-connect = require('connect')
 fs = require('fs')
 jade = require('jade')
 JsonRpcServer = require('./JsonRpcServer.coffee').JsonRpcServer
@@ -10,6 +9,9 @@ SocketIoServer = require('./SocketIoServer.coffee').SocketIoServer
 class exports.Application
 
 	socketIoServer = new SocketIoServer()
+	
+	constructor: (@options = {}) ->
+		# do nothing
 	
 	start: () ->
 		# register JSON-RPC methods
@@ -22,7 +24,11 @@ class exports.Application
 		
 		# sessions
 		@app.use(express.cookieParser())
-		@app.use(express.session({ 'secret': "protrada", 'store': new SessionStore() }))
+		@app.use(express.session({
+			'secret': "protrada",
+			'store': new SessionStore(),
+			'maxAge': 1209600000
+		}))
 		
 		# prepare user states
 		@states = new StateStore()
@@ -53,8 +59,8 @@ class exports.Application
 		#)
 		
 		# listen
-		@app.listen(8181)
-		console.log("Server started.")
+		@app.listen(@options.port)
+		console.log("Server started on port " + @options.port + ".")
 		
 	@realUrl: (url) ->
 		if url.indexOf('?') >= 0

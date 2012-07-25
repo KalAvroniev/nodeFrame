@@ -30,13 +30,6 @@ $( document ).ready(function() {
 
 		$("#trading-and-trending .graph-options").on( "click", toggleGraphVisible );
 
-		// show the two tabs for this page
-		$(".sectional-tabs").removeClass("singular");
-		$(".sectional-tabs li").addClass("hidden");
-		$(".sectional-tabs li#watchlist").removeClass("hidden");
-
-		$(".sectional-tabs").on( "click", "li#watchlist", showWatchlist );
-
 		// update the scrollable area on window resize
 		$( window ).on( "resize", windowResize );
 		$( window ).on( "scroll", windowScroll );

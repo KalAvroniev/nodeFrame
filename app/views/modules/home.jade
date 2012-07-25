@@ -26,20 +26,7 @@ header#main
 				span
 			span.right-bar
 		
-		ul.sectional-tabs
-			li#modal
-				a(href='javascript:void(0);')
-					span
-						strong active modal 
-						| label in here
-			li#domain-info.hidden
-				a.ff-icon-before(href='javascript:void(0);')
-					strong Detailed 
-					| domain info
-			li#watchlist.hidden
-				a(href='javascript:void(0);')
-					strong My Watchlist 
-					| domains you star
+		!= partial('partials/tabs')
 		
 		form#quick-search
 			input#quick-search-keyword(value='', placeholder='quick domain search _')

@@ -1,4 +1,5 @@
 fs = require('fs')
+util = require('util')
 
 class exports.SessionStore extends require('connect').session.Store
 	
@@ -6,11 +7,10 @@ class exports.SessionStore extends require('connect').session.Store
 		@sessions = {}
 		
 		# try and load the previous session
-		fs.readFile('session_data', 'utf8', (err, data) ->
+		fs.readFile('session_data', 'utf8', (err, data) =>
 			if err
 				return console.error(err)
 			else
-				console.log(data)
 				@sessions = JSON.parse(data)
 		)
 
@@ -39,12 +39,12 @@ class exports.SessionStore extends require('connect').session.Store
 		delete @sessions[sid]
 		cb(null)
 	
-	#all: (cb = @defaultCallback) ->
+	all: (cb = @defaultCallback) ->
+		cb(@sessions)
 	
 	clear: (cb = @defaultCallback) ->
-		console.log("SessionStore: clear()")
 		@sessions = {}
 		cb()
 	
-	#length: (cb = @defaultCallback) ->
-	#	cb(@sessions.length)
+	length: (cb = @defaultCallback) ->
+		cb(@sessions.length)
