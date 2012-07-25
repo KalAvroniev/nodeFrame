@@ -120,6 +120,9 @@ $.pv3.state.get = function (success) {
 				$.pv3.state.current = data;
 				if(success)
 					success();
+				$(document).ready(function () {
+					$(document).trigger('restore');
+				});
 			}
 		},
 		function (error) {
