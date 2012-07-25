@@ -2960,12 +2960,12 @@ input[type=number] {
 }
 
 
-/* ----------------------------- Global notice / growl msgs styles work --------------------------------- */
+/* -------------------------- Global task status / growl msgs styles work ----------------------------- */
 
 .task-status {
 	position: absolute;
-	z-index: 3; /* should be 3 in production */
-	width: 100%;
+	z-index: 3;
+	width: 100%;	
 	padding: 0 305px 0 0;		
 	top: 74px; left: 0;					
 }
@@ -3035,7 +3035,7 @@ input[type=number] {
 	font-size: 33px;
 	font-weight: 600;
 	float: left;
-	margin: 3px 35px 0 75px;
+	margin: 0 35px 0 75px;
 }
 .task-status.success h2:before {
 	content: "D";
@@ -3056,6 +3056,7 @@ input[type=number] {
 .task-status p {
 	font-size: 14px;
 	font-weight: 400;
+	min-height: 42px;
 	margin: 0 60px 0 180px;
 }
 .task-status.success p {
