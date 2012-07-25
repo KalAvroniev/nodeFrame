@@ -54,7 +54,8 @@ header#main
 
 #main-container.page-settings
 
-		h5#first-heading.ff-icon-before moo goes the cow
+		h5#first-heading.ff-icon-before currently logged in as: 
+			strong Andrew Chinn
 
 		a#go-pro(href="#")
 			strong.title.ff-icon-after Go Pro! 
@@ -131,7 +132,7 @@ header#main
 									label(for="text").control-label this is a text input
 									.controls
 										input#text(type="text", placeholder="anything goes")
-										span.hint this is a field help / tip text snippet
+										p.help-block this is a field help / tip text snippet
 														
 								.control-group.txt-input-row
 									label(for="number").control-label this input is number only
@@ -144,18 +145,20 @@ header#main
 											input#instant-bid(type="checkbox")	
 											| words in here about what an instant bid actually is
 		
-		
-								#select-box-replacement.btn-group
-									a.btn.btn-large.dropdown-toggle(href='javascript:void(0);', data-toggle='dropdown')
-											| select-box replacment
-											span.caret
-										ul.dropdown-menu
-											li
-												a(href='') Action 1
-											li
-												a(href='') Action 2
-											li
-												a(href='') Action 3
+								.control-group.dropdown-row		
+									label.control-label label for select box	
+									.controls		
+										#select-box-replacement.btn-group
+											a.btn.btn-large.dropdown-toggle(href='javascript:void(0);', data-toggle='dropdown')
+													| select-box replacment
+													span.caret
+												ul.dropdown-menu
+													li
+														a(href='') Action 1
+													li
+														a(href='') Action 2
+													li
+														a(href='') Action 3
 
 		
 								a.btn.btn-success.btn-large.ff-icon-before save form (submit)
