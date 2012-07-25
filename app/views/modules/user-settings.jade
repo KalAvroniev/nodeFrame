@@ -77,23 +77,24 @@ header#main
 				a(href='')#sys-notifications-btn.ff-icon-before System notification settings (coming soon)
 
 		
-		#user-settings-tab-panes.tab-content
+		#user-settings-tab-panes.tab-content.tabs-in-tabs
+			
 			#general.tab-pane.active
 				// h3#tab-section-heading 	
 								
 				ul#general-tabs.nav.nav-tabs.tabs-in-tabs
 		
 					li.active
-						a(href='') User profile &amp; membership
+						a(href='') user profile &amp; membership
 					li
-						a(href='') Login information
+						a(href='') login information
 					li
-						a(href='') Purchase history &amp; invoicies
+						a(href='') purchase history &amp; invoicies
 					li
-						a(href='') Credit usage / history
+						a(href='') credit usage / history
 				
 				#general-tab-panes.tab-content.tabs-in-tabs
-					#general.tab-pane.active
+					#user-profile.tab-pane.active
 					
 						#right-col
 							#account
@@ -129,7 +130,9 @@ header#main
 								.control-group.txt-input-row
 									label(for="text").control-label this is a text input
 									.controls
-										input#text(type="text", placeholder="anything goes")							
+										input#text(type="text", placeholder="anything goes")
+										span.hint this is a field help / tip text snippet
+														
 								.control-group.txt-input-row
 									label(for="number").control-label this input is number only
 									.controls
@@ -142,9 +145,9 @@ header#main
 											| words in here about what an instant bid actually is
 		
 		
-								#form-save.btn-group
+								#select-box-replacement.btn-group
 									a.btn.btn-large.dropdown-toggle(href='javascript:void(0);', data-toggle='dropdown')
-											| sort by?
+											| select-box replacment
 											span.caret
 										ul.dropdown-menu
 											li
@@ -155,7 +158,8 @@ header#main
 												a(href='') Action 3
 
 		
-		
+								a.btn.btn-success.btn-large.ff-icon-before save form (submit)
+
 		
 		
 		
