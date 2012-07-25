@@ -22,9 +22,11 @@ $( document ).ready(function() {
 
 		// toggle active UI state
 		$( this ).toggleClass("active");
+		
+		// update the state
+		$.pv3.state.update('system_options.toggles.' + $(this).attr('id'), $(this).hasClass("active"));
 	});
 
-	// TODO: this should all be replaced with code that relies on the <user/state> JSONRPC call (when it's implemented)
 	$("#toggle-condensed").toggleClass( "active", $(document.body).hasClass("condensed") );
 	$("#toggle-downgrade").toggleClass( "active", $(document.body).hasClass("mobile") );
 
@@ -48,6 +50,15 @@ $( document ).ready(function() {
 
 		// toggle active UI state
 		$( this ).toggleClass("active");
+	});
+});
+	
+// restore the state for the system options
+$(document).on('restore', function () {
+	$.each($.pv3.state.current.system_options.toggles, function (k, v) {
+		var id = "#ui-controls #" + k;
+		if((v && !$(id).hasClass('active')) || (!v && $(id).hasClass('active')))
+			$(id).click();
 	});
 });
 
