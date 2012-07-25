@@ -11,6 +11,9 @@ class exports.Application
 
 	socketIoServer = new SocketIoServer()
 	
+	constructor: (@options = {}) ->
+		# do nothing
+	
 	start: () ->
 		# register JSON-RPC methods
 		@jsonRpcServer = new JsonRpcServer(this)
@@ -53,8 +56,8 @@ class exports.Application
 		#)
 		
 		# listen
-		@app.listen(8181)
-		console.log("Server started.")
+		@app.listen(@options.port)
+		console.log("Server started on port " + @options.port + ".")
 		
 	@realUrl: (url) ->
 		if url.indexOf('?') >= 0
