@@ -1339,6 +1339,7 @@ header#main:before {
 }
 .sectional-tabs li.active {
 	float: right;
+	margin: 0 0 0 3px;
 }
 /*.sectional-tabs li:first-of-type {
 	float: right;
@@ -2287,7 +2288,13 @@ header#main:before {
 
 /* --------------------- */
 
-
+.light-grid-header {
+	float: left;
+	margin: 3px 40px 15px 20px;
+}
+.panel-tab-intro {
+	
+}
 .domain-details-table {
 	float: left;
 	width: 310px;
@@ -2395,10 +2402,10 @@ header#main:before {
 	border-bottom: 1px solid #97948c;
 }
 .light-gridview td {
-	padding: 10px 15px;
+	padding: 9px 15px 5px;
 	border: none;
 	background: #efece8;
-	line-height: 1.6em;	
+	line-height: 2.0em;	
 	border-top: 1px solid white;
 	border-bottom: 1px solid #d0cecb;
 }
@@ -2453,15 +2460,14 @@ header#main:before {
 	text-shadow: 0 0 5px rgba(81,81,81,0.65);
 }
 .light-gridview #domain-title-inputs {
-	width: 196px;	
+	width: 200px;	
 }
-.light-gridview #string-mode-selection {
-	display: inline-block;
-	margin: 0 0 0 5px;
+.light-gridview #domain-title-inputs {
+	margin: 0;
 }
 .light-gridview thead input#domain-title {
 	width: 85px;
-	vertical-align: top;
+	float: left;
 }
 .action-buttons a[title="Place bid / Buy"] {
 	padding: 7px 0 0 6px;
@@ -2521,6 +2527,7 @@ header#main:before {
 }
 .light-gridview thead input.txt-filter {
 	width: 100%;
+	height: auto;
 	min-width: 60px;
 	font-size: 13px;
 }
