@@ -25,7 +25,11 @@ class exports.Application
 		
 		# sessions
 		@app.use(express.cookieParser())
-		@app.use(express.session({ 'secret': "protrada", 'store': new SessionStore() }))
+		@app.use(express.session({
+			'secret': "protrada",
+			'store': new SessionStore(),
+			'maxAge': new Date(Date.now() + 1209600000)
+		}))
 		
 		# prepare user states
 		@states = new StateStore()
