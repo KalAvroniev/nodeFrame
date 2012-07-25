@@ -90,6 +90,26 @@ $.jade.renderSync = function (fn, obj, failure) {
 
 $.pv3 = {};
 
+$.pv3.growl = {};
+
+$.pv3.growl.hide = function () {
+	$('.task-status').css('display', 'none');
+}
+
+/**
+ * @param type 'success' or 'error'
+ * @param message HTML message (can be raw text
+ */
+$.pv3.growl.show = function (type, message) {
+	$.pv3.growl.hide();
+	$('.task-status').removeClass('success error');
+	$('.task-status').css('display', 'block');
+	$('.task-status').addClass(type);
+	$('.task-status').addClass('active');
+	$('.status-content h2').html(type);
+	$('.status-content p').html(message);
+}
+
 $.pv3.state = {};
 $.pv3.state.get = function (success) {
 	$.jsonrpc(
