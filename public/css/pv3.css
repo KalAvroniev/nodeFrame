@@ -2960,14 +2960,21 @@ input[type=number] {
 }
 
 
-/* ----------------------------- Global notice / growl msgs styles work --------------------------------- */
+/* -------------------------- Global task status / growl msgs styles work ----------------------------- */
 
 .task-status {
 	position: absolute;
-	z-index: 3; /* should be 3 in production */
-	width: 100%;
+	z-index: 3;
+	width: 100%;	
 	padding: 0 305px 0 0;		
-	top: 74px; left: 0;					
+	top: -80px; left: 0;					
+
+	-moz-transition: top .3s ease-in-out;
+	-webkit-transition: top .3s ease-in-out;
+   	transition: top .3s ease-in-out;	
+}
+.task-status.active {
+	top: 74px; 
 }
 .sidebar-hidden .task-status {
 	padding: 0;		
@@ -3035,7 +3042,8 @@ input[type=number] {
 	font-size: 33px;
 	font-weight: 600;
 	float: left;
-	margin: 3px 35px 0 75px;
+	margin: 0 35px 0 75px;
+	padding: 0 0 10px 0;
 }
 .task-status.success h2:before {
 	content: "D";
@@ -4378,7 +4386,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82b42c', end
 	font-weight: 400;
 	box-shadow: inset 0px 1px 0 rgba(0,0,0,0.3);
 	border: none;	
-	padding: 12px 15px;
 }
 .grid-table tbody .row-sel.child td, .grid-table tbody .row-sel.child:hover td {
 	border: none;
