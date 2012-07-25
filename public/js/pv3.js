@@ -54,6 +54,7 @@ $( document ).ready(function() {
 	$(".dropdown-toggle").dropdown();
 
 	// TODO: could this be taken care of with CSS (:hover, :active, :focus)?
+	// tim: Nope, that was how i made them to begin with, the interaction was spotty. this was a fallback.
 	// UX improvement on the spine nav buttons
 	$("#spine-inner").find("nav").find("a").mouseup(function() {
 		$( this ).removeClass("active");
