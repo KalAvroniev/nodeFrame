@@ -48,16 +48,31 @@ $( document ).ready(function() {
 
 		// toggle active UI state
 		$( this ).toggleClass("active");
+		
+		// update the state
+		var selected = $('#system-rocker').find("h3:not(.hidden)").attr('id');
+		$.pv3.state.update('system_options.mode', selected);
 	});
 });
 	
 // restore the state for the system options
 $(document).on('restore', function () {
-	$.each($.pv3.state.current.system_options.toggles, function (k, v) {
+	var state = $.pv3.state.current.system_options;
+	
+	// toggle switches
+	$.each(state.toggles, function (k, v) {
 		var id = "#ui-controls #" + k;
 		if((v && !$(id).hasClass('active')) || (!v && $(id).hasClass('active')))
 			$(id).click();
 	});
+	
+	// trading/devname
+	$("#system-rocker").find("h3").addClass('hidden');
+	$("#system-rocker #" + state.mode).removeClass('hidden');
+	
+	$("#mode-rocker").removeClass('active');
+	if(state.mode == 'devname')
+		$("#mode-rocker").addClass('active');
 });
 
 // setup open/close sidebar element functions
