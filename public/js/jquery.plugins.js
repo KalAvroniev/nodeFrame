@@ -141,8 +141,11 @@ $.pv3.state.restoreModule = function () {
 			
 			// restore panels
 			var modules = $.pv3.state.current.modules;
-			if(modules[modules.selected].panel.active != null)
-				$.pv3.panel.show(modules[modules.selected].panel.active.url, modules[modules.selected].panel.active.options);
+			if(modules[modules.selected] != undefined &&
+				modules[modules.selected].panel != undefined &&
+				modules[modules.selected].panel.active != null)
+				$.pv3.panel.show(modules[modules.selected].panel.active.url,
+					modules[modules.selected].panel.active.options);
 		}
 	});
 }
