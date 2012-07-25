@@ -9,22 +9,15 @@ html(lang='en')
 
 	body.sidebar-hidden.task-status-on
 		script
+			
 			// user agent sniffing is frowned upon :(
+			// tim: true, but not for the reasons that we use it. http://united-coders.com/matthias-reuter/user-agent-sniffing-is-back/ 
+			// in any case, maybe we should try one of these...(although they both still seem to use UA sniffing) http://notnotmobile.appspot.com/   or   http://www.justindocanto.com/scripts/detect-a-user-on-a-mobile-browser-or-device 
+			
 			if ( /Android|webOS|BlackBerry|iP(hone|ad|od)/i.test( navigator.userAgent ) ) {
 				document.body.className += " mobile";
+			
 			}
-
-		.notice.success
-			.notice-content
-				a.ff-icon-before.x-notice
-				h2.ff-icon-before Success
-				p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a nisi purus. Sed scelerisque magna quis quam consectetur fermentum. Quisque et nisi libero.
-
-		.notice.error
-			.notice-content
-				a.ff-icon-before.x-notice
-				h2.ff-icon-before Error
-				p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a nisi purus. Sed scelerisque magna quis quam consectetur fermentum. Quisque et nisi libero.
 
 		!= partial('partials/task-status')
 
