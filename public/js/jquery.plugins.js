@@ -120,6 +120,9 @@ $.pv3.state.get = function (success) {
 				$.pv3.state.current = data;
 				if(success)
 					success();
+				$(document).ready(function () {
+					$(document).trigger('restore');
+				});
 			}
 		},
 		function (error) {
@@ -205,6 +208,9 @@ $.pv3.panel.show = function (url, options) {
 					$('.standout-disabled').removeClass('standout-disabled').addClass('standout-tab');
 					return $.pv3.panel.hide();
 				});
+				
+				$('#section-panel').removeClass();
+				$('#section-panel').addClass(options.panel_size);
 			});
 		}
 	);

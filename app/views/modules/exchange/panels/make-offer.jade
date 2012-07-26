@@ -1,49 +1,45 @@
-#section-panel.mini-panel
-	#panel-content
-		.clearfix
-			a.x-panel(href='#')	
-			h2.panel-heading
-				strong make an offer
-				| on 
-				span.ff-icon-before.make-offer 'i-like-to-floss.com'
-			
-			p	Protrada will bid in domain auctions automatically on your behalf, all you have to do is set the maximum amount that you are willing to bid for this domain. 
-				strong * Unless "Place as Instant bid" is checked, Protrada will automatically place this bid within the last 3 mins of the domain auction.
-			
-			form#bid-amount-form.form-horizontal.panel-form.mini-panel-form
+h2.panel-heading
+	strong make an offer
+	| on 
+	span.ff-icon-before.make-offer 'i-like-to-floss.com'
+
+p	Protrada will bid in domain auctions automatically on your behalf, all you have to do is set the maximum amount that you are willing to bid for this domain. 
+	strong * Unless "Place as Instant bid" is checked, Protrada will automatically place this bid within the last 3 mins of the domain auction.
+
+form#bid-amount-form.form-horizontal.panel-form.mini-panel-form
+	
+	.control-group.txt-input-row
+		label(for="max-bid-value").control-label max-bid value
+		.controls
+			input#max-bid-value(type="number", placeholder="placed in USD")
+	
+	.control-group		
+		label(for="instant-bid").control-label place as 'instant bid'?		
+		.controls
+			label.checkbox
+				input#instant-bid(type="checkbox")	
+				| words in here about what an instant bid actually is
 				
-				.control-group.txt-input-row
-					label(for="max-bid-value").control-label max-bid value
-					.controls
-						input#max-bid-value(type="number", placeholder="placed in USD")
+	.control-group.txt-input-row		
+		label(for="cell-number-captcha").control-label txt me with updates		
+		.controls
+			input#cell-number-captcha(type="number", placeholder="incl. area code")
+
+	.control-group		
+		label(for="txt-me").control-label txt me with updates		
+		.controls
+			label.checkbox
+				input#txt-me(type="checkbox")	
+				| words in here about kinds of alerts they will get
 				
-				.control-group		
-					label(for="instant-bid").control-label place as 'instant bid'?		
-					.controls
-						label.checkbox
-							input#instant-bid(type="checkbox")	
-							| words in here about what an instant bid actually is
-							
-				.control-group.txt-input-row		
-					label(for="cell-number-captcha").control-label txt me with updates		
-					.controls
-						input#cell-number-captcha(type="number", placeholder="incl. area code")
-			
-				.control-group		
-					label(for="txt-me").control-label txt me with updates		
-					.controls
-						label.checkbox
-							input#txt-me(type="checkbox")	
-							| words in here about kinds of alerts they will get
-							
-							
-			#submit-bid-button.btn-group.dropup
-				a.btn.btn-success.btn-large.ff-icon-before make offer &amp; watch
-				a.btn.btn-success.btn-large.dropdown-toggle(data-toggle='dropdown')
-					span.caret
-				ul.dropdown-menu.pull-right
-					li
-						a(href="#") just watch
-					li.divider
-					li
-						a(href="#") do something else entirely!
+				
+#submit-bid-button.btn-group.dropup
+	a.btn.btn-success.btn-large.ff-icon-before make offer &amp; watch
+	a.btn.btn-success.btn-large.dropdown-toggle(data-toggle='dropdown')
+		span.caret
+	ul.dropdown-menu.pull-right
+		li
+			a(href="#") just watch
+		li.divider
+		li
+			a(href="#") do something else entirely!

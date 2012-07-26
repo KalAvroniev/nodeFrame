@@ -15,19 +15,22 @@ class exports.Controller extends Controller
 				'class': 'standout-tab',
 				'h1': 'import domains',
 				'h2': 'into portfolio',
-				'panel': '/modules/home/panels/import-domains'
+				'panel': '/modules/home/panels/import-domains',
+				'panel_size': 'mini-panel'
 			},
 			{
 				'id': 'export-data',
 				'h1': 'export all',
 				'h2': 'on-screen data',
-				'panel': '/panels/export-data'
+				'panel': '/panels/export-data',
+				'panel_size': 'mini-panel'
 			},
 			{
 				'id': 'list-forsale',
 				'h1': 'list domains',
 				'h2': 'for-sale',
-				'panel': '/modules/home/panels/list-forsale'
+				'panel': '/modules/home/panels/list-forsale',
+				'panel_size': 'panel'
 			}
 		]
 			

@@ -3,39 +3,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8181/" />
-<title>LoginSuccessful</title>
+<link rel="selenium.base" href="http://localhost:8182/" />
+<title>SystemOptionsLogout</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">LoginSuccessful</td></tr>
+<tr><td rowspan="1" colspan="3">SystemOptionsLogout</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>${baseUrl}/login</td>
+	<td>/home</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name=username</td>
-	<td>protrada</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=password</td>
-	<td>test</td>
+	<td>click</td>
+	<td>css=span.ff-icon-before</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=go login</td>
+	<td>//div[@id='user-options']/a[4]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertLocation</td>
-	<td>regexp:.*/home</td>
+	<td>regexp:.*/login</td>
 	<td></td>
 </tr>
+
 </tbody></table>
 </body>
 </html>
