@@ -77,12 +77,13 @@ $(document).on('restore', function () {
 
 // setup open/close sidebar element functions
 $( document ).on( "click", "#toggle-side-bar, #x-side-bar", function() {
+	
 	var $aside = $("aside");
 
 	$aside.toggleClass("active");
-	$( document.body ).toggleClass("sidebar-hidden");
+	$( document.body ).toggleClass("sidebar-hidden").toggleClass("sidebar-open");
 
-	// animate main body
+	// animate main body (the best way to force webkit to re-render children dom elements)
 	$("#main-container, .task-status").animate( { width: ($aside.hasClass("active") ? "99.999" : "100") + "%" }, 200 );
 
 	// update fake scrollbars
