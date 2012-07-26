@@ -208,6 +208,9 @@ $.pv3.panel.show = function (url, options) {
 					$('.standout-disabled').removeClass('standout-disabled').addClass('standout-tab');
 					return $.pv3.panel.hide();
 				});
+				
+				$('#section-panel').removeClass();
+				$('#section-panel').addClass(options.panel_size);
 			});
 		}
 	);
