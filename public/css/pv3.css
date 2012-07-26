@@ -1398,6 +1398,13 @@ header#main:before {
 .sectional-tabs li#list-forsale a:before {
 	content: "^";
 }
+.sectional-tabs li#watchlist a {
+	padding-left: 50px;	
+}
+.sectional-tabs li#watchlist a:before {
+	content: "L";
+	margin-left: -35px;	
+}
 
 
 
