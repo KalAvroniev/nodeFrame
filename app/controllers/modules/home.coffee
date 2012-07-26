@@ -11,15 +11,22 @@ class exports.Controller extends Controller
 		# tabs
 		res.view.tabs = [
 			{
-				'id': 'import-domains'
-				'h1': 'Import Domains',
-				'h2': 'import domains',
+				'id': 'import-domains',
+				'class': 'standout-tab',
+				'h1': 'import domains',
+				'h2': 'into portfolio',
 				'panel': '/modules/home/panels/import-domains'
 			},
 			{
-				'id': 'list-forsale'
-				'h1': 'List for Sale',
-				'h2': 'list for sale',
+				'id': 'export-data',
+				'h1': 'export',
+				'h2': 'on-screen data',
+				'panel': '/panels/export-data'
+			},
+			{
+				'id': 'list-forsale',
+				'h1': 'list domains',
+				'h2': 'for-sale',
 				'panel': '/modules/home/panels/list-forsale'
 			}
 		]
