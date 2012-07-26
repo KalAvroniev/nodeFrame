@@ -96,7 +96,7 @@ header#main
 						a(href='') credit usage / history
 				
 				#general-tab-panes.tab-content.tabs-in-tabs
-					#user-profile.tab-pane.active
+					#user-profile.tab-pane.active.clearfix
 					
 						#right-col
 							#account.clearfix
@@ -110,14 +110,19 @@ header#main
 								h5 some details about where this is seen maybe?								
 								
 								#avatar-img-container.ff-icon-before
-									\\ image content goes in here
+									// image content goes in here
 								
 								a.btn.btn-success.btn-large.ff-icon-before change
 								a.btn.btn-large.btn-danger.ff-icon-before delete
 							
 							#social-media.clearfix
 								h4 link up social media accounts
-								h5 some details about Protrada can use them							
+								h5 some details about Protrada can use them	
+								
+								.social-account.facebook.ff-icon-before
+									// facebook shit in here
+								.social-account.twitter.ff-icon-before
+									// twitter shit in here							
 								
 								a.btn.btn-success.btn-large.ff-icon-before link accounts
 								a.btn.btn-large.ff-icon-before unlink all
@@ -146,21 +151,16 @@ header#main
 											input#instant-bid(type="checkbox")	
 											| words in here about what an instant bid actually is
 		
-								.control-group.dropdown-row	
+								.control-group
 									label(for="instant-bid").control-label combo box replacement		
 									.controls
-										#select-box-replacement.btn-group
-											a.btn.btn-large.dropdown-toggle(href='javascript:void(0);', data-toggle='dropdown')
-													| select-box replacment
-													span.caret
-												ul.dropdown-menu
-													li
-														a(href='') Action 1
-													li
-														a(href='') Action 2
-													li
-														a(href='') Action 3
-											
+										select#select01
+												option something
+													option 2
+													option 3
+													option 4
+													option 5
+
 
 								.form-actions
 									a.btn.btn-success.btn-large.ff-icon-before save form (submit)

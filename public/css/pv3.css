@@ -4183,8 +4183,36 @@ aside header.alerts-header {
 #avatar .btn-success:before {
 	content: "F"	
 }
-
-
+.social-account {
+	width: 135px; height: 120px;
+	background: #e2dfdb;
+	float: left;
+	position: relative;
+	margin: 0 0 20px;
+	border: 1px dotted #c2bfba;	
+	border-radius: 5px;	
+}
+.social-account:before {
+	content: "Y";
+	top: 28px; left: 36px;
+	font-size: 63px;
+	line-height: 1;
+	position: absolute;
+	color: #d3d0cc;
+}
+.social-account.twitter:before {
+	content: "Z";
+}
+.social-account:nth-child(2n) {
+	float: right;
+}
+#social-media .btn {
+	float: right;
+	display: block;
+}
+#social-media .btn:nth-child(2n) {
+	margin: -2px 22px 0 0;
+}
 
 
 /* ---------------------------- Generic form styles work ---------------------------- */
@@ -4203,6 +4231,7 @@ aside header.alerts-header {
 }
 .radio input[type="radio"], .checkbox input[type="checkbox"] {
 	width: auto;
+	margin-left: -25px;
 }
 
 .form-horizontal input:focus {
@@ -4232,12 +4261,12 @@ aside header.alerts-header {
 .form-horizontal .controls {
     margin-left: 240px;
 }
-.form-horizontal .control-group:before, .form-horizontal .control-group:after {
+.form-horizontal .control-group:before, .form-horizontal .control-group:after, .form-horizontal .form-actions:before, .form-horizontal .form-actions:after {
 	
 	/* 
 	
-	this selector is set to 'display:table' by the bootstrap... dunno why that's needed.
-	it's also causing styling issues, so for now it's gone. 
+	these selectors are set to 'display:table' by the bootstrap... dunno why that's needed.
+	it's also causing styling issues, so for now - Bam! and it's gone. 
 	
 	*/
 	
@@ -4292,8 +4321,6 @@ aside header.alerts-header {
 .form-actions .btn-success {
 	box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255,255,255,0.3), 0 -3px 0 rgba(0, 0, 0, 0.08);
 }
-
-
 
 
 
@@ -5586,8 +5613,6 @@ select, input[type="file"] {
 	background: -ms-linear-gradient(top,  #657f0f 0%,#3a5603 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #657f0f 0%,#3a5603 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#657f0f', endColorstr='#3a5603',GradientType=0 ); /* IE6-9 */
-
-
 	
 }
 
