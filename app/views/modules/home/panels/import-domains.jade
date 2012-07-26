@@ -1,41 +1,36 @@
-#section-panel.mini-panel
-	#panel-content
-		.clearfix
+h2.panel-heading
+	strong import / update 
+	span.ff-icon-before.import  porfolio domain data 
+
+a#download-csv.btn.btn-info.btn-large.ff-icon-before download exmaple csv file
+
+p	
+	strong * Please use the csv import template provided.  
 	
-			a.x-panel(href='#')	
-			h2.panel-heading
-				strong import / update 
-				span.ff-icon-before.import  porfolio domain data 
+	| You can also view an annotated screenshot of the csv template, with explanations of each of the fields, click 
+	a(href="#").default here.
+
+form#upload-domains.form-horizontal.panel-form.mini-panel-form
+
+	h3#file-upload.panel-subhead update data by file upload
+	#file-upload-area
+		#drag-n-drop
+			p.ff-icon-after.asterisk you can simply 
+				strong drag the file 
+				| you wish to import into this area, or use the input below 
 		
-			a#download-csv.btn.btn-info.btn-large.ff-icon-before download exmaple csv file
-			
-			p	
-				strong * Please use the csv import template provided.  
-				
-				| You can also view an annotated screenshot of the csv template, with explanations of each of the fields, click 
-				a(href="#").default here.
-			
-			form#upload-domains.form-horizontal.panel-form.mini-panel-form
-			
-				h3#file-upload.panel-subhead update data by file upload
-				#file-upload-area
-					#drag-n-drop
-						p.ff-icon-after.asterisk you can simply 
-							strong drag the file 
-							| you wish to import into this area, or use the input below 
-					
-					input(type="file").input-file
-					
-				.or-txt 
-					span or
-				
-				h3#enter-multiline.panel-subhead manually enter domain names below
-				p 
-					strong * Note: 
-					| Please do not include www prefix and slash trailing at the end of domain names
-					
-				textarea#manual-domain-entry(placeholder="enter domains here",)	
-					
-					
-				input#submit(type="submit").hidden
-				a.btn.btn-success.btn-large.ff-icon-before continue (upload)	
+		input(type="file").input-file
+		
+	.or-txt 
+		span or
+	
+	h3#enter-multiline.panel-subhead manually enter domain names below
+	p 
+		strong * Note: 
+		| Please do not include www prefix and slash trailing at the end of domain names
+		
+	textarea#manual-domain-entry(placeholder="enter domains here",)	
+		
+		
+	input#submit(type="submit").hidden
+	a.btn.btn-success.btn-large.ff-icon-before continue (upload)	

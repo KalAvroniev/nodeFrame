@@ -15,13 +15,15 @@ class exports.Controller extends Controller
 				'class': 'standout-tab',				
 				'h1': 'my watchlist',
 				'h2': 'domains you star',
-				'panel': '/modules/exchange/panels/watchlist'
+				'panel': '/modules/exchange/panels/watchlist',
+				'panel_size': 'panel'
 			},
 			{
 				'id': 'export-data',
 				'h1': 'export all',
 				'h2': 'on-screen data',
-				'panel': '/panels/export-data'
+				'panel': '/panels/export-data',
+				'panel_size': 'mini-panel'
 			},
 		]
 		
