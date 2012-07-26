@@ -32,13 +32,11 @@ $( document ).ready(function() {
 
 	$("#toggle-sys-menu").on( "click", function( e ) {
 		e.preventDefault();
-
 		$( this ).add("#sys-menu").toggleClass("active");
     });
 
 	$("#x-sys-menu").on( "click", function( e ) {
 		e.preventDefault();
-
 		$("#sys-menu, #toggle-sys-menu").removeClass("active");
 	});
 

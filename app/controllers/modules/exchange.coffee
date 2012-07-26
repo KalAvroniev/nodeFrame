@@ -11,17 +11,18 @@ class exports.Controller extends Controller
 		# tabs
 		res.view.tabs = [
 			{
-				'id': 'watchlist'
-				'h1': 'My Watchlist',
+				'id': 'watchlist',
+				'class': 'standout-tab',				
+				'h1': 'my watchlist',
 				'h2': 'domains you star',
 				'panel': '/modules/exchange/panels/watchlist'
 			},
 			{
-				'id': 'export'
-				'h1': 'Export',
-				'h2': 'export data',
+				'id': 'export-data',
+				'h1': 'export all',
+				'h2': 'on-screen data',
 				'panel': '/panels/export-data'
-			}
+			},
 		]
 		
 		res.ready()

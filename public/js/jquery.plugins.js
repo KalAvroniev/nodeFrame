@@ -194,6 +194,7 @@ $.pv3.panel.show = function (url, options) {
 				
 				// set active tab
 				$('.sectional-tabs li').removeClass('active');
+				$('.sectional-tabs li.standout-tab').removeClass('standout-tab').addClass('standout-disabled');
 				$('.sectional-tabs #' + options.tabid).addClass('active');
 				
 				$('#section-panel').removeClass('hidden');
@@ -204,6 +205,7 @@ $.pv3.panel.show = function (url, options) {
 				// fix close handler
 				$("#import-export, .x-panel").unbind('click');
 				$("#import-export, .x-panel").click(function () {
+					$('.standout-disabled').removeClass('standout-disabled').addClass('standout-tab');
 					return $.pv3.panel.hide();
 				});
 			});
