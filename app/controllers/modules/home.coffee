@@ -19,7 +19,7 @@ class exports.Controller extends Controller
 			},
 			{
 				'id': 'export-data',
-				'h1': 'export',
+				'h1': 'export all',
 				'h2': 'on-screen data',
 				'panel': '/panels/export-data'
 			},
