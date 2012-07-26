@@ -6106,31 +6106,34 @@ body.no-bubbles #tiptip_holder {
 	}
 
 
-	/* Style tabs to be thin + without text labels, when the sidebar is open 
-	.sectional-tabs li a strong {
+	/* Style tabs to be thin + without text labels, when the sidebar is open  */
+	.sidebar-open .sectional-tabs li a strong {
 		display: inline;
 	}	
-	.sectional-tabs li a {
+	.sidebar-open .sectional-tabs li a {
 		text-indent: -3000em;
 		white-space: nowrap;
-		height: 56px;
-	}/*
-
+		height: 55px;
+	}
+	.sidebar-open .sectional-tabs li a:before {
+		text-indent: 0;	
+		margin: 0;
+	}	
 	
 	
-	/* Style tabs to be thick + show text labels, when the sidebar is hidden	
+	/* Style tabs to be thick + show text labels, when the sidebar is hidden */
 	.sidebar-hidden .sectional-tabs li a strong {
 		display: block;
-	
 	}
 	.sidebar-hidden .sectional-tabs li a {
-		text-indent: 0em;
-
-	}*/
-
+		text-indent: 0;
+		white-space: nowrap;
+		height: 55px;
+	}
+	.sidebar-hidden .sectional-tabs.singular li a, .sectional-tabs li.standout-tab a {
+		height: 87px;
+	}
 	
-
-
 
 	
 	
