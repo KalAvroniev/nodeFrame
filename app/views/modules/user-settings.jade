@@ -16,6 +16,7 @@ header#main
 			span.left-bars
 				span
 			span.right-bar
+		
 		- var klass = (tabs.length == 1 ? 'singular' : '');
 		ul.sectional-tabs(class=klass)
 			- for(var i = 0; i < tabs.length; ++i) {
@@ -95,28 +96,33 @@ header#main
 						a(href='') credit usage / history
 				
 				#general-tab-panes.tab-content.tabs-in-tabs
-					#user-profile.tab-pane.active
+					#user-profile.tab-pane.active.clearfix
 					
 						#right-col
-							#account
+							#account.clearfix
 								a.btn.btn-success.btn-large.ff-icon-before switch accounts
 								h4 account details
 								h5 
 									strong free member
 									| (this will never expire)
-							#avatar
+							#avatar.clearfix
 								h4 your avatar
 								h5 some details about where this is seen maybe?								
 								
-								#avatar-img-container
-									\\ image goes in here
+								#avatar-img-container.ff-icon-before
+									// image content goes in here
 								
 								a.btn.btn-success.btn-large.ff-icon-before change
-								a.btn.btn-large.ff-icon-before delete
+								a.btn.btn-large.btn-danger.ff-icon-before delete
 							
-							#social-media
+							#social-media.clearfix
 								h4 link up social media accounts
-								h5 some details about Protrada can use them							
+								h5 some details about Protrada can use them	
+								
+								.social-account.facebook.ff-icon-before
+									// facebook shit in here
+								.social-account.twitter.ff-icon-before
+									// twitter shit in here							
 								
 								a.btn.btn-success.btn-large.ff-icon-before link accounts
 								a.btn.btn-large.ff-icon-before unlink all
@@ -132,7 +138,7 @@ header#main
 									label(for="text").control-label this is a text input
 									.controls
 										input#text(type="text", placeholder="anything goes")
-										span.hint this is a field help / tip text snippet
+										p.help-block this is a field help / tip text snippet
 														
 								.control-group.txt-input-row
 									label(for="number").control-label this input is number only
@@ -145,24 +151,20 @@ header#main
 											input#instant-bid(type="checkbox")	
 											| words in here about what an instant bid actually is
 		
-		
-								#select-box-replacement.btn-group
-									a.btn.btn-large.dropdown-toggle(href='javascript:void(0);', data-toggle='dropdown')
-											| select-box replacment
-											span.caret
-										ul.dropdown-menu
-											li
-												a(href='') Action 1
-											li
-												a(href='') Action 2
-											li
-												a(href='') Action 3
+								.control-group
+									label(for="instant-bid").control-label combo box replacement		
+									.controls
+										select#select01
+												option something
+													option 2
+													option 3
+													option 4
+													option 5
+
 
 								.form-actions
 									a.btn.btn-success.btn-large.ff-icon-before save form (submit)
 
-		
-								a.btn.btn-success.btn-large.ff-icon-before save form (submit)
 
 		
 		
