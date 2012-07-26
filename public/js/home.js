@@ -1,20 +1,11 @@
-$( document ).ready(function() {
+(function() {
 	var domLoaded = 0,
 		tradingGraph = null,
 		scrollContainer;
 
-	/*$(document).one({
-		ready: onDomLoad
-	});
-
-	$('#main-container').one({
-		ajaxLoaded: onDomLoad
-	});*/
-
 	$("#main-container").one( "ajaxLoad", function() {
 		$(".ajax-spinner").show();
-	});
-	$("#main-container").one({ ajaxUnload: onDomUnload });
+	}).one({ ajaxUnload: onDomUnload });
 
 	function onDomLoad() {
 		domLoaded++;
@@ -183,14 +174,14 @@ $( document ).ready(function() {
 		graph.wrap(graphContainer);
 
 		graphContainer = graph.parent();
-			
+
 		// scrolling area
 		if ( minWidthBetweenMarks * dataMarks < containerWidth ) {
 			// recalculate the difference between the graph marks
 			minWidthBetweenMarks = containerWidth / dataMarks;
 		}
 
-		scrollContainer = $('<div class="tiny-scrollbar-horiz" style="position: relative; width: ' + containerWidth + 'px; height: ' + containerHeight + 'px"><div class="viewport"><div class="overview"></div></div></div>');
+		scrollContainer = $( "<div class=\"tiny-scrollbar-horiz\" style=\"position: relative; width: " + containerWidth + "px; height: " + containerHeight + "px\"><div class=\"viewport\"><div class=\"overview\"></div></div></div>" );
 
 		graphContainer.wrap( scrollContainer );
 
@@ -201,9 +192,9 @@ $( document ).ready(function() {
 		// widen the graph area to be able to fit the whole graph
 		containerWidth = minWidthBetweenMarks * dataMarks;
 		graph.css( "width", containerWidth );
-		graphContainer.closest( ".overview" ).css( "width", containerWidth );
+		graphContainer.closest(".overview").css( "width", containerWidth );
 
-		$(scrollContainer).tinyscrollbar({
+		$( scrollContainer ).tinyscrollbar({
 			axis: "x",
 			scroll: false
 		});
@@ -232,7 +223,7 @@ $( document ).ready(function() {
 				dataSet.push( settings[set].data[valueIndex] );
 			}
 
-			// 'forward' 1 time interval
+			// "forward" 1 time interval
 			dataSet.push([ newLastDate, last[1] ]);
 
 			dataArray.push( dataSet );
@@ -249,8 +240,8 @@ $( document ).ready(function() {
 		}
 
 		// minimum and maxium marks on the graph
-		var min = new Date(dataArray[0][0][0].getTime()),
-			max = new Date(dataArray[0][dataArray[0].length - 1][0].getTime());
+		var min = new Date( dataArray[0][0][0].getTime() ),
+			max = new Date( dataArray[0][dataArray[0].length - 1][0].getTime() );
 
 		tradingGraph = $.jqplot(
 			elementId,
@@ -346,11 +337,10 @@ $( document ).ready(function() {
 					}
 				}
 			}
-
 		);
 
 		// shift the graph so the dots aren't visible on the left hand side
 		var tickSteps = graph.width() / tradingGraph.axes.x2axis.numberTicks;
-		graph.css('margin-left', '-' + (tickSteps / 2) + 'px');
+		graph.css( "margin-left", "-" + (tickSteps / 2) + "px" );
 	}
 })();

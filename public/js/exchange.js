@@ -1,14 +1,6 @@
 (function() {
 	var domLoaded = 0;
 
-	/*$(document).one({
-		ready: onDomLoad
-	});
-
-	$('#main-container').one({
-		ajaxLoaded: onDomLoad
-	});*/
-
 	$("#main-container").one({ ajaxUnload: onDomUnload });
 
 	function onDomLoad() {

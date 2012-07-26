@@ -22,13 +22,13 @@ $( document ).ready(function() {
 
 		// toggle active UI state
 		$( this ).toggleClass("active");
-		
+
 		// update the state
-		$.pv3.state.update('system_options.toggles.' + $(this).attr('id'), $(this).hasClass("active"));
+		$.pv3.state.update( "system_options.toggles." + this.id, $( this ).hasClass("active") );
 	});
 
-	$("#toggle-condensed").toggleClass( "active", $(document.body).hasClass("condensed") );
-	$("#toggle-downgrade").toggleClass( "active", $(document.body).hasClass("mobile") );
+	$("#toggle-condensed").toggleClass( "active", $( document.body ).hasClass("condensed") );
+	$("#toggle-downgrade").toggleClass( "active", $( document.body ).hasClass("mobile") );
 
 	$("#toggle-sys-menu").on( "click", function( e ) {
 		e.preventDefault();
@@ -48,36 +48,37 @@ $( document ).ready(function() {
 
 		// toggle active UI state
 		$( this ).toggleClass("active");
-		
+
 		// update the state
-		var selected = $('#system-rocker').find("h3:not(.hidden)").attr('id');
-		$.pv3.state.update('system_options.mode', selected);
+		$.pv3.state.update( "system_options.mode", $("#system-rocker").find("h3").not(".hidden").attr("id") );
 	});
 });
-	
+
 // restore the state for the system options
-$(document).on('restore', function () {
+$( document ).on( "restore", function() {
 	var state = $.pv3.state.current.system_options;
-	
+
 	// toggle switches
-	$.each(state.toggles, function (k, v) {
+	$.each( state.toggles, function( k, v ) {
 		var id = "#ui-controls #" + k;
-		if((v && !$(id).hasClass('active')) || (!v && $(id).hasClass('active')))
-			$(id).click();
+
+		if ( (v && !$( id ).hasClass("active")) || (!v && $( id ).hasClass("active")) ) {
+			$( id ).click();
+		}
 	});
-	
+
 	// trading/devname
-	$("#system-rocker").find("h3").addClass('hidden');
-	$("#system-rocker #" + state.mode).removeClass('hidden');
-	
-	$("#mode-rocker").removeClass('active');
-	if(state.mode == 'devname')
-		$("#mode-rocker").addClass('active');
+	$("#system-rocker").find("h3").addClass("hidden").find( "#" + state.mode ).removeClass("hidden");
+	$("#mode-rocker").removeClass("active");
+
+	if ( state.mode === "devname" ) {
+		$("#mode-rocker").addClass("active");
+	}
 });
 
 // setup open/close sidebar element functions
 $( document ).on( "click", "#toggle-side-bar, #x-side-bar", function() {
-	
+
 	var $aside = $("aside");
 
 	$aside.toggleClass("active");
