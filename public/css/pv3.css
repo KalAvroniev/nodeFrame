@@ -1438,7 +1438,7 @@ header#main:before {
 	background: #FCF9F5;
 	color: #333333;
 	
-	box-shadow: 0 0 12px rgba(255,255,255,0.7), inset 0 1px 0px rgba(255,255,255,1);	
+	box-shadow: 0 0 14px rgba(255,255,255,0.75), inset 0 1px 0px rgba(255,255,255,1);	
 }
 #quick-search .btn-group {
 	display: inline-block;
@@ -1514,7 +1514,7 @@ header#main:before {
 	color: #333333;
 	text-shadow: none;
 	
-	box-shadow: 0 0 12px rgba(255,255,255,0.7), inset 0 1px 0px rgba(255,255,255,1);	
+	box-shadow: 0 0 14px rgba(255,255,255,0.75), inset 0 1px 0px rgba(255,255,255,1);	
 }
 #x-side-bar {
 	width: 90px;
