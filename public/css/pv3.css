@@ -4005,6 +4005,7 @@ aside header.alerts-header {
 /* --------------------------------- User settings styles work ------------------------------------ */ 
 
 #main-container .nav-tabs a.ff-icon-before {
+	padding: 17px 20px 20px;
 }
 #main-container .nav-tabs a.ff-icon-before:before {
 	content: "p";
@@ -4021,7 +4022,7 @@ aside header.alerts-header {
 #main-container .nav-tabs a#sys-notifications-btn:before {
 	content: "r";
 }
-#main-container .tab-content.tabs-in-tabs {
+#main-container .tab-content .tabs-in-tabs {
 	box-shadow: none;		
 }
 #main-container .tab-content.tabs-in-tabs {
@@ -4058,6 +4059,10 @@ aside header.alerts-header {
 	padding: 0;
 	margin: 0 0 30px 0;
 }
+#external-accounts .tabs-in-tabs-headings {
+	margin: 10px 15% 0 0;
+	border: none;
+}
 .tabs-in-tabs-headings h2 {
 	margin: 0;
 	padding: 0;
@@ -4068,16 +4073,19 @@ aside header.alerts-header {
 	float: none;
 }
 .tabs-in-tabs-headings h3 {
-	margin: 20px 0 30px;
+	margin: 15px 0 25px;
 	font-size: 15px;
-	line-height: 1;
+	line-height: 1.45em;
 	padding: 0 0 0 35px;
 	position: relative;
+}
+#external-accounts .tabs-in-tabs-headings h3 {
+	margin: 32px 0 25px;
 }
 .tabs-in-tabs-headings h3:before {
 	content: "*";
 	position: absolute;
-	top: -2px; left: 0;
+	top: 6px; left: 0;
 	font-size: 32px;
 	font-weight: 400;
 }
