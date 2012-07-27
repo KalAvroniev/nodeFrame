@@ -3,8 +3,8 @@
 != partial("partials/styles")
 - }
 
+script(src="/js/user-settings.js")
 != partial("partials/header")
-
 != partial("partials/panel")
 
 #main-container.page-settings
@@ -25,9 +25,9 @@
 		
 		ul#user-settings-tabs.nav.nav-tabs
 
-			li.active
-				a(href='#general')#general-btn.ff-icon-before General / user settings
 			li
+				a(href='#general')#general-btn.ff-icon-before General / user settings
+			li.active
 				a(href='#external-accounts')#external-accounts-btn.ff-icon-before External account linkage
 			li
 				a(href='#system-notifications')#sys-notifications-btn.ff-icon-before System notification settings (coming soon)
@@ -41,13 +41,13 @@
 				ul#general-tabs.nav.nav-tabs.tabs-in-tabs
 		
 					li.active
-						a(href='#user-profile') user profile &amp; membership
+						a(href='#user-profile')#user-profile user profile &amp; membership
 					li
-						a(href='#login-information') login information
+						a(href='#login-information')#login-information login information
 					li
-						a(href='#purchase-history') purchase history &amp; invoicies
+						a(href='#purchase-history')#purchase-history purchase history &amp; invoicies
 					li
-						a(href='#credit-use') credit usage / history
+						a(href='#credit-use')#credit-use credit usage / history
 				
 				#general-tab-panes.tab-content.tabs-in-tabs
 					#user-profile.tab-pane.active.clearfix
@@ -82,7 +82,7 @@
 								a.btn.btn-large.ff-icon-before unlink all
 							
 						#left-col
-							hgroup#tabs-in-tabs-headings
+							hgroup.tabs-in-tabs-headings
 								h2 update your details below
 								h3 use this section to update/edit any of your personal details
 							
@@ -109,11 +109,11 @@
 									label(for="instant-bid").control-label combo box replacement		
 									.controls
 										select#select01
-												option something
-													option 2
-													option 3
-													option 4
-													option 5
+											option something
+												option 2
+												option 3
+												option 4
+												option 5
 
 
 								.form-actions
@@ -125,11 +125,66 @@
 		
 					#purchase-history.tab-pane.clearfix
 		
-						hgroup#tabs-in-tabs-headings
+						#show-only.btn-group
+							a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+								| show only
+								span.caret
+							ul.dropdown-menu
+								li
+									a(href='') tomorrow
+								li
+									a(href='') 2 days
+								li
+									a(href='') date range	
+									
+						hgroup.tabs-in-tabs-headings
 							h2 view all of your purchase history
 							h3 you can also download invoices for all purchases, no matter how old.	
 		
-		
+						
+						table.simple-data-grid
+							thead
+								tr
+									th date
+									th type
+									th invoice
+									th amount paid
+									th description
+							tbody
+								tr
+									td.date 20
+										sup th 
+										| May, 2012
+										
+									td Purchase 
+									td 
+										a(href="").default Download
+									td.currency 150.00
+									td 
+										p This is Photoshop's version  of Lorem Ipsum. Proin gravida 
+						
+								tr
+									td.date 20
+										sup th 
+										| May, 2012
+										
+									td Purchase 
+									td 
+										a(href="").default Download
+									td.currency 150.00
+									td 
+										p Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin. 					
+								tr
+									td.date 20
+										sup th 
+										| May, 2012
+										
+									td Somthing else 
+									td 
+										a(href="").default Download
+									td.currency 150.00
+									td 
+										p Aenean sollicitudin, lorem quis						
 		
 		
 					#credit-use.tab-pane.clearfix
@@ -139,6 +194,3 @@
 			#external-accounts.tab-pane.active
 
 			#system-notifications.tab-pane.active
-
-		
-		
