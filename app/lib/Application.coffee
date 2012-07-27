@@ -137,10 +137,8 @@ class exports.Application
 		# run
 		controller = new (require("../controllers" + url + ".coffee").Controller)
 		res.view = {}
-		controller.run(
-			req,
-			res
-		)
+		if controller.init == undefined || controller.init(req, res)
+			controller.run(req, res)
 	
 	jsonRpcRequest: (req, res) ->
 		@jsonRpcServer.handleRequest(req, res)
