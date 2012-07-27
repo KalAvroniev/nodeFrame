@@ -7,11 +7,11 @@
 		stickyHeaderEnabled = true;
 
 	function onDomLoad() {
-		domLoaded++;
+		++domLoaded;
 
-		/*if (domLoaded > 1) {
+		if ( domLoaded > 1 ) {
 			return;
-		}*/
+		}
 
 		loadDataIntoTable();
 
@@ -23,9 +23,9 @@
 
 		$("#main-container").on( "click", ".grid-table .sticky", toggleSticky );
 
-		$(".grid-table").children("tbody").on( "click", ".domain-title-cntnr .copy-to-clipboard", preventEvent )
-			.on( "click", "td button.favourite", toggleFavourite );
-			.on( "click", "td button.select", toggleSelect );
+		/*$(".grid-table").children("tbody").on( "click", ".domain-title-cntnr .copy-to-clipboard", preventEvent )
+			.on( "click", "td button.favourite", toggleFavourite )
+			.on( "click", "td button.select", toggleSelect )
 			.on("click", "td:not(#zero-alert)", function() {
 				var $this = $( this ),
 					$row = $this.closest("tr"),
@@ -55,7 +55,7 @@
 						$row.next().fadeIn();
 					}
 				}
-			});
+			});*/
 
 		$( window ).on( "resize", windowResize ).on( "scroll", windowScroll );
 		$( verticalScroll + ", " + horizontalScroll ).on( "resize", copyHeaderSize );
@@ -113,8 +113,8 @@
 
 		$("#main-container").off("click", ".grid-table th.sticky", toggleSticky);
 
-		$(".grid-table").children("tbody").off( "click", ".domain-title-cntnr .copy-to-clipboard", preventEvent );
-			.off( "click", "td button.favourite", toggleFavourite );
+		$(".grid-table").children("tbody").off( "click", ".domain-title-cntnr .copy-to-clipboard", preventEvent )
+			.off( "click", "td button.favourite", toggleFavourite )
 			.off( "click", "td button.select", toggleSelect );
 
 		$( window ).off( "resize", windowResize ).off( "scroll", windowScroll );
@@ -143,7 +143,7 @@
 			$( document.body ).removeClass("sticky-thead");
 		} else {
 			stickyHeaderEnabled = true;
-			spans.addClass("on")removeClass("off");
+			spans.addClass("on").removeClass("off");
 		}
 
 		UpdateTableHeaders();
@@ -288,7 +288,7 @@
 	function loadDataIntoTable() {
 		var tableData, table;
 
-		if ( typeof exchangeDomainResults === "undefined" || exchangeDomainResults == null ) {
+		if ( typeof exchangeDomainResults === "undefined" || exchangeDomainResults === null ) {
 			return;
 		}
 
@@ -323,11 +323,11 @@
 					<td class="currency">' + domain.auction_details[0].auction_price + '</td> \
 					<td>' + domain.auction_details[0].auction_bidders + '</td> \
 					<td>' + domain.domain.chars + '</td> \
-					<td>' + (domain.domain.dash ? '✔' : '-') + '</td> \
+					<td>' + (domain.domain.dash ? '?' : '-') + '</td> \
 					<td>' + domain.domain.tld + '</td> \
-					<td>' + (domain.tld_available.com != '0' ? '✔' : '✘') + '</td> \
-					<td>' + (domain.tld_available.net != '0' ? '✔' : '✘') + '</td> \
-					<td>' + (domain.tld_available.org != '0' ? '✔' : '✘') + '</td> \
+					<td>' + (domain.tld_available.com != '0' ? '?' : '?') + '</td> \
+					<td>' + (domain.tld_available.net != '0' ? '?' : '?') + '</td> \
+					<td>' + (domain.tld_available.org != '0' ? '?' : '?') + '</td> \
 					<td>' + domain.pagerank.pagerank + '</td> \
 					<td>' + domain.backlinks.edu + '</td> \
 					<td>' + domain.backlinks.gov + '</td> \

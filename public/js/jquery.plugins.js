@@ -2,7 +2,7 @@
 $.jsonrpc = function (method, params, success, failure, options) {
 	if(options == undefined)
 		options = {};
-	
+
 	if(failure == undefined) {
 		failure = function (errMsg, errCode) {
 			console.error("Error " + errCode + ": " + errMsg);
@@ -12,7 +12,7 @@ $.jsonrpc = function (method, params, success, failure, options) {
 		success = function (data) {
 		}
 	}
-	
+
 	var ajax = {
 		type: 'POST',
 		url: '/jsonrpc',
@@ -33,7 +33,7 @@ $.jsonrpc = function (method, params, success, failure, options) {
 			return failure(textStatus, 0);
 		}
 	};
-	
+
 	if(options.async != undefined)
 		ajax.async = options.async;
 
@@ -42,7 +42,7 @@ $.jsonrpc = function (method, params, success, failure, options) {
 $.jsonrpcSync = function (method, params, success, failure, options) {
 	if(options == undefined)
 		options = {};
-	
+
 	options.async = false;
 	return $.jsonrpc(method, params, success, failure, options);
 }
@@ -53,7 +53,7 @@ $.ajaxPanel = function (url, success, failure) {
 			alert("Error " + errCode + ": " + errMsg);
 		}
 	}
-	
+
 	$.ajax({
 		type: 'GET',
 		url: url,
@@ -71,7 +71,7 @@ $.jade.getTemplate = function (url, success, options) {
 	var fn = 'views_' + fnRaw;
 	if(document[fn] != undefined)
 		return success(fn);
-	
+
 	// we need to load it
 	$.ajax({
 		url: url + ".jade",
@@ -98,7 +98,7 @@ $.jade.renderSync = function (fn, obj, failure) {
 		});
 		return r;
 	}
-	
+
 	return document[fn](
 		obj,
 		attrs,
@@ -130,70 +130,71 @@ $.pv3.growl.show = function (type, message) {
 }
 
 $.pv3.state = {};
-$.pv3.state.get = function (success, options) {
-	$.jsonrpc(
-		'user/get-state',
-		{},
-		function (data) {
-			if(data != undefined) {
+$.pv3.state.get = function( success, options ) {
+	$.jsonrpc( "user/get-state", {}, function( data ) {
+			if ( data !== undefined ) {
 				$.pv3.state.current = data;
-				if(success)
+
+				if ( success ) {
 					success();
-				$(document).ready(function () {
-					$(document).trigger('restore');
+				}
+
+				$( document ).ready(function() {
+					$( this ).trigger("restore");
 				});
 			}
-		},
-		function (error) {
-			console.error(error);
+		}, function ( error ) {
+			console.error( error );
 		},
 		options
 	);
-}
+};
 $.pv3.state.restoreModule = function () {
-	var module = (!$.pv3.state.current.modules.selected || $.pv3.state.current.modules.selected == '') ? 'home' : $.pv3.state.current.modules.selected;
-	window.history.pushState('', module, "/" + module);
+	var module = ( !$.pv3.state.current.modules.selected || $.pv3.state.current.modules.selected === "" ) ? "home" : $.pv3.state.current.modules.selected;
+
+	window.history.pushState( "", module, "/" + module );
+
 	$("#main-container").trigger("ajaxUnload");
-	$.pv3.state.update('modules.selected', module);
-	$.ajax('/modules/' + module + '?ajax=1', {
-		'success': function (data) {
-			$('#ajax-container').html(data);
-			$('.selected').removeClass("selected");
-			$('#spine-inner nav li a#nav-' + module).parent().addClass("selected");
+	$.pv3.state.update( "modules.selected", module );
+
+	$.ajax( "/modules/" + module + "?ajax=1", {
+		success: function( data ) {
+			$("#ajax-container").html( data );
+			$(".selected").removeClass("selected");
+			$( "#spine-inner nav li a#nav-" + module ).parent().addClass("selected");
 			$(".ajax-spinner").hide();
-			
+
 			// restore panels
 			var modules = $.pv3.state.current.modules;
-			if(modules[modules.selected] != undefined &&
-				modules[modules.selected].panel != undefined &&
-				modules[modules.selected].panel.active != null)
-				$.pv3.panel.show(modules[modules.selected].panel.active.url,
-					modules[modules.selected].panel.active.options);
+
+			if ( modules[ modules.selected ] != undefined && modules[ modules.selected ].panel != undefined && modules[ modules.selected ].panel.active != null ) {
+				$.pv3.panel.show( modules[ modules.selected ].panel.active.url, modules[ modules.selected ].panel.active.options );
+			}
 		}
 	});
-}
-$.pv3.state.restore = function () {
-	$(document).ready(function () {
-		if($.pv3.state.current == undefined) {
-			$.pv3.state.get(function () {
-				if($.pv3.state.current.modules != undefined && $.pv3.state.current.modules.selected != undefined)
-					$.pv3.state.restoreModule($.pv3.state.current.modules);
+};
+$.pv3.state.restore = function() {
+	$( document ).ready(function() {
+		if ( $.pv3.state.current === undefined ) {
+			$.pv3.state.get(function() {
+				if ( $.pv3.state.current.modules !== undefined && $.pv3.state.current.modules.selected !== undefined ) {
+					$.pv3.state.restoreModule( $.pv3.state.current.modules );
+				}
 			});
 		}
 	});
-}
-$.pv3.state.update = function (stateName, stateValue) {
-	$.jsonrpc(
-		'user/update-state',
-		{ 'name': stateName, 'value': stateValue },
-		function (result) {
+};
+$.pv3.state.update = function( stateName, stateValue ) {
+	$.jsonrpc( "user/update-state", {
+			name: stateName,
+			value: stateValue
+		}, function ( result ) {
 			$.pv3.state.current = result;
-		},
-		function (error) {
-			console.error(error);
+		}, function ( error ) {
+			console.error( error );
 		}
 	);
-}
+};
 
 $.pv3.panel = {};
 $.pv3.panel.show = function (url, options) {
@@ -211,32 +212,32 @@ $.pv3.panel.show = function (url, options) {
 				// nofify the server that the active tab has changed
 				console.log($.pv3.state.current);
 				$.pv3.state.update('modules.' + $.pv3.state.current.modules.selected + '.panel.active', {'url': url, 'options': options});
-				
+
 				// set active tab
 				$('.sectional-tabs li').removeClass('active');
 				$('.sectional-tabs li.standout-tab').removeClass('standout-tab').addClass('standout-disabled');
 				$('.sectional-tabs #' + options.tabid).addClass('active');
-				
+
 				// set the active tab to be the first child of the UL
 				$(".sectional-tabs").reorderActiveElement();
-				
+
 				$('#section-panel').removeClass('hidden');
 				$('.ajax-panel-content').html($.jade.renderSync(fn, obj, function (err, file, line) {
 					$('.ajax-panel-content').html("Error in " + file + " at line " + line + ": " + err);
 				}));
-				
+
 				// fix close handler
 				$("#import-export, .x-panel").unbind('click');
 				$("#import-export, .x-panel").click(function () {
 					$('.standout-disabled').removeClass('standout-disabled').addClass('standout-tab');
-					
+
 					// restore the standout tab to be the first child of the UL
 					$(".sectional-tabs").restoreStandoutElement();
-					
+
 					return $.pv3.panel.hide();
-					
+
 				});
-				
+
 				$('#section-panel').removeClass();
 				$('#section-panel').addClass(options.panel_size);
 			});
@@ -260,7 +261,7 @@ $.pv3.panel.hide = function () {
 		$("#section-panel").addClass("hidden")
 		$(".sectional-tabs .active").removeClass("active");
 	}
-	
+
 	// notify the server that the active tab has changed
 	$.pv3.state.update('modules.' + $.pv3.state.current.modules.selected + '.panel.active', null);
 }
