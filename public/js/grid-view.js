@@ -23,7 +23,7 @@
 
 		$("#main-container").on( "click", ".grid-table .sticky", toggleSticky );
 
-		/*$(".grid-table").children("tbody").on( "click", ".domain-title-cntnr .copy-to-clipboard", preventEvent )
+		$(".grid-table").children("tbody").on( "click", ".domain-title-cntnr .copy-to-clipboard", preventEvent )
 			.on( "click", "td button.favourite", toggleFavourite )
 			.on( "click", "td button.select", toggleSelect )
 			.on("click", "td:not(#zero-alert)", function() {
@@ -55,7 +55,7 @@
 						$row.next().fadeIn();
 					}
 				}
-			});*/
+			});
 
 		$( window ).on( "resize", windowResize ).on( "scroll", windowScroll );
 		$( verticalScroll + ", " + horizontalScroll ).on( "resize", copyHeaderSize );
