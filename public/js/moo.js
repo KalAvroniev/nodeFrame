@@ -84,6 +84,27 @@ $( document ).on( "click", ".x-alert-msg", function() {
 	});
 });
 
+
+
+// tabs
+$( document ).on( "click", ".nav-tabs li a", function( e ) {
+	e.preventDefault();
+	$( this ).tab("show");
+});
+ 
+ 
+$( document ).on( "click", "#alert-msgs a", function( e ) {
+	e.preventDefault();
+ 
+	$( this ).tab("show");
+ 
+	// update fake scrollbars
+	$("#notifications").not(".native").tinyscrollbar_update("relative");
+	
+});
+
+
+
 // restore the state for the system options
 $( document ).on( "restore", function() {
 	var state = $.pv3.state.current.system_options;
@@ -120,3 +141,5 @@ $( document ).on( "restore", function() {
 		}
 	}
 });
+
+

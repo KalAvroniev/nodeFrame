@@ -725,8 +725,8 @@ body.login {
 	position: relative;
 }
 #login-container.error {
-	-moz-animation: shake 0.7s linear;
-	-webkit-animation: shake 0.7s linear;	
+	-moz-animation: shake 0.5s linear;
+	-webkit-animation: shake 0.5s linear;	
 }
 @-moz-keyframes shake {
 	0% { padding: 0; }
