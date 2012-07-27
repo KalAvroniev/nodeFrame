@@ -1,17 +1,17 @@
 #spine
 	#spine-inner
-		
+
 		a#toggle-sys-menu(href='', title='Protrada system menu')
 			span.ff-icon-before
-		
+
 		#sys-menu
-		
+
 			#sys-menu-title-bar
 				a#x-sys-menu.ff-icon-before(href='#')
 				h4
-					| system 
+					| system
 					strong options
-		
+
 			#user-options
 				h4.side-on user options
 				#credits
@@ -30,19 +30,19 @@
 				a#toggle-help-bubbles.ff-icon-before(href='#') toggle display of help bubbles (for new users)
 				a#toggle-condensed.ff-icon-before(href='#') toggle condensed view (for small screens)
 				a#toggle-downgrade.ff-icon-before(href='#') downgrade interface details (for better performance)
-		
+
 			#system-rocker.clearfix
 				h4.side-on system
-				h3.ff-icon-before.devname.hidden#devname
+				h3#devname.ff-icon-before.devname.hidden
 					| monetize
 					br
 					| mode
-				h3.ff-icon-before.protrada#protrada
+				h3#protrada.ff-icon-before.protrada
 					| trading
 					br
 					| mode
-				a#mode-rocker(href='#')
-		
+				a#mode-rocker(href="#")
+
 		nav
 			ul
 				li
@@ -51,22 +51,22 @@
 				li
 					a#nav-exchange.ff-icon-before(href="javascript:$.pv3.state.current.modules.selected = 'exchange'; $.pv3.state.restoreModule()")
 					span the domain exchange
-					
+
 				li
 					a#nav-user-settings.ff-icon-before(href="javascript:$.pv3.state.current.modules.selected = 'user-settings'; $.pv3.state.restoreModule()")
-					span user settings					
-					
-					
-					
-				// not active/in-use yet ----------	
-				//		
+					span user settings
+
+
+
+				// not active/in-use yet ----------
+				//
 				//li
 				//	a#nav-education.ff-icon-before(href='javascript:void(0);')
 				//	span 'domaining' education
 				//li
 				//	a#nav-cart.ff-icon-before(href='javascript:void(0);')
 				//	span shopping cart
-		
+
 		a#system-help.ff-icon-after(href='')
 			| system
 			strong help
