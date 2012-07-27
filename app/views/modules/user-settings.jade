@@ -128,7 +128,7 @@ header#main
 								a.btn.btn-large.ff-icon-before unlink all
 							
 						#left-col
-							hgroup#tabs-in-tabs-headings
+							hgroup.tabs-in-tabs-headings
 								h2 update your details below
 								h3 use this section to update/edit any of your personal details
 							
@@ -155,11 +155,11 @@ header#main
 									label(for="instant-bid").control-label combo box replacement		
 									.controls
 										select#select01
-												option something
-													option 2
-													option 3
-													option 4
-													option 5
+											option something
+												option 2
+												option 3
+												option 4
+												option 5
 
 
 								.form-actions
@@ -171,11 +171,66 @@ header#main
 		
 					#purchase-history.tab-pane.clearfix
 		
-						hgroup#tabs-in-tabs-headings
+						#show-only.btn-group
+							a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+								| show only
+								span.caret
+							ul.dropdown-menu
+								li
+									a(href='') tomorrow
+								li
+									a(href='') 2 days
+								li
+									a(href='') date range	
+									
+						hgroup.tabs-in-tabs-headings
 							h2 view all of your purchase history
 							h3 you can also download invoices for all purchases, no matter how old.	
 		
-		
+						
+						table.simple-data-grid
+							thead
+								tr
+									th date
+									th type
+									th invoice
+									th amount paid
+									th description
+							tbody
+								tr
+									td.date 20
+										sup th 
+										| May, 2012
+										
+									td Purchase 
+									td 
+										a(href="").default Download
+									td.currency 150.00
+									td 
+										p This is Photoshop's version  of Lorem Ipsum. Proin gravida 
+						
+								tr
+									td.date 20
+										sup th 
+										| May, 2012
+										
+									td Purchase 
+									td 
+										a(href="").default Download
+									td.currency 150.00
+									td 
+										p Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin. 					
+								tr
+									td.date 20
+										sup th 
+										| May, 2012
+										
+									td Somthing else 
+									td 
+										a(href="").default Download
+									td.currency 150.00
+									td 
+										p Aenean sollicitudin, lorem quis						
 		
 		
 					#credit-use.tab-pane.clearfix
