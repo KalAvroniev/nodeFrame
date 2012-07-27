@@ -62,7 +62,7 @@ function toggleSidebar(e) {
 	$( document.body ).toggleClass("sidebar-hidden").toggleClass("sidebar-open");
 
 	// animate main body (the best way to force webkit to re-render children dom elements)
-	$("#main-container, .task-status").animate( { width: ($aside.hasClass("active") ? "99.999" : "100") + "%" }, 200 );
+	$("#main-container, .task-status").delay( $( document.body ).hasClass("sidebar-hidden") ? 200 : 0 ).animate( { width: ($aside.hasClass("active") ? "99.999" : "100") + "%" }, 200 );
 
 	// update fake scrollbars
 	$("#notifications").not(".native").tinyscrollbar_update("relative");
