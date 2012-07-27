@@ -4237,7 +4237,8 @@ aside header.alerts-header {
 }
 
 
-#purchase-history .tabs-in-tabs-headings {
+#purchase-history .tabs-in-tabs-headings,
+#credit-use .tabs-in-tabs-headings {
 	margin: 0 200px 2px 0;
 }
 .simple-data-grid {
@@ -4273,6 +4274,65 @@ aside header.alerts-header {
 #show-only {
 	float: right;
 }
+
+#your-credits {
+	float: right;
+}
+
+#your-credits .credits {
+	float: left;
+	position: relative;
+	z-index: 1;
+	margin: 0 10px 0 0;
+	padding: 11px 15px;
+	border-radius: 4px;
+	color: #6e3312;
+	font-size: 14px;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+	background: #dcd9d6;
+	box-shadow: inset 0 2px 0 rgba(0,0,0,0.13), 0 1px 0 rgba(255,255,255,0.5);
+}
+
+#your-credits .credits > div:first-child {
+	float: left;
+}
+
+#your-credits .credits div:nth-child(2) {
+	float: right;
+	margin: 0 0 0 30px;
+	font-size: 36px;
+	font-weight: 700;
+	letter-spacing: -2px;
+}
+
+#your-credits .credits strong {
+	display: block;
+	font-size: 21px;
+}
+
+#your-credits .credits strong:before {
+	content: "R";
+}
+
+#your-credits .btn {
+	float: right;
+}
+
+#your-credits .btn:before {
+	content: "-";
+	display: block;
+}
+
+#credit-use > table .ff-icon-before:before {
+	content: "R";
+	font-size: 12px;
+	line-height: 1;
+	font-weight: 400;
+	margin: 0 6px 0 0;
+	display: inline-block;
+	vertical-align: middle;
+}
+
 #user-settings-tab-panes .btn-group > .btn {
 	background: #f9f9f9;
 	color: #4c4b4a;

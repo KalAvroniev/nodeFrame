@@ -9,113 +9,113 @@ script(src="/js/user-settings.js")
 
 #main-container.page-settings
 
-		h5#first-heading.ff-icon-before currently logged in as: 
+		h5#first-heading.ff-icon-before currently logged in as:
 			strong Andrew Chinn
 
 		a#go-pro(href="#")
-			strong.title.ff-icon-after Go Pro! 
-			span.sub-text Soo many features, 
+			strong.title.ff-icon-after Go Pro!
+			span.sub-text Soo many features,
 				strong just $xx a month!
-		
+
 		div#section-headings
-			
-			h1 
-				strong user settings 
+
+			h1
+				strong user settings
 				| &amp; control panel area
-		
+
 		ul#user-settings-tabs.nav.nav-tabs
 
 			li.active
-				a(href='#general')#general-btn.ff-icon-before 
+				a(href='#general')#general-btn.ff-icon-before
 					| general / user settings
 			li
-				a(href='#external-accounts')#external-accounts-btn.ff-icon-before 
+				a(href='#external-accounts')#external-accounts-btn.ff-icon-before
 					| external account linkage
 			li
-				a(href='#system-notifications')#sys-notifications-btn.ff-icon-before 
+				a(href='#system-notifications')#sys-notifications-btn.ff-icon-before
 					| system notification settings (coming soon)
 
-		
+
 		#user-settings-tab-panes.tab-content.tabs-in-tabs
-			
+
 			#general.tab-pane.active
-				// h3#tab-section-heading 	
-								
+				// h3#tab-section-heading
+
 				ul#general-tabs.nav.nav-tabs.tabs-in-tabs
-		
+
 					li.active
-						a(href='#user-profile')#general-user-profile 
+						a(href='#user-profile')#general-user-profile
 							| user profile &amp; membership
 					li
-						a(href='#login-information')#general-login-information 
+						a(href='#login-information')#general-login-information
 							| login information
 					li
-						a(href='#purchase-history')#general-purchase-history 
+						a(href='#purchase-history')#general-purchase-history
 							| purchase history &amp; invoicies
-				
+
 					li
-						a(href='#credit-use')#general-credit-use 
+						a(href='#credit-use')#general-credit-use
 							| credit usage / history
-				
+
 				#general-tab-panes.tab-content.tabs-in-tabs
-					
+
 					#user-profile.tab-pane.active.clearfix
-					
+
 						#right-col
 							#account.clearfix
 								a.btn.btn-success.btn-large.ff-icon-before switch accounts
 								h4 account details
-								h5 
+								h5
 									strong free member
 									| (this will never expire)
 							#avatar.clearfix
 								h4 your avatar
-								h5 some details about where this is seen maybe?								
-								
+								h5 some details about where this is seen maybe?
+
 								#avatar-img-container.ff-icon-before
 									// image content goes in here
-								
+
 								a.btn.btn-success.btn-large.ff-icon-before change
 								a.btn.btn-large.btn-danger.ff-icon-before delete
-							
+
 							#social-media.clearfix
 								h4 link up social media accounts
-								h5 some details about Protrada can use them	
-								
+								h5 some details about Protrada can use them
+
 								.social-account.facebook.ff-icon-before
 									// facebook shit in here
 								.social-account.twitter.ff-icon-before
-									// twitter shit in here							
-								
+									// twitter shit in here
+
 								a.btn.btn-success.btn-large.ff-icon-before link accounts
 								a.btn.btn-large.ff-icon-before unlink all
-							
+
 						#left-col
 							hgroup.tabs-in-tabs-headings
 								h2 update your details below
 								h3 use this section to update/edit any of your personal details
-							
+
 							form#update-details.form-horizontal
-								
+
 								.control-group.txt-input-row
 									label(for="text").control-label this is a text input
 									.controls
 										input#text(type="text", placeholder="anything goes")
 										p.help-block this is a field help / tip text snippet
-														
+
 								.control-group.txt-input-row
 									label(for="number").control-label this input is number only
 									.controls
-										input#number(type="number", placeholder="numeric only")						
-								.control-group		
-									label(for="instant-bid").control-label place as 'instant bid'?		
+										input#number(type="number", placeholder="numeric only")
+								.control-group
+									label(for="instant-bid").control-label place as 'instant bid'?
 									.controls
 										label.checkbox
-											input#instant-bid(type="checkbox")	
+											input#instant-bid(type="checkbox")
 											| words in here about what an instant bid actually is
-		
+
 								.control-group
-									label(for="instant-bid").control-label combo box replacement		
+									label(for="instant-bid").control-label combo box replacement
 									.controls
 										select#select01
 											option something
@@ -129,11 +129,11 @@ script(src="/js/user-settings.js")
 									a.btn.btn-success.btn-large.ff-icon-before save form (submit)
 
 
-		
+
 					#login-information.tab-pane.clearfix
-		
+
 					#purchase-history.tab-pane.clearfix
-		
+
 						#show-only.btn-group
 							a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
 								| show only
@@ -144,13 +144,13 @@ script(src="/js/user-settings.js")
 								li
 									a(href='') 2 days
 								li
-									a(href='') date range	
-									
+									a(href='') date range
+
 						hgroup.tabs-in-tabs-headings
 							h2 view all of your purchase history
-							h3 you can also download invoices for all purchases, no matter how old.	
-		
-						
+							h3 you can also download invoices for all purchases, no matter how old.
+
+
 						table.simple-data-grid
 							thead
 								tr
@@ -162,106 +162,160 @@ script(src="/js/user-settings.js")
 							tbody
 								tr
 									td.date 20
-										sup th 
+										sup th
 										| May, 2012
-										
-									td Purchase 
-									td 
+
+									td Purchase
+									td
 										a(href="").default Download
 									td.currency 150.00
-									td 
-										p This is Photoshop's version  of Lorem Ipsum. Proin gravida 
-						
+									td
+										p This is Photoshop's version  of Lorem Ipsum. Proin gravida
+
 								tr
 									td.date 20
-										sup th 
+										sup th
 										| May, 2012
-										
-									td Purchase 
-									td 
+
+									td Purchase
+									td
 										a(href="").default Download
 									td.currency 150.00
-									td 
-										p Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin. 					
+									td
+										p Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin.
 								tr
 									td.date 20
-										sup th 
+										sup th
 										| May, 2012
-										
-									td Somthing else 
-									td 
+
+									td Somthing else
+									td
 										a(href="").default Download
 									td.currency 150.00
-									td 
-										p Aenean sollicitudin, lorem quis						
-		
-		
+									td
+										p Aenean sollicitudin, lorem quis
+
 					#credit-use.tab-pane.clearfix
-		
-		
-		
+
+						#your-credits
+							.credits
+								div your system
+									strong.ff-icon-before credits
+								div 657
+							a.btn.btn-success.btn-large.ff-icon-before buy more
+
+						hgroup.tabs-in-tabs-headings
+							h2 view all credit based transactions
+							h3 anything you have done within the system that costs credits appears in here.
+
+						table.simple-data-grid
+							thead
+								tr
+									th date / time
+									th action
+									th debt
+									th credit
+									th balance
+									th details
+							tbody
+								tr
+									td.date 21
+										sup st
+										| May, 2012
+										| @ 18:53
+									td Trading hosting website
+									td.ff-icon-before -20
+									td
+									td.ff-icon-before 580
+									td
+										p This is Photoshop's version  of Lorem Ipsum. Proin gravida
+
+								tr
+									td.date 19
+										sup th
+										| May, 2012
+										| @ 18:53
+									td Trading hosting website
+									td.ff-icon-before -20
+									td
+									td.ff-icon-before 600
+									td
+										p Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin.
+
+								tr
+									td.date 19
+										sup th
+										| May, 2012
+										| @ 18:53
+									td Something else
+									td.ff-icon-before -60
+									td
+									td.ff-icon-before 620
+									td
+										p Aenean sollicitudin, lorem quis
+
 			#external-accounts.tab-pane
-			
+
 				hgroup.tabs-in-tabs-headings
 					h2 link your external accounts below
-					h3 to automate and perform services on your belhaf, our trading system needs to be able to link up with several of your external monetization and auction accounts.	
-					
+					h3 to automate and perform services on your belhaf, our trading system needs to be able to link up with several of your external monetization and auction accounts.
+
 				ul#external-acc-tabs.nav.nav-tabs.tabs-in-tabs
-		
+
 					li.active
-						a(href='#all-linkable')#external-acc-user-profile 
+						a(href='#all-linkable')#external-acc-user-profile
 							| all linkable accounts
 					li
-						a(href='#only-trading')#external-acc-only-trading 
+						a(href='#only-trading')#external-acc-only-trading
 							| only trading accounts
 					li
-						a(href='#only-development')#external-acc-only-development 
+						a(href='#only-development')#external-acc-only-development
 							| only development accounts
 
-				
+
 				#external-acc-tab-panes.tab-content.tabs-in-tabs
-					
+
 					#all-linkable.tab-pane.active.clearfix
-					
-						
+
+
 						hgroup.account-types
 							h4 buying accounts
-							h5 external buying accounts are needed to purchase any domain within our trading system	
-											
+							h5 external buying accounts are needed to purchase any domain within our trading system
+
 						ul.account-selection.has-open-edit.clearfix
 							li.open-for-edit
 								a.x-open-for-edit.ff-icon-before(href="")
-							
+
 								.sources-sprite(source="GoDaddy")
-						
+
 								h5 GoDaddy auctions
-								
+
 								a.btn.btn-success.btn-large.ff-icon-before change
-								
-								span.account-username username: 
+
+								span.account-username username:
 									strong everblaze@gmail.com
 
 							li
 								a.sources-sprite(source="Namejet")
-						
+
 							li
 								a.sources-sprite(source="Afternic")
-								
+
 							li
-								a.sources-sprite(source="Snap Names")								
-								
+								a.sources-sprite(source="Snap Names")
+
 							li
-								a.sources-sprite(source="Pool.com")								
-								
+								a.sources-sprite(source="Pool.com")
+
 							li.more-coming-soon
 								span.ff-icon-before more providers
 									strong coming soon...
-								
-								
-													
+
+
+
 					#only-trading.tab-pane.clearfix
-					
+
 					#only-dev.tab-pane.clearfix
-															
+
 
 			#system-notifications.tab-pane
