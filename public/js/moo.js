@@ -132,8 +132,6 @@ $( document ).on( "restore", function() {
 	if(sidebar != undefined) {
 		// show/hide
 		if(sidebar.visible != undefined) {
-			console.log(sidebar.visible);
-			console.log($( document.body ).hasClass("sidebar-hidden"));
 			if((sidebar.visible && $( document.body ).hasClass("sidebar-hidden")) ||
 				(!sidebar.visible && !$( document.body ).hasClass("sidebar-hidden"))) {
 					(function () { toggleSidebar(); })();

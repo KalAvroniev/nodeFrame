@@ -3,6 +3,28 @@
 != partial('partials/styles')
 - }
 
+script(src="/js/user-settings.js")
+		
+script
+	function refreshExchangeDate() {
+		function pad(num) {
+			if(num < 10)
+				return '0' + num;
+			return num;
+		}
+		
+		var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+		var postDate = ['', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th','th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th', 'th', 'st'];
+		var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+		var now = new Date();
+		
+		$('#first-heading').html(days[now.getDay()] + " " + now.getDate() + '<sup>' +
+			postDate[now.getDate()] + '</sup> ' + months[now.getMonth()] + ' ' + now.getFullYear() +
+			', <strong>' + now.getHours() + ':' + pad(now.getMinutes()) + '</strong>');
+	}
+	refreshExchangeDate();
+	setInterval(refreshExchangeDate, 1000);
+
 header#main
 
 	#toggle-side-bar.ff-icon-before
@@ -71,9 +93,9 @@ header#main
 		
 		ul#user-settings-tabs.nav.nav-tabs
 
-			li.active
-				a(href='#general')#general-btn.ff-icon-before General / user settings
 			li
+				a(href='#general')#general-btn.ff-icon-before General / user settings
+			li.active
 				a(href='#external-accounts')#external-accounts-btn.ff-icon-before External account linkage
 			li
 				a(href='#system-notifications')#sys-notifications-btn.ff-icon-before System notification settings (coming soon)
@@ -87,13 +109,13 @@ header#main
 				ul#general-tabs.nav.nav-tabs.tabs-in-tabs
 		
 					li.active
-						a(href='#user-profile') user profile &amp; membership
+						a(href='#user-profile')#user-profile user profile &amp; membership
 					li
-						a(href='#login-information') login information
+						a(href='#login-information')#login-information login information
 					li
-						a(href='#purchase-history') purchase history &amp; invoicies
+						a(href='#purchase-history')#purchase-history purchase history &amp; invoicies
 					li
-						a(href='#credit-use') credit usage / history
+						a(href='#credit-use')#credit-use credit usage / history
 				
 				#general-tab-panes.tab-content.tabs-in-tabs
 					#user-profile.tab-pane.active.clearfix
@@ -185,6 +207,3 @@ header#main
 			#external-accounts.tab-pane.active
 
 			#system-notifications.tab-pane.active
-
-		
-		
