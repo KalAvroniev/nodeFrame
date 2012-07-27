@@ -25,7 +25,7 @@ script(src="/js/user-settings.js")
 		
 		ul#user-settings-tabs.nav.nav-tabs
 
-			li
+			li.active
 				a(href='#general')#general-btn.ff-icon-before 
 					| general / user settings
 			li
@@ -52,11 +52,13 @@ script(src="/js/user-settings.js")
 					li
 						a(href='#purchase-history')#general-purchase-history 
 							| purchase history &amp; invoicies
+				
 					li
 						a(href='#credit-use')#general-credit-use 
 							| credit usage / history
 				
 				#general-tab-panes.tab-content.tabs-in-tabs
+					
 					#user-profile.tab-pane.active.clearfix
 					
 						#right-col
@@ -202,7 +204,64 @@ script(src="/js/user-settings.js")
 			
 				hgroup.tabs-in-tabs-headings
 					h2 link your external accounts below
-					h3 to automate and perform services on your belhaf, our trading system needs to be able to link up with several of your external monetization and auction accounts.		
-			
+					h3 to automate and perform services on your belhaf, our trading system needs to be able to link up with several of your external monetization and auction accounts.	
+					
+				ul#external-acc-tabs.nav.nav-tabs.tabs-in-tabs
+		
+					li.active
+						a(href='#all-linkable')#external-acc-user-profile 
+							| all linkable accounts
+					li
+						a(href='#only-trading')#external-acc-only-trading 
+							| only trading accounts
+					li
+						a(href='#only-development')#external-acc-only-development 
+							| only development accounts
+
+				
+				#external-acc-tab-panes.tab-content.tabs-in-tabs
+					
+					#all-linkable.tab-pane.active.clearfix
+					
+						
+						hgroup.account-types
+							h4 buying accounts
+							h5 external buying accounts are needed to purchase any domain within our trading system	
+											
+						ul.account-selection.has-open-edit.clearfix
+							li.open-for-edit
+								a.x-open-for-edit.ff-icon-before(href="")
+							
+								.sources-sprite(source="GoDaddy")
+						
+								h5 GoDaddy auctions
+								
+								a.btn.btn-success.btn-large.ff-icon-before change
+								
+								span.account-username username: 
+									strong everblaze@gmail.com
+
+							li
+								a.sources-sprite(source="Namejet")
+						
+							li
+								a.sources-sprite(source="Afternic")
+								
+							li
+								a.sources-sprite(source="Snap Names")								
+								
+							li
+								a.sources-sprite(source="Pool.com")								
+								
+							li.more-coming-soon
+								span.ff-icon-before more providers
+									strong coming soon...
+								
+								
+													
+					#only-trading.tab-pane.clearfix
+					
+					#only-dev.tab-pane.clearfix
+															
 
 			#system-notifications.tab-pane

@@ -4080,7 +4080,7 @@ aside header.alerts-header {
 	position: relative;
 }
 #external-accounts .tabs-in-tabs-headings h3 {
-	margin: 32px 0 25px;
+	margin: 32px 0;
 }
 .tabs-in-tabs-headings h3:before {
 	content: "*";
@@ -4293,16 +4293,127 @@ aside header.alerts-header {
 	font-size: 10px;
 }
 
+.account-selection {
+	list-style: none;	
+	margin: 30px 0 0 0;
+}
+.account-selection.has-open-edit {
+	padding: 0 0 0 243px;
+	position: relative;
+}
+.account-selection li {
+	float: left;
+	margin: 0 13px 13px 0;
+	background: #f9f9f9;
+	box-shadow: inset 0 1px 0 white, 0 2px 4px rgba(0,0,0,0.12);
+	border-radius: 4px;
+	padding: 25px 0 0 22px;	
+	width: 222px; height: 80px;
+	cursor: pointer;
+}
+.account-selection li.open-for-edit {
+	position: absolute;
+	left: 0; top: 0;
+	background: #d5d1cd;
+	float: none;
+	cursor: default;
+	margin: 0;
+	padding: 20px 15px;
+	box-shadow: 0 1px 0 rgba(255,255,255,0.3), inset 0 2px 4px rgba(0,0,0,0.3);	
+	width: 230px; height: 100%;
+}
+.account-selection li:not(.open-for-edit) .sources-sprite:before {
+	height: 40px; width: 50px;
+	border-radius: 4px;
+	margin: -5px 16px 0 0;
+}
+.account-selection .sources-sprite:after {
+	font-size: 20px;
+	font-weight: 600;
+	letter-spacing: -1px;
+}
+.account-selection .open-for-edit .sources-sprite:after {
+	color: #4b4743;
+}
+.account-selection li:not(.open-for-edit) .sources-sprite[source="Namejet"]:before {
+	background-position: -232px -5px;
+}
+.account-selection li:not(.open-for-edit) .sources-sprite[source="GoDaddy"]:before {
+	background-position: -1px -6px;
+}
+.account-selection li:not(.open-for-edit) .sources-sprite[source="Afternic"]:before {
+	background-position: -117px -8px;
+}
+.account-selection li:not(.open-for-edit) .sources-sprite[source="Snap Names"]:before {
+	background-position: -290px -7px;
+}
+.account-selection .btn-success {
+	float: right;
+	margin: 0 0 0 10px;
+	box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255,255,255,0.3), 0 -3px 0 rgba(0, 0, 0, 0.08);
+}
+.account-selection .open-for-edit .sources-sprite:before {
+	margin: -5px 12px 0 0;
+}
+.x-open-for-edit {
+	position: absolute;
+	z-index: 1;
+	color: #4B4743;
+	font-size: 23px;
+	line-height: 1;
+	top: 18px; right: 16px;
+	padding: 2px 4px;
+	border-radius: 4px;
+}
+.x-open-for-edit:before {
+	content: "y";
+}
+.x-open-for-edit:hover {
+	background: rgba(0,0,0,0.1);
+}
+.open-for-edit .sources-sprite {
+	margin: 0 40px 0 0;
+}
+.open-for-edit h5 {
+	font-size: 15px;
+	margin: 25px 0 20px;
+	color: #4B4743;
+}
+.open-for-edit .account-username {
+	color: #4B4743;
+	line-height: 1.4em;
+}
+.account-username strong {
+	display: block;
+	width: 108px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.account-types h4 {
+	font-size: 23px;
+	margin: 0;
+}
+.account-types h5 {
+	font-size: 12px;
+	line-height: 1.5em;
+	width: 40%;
+	margin: 0 0 0 30px;
+	padding: 0 0 0 60px;
+	position: relative;
+}
+.account-types h5:before {
+	position: absolute;
+	top: 8px; left: 0;
+	content: "*";
+	font-size: 30px;
+}
 
-
-
-
-
-
-
-
-
-
+.account-types * {
+	color: #94918e;
+	display: inline-block;	
+	vertical-align: top;
+}
 
 
 
@@ -6084,7 +6195,7 @@ body.no-bubbles #tiptip_holder {
 
 /* -------------------- Detuned mode styles work here -------------------------- */
 
-.mobile #spine-inner, .mobile .grid-table tbody tr, .mobile .grid-table #zero-alert span, .mobile .grid-table tbody td, .mobile .grid-table tbody tr:hover td, .mobile #spine-inner > nav li > span, .mobile #main-container .nav-tabs > .active > a, .mobile #main-container .nav-tabs > .active > a:hover, .mobile #main-container .tab-content, .mobile #sys-menu, .mobile #aside-inset-shadow, .mobile #connect-popup, .mobile #status-summary, .mobile .alerts-summary > span, .mobile .alerts-summary > span span.hover-bubble
+.mobile #spine-inner, .mobile .grid-table tbody tr, .mobile .grid-table #zero-alert span, .mobile .grid-table tbody td, .mobile .grid-table tbody tr:hover td, .mobile #spine-inner > nav li > span, .mobile #main-container .nav-tabs > .active > a, .mobile #main-container .nav-tabs > .active > a:hover, .mobile #main-container .tab-content, .mobile #sys-menu, .mobile #aside-inset-shadow, .mobile #connect-popup, .mobile #status-summary, .mobile .alerts-summary > span, .mobile .alerts-summary > span span.hover-bubble, .mobile #panel-content
 {
 	box-shadow: none !important;
 }
