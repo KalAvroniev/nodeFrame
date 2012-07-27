@@ -26,11 +26,14 @@ script(src="/js/user-settings.js")
 		ul#user-settings-tabs.nav.nav-tabs
 
 			li
-				a(href='#general')#general-btn.ff-icon-before General / user settings
+				a(href='#general')#general-btn.ff-icon-before 
+					| general / user settings
 			li
-				a(href='#external-accounts')#external-accounts-btn.ff-icon-before External account linkage
+				a(href='#external-accounts')#external-accounts-btn.ff-icon-before 
+					| external account linkage
 			li
-				a(href='#system-notifications')#sys-notifications-btn.ff-icon-before system notification settings (coming soon)
+				a(href='#system-notifications')#sys-notifications-btn.ff-icon-before 
+					| system notification settings (coming soon)
 
 		
 		#user-settings-tab-panes.tab-content.tabs-in-tabs
@@ -41,13 +44,17 @@ script(src="/js/user-settings.js")
 				ul#general-tabs.nav.nav-tabs.tabs-in-tabs
 		
 					li.active
-						a(href='#user-profile')#user-profile user profile &amp; membership
+						a(href='#user-profile')#general-user-profile 
+							| user profile &amp; membership
 					li
-						a(href='#login-information')#login-information login information
+						a(href='#login-information')#general-login-information 
+							| login information
 					li
-						a(href='#purchase-history')#purchase-history purchase history &amp; invoicies
+						a(href='#purchase-history')#general-purchase-history 
+							| purchase history &amp; invoicies
 					li
-						a(href='#credit-use')#credit-use credit usage / history
+						a(href='#credit-use')#general-credit-use 
+							| credit usage / history
 				
 				#general-tab-panes.tab-content.tabs-in-tabs
 					#user-profile.tab-pane.active.clearfix
