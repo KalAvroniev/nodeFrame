@@ -12,13 +12,17 @@ fs.readFile('vows-results.txt', 'ascii', (err, data) ->
 		process.exit(1)
 	
 	# check selenium
-	fs.readFile('selenium/Result.html', 'ascii', (err, data) ->
-		if err
-			console.error("Could not open file: %s", err)
-			process.exit(1)
+	checkResult = (path) =>
+		fs.readFile(path, 'ascii', (err, data) ->
+			if err
+				console.error("Could not open file: %s", err)
+				process.exit(1)
+			
+			if data.match(/<td>failed<\/td>/)
+				console.error("Selenium tests failed.")
+				process.exit(1)
+		)
 		
-		if data.match(/<td>failed<\/td>/)
-			console.error("Selenium tests failed.")
-			process.exit(1)
-	)
+	checkResult('selenium/results/Firefox.html')
+	checkResult('selenium/results/Chrome.html')
 )

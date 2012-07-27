@@ -32,9 +32,15 @@ class exports.StateStore
 			cb(null)
 		)
 	
+	reset: (user_id, cb) ->
+		@users[user_id] = new UserState()
+		@save(() =>
+			cb(@users[user_id])
+		)
+	
 	update: (user_id, name, value, cb) ->
 		if not @users[user_id]
-			@users[user_id] = {}
+			@users[user_id] = new UserState()
 		
 		parts = name.split(/\./)
 		for part, i in parts

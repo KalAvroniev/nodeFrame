@@ -3,17 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:8181/" />
-<title>LoginSuccessful</title>
+<link rel="selenium.base" href="http://localhost:8182/" />
+<title>ResetUserState</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">LoginSuccessful</td></tr>
+<tr><td rowspan="1" colspan="3">ResetUserState</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/login</td>
+	<td>/</td>
 	<td></td>
 </tr>
 <tr>
@@ -22,25 +22,16 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name=username</td>
-	<td>protrada</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
+	<td>3000</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name=password</td>
-	<td>test</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=go login</td>
+	<td>storeEval</td>
+	<td>var window = this.browserbot.getUserWindow(); window.$.jsonrpcSync('user/reset-state', {}); window.$.pv3.state.get(function () {}, { 'async': false })</td>
 	<td></td>
 </tr>
-<tr>
-	<td>assertLocation</td>
-	<td>regexp:.*/home</td>
-	<td></td>
-</tr>
+
 </tbody></table>
 </body>
 </html>

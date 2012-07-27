@@ -54,33 +54,8 @@ $( document ).ready(function() {
 	});
 });
 
-
-
-// restore the state for the system options
-$( document ).on( "restore", function() {
-	var state = $.pv3.state.current.system_options;
-
-	// toggle switches
-	$.each( state.toggles, function( k, v ) {
-		var id = "#ui-controls #" + k;
-
-		if ( (v && !$( id ).hasClass("active")) || (!v && $( id ).hasClass("active")) ) {
-			$( id ).click();
-		}
-	});
-
-	// trading/devname
-	$("#system-rocker").find("h3").addClass("hidden").find( "#" + state.mode ).removeClass("hidden");
-	$("#mode-rocker").removeClass("active");
-
-	if ( state.mode === "devname" ) {
-		$("#mode-rocker").addClass("active");
-	}
-});
-
 // setup open/close sidebar element functions
-$( document ).on( "click", "#toggle-side-bar, #x-side-bar", function() {
-
+function toggleSidebar(e) {
 	var $aside = $("aside");
 
 	$aside.toggleClass("active");
@@ -91,6 +66,12 @@ $( document ).on( "click", "#toggle-side-bar, #x-side-bar", function() {
 
 	// update fake scrollbars
 	$("#notifications").not(".native").tinyscrollbar_update("relative");
+};
+$( document ).on( "click", "#toggle-side-bar, #x-side-bar", function (e) {
+	toggleSidebar();
+
+	// update the state
+	$.pv3.state.update( "sidebar.visible", !$( document.body ).hasClass("sidebar-hidden") );
 });
 
 // remove alert item from sidebar
@@ -103,24 +84,39 @@ $( document ).on( "click", ".x-alert-msg", function() {
 	});
 });
 
-
-// init bootstrap components below
-
-// tabs
-
-$( document ).on( "click", ".nav-tabs li a", function( e ) {
-	e.preventDefault();
-	$( this ).tab("show");
-});
-
-
-$( document ).on( "click", "#alert-msgs a", function( e ) {
-	e.preventDefault();
-
-	$( this ).tab("show");
-
-	// update fake scrollbars
-	$("#notifications").not(".native").tinyscrollbar_update("relative");
+// restore the state for the system options
+$( document ).on( "restore", function() {
+	var state = $.pv3.state.current.system_options;
+	if(state != undefined) {
+		// toggle switches
+		$.each( state.toggles, function( k, v ) {
+			var id = "#ui-controls #" + k;
 	
+			if ( (v && !$( id ).hasClass("active")) || (!v && $( id ).hasClass("active")) ) {
+				$( id ).click();
+			}
+		});
+	
+		// trading/devname
+		$("#system-rocker").find("h3").addClass("hidden").find( "#" + state.mode ).removeClass("hidden");
+		$("#mode-rocker").removeClass("active");
+	
+		if ( state.mode === "devname" ) {
+			$("#mode-rocker").addClass("active");
+		}
+	}
+	
+	// sidebar
+	var sidebar = $.pv3.state.current.sidebar;
+	if(sidebar != undefined) {
+		// show/hide
+		if(sidebar.visible != undefined) {
+			console.log(sidebar.visible);
+			console.log($( document.body ).hasClass("sidebar-hidden"));
+			if((sidebar.visible && $( document.body ).hasClass("sidebar-hidden")) ||
+				(!sidebar.visible && !$( document.body ).hasClass("sidebar-hidden"))) {
+					(function () { toggleSidebar(); })();
+			}
+		}
+	}
 });
-
