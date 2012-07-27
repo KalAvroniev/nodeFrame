@@ -23,6 +23,7 @@ Number.prototype.toMoney = function( decimals, decimal_sep, thousands_sep ) {
 };
 
 $( document ).ready(function() {
+	
 	// special class for the side-bar on mobile devices
 	// we've already checked for mobile by this stage (index.jade), so rely on class present on body
 	if ( $( document.body ).hasClass("mobile") ) {
@@ -32,22 +33,6 @@ $( document ).ready(function() {
 	// init fake scrollbars
 	$("#notifications").not(".native").tinyscrollbar();
 
-	// init bootstrap components below
-
-	// tabs
-	$("#watchlist-tabs, #portfolio-data-tabs").on( "click", "a", function( e ) {
-		e.preventDefault();
-		$( this ).tab("show");
-	});
-
-	$("#alert-msgs").click( "click", "a", function( e ) {
-		e.preventDefault();
-
-		$( this ).tab("show");
-
-		// update fake scrollbars
-		$("#notifications").not(".native").tinyscrollbar_update("relative");
-	});
 
 	// dropdowns
 	$(".dropdown-toggle").dropdown();

@@ -26,11 +26,11 @@
 		ul#user-settings-tabs.nav.nav-tabs
 
 			li.active
-				a(href='')#general-btn.ff-icon-before General / user settings
+				a(href='#general')#general-btn.ff-icon-before General / user settings
 			li
-				a(href='')#external-accounts-btn.ff-icon-before External account linkage
+				a(href='#external-accounts')#external-accounts-btn.ff-icon-before External account linkage
 			li
-				a(href='')#sys-notifications-btn.ff-icon-before System notification settings (coming soon)
+				a(href='#system-notifications')#sys-notifications-btn.ff-icon-before System notification settings (coming soon)
 
 		
 		#user-settings-tab-panes.tab-content.tabs-in-tabs
@@ -41,13 +41,13 @@
 				ul#general-tabs.nav.nav-tabs.tabs-in-tabs
 		
 					li.active
-						a(href='') user profile &amp; membership
+						a(href='#user-profile') user profile &amp; membership
 					li
-						a(href='') login information
+						a(href='#login-information') login information
 					li
-						a(href='') purchase history &amp; invoicies
+						a(href='#purchase-history') purchase history &amp; invoicies
 					li
-						a(href='') credit usage / history
+						a(href='#credit-use') credit usage / history
 				
 				#general-tab-panes.tab-content.tabs-in-tabs
 					#user-profile.tab-pane.active.clearfix
@@ -121,11 +121,24 @@
 
 
 		
+					#login-information.tab-pane.clearfix
+		
+					#purchase-history.tab-pane.clearfix
+		
+						hgroup#tabs-in-tabs-headings
+							h2 view all of your purchase history
+							h3 you can also download invoices for all purchases, no matter how old.	
 		
 		
 		
 		
+					#credit-use.tab-pane.clearfix
 		
 		
+		
+			#external-accounts.tab-pane.active
+
+			#system-notifications.tab-pane.active
+
 		
 		
