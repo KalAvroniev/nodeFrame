@@ -3,21 +3,16 @@
 		tradingGraph = null,
 		scrollContainer;
 
-	$("#main-container").one( "ajaxLoad", function() {
-		$(".ajax-spinner").show();
-	}).one({ ajaxUnload: onDomUnload });
+	$("#main-container").one({ ajaxUnload: onDomUnload });
 
 	function onDomLoad() {
-		domLoaded++;
+		++domLoaded;
 
-		/*if (domLoaded > 1) {
+		if ( domLoaded > 1 ) {
 			return;
-		}*/
+		}
 
-		$("#status-summary").tinyscrollbar({
-			axis: "x",
-			scroll: false
-		});
+		$("#status-summary").tinyscrollbar({ axis: "x", scroll: false });
 
 		$("#trading-and-trending .graph-options").on( "click", toggleGraphVisible );
 
@@ -194,10 +189,7 @@
 		graph.css( "width", containerWidth );
 		graphContainer.closest(".overview").css( "width", containerWidth );
 
-		$( scrollContainer ).tinyscrollbar({
-			axis: "x",
-			scroll: false
-		});
+		$( scrollContainer ).tinyscrollbar({ axis: "x", scroll: false });
 
 		// resize the graph and shift it so that the first and last marks are
 		// hidden
