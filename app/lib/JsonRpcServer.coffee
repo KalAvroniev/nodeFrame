@@ -52,6 +52,16 @@ class exports.JsonRpcRequest
 				(state) ->
 					return success(state)
 			)
+	
+	resetState: (success, error, userId) ->
+		if(userId == undefined)
+			return error("No user ID.")
+		else
+			@options.application.states.reset(
+				userId,
+				(state) ->
+					return success(state)
+			)
 
 class exports.JsonRpcServer
 

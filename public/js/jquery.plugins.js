@@ -1,12 +1,19 @@
 // install JSON-RPC client
-$.jsonrpc = function (method, params, success, failure) {
+$.jsonrpc = function (method, params, success, failure, options) {
+	if(options == undefined)
+		options = {};
+	
 	if(failure == undefined) {
 		failure = function (errMsg, errCode) {
 			console.error("Error " + errCode + ": " + errMsg);
 		}
 	}
+	if(success == undefined) {
+		success = function (data) {
+		}
+	}
 	
-	$.ajax({
+	var ajax = {
 		type: 'POST',
 		url: '/jsonrpc',
 		processData: false,
@@ -25,7 +32,19 @@ $.jsonrpc = function (method, params, success, failure) {
 		error: function (jqXHR, textStatus, errorThrown) {
 			return failure(textStatus, 0);
 		}
-	});
+	};
+	
+	if(options.async != undefined)
+		ajax.async = options.async;
+
+	return $.ajax(ajax);
+}
+$.jsonrpcSync = function (method, params, success, failure, options) {
+	if(options == undefined)
+		options = {};
+	
+	options.async = false;
+	return $.jsonrpc(method, params, success, failure, options);
 }
 
 $.ajaxPanel = function (url, success, failure) {
@@ -111,7 +130,7 @@ $.pv3.growl.show = function (type, message) {
 }
 
 $.pv3.state = {};
-$.pv3.state.get = function (success) {
+$.pv3.state.get = function (success, options) {
 	$.jsonrpc(
 		'user/get-state',
 		{},
@@ -127,7 +146,8 @@ $.pv3.state.get = function (success) {
 		},
 		function (error) {
 			console.error(error);
-		}
+		},
+		options
 	);
 }
 $.pv3.state.restoreModule = function () {
@@ -219,9 +239,6 @@ $.pv3.panel.show = function (url, options) {
 				
 				$('#section-panel').removeClass();
 				$('#section-panel').addClass(options.panel_size);
-				
-
-								
 			});
 		}
 	);

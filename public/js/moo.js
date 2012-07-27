@@ -57,6 +57,8 @@ $( document ).ready(function() {
 // restore the state for the system options
 $( document ).on( "restore", function() {
 	var state = $.pv3.state.current.system_options;
+	if(state == undefined)
+		return;
 
 	// toggle switches
 	$.each( state.toggles, function( k, v ) {
