@@ -6410,6 +6410,9 @@ body.no-bubbles #tiptip_holder {
 .sectional-tabs li#watchlist a {
 	padding-left: 45px;	
 }
+.sectional-tabs li#watchlist a:before {
+	left: 19px;
+}	
 .sectional-tabs li#import-domains a:before {
 	left: 21px;
 }	
