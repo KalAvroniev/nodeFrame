@@ -1,49 +1,9 @@
-header#main
+// home.jade
+!= partial("partials/header")
 
-	#toggle-side-bar.ff-icon-before
-		span.toggle-title
-			strong collapse 
-			| sidebar
-		span.toggle-sub * you can also re-open from here
-	#sectional-func.side-open
-		#x-side-bar(title='Toggle display of sidebar')
-			
-			span.alerts-summary 
-				span(data-alerts="2", data-title="Protrada Alerts") 
-					span.ff-icon-before.hover-bubble Protrada alerts
-				span(data-alerts="4", data-title="Devname Alerts") 
-					span.ff-icon-before.hover-bubble Devname alerts
-					
-			span.left-bars
-				span
-			span.right-bar
-		
-		!= partial('partials/tabs')
-		
-		form#quick-search
-			input#quick-search-keyword(value='', placeholder='quick domain search _')
-			#sale-type.btn-group
-				a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-					| sale type 
-					span.caret
-				ul.dropdown-menu
-					li
-						a(href='') Auctions only
-					li
-						a(href='') PreAuctions only
-					li
-						a(href='') Expiring only
-					li
-						a(href='') Dropping only
-					li.divider
-					li
-						a(href='') New Registrations only
-					li
-						a(href='') Websites only
-			button.btn.ff-icon-before(type='submit') Submit
+!= partial("partials/panel")
 
-!= partial('partials/panel')
-!= partial('partials/connect-afternic')
+!= partial("partials/connect-afternic")
 
 #main-container.page-home
 

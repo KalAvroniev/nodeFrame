@@ -1,49 +1,11 @@
 // exchange.jade
-- if(!ajax) {
-!= partial('partials/styles')
+- if (!ajax) {
+!= partial("partials/styles")
 - }
 
-header#main
+!= partial("partials/header")
 
-	#toggle-side-bar.ff-icon-before
-		span.toggle-title
-			strong Collapse 
-			| sidebar
-		span.toggle-sub * You can also re-open from here
-	
-	#sectional-func.side-open	
-		#x-side-bar(title='Toggle display of sidebar',onclick=)
-			span.left-bars
-				span
-			span.right-bar
-			
-		!= partial('partials/tabs')
-			
-		form#quick-search.well
-			input#quick-search-keyword(value='', placeholder='Quick domain search _')
-			#sale-type.btn-group
-				a.btn.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-					| Sale type
-					span.caret
-				ul.dropdown-menu
-					li
-						a(href='') Auctions only
-					li
-						a(href='') Pre-auctions only
-					li
-						a(href='') Expiring only
-					li
-						a(href='') Dropping only
-					li.divider
-	
-					li
-						a(href='') New Registrations only
-					li
-						a(href='') Websites only
-			button.btn.ff-icon-before(type='submit') Submit
-
-	
-!= partial('partials/panel')
+!= partial("partials/panel")
 
 #main-container.page-exchange.search-results
 
