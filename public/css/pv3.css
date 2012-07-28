@@ -1436,7 +1436,7 @@ header#main:before {
 	background: #474747 url(../img/elements-noise.png);
 	color: #999999;
 	padding: 11px 9px;
-	width: auto;
+	width: 168px;
 
 	box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 1px 0px rgba(255,255,255,0.14), inset 0 0 3px rgba(255,255,255,0.07);
 
@@ -2175,21 +2175,23 @@ header#main:before {
 
 #section-panel {
 	max-width: 1000px;
-	min-width: 420px;
 	position: fixed;
 	right: 305px; top: 0;
 	z-index: 4;
 	pointer-events: none;
 	height: 100%;
 	padding: 74px 0 0;	
-	margin: 0 0 0 105px;
+	margin: 0;
 	
-	-moz-transition: all 0.5s ease-in-out;
-	-webkit-transition: all 0.5s ease-in-out;
-   	transition: all 0.5s ease-in-out;	
+}
+#section-panel:not(.mini-panel) {
 }
 #section-panel.mini-panel { 
 	max-width: 420px;	
+	
+	-moz-transition: max-width 0.5s ease-in-out;
+	-webkit-transition: max-width 0.5s ease-in-out;
+   	transition: max-width 0.5s ease-in-out;		
 }
 #panel-content {
 	background: #fcf9f5;
@@ -6527,18 +6529,18 @@ body.no-bubbles #tiptip_holder {
 }
 
 @media only screen and (max-width: 1224px) {
+	
 	#section-panel:not(.mini-panel) {
-		left: 105px;
+		left: 105px; right: 120px !important;
 		margin: 0;
 	}
+
 }
 
 @media only screen and (max-width: 1152px) {
 	
 	#section-panel:not(.mini-panel) {
-		width: 700px;	
-		left: auto;
-		margin: 0 0 0 105px;
+		
 	}
 	
 	header#main:before {
@@ -6647,7 +6649,6 @@ body.no-bubbles #tiptip_holder {
 	
 	#section-panel {
 		right: 120px;
-    	width: 600px;
 	}
 
 
@@ -6669,7 +6670,7 @@ body.no-bubbles #tiptip_holder {
 @media only screen and (max-width: 924px) {
 	
 	#section-panel:not(.mini-panel) {
-    	width: 570px;
+    	min-width: 570px;
 	}
 	
 }
@@ -6690,9 +6691,6 @@ body.no-bubbles #tiptip_holder {
 		overflow-x: scroll;
 	}
 	
-	#section-panel {
-		right: 13px;
-	}
 	#dashboard-tab-panes .tab-pane p {
 		clear: both;
 		padding: 15px 15px 0 25px !important;
@@ -6705,13 +6703,13 @@ body.no-bubbles #tiptip_holder {
 }
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) { /* ipad portrait mode */
 
 	aside.active, #x-side-bar, .sidebar-hidden #x-side-bar {
 		display: none;
 	}
 	.sidebar-hidden #section-panel, .sidebar-open #section-panel {
-		right: 25px;
+		right: 27px;
 	}
 	
 	#main-container {
@@ -6721,6 +6719,7 @@ body.no-bubbles #tiptip_holder {
 	.sectional-tabs {
 		margin-right: 27px;
 	}
+	
 	body {
 		min-width: auto;
 	}
