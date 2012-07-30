@@ -1441,10 +1441,12 @@ header#main:before {
 }
 .sectional-tabs li#import-domains a:before {
 	content: "m";
-	left: 14px;	
+	left: 14px;
+	margin: 0 0 0 -2px;	
 }
 .sectional-tabs li#list-forsale a:before {
 	content: "^";
+	margin: 0 0 0 -1px;	
 }
 .sectional-tabs li#watchlist a {
 	padding-left: 50px;	
@@ -2229,7 +2231,7 @@ header#main:before {
 	pointer-events: none;
 	height: 100%;
 	padding: 74px 0 0;	
-	margin: 0;
+	margin: 0 0 0 105px;
 	
 }
 #section-panel:not(.mini-panel) {
@@ -6598,14 +6600,14 @@ body.no-bubbles #tiptip_holder {
 
 
 /* Style tabs to be thin + without text labels, when the sidebar is open  */
-
+.sidebar-open .sectional-tabs li a {
+	text-indent: -3000em;
+	padding: 0 !important;
+	height: 55px; width: 70px;
+}
 .sidebar-open .sectional-tabs li a strong {
 	display: inline;
 }	
-.sidebar-open .sectional-tabs li a {
-	text-indent: -3000em;
-	height: 55px;
-}
 .sidebar-open .sectional-tabs.singular li a, .sidebar-open .sectional-tabs li.standout-tab a {
 	height: 62px;
 }
@@ -6613,17 +6615,9 @@ body.no-bubbles #tiptip_holder {
 	height: 63px;
 }
 .sidebar-open .sectional-tabs li a:before {
-	left: 20px;
+	left: 23px !important;
 }
-.sectional-tabs li#watchlist a {
-	padding-left: 45px;	
-}
-.sectional-tabs li#watchlist a:before {
-	left: 19px;
-}	
-.sectional-tabs li#import-domains a:before {
-	left: 21px;
-}	
+
 
 
 /* Style tabs to be thick + show text labels, when the sidebar is hidden */
@@ -6641,10 +6635,7 @@ body.no-bubbles #tiptip_holder {
 .sidebar-hidden .sectional-tabs.singular li a, .sectional-tabs li.standout-tab a {
 	height: 62px;
 }
-.sidebar-hidden .sectional-tabs li#import-domains a:before {
-	left: 14px;
-}	
-	
+
 	
 	#section-headings.search-results {	
 		margin: 0 210px 40px 0;
@@ -6720,7 +6711,8 @@ body.no-bubbles #tiptip_holder {
 	}	
 	.sidebar-open .sectional-tabs li a, .sidebar-hidden .sectional-tabs li a {
 		text-indent: -3000em;
-		height: 55px;
+		height: 55px; width: 70px;
+		padding: 0 !important;
 	}
 	.sidebar-open .sectional-tabs.singular li a, .sidebar-open .sectional-tabs li.standout-tab a, .sidebar-hidden .sectional-tabs.singular li a, .sidebar-hidden .sectional-tabs li.standout-tab a {
 		height: 62px;
@@ -6729,13 +6721,7 @@ body.no-bubbles #tiptip_holder {
 		height: 63px;
 	}
 	.sidebar-open .sectional-tabs li a:before, .sidebar-hidden .sectional-tabs li a:before {
-		left: 20px;
-	}
-	.sidebar-open .sectional-tabs li#watchlist a, .sidebar-hidden .sectional-tabs li#watchlist a {
-		padding-left: 45px;	
-	}
-	.sidebar-open .sectional-tabs li#import-domains a:before, .sidebar-hidden .sectional-tabs li#import-domains a:before {
-		left: 21px;
+		left: 23px !important;
 	}
 	
 		
