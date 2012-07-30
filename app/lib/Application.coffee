@@ -17,6 +17,9 @@ class exports.Application
 		# register JSON-RPC methods
 		@jsonRpcServer = new JsonRpcServer(this)
 		@jsonRpcServer.registerMethods()
+		
+		# load config
+		@loadConfig(@options.config)
 	
 		# create server
 		@app = express.createServer()
@@ -50,13 +53,6 @@ class exports.Application
 		io.sockets.on('connection', (socket) ->
 			socketIoServer.addClient(socket)
 		)
-		
-		# setup the auto broadcaster
-		#setInterval(
-		#	() ->
-		#		socketIoServer.broadcastToAll()
-		#	, 3000
-		#)
 		
 		# listen
 		@app.listen(@options.port)
@@ -160,3 +156,6 @@ class exports.Application
 			@app.all(path.substr(11, path.length - 18), express.bodyParser(), @handleRequest)
 			@app.all(path.substr(11, path.length - 18) + ".jade", express.bodyParser(), @handleJadeRequest)
 			@app.all(path.substr(11, path.length - 18) + ".jsonrpc", express.bodyParser(), @handleDemoRequest)
+	
+	loadConfig: (config) ->
+		@config = require('../config/' + config + '.coffee').config
