@@ -37,7 +37,9 @@ class exports.SessionStore extends require('connect').session.Store
 	
 	destroy: (sid, cb = @defaultCallback) ->
 		delete @sessions[sid]
-		cb(null)
+		@save(() ->
+			cb(null)
+		)
 	
 	all: (cb = @defaultCallback) ->
 		cb(@sessions)

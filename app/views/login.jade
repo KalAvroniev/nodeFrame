@@ -50,3 +50,7 @@ html(lang='en')
 			!window.jQuery && document.write("<script src=\"js/jquery-1.7.2.min.js\"><\/script>");
 		script(src='js/bootstrap.min.js')
 		script(src='js/pv3.js')
+		script
+			// verify that we are on the right url
+			if(document.location.pathname != '/login')
+				document.location = '/login';

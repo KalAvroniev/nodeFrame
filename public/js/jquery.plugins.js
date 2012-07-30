@@ -24,8 +24,11 @@ $.jsonrpc = function (method, params, success, failure, options) {
 			'id': 1
 		}),
 		success: function (result) {
-			if(result.error != undefined && result.error.message)
+			if(result.error != undefined && result.error.message) {
+				if(result.error.message.substr(0, 8) == '!logout:')
+					document.location = '/login';
 				return failure(result.error.message, result.error.code);
+			}
 			return success(result.result);
 		},
 		dataType: 'json',

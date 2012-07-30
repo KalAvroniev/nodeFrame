@@ -27,6 +27,9 @@ class exports.JsonRpcRequest
 		
 	error: (message, code = -32603) ->
 		@callback(null, message)
+		
+	logout: (message) ->
+		@callback(null, "!logout:" + message)
 	
 	getSession: () ->
 		return @options.req.session
@@ -43,9 +46,8 @@ class exports.JsonRpcRequest
 		if not @options.req.cookies
 			return cb()
 		
-		@options.req.cookies['connect.sid'] = null
 		@options.req.sessionID = null
-		@options.req.session.save(() ->
+		@options.req.session.destroy(() ->
 			return cb()
 		)
 	

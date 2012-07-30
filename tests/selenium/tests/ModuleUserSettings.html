@@ -12,21 +12,6 @@
 <tr><td rowspan="1" colspan="3">ModuleUserSettings</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
-	<td>3000</td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>id=nav-user-settings</td>
 	<td></td>
@@ -35,6 +20,11 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
 	<td>3000</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertLocation</td>
