@@ -4,16 +4,16 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8182/" />
-<title>LoginUserOnly</title>
+<title>ModuleUserSettings</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">LoginUserOnly</td></tr>
+<tr><td rowspan="1" colspan="3">ModuleUserSettings</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/login</td>
+	<td>/</td>
 	<td></td>
 </tr>
 <tr>
@@ -22,25 +22,36 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name=username</td>
-	<td>protrada</td>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
+	<td>3000</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=go login</td>
+	<td>click</td>
+	<td>id=nav-user-settings</td>
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
+	<td>3000</td>
+</tr>
+<tr>
 	<td>assertLocation</td>
-	<td>regexp:.*/login\?error=.*</td>
+	<td>regexp:.*/user-settings</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Your login information is incorrect</td>
+	<td>user settings</td>
 	<td></td>
 </tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>control panel area</td>
+	<td></td>
+</tr>
+
 </tbody></table>
 </body>
 </html>

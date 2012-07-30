@@ -934,6 +934,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	font-weight: 600;
 	display: block;
 }
+fieldset.login .login-right .invisible {
+	width: 0; height: 0;
+	padding: 0; margin: 0;
+	background: transparent;
+	text-indent: -3000em;
+}
 #process-error {
 	background: #e46503;
 	color: #5c2405;
@@ -1042,20 +1048,76 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	padding: 6px 0 0 6px;
 }
 #spine-inner > nav {
+	clear: both;
+}
+#spine-inner #sys-alert {
+	display: inline-block;
+	margin: 5px 0 20px 7px;
+	padding: 6px 7px;
+	clear: both;
+	color: #e86908;		
+	position: relative;
+}
+#spine-inner #sys-alert:hover {
+	color: #FCF9F5;
+	text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+	background: #e86908;
+	border-radius: 5px;	
+}
+#sys-alert .alertmsg-container {
+	position: absolute;
+	z-index: -1;
+	left: -275px;
+	margin: -5px 0 0 0;
+	width: 250px;
+	padding: 15px 20px; 
+	background: #e86908;
+	border-radius: 5px;	
+	color: #581e04;
+	font-size: 12px;
+	line-height: 1.4em;
+	cursor: text;	
+	text-shadow: none;	
+	
+	-moz-transition: left .2s ease-in-out;
+	-webkit-transition: left .2s ease-in-out;
+   	transition: left .2s ease-in-out;		
+}
+#sys-alert:hover .alertmsg-container {
+	left: 92px;	
+}
+#sys-alert .alertmsg-container h4 {
+	font-size: 16px;
+	line-height: 1;
+	margin: 0 0 10px 0;
+	font-weight: 400;
+}
+#sys-alert .alertmsg-container:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 15px;	left: -20px;
+	margin: 0;
+	border: 10px outset transparent;
+	border-right: 10px solid #e86908;	
+}
+#spine-inner #sys-alert:before {
+	content: "5";
+	font-size: 30px;
+	line-height: 1;	
 }
 #spine-inner > nav ul {
 	padding: 0;
 	margin: 0;
 }
 #spine-inner > nav ul li {
-	display: block;
-	float: left;
+	display: inline-block;
 	margin: 0 0 20px 0;
 	padding: 6px;
 	border-radius: 4px;
 	position: relative;
 }
-#spine-inner nav a {
+#spine-inner nav ul a {
 	display: block;
 	width: 50px;
 	height: 50px;
@@ -1064,7 +1126,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	border-radius: 4px;
 }
 
-#spine-inner nav a:before { 
+#spine-inner nav ul a:before { 
 
 	/* the nav button icon */ 
 	
@@ -1083,17 +1145,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
     text-shadow: 0px 1px 1px #fcf9f5, 0 0 0 #000, 0px 1px 1px #fcf9f5, 0 1px 0 white;		
 }
 
-#spine-inner nav .selected a:before {
+#spine-inner nav ul .selected a:before {
 	color: #161413;
     text-shadow: 0 1px 0 white;		
 }
 
-#spine-inner nav a:hover:before {
+#spine-inner nav ul a:hover:before {
 	color: #161413;
     text-shadow: 0 1px 0 white;	
 }
 
-#spine-inner nav a:after { 
+#spine-inner nav ul a:after { 
 	
 	/* the glossy overlay */
 	
@@ -1116,7 +1178,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	display: none;
 }
 
-#spine-inner nav li:hover { 
+#spine-inner nav ul li:hover { 
 	
 	/* the sunk look with shadow etc */
 	
@@ -1354,17 +1416,11 @@ header#main:before {
 .sectional-tabs.singular li a, .sectional-tabs li.standout-tab a {
 	margin: 0;
 	padding-top: 14px;
-	height: 87px;	
+	height: 62px;	
 	color: #3a3a3a;
 	box-shadow: inset 0 1px 0 white, 5px -10px 8px rgba(0,0,0,0.1), -5px -10px 8px rgba(0,0,0,0.1);
 
-	background: -moz-linear-gradient(top,  rgba(230,230,230,1) 0%, rgba(230,230,230,1) 71%, rgba(230,230,230,0) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(230,230,230,1)), color-stop(71%,rgba(230,230,230,1)), color-stop(100%,rgba(230,230,230,0))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(230,230,230,1) 0%,rgba(230,230,230,1) 71%,rgba(230,230,230,0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(230,230,230,1) 0%,rgba(230,230,230,1) 71%,rgba(230,230,230,0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(230,230,230,1) 0%,rgba(230,230,230,1) 71%,rgba(230,230,230,0) 100%); /* IE10+ */
-	background: linear-gradient(top,  rgba(230,230,230,1) 0%,rgba(230,230,230,1) 71%,rgba(230,230,230,0) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e6e6', endColorstr='#00e6e6e6',GradientType=0 ); /* IE6-9 */	
+	background: rgb(230,230,230);	
 }
 .sectional-tabs li.active a, .sectional-tabs.singular li.active a, .sectional-tabs li.standout-tab.active a {
 	background: #fcf9f5;
@@ -2306,6 +2362,12 @@ header#main:before {
 	content: "1";
 	font-size: 25px;
 }
+.panel-heading .domain-details:before {
+	content: "G";
+	font-size: 25px;
+	margin: -2px 10px 0 0;				
+}
+
 
 /* --------------------- */
 
@@ -2646,6 +2708,28 @@ a.download {
 #panel-content p {
 	margin: 0 0 1.6em;	
 }
+.simple-data {
+	display: inline-block;	
+	text-align: left;
+	font-size: 13px;
+	line-height: 1;
+}
+.simple-data tr:nth-child(2n) {
+	background: #f0ede9;
+}
+.simple-data td, .simple-data th {
+	padding: 10px;
+}
+.simple-data th {
+	font-weight: 400;
+	min-width: 200px;
+}
+.simple-data td {
+	font-weight: 300;
+}
+
+
+
 
 
 
@@ -2688,7 +2772,7 @@ a.download {
 }
 #drag-n-drop {
 	padding: 12px 16px 14px 18px;
-	border: 4px dashed white;
+	border: 4px dashed rgba(0,0,0,0.4);
 	color: #161413;
 	opacity: 0.45;	
 	border-radius: 10px;
@@ -2699,7 +2783,7 @@ a.download {
    	transition: all .3s ease-in-out;		
 }
 #drag-n-drop:hover {
-	border-color: rgba(0,0,0,0.4);
+	border: 4px dashed white;	
 	opacity: 0.7;	
 	cursor: pointer;
 }
@@ -3041,6 +3125,10 @@ input[type=number] {
 	-moz-transition: top .3s ease-in-out;
 	-webkit-transition: top .3s ease-in-out;
    	transition: top .3s ease-in-out;	
+}
+.task-status:not(.active) {
+	height: 100px;
+	overflow: hidden;
 }
 .task-status.active {
 	top: 74px; 
@@ -4371,6 +4459,7 @@ aside header.alerts-header {
 .account-selection.has-open-edit {
 	padding: 0 0 0 243px;
 	position: relative;
+	min-height: 177px;
 }
 .account-selection li {
 	float: left;
@@ -4382,9 +4471,9 @@ aside header.alerts-header {
 	width: 222px; height: 80px;
 	cursor: pointer;
 }
-.account-selection li:not(.open-for-edit, .more-coming-soon):hover {
+.account-selection li:not(.open-for-edit):not(.more-coming-soon):not(.active):hover {
 	background: white;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.25);		
+	box-shadow: 0 4px 0px rgba(0,0,0,0.07);		
 }
 .account-selection li.active {
 	background: #bbb6b1;
@@ -4401,6 +4490,7 @@ aside header.alerts-header {
 	box-shadow: none;
 	color: #93908c;
 	padding: 15px 0 0 0;
+	cursor: default;
 }
 li.more-coming-soon .ff-icon-before {
 	padding: 0 0 0 85px;
@@ -6473,6 +6563,15 @@ body.no-bubbles #tiptip_holder {
 
 /* ------------------------------------ Media query reponsive work -------------------------- */
 
+@media only screen and (max-width: 1423px) {
+	
+	.sidebar-open #section-panel:not(.mini-panel) {
+		left: 105px;
+		margin: 0;
+	}
+
+}
+
 @media only screen and (max-width: 1287px) {
 
 	
@@ -6548,7 +6647,7 @@ body.no-bubbles #tiptip_holder {
 	height: 63px;
 }
 .sidebar-hidden .sectional-tabs.singular li a, .sectional-tabs li.standout-tab a {
-	height: 87px;
+	height: 62px;
 }
 .sidebar-hidden .sectional-tabs li#import-domains a:before {
 	left: 14px;
@@ -6585,8 +6684,8 @@ body.no-bubbles #tiptip_holder {
 
 @media only screen and (max-width: 1224px) {
 	
-	#section-panel:not(.mini-panel) {
-		left: 105px; right: 120px !important;
+	.sidebar-hidden #section-panel:not(.mini-panel) {
+		left: 105px; right: 120px;
 		margin: 0;
 	}
 
@@ -6632,7 +6731,7 @@ body.no-bubbles #tiptip_holder {
 		height: 55px;
 	}
 	.sidebar-open .sectional-tabs.singular li a, .sidebar-open .sectional-tabs li.standout-tab a, .sidebar-hidden .sectional-tabs.singular li a, .sidebar-hidden .sectional-tabs li.standout-tab a {
-		height: 87px;
+		height: 62px;
 	}
 	.sidebar-open .sectional-tabs li.active a, .sidebar-hidden .sectional-tabs li.active a {
 		height: 63px;
@@ -6664,6 +6763,10 @@ body.no-bubbles #tiptip_holder {
 	}
 	#notifications, aside header.alerts-header {
 		right: 30px;
+	}
+	.task-status {		
+		top: -70px;
+		padding: 0;		
 	}
 	aside.active:before {
 		content: "";
