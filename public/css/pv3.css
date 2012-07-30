@@ -1060,7 +1060,7 @@ fieldset.login .login-right .invisible {
 }
 #spine-inner #sys-alert:hover {
 	color: #FCF9F5;
-	text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+	text-shadow: 0 1px 1px rgba(0,0,0,0.2);
 	background: #e86908;
 	border-radius: 5px;	
 }
@@ -1070,9 +1070,10 @@ fieldset.login .login-right .invisible {
 	left: -275px;
 	margin: -5px 0 0 0;
 	width: 250px;
-	padding: 15px 20px; 
+	padding: 15px 20px 17px 35px; 
 	background: #e86908;
-	border-radius: 5px;	
+	box-shadow: inset 0 5px 0 rgba(0,0,0,0.08), 0 0 10px rgba(0,0,0,0.2), inset 0 -1px 0 rgba(255,255,255,0.4);
+	border-radius: 0 5px 5px 0;	
 	color: #581e04;
 	font-size: 12px;
 	line-height: 1.4em;
@@ -1084,22 +1085,13 @@ fieldset.login .login-right .invisible {
    	transition: left .2s ease-in-out;		
 }
 #sys-alert:hover .alertmsg-container {
-	left: 92px;	
+	left: 60px;	
 }
 #sys-alert .alertmsg-container h4 {
 	font-size: 16px;
 	line-height: 1;
 	margin: 0 0 10px 0;
-	font-weight: 400;
-}
-#sys-alert .alertmsg-container:after {
-	content: "";
-	display: block;
-	position: absolute;
-	top: 15px;	left: -20px;
-	margin: 0;
-	border: 10px outset transparent;
-	border-right: 10px solid #e86908;	
+	font-weight: 600;
 }
 #spine-inner #sys-alert:before {
 	content: "5";
@@ -1254,7 +1246,7 @@ fieldset.login .login-right .invisible {
 
 #spine-inner > nav li > span { /* the navigation label */
 	position: absolute;
-	z-index: -1;
+	z-index: -2;
 	left: -240px; top: 8px;
 	white-space: nowrap;
 	display: block;
@@ -6721,7 +6713,7 @@ body.no-bubbles #tiptip_holder {
 
 @media only screen and (max-width: 1055px) {
 
-/* Style tabs to be thin + without text labels, when the sidebar is open and closed  */
+	/* Style tabs to be thin + without text labels, when the sidebar is open and closed  */
 	
 	.sidebar-open .sectional-tabs li a strong, .sidebar-hidden .sectional-tabs li a strong {
 		display: inline;
