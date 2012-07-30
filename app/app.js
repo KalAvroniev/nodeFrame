@@ -3,13 +3,14 @@ Application = require('./lib/Application.coffee').Application
 
 // production server
 app = new Application({
-	'port': 8181
+	'port': 8181,
+	'config': 'staging'
 });
 app.start();
 
 // debug server
 debug = new Application({
 	'port': 8182,
-	'debug': true
+	'config': 'development'
 });
 debug.start();
