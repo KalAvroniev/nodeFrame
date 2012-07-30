@@ -31,6 +31,24 @@ class exports.JsonRpcRequest
 	getSession: () ->
 		return @options.req.session
 	
+	getSessionId: () ->
+		return @options.req.sessionID
+	
+	getCookies: () ->
+		return @options.req.cookies
+		
+	resetSession: (cb) ->
+		if not @options.req.sessionID
+			return cb()
+		if not @options.req.cookies
+			return cb()
+		
+		@options.req.cookies['connect.sid'] = null
+		@options.req.sessionID = null
+		@options.req.session.save(() ->
+			return cb()
+		)
+	
 	getState: (callback, userId) ->
 		if(userId == undefined)
 			return callback(null)
