@@ -105,10 +105,19 @@ script
 	$.jsonrpc( "exchange/grid", {}, function( data ) {
 		console.log( data );
 
-		$.jade.getTemplate("grid/row");
+		$.jade.getTemplate( "grid/row", $.noop );
 
 		$.jade.getTemplate( "grid/table", function( fn ) {
-			$("#grid-view").find(".viewport").html( $.jade.renderSync(fn, data, function(err){alert(err)}) );			
+			var records = data.records;
+
+			$("#grid-view").find(".viewport").html( $.jade.renderSync(fn, data, function(err){alert(err)}) );
+
+			for ( var i = 0; i < records.length; ++i ) {
+				$("#grid-view").find("tbody").append( $.jade.renderSync("views_grid_row", records[ i ], function(err){alert(err)}) );
+			}
+
+			// do scrollbar/stick-header/etc setup here?
+			$("#grid-view").tinyscrollbar({ axis: "x", scroll: false });
 		});
 	});
 
