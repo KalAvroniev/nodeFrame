@@ -3126,6 +3126,10 @@ input[type=number] {
 	-webkit-transition: top .3s ease-in-out;
    	transition: top .3s ease-in-out;	
 }
+.task-status:not(.active) {
+	height: 100px;
+	overflow: hidden;
+}
 .task-status.active {
 	top: 74px; 
 }
@@ -6727,7 +6731,7 @@ body.no-bubbles #tiptip_holder {
 		height: 55px;
 	}
 	.sidebar-open .sectional-tabs.singular li a, .sidebar-open .sectional-tabs li.standout-tab a, .sidebar-hidden .sectional-tabs.singular li a, .sidebar-hidden .sectional-tabs li.standout-tab a {
-		height: 87px;
+		height: 62px;
 	}
 	.sidebar-open .sectional-tabs li.active a, .sidebar-hidden .sectional-tabs li.active a {
 		height: 63px;
@@ -6759,6 +6763,10 @@ body.no-bubbles #tiptip_holder {
 	}
 	#notifications, aside header.alerts-header {
 		right: 30px;
+	}
+	.task-status {		
+		top: -70px;
+		padding: 0;		
 	}
 	aside.active:before {
 		content: "";
