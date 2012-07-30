@@ -2694,7 +2694,7 @@ a.download {
 }
 #drag-n-drop {
 	padding: 12px 16px 14px 18px;
-	border: 4px dashed white;
+	border: 4px dashed rgba(0,0,0,0.4);
 	color: #161413;
 	opacity: 0.45;	
 	border-radius: 10px;
@@ -2705,7 +2705,7 @@ a.download {
    	transition: all .3s ease-in-out;		
 }
 #drag-n-drop:hover {
-	border-color: rgba(0,0,0,0.4);
+	border: 4px dashed white;	
 	opacity: 0.7;	
 	cursor: pointer;
 }
@@ -4377,6 +4377,7 @@ aside header.alerts-header {
 .account-selection.has-open-edit {
 	padding: 0 0 0 243px;
 	position: relative;
+	min-height: 177px;
 }
 .account-selection li {
 	float: left;
@@ -4388,9 +4389,9 @@ aside header.alerts-header {
 	width: 222px; height: 80px;
 	cursor: pointer;
 }
-.account-selection li:not(.open-for-edit, .more-coming-soon):hover {
+.account-selection li:not(.open-for-edit):not(.more-coming-soon):not(.active):hover {
 	background: white;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.25);		
+	box-shadow: 0 4px 0px rgba(0,0,0,0.07);		
 }
 .account-selection li.active {
 	background: #bbb6b1;
@@ -4407,6 +4408,7 @@ aside header.alerts-header {
 	box-shadow: none;
 	color: #93908c;
 	padding: 15px 0 0 0;
+	cursor: default;
 }
 li.more-coming-soon .ff-icon-before {
 	padding: 0 0 0 85px;
