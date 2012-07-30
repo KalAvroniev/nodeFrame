@@ -6473,6 +6473,15 @@ body.no-bubbles #tiptip_holder {
 
 /* ------------------------------------ Media query reponsive work -------------------------- */
 
+@media only screen and (max-width: 1423px) {
+	
+	.sidebar-open #section-panel:not(.mini-panel) {
+		left: 105px;
+		margin: 0;
+	}
+
+}
+
 @media only screen and (max-width: 1287px) {
 
 	
@@ -6585,8 +6594,8 @@ body.no-bubbles #tiptip_holder {
 
 @media only screen and (max-width: 1224px) {
 	
-	#section-panel:not(.mini-panel) {
-		left: 105px; right: 120px !important;
+	.sidebar-hidden #section-panel:not(.mini-panel) {
+		left: 105px; right: 120px;
 		margin: 0;
 	}
 
