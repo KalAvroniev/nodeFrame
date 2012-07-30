@@ -2709,10 +2709,24 @@ a.download {
 	margin: 0 0 1.6em;	
 }
 .simple-data {
-	
+	display: inline-block;	
+	text-align: left;
+	font-size: 13px;
+	line-height: 1;
 }
-
-
+.simple-data tr:nth-child(2n) {
+	background: #f0ede9;
+}
+.simple-data td, .simple-data th {
+	padding: 10px;
+}
+.simple-data th {
+	font-weight: 400;
+	min-width: 200px;
+}
+.simple-data td {
+	font-weight: 300;
+}
 
 
 
