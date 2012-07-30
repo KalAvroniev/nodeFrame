@@ -11,79 +11,151 @@ class exports.Controller
 	
 	run: (req) ->
 		grid = new GridModel()
-		
+
 		# header
-		grid.addHeaderLabel([
-			{
-				'action': 'stickyswitch'
-			},
-			{
-				'title': 'Basic domain info',
-				'span': 2
-			}
-			#{
-			#	'title': 'Price/value info',
-			#	'span': 4
-			#},
-			#{
-			#	'title': 'Performance info',
-			#	'span': 2
-			#},
-			#{
-			#	'title': 'Domain registration info',
-			#	'span': 3
-			#},
-			#{
-			#	'title': 'Extension info',
-			#	'span': 3
-			#}
-		])
+		grid.addHeaderLabel({
+			action: "stickyswitch",
+			span: 2,
+			title: "Stick"
+		})
+
+		grid.addHeaderLabel({
+			span: 2,
+			title: "Basic domain info"
+		})
+
+		grid.addHeaderLabel({
+			span: 4,
+			title: "Price/value info"
+		})
+
+		grid.addHeaderLabel({
+			span: 2,
+			title: "Performance info"
+		})
+
+		grid.addHeaderLabel({
+			span: 3,
+			title: "Domain registration info"
+		})
 		
+		grid.addHeaderLabel({
+			span: 4,
+			title: "Extension info"
+		})
+
 		# columns
 		grid.addMasterColumn({
-			'title': 'Bulk',
-			'columns': {
-				'selected': {
-					'formatter': 'checkbox'
-				},
-				'star': {
-					'formatter': 'star'
-				}
-			}
+			span: 2,
+			title: "Bulk"
 		})
-		
+
 		grid.addMasterColumn({
-			'title': 'Top action(s)',
-			'columns': {
-				'topactions': {
-					'formatter': 'topactions',
-					'filter': {
-						'type': 'menu',
-						'title': 'sort by?'
-						'values': ['Action 1', 'Action 2', 'Action 3']
-					}
-				}
-			}
+			filter: {
+				id: "top-actions",
+				type: "menu",
+				values: [ "Action 1", "Action 2", "Action 3" ]
+			},
+			title: "Top action(s)"
 		})
-		
+
 		grid.addMasterColumn({
-			'title': 'Domain title',
-			'columns': {
-				'domain': {
-					'sortable': true,
-					'filter': {
-						'type': 'textcombo'
-					}
-				}
-			}
+			sortable: true,
+			filter: {
+				id: "domain-title",
+				active: true,
+				type: "textcombo",
+				values: [ "Contains", "Beginning with", "Ending with" ]
+			},
+			title: "Domain title"
 		})
-		
+
+		grid.addMasterColumn({
+			title: "Offers"
+		})
+
+		grid.addMasterColumn({
+			sortable: true,
+			filter: {
+				id: "cost",
+				type: "text"
+			},
+			title: "Cost"
+		})
+
+		grid.addMasterColumn({
+			sortable: true,
+			filter: {
+				id: "appraised",
+				type: "text"
+			},
+			title: "Appraised"
+		})
+
+		grid.addMasterColumn({
+			title: "Unrealised"
+		})
+
+		grid.addMasterColumn({
+			title: "Income"
+		})
+
+		grid.addMasterColumn({
+			title: "ROI%"
+		})
+
+		grid.addMasterColumn({
+			sortable: true,
+			filter: {
+				id: "accquired",
+				type: "menu",
+				values: [ "tomorrow", "2 days", "date range" ]
+			},
+			title: "Acquired date"
+		})
+
+		grid.addMasterColumn({
+			sortable: true,
+			filter: {
+				id: "expiring",
+				type: "menu",
+				values: [ "tomorrow", "2 days", "date range" ]
+			},
+			title: "Expiry date"
+		})
+
+		grid.addMasterColumn({
+			filter: {
+				id: "status",
+				type: "menu",
+				values: [ "pending", "active", "expired", "dropping" ]
+			},
+			title: "Status"
+		})
+
+		grid.addMasterColumn({
+			title: ".com"
+		})
+
+		grid.addMasterColumn({
+			title: ".net"
+		})
+
+		grid.addMasterColumn({
+			title: ".org"
+		})
+
+		grid.addMasterColumn({
+			title: ".edu"
+		})
+
 		# data
 		for i in [1,2,3]
 			grid.addRecord({
-				'selected': false,
-				'star': false,
-				'domain': '353cards.com'
+				selected: false,
+				star: false,
+				domain: "353cards",
+				tld: ".com"
 			})
 		
 		return req.success(grid.result())

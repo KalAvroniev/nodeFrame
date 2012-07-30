@@ -4,7 +4,8 @@ table.grid-table.overview.floatable
 			- var grouping = headers;
 			- for ( var i = 0; i < grouping.length; ++i ) {
 				- var group = grouping[ i ];
-				th(colspan=group.span)
+				- var klass = group.action ? "sticky" : "";
+				th(colspan=group.span, class=klass)
 					- if ( group.action !== undefined )
 						span.on.sticky-pin= group.title
 					- else
@@ -18,10 +19,14 @@ table.grid-table.overview.floatable
 				- var label = column.filter ? column.filter.id : "";
 				th(scope="col", colspan=colspan, class=klass)
 					label(for=label)= column.title
+					- if ( column.title === "Bulk" )
+						#fav-sel-all
+							button.btn.select(title="Select all", data-toggle="button")
+							button.btn.favourite(title="Favourite all", data-toggle="button")
 					- if ( column.filter )
 						case column.filter.type
 							when "text"
-								input.txt-column(id=column.filter.id, type="text")
+								input.txt-filter(id=column.filter.id, type="text")
 							when "menu"
 								.btn-group(id=column.filter.id)
 									a.btn.btn-large.dropdown-toggle(href="javascript:void(0);", data-toggle="dropdown")
@@ -33,7 +38,8 @@ table.grid-table.overview.floatable
 												a(href="")= value
 							when "textcombo"
 								div(id=column.filter.id + "-inputs")
-									input.txt-column(id=column.filter.id, type="text")
+									- klass = column.filter.active ? "filter-active" : "";
+									input.txt-filter(id=column.filter.id, type="text", class=klass)
 									a.disable
 									.btn-group
 										a.btn.btn-large.dropdown-toggle(href="javascript:void(0);", data-toggle="dropdown")
@@ -63,16 +69,17 @@ table.grid-table.overview.floatable
 								a(href="") sell all
 							li
 								a(href="") go "moo" like a cow
-		tr
-			td#zero-alert(colspan="17")
-				span.ff-icon-before
-					a.ff-icon-after.x-zero-alert(href="#")
-					strong Sorry
-					| , we couldnt find any matches for this keyword 
-					strong under expired domains.
-					br
-					| Perhaps instead try searching under 
-					strong new registrations
+		- if ( !records.length )
+			tr
+				td#zero-alert(colspan="17")
+					span.ff-icon-before
+						a.ff-icon-after.x-zero-alert(href="#")
+						strong Sorry
+						| , we couldnt find any matches for this keyword 
+						strong under expired domains.
+						br
+						| Perhaps instead try searching under 
+						strong new registrations
 		tr
 			td#filter-params(colspan="17")
 				span.ff-icon-before
