@@ -1,0 +1,98 @@
+table.grid-table.overview.floatable
+	thead
+		tr.col-grouping
+			- var grouping = headers;
+			- for ( var i = 0; i < grouping.length; ++i ) {
+				- var group = grouping[ i ];
+				th(colspan=group.span)
+					- if ( group.action !== undefined )
+						span.on.sticky-pin= group.title
+					- else
+						= group.title
+			- }
+		tr.filter
+			- for ( var i = 0; i < columns.length; ++i ) {
+				- var column = columns[ i ];
+				- var klass = column.sortable ? "sortable" : "";
+				- var colspan = column.span || 1;
+				- var label = column.filter ? column.filter.id : "";
+				th(scope="col", colspan=colspan, class=klass)
+					label(for=label)= column.title
+					- if ( column.filter )
+						case column.filter.type
+							when "text"
+								input.txt-column(id=column.filter.id, type="text")
+							when "menu"
+								.btn-group(id=column.filter.id)
+									a.btn.btn-large.dropdown-toggle(href="javascript:void(0);", data-toggle="dropdown")
+										| sort by?
+										span.caret
+									ul.dropdown-menu
+										each value in column.filter.values
+											li
+												a(href="")= value
+							when "textcombo"
+								div(id=column.filter.id + "-inputs")
+									input.txt-column(id=column.filter.id, type="text")
+									a.disable
+									.btn-group
+										a.btn.btn-large.dropdown-toggle(href="javascript:void(0);", data-toggle="dropdown")
+											| contains
+											span.caret
+										ul.dropdown-menu
+											each value in column.filter.values
+												li
+													a(href="")= value
+			- }
+		tr
+			td#bulk-actions(colspan="17")
+				.ff-icon-before.bulk-wrapper
+					a.ff-icon-after.x-zero-alert(href="#")
+					span
+						strong Bulk actions menu
+						br
+						| for all selected items
+					#bulk-action-menu.btn-group
+						a.btn.btn-large.dropdown-toggle(href="javascript:void(0);", data-toggle="dropdown")
+							| sell all
+							span.caret
+						ul.dropdown-menu
+							li
+								a(href="") another action
+							li
+								a(href="") sell all
+							li
+								a(href="") go "moo" like a cow
+		tr
+			td#zero-alert(colspan="17")
+				span.ff-icon-before
+					a.ff-icon-after.x-zero-alert(href="#")
+					strong Sorry
+					| , we couldnt find any matches for this keyword 
+					strong under expired domains.
+					br
+					| Perhaps instead try searching under 
+					strong new registrations
+		tr
+			td#filter-params(colspan="17")
+				span.ff-icon-before
+					a#save-search.ff-icon-before.btn(href="javascript:void(0);", data-toggle="dropdown")
+						strong save 
+						| this search
+					| Showing similar domains from 
+					strong all sources 
+					| ending 
+					strong today
+					| , containing keywords 
+					strong 'protrada'
+	tbody
+
+	tfoot
+		tr
+			td(colspan="17")
+				#foot-pager
+					strong Loading more 
+					| domain results ...
+					.ajax-spinner
+						.ball
+						.ball1
