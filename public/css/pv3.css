@@ -6747,13 +6747,7 @@ body.no-bubbles #tiptip_holder {
 		padding: 0;		
 	}
 	aside.active:before {
-		content: "";
-		display: block;
-		position: absolute;
-		width: 0;
-		top: 75px; right: 74px;
-		border: 15px outset transparent;
-		border-bottom: 15px solid black;
+		right: 74px;
 	}
 	#aside-inset-shadow {
 		display: none;
