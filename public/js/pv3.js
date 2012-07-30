@@ -66,6 +66,13 @@ $( document ).ready(function() {
 		$("#notifications").not(".native").tinyscrollbar_update("relative");
 	});
 
+	// now setup the socket for push notifications
+	document.socketio = io.connect( "http://" + location.host );
+	document.socketio.on( "logout", function() {
+		// force logout
+		document.location = '/login';
+	});
+
 	// the first thing we need to do is fetch the recent notifications
 	$.jsonrpc(
 		"notifications/fetch",
@@ -74,15 +81,18 @@ $( document ).ready(function() {
 			var notif = new NotificationsController( data.notifications );
 
 			notif.render();
-
+			
 			// now setup the socket for push notifications
-			document.socketio = io.connect( "http://" + location.host );
 			document.socketio.on( "notification", function( msg ) {
 				notif.notifications.unshift( msg.data );
 				notif.render();
 			});
 		}
 	);
+	
+	$.pv3.state.get(function () {
+		$.pv3.state.restoreModule();
+	});
 
 	/*// setup Tiptip "training wheel" tooltips
 	$("#tiptip_holder .hide-bubbles").live( "click", function( e ) {
