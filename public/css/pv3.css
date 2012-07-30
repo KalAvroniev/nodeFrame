@@ -1048,20 +1048,75 @@ fieldset.login .login-right .invisible {
 	padding: 6px 0 0 6px;
 }
 #spine-inner > nav {
+	clear: both;
+}
+#spine-inner #sys-alert {
+	display: inline-block;
+	margin: 5px 0 20px 7px;
+	padding: 6px 7px;
+	clear: both;
+	color: #e86908;		
+	position: relative;
+}
+#spine-inner #sys-alert:hover {
+	color: #FCF9F5;
+	text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+	background: #e86908;
+	border-radius: 5px;	
+}
+#sys-alert .alertmsg-container {
+	position: absolute;
+	z-index: -1;
+	left: -275px;
+	margin: -5px 0 0 0;
+	width: 250px;
+	padding: 15px 20px; 
+	background: #e86908;
+	border-radius: 5px;	
+	color: #581e04;
+	font-size: 12px;
+	line-height: 1.4em;
+	cursor: text;	
+	
+	-moz-transition: left .2s ease-in-out;
+	-webkit-transition: left .2s ease-in-out;
+   	transition: left .2s ease-in-out;		
+}
+#sys-alert:hover .alertmsg-container {
+	left: 92px;	
+}
+#sys-alert .alertmsg-container h4 {
+	font-size: 16px;
+	line-height: 1;
+	margin: 0 0 10px 0;
+	font-weight: 400;
+}
+#sys-alert .alertmsg-container:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 15px;	left: -20px;
+	margin: 0;
+	border: 10px outset transparent;
+	border-right: 10px solid #e86908;	
+}
+#spine-inner #sys-alert:before {
+	content: "5";
+	font-size: 30px;
+	line-height: 1;	
 }
 #spine-inner > nav ul {
 	padding: 0;
 	margin: 0;
 }
 #spine-inner > nav ul li {
-	display: block;
-	float: left;
+	display: inline-block;
 	margin: 0 0 20px 0;
 	padding: 6px;
 	border-radius: 4px;
 	position: relative;
 }
-#spine-inner nav a {
+#spine-inner nav ul a {
 	display: block;
 	width: 50px;
 	height: 50px;
@@ -1070,7 +1125,7 @@ fieldset.login .login-right .invisible {
 	border-radius: 4px;
 }
 
-#spine-inner nav a:before { 
+#spine-inner nav ul a:before { 
 
 	/* the nav button icon */ 
 	
@@ -1089,17 +1144,17 @@ fieldset.login .login-right .invisible {
     text-shadow: 0px 1px 1px #fcf9f5, 0 0 0 #000, 0px 1px 1px #fcf9f5, 0 1px 0 white;		
 }
 
-#spine-inner nav .selected a:before {
+#spine-inner nav ul .selected a:before {
 	color: #161413;
     text-shadow: 0 1px 0 white;		
 }
 
-#spine-inner nav a:hover:before {
+#spine-inner nav ul a:hover:before {
 	color: #161413;
     text-shadow: 0 1px 0 white;	
 }
 
-#spine-inner nav a:after { 
+#spine-inner nav ul a:after { 
 	
 	/* the glossy overlay */
 	
@@ -1122,7 +1177,7 @@ fieldset.login .login-right .invisible {
 	display: none;
 }
 
-#spine-inner nav li:hover { 
+#spine-inner nav ul li:hover { 
 	
 	/* the sunk look with shadow etc */
 	
