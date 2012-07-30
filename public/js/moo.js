@@ -55,18 +55,19 @@ $( document ).ready(function() {
 });
 
 // setup open/close sidebar element functions
-function toggleSidebar(e) {
+function toggleSidebar( e ) {
 	var $aside = $("aside");
 
 	$aside.toggleClass("active");
 	$( document.body ).toggleClass("sidebar-hidden").toggleClass("sidebar-open");
 
 	// animate main body (the best way to force webkit to re-render children dom elements)
-	$("#main-container, .task-status").animate( { width: ($aside.hasClass("active") ? "99.999" : "100") + "%" }, 200 );
+	$("#main-container, .task-status").delay( $( document.body ).hasClass("sidebar-hidden") ? 200 : 0 ).animate( { width: ($aside.hasClass("active") ? "99.999" : "100") + "%" }, 200 );
 
 	// update fake scrollbars
 	$("#notifications").not(".native").tinyscrollbar_update("relative");
-};
+}
+
 $( document ).on( "click", "#toggle-side-bar, #x-side-bar", function (e) {
 	toggleSidebar();
 
@@ -105,7 +106,8 @@ $( document ).on( "click", "#alert-msgs a", function( e ) {
 
 // restore the state for the system options
 $( document ).on( "restore", function() {
-	var state = $.pv3.state.current.system_options;
+	var state = $.pv3.state.current.system_options,
+		sidebar = $.pv3.state.current.sidebar;
 
 	if ( state !== undefined ) {
 		// toggle switches
@@ -127,13 +129,11 @@ $( document ).on( "restore", function() {
 	}
 
 	// sidebar
-	var sidebar = $.pv3.state.current.sidebar;
-	if(sidebar != undefined) {
+	if ( sidebar !== undefined ) {
 		// show/hide
-		if(sidebar.visible != undefined) {
-			if((sidebar.visible && $( document.body ).hasClass("sidebar-hidden")) ||
-				(!sidebar.visible && !$( document.body ).hasClass("sidebar-hidden"))) {
-					(function () { toggleSidebar(); })();
+		if ( sidebar.visible !== undefined ) {
+			if ( (sidebar.visible && $( document.body ).hasClass("sidebar-hidden")) || (!sidebar.visible && !$( document.body ).hasClass("sidebar-hidden")) ) {
+				toggleSidebar();
 			}
 		}
 	}

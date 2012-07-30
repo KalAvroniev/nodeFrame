@@ -6,8 +6,8 @@ require.config({
 	},
 	shim: {
 		bootstrap: ["jquery"],
-		moo: ["jquery"],
-		pv3: ["jquery"],
+		moo: [ "jquery", "jade" ],
+		pv3: [ "jquery", "moo" ],
 		"jquery.tinyscrollbar": ["jquery"],
 		"jquery.plugins": ["jquery"]
 	}

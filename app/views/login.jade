@@ -23,7 +23,7 @@ html(lang='en')
 								input(type='password', value='', placeholder='password', name='password')
 						
 								.login-right		
-									input(type='submit', value='').hidden
+									input(type='submit', value='').invisible
 									a.go-login.ff-icon-after(href='#',onclick="$('#login-body').submit()") go login
 									a#forgot(href='#') forgot?
 
@@ -48,14 +48,5 @@ html(lang='en')
 		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
 		script
 			!window.jQuery && document.write("<script src=\"js/jquery-1.7.2.min.js\"><\/script>");
-		script
-			$( document ).ready(function() {
-				$("#login-body").keydown(function( e ) {
-					if ( e.keyCode === 13 ) {
-						e.stopPropagation();
-						$( this ).submit();
-					}
-				});
-			});
 		script(src='js/bootstrap.min.js')
 		script(src='js/pv3.js')

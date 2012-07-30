@@ -52,4 +52,25 @@ $(document).on('restore', function() {
 		return;
 	}
 });
+
+// external account button UI behaviour
+$( document ).on( "click", ".account-selection li:not(.open-for-edit, .more-coming-soon)", function( e ) {
+	e.preventDefault();
+
+	if($( this ).hasClass("active")) {
+	
+		$( this ).removeClass("active");
+		
+	} else {
+		
+		$(".account-selection li.active").removeClass("active");
+		$( this ).addClass("active");		
+			
+	}	
+
+});
+
+
+
 $.pv3.state.get();
+

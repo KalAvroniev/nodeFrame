@@ -84,9 +84,6 @@ $( document ).ready(function() {
 		}
 	);
 
-	// restore the users state
-	$.pv3.state.restore();
-
 	/*// setup Tiptip "training wheel" tooltips
 	$("#tiptip_holder .hide-bubbles").live( "click", function( e ) {
     	$("body").addClass("no-bubbles");
