@@ -3004,7 +3004,6 @@ input[type=number] {
 .sources-sprite[source="Namejet"] {
 	color: #627c96;
 }
-
 .sources-sprite[source="Namejet"]:before {
 	background-position: -242px -9px;
 	background-color: #627c96;
@@ -3012,10 +3011,16 @@ input[type=number] {
 .sources-sprite[source="Snap Names"] {
 	color: #dd5120;
 }
-
 .sources-sprite[source="Snap Names"]:before {
 	background-position: -298px -10px;
 	background-color: #dd5120;
+}
+.sources-sprite[source="Pool.com"] {
+	color: #de7005;
+}
+.sources-sprite[source="Pool.com"]:before {
+	background-position: -359px -15px;
+	background-color: #de7005;
 }
 
 
@@ -4061,7 +4066,7 @@ aside header.alerts-header {
 	padding: 0;
 	margin: 0 0 30px 0;
 }
-#external-accounts .tabs-in-tabs-headings {
+#external-accounts .tabs-in-tabs-headings, #user-settings-tab-panes .tabs-in-tabs-headings {
 	margin: 10px 15% 0 0;
 	border: none;
 }
@@ -4087,7 +4092,7 @@ aside header.alerts-header {
 .tabs-in-tabs-headings h3:before {
 	content: "*";
 	position: absolute;
-	top: 6px; left: 0;
+	top: 5px; left: 0;
 	font-size: 32px;
 	font-weight: 400;
 }
@@ -4377,6 +4382,48 @@ aside header.alerts-header {
 	width: 222px; height: 80px;
 	cursor: pointer;
 }
+.account-selection li:not(.open-for-edit, .more-coming-soon):hover {
+	background: white;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.25);		
+}
+.account-selection li.active {
+	background: #bbb6b1;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+	box-shadow: 0 1px 0 white, inset 0 2px 4px rgba(0,0,0,0.3);		
+}
+.account-selection .active .sources-sprite {
+	color: #4B4743;
+}
+
+.account-selection li.more-coming-soon {
+	background: #e2dfdb;
+	border: 2px dotted #c9c6c3;
+	box-shadow: none;
+	color: #93908c;
+	padding: 15px 0 0 0;
+}
+li.more-coming-soon .ff-icon-before {
+	padding: 0 0 0 85px;
+	display: block;
+	font-size: 14px;
+	line-height: 1.4em;
+	position: relative;
+}
+li.more-coming-soon .ff-icon-before:before {
+	content: "t";
+	font-size: 55px;
+	position: absolute;
+	top: 13px; left: 15px;
+	color: #c3c0bd;
+}
+li.more-coming-soon .ff-icon-before:after {
+	content: "*";
+	font-size: 26px;
+	position: absolute;
+	top: 16px; left: 35px;
+	color: #4b4743;	
+
+}
 .account-selection li.open-for-edit {
 	position: absolute;
 	left: 0; top: 0;
@@ -4386,7 +4433,7 @@ aside header.alerts-header {
 	margin: 0;
 	padding: 20px 15px;
 	box-shadow: 0 1px 0 rgba(255,255,255,0.3), inset 0 2px 4px rgba(0,0,0,0.3);	
-	width: 230px; height: 100%;
+	width: 230px; height: auto;
 }
 .account-selection li:not(.open-for-edit) .sources-sprite:before {
 	height: 40px; width: 50px;
@@ -4413,6 +4460,10 @@ aside header.alerts-header {
 .account-selection li:not(.open-for-edit) .sources-sprite[source="Snap Names"]:before {
 	background-position: -290px -7px;
 }
+.account-selection li:not(.open-for-edit) .sources-sprite[source="Pool.com"]:before {
+	background-position: -346px -7px;
+}
+
 .account-selection .btn-success {
 	float: right;
 	margin: 0 0 0 10px;
@@ -4428,7 +4479,7 @@ aside header.alerts-header {
 	font-size: 23px;
 	line-height: 1;
 	top: 18px; right: 16px;
-	padding: 2px 4px;
+	padding: 2px 4px 0;
 	border-radius: 4px;
 }
 .x-open-for-edit:before {
@@ -4487,7 +4538,7 @@ aside header.alerts-header {
 
 .form-horizontal input {
 	font-size: 18px;
-	height: auto; width: 100%;
+	height: auto; width: 90%;
 	letter-spacing: -1px;
 	font-weight: 400;
 	color: #4c4b4a;
