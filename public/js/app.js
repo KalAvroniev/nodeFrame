@@ -9,8 +9,9 @@ require.config({
 		moo: [ "jquery", "jade" ],
 		pv3: [ "jquery", "moo" ],
 		"jquery.tinyscrollbar": ["jquery"],
-		"jquery.plugins": ["jquery"]
+		"jquery.plugins": ["jquery"],
+		"grid": ["jquery"]
 	}
 });
 
-requirejs([ "jquery", "bootstrap", "jquery.tinyscrollbar", "jade", "moo", "jquery.plugins", "pv3", "socket" ]);
+requirejs([ "jquery", "bootstrap", "jquery.tinyscrollbar", "jade", "moo", "jquery.plugins", "pv3", "socket", "grid" ]);
