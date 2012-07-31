@@ -36,4 +36,9 @@ class exports.Controller extends Controller
 			
 		res.view.showTradingSummary = false
 		
+		# user info
+		res.view.user = {}
+		res.view.user.name = "Tim"
+		res.view.user.type = "Investor member."
+		
 		res.ready()

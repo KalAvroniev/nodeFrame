@@ -9,13 +9,13 @@
 
 	h5#first-heading.home welcome to Protrada
 
-	h2#user-greeting hi, Andrew 
+	h2#user-greeting hi, #{user.name}
 
 	hgroup#member-details
 
 		h5
 			| you are currently an 
-			strong Investor member.
+			strong= user.type
 
 		h5#member-renewal
 			| your next membership renewal is: 
