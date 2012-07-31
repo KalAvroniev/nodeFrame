@@ -4146,7 +4146,7 @@ aside header.alerts-header {
 	margin: 0 0 30px 0;
 }
 #external-accounts .tabs-in-tabs-headings, #user-settings-tab-panes .tabs-in-tabs-headings {
-	margin: 10px 15% 0 0;
+	margin: 0 15% 10px 0;
 	border: none;
 }
 .tabs-in-tabs-headings h2 {
@@ -4324,7 +4324,7 @@ aside header.alerts-header {
 
 
 #purchase-history .tabs-in-tabs-headings, #credit-use .tabs-in-tabs-headings {
-	margin: 0 340px 2px 0;
+	margin-right: 340px;
 }
 
 .simple-data-grid {
@@ -4335,8 +4335,15 @@ aside header.alerts-header {
 	padding: 10px;
 	color: #898785;
 	vertical-align: middle;
+	white-space: nowrap;
 	line-height: 1.4em;
 	font-size: 13px;	
+}
+.simple-data-grid td * {
+	max-width: 100%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 .simple-data-grid th {
 	padding: 14px 10px;
@@ -4445,7 +4452,7 @@ aside header.alerts-header {
 
 .account-selection {
 	list-style: none;	
-	margin: 30px 0 0 0;
+	margin: 25px 0 0 0;
 }
 .account-selection.has-open-edit {
 	padding: 0 0 0 243px;
@@ -4454,6 +4461,7 @@ aside header.alerts-header {
 }
 .account-selection li {
 	float: left;
+	position: relative;
 	margin: 0 13px 13px 0;
 	background: #f9f9f9;
 	box-shadow: inset 0 1px 0 white, 0 2px 4px rgba(0,0,0,0.12);
@@ -4474,7 +4482,18 @@ aside header.alerts-header {
 .account-selection .active .sources-sprite {
 	color: #4B4743;
 }
-
+.account-selection li > .linked {
+	position: absolute;
+	bottom: 0; right: 0;
+	padding: 7px 8px 4px;
+	background: #EFECE8;
+	color: #93908C;
+	border-radius: 4px 0;
+	box-shadow: inset 0 1px 0 rgba(0,0,0,0.05), inset 0 -1px 0 rgba(255,255,255,0.6);
+}
+.account-selection li > .linked:before {
+	content: "u";
+}
 .account-selection li.more-coming-soon {
 	background: #e2dfdb;
 	border: 2px dotted #c9c6c3;
@@ -4513,7 +4532,7 @@ li.more-coming-soon .ff-icon-before:after {
 	cursor: default;
 	margin: 0;
 	padding: 20px 15px;
-	box-shadow: 0 1px 0 rgba(255,255,255,0.3), inset 0 2px 4px rgba(0,0,0,0.3);	
+	box-shadow: 0 1px 0 rgba(255,255,255,0.3), inset 0 2px 4px rgba(0,0,0,0.2);	
 	width: 230px; height: auto;
 }
 .account-selection li:not(.open-for-edit) .sources-sprite:before {
@@ -4606,12 +4625,23 @@ li.more-coming-soon .ff-icon-before:after {
 	content: "*";
 	font-size: 30px;
 }
-
 .account-types * {
 	color: #94918e;
 	display: inline-block;	
 	vertical-align: top;
 }
+#external-acc-tab-panes .account-groups {
+	padding: 5px 0 30px;
+}
+
+
+
+
+
+
+
+
+
 
 
 

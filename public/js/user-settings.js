@@ -55,17 +55,19 @@ $(document).on('restore', function() {
 
 // external account button UI behaviour
 $( document ).on( "click", ".account-selection li:not(.open-for-edit, .more-coming-soon)", function( e ) {
+	
 	e.preventDefault();
 
 	if($( this ).hasClass("active")) {
 	
-		$( this ).removeClass("active");
+		$(".account-selection li.active").removeClass("active");
+		console.log('is active');
 		
 	} else {
 		
 		$(".account-selection li.active").removeClass("active");
 		$( this ).addClass("active");		
-			
+		console.log('isnt active');	
 	}	
 
 });
