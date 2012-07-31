@@ -155,6 +155,10 @@ $.pv3.state.get = function( success, options ) {
 $.pv3.state.restoreModule = function () {
 	var module = ( !$.pv3.state.current.modules.selected || $.pv3.state.current.modules.selected === "" ) ? "home" : $.pv3.state.current.modules.selected;
 
+	// TODO: fix!
+	// for some reason module has an # appended?
+	module = module.replace( "#", "" );
+
 	window.history.pushState( "", module, "/" + module );
 
 	$("#main-container").trigger("ajaxUnload");
@@ -200,17 +204,32 @@ $.pv3.state.update = function( stateName, stateValue ) {
 };
 
 $.pv3.panel = {};
-$.pv3.panel.show = function (url, options) {
-	if(options == undefined)
+$.pv3.panel.show = function ( url, options ) {
+	var active = $.pv3.state.current.modules[ $.pv3.state.current.modules.selected ].panel.active;
+
+	if ( options == undefined ) {
 		options = {};
-	if(options.jsonrpcMethod == undefined)
-		options.jsonrpcMethod = 'view' + url;
+	}
+
+	if ( options.jsonrpcMethod == undefined ) {
+		options.jsonrpcMethod = "view" + url;
+	}
+
+	// TODO: refactor this at some point, as it's duplicated below
+	// is this panel already open? then close it
+	if ( active && active.options.tabid === options.tabid ) {
+		$(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
+
+		// restore the standout tab to be the first child of the <ul>
+		$(".sectional-tabs").restoreStandoutElement();
+
+		$.pv3.panel.hide();
+
+		return;
+	}
 
 	// make the JSON-RPC call
-	$.jsonrpc(
-		options.jsonrpcMethod,
-		{},
-		function (obj) {
+	$.jsonrpc( options.jsonrpcMethod, {}, function( obj ) {
 			$.jade.getTemplate(url, function (fn) {
 				// nofify the server that the active tab has changed
 				console.log($.pv3.state.current);
@@ -251,10 +270,10 @@ $.pv3.panel.show = function (url, options) {
 $.fn.reorderActiveElement = function() {
 	return this.children(".active").detach().prependTo( this );
 };
+
 $.fn.restoreStandoutElement = function() {
 	return this.children(".standout-tab").detach().prependTo( this );
 };
-
 
 $.pv3.panel.hide = function () {
 	if ( $("#section-panel").hasClass("hidden") ) {
@@ -267,4 +286,4 @@ $.pv3.panel.hide = function () {
 
 	// notify the server that the active tab has changed
 	$.pv3.state.update('modules.' + $.pv3.state.current.modules.selected + '.panel.active', null);
-}
+};
