@@ -150,7 +150,7 @@ class exports.Controller
 		})
 
 		# data
-		for i in [1,2,3]
+		for i in [0..9]
 			grid.addRecord({
 				selected: false,
 				star: false,
