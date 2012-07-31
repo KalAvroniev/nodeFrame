@@ -3,3 +3,4 @@ tests/vows-results.txt
 tests/vows.coffee
 app/state_data
 tests/selenium/results/
+/nbproject/private/
