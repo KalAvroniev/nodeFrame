@@ -13,6 +13,10 @@ class exports.Controller
 		}
 	}
 	
+	options: {
+		"requireUserSession": true
+	}
+	
 	run: (req) ->
 		req.updateState(
 			req.params.name,
