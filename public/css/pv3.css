@@ -131,7 +131,9 @@ form input.hidden {
 }
 
 
+#ajax-container {
 
+}
 #main-container {
 	padding: 100px 305px 0 30px;
 	background: url(../img/bg-noise.png);
@@ -1809,8 +1811,7 @@ header#main:before {
 
 /* ---------------------- Home / portfolio dashboard main content work ---------------------------- */
 
-#ajax-container {
-}
+
 #first-heading {
 	font-size: 14px;
 	margin-bottom: 20px;
@@ -3070,11 +3071,11 @@ input[type=number] {
 	background-color: #694188;
 }
 .sources-sprite[source="Protrada"] {
-	color: #3f3f3f;
+	color: #303030;
 }
 .sources-sprite[source="Protrada"]:before {
 	background-position: -185px -9px;
-	background-color: #3f3f3f;
+	background-color: #303030;
 }
 .sources-sprite[source="Namejet"] {
 	color: #627c96;
@@ -3097,8 +3098,28 @@ input[type=number] {
 	background-position: -359px -15px;
 	background-color: #de7005;
 }
+.sources-sprite[source="Bido"] {
+	color: #4a2354;
+}
+.sources-sprite[source="Bido"]:before {
+	background-position: -417px -20px;
+	background-color: #4a2354;
+}
 
-
+.sources-sprite[source="Expiring"] {
+	color: #626262;
+}
+.sources-sprite[source="Expiring"]:before {
+	background-position: -104px -61px;
+	background-color: #626262;
+}
+.sources-sprite[source="Fabulous"] {
+	color: #3cabf8;
+}
+.sources-sprite[source="Fabulous"]:before {
+	background-position: -44px -59px;
+	background-color: #3cabf8;
+}
 
 
 
@@ -4562,6 +4583,12 @@ li.more-coming-soon .ff-icon-before:after {
 }
 .account-selection li:not(.open-for-edit) .sources-sprite[source="Pool.com"]:before {
 	background-position: -346px -7px;
+}
+.account-selection li:not(.open-for-edit) .sources-sprite[source="Sedo"]:before {
+	background-position: -62px -7px;
+}
+.account-selection li:not(.open-for-edit) .sources-sprite[source="Bido"]:before {
+	background-position: -404px -5px;
 }
 
 .account-selection .btn-success {
