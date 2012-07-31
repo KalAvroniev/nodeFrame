@@ -41,8 +41,4 @@ class exports.Controller extends Controller
 		res.view.user.name = "Tim"
 		res.view.user.type = "Investor member."
 		
-	
-		res.view.whitelabel = {}
-		res.view.whitelabel.name = "Protrada"
-		
 		res.ready()
