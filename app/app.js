@@ -3,7 +3,7 @@ Application = require('./lib/Application.coffee').Application
 
 // production server
 app = new Application({
-	'port': 8181,
+	'port': 8080,
 	'config': 'staging'
 });
 app.start();
