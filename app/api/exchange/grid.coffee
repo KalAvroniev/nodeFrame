@@ -5,6 +5,10 @@ class exports.Controller
 	validate: {
 	}
 	
+	options: {
+		"requireUserSession": true
+	}
+	
 	run: (req) ->
 		grid = new GridModel()
 		

@@ -3,6 +3,10 @@ class exports.Controller
 	validate: {
 	}
 	
+	options: {
+		"requireUserSession": true
+	}
+	
 	run: (req) ->
 		r = {}
 		
@@ -38,12 +42,3 @@ class exports.Controller
 		r.active_tab = '#expiring'
 		
 		return req.success(r)
-		
-	testBasic: (test) ->
-		test.run(
-			{},
-			(result) ->
-				test.assert.equal(result.tabs.length, 6)
-			, (error) ->
-				test.fail(error)
-		)

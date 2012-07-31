@@ -3,10 +3,12 @@ class exports.Controller
 	validate: {
 	}
 	
+	options: {
+		"requireUserSession": true
+	}
+	
 	run: (req) ->
 		r = {}
-		
-		# restore state here
 		
 		# view elements
 		r.tabs = [

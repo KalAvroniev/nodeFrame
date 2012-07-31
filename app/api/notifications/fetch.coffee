@@ -2,7 +2,7 @@ class exports.Controller
 
 	validate: {
 		"limit": {
-			"description": "The maximu number of recent notifications to return.",
+			"description": "The maximum number of recent notifications to return.",
 			"type": "integer"
 			"required": false,
 			"default": 10
