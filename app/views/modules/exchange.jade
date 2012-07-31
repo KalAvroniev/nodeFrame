@@ -84,7 +84,7 @@
 					| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
 					| andit eget non lacus. Pellentesque a imperdiet diam.
 
-				#grid-view.tiny-scrollbar-horiz
+				#grid-view
 
 			#listed-for-sale.tab-pane
 				h2#complete-listing Domains listed for sale
@@ -98,5 +98,6 @@
 
 script
 	$("#grid-view").grid({
-		url: "exchange/grid"
+		url: "exchange/grid",
+		stickyHeader: true
 	});

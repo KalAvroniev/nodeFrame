@@ -34,7 +34,7 @@
 									input.txt-filter(id=column.filter.id, type="text")
 								when "menu"
 									.btn-group(id=column.filter.id)
-										a.btn.btn-large.dropdown-toggle(href="javascript:void(0);", data-toggle="dropdown")
+										a.btn.btn-large.dropdown-toggle(href="#", data-toggle="dropdown")
 											| sort by?
 											span.caret
 										ul.dropdown-menu
@@ -47,7 +47,7 @@
 										input.txt-filter(id=column.filter.id, type="text", class=klass)
 										a.disable
 										.btn-group
-											a.btn.btn-large.dropdown-toggle(href="javascript:void(0);", data-toggle="dropdown")
+											a.btn.btn-large.dropdown-toggle(href="#", data-toggle="dropdown")
 												| contains
 												span.caret
 											ul.dropdown-menu
@@ -64,7 +64,7 @@
 							br
 							| for all selected items
 						#bulk-action-menu.btn-group
-							a.btn.btn-large.dropdown-toggle(href="javascript:void(0);", data-toggle="dropdown")
+							a.btn.btn-large.dropdown-toggle(href="#", data-toggle="dropdown")
 								| sell all
 								span.caret
 							ul.dropdown-menu
@@ -88,7 +88,7 @@
 			tr
 				td#filter-params(colspan="17")
 					span.ff-icon-before
-						a#save-search.ff-icon-before.btn(href="javascript:void(0);", data-toggle="dropdown")
+						a#save-search.ff-icon-before.btn(href="#", data-toggle="dropdown")
 							strong save 
 							| this search
 						| Showing similar domains from 

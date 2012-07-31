@@ -8,8 +8,8 @@ $("#grid-view").grid({
 });
 */
 
-var Grid = function( grid, options ) {
-	this.grid = $( grid );
+var Grid = function( element, options ) {
+	this.grid = $( element );
 	this.options = {
 		url: null, // ajax endpoint for grid data
 		data: null, // use this array of data for the grid instead of ajaxing it in
@@ -27,39 +27,130 @@ Grid.prototype = {
 	constructor: Grid,
 
 	init: function() {
+		var that = this,
+			$grid = this.grid;
+
 		$.jsonrpc( this.options.url, {}, function( data ) {
-			console.log( data );
+			//console.log( data );
 
 			$.jade.getTemplate( "grid/row", $.noop );
 
 			$.jade.getTemplate( "grid/table", function( fn ) {
 				var records = data.records;
 
-				$("#grid-view").html( $.jade.renderSync(fn, data, function(err){alert(err)}) );
+				$grid.html( $.jade.renderSync(fn, data, function(err){alert(err)}) );
 
 				for ( var i = 0; i < records.length; ++i ) {
-					$("#grid-view").find("tbody").append( $.jade.renderSync("views_grid_row", records[ i ], function(err){alert(err)}) );
+					$grid.find("tbody").append( $.jade.renderSync("views_grid_row", records[ i ], function(err){alert(err)}) );
 				}
 
-				// do scrollbar/stick-header/etc setup here?
-				$("#grid-view").tinyscrollbar({ axis: "x", scroll: false });
+				// run setup
+				that.setup();
 			});
 		});
+	},
 
-		/*$( document ).on( "click", "#toggle-side-bar, #x-side-bar", function() {
-			this.windowResize();
-			this.windowScroll();
-		});*/
+	setup: function() {
+		var that = this;
+
+		if ( this.options.stickyHeader ) {
+			$( this ).addClass("tiny-scrollbar-horiz");
+		}
+
+		$( document.body ).not(".mobile").find(".domain-title").on({
+			mouseenter: this.domainTitleMouseEnter,
+			mouseleave: this.domainTitleMouseLeave
+		});
+
+		$("#main-container").on( "click", ".grid-table .sticky", { grid: this }, this.toggleSticky );
+
+		$(".grid-table").children("tbody").on( "click", ".domain-title-cntnr .copy-to-clipboard", function( e ) { e.preventDefault(); })
+			.on( "click", "td button.favourite", this.toggleFavourite )
+			.on( "click", "td button.select", this.toggleSelect )
+			.on( "click", "td:not(#zero-alert)", function() {
+				var $this = $( this ),
+					$row = $this.closest("tr"),
+					parent,
+					rowIsSelected;
+
+				if ( $row.hasClass("child") ) {
+					// clicking on the child row
+					$row.fadeOut(function() {
+						$this.prev().removeClass("row-sel parent-open").remove();
+					});
+				} else {
+					$parent = $row.parent();
+					rowIsSelected = $row.hasClass("parent-open");
+
+					// fade out / remove all "open" child rows
+					$parent.children("tr.row-sel.child").fadeOut(function() {
+						$this.prev().removeClass("row-sel parent-open").remove();
+					});
+
+					if ( !rowIsSelected ) {
+						$row.addClass("row-sel parent-open");
+
+						$row.after(
+							'<tr class="row-sel child" style="display:none;"><td colspan="' + $row.find("td").length + '"><div class="child-inner"> <a class="x-row-sel" href="javascript:void(0);">x</a><p><strong>selected domain content</strong> <br>to be placed in here …</p></div></td></tr>'
+						);
+
+						$row.next().fadeIn();
+					}
+				}
+			});
+
+		$( window ).on( "resize", { grid: this }, this.windowResize ).on( "scroll", { grid: this }, this.windowScroll );
+		$( verticalScroll ).add( this.grid ).on( "resize", this.copyHeaderSize );
+		this.grid.on( "tsb_scroll", ".scrollbar", this.updateTableHeaders );
+
+		$( "table.floatable", this.grid ).each(function() {
+			var $this = $( this ),
+				$parent = $this.parent(),
+				originalHeaderRow,
+				cloneTable,
+				clonedHeaderRow;
+
+			if ( $parent.css("position") === "relative" ) {
+				$parent.addClass("divTableWithFloatingHeader");
+			} else {
+				$this.wrap("<div class=\"divTableWithFloatingHeader\" style=\"position: relative;\" />");
+			}
+
+			originalHeaderRow = $( "thead:first", this );
+			cloneTable = $("#thetableclone").children("table");
+			clonedHeaderRow = cloneTable.append( originalHeaderRow.clone() );
+
+			clonedHeaderRow.closest("#thetableclone").css({
+				top: $("header#main").height(),
+				left: $this.css("margin-left") + $this.offset().left
+			});
+
+			clonedHeaderRow.addClass("tableFloatingHeader");
+			originalHeaderRow.addClass("tableFloatingHeaderOriginal");
+
+			that.copyHeaderSize();
+		});
+
+		this.grid.tinyscrollbar({ axis: "x", scroll: false });
+
+		this.positionHorizScroll();
+		this.updateTableHeaders();
+	},
+
+	teardown: function() {
+		//
 	},
 
 	toggleSticky: function( e ) {
+		var grid = e.data.grid;
+
 		e.preventDefault();
 
-		this.stickyHeaderEnabled = !this.stickyHeaderEnabled;
-		this.grid.find(".sticky").find("span").toggleClass("on off");
+		grid.options.stickyHeader = !grid.options.stickyHeader;
+		grid.grid.find(".sticky").find("span").toggleClass("on off");
 		$( document.body ).toggleClass("sticky-thead");
 
-		this.updateTableHeaders();
+		grid.updateTableHeaders();
 	},
 
 	toggleFavourite: function( e ) {
@@ -72,33 +163,40 @@ Grid.prototype = {
 		$( this ).button("toggle");
 	},
 
-	windowResize: function() {
-		this.grid.tinyscrollbar_update("relative");
-
-		innerOuterOffset = this.getInnerOuterOffset();
-		tableHeaderOffset = this.getTableHeaderOffset();
-
-		this.positionHorizScroll();
-		this.updateTableHeaders();
+	domainTitleMouseEnter: function() {
+		$( this ).find(".domain-title-cntnr .copy-to-clipboard").css( "opacity", 1 );
 	},
 
-	windowScroll: function() {
+	domainTitleMouseLeave: function() {
+		$( this ).find(".domain-title-cntnr .copy-to-clipboard").css( "opacity", 0 );
+	},
+
+	windowResize: function( e ) {
+		var grid = e.data.grid;
+
+		grid.grid.tinyscrollbar_update("relative");
+
+		grid.positionHorizScroll();
+		grid.updateTableHeaders();
+	},
+
+	windowScroll: function( e ) {
+		var grid = e.data.grid;
+
 		$(".btn-group.open").removeClass("open");
 
-		innerOuterOffset = this.getInnerOuterOffset();
-		tableHeaderOffset = this.getTableHeaderOffset();
-
-		this.positionHorizScroll();
-		this.updateTableHeaders();
+		grid.positionHorizScroll();
+		grid.updateTableHeaders();
 	},
 
-	getInnerOuterOffset: function() {
+	// not needed?
+	/*getInnerOuterOffset: function() {
 		var scrollOffset = $( verticalScroll ).scrollTop(),
 			vertOffset = $( verticalScroll ).offset().top,
 			innerOffset = this.grid.offset().top;
 
 		return ( innerOffset - scrollOffset ) - vertOffset;
-	},
+	},*/
 
 	getTableHeaderOffset: function() {
 		var scrollOffset = $( verticalScroll ).scrollTop(),
@@ -139,13 +237,15 @@ Grid.prototype = {
 
 	// derived from https://bitbucket.org/cmcqueen1975/htmlfloatingtableheader/wiki/Home
 	updateTableHeaders: function() {
+		var that = this;
+
 		$("div.divTableWithFloatingHeader").each(function() {
 			var theClone = $(".tableFloatingHeader"),
 				theCloneTable = theClone.closest("table"),
 				theCloneContainer = theClone.closest("#thetableclone"),
 				body = $( document.body );
 
-			if ( !this.stickyHeaderEnabled ) {
+			if ( !that.options.stickyHeader ) {
 				theCloneContainer.css( "visibility", "hidden" );
 
 				if ( body.hasClass("sticky-thead") ) {
@@ -155,7 +255,7 @@ Grid.prototype = {
 				return;
 			}
 
-			var offset = tableHeaderOffset,
+			var offset = that.getTableHeaderOffset(),
 				scrollTop = $( window ).scrollTop(),
 				viewport = $( this ).closest(".viewport");
 
@@ -174,7 +274,7 @@ Grid.prototype = {
 			}
 
 			theCloneTable.css({
-				left: -this.grid.tinyscrollbar_offset() + "px"
+				left: -that.grid.tinyscrollbar_offset() + "px"
 			});
 
 			theCloneContainer.width( viewport.width() );

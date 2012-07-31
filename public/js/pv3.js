@@ -89,10 +89,11 @@ $( document ).ready(function() {
 			});
 		}
 	);
-	
-	$.pv3.state.get(function () {
+
+	// this is already called in moo.js!
+	/*$.pv3.state.get(function () {
 		$.pv3.state.restoreModule();
-	});
+	});*/
 
 	/*// setup Tiptip "training wheel" tooltips
 	$("#tiptip_holder .hide-bubbles").live( "click", function( e ) {
