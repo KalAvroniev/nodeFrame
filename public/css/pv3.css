@@ -1060,7 +1060,7 @@ fieldset.login .login-right .invisible {
 }
 #spine-inner #sys-alert:hover {
 	color: #FCF9F5;
-	text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+	text-shadow: 0 1px 1px rgba(0,0,0,0.2);
 	background: #e86908;
 	border-radius: 5px;	
 }
@@ -1070,9 +1070,10 @@ fieldset.login .login-right .invisible {
 	left: -275px;
 	margin: -5px 0 0 0;
 	width: 250px;
-	padding: 15px 20px; 
+	padding: 15px 20px 17px 35px; 
 	background: #e86908;
-	border-radius: 5px;	
+	box-shadow: inset 0 5px 0 rgba(0,0,0,0.08), 0 0 10px rgba(0,0,0,0.2), inset 0 -1px 0 rgba(255,255,255,0.4);
+	border-radius: 0 5px 5px 0;	
 	color: #581e04;
 	font-size: 12px;
 	line-height: 1.4em;
@@ -1084,22 +1085,13 @@ fieldset.login .login-right .invisible {
    	transition: left .2s ease-in-out;		
 }
 #sys-alert:hover .alertmsg-container {
-	left: 92px;	
+	left: 60px;	
 }
 #sys-alert .alertmsg-container h4 {
 	font-size: 16px;
 	line-height: 1;
 	margin: 0 0 10px 0;
-	font-weight: 400;
-}
-#sys-alert .alertmsg-container:after {
-	content: "";
-	display: block;
-	position: absolute;
-	top: 15px;	left: -20px;
-	margin: 0;
-	border: 10px outset transparent;
-	border-right: 10px solid #e86908;	
+	font-weight: 600;
 }
 #spine-inner #sys-alert:before {
 	content: "5";
@@ -1254,7 +1246,7 @@ fieldset.login .login-right .invisible {
 
 #spine-inner > nav li > span { /* the navigation label */
 	position: absolute;
-	z-index: -1;
+	z-index: -2;
 	left: -240px; top: 8px;
 	white-space: nowrap;
 	display: block;
@@ -1449,10 +1441,12 @@ header#main:before {
 }
 .sectional-tabs li#import-domains a:before {
 	content: "m";
-	left: 14px;	
+	left: 14px;
+	margin: 0 0 0 -2px;	
 }
 .sectional-tabs li#list-forsale a:before {
 	content: "^";
+	margin: 0 0 0 -1px;	
 }
 .sectional-tabs li#watchlist a {
 	padding-left: 50px;	
@@ -2237,7 +2231,7 @@ header#main:before {
 	pointer-events: none;
 	height: 100%;
 	padding: 74px 0 0;	
-	margin: 0;
+	margin: 0 0 0 105px;
 	
 }
 #section-panel:not(.mini-panel) {
@@ -6606,32 +6600,24 @@ body.no-bubbles #tiptip_holder {
 
 
 /* Style tabs to be thin + without text labels, when the sidebar is open  */
-
+.sidebar-open .sectional-tabs li a {
+	text-indent: -3000em;
+	padding: 0 !important;
+	height: 55px; width: 70px;
+}
 .sidebar-open .sectional-tabs li a strong {
 	display: inline;
 }	
-.sidebar-open .sectional-tabs li a {
-	text-indent: -3000em;
-	height: 55px;
-}
 .sidebar-open .sectional-tabs.singular li a, .sidebar-open .sectional-tabs li.standout-tab a {
-	height: 87px;
+	height: 62px;
 }
 .sidebar-open .sectional-tabs li.active a {
 	height: 63px;
 }
 .sidebar-open .sectional-tabs li a:before {
-	left: 20px;
+	left: 23px !important;
 }
-.sectional-tabs li#watchlist a {
-	padding-left: 45px;	
-}
-.sectional-tabs li#watchlist a:before {
-	left: 19px;
-}	
-.sectional-tabs li#import-domains a:before {
-	left: 21px;
-}	
+
 
 
 /* Style tabs to be thick + show text labels, when the sidebar is hidden */
@@ -6649,10 +6635,7 @@ body.no-bubbles #tiptip_holder {
 .sidebar-hidden .sectional-tabs.singular li a, .sectional-tabs li.standout-tab a {
 	height: 62px;
 }
-.sidebar-hidden .sectional-tabs li#import-domains a:before {
-	left: 14px;
-}	
-	
+
 	
 	#section-headings.search-results {	
 		margin: 0 210px 40px 0;
@@ -6721,14 +6704,15 @@ body.no-bubbles #tiptip_holder {
 
 @media only screen and (max-width: 1055px) {
 
-/* Style tabs to be thin + without text labels, when the sidebar is open and closed  */
+	/* Style tabs to be thin + without text labels, when the sidebar is open and closed  */
 	
 	.sidebar-open .sectional-tabs li a strong, .sidebar-hidden .sectional-tabs li a strong {
 		display: inline;
 	}	
 	.sidebar-open .sectional-tabs li a, .sidebar-hidden .sectional-tabs li a {
 		text-indent: -3000em;
-		height: 55px;
+		height: 55px; width: 70px;
+		padding: 0 !important;
 	}
 	.sidebar-open .sectional-tabs.singular li a, .sidebar-open .sectional-tabs li.standout-tab a, .sidebar-hidden .sectional-tabs.singular li a, .sidebar-hidden .sectional-tabs li.standout-tab a {
 		height: 62px;
@@ -6737,13 +6721,7 @@ body.no-bubbles #tiptip_holder {
 		height: 63px;
 	}
 	.sidebar-open .sectional-tabs li a:before, .sidebar-hidden .sectional-tabs li a:before {
-		left: 20px;
-	}
-	.sidebar-open .sectional-tabs li#watchlist a, .sidebar-hidden .sectional-tabs li#watchlist a {
-		padding-left: 45px;	
-	}
-	.sidebar-open .sectional-tabs li#import-domains a:before, .sidebar-hidden .sectional-tabs li#import-domains a:before {
-		left: 21px;
+		left: 23px !important;
 	}
 	
 		
@@ -6769,13 +6747,7 @@ body.no-bubbles #tiptip_holder {
 		padding: 0;		
 	}
 	aside.active:before {
-		content: "";
-		display: block;
-		position: absolute;
-		width: 0;
-		top: 75px; right: 74px;
-		border: 15px outset transparent;
-		border-bottom: 15px solid black;
+		right: 74px;
 	}
 	#aside-inset-shadow {
 		display: none;
