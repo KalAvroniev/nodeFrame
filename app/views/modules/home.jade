@@ -7,7 +7,7 @@
 
 #main-container.page-home
 
-	h5#first-heading.home welcome to Protrada
+	h5#first-heading.home welcome to #{whitelabel.name}
 
 	h2#user-greeting hi, #{user.name}
 
@@ -15,7 +15,7 @@
 
 		h5
 			| you are currently an 
-			strong= user.type
+			strong!= user.type
 
 		h5#member-renewal
 			| your next membership renewal is: 
