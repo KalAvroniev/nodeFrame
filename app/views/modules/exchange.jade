@@ -39,50 +39,61 @@
 			refreshExchangeDate();
 			var refreshExchangeDateIntervalID = setInterval( refreshExchangeDate, 1000 );
 
-		div#section-headings.search-results
-			//#member-options.btn-group
-			//	a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
-			//		| previous searches
-			//		span.caret
-			//	ul.dropdown-menu
-			//		li
-			//			a(href='javascript:void(0);') search 1
-			//		li
-			//			a(href='javascript:void(0);') an old search
-			//		li
-			//			a(href='javascript:void(0);') another old search
-			//		li.divider
-			//		li
-			//			a(href='javascript:void(0);') search is divided
-
-			h1 the domain exchange
-			//span#results-marker 
-			//	a(href='#').ff-icon-before 
-			//	strong 'moo' 
-			//	| search results 
+		
+		- if(searchResults.state) {
+						
+			div#section-headings.search-results
+				#member-options.btn-group
+					a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='javascript:void(0);')
+						| previous searches
+						span.caret
+					ul.dropdown-menu
+						li
+							a(href='javascript:void(0);') search 1
+						li
+							a(href='javascript:void(0);') an old search
+						li
+							a(href='javascript:void(0);') another old search
+						li.divider
+						li
+							a(href='javascript:void(0);') search is divided
+	
+				h1 the domain exchange
 				
-			h3 search, sort, analyse and filter domains from the all the major domain resellers / trading houses.
+				span#results-marker 
+					a(href='#').ff-icon-before 
+					strong '#{searchResults.searchString}' 
+					| search results		
+				
+				h3 search, sort, analyse and filter domains from the all the major domain resellers / trading houses.
+			
+		- }	else {
+			
+			div#section-headings
+				h1 the domain exchange
+				h3 search, sort, analyse and filter domains from the all the major domain resellers / trading houses.
+			
+		- }
+			
 
 		ul#exchange-data-tabs.nav.nav-tabs
 			li.active
-				a(href='') Expiring
+				a(href='#expiring') expiring
 			li
-				a(href='') Auctions
+				a(href='#auctions') auctions
 			li
-				a(href='') Dropping
+				a(href='#dropping') dropping
 			li
-				a(href='') Websites
+				a(href='#websites') websites
 			li
-				a(href='') History
+				a(href='#history') history
 			li
-				a(href='') New registrations
+				a(href='#new-registrations') new registrations
 
 		#exchange-tab-panes.tab-content
 			#expiring.tab-pane.active
-				h2.tab-intro-heading Expiring domains listing
-				p.clearfix.tab-intro-text
-					| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
-					| andit eget non lacus. Pellentesque a imperdiet diam.
+				h2.tab-intro-heading #{contentTabs.expiring.title}
+				p.clearfix.tab-intro-text #{contentTabs.expiring.intoText}
 
 				#grid-view.tiny-scrollbar-horiz
 					.scrollbar
@@ -98,6 +109,33 @@
 					| andit eget non lacus. Pellentesque a imperdiet diam.
 				#temp-for-sale grid view control goes in here
 
+		
+		
+			#expiring.tab-pane
+				h2.tab-intro-heading #{contentTabs.expiring.title}
+				p.clearfix.tab-intro-text #{contentTabs.expiring.intoText}
+		
+			#auctions.tab-pane
+				h2.tab-intro-heading #{contentTabs.auctions.title}
+				p.clearfix.tab-intro-text #{contentTabs.auctions.intoText}
+		
+			#dropping.tab-pane
+				h2.tab-intro-heading #{contentTabs.dropping.title}
+				p.clearfix.tab-intro-text #{contentTabs.dropping.intoText}
+
+			#websites.tab-pane
+				h2.tab-intro-heading #{contentTabs.websites.title}
+				p.clearfix.tab-intro-text #{contentTabs.websites.intoText}
+
+			#history.tab-pane
+				h2.tab-intro-heading #{contentTabs.history.title}
+				p.clearfix.tab-intro-text #{contentTabs.history.intoText}
+
+			#new-registrations.tab-pane
+				h2.tab-intro-heading #{contentTabs.newRegistrations.title}
+				p.clearfix.tab-intro-text #{contentTabs.newRegistrations.intoText}
+		
+		
 		#thetableclone
 			table.grid-table
 

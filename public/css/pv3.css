@@ -545,8 +545,9 @@ a.ff-icon-before:before {
 }
 #credits a {
 	display: block;
-	background: #d66108;
-	color: #5e2303;
+	background: #82B42C;
+    color: #37500D;
+    font-weight: 400;
 	margin: 7px 0 0 0;
 	padding: 5px 5px 5px 18px;
 	position: relative;
@@ -1863,10 +1864,6 @@ header#main:before {
 	background: rgba(0,0,0,0.15);
 	margin: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-#member-options .btn-large .caret, #graph-settings .btn-large .caret
-{
-	padding: 7px 3px 0 25px;
 }
 
 
@@ -6161,7 +6158,7 @@ select, input[type="file"] {
    	transition: all .25s ease-in-out;		
 }
 .btn.btn-large .caret {
-	margin: 8px 0 0 9px;	
+	margin: 8px 0 0 11px;	
 }
 .btn .caret:before {
 	content: "z";	

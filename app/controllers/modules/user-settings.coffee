@@ -35,5 +35,22 @@ class exports.Controller extends Controller
 			#	'panel': '/panels/export-data'
 			#}
 		]
+			
+
+	# user info
+		res.view.user = {}
+		res.view.user.userCanUpgrade = true
+		res.view.user.fullName = "Andrew Chinn"	
+		res.view.user.availableCredits = "657"
+		res.view.user.memberType = "free member"	
+		res.view.user.membershipExpires = "(this will never expire)"
+					
+	
+	# user upgrade info	
+		res.view.upgrade = {}
+		res.view.upgrade.monthlyCost = 49
+		
+		
+		
 		
 		res.ready()

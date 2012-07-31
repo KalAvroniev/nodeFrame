@@ -10,12 +10,16 @@ script(src="/js/user-settings.js")
 #main-container.page-settings
 
 		h5#first-heading.ff-icon-before currently logged in as: 
-			strong Andrew Chinn
+			strong #{user.fullName}
 
-		a#go-pro(href="#")
-			strong.title.ff-icon-after Go Pro!
-			span.sub-text Soo many features,
-				strong just $xx a month!
+		- if(user.userCanUpgrade) {
+	
+			a#go-pro(href="#")
+				strong.title.ff-icon-after Go Pro!
+				span.sub-text Soo many features,
+					strong from just $#{upgrade.monthlyCost} a month!	
+						
+		- }
 
 		div#section-headings
 
@@ -56,18 +60,21 @@ script(src="/js/user-settings.js")
 					li
 						a(href='#credit-use')#general-credit-use
 							| credit usage / history
+							
 
 				#general-tab-panes.tab-content.tabs-in-tabs
 
 					#user-profile.tab-pane.active.clearfix
 
 						#right-col
+						
 							#account.clearfix
 								a.btn.btn-success.btn-large.ff-icon-before switch accounts
 								h4 account details
 								h5
-									strong free member
-									| (this will never expire)
+									strong #{user.memberType}
+									| #{user.membershipExpires}
+						
 							#avatar.clearfix
 								h4 your avatar
 								h5 some details about where this is seen maybe?

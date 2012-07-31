@@ -19,10 +19,8 @@
 
 		h5#member-renewal
 			| your next membership renewal is: 
-			strong.ff-icon-before
-				| 24
-				sup th 
-				| May, 2012 
+			strong.ff-icon-before!= user.renewal
+
 
 	#health-and-status.clearfix
 
@@ -32,12 +30,8 @@
 				| portfolio 
 				strong health
 
-			p.ff-icon-before
-				| This section can show you at a glance, how healthy your portfolio is (by charting it's ROI%), and also how it is trending. 
-				a(href='#') Read more
-				| 
-				| to learn how to take advantage of this feature
-
+			!= portfolioHealth.default
+			
 			span.demo-spark(title='Graph currently inactive - no data to display')
 
 		h4#h4-status-summary.ff-icon-before
@@ -53,21 +47,20 @@
 				.overview
 					ul#status-data
 						li
-							h5(data-title='watching', data-value='23')
+							h5(data-title='watching', data-value='#{satusSummary.watching}')
 							span.status-descr domains that you're currently watching
 						li
-							h5(data-value='2', data-title='losing')
+							h5(data-title='losing', data-value='#{satusSummary.losing}')
 							span.status-descr auctions that you're currently losing
 						li
-							h5(data-title='winning', data-value='0')
+							h5(data-title='winning', data-value='#{satusSummary.winning}')
 							span.status-descr auctions that you're currently winning
 						li
-							h5(data-title='pre-auction', data-value='0')
+							h5(data-title='pre-auction', data-value='#{satusSummary.preAuction}')
 							span.status-descr register your interest for private auctions
 						li.divided
-							h5(data-title='pending', data-value='0')
+							h5(data-title='pending', data-value='#{satusSummary.pending}')
 							span.status-descr domains pending (not propogated)
-
 
 	- if(showTradingSummary) {
 		!= partial('partials/home-trending')
@@ -83,11 +76,10 @@
 		
 		#whole-portfolio.tab-pane.active
 		
-			h2.tab-intro-heading#complete-listing Complete domain listing
+			h2.tab-intro-heading#complete-listing #{contentTabs.wholePortfolio.title}
 		
 			p.tab-intro-text.clearfix
-				| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
-				| andit eget non lacus. Pellentesque a imperdiet diam.
+				= contentTabs.wholePortfolio.intoText
 		
 			#grid-view.tiny-scrollbar-horiz
 				.scrollbar
@@ -100,13 +92,13 @@
 
 		#listed-for-sale.tab-pane
 			
-			h2#complete-listing Domains listed for sale
+			h2.tab-intro-heading#complete-listing #{contentTabs.listedForSale.title}
+		
+			p.tab-intro-text.clearfix
+				= contentTabs.listedForSale.intoText
 			
-			p
-				| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
-				| andit eget non lacus. Pellentesque a imperdiet diam.
-			
-			#temp-for-sale	grid view control goes in here 
+			#temp-for-sale grid view control goes in here 
+	
 	
 	#thetableclone
 		table.grid-table
