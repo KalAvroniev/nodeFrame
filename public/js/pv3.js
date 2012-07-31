@@ -66,6 +66,12 @@ $( document ).ready(function() {
 		$("#notifications").not(".native").tinyscrollbar_update("relative");
 	});
 
+	$("#system-help, #live-help-status, #live-help-info > a").on( "click", function( e ) {
+		e.preventDefault();
+
+		$.pv3.growl.show( "error", "The Live Help system is coming soon." );
+	});
+
 	// now setup the socket for push notifications
 	document.socketio = io.connect( "http://" + location.host );
 	document.socketio.on( "logout", function() {
