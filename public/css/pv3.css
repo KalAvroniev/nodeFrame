@@ -4590,7 +4590,9 @@ li.more-coming-soon .ff-icon-before:after {
 .account-selection li:not(.open-for-edit) .sources-sprite[source="Bido"]:before {
 	background-position: -404px -5px;
 }
-
+.account-selection li:not(.open-for-edit) .sources-sprite[source="Fabulous"]:before {
+	background-position: -30px -51px;
+}
 .account-selection .btn-success {
 	float: right;
 	margin: 0 0 0 10px;

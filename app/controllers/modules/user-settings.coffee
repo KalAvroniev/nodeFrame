@@ -65,33 +65,39 @@ class exports.Controller extends Controller
 		
 		res.view.user.externalAccounts.buying.godaddy = {}
 		res.view.user.externalAccounts.buying.godaddy.sourceSprite = "GoDaddy"	
-		res.view.user.externalAccounts.buying.godaddy.isShown = true
+		res.view.user.externalAccounts.buying.godaddy.isShown = false
 		res.view.user.externalAccounts.buying.godaddy.isAlreadyLinked = true
+		
+		res.view.user.externalAccounts.buying.fabulous = {}
+		res.view.user.externalAccounts.buying.fabulous.sourceSprite = "Fabulous"			
+		res.view.user.externalAccounts.buying.fabulous.isShown = true
+		res.view.user.externalAccounts.buying.fabulous.isAlreadyLinked = false		
 		
 		res.view.user.externalAccounts.buying.namejet = {}
 		res.view.user.externalAccounts.buying.namejet.sourceSprite = "Namejet"			
 		res.view.user.externalAccounts.buying.namejet.isShown = true
-		res.view.user.externalAccounts.buying.namejet.isAlreadyLinked = false		
-		
+		res.view.user.externalAccounts.buying.namejet.isAlreadyLinked = false	
+				
 		res.view.user.externalAccounts.buying.afternic = {}
 		res.view.user.externalAccounts.buying.afternic.sourceSprite = "Afternic"
 		res.view.user.externalAccounts.buying.afternic.isShown = true
-		res.view.user.externalAccounts.buying.afternic.isAlreadyLinked = false
+		res.view.user.externalAccounts.buying.afternic.isAlreadyLinked = false		
 		
-		res.view.user.externalAccounts.buying.snapNames = {}
-		res.view.user.externalAccounts.buying.snapNames.sourceSprite = "Snap Names"
-		res.view.user.externalAccounts.buying.snapNames.isShown = true
-		res.view.user.externalAccounts.buying.snapNames.isAlreadyLinked = false	
-			
+		res.view.user.externalAccounts.buying.bido = {}
+		res.view.user.externalAccounts.buying.bido.sourceSprite = "Bido"
+		res.view.user.externalAccounts.buying.bido.isShown = true
+		res.view.user.externalAccounts.buying.bido.isAlreadyLinked = true	
+		
 		res.view.user.externalAccounts.buying.pool = {}
 		res.view.user.externalAccounts.buying.pool.sourceSprite = "Pool.com"
 		res.view.user.externalAccounts.buying.pool.isShown = true
 		res.view.user.externalAccounts.buying.pool.isAlreadyLinked = false	
 		
-		res.view.user.externalAccounts.buying.bido = {}
-		res.view.user.externalAccounts.buying.bido.sourceSprite = "Bido"
-		res.view.user.externalAccounts.buying.bido.isShown = true
-		res.view.user.externalAccounts.buying.bido.isAlreadyLinked = true						
+		res.view.user.externalAccounts.buying.snapNames = {}
+		res.view.user.externalAccounts.buying.snapNames.sourceSprite = "Snap Names"
+		res.view.user.externalAccounts.buying.snapNames.isShown = true
+		res.view.user.externalAccounts.buying.snapNames.isAlreadyLinked = false	
+							
 		
 
 		res.view.user.externalAccounts.selling = {}
@@ -105,16 +111,18 @@ class exports.Controller extends Controller
 		res.view.user.externalAccounts.selling.namejet.sourceSprite = "Namejet"			
 		res.view.user.externalAccounts.selling.namejet.isShown = true
 		res.view.user.externalAccounts.selling.namejet.isAlreadyLinked = false		
+
+		res.view.user.externalAccounts.selling.sedo = {}
+		res.view.user.externalAccounts.selling.sedo.sourceSprite = "Sedo"
+		res.view.user.externalAccounts.selling.sedo.isShown = true
+		res.view.user.externalAccounts.selling.sedo.isAlreadyLinked = false
 		
 		res.view.user.externalAccounts.selling.snapNames = {}
 		res.view.user.externalAccounts.selling.snapNames.sourceSprite = "Snap Names"
 		res.view.user.externalAccounts.selling.snapNames.isShown = true
 		res.view.user.externalAccounts.selling.snapNames.isAlreadyLinked = true	
 
-		res.view.user.externalAccounts.selling.sedo = {}
-		res.view.user.externalAccounts.selling.sedo.sourceSprite = "Sedo"
-		res.view.user.externalAccounts.selling.sedo.isShown = true
-		res.view.user.externalAccounts.selling.sedo.isAlreadyLinked = false
+
 
 
 
