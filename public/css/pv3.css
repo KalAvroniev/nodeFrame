@@ -3695,6 +3695,9 @@ aside header.alerts-header {
 	padding: 0 84px 0 86px;
 	border: none;
 }
+#tabbed-alert-msgs .tab-content {
+	overflow: inherit;
+}
 #alert-msgs li {
 	margin-bottom: 0;
 	padding: 0;
