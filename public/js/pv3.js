@@ -26,17 +26,6 @@ $( document ).ready(function() {
 	// dropdowns
 	$(".dropdown-toggle").dropdown();
 
-	// TODO: could this be taken care of with CSS (:hover, :active, :focus)?
-	// tim: Nope, that was how i made them to begin with, the interaction was spotty. this was a fallback.
-	// UX improvement on the spine nav buttons
-	$("#spine-inner").find("nav").find("a").mouseup(function() {
-		$( this ).removeClass("active");
-	}).mousedown(function() {
-		$( this ).addClass("active");
-	}).mouseout(function() {
-		$( this ).removeClass("active");
-	});
-
 	// this must be assigned after the jade template is loaded in, see $.pv3.panel.show()
 	/*$("#import-export, .x-panel").click(function() {
 		if ( $("#section-panel").hasClass("hidden") ) {
@@ -202,7 +191,9 @@ NotificationsController.prototype.render = function() {
 	$.jade.getTemplate(
 		"notifications/generic",
 		function( fn ) {
-			$("#protrada-msgs").html("<h4><strong>Protrada</strong> notifications</h4>");
+		
+			$( "#protrada-msgs.no-alerts" ).removeClass( "no-alerts" )
+			$( "#protrada-msgs .alerts-listing" ).html( " " );
 
 			for ( var i = 0; i < ns.length; ++i ) {
 				var notif = $.jade.renderSync( fn, ns[i] );
