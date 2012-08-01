@@ -131,7 +131,9 @@ form input.hidden {
 }
 
 
+#ajax-container {
 
+}
 #main-container {
 	padding: 100px 305px 0 30px;
 	background: url(../img/bg-noise.png);
@@ -545,8 +547,9 @@ a.ff-icon-before:before {
 }
 #credits a {
 	display: block;
-	background: #d66108;
-	color: #5e2303;
+	background: #82B42C;
+    color: #37500D;
+    font-weight: 400;
 	margin: 7px 0 0 0;
 	padding: 5px 5px 5px 18px;
 	position: relative;
@@ -1808,8 +1811,7 @@ header#main:before {
 
 /* ---------------------- Home / portfolio dashboard main content work ---------------------------- */
 
-#ajax-container {
-}
+
 #first-heading {
 	font-size: 14px;
 	margin-bottom: 20px;
@@ -1863,10 +1865,6 @@ header#main:before {
 	background: rgba(0,0,0,0.15);
 	margin: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-#member-options .btn-large .caret, #graph-settings .btn-large .caret
-{
-	padding: 7px 3px 0 25px;
 }
 
 
@@ -3073,11 +3071,11 @@ input[type=number] {
 	background-color: #694188;
 }
 .sources-sprite[source="Protrada"] {
-	color: #3f3f3f;
+	color: #303030;
 }
 .sources-sprite[source="Protrada"]:before {
 	background-position: -185px -9px;
-	background-color: #3f3f3f;
+	background-color: #303030;
 }
 .sources-sprite[source="Namejet"] {
 	color: #627c96;
@@ -3100,8 +3098,28 @@ input[type=number] {
 	background-position: -359px -15px;
 	background-color: #de7005;
 }
+.sources-sprite[source="Bido"] {
+	color: #4a2354;
+}
+.sources-sprite[source="Bido"]:before {
+	background-position: -417px -20px;
+	background-color: #4a2354;
+}
 
-
+.sources-sprite[source="Expiring"] {
+	color: #626262;
+}
+.sources-sprite[source="Expiring"]:before {
+	background-position: -104px -61px;
+	background-color: #626262;
+}
+.sources-sprite[source="Fabulous"] {
+	color: #3cabf8;
+}
+.sources-sprite[source="Fabulous"]:before {
+	background-position: -44px -59px;
+	background-color: #3cabf8;
+}
 
 
 
@@ -4149,7 +4167,7 @@ aside header.alerts-header {
 	margin: 0 0 30px 0;
 }
 #external-accounts .tabs-in-tabs-headings, #user-settings-tab-panes .tabs-in-tabs-headings {
-	margin: 10px 15% 0 0;
+	margin: 0 15% 10px 0;
 	border: none;
 }
 .tabs-in-tabs-headings h2 {
@@ -4327,7 +4345,7 @@ aside header.alerts-header {
 
 
 #purchase-history .tabs-in-tabs-headings, #credit-use .tabs-in-tabs-headings {
-	margin: 0 340px 2px 0;
+	margin-right: 340px;
 }
 
 .simple-data-grid {
@@ -4338,8 +4356,15 @@ aside header.alerts-header {
 	padding: 10px;
 	color: #898785;
 	vertical-align: middle;
+	white-space: nowrap;
 	line-height: 1.4em;
 	font-size: 13px;	
+}
+.simple-data-grid td * {
+	max-width: 100%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 .simple-data-grid th {
 	padding: 14px 10px;
@@ -4448,7 +4473,7 @@ aside header.alerts-header {
 
 .account-selection {
 	list-style: none;	
-	margin: 30px 0 0 0;
+	margin: 25px 0 0 0;
 }
 .account-selection.has-open-edit {
 	padding: 0 0 0 243px;
@@ -4457,6 +4482,7 @@ aside header.alerts-header {
 }
 .account-selection li {
 	float: left;
+	position: relative;
 	margin: 0 13px 13px 0;
 	background: #f9f9f9;
 	box-shadow: inset 0 1px 0 white, 0 2px 4px rgba(0,0,0,0.12);
@@ -4477,7 +4503,18 @@ aside header.alerts-header {
 .account-selection .active .sources-sprite {
 	color: #4B4743;
 }
-
+.account-selection li > .linked {
+	position: absolute;
+	bottom: 0; right: 0;
+	padding: 7px 8px 4px;
+	background: #EFECE8;
+	color: #93908C;
+	border-radius: 4px 0;
+	box-shadow: inset 0 1px 0 rgba(0,0,0,0.05), inset 0 -1px 0 rgba(255,255,255,0.6);
+}
+.account-selection li > .linked:before {
+	content: "u";
+}
 .account-selection li.more-coming-soon {
 	background: #e2dfdb;
 	border: 2px dotted #c9c6c3;
@@ -4516,7 +4553,7 @@ li.more-coming-soon .ff-icon-before:after {
 	cursor: default;
 	margin: 0;
 	padding: 20px 15px;
-	box-shadow: 0 1px 0 rgba(255,255,255,0.3), inset 0 2px 4px rgba(0,0,0,0.3);	
+	box-shadow: 0 1px 0 rgba(255,255,255,0.3), inset 0 2px 4px rgba(0,0,0,0.2);	
 	width: 230px; height: auto;
 }
 .account-selection li:not(.open-for-edit) .sources-sprite:before {
@@ -4547,7 +4584,15 @@ li.more-coming-soon .ff-icon-before:after {
 .account-selection li:not(.open-for-edit) .sources-sprite[source="Pool.com"]:before {
 	background-position: -346px -7px;
 }
-
+.account-selection li:not(.open-for-edit) .sources-sprite[source="Sedo"]:before {
+	background-position: -62px -7px;
+}
+.account-selection li:not(.open-for-edit) .sources-sprite[source="Bido"]:before {
+	background-position: -404px -5px;
+}
+.account-selection li:not(.open-for-edit) .sources-sprite[source="Fabulous"]:before {
+	background-position: -30px -51px;
+}
 .account-selection .btn-success {
 	float: right;
 	margin: 0 0 0 10px;
@@ -4609,12 +4654,23 @@ li.more-coming-soon .ff-icon-before:after {
 	content: "*";
 	font-size: 30px;
 }
-
 .account-types * {
 	color: #94918e;
 	display: inline-block;	
 	vertical-align: top;
 }
+#external-acc-tab-panes .account-groups {
+	padding: 5px 0 30px;
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6161,7 +6217,7 @@ select, input[type="file"] {
    	transition: all .25s ease-in-out;		
 }
 .btn.btn-large .caret {
-	margin: 8px 0 0 9px;	
+	margin: 8px 0 0 11px;	
 }
 .btn .caret:before {
 	content: "z";	
