@@ -68,19 +68,19 @@ Grid.prototype = {
 
 		$("#main-container").on( "click", ".grid-table .sticky", { grid: this }, this.toggleSticky );
 
-		$(".grid-table").children("tbody").on( "click", ".domain-title-cntnr .copy-to-clipboard", function( e ) { e.preventDefault(); })
+		$(".grid-table").find("tbody").on( "click", ".domain-title-cntnr .copy-to-clipboard", function( e ) { e.preventDefault(); })
 			.on( "click", "td button.favourite", this.toggleFavourite )
 			.on( "click", "td button.select", this.toggleSelect )
 			.on( "click", "td:not(#zero-alert)", function() {
 				var $this = $( this ),
 					$row = $this.closest("tr"),
-					parent,
+					$parent,
 					rowIsSelected;
 
 				if ( $row.hasClass("child") ) {
 					// clicking on the child row
 					$row.fadeOut(function() {
-						$this.prev().removeClass("row-sel parent-open").remove();
+						$row.siblings().removeClass("row-sel parent-open");
 					});
 				} else {
 					$parent = $row.parent();
@@ -88,17 +88,13 @@ Grid.prototype = {
 
 					// fade out / remove all "open" child rows
 					$parent.children("tr.row-sel.child").fadeOut(function() {
-						$this.prev().removeClass("row-sel parent-open").remove();
+						$row.removeClass("row-sel parent-open");
 					});
 
 					if ( !rowIsSelected ) {
-						$row.addClass("row-sel parent-open");
-
-						$row.after(
-							'<tr class="row-sel child" style="display:none;"><td colspan="' + $row.find("td").length + '"><div class="child-inner"> <a class="x-row-sel" href="javascript:void(0);">x</a><p><strong>selected domain content</strong> <br>to be placed in here …</p></div></td></tr>'
-						);
-
-						$row.next().fadeIn();
+						$row.addClass("row-sel parent-open")
+							.after( '<tr class="row-sel child" style="display:none;"><td colspan="' + $row.find("td").length + '"><div class="child-inner"> <a class="x-row-sel" href="javascript:void(0);">x</a><p><strong>selected domain content</strong> <br>to be placed in here &hellip;</p></div></td></tr>')
+							.next().fadeIn();
 					}
 				}
 			});
