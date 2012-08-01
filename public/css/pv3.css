@@ -1397,7 +1397,7 @@ header#main:before {
 	text-align: left;
 	position: relative;
 	margin: 7px 0 0 0;
-	padding: 10px 15px 0 45px;
+	padding: 10px 15px 0 50px;
 	height: 55px;
 	
 	border-radius: 4px 4px 0 0;
@@ -1430,7 +1430,7 @@ header#main:before {
 }
 .sectional-tabs li a:before {
 	position: absolute;
-	top: 15px; left: 12px;
+	top: 15px; left: 16px;
 	content: "1";
 	line-height: 1;	
 	font-size: 20px;
@@ -1443,11 +1443,12 @@ header#main:before {
 	padding-left: 55px;	
 }
 .sectional-tabs li#import-domains a:before {
-	content: "m";
+	content: "v";
 	margin: 0 0 0 -2px;	
 }
 .sectional-tabs li#list-forsale a:before {
 	content: "^";
+	font-size: 21px;
 	margin: 0 0 0 -1px;	
 }
 .sectional-tabs li#export-data a:before {
