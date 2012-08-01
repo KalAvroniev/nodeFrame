@@ -14,16 +14,24 @@ aside.scrollfix
 					.end
 		.viewport
 			.overview
+				
 				h3#h3-alerts-title.ff-icon-before
 					strong Important 
 					| messages
+				
 				p
 					| This is your system-wide activity feed.
+					
 					br
+					
 					| Check this list for items requiring action from you, or for
+					
 					| updates on things that the system has done for you. 
+					
 					a#hide-activity-descr(href='') Hide this 
+				
 				section#tabbed-alert-msgs
+					
 					ul#alert-msgs.nav.nav-tabs
 						li.devname.center
 							a.ff-icon-before(href='#devname-msgs')
@@ -33,73 +41,54 @@ aside.scrollfix
 								span.alert-count(data-alerts='4',title='origin of alerts') 
 						li.archive.right
 							a.ff-icon-before(href='#archive-msgs')
+					
 					.tab-content
-						#protrada-msgs.tab-pane.active
+						
+						#protrada-msgs.tab-pane.no-alerts.active
 							h4
-								strong Protrada 
+								strong protrada 
 								| notifications
 							// article alerts here
-						#devname-msgs.tab-pane
+						
+						
+							// default content
+							article.ff-icon-before.alert-msg.preview.new
+								header
+									h1 No alerts
+								p just at the moment
+							
+							article.ff-icon-before.alert-msg
+								header
+									h1 Currently there are no alerts to show here
+								p
+									| This area will become populated with msg's as the system starts performing actions / automated procedures on your behalf. This includes things like bidding, watching and dns monitoring.
+						
+						
+						#devname-msgs.tab-pane.no-alerts
 							h4
-								strong Devname 
+								strong devname 
 								| notifications
-							article.alert-msg.preview.new
-								span.x-alert-msg(title='Archive this message') x
-								header.clearfix
-									h6
-										strong Alert 3
-										| - 4hrs ago
-									hgroup
-										h5 Website preview is ready
-										h4
-											a(title='view preview now', href='') webuiltthiscityyyy.com
-								section
-									| This domain has just finished being assessed and is now ready to be previewed!
-									a(title='view preview now', href='') View it now
-							article.alert-msg.for-sale
-								span.x-alert-msg(title='Archive this message') x
-								header.clearfix
-									h6
-										strong Alert 10
-										| - 4hrs ago
-									hgroup
-										h5 A domain you're watching ends soon!
-										h4
-											a(title='action description', href='') crazy-man.com
-								section
-									| The auction for this domain will finish on 15th Jan, 2012 @ 5:40pm, and is currently
-									strong $50 from 3 bids
-									| .
-									a(title='action description', href='') Bid on this now
-							article.alert-msg.domain-expire
-								span.x-alert-msg(title='Archive this message') x
-								header.clearfix
-									h6
-										strong Alert 11
-										| - 4hrs ago
-									hgroup
-										h5 One of your domains is about to expire!
-										h4
-											a(title='action description', href='') outofdate.com
-								section
-									| This domain is set to expire on the 15th Jan, 2012.
-									a(title='action description', href='') Renew this domain now
-							article.alert-msg.dns-change
-								span.x-alert-msg(title='Archive this message') x
-								header.clearfix
-									h6
-										strong Alert 12
-										| - 4hrs ago
-									hgroup
-										h5 Your DNS settings have changed
-										h4
-											a(title='action description', href='') outofdate.com
-								section
-									| Our system is telling us that this domain's DNS settings have changed. Did you drop this domain?
-									a(title='action description', href='') Remove it from your Portfolio now
+							
+							
+							// default content
+							article.ff-icon-before.alert-msg.preview.new
+								header
+									h1 No alerts
+								p just at the moment
+							
+							article.ff-icon-before.alert-msg
+								header
+									h1 Currently there are no alerts to show here
+								p
+									| This area will become populated with msg's as the system starts performing actions / automated procedures on your behalf. This includes things like bidding, watching and dns monitoring.							
+							
+							
+							
+							
+							
 						#archive-msgs.tab-pane
 							h4
-								strong Archived 
+								strong archived 
 								| notifications
 							p
 								strong Archive content goes in here

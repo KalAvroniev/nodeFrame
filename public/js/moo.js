@@ -52,6 +52,19 @@ $( document ).ready(function() {
 		// update the state
 		$.pv3.state.update( "system_options.mode", $("#system-rocker").find("h3").not(".hidden").attr("id") );
 	});
+	
+	
+	// PETE: Please don't delete this script:
+	// UX improvement on the spine nav buttons
+	$("#spine-inner").find("nav").find("a").mouseup(function() {
+		$( this ).removeClass("active");
+	}).mousedown(function() {
+		$( this ).addClass("active");
+	}).mouseout(function() {
+		$( this ).removeClass("active");
+	});
+	
+	
 });
 
 // setup open/close sidebar element functions

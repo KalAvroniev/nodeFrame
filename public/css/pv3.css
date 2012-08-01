@@ -4020,7 +4020,7 @@ aside header.alerts-header {
 	line-height: 90px;
 	position: relative;
 	top: 12px;
-	opacity: 0.3;
+	opacity: 0.2;
 	padding-bottom: 50px;
 }
 
@@ -4028,6 +4028,10 @@ aside header.alerts-header {
 	font-weight: 700;
 	font-size: 15px;
 }
+.no-alerts .alert-msg p {
+	margin: 0;
+}
+
 
 .no-alerts article.alert-msg:last-of-type h1 {
 	font-size: 14px;
