@@ -48,6 +48,8 @@ aside.scrollfix
 							h4
 								strong protrada 
 								| notifications
+							
+							
 							// article alerts here
 						
 						
@@ -69,6 +71,8 @@ aside.scrollfix
 								strong devname 
 								| notifications
 							
+							// article alerts here
+							
 							
 							// default content
 							article.ff-icon-before.alert-msg.new
@@ -89,16 +93,55 @@ aside.scrollfix
 								| notifications
 							
 							
-							article.ff-icon-before.alert-msg.new
+							#archive-summary
+								h1 
+									strong archive 
+									| summary
+								
+								ul#section-summary.clearfix
+									li
+										h3
+											strong trading 
+											| system alerts
+
+										span.archive-count 256
+										span.ff-icon-before.messages messages
+									
+									li
+										h3
+											strong monetization 
+											| system alerts
+
+										span.archive-count 60
+										span.ff-icon-before.messages messages										
+								a(href="").goto-full-archive.ff-icon-before goto full 
+									u archive listing
 							
+								
+							form#quicksearch-archive.well.clearfix
 							
+								h3#qs-title.ff-icon-before 
+									strong quick 
+									| search the archive
+								
+								input#archive-quicksearch(value="", placeholder="search term _")
+								
+								#archive-section-selection.btn-group.dropup
+									a.btn.dropdown-toggle(data-toggle="dropdown", href="")
+										| all
+										span.caret
+									ul.dropdown-menu
+										li
+											a(href="") trading alerts only
+										li
+											a(href="") monetization alerts only
+
+								button.btn.btn-success.btn-large.ff-icon-before(type="submit") Submit							
 							
-							
-							
-							
-							
-							
-							
+							#matchin-results
+								h1 
+									matching alerts for 
+									strong 'search-term'
 							
 							
 							
