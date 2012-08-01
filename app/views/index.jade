@@ -30,8 +30,11 @@ html(lang="en")
 		script(src="/js/require-2.0.4.min.js", data-main="js/app")
 		script
 			var _gaq = _gaq || [];
-			_gaq.push([ "_setAccount", "UA-33674085-1" ]);
-			_gaq.push([ "_trackPageview" ]);
+			_gaq.push(
+				[ "_setAccount", "UA-33674085-1" ],
+				[ "_trackPageview" ],
+				[ "_setCustomVar", 1, "Module", document.URL.substr( document.URL.lastIndexOf("/") + 1 ) || "home", 3 ]
+			);
 
 			(function() {
 				var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
