@@ -52,8 +52,16 @@ $( document ).ready(function() {
 		// update the state
 		$.pv3.state.update( "system_options.mode", $("#system-rocker").find("h3").not(".hidden").attr("id") );
 	});
-	
-	
+
+	// special class for the side-bar on mobile devices
+	// we've already checked for mobile by this stage (index.jade), so rely on class present on body
+	if ( $( document.body ).hasClass("mobile") ) {
+		$("#notifications").addClass("native");
+	}
+
+	// init fake scrollbars on sidebar
+	$("#notifications").not(".native").tinyscrollbar();
+
 	// PETE: Please don't delete this script:
 	// UX improvement on the spine nav buttons
 	$("#spine-inner").find("nav").find("a").mouseup(function() {
@@ -63,8 +71,6 @@ $( document ).ready(function() {
 	}).mouseout(function() {
 		$( this ).removeClass("active");
 	});
-	
-	
 });
 
 // setup open/close sidebar element functions

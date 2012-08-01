@@ -38,10 +38,10 @@ Grid.prototype = {
 			$.jade.getTemplate( "grid/table", function( fn ) {
 				var records = data.records;
 
-				$grid.html( $.jade.renderSync(fn, data, function(err){alert(err)}) );
+				$grid.html( $.jade.renderSync(fn, data, that.error) );
 
 				for ( var i = 0; i < records.length; ++i ) {
-					$grid.find("tbody").append( $.jade.renderSync("views_grid_row", records[ i ], function(err){alert(err)}) );
+					$grid.find("tbody").append( $.jade.renderSync("views_grid_row", records[ i ], that.error) );
 				}
 
 				// run setup
@@ -50,11 +50,15 @@ Grid.prototype = {
 		});
 	},
 
+	error: function( error ) {
+		alert( error );
+	},
+
 	setup: function() {
 		var that = this;
 
 		if ( this.options.stickyHeader ) {
-			$( this ).addClass("tiny-scrollbar-horiz");
+			this.grid.addClass("tiny-scrollbar-horiz");
 		}
 
 		$( document.body ).not(".mobile").find(".domain-title").on({

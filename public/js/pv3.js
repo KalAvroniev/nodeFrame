@@ -22,18 +22,7 @@ Number.prototype.toMoney = function( decimals, decimal_sep, thousands_sep ) {
 	return sign + ( j ? i.substr( 0, j ) + t : "" ) + i.substr( j ).replace( /(\d{3})(?=\d)/g, "$1" + t ) + ( c ? d + Math.abs( n - i ).toFixed( c ).slice(2) : "" );
 };
 
-$( document ).ready(function() {
-	
-	// special class for the side-bar on mobile devices
-	// we've already checked for mobile by this stage (index.jade), so rely on class present on body
-	if ( $( document.body ).hasClass("mobile") ) {
-		$("#notifications").addClass("native");
-	}
-
-	// init fake scrollbars
-	$("#notifications").not(".native").tinyscrollbar();
-
-
+$( document ).ready(function() {	
 	// dropdowns
 	$(".dropdown-toggle").dropdown();
 
