@@ -4097,6 +4097,7 @@ aside header.alerts-header {
 #quicksearch-archive {
 	border: none;
 	border-radius: 0;
+	margin: 0;
 }
 #qs-title {
 	margin: 5px 0 20px 0;		
@@ -4146,6 +4147,84 @@ aside header.alerts-header {
     width: 42px;
     float: left;
 }
+
+#matching-results-title {
+	background: #eaeaea;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+	padding: 20px 17px 22px;
+}
+
+#matching-results-title .full-listing {
+	float: right;
+	margin: 0 0 0 15px;
+	padding: 6px 7px;
+	color: #161413;
+	background: rgba(0,0,0,0.08);
+	border-radius: 4px;
+}
+#matching-results-title .full-listing:after {
+	display: inline-block;
+	content: "7";
+	margin: 0 0 0 9px;
+}
+#matching-results-title h1 {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: 0 0 13px;
+	line-height: 1.2em;
+}
+.showing-count {
+	display: block;
+	line-height: 1.35em;
+	font-size: 12px;
+}
+#matching-results-listing {
+	margin: 0;
+}
+#matching-results-listing li {
+	padding: 15px 15px 16px 60px;
+	cursor: pointer;
+}
+#matching-results-listing li:nth-child(2n) {
+	background: rgba(223,223,223,0.55);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(0,0,0,0.2);
+}
+#matching-results-listing li:before {
+	position: absolute;
+	content: "l";
+	margin: 6px 0 0 -39px;
+	font-size: 20px;
+}
+#matching-results-listing li.protrada:before {
+	content: "#";
+	font-size: 25px;
+	margin: 8px 0 0 -41px;	
+}
+#matching-results-listing span {
+	display: block;
+	font-size: 12px;	
+	line-height: 1.3em;
+	margin: 0 65px 0 0;		
+}
+#matching-results-listing .alert-timestamp {
+	font-size: 11px;
+	line-height: 1.15em;	
+	float: right;
+	width: 50px;
+	margin: 3px 0 0 0;
+}
+
+#matching-results-listing .domain-or-subject {
+	font-weight: 400;
+	font-size: 13px;
+	margin: 0 65px 3px 0;		
+}
+
+
+
+
 
 
 
@@ -5975,6 +6054,14 @@ select, input[type="file"] {
 	box-shadow: inset 0 1px 0 white, 0 1px 3px rgba(0,0,0,0.15);
 	color: #1d1b1a;
 	border: none;
+}
+.btn-group.open .btn.dropdown-toggle {
+	background: rgba(0,0,0,0.1);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.7);
+	color: #1D1B1A;
+}
+.dropup .dropdown-menu {
+	margin-bottom: 8px;
 }
 .btn-group .btn-info, .btn-info {
 	color: white;
