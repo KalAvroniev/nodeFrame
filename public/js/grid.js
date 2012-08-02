@@ -54,31 +54,6 @@ Grid.prototype = {
 		alert( error );
 	},
 
-	expandRow: function() {
-		var $row = $( this );
-
-		// collapse any other open rows
-		$row.siblings(".parent-open").trigger("click");
-
-		$row.addClass("row-sel parent-open")
-			.after( "<tr class=\"row-sel child\" style=\"display: none;\"><td colspan=\"" + $row.find("td").length + "\"><div class=\"child-inner\"> <a class=\"x-row-sel\" href=\"javascript:void(0);\">x</a><p><strong>selected domain content</strong> <br />to be placed in here &hellip;</p></div></td></tr>")
-			.next().fadeIn();
-	},
-
-	collapseRow: function() {
-		var $row = $( this );
-
-		if ( $row.hasClass("child") ) {
-			$row.fadeOut(function() {
-				$row.prev().removeClass("row-sel parent-open").end().remove();
-			});
-		} else {
-			$row.next().fadeOut(function() {
-				$row.removeClass("row-sel parent-open").next().remove();
-			});
-		}
-	},
-
 	setup: function() {
 		var that = this;
 
@@ -102,7 +77,7 @@ Grid.prototype = {
 
 		$( window ).on( "resize", { grid: this }, this.windowResize ).on( "scroll", { grid: this }, this.windowScroll );
 		$( verticalScroll ).add( this.grid ).on( "resize", this.copyHeaderSize );
-		this.grid.on( "tsb_scroll", ".scrollbar", this.updateTableHeaders );
+		this.grid.on( "scroll.tinyscrollbar", ".scrollbar", { grid: this }, this.updateTableHeaders );
 
 		$( "table.floatable", this.grid ).each(function() {
 			var $this = $( this ),
@@ -142,6 +117,31 @@ Grid.prototype = {
 		//
 	},
 
+	expandRow: function() {
+		var $row = $( this );
+
+		// collapse any other open rows
+		$row.siblings(".parent-open").trigger("click");
+
+		$row.addClass("row-sel parent-open")
+			.after( "<tr class=\"row-sel child\" style=\"display: none;\"><td colspan=\"" + $row.find("td").length + "\"><div class=\"child-inner\"> <a class=\"x-row-sel\" href=\"javascript:void(0);\">x</a><p><strong>selected domain content</strong> <br />to be placed in here &hellip;</p></div></td></tr>")
+			.next().fadeIn();
+	},
+
+	collapseRow: function() {
+		var $row = $( this );
+
+		if ( $row.hasClass("child") ) {
+			$row.fadeOut(function() {
+				$row.prev().removeClass("row-sel parent-open").end().remove();
+			});
+		} else {
+			$row.next().fadeOut(function() {
+				$row.removeClass("row-sel parent-open").next().remove();
+			});
+		}
+	},
+
 	toggleSticky: function( e ) {
 		var grid = e.data.grid;
 
@@ -173,7 +173,7 @@ Grid.prototype = {
 	},
 
 	windowResize: function( e ) {
-		var grid = e.data.grid;
+		var grid = e ? e.data.grid : this;
 
 		grid.grid.tinyscrollbar_update("relative");
 
@@ -199,17 +199,9 @@ Grid.prototype = {
 		return ( innerOffset - scrollOffset ) - vertOffset;
 	},*/
 
-	getTableHeaderOffset: function() {
-		var scrollOffset = $( verticalScroll ).scrollTop(),
-			vertOffset = $( verticalScroll ).offset().top,
-			tableOffset = $( "table", this.grid ).offset().top;
-
-		return $( ".grid-table", this.grid ).offset().top;
-	},
-
 	isTableOnScreen: function( offset ) {
 		var bottomOfScreen = $( window ).scrollTop() + $( window ).height(),
-			tableOffset = $( "table", this.grid ).offset().top;
+			tableOffset = $( ".viewport", this.grid ).offset().top;
 
 		offset = offset || 0;
 
@@ -217,11 +209,7 @@ Grid.prototype = {
 	},
 
 	positionHorizScroll: function() {
-		var viewHeight = $( verticalScroll ).height(),
-			scrollOffset = $( verticalScroll ).scrollTop(),
-			scroll = $( ".scrollbar", this.grid );
-
-		scroll.css( "display", this.isTableOnScreen() ? "block" : "none" );
+		$( ".scrollbar", this.grid ).css( "display", this.isTableOnScreen() ? "block" : "none" );
 	},
 
 	copyHeaderSize: function() {
@@ -237,13 +225,12 @@ Grid.prototype = {
 	},
 
 	// derived from https://bitbucket.org/cmcqueen1975/htmlfloatingtableheader/wiki/Home
-	updateTableHeaders: function() {
-		var that = this;
+	updateTableHeaders: function( e ) {
+		var that = e ? e.data.grid : this;
 
-		$("div.divTableWithFloatingHeader").each(function() {
-			var theClone = $(".tableFloatingHeader"),
-				theCloneTable = theClone.closest("table"),
-				theCloneContainer = theClone.closest("#thetableclone"),
+		$( ".divTableWithFloatingHeader", that.grid ).each(function() {
+			var theCloneTable = $(".tableFloatingHeader"),
+				theCloneContainer = theCloneTable.closest("#thetableclone"),
 				body = $( document.body );
 
 			if ( !that.options.stickyHeader ) {
@@ -256,9 +243,9 @@ Grid.prototype = {
 				return;
 			}
 
-			var offset = that.getTableHeaderOffset(),
+			var offset = $( ".grid-table", that.grid ).offset().top,
 				scrollTop = $( window ).scrollTop(),
-				viewport = $( this ).closest(".viewport");
+				viewport = $( that.grid );
 
 			if ( ((scrollTop + $("header#main").height()) - offset > 0) ) {// && (scrollTop - offset - $(this).height() < 0)) {
 				theCloneContainer.css( "visibility", "visible" );

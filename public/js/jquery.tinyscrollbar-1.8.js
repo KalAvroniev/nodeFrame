@@ -180,6 +180,10 @@
                 oThumb.obj.css( sDirection, iScroll / oScrollbar.ratio );
                 oContent.obj.css( sDirection, -iScroll );
 
+				// we shouldn't be injecting our own code into a third party plugin
+				// but too much code already relies on it...
+				oScrollbar.obj.trigger("scroll.tinyscrollbar");
+
                 if( options.lockscroll || ( iScroll !== ( oContent[ options.axis ] - oViewport[ options.axis ] ) && iScroll !== 0 ) )
                 {
                     oEvent = $.event.fix( oEvent );
@@ -204,6 +208,10 @@
                 iScroll = iPosition.now * oScrollbar.ratio;
                 oContent.obj.css( sDirection, -iScroll );
                 oThumb.obj.css( sDirection, iPosition.now );
+
+				// we shouldn't be injecting our own code into a third party plugin
+				// but too much code already relies on it...
+				oScrollbar.obj.trigger("scroll.tinyscrollbar");
             }
         }
         
