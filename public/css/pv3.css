@@ -6223,7 +6223,7 @@ select, input[type="file"] {
 
 #thetableclone .dropdown-menu {
 	float: none;
-	top: -50px; left: 120px;
+	top: -30px; left: 100px;
 }
 #thetableclone #category .dropdown-menu {
 	top: -50px; left: 75px;
