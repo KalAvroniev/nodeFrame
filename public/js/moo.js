@@ -73,6 +73,28 @@ $( document ).ready(function() {
 	});
 });
 
+// crude method of keeping track of fake scrollbars
+// will redo much better at some point when other "state machines" are worked out
+var protrada = {
+	scrollbars: {
+		init: function() {
+			// tinyscrollbar();
+		},
+
+		update: function() {
+			// tinyscrollbar_update("relative");
+		},
+
+		updateAll: function() {
+			//
+		},
+
+		remove: function() {
+			//
+		}
+	}
+};
+
 // setup open/close sidebar element functions
 function toggleSidebar( e ) {
 	var $aside = $("aside");
@@ -81,13 +103,21 @@ function toggleSidebar( e ) {
 	$( document.body ).toggleClass("sidebar-hidden").toggleClass("sidebar-open");
 
 	// animate main body (the best way to force webkit to re-render children dom elements)
-	$("#main-container, .task-status").delay( $( document.body ).hasClass("sidebar-hidden") ? 200 : 0 ).animate( { width: ($aside.hasClass("active") ? "99.999" : "100") + "%" }, 200 );
+	$("#main-container, .task-status")
+		.delay( $( document.body ).hasClass("sidebar-hidden") ? 200 : 0 )
+		.animate( { width: ($aside.hasClass("active") ? "99.999" : "100") + "%" }, 200, function() {
+			// update fake scrollbars
+			$("#notifications").not(".native").tinyscrollbar_update("relative");
 
-	// update fake scrollbars
-	$("#notifications").not(".native").tinyscrollbar_update("relative");
+			// update other fake scrollbars
+			$("#grid-view").tinyscrollbar_update("relative");
+
+			// update sticky headers
+			$("#grid-view").grid("windowResize");
+		});
 }
 
-$( document ).on( "click", "#toggle-side-bar, #x-side-bar", function (e) {
+$( document ).on( "click", "#toggle-side-bar, #x-side-bar", function() {
 	toggleSidebar();
 
 	// update the state
@@ -103,8 +133,6 @@ $( document ).on( "click", ".x-alert-msg", function() {
 		$("#notifications").not(".native").tinyscrollbar_update("relative");
 	});
 });
-
-
 
 // tabs
 $( document ).on( "click", ".nav-tabs li a", function( e ) {
