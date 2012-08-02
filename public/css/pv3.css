@@ -1509,31 +1509,7 @@ header#main:before {
 	margin: 0 3px;
 }
 
-.sticky-thead #quick-search .dropdown-menu {
-	left: 103px; top: -6px;
-	width: 586px;
-	padding: 5px;
-}
-.sticky-thead #quick-search .dropdown-menu li {
-	padding: 0 0 0 5px;
-	float: left;
-}
-.sticky-thead #quick-search .dropdown-menu li.divider {
-	display: none;
-}
-.sticky-thead #quick-search .dropdown-menu li:first-child {
-	padding: 0;
-}
-.sticky-thead #quick-search .dropdown-menu li a {
-	clear: none;
-	padding: 6px 7px 6px;
-	background: rgba(0,0,0,0.1);
-	border-radius: 4px;
-}
-.sticky-thead #quick-search .dropdown-menu li a:hover {
-	color: white;
-	background: black;
-}
+
 #quick-search .btn {
 	display: inline-block;
 	vertical-align: top;	
@@ -1571,6 +1547,7 @@ header#main:before {
 	font-weight: 400;
 	text-indent: 0em;
 	width: auto;
+	padding: 10px 12px 12px 10px; 
 }
 #quick-search .open .dropdown-toggle {
 	background: #FCF9F5;
@@ -2336,7 +2313,7 @@ header#main:before {
 	font-size: 25px;	
 }
 .panel-heading .import:before {
-	content: "m";
+	content: "v";
 	font-size: 25px;
 	margin: 0 12px 0 6px;			
 }
@@ -5993,11 +5970,44 @@ thead #category {
 select, input[type="file"] {
 	height: auto;	
 }
-.btn-group .btn-large, .btn-large, .btn.dropdown-toggle {
+.btn-group .btn-large, .btn-large, .btn.dropdown-toggle, .btn {
 	background: #eeeeee;
 	box-shadow: inset 0 1px 0 white, 0 1px 3px rgba(0,0,0,0.15);
 	color: #1d1b1a;
 	border: none;
+}
+.btn-group .btn-info, .btn-info {
+	color: white;
+	font-weight: 300;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+	box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 white, 0 -3px 0 rgba(0, 0, 0, 0.08);
+	
+	background: #00a8e5; /* Old browsers */
+	background: -moz-linear-gradient(top,  #00a8e5 0%, #0090d8 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00a8e5), color-stop(100%,#0090d8)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #00a8e5 0%,#0090d8 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #00a8e5 0%,#0090d8 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #00a8e5 0%,#0090d8 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #00a8e5 0%,#0090d8 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00a8e5', endColorstr='#0090d8',GradientType=0 ); /* IE6-9 */
+}
+.btn-group .btn-info:hover, .btn-info:hover {
+	background: #00a8e5;
+}
+.btn-group .btn-danger, .btn-danger {
+	color: white;
+	font-weight: 300;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+	box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 white, 0 -3px 0 rgba(0, 0, 0, 0.08);
+	
+	background: #e86806; /* Old browsers */
+	background: -moz-linear-gradient(top,  #e86806 0%, #bc0303 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e86806), color-stop(100%,#bc0303)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #e86806 0%,#bc0303 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #e86806 0%,#bc0303 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #e86806 0%,#bc0303 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #e86806 0%,#bc0303 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e86806', endColorstr='#bc0303',GradientType=0 ); /* IE6-9 */
 }
 .btn {
 	white-space: nowrap;
@@ -6338,7 +6348,8 @@ select, input[type="file"] {
 	opacity: 1;
 	width: auto;
 	height: auto;
-	margin: 6px 0 0 10px;
+	margin: 0 0 0 10px;
+	vertical-align: middle;
 
 	font-family: 'AlexKiddReg';	
 	font-size: 9px;
@@ -6351,9 +6362,6 @@ select, input[type="file"] {
 	-webkit-transition: all .25s ease-in-out;
    	transition: all .25s ease-in-out;		
 }
-.btn.btn-large .caret {
-	margin: 8px 0 0 11px;	
-}
 .btn .caret:before {
 	content: "z";	
 }
@@ -6361,7 +6369,6 @@ select, input[type="file"] {
 	-moz-transform:rotate(180deg);
 	-webkit-transform:rotate(180deg);
 	transform:rotate(180deg);
-	margin-top: 5px;
 }
 .dropup .btn .caret:before {
 	content: "{";
