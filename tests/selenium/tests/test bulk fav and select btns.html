@@ -27,19 +27,24 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
+	<td>300</td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//div[@id='fav-sel-all']/button[2]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>//div[@id='fav-sel-all']/button[2]</td>
-	<td></td>
+	<td>assertXpathCount</td>
+	<td>//div[@id='fav-sel-all']/button[2][contains(@class, &quot;active&quot;)]</td>
+	<td>1</td>
 </tr>
 <tr>
-	<td>assertXpathCount</td>
-	<td>//div[@id='fav-sel-all']/button[2][contains(@class, &quot;btn favourite active&quot;)]</td>
-	<td>1</td>
+	<td>click</td>
+	<td>//div[@id='fav-sel-all']/button[2]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -48,8 +53,8 @@
 </tr>
 <tr>
 	<td>assertXpathCount</td>
-	<td>//div[@id='fav-sel-all']/button[contains(@class, &quot;btn select active&quot;)]</td>
-	<td>0</td>
+	<td>//div[@id='fav-sel-all']/button[contains(@class, &quot;active&quot;)]</td>
+	<td>1</td>
 </tr>
 <tr>
 	<td>click</td>
