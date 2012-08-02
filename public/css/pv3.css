@@ -5003,7 +5003,7 @@ body table {
 	padding: 0;
 	vertical-align: top;
 }
-.grid-view {
+.grid-table {
 	border-spacing: 0;
 	border-collapse: separate;
 	width: 100%;
