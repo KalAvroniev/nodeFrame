@@ -205,7 +205,14 @@ $.pv3.state.update = function( stateName, stateValue ) {
 
 $.pv3.panel = {};
 $.pv3.panel.show = function ( url, options ) {
-	var active = $.pv3.state.current.modules[ $.pv3.state.current.modules.selected ].panel.active;
+	var active = false;
+
+	// temporary work-around for absence of panel data
+	try {
+		active = $.pv3.state.current.modules[ $.pv3.state.current.modules.selected ].panel.active;
+	} catch ( _ ) {
+		console.warn("$.pv3.state.current.modules.panel is still not being returned!");
+	}
 
 	if ( options == undefined ) {
 		options = {};
