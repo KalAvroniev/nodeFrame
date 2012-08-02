@@ -75,6 +75,8 @@ Grid.prototype = {
 			.on( "click", "td button.favourite", this.toggleFavourite )
 			.on( "click", "td button.select", this.toggleSelect );
 
+		$("#fav-sel-all").on( "click", ".select", this.bulkActionsHandler );
+
 		$( window ).on( "resize", { grid: this }, this.windowResize ).on( "scroll", { grid: this }, this.windowScroll );
 		$( verticalScroll ).add( this.grid ).on( "resize", this.copyHeaderSize );
 		this.grid.on( "scroll.tinyscrollbar", ".scrollbar", { grid: this }, this.updateTableHeaders );
@@ -113,8 +115,29 @@ Grid.prototype = {
 		this.updateTableHeaders();
 	},
 
+	// this function isn't used yet, will be once the
+	// page load/unload handlers are properly fleshed out
 	teardown: function() {
-		//
+		/*$("div.divTableWithFloatingHeader").remove();
+
+		$( document.body ).not(".mobile").find("td.domain-title").off({
+			mouseenter: domainTitleMouseEnter,
+			mouseleave: domainTitleMouseLeave
+		});
+
+		$("#main-container").off("click", ".grid-table th.sticky", toggleSticky);
+
+		$(".grid-table").children("tbody").off( "click", ".domain-title-cntnr .copy-to-clipboard", preventEvent )
+			.off( "click", "td button.favourite", toggleFavourite )
+			.off( "click", "td button.select", toggleSelect );
+
+		$( window ).off( "resize", windowResize ).off( "scroll", windowScroll );
+		$( verticalScroll + ", " + horizontalScroll ).off( "resize", copyHeaderSize );
+		$( horizontalScroll ).off( "tsb_scroll", horizontalScroll + " > .scrollbar", UpdateTableHeaders );
+
+		if ( typeof exchangeDomainResults !== "undefined" ) {
+			exchangeDomainResults = null;
+		}*/
 	},
 
 	expandRow: function() {
@@ -142,6 +165,16 @@ Grid.prototype = {
 		}
 	},
 
+	bulkActionsHandler: function() {
+		var $tr = $("#bulk-actions").parent();
+
+		if ( $tr.is(":visible") ) {
+			$tr.fadeOut().attr("hidden");
+		} else {
+			$tr.fadeIn().removeAttr("hidden");
+		}
+	},
+
 	toggleSticky: function( e ) {
 		var grid = e.data.grid;
 
@@ -156,11 +189,15 @@ Grid.prototype = {
 
 	toggleFavourite: function( e ) {
 		e.preventDefault();
+		e.stopPropagation();
+
 		$( this ).button("toggle");
 	},
 
 	toggleSelect: function( e ) {
 		e.preventDefault();
+		e.stopPropagation();
+
 		$( this ).button("toggle");
 	},
 
