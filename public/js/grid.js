@@ -33,19 +33,19 @@ Grid.prototype = {
 		$.jsonrpc( this.options.url, {}, function( data ) {
 			//console.log( data );
 
-			$.jade.getTemplate( "grid/row", $.noop );
+			$.jade.getTemplate( "grid/table", function () {
+				$grid.html( $.jade.renderSync("views_grid_table", data, that.error) );
 
-			$.jade.getTemplate( "grid/table", function( fn ) {
-				var records = data.records;
+				$.jade.getTemplate( "grid/row", function() {
+					var records = data.records;
 
-				$grid.html( $.jade.renderSync(fn, data, that.error) );
+					for ( var i = 0; i < records.length; ++i ) {
+						$grid.find("tbody").append( $.jade.renderSync("views_grid_row", records[ i ], that.error) );
+					}
 
-				for ( var i = 0; i < records.length; ++i ) {
-					$grid.find("tbody").append( $.jade.renderSync("views_grid_row", records[ i ], that.error) );
-				}
-
-				// run setup
-				that.setup();
+					// run setup
+					that.setup();
+				});
 			});
 		});
 	},

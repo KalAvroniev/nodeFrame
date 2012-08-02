@@ -16,4 +16,4 @@ require.config({
 	}
 });
 
-requirejs([ "jquery", "bootstrap", "tinyscrollbar", "jade", "moo", "jquery.plugins", "pv3", "socket", "grid" ]);
+requirejs([ "jquery", "bootstrap", "socket", "tinyscrollbar", "jade", "jquery.plugins", "moo", "pv3", "grid" ]);
