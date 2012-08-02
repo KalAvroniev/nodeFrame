@@ -43,6 +43,9 @@ Grid.prototype = {
 						$grid.find("tbody").append( $.jade.renderSync("views_grid_row", records[ i ], that.error) );
 					}
 
+					// hide spinner
+					$grid.find("tfoot").attr( "hidden", true );
+
 					// run setup
 					that.setup();
 				});
@@ -73,7 +76,13 @@ Grid.prototype = {
 
 		$(".grid-table").find("tbody").on( "click", ".domain-title-cntnr .copy-to-clipboard", function( e ) { e.preventDefault(); })
 			.on( "click", "td button.favourite", this.toggleFavourite )
-			.on( "click", "td button.select", this.toggleSelect );
+			.on( "click", "td button.select", this.toggleSelect )
+			.on( "click", "td.actions", function( e ) {
+				e.preventDefault();
+				e.stopPropagation();
+
+				// code here
+			});
 
 		$("#fav-sel-all").on( "click", ".select", this.bulkActionsHandler );
 
