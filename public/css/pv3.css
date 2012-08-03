@@ -5308,7 +5308,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82b42c', end
 }
 .grid-table tbody td, .grid-table tfoot td {
 	padding: 10px 15px;		
-	white-space: no-wrap;
+	white-space: nowrap;
 	line-height: 2.3em;
 	
 	border-top: 1px solid white; 
