@@ -118,7 +118,7 @@ Grid.prototype = {
 			that.copyHeaderSize();
 		});
 
-		this.grid.tinyscrollbar({ axis: "x", scroll: false });
+		Scrollbars.add( "grid", this.grid, { axis: "x", scroll: false } );
 
 		this.positionHorizScroll();
 		this.updateTableHeaders();
@@ -221,7 +221,7 @@ Grid.prototype = {
 	windowResize: function( e ) {
 		var grid = e ? e.data.grid : this;
 
-		grid.grid.tinyscrollbar_update("relative");
+		Scrollbars.update("grid");
 
 		grid.positionHorizScroll();
 		grid.updateTableHeaders();
@@ -308,7 +308,7 @@ Grid.prototype = {
 			}
 
 			theCloneTable.css({
-				left: -that.grid.tinyscrollbar_offset() + "px"
+				left: -Scrollbars.offset("grid") + "px"
 			});
 
 			theCloneContainer.width( viewport.width() );

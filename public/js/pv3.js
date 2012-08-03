@@ -41,7 +41,7 @@ $( document ).ready(function() {
 
 	$( window ).resize(function() {
 		// update fake scrollbars
-		$("#notifications").not(".native").tinyscrollbar_update("relative");
+		Scrollbars.update("notifications");
 	});
 
 	$("#system-help, #live-help-status, #live-help-info > a").on( "click", function( e ) {
@@ -54,107 +54,26 @@ $( document ).ready(function() {
 	document.socketio = io.connect( "http://" + location.host );
 	document.socketio.on( "logout", function() {
 		// force logout
-		document.location = '/login';
+		document.location = "/login";
 	});
 
 	// the first thing we need to do is fetch the recent notifications
-	$.jsonrpc(
-		"notifications/fetch",
-		{},
-		function ( data ) {
-			var notif = new NotificationsController( data.notifications );
+	$.jsonrpc( "notifications/fetch", {}, function ( data ) {
+		var notif = new NotificationsController( data.notifications );
 
+		notif.render();
+		
+		// now setup the socket for push notifications
+		document.socketio.on( "notification", function( msg ) {
+			notif.notifications.unshift( msg.data );
 			notif.render();
-			
-			// now setup the socket for push notifications
-			document.socketio.on( "notification", function( msg ) {
-				notif.notifications.unshift( msg.data );
-				notif.render();
-			});
-		}
-	);
-
-	// this is already called in moo.js!
-	/*$.pv3.state.get(function () {
-		$.pv3.state.restoreModule();
-	});*/
-
-	/*// setup Tiptip "training wheel" tooltips
-	$("#tiptip_holder .hide-bubbles").live( "click", function( e ) {
-    	$("body").addClass("no-bubbles");
-		e.preventDefault();
-		return false;
+		});
 	});
-
-	var lipsum = " This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum aucto <a href='#' class='hide-bubbles' title='Permanently hide all help bubbles'>Turn off all bubbles</a>";
-
-	$(".sectional-tabs").tipTip(
-		{
-			defaultPosition: "bottom",
-			maxWidth: "165px",
-			keepHover: true,
-			edgeOffset: 0,
-			content: lipsum,
-			delay: 1000
-		}
-	);
-	$("#member-options").tipTip(
-		{
-			defaultPosition: "left",
-			maxWidth: "165px",
-			keepHover: true,
-			edgeOffset: 15,
-			content: lipsum,
-			delay: 1000
-		}
-	);
-	$('#sale-type').tipTip(
-		{
-			defaultPosition: "bottom",
-			maxWidth: "165px",
-			keepHover: true,
-			edgeOffset: 20,
-			content: lipsum,
-			delay: 1000
-		}
-	);
-
-	$('#graph-settings').tipTip(
-		{
-			defaultPosition: "top",
-			maxWidth: "165px",
-			keepHover: true,
-			edgeOffset: 15,
-			content: lipsum,
-			delay: 1000
-		}
-	);
-
-	$('#grid-view input#domain-title').tipTip(
-		{
-			defaultPosition: "top",
-			maxWidth: "165px",
-			keepHover: true,
-			edgeOffset: 15,
-			content: lipsum,
-			delay: 1000
-		}
-	);
-
-	$('#thetableclone input#domain-title').tipTip(
-		{
-			defaultPosition: "bottom",
-			maxWidth: "165px",
-			keepHover: true,
-			edgeOffset: 16,
-			content: lipsum,
-			delay: 1000
-		}
-	);*/
 });
 
 function togglePanel( selectorName, contentCallback ) {
-	var $panel = $("#section-panel");
+	var $this = $( this ),
+		$panel = $("#section-panel");
 
 	// already visible
 	if ( $panel.data("tab") == selectorName ) {
@@ -163,16 +82,16 @@ function togglePanel( selectorName, contentCallback ) {
 		if ( $panel.hasClass("hidden") ) {
 			$panel.removeClass("hidden");
 		} else {
-			$( this ).siblings().removeClass("active");
+			$this.siblings().removeClass("active");
 		}
 
 		$panel.html( contentCallback() ).data( "tab", selectorName );
 	}
 
 	if ( $panel.hasClass("hidden") ) {
-		$( this ).removeClass("active");
+		$this.removeClass("active");
 	} else {
-		$( this ).addClass("active");
+		$this.addClass("active");
 	}
 }
 
@@ -188,25 +107,20 @@ NotificationsController.prototype.render = function() {
 	var ns = this.notifications;
 
 	// if there is data, fetch the template and render
-	$.jade.getTemplate(
-		"notifications/generic",
-		function( fn ) {
-		
-			$( "#protrada-msgs.no-alerts" ).removeClass( "no-alerts" )
-			$( "#protrada-msgs .alerts-listing" ).html( " " );
+	$.jade.getTemplate( "notifications/generic", function( fn ) {
+		$("#protrada-msgs.no-alerts").removeClass("no-alerts").find(".alerts-listing").html(" ");
 
-			for ( var i = 0; i < ns.length; ++i ) {
-				var notif = $.jade.renderSync( fn, ns[i] );
-				$("#protrada-msgs").append( notif );
-			}
-
-			// update counter
-			$(".protrada .alert-count").attr( "data-alerts", ns.length );
-
-			$("aside #notifications:not(.native)").tinyscrollbar_update("relative");
-		},
-		function( error ) {
-			alert( error );
+		for ( var i = 0; i < ns.length; ++i ) {
+			var notif = $.jade.renderSync( fn, ns[i] );
+			$("#protrada-msgs").append( notif );
 		}
-	);
+
+		// update counter
+		$(".protrada .alert-count").attr( "data-alerts", ns.length );
+
+		Scrollbars.update("notifications");
+	},
+	function( error ) {
+		alert( error );
+	});
 };

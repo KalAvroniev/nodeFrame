@@ -1,3 +1,41 @@
+// crude method of keeping track of fake scrollbars
+// will redo much better at some point when other "state machines" are worked out
+var protrada = {
+	version: "3a2",
+
+	cachedAt: 1343982244107,
+
+	scrollbars: {
+		elements: {},
+
+		add: function( identifier, $element, options ) {
+			this.elements[ identifier ] = $element.tinyscrollbar( options || {} );
+		},
+
+		update: function( identifier, type ) {
+			this.elements[ identifier ].tinyscrollbar_update( type || "relative" );
+		},
+
+		updateAll: function( type ) {
+			var that = this;
+
+			$.each( this.elements, function( i, v ) {
+				that.update( i, type );
+			});
+		},
+
+		offset: function( identifier ) {
+			return this.elements[ identifier ].tinyscrollbar_offset();
+		},
+
+		remove: function( identifier ) {
+			this.elements[ identifier ].children(".scrollbar").remove();
+		}
+	}
+};
+
+var Scrollbars = protrada.scrollbars;
+
 $( document ).ready(function() {
 	var module = document.URL.substr( document.URL.lastIndexOf("/") + 1 );
 
@@ -60,7 +98,7 @@ $( document ).ready(function() {
 	}
 
 	// init fake scrollbars on sidebar
-	$("#notifications").not(".native").tinyscrollbar();
+	Scrollbars.add( "notifications", $("#notifications").not(".native") );
 
 	// PETE: Please don't delete this script:
 	// UX improvement on the spine nav buttons
@@ -72,28 +110,6 @@ $( document ).ready(function() {
 		$( this ).removeClass("active");
 	});
 });
-
-// crude method of keeping track of fake scrollbars
-// will redo much better at some point when other "state machines" are worked out
-var protrada = {
-	scrollbars: {
-		init: function() {
-			// tinyscrollbar();
-		},
-
-		update: function() {
-			// tinyscrollbar_update("relative");
-		},
-
-		updateAll: function() {
-			//
-		},
-
-		remove: function() {
-			//
-		}
-	}
-};
 
 // setup open/close sidebar element functions
 function toggleSidebar( e ) {
@@ -107,10 +123,7 @@ function toggleSidebar( e ) {
 		.delay( $( document.body ).hasClass("sidebar-hidden") ? 200 : 0 )
 		.animate( { width: ($aside.hasClass("active") ? "99.999" : "100") + "%" }, 200, function() {
 			// update fake scrollbars
-			$("#notifications").not(".native").tinyscrollbar_update("relative");
-
-			// update other fake scrollbars
-			$("#grid-view").tinyscrollbar_update("relative");
+			Scrollbars.updateAll();
 
 			// update sticky headers
 			$("#grid-view").grid("windowResize");
@@ -130,7 +143,7 @@ $( document ).on( "click", ".x-alert-msg", function() {
 		$( this ).remove();
 
 		// update fake scrollbars
-		$("#notifications").not(".native").tinyscrollbar_update("relative");
+		Scrollbars.update("notifications");
 	});
 });
 
@@ -140,15 +153,13 @@ $( document ).on( "click", ".nav-tabs li a", function( e ) {
 	$( this ).tab("show");
 });
 
-
 $( document ).on( "click", "#alert-msgs a", function( e ) {
 	e.preventDefault();
 
 	$( this ).tab("show");
 
 	// update fake scrollbars
-	$("#notifications").not(".native").tinyscrollbar_update("relative");
-
+	Scrollbars.update("notifications");
 });
 
 // restore the state for the system options
@@ -168,11 +179,9 @@ $( document ).on( "restore", function() {
 
 		// trading/devname
 		$("#system-rocker").find("h3").addClass("hidden").filter( "#" + state.mode ).removeClass("hidden");
-		$("#mode-rocker").removeClass("active");
-
-		if ( state.mode === "devname" ) {
-			$("#mode-rocker").addClass("active");
-		}
+		$("#mode-rocker").removeClass("active").addClass(function() {
+			return state.mode === "devname" ? "active" : "";
+		});
 	}
 
 	// sidebar
