@@ -4352,7 +4352,7 @@ aside header.alerts-header {
 	padding: 0;
 	margin: 0 0 30px 0;
 }
-#external-accounts .tabs-in-tabs-headings, #user-settings-tab-panes .tabs-in-tabs-headings {
+#external-accounts .tabs-in-tabs-headings, #system-notifications .tabs-in-tabs-headings {
 	margin: 0 15% 10px 0;
 	border: none;
 }
@@ -4529,7 +4529,7 @@ aside header.alerts-header {
 
 
 #purchase-history .tabs-in-tabs-headings, #credit-use .tabs-in-tabs-headings {
-	margin-right: 340px;
+	margin: 0 340px 2px 0;
 }
 
 .simple-data-grid {
@@ -6632,7 +6632,7 @@ body.no-bubbles #tiptip_holder {
 	background-color: #3a3a3a;
 }
 .tiny-scrollbar-horiz > .scrollbar .thumb {
-	height: 25px;
+	height: 100%;
 	cursor: pointer;
 	overflow: hidden;
 	position: absolute;
@@ -6641,21 +6641,22 @@ body.no-bubbles #tiptip_holder {
 }
 .tiny-scrollbar-horiz > .scrollbar .thumb .end {
 	overflow: hidden;
-	height: 25px;
+	height: 100%;
 	width: 5px;
 }
 .tiny-scrollbar-horiz > .scrollbar {
 	position: absolute;
-	height: 25px;
+	height: 17px;
 	bottom: 0px;
 	z-index: 1;
 }
 #grid-view.tiny-scrollbar-horiz > .scrollbar {
 	position: fixed;
+	height: 25px;	
 }
 .tiny-scrollbar-horiz > .scrollbar .track {
 	width: 100%;
-	height: 25px;
+	height: 100%;
 	position: relative;
 }
 .tiny-scrollbar-horiz > .scrollbar.disable {
@@ -6673,26 +6674,36 @@ body.no-bubbles #tiptip_holder {
 }
 
 .tiny-scrollbar-horiz > .scrollbar .thumb .end {
-	width: 1px; height: 18px;
-	margin: 4px 0 0 0;
+	width: 1px; height: 11px;
+	margin: 3px 0 0 0;
 	left: 50%;	
 	position: absolute;
 	background: rgba(255,255,255,0.12);
 	box-shadow: 1px 0 0 rgba(0,0,0,0.25);
 	overflow: visible;
 }
+#grid-view.tiny-scrollbar-horiz > .scrollbar .thumb .end {
+	height: 18px;
+	margin: 4px 0 0 0;
+}
 .tiny-scrollbar-horiz > .scrollbar .thumb .end:before, .tiny-scrollbar-horiz > .scrollbar .thumb .end:after {
 	content: "";
 	position: absolute;
 	background: rgba(255,255,255,0.12);
 	box-shadow: 1px 0 0 rgba(0,0,0,0.25);
-	width: 1px; height: 18px;
-	margin: 0 0 0 -6px;
+	width: 1px; height: 11px;
+	margin: 0 0 0 -4px;
+}
+#grid-view.tiny-scrollbar-horiz > .scrollbar .thumb .end:before, #grid-view.tiny-scrollbar-horiz > .scrollbar .thumb .end:after {
+	height: 18px;
+	margin: 0 0 0 -6px;	
 }
 .tiny-scrollbar-horiz > .scrollbar .thumb .end:after {
+	margin: 0 0 0 4px;
+}
+#grid-view.tiny-scrollbar-horiz > .scrollbar .thumb .end:after {
 	margin: 0 0 0 6px;
 }
-
 
 
 
@@ -6768,11 +6779,10 @@ body.no-bubbles #tiptip_holder {
 	float: left;
 	font-size: 38px;
 	line-height: 1.05em;
-	margin: 0 40px 20px 0;
+	margin: 0 40px 30px 0;
 }
 .condensed #section-headings h3 {
-	margin: 0;
-	padding: 7px 0 0 0;
+	display: none;
 }
 .condensed #section-headings h3:before {
 	position: static;
@@ -6805,9 +6815,19 @@ body.no-bubbles #tiptip_holder {
 .condensed #first-heading {
 	margin-bottom: 10px;
 }
+.condensed #main-container > .tab-content.tabs-in-tabs {
+	padding: 17px;
+}
 .condensed #main-container .tab-content .tab-pane {
 	padding: 17px 0 0 0;
 }
+.condensed #main-container .tab-content.tabs-in-tabs .tab-pane {
+	padding: 0;
+}
+.condensed #main-container .tabs-in-tabs .tab-pane .tab-pane {
+	padding: 20px 15px 10px;	
+}
+
 .condensed #grid-view {
 	padding: 17px 0 0 0;	
 }
@@ -6846,10 +6866,19 @@ body.no-bubbles #tiptip_holder {
 .condensed #filter-params span, .condensed #zero-alert span, .condensed #bulk-actions .bulk-wrapper {
 	padding: 8px 20px 10px;
 }
-
-
-
-
+.condensed .actions .action-buttons a.main-action {
+	padding: 4px 0 3px 6px;
+}
+.condensed .action-buttons a[data-title="View domain details"] {
+	padding: 4px 0 0 4px;
+}
+.condensed .action-buttons a {
+	height: 24px; width: 24px;
+	font-size: 15px;
+}
+.condensed #results-marker {
+	margin: -3px 0 0 0;
+}
 
 
 
@@ -6889,7 +6918,7 @@ body.no-bubbles #tiptip_holder {
 
 	.condensed #section-headings h1 {
 		float: none;
-		margin: 0 0 15px 0;
+		margin: 0;
 	}
 	.condensed #section-headings h3 {
 		margin: 0;
@@ -6944,11 +6973,17 @@ body.no-bubbles #tiptip_holder {
 	#section-headings.search-results {	
 		margin: 0 210px 40px 0;
 	}	
+	.condensed #section-headings.search-results {
+		margin-bottom: 34px;
+	}
 	.search-results #results-marker {
 		float: none;
 		position: absolute;
 		margin: 0;
 		top: 0; right: -210px;
+	}
+	.condensed .search-results #results-marker {
+		top: -30px;
 	}
 	.search-results #member-options {
 		margin: 50px 0 0 0;
@@ -6957,7 +6992,9 @@ body.no-bubbles #tiptip_holder {
 		margin: 0;
 		top: 60px; right: -210px;	
 	}	
-	
+	.condensed .search-results #member-options {
+		top: 23px;
+	}
 	#user-greeting {
 		max-width: 100%;
 	}
