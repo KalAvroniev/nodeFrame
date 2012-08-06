@@ -33,7 +33,17 @@ var protrada = {
 		}
 	},
 
-	alerts: {
+	alert: {
+		show: function( message ) {
+			$("#sys-alert").removeClass("hidden").find(".alertmsg-container").find("span").text( message );
+		},
+
+		hide: function() {
+			$("#sys-alert").addClass("hidden");
+		}
+	},
+
+	taskStatus: {
 		show: function( type, message ) {
 			$.pv3.growl.show( type, message );
 		},
@@ -45,7 +55,8 @@ var protrada = {
 };
 
 var Scrollbars = protrada.scrollbars,
-	Alerts = protrada.alerts;
+	TaskStatus = protrada.taskStatus,
+	Alert = protrada.alert;
 
 $( document ).ready(function() {
 	var module = document.URL.substr( document.URL.lastIndexOf("/") + 1 );

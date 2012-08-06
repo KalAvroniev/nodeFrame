@@ -47,7 +47,7 @@ $( document ).ready(function() {
 	$("#system-help, #live-help-status, #live-help-info > a").on( "click", function( e ) {
 		e.preventDefault();
 
-		Alerts.show( "error", "The Live Help system is coming soon." );
+		TaskStatus.show( "error", "The Live Help system is coming soon." );
 	});
 
 	// now setup the socket for push notifications
