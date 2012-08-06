@@ -138,7 +138,7 @@ function toggleSidebar( e ) {
 	var $aside = $("aside");
 
 	$aside.toggleClass("active");
-	$( document.body ).toggleClass("sidebar-hidden").toggleClass("sidebar-open");
+	$( document.body ).toggleClass("sidebar-hidden sidebar-open");
 
 	// animate main body (the best way to force webkit to re-render children dom elements)
 	$("#main-container, .task-status")
