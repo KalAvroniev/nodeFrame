@@ -4,11 +4,9 @@
 - }
 
 != partial("partials/header")
-
 != partial("partials/panel")
 
 #main-container.page-exchange.search-results
-
 		h5#first-heading.ff-icon-before
 
 		script
@@ -39,83 +37,54 @@
 			refreshExchangeDate();
 			var refreshExchangeDateIntervalID = setInterval( refreshExchangeDate, 1000 );
 
-		
-		- if(searchResults.state) {
-						
-			div#section-headings.search-results
+		- if ( searchResults.state ) {
+			#section-headings.search-results
 				#member-options.btn-group
-					
-					
-					
-					span.help-bubble-container.left-msg
-						span.help-marker.ff-icon-before.ff-icon-after
-							span.marker-icon +
-						span.help-bubble
-							span(title="hide this single bubble &amp; marker").x-help-bubble.ff-icon-before
-							span.ff-icon-before.help-body-icon
-							span.help-title Help text title
-							span.help-body Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat. 
-								a(href="").hide-all-bubbles hide all help bubbles.
-					
-					
-															
-					a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='#')
+					a.btn.btn-large.dropdown-toggle(href="#", data-toggle="dropdown")
 						| previous searches
 						span.caret
 					ul.dropdown-menu
 						li
-							a(href='#') search 1
+							a(href="#") search 1
 						li
-							a(href='#') an old search
+							a(href="#") an old search
 						li
-							a(href='#') another old search
+							a(href="#") another old search
 						li.divider
 						li
-							a(href='#') search is divided
-	
+							a(href="#") search is divided
+
 				h1 the domain exchange
-				
-				span#results-marker 
-					a(href='#').ff-icon-before 
-					strong '#{searchResults.searchString}' 
-					| search results		
-				
+
+				span#results-marker
+					a(href="#").ff-icon-before
+					strong '#{searchResults.searchString}'
+					| search results
+
 				h3 search, sort, analyse and filter domains from the all the major domain resellers / trading houses.
-			
 		- }	else {
-			
-			div#section-headings
+			#section-headings
 				h1 the domain exchange
 				h3 search, sort, analyse and filter domains from the all the major domain resellers / trading houses.
-			
 		- }
-			
 
 		ul#exchange-data-tabs.nav.nav-tabs
 			li.active
-				a(href='#expiring') expiring
+				a(href="#expiring") expiring
 			li
-			
-				span.help-bubble-container.right-msg
-					span.help-marker.ff-icon-before.ff-icon-after
-						span.marker-icon +
+				a(href="#auctions") auctions
+
+				span.help-container
+					span.help-marker
 					span.help-bubble
-						span(title="hide this single bubble &amp; marker").x-help-bubble.ff-icon-before
-						span.ff-icon-before.help-body-icon
-						span.help-title Help text title
-						span.help-body Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat. 
-							a(href="").hide-all-bubbles hide all help bubbles.
-										
-				a(href='#auctions') auctions
-								
 			li
-				a(href='#dropping') dropping
+				a(href="#dropping") dropping
 			li
-				a(href='#websites') websites
+				a(href="#websites") websites
 			li
-				a(href='#history') history
+				a(href="#history") history
 			li
-				a(href='#new-registrations') new registrations
+				a(href="#new-registrations") new registrations
 
 		#exchange-tab-panes.tab-content
 			#expiring.tab-pane.active
@@ -131,16 +100,14 @@
 					| andit eget non lacus. Pellentesque a imperdiet diam.
 				#temp-for-sale grid view control goes in here
 
-		
-		
 			#expiring.tab-pane
 				h2.tab-intro-heading #{contentTabs.expiring.title}
 				p.clearfix.tab-intro-text #{contentTabs.expiring.intoText}
-		
+
 			#auctions.tab-pane
 				h2.tab-intro-heading #{contentTabs.auctions.title}
 				p.clearfix.tab-intro-text #{contentTabs.auctions.intoText}
-		
+
 			#dropping.tab-pane
 				h2.tab-intro-heading #{contentTabs.dropping.title}
 				p.clearfix.tab-intro-text #{contentTabs.dropping.intoText}
@@ -156,8 +123,7 @@
 			#new-registrations.tab-pane
 				h2.tab-intro-heading #{contentTabs.newRegistrations.title}
 				p.clearfix.tab-intro-text #{contentTabs.newRegistrations.intoText}
-		
-		
+
 		#thetableclone
 			table.grid-table
 

@@ -117,20 +117,19 @@ $.pv3 = {};
 $.pv3.growl = {};
 
 $.pv3.growl.hide = function() {
-	$(".task-status").css( "display", "none" );
+	$(".task-status").removeClass("active").css( "display", "none" );
 };
 
 /**
  * @param type "success" or "error"
- * @param message HTML message (can be raw text
+ * @param message HTML message (can be raw text)
  */
 $.pv3.growl.show = function( type, message ) {
 	$.pv3.growl.hide();
 
-	$(".task-status").removeClass("success error").addClass( type + " active" ).css( "display", "block" );
+	$( ".task-status." + type ).css( "display", "block" ).addClass("active");
 
-	$(".status-content h2").html( type );
-	$(".status-content p").html( message );
+	$(".status-content h2").html( type ).next().html( message );
 };
 
 $.pv3.state = {};
@@ -237,7 +236,6 @@ $.pv3.panel.show = function ( url, options ) {
 		$.jade.getTemplate( url, function ( fn ) {
 			var $sectionalTabs = $(".sectional-tabs"),
 				$sectionPanel = $("#section-panel");
-				
 
 			// notify the server that the active tab has changed
 			$.pv3.state.update( "modules." + $.pv3.state.current.modules.selected + ".panel.active", { url: url, options: options } );
@@ -249,7 +247,7 @@ $.pv3.panel.show = function ( url, options ) {
 			// set the active tab to be the first child of the UL
 			$sectionalTabs.reorderActiveElement();
 
-			$sectionPanel.removeClass("hidden");
+			$sectionPanel.removeClass("hidden panel mini-panel").addClass( options.panel_size );
 
 			$(".ajax-panel-content").html( $.jade.renderSync( fn, obj, function( err, file, line ) {
 				$(".ajax-panel-content").html( "Error in " + file + " at line " + line + ": " + err );
@@ -264,8 +262,6 @@ $.pv3.panel.show = function ( url, options ) {
 
 				return $.pv3.panel.hide();
 			});
-
-			$sectionPanel.addClass( options.panel_size );
 		});
 	});
 };

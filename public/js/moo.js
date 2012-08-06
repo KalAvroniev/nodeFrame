@@ -31,10 +31,32 @@ var protrada = {
 		remove: function( identifier ) {
 			this.elements[ identifier ].children(".scrollbar").remove();
 		}
+	},
+
+	alert: {
+		show: function( message ) {
+			$("#sys-alert").removeClass("hidden").find(".alertmsg-container").find("span").text( message );
+		},
+
+		hide: function() {
+			$("#sys-alert").addClass("hidden");
+		}
+	},
+
+	taskStatus: {
+		show: function( type, message ) {
+			$.pv3.growl.show( type, message );
+		},
+
+		hide: function() {
+			$.pv3.growl.hide();
+		}
 	}
 };
 
-var Scrollbars = protrada.scrollbars;
+var Scrollbars = protrada.scrollbars,
+	TaskStatus = protrada.taskStatus,
+	Alert = protrada.alert;
 
 $( document ).ready(function() {
 	var module = document.URL.substr( document.URL.lastIndexOf("/") + 1 );
@@ -98,7 +120,7 @@ $( document ).ready(function() {
 	}
 
 	// init fake scrollbars on sidebar
-	Scrollbars.add( "notifications", $("#notifications").not(".native") );
+	Scrollbars.add( "notifications", $("#notifications").not(".native"), { lockscroll: false } );
 
 	// PETE: Please don't delete this script:
 	// UX improvement on the spine nav buttons
@@ -109,14 +131,6 @@ $( document ).ready(function() {
 	}).mouseout(function() {
 		$( this ).removeClass("active");
 	});
-	
-	
-	
-	
-	
-	
-	
-	
 });
 
 // setup open/close sidebar element functions
