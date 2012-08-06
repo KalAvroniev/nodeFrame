@@ -109,6 +109,14 @@ $( document ).ready(function() {
 	}).mouseout(function() {
 		$( this ).removeClass("active");
 	});
+	
+	
+	
+	
+	
+	
+	
+	
 });
 
 // setup open/close sidebar element functions

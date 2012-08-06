@@ -113,7 +113,7 @@ ul, ol {
 }
 form input.hidden {
 	display: none;
-}
+} 
 
 /* For modern browsers */
 .clearfix:before,
@@ -6569,6 +6569,19 @@ body.no-bubbles #tiptip_holder {
 /*.tiny-scrollbar { width: 520px; clear: both; margin: 20px 0 10px; }
 .tiny-scrollbar .viewport { width: 500px; height: 200px; overflow: hidden; position: relative; }
 .tiny-scrollbar .overview { list-style: none; position: absolute; left: 0; top: 0; }*/
+
+
+.scrollbar div {
+
+	/* fix a small issue with 1.8 where dragging the scrollbar triggers text selection */
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}  
 
 .tiny-scrollbar-vert > .viewport > .overview {
 	z-index: 0;
