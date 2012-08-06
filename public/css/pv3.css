@@ -4253,7 +4253,7 @@ aside header.alerts-header {
 	clear: both;
 	border: none;
 }
-#main-container .nav-tabs a {
+#main-container .nav-tabs li > a {
 	border: none;
 	padding: 16px 20px;
 	margin: 0;
@@ -5971,9 +5971,133 @@ thead #category {
 
 
 
+/* ------------------------------ Help bubble + marker styles work ------------------------------------- */
 
+.help-bubble-container {
+	position: relative;
+}
+.help-bubble {
+	position: absolute;
+	width: 260px;
+	z-index: 0;
+	padding: 10px 15px 10px 35px;
+	border-radius: 6px;
+	background: #08a4ed;
+	font-size: 11px;
+	line-height: 1.4em;
+	display: none;
+	left: 48px; top: -150px;
+	opacity: 0;		
+	box-shadow: 0 2px 13px rgba(0,0,0,0.2);	
+}
+.help-bubble-container:hover .help-bubble {
+	top: -115px;
+	opacity: 1;
+	display: block;
+   	
+	/*transition-property: top, opacity;
+	transition-duration: 350ms, 350ms;
+	transition-timing-function: ease-in-out, ease-in-out;*/	
+}
+.help-bubble span {
+	display: block;
+}
+.help-body-icon {
+	float: left;
+	margin: 5px 20px 5px -18px;
+	padding: 9px 11px;
+	border-radius: 6px;
+	background: rgba(0,0,0,0.1);
+}
+.help-body-icon:before {
+	content: "4";
+	font-size: 32px;
+	line-height: 1;	
+}
+.help-title {
+	font-size: 14px;
+	font-weight: 400;
+	margin: 3px 0 5px;
+}
+.help-body {
+	color: rgba(0,0,0,0.7);
+	margin: 0 0 5px;
+}
+.help-body .hide-all-bubbles {
+	display: inline-block;
+	clear: left;
+	color: white;
+	border-bottom: 2px solid rgba(255,255,255,0.15)
+}
+.x-help-bubble {
+	float: right;
+	cursor: pointer;
+	margin: 3px 0 10px 10px;
+	padding: 2px 4px 4px;
+}
+.x-help-bubble:hover {
+	background: rgba(0,0,0,0.1);
+	border-radius: 4px;
+}
+.x-help-bubble:before {
+	content: "y";
+	font-size: 13px;
+	line-height: 1;
+}
+.help-marker {
+	position: absolute;
+	cursor: pointer;
+	color: white; 
+	top: -60px;
+	margin: 0 0 0 35px;
+}
+.help-marker:before {
+	content: "c";
+	font-size: 34px;
+	line-height: 1;
+	position: absolute;
+	z-index: 2;	
+	color: #08a4ed;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+	cursor: pointer;	
+}
+.help-bubble-container:hover .help-marker:before {
+	color: #fff;
+	text-shadow: 0 1px 4px rgba(0,0,0,0.3);	
+}
+.help-marker:after {
+	content: "c";
+	font-size: 23px;
+	cursor: pointer;	
+	line-height: 1;
+	position: absolute;
+	z-index: 1;
+	right: -37px;
+	margin: 14px 0 0 0;
+	color: rgba(0,0,0,0.12);
 
+	-moz-transform: rotate(19deg) skewX(-45deg);
+	-webkit-transform: rotate(19deg) skewX(-45deg);
+	transform: rotate(19deg) skewX(-45deg);				
+}
+.help-bubble-container:hover .help-marker:after {
+	color: rgba(0,0,0,0.17);
+}
 
+.help-marker .marker-icon {
+	position: absolute;
+	z-index: 3;
+	color: white;
+	text-shadow: 0 1px 0px rgba(0,0,0,0.4);	
+	font-size: 18px;
+	line-height: 1;
+	top: 2px; left: 8px;
+}
+.help-bubble-container:hover .marker-icon {
+	color: #08a4ed;
+	font-weight: 400;
+	text-shadow: none;	
+}
 
 
 
