@@ -1041,7 +1041,7 @@ fieldset.login .login-right .invisible {
 	position: fixed;
 	width: 75px;
 	height: 100%;
-	z-index: 6;
+	z-index: 26;
 }
 #spine-inner {
 	height: 100%;
@@ -1322,7 +1322,7 @@ header#main {
 	background: url(../img/app-bar-texture.png);
 	width: 100%;
 	position: fixed;
-	z-index: 5;
+	z-index: 25;
 	left: 0; top: 0;
 	
 	height: 74px;
@@ -2203,7 +2203,7 @@ header#main:before {
 	max-width: 1000px;
 	position: fixed;
 	right: 305px; top: 0;
-	z-index: 4;
+	z-index: 24;
 	pointer-events: none;
 	height: 100%;
 	padding: 74px 0 0;	
@@ -4915,6 +4915,12 @@ li.more-coming-soon .ff-icon-before:after {
 	
 	display: none; 
 }
+.btn-group > .btn {
+	
+	/* --------- this causes issues with our help marker/bubbles ----------- */
+	
+	float: none;	
+}
 #panel-content .form-horizontal .controls {
     margin-left: 160px;
 }
@@ -5974,44 +5980,70 @@ thead #category {
 /* ------------------------------ Help bubble + marker styles work ------------------------------------- */
 
 .help-bubble-container {
-	position: relative;
+	position: absolute;
+	margin: -25px 0 0 18px;
 }
 .help-bubble {
 	position: absolute;
 	width: 260px;
-	z-index: 0;
-	padding: 10px 15px 10px 35px;
+	z-index: 15;
+	padding: 10px 15px 10px 45px;
 	border-radius: 6px;
 	background: #08a4ed;
 	font-size: 11px;
 	line-height: 1.4em;
+	bottom: -70px;
+	
 	display: none;
-	left: 48px; top: -150px;
-	opacity: 0;		
+	
 	box-shadow: 0 2px 13px rgba(0,0,0,0.2);	
 }
+.right-msg .help-bubble {
+	left: 12px;
+}
+.left-msg .help-bubble {
+	right: -13px;
+	padding: 10px 25px 10px 30px;	
+}
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; bottom: 0px; }
+      to { opacity: 1; bottom: -70px; }
+}
+
+@-moz-keyframes fadeIn {
+    from { opacity: 0; bottom: 0px; }
+      to { opacity: 1; bottom: -70px; }
+}
+
+@-ms-keyframes fadeIn {
+    from { opacity: 0; bottom: 0px; }
+      to { opacity: 1; bottom: -70px; }
+}
 .help-bubble-container:hover .help-bubble {
-	top: -115px;
-	opacity: 1;
 	display: block;
    	
-	/*transition-property: top, opacity;
-	transition-duration: 350ms, 350ms;
-	transition-timing-function: ease-in-out, ease-in-out;*/	
+    -webkit-animation: fadeIn 0.35s;
+    -moz-animation: fadeIn 0.35s;
+    -ms-animation: fadeIn 0.35s;
 }
+
 .help-bubble span {
 	display: block;
 }
 .help-body-icon {
 	float: left;
-	margin: 5px 20px 5px -18px;
+	margin: 5px 20px 5px -30px;
 	padding: 9px 11px;
 	border-radius: 6px;
 	background: rgba(0,0,0,0.1);
 }
+.left-msg .help-body-icon {
+	margin: 5px 20px 0 -14px;	
+}
 .help-body-icon:before {
 	content: "4";
-	font-size: 32px;
+	color: rgba(0,0,0,0.4);
+	font-size: 36px;
 	line-height: 1;	
 }
 .help-title {
@@ -6035,6 +6067,9 @@ thead #category {
 	margin: 3px 0 10px 10px;
 	padding: 2px 4px 4px;
 }
+.left-msg .x-help-bubble {
+	margin: 3px -10px 10px 10px;	
+}
 .x-help-bubble:hover {
 	background: rgba(0,0,0,0.1);
 	border-radius: 4px;
@@ -6048,15 +6083,15 @@ thead #category {
 	position: absolute;
 	cursor: pointer;
 	color: white; 
-	top: -60px;
-	margin: 0 0 0 35px;
+	top: 0; left: 0;
+	margin: 0;
 }
 .help-marker:before {
 	content: "c";
 	font-size: 34px;
 	line-height: 1;
 	position: absolute;
-	z-index: 2;	
+	z-index: 19;	
 	color: #08a4ed;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 	cursor: pointer;	
@@ -6071,7 +6106,7 @@ thead #category {
 	cursor: pointer;	
 	line-height: 1;
 	position: absolute;
-	z-index: 1;
+	z-index: 18;
 	right: -37px;
 	margin: 14px 0 0 0;
 	color: rgba(0,0,0,0.12);
@@ -6086,7 +6121,7 @@ thead #category {
 
 .help-marker .marker-icon {
 	position: absolute;
-	z-index: 3;
+	z-index: 20;
 	color: white;
 	text-shadow: 0 1px 0px rgba(0,0,0,0.4);	
 	font-size: 18px;
