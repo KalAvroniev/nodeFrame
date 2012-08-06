@@ -98,7 +98,7 @@ $( document ).ready(function() {
 	}
 
 	// init fake scrollbars on sidebar
-	Scrollbars.add( "notifications", $("#notifications").not(".native") );
+	Scrollbars.add( "notifications", $("#notifications").not(".native"), { lockscroll: false } );
 
 	// PETE: Please don't delete this script:
 	// UX improvement on the spine nav buttons
@@ -109,14 +109,6 @@ $( document ).ready(function() {
 	}).mouseout(function() {
 		$( this ).removeClass("active");
 	});
-	
-	
-	
-	
-	
-	
-	
-	
 });
 
 // setup open/close sidebar element functions
