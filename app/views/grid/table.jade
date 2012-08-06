@@ -2,9 +2,13 @@
 	.track
 		.thumb
 			.end
+
 .viewport
+
 	table.grid-table.overview.floatable
+		
 		thead
+		
 			tr.col-grouping
 				- var grouping = headers;
 				- for ( var i = 0; i < grouping.length; ++i ) {
@@ -16,6 +20,7 @@
 						- else
 							= group.title
 				- }
+				
 			tr.filter
 				- for ( var i = 0; i < columns.length; ++i ) {
 					- var column = columns[ i ];
@@ -55,6 +60,7 @@
 													li
 														a(href="")= value
 				- }
+				
 			tr(hidden)
 				td#bulk-actions(colspan="17")
 					.ff-icon-before.bulk-wrapper
