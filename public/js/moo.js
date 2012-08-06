@@ -31,10 +31,21 @@ var protrada = {
 		remove: function( identifier ) {
 			this.elements[ identifier ].children(".scrollbar").remove();
 		}
+	},
+
+	alerts: {
+		show: function( type, message ) {
+			$.pv3.growl.show( type, message );
+		},
+
+		hide: function() {
+			$.pv3.growl.hide();
+		}
 	}
 };
 
-var Scrollbars = protrada.scrollbars;
+var Scrollbars = protrada.scrollbars,
+	Alerts = protrada.alerts;
 
 $( document ).ready(function() {
 	var module = document.URL.substr( document.URL.lastIndexOf("/") + 1 );

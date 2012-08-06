@@ -1,15 +1,13 @@
 #spine
 	#spine-inner
-
-		a#toggle-sys-menu(href='', title='Protrada system menu')
+		a#toggle-sys-menu(href="", title="Protrada system menu")
 			span.ff-icon-before
 
 		#sys-menu
-
 			#sys-menu-title-bar
-				a#x-sys-menu.ff-icon-before(href='#')
+				a#x-sys-menu.ff-icon-before(href="#")
 				h4
-					| system 
+					| system
 					strong options
 
 			#user-options
@@ -19,17 +17,17 @@
 						| your system
 						strong.ff-icon-before credits
 					span.ff-icon-after.credit-count 657
-					a.ff-icon-before(href='#') buy more
-				a.ff-icon-before(href='/user-settings', data-title='user settings')
-				a.ff-icon-before(href='/user-settings', data-title='user profile')
-				a.ff-icon-before(href='#', data-title='upgrade membership')
-				a.ff-icon-before(href='/logout', data-title='sign-out of account')
+					a.ff-icon-before(href="#") buy more
+				a.ff-icon-before(href="/user-settings", data-title="user settings")
+				a.ff-icon-before(href="/user-settings", data-title="user profile")
+				a.ff-icon-before(href="#", data-title="upgrade membership")
+				a.ff-icon-before(href="/logout", data-title="sign-out of account")
 
 			#ui-controls
 				h4.side-on ui controls
-				a#toggle-help-bubbles.ff-icon-before(href='#') toggle display of help bubbles (for new users)
-				a#toggle-condensed.ff-icon-before(href='#') toggle condensed view (for small screens)
-				a#toggle-downgrade.ff-icon-before(href='#') downgrade interface details (for better performance)
+				a#toggle-help-bubbles.ff-icon-before(href="#") toggle display of help bubbles (for new users)
+				a#toggle-condensed.ff-icon-before(href="#") toggle condensed view (for small screens)
+				a#toggle-downgrade.ff-icon-before(href="#") downgrade interface details (for better performance)
 
 			#system-rocker.clearfix
 				h4.side-on system
@@ -44,10 +42,10 @@
 				a#mode-rocker(href="#")
 
 		nav
-			a#sys-alert.ff-icon-before(href="#")
+			a#sys-alert.ff-icon-before.hidden(href="#")
 				span.alertmsg-container
 					h4.alert-header system wide alert
-					| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque viverra fringilla nibh vel porttitor. Praesent tincidunt tristique nunc.		
+					| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque viverra fringilla nibh vel porttitor. Praesent tincidunt tristique nunc.
 			ul
 				li
 					a#nav-home.ff-icon-before(href="javascript:$.pv3.state.current.modules.selected = 'home'; $.pv3.state.restoreModule()")
@@ -55,22 +53,19 @@
 				li
 					a#nav-exchange.ff-icon-before(href="javascript:$.pv3.state.current.modules.selected = 'exchange'; $.pv3.state.restoreModule()")
 					span the domain exchange
-
 				li
 					a#nav-user-settings.ff-icon-before(href="javascript:$.pv3.state.current.modules.selected = 'user-settings'; $.pv3.state.restoreModule()")
 					span user settings
 
-
-
 				// not active/in-use yet ----------
 				//
 				//li
-				//	a#nav-education.ff-icon-before(href='#')
+				//	a#nav-education.ff-icon-before(href="#")
 				//	span 'domaining' education
 				//li
-				//	a#nav-cart.ff-icon-before(href='#')
+				//	a#nav-cart.ff-icon-before(href="#")
 				//	span shopping cart
 
-		a#system-help.ff-icon-after(href='')
+		a#system-help.ff-icon-after(href="")
 			| system
 			strong help

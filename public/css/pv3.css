@@ -1067,6 +1067,9 @@ fieldset.login .login-right .invisible {
 	background: #e86908;
 	border-radius: 5px;	
 }
+#spine-inner #sys-alert.hidden {
+	display: none;
+}
 #sys-alert .alertmsg-container {
 	position: absolute;
 	z-index: -1;

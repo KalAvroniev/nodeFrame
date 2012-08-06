@@ -47,7 +47,7 @@ $( document ).ready(function() {
 	$("#system-help, #live-help-status, #live-help-info > a").on( "click", function( e ) {
 		e.preventDefault();
 
-		$.pv3.growl.show( "error", "The Live Help system is coming soon." );
+		Alerts.show( "error", "The Live Help system is coming soon." );
 	});
 
 	// now setup the socket for push notifications
