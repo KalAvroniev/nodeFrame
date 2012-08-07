@@ -391,6 +391,8 @@ a.ff-icon-before:before {
     from { opacity: 0; left: -100px; }
       to { opacity: 1; left: 10px; }
 }
+
+
 #sys-menu.active {
 	display: block;
 	left: 10px;
