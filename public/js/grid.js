@@ -26,11 +26,14 @@ var Grid = function( element, options ) {
 Grid.prototype = {
 	constructor: Grid,
 
+	isWaiting: false, // used by the scroll listener to load new content
+	rowOffset: 0,
+
 	init: function() {
 		var that = this,
 			$grid = this.grid;
 
-		$.jsonrpc( this.options.url, {}, function( data ) {
+		$.jsonrpc( this.options.url, { offset: this.rowOffset }, function( data ) {
 			//console.log( data );
 
 			$.jade.getTemplate( "grid/table", function () {
@@ -50,6 +53,8 @@ Grid.prototype = {
 					that.setup();
 				});
 			});
+
+			that.rowOffset += 10;
 		});
 	},
 
@@ -234,6 +239,12 @@ Grid.prototype = {
 
 		grid.positionHorizScroll();
 		grid.updateTableHeaders();
+
+		if ( !grid.isWaiting && grid.distanceFromBottom() <= 150 ) {
+			grid.isWaiting = true;
+
+			grid.loadInData();
+		}
 	},
 
 	// not needed?
@@ -244,6 +255,38 @@ Grid.prototype = {
 
 		return ( innerOffset - scrollOffset ) - vertOffset;
 	},*/
+
+	loadInData: function() {
+		var that = this,
+			$grid = this.grid;
+
+		// show spinner
+		$grid.find("tfoot").removeAttr("hidden");
+
+		$.jsonrpc( this.options.url, { offset: this.rowOffset }, function( data ) {
+			//console.log( data );
+
+			$.jade.getTemplate( "grid/row", function() {
+				var records = data.records;
+
+				for ( var i = 0; i < records.length; ++i ) {
+					$grid.find("tbody").append( $.jade.renderSync("views_grid_row", records[ i ], that.error) );
+				}
+
+				// hide spinner
+				$grid.find("tfoot").attr( "hidden", true );
+
+				// let the scroll listener know we're no longer waiting on data
+				that.isWaiting = false;
+			});
+
+			that.rowOffset += 10;
+		});
+	},
+
+	distanceFromBottom: function() {
+		return $( document ).height() - ( $( window ).scrollTop() + $( window ).height() );
+	},
 
 	isTableOnScreen: function( offset ) {
 		var bottomOfScreen = $( window ).scrollTop() + $( window ).height(),
