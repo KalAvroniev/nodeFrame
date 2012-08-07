@@ -91,7 +91,7 @@ Grid.prototype = {
 			});
 
 		$(".grid-table").find("thead").find(".filter")
-			.on( "click", ".select", this.bulkActionsHandler )
+			.on( "click", ".select", { grid: this }, this.bulkActionsHandler )
 			.on( "click", ".favourite", this.bulkFavouritesHandler );
 
 		$( window ).on( "resize", { grid: this }, this.windowResize ).on( "scroll", { grid: this }, this.windowScroll );
@@ -195,14 +195,22 @@ Grid.prototype = {
 		}
 	},
 
-	bulkActionsHandler: function() {
-		var $tr = $("#bulk-actions").parent();
+	bulkActionsHandler: function( e ) {
+		var grid = e ? e.data.grid : this,
+			checking = !$( this ).hasClass("active");
 
-		if ( $tr.is(":visible") ) {
-			$tr.fadeOut().attr("hidden");
+		// TODO: not DRY compliant
+		if ( checking ) {
+			$( ".btn.select", grid.grid.find("tbody") ).each(function() {
+				$( this ).addClass("active");
+			});
 		} else {
-			$tr.fadeIn().removeAttr("hidden");
+			$( ".btn.select", grid.grid.find("tbody") ).each(function() {
+				$( this ).removeClass("active");
+			});
 		}
+
+		grid.toggleBulkHandler();
 	},
 
 	bulkFavouritesHandler: function() {
@@ -210,7 +218,7 @@ Grid.prototype = {
 	},
 
 	toggleSticky: function( e ) {
-		var grid = e.data.grid;
+		var grid = e ? e.data.grid : this;
 
 		e.preventDefault();
 
@@ -228,17 +236,26 @@ Grid.prototype = {
 		$( this ).button("toggle");
 	},
 
+	toggleBulkHandler: function() {
+		var $tr = $("#bulk-actions").parent(),
+			selected = $( ".btn.select", this.grid.find("tbody") ).filter(".active").length;
+
+		if ( $tr.is(":visible") && !selected ) {
+			$tr.fadeOut().attr("hidden");
+		} else {
+			$tr.fadeIn().removeAttr("hidden");
+		}
+	},
+
 	toggleSelect: function( e ) {
-		var grid = e.data.grid;
+		var grid = e ? e.data.grid : this;
 
 		e.preventDefault();
 		e.stopPropagation();
 
 		$( this ).button("toggle");
 
-		if ( $( "button.select.active", grid.grid ).length <= 1 ) {
-			grid.bulkActionsHandler();
-		}
+		grid.toggleBulkHandler();
 	},
 
 	domainTitleMouseEnter: function() {
