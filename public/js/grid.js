@@ -89,7 +89,9 @@ Grid.prototype = {
 				// code here
 			});
 
-		$("#fav-sel-all").on( "click", ".select", this.bulkActionsHandler );
+		$(".grid-table").find("thead").find(".filter")
+			.on( "click", ".select", this.bulkActionsHandler )
+			.on( "click", ".favourite", this.bulkFavouritesHandler );
 
 		$( window ).on( "resize", { grid: this }, this.windowResize ).on( "scroll", { grid: this }, this.windowScroll );
 		$( verticalScroll ).add( this.grid ).on( "resize", this.copyHeaderSize );
@@ -193,6 +195,10 @@ Grid.prototype = {
 		} else {
 			$tr.fadeIn().removeAttr("hidden");
 		}
+	},
+
+	bulkFavouritesHandler: function() {
+		
 	},
 
 	toggleSticky: function( e ) {
