@@ -3471,11 +3471,43 @@ aside {
 	pointer-events: none;
 	
 	opacity: 0; 
-	right: -100px;
+	right: -280px;
 	
     -webkit-animation: asideSlideOut 0.1s ease-in-out;
     -moz-animation: asideSlideOut 0.1s ease-in-out;
     -ms-animation: asideSlideOut 0.1s ease-in-out;			
+}
+aside.active {	
+	right: 0;
+	opacity: 1;
+   	
+    -webkit-animation: asideSlideIn 0.4s ease-in-out;
+    -moz-animation: asideSlideIn 0.4s ease-in-out;
+    -ms-animation: asideSlideIn 0.4s ease-in-out;	
+}
+@-webkit-keyframes asideSlideIn {
+    from { display: block; opacity: 0; right: -30px; }
+      to { opacity: 1; right: 0px; }
+}
+@-moz-keyframes asideSlideIn {
+    from { display: block; opacity: 0; right: -30px; }
+      to { opacity: 1; right: 0px; }
+}
+@-ms-keyframes asideSlideIn {
+    from { display: block; opacity: 0; right: -30px; }
+      to { opacity: 1; right: 0px; }
+}
+@-webkit-keyframes asideSlideOut {
+    from { opacity: 1; right: 0px; }
+      to { display: none; opacity: 0; right: -30px; }
+}
+@-moz-keyframes asideSlideOut {
+    from { opacity: 1; right: 0px; }
+      to { display: none; opacity: 0; right: -30px; }
+}
+@-ms-keyframes asideSlideOut {
+    from { opacity: 1; right: 0px; }
+      to { display: none; opacity: 0; right: -30px; }
 }
 
 /* ---------- 
@@ -3490,42 +3522,6 @@ aside:before {
 	border: 10px outset transparent;
 	border-bottom: 10px solid rgba(0,0,0,0.4);
 }
-
-aside.active {
-	
-	right: 0;
-	opacity: 1;
-   	
-    -webkit-animation: asideSlideIn 0.4s ease-in-out;
-    -moz-animation: asideSlideIn 0.4s ease-in-out;
-    -ms-animation: asideSlideIn 0.4s ease-in-out;	
-}
-@-webkit-keyframes asideSlideIn {
-    from { display: block; opacity: 0; right: -100px; }
-      to { opacity: 1; right: 0px; }
-}
-@-moz-keyframes asideSlideIn {
-    from { display: block; opacity: 0; right: -100px; }
-      to { opacity: 1; right: 0px; }
-}
-@-ms-keyframes asideSlideIn {
-    from { display: block; opacity: 0; right: -100px; }
-      to { opacity: 1; right: 0px; }
-}
-@-webkit-keyframes asideSlideOut {
-    from { opacity: 1; right: 0px; }
-      to { display: none; opacity: 0; right: -100px; }
-}
-@-moz-keyframes asideSlideOut {
-    from { opacity: 1; right: 0px; }
-      to { display: none; opacity: 0; right: -100px; }
-}
-@-ms-keyframes asideSlideOut {
-    from { opacity: 1; right: 0px; }
-      to { display: none; opacity: 0; right: -100px; }
-}
-
-
 #notifications, aside header.alerts-header {
 	right: 22px;
 	position: absolute;
