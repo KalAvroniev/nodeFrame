@@ -447,7 +447,7 @@ a.ff-icon-before:before {
 	color: #333332;
 	font-size: 16px;
 	margin: -7px 0px 0 0;
-	padding: 4px 4px 2px;
+	padding: 4px;
 	border-radius: 4px;
 }
 #x-sys-menu:before {
@@ -6160,7 +6160,7 @@ thead #category {
 .left-msg .help-bubble {
 	right: -13px;
 	margin: 32px 0 0 0;
-	padding: 10px 25px 10px 30px;	
+	padding: 10px 20px 10px 15px;	
 }
 .bottom-msg .help-bubble {
 	left: -115px;
@@ -6178,8 +6178,6 @@ thead #category {
 	padding: 10px 15px;
 }
 
-
-
 .help-bubble span {
 	display: block;
 }
@@ -6190,11 +6188,9 @@ thead #category {
 	border-radius: 6px;
 	background: rgba(0,0,0,0.1);
 }
-.left-msg .help-body-icon {
-	margin: 5px 20px 0 -14px;	
-}
-.bottom-left-msg .help-body-icon, .bottom-right-msg .help-body-icon {
+.left-msg .help-body-icon, .bottom-left-msg .help-body-icon, .bottom-right-msg .help-body-icon {
 	margin-left: 0;
+	margin-right: 15px;
 }
 .help-body-icon:before {
 	content: "4";
