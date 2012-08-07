@@ -123,6 +123,12 @@ Grid.prototype = {
 			that.copyHeaderSize();
 		});
 
+		// scroll event won't fire lazy load, as there isn't a scrollbar!
+		if ( this.bottomOfTable() >= 0 ) {
+			//this.loadInData();
+			this.grid.before("<a href=\"javascript:$('#grid-view').grid('loadInData');\">Load more data</a>");
+		}
+
 		Scrollbars.add( "grid", this.grid, { axis: "x", scroll: false } );
 
 		this.positionHorizScroll();
@@ -255,6 +261,13 @@ Grid.prototype = {
 
 		return ( innerOffset - scrollOffset ) - vertOffset;
 	},*/
+
+	bottomOfTable: function() {
+		var $window = $( window ),
+			$viewport = $( ".viewport", this.grid );
+
+		return ( $window.scrollTop() + $window.height() ) - ( $viewport.offset().top + $viewport.height() );
+	},
 
 	loadInData: function() {
 		var that = this,
