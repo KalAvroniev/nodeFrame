@@ -81,7 +81,7 @@ Grid.prototype = {
 
 		$(".grid-table").find("tbody").on( "click", ".domain-title-cntnr .copy-to-clipboard", function( e ) { e.preventDefault(); })
 			.on( "click", "td button.favourite", this.toggleFavourite )
-			.on( "click", "td button.select", this.toggleSelect )
+			.on( "click", "td button.select", { grid: this }, this.toggleSelect )
 			.on( "click", "td.actions", function( e ) {
 				e.preventDefault();
 				e.stopPropagation();
@@ -221,10 +221,16 @@ Grid.prototype = {
 	},
 
 	toggleSelect: function( e ) {
+		var grid = e.data.grid;
+
 		e.preventDefault();
 		e.stopPropagation();
 
 		$( this ).button("toggle");
+
+		if ( $( "button.select.active", grid.grid ).length <= 1 ) {
+			grid.bulkActionsHandler();
+		}
 	},
 
 	domainTitleMouseEnter: function() {
