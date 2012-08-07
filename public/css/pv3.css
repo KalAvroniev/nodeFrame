@@ -234,6 +234,9 @@ a.ff-icon-before:before {
     height: 62px;
     position: relative;
 } 
+.help #toggle-sys-menu {
+    margin: 0 0 25px;	
+}
 #toggle-sys-menu:hover, #toggle-sys-menu.active { 
 	
 	/* the sunk look with shadow etc */
@@ -1145,7 +1148,7 @@ fieldset.login .login-right .invisible {
 }
 #spine-inner > nav ul li {
 	display: inline-block;
-	margin: 0 0 20px 0;
+	margin: 0 0 15px 0;
 	padding: 6px;
 	border-radius: 4px;
 	position: relative;
@@ -6102,14 +6105,15 @@ thead #category {
 .bottom-msg.help-bubble-container, .bottom-left-msg.help-bubble-container {
 	margin: -18px 0 0 16px;
 }
-
 .sectional-tabs .help-bubble-container {
+	top: 0;
 	margin: 0 0 0 20px;
 }
-
-
 #x-side-bar .help-bubble-container {
 	margin: -5px 0 0 -46px;
+}
+#spine-inner .help-bubble-container {
+	margin: -45px 0 0 17px
 }
 
 
@@ -6370,6 +6374,7 @@ select, input[type="file"] {
 	box-shadow: inset 0 1px 0 white, 0 1px 3px rgba(0,0,0,0.15);
 	color: #1d1b1a;
 	border: none;
+	border-radius: 5px;
 }
 .btn-group.open .btn.dropdown-toggle {
 	background: rgba(0,0,0,0.1);
