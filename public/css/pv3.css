@@ -6110,7 +6110,11 @@ thead #category {
 	margin: 0 0 0 20px;
 }
 #sectional-func > .help-bubble-container {
+	display: none;
+}
+.sidebar-hidden #sectional-func > .help-bubble-container {
 	margin: 0;
+	display: block;
 	right: 103px; top: 47px;
 }
 #spine-inner .help-bubble-container {
