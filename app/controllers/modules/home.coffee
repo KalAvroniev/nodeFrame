@@ -44,7 +44,7 @@ class exports.Controller extends Controller
 
 	# portfolio health info
 		res.view.portfolioHealth = {}
-		res.view.portfolioHealth.default = "<p class='ff-icon-before'>This section can show you at a glance, how healthy your portfolio is (by charting it's ROI%), and also how it is trending.<a href='#'>Read more</a> to learn how to take advantage of this feature.</p>"
+		res.view.portfolioHealth.default = "<p class='ff-icon-before'>This section can show you at a glance, how healthy your portfolio is (by charting it's ROI%), and also how it is trending. <a href='#'>Read more</a> to learn how to take advantage of this feature.</p>"
 
 	# status summary info
 		res.view.satusSummary = {}
