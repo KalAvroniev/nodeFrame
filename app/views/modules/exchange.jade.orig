@@ -1,0 +1,169 @@
+// exchange.jade
+- if (!ajax) {
+!= partial("partials/styles")
+- }
+
+!= partial("partials/header")
+!= partial("partials/panel")
+
+#main-container.page-exchange.search-results
+		h5#first-heading.ff-icon-before
+
+		script
+			function refreshExchangeDate() {
+				function pad( num ) {
+					if ( num < 10 ) {
+						return "0" + num;
+					}
+
+					return num;
+				}
+
+				var days = [ "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday" ];
+				var postDate = [ "", "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "st" ];
+				var months = [ "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec" ];
+				var now = new Date();
+
+				if ( $.pv3.state.current.modules.selected !== "exchange" ) {
+					clearInterval( refreshExchangeDateIntervalID );
+					return;
+				}
+
+				$("#first-heading").html( days[now.getDay()] + " " + now.getDate() + "<sup>" +
+					postDate[now.getDate()] + "</sup> " + months[now.getMonth()] + " " + now.getFullYear() +
+					", <strong>" + now.getHours() + ":" + pad(now.getMinutes()) + "</strong>" );
+			}
+
+			refreshExchangeDate();
+			var refreshExchangeDateIntervalID = setInterval( refreshExchangeDate, 1000 );
+
+		- if ( searchResults.state ) {
+			#section-headings.search-results
+				#member-options.btn-group
+<<<<<<< HEAD
+					
+					
+					
+					span.help-bubble-container.left-msg
+						span.help-marker.ff-icon-before.ff-icon-after
+							span.marker-icon +
+						span.help-bubble
+							span(title="hide this single bubble &amp; marker").x-help-bubble.ff-icon-before
+							span.ff-icon-before.help-body-icon
+							span.help-title Help text title
+							span.help-body Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat. 
+								a(href="").hide-all-bubbles hide all help bubbles.
+					
+					
+															
+					a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href='#')
+=======
+					a.btn.btn-large.dropdown-toggle(href="#", data-toggle="dropdown")
+>>>>>>> 42617c0b645892f985bd6729119cfd4dcb5250e0
+						| previous searches
+						span.caret
+					ul.dropdown-menu
+						li
+							a(href="#") search 1
+						li
+							a(href="#") an old search
+						li
+							a(href="#") another old search
+						li.divider
+						li
+							a(href="#") search is divided
+
+				h1 the domain exchange
+
+				span#results-marker
+					a(href="#").ff-icon-before
+					strong '#{searchResults.searchString}'
+					| search results
+
+				h3 search, sort, analyse and filter domains from the all the major domain resellers / trading houses.
+		- }	else {
+			#section-headings
+				h1 the domain exchange
+				h3 search, sort, analyse and filter domains from the all the major domain resellers / trading houses.
+		- }
+
+		ul#exchange-data-tabs.nav.nav-tabs
+			li.active
+				a(href="#expiring") expiring
+			li
+<<<<<<< HEAD
+			
+				span.help-bubble-container.right-msg
+					span.help-marker.ff-icon-before.ff-icon-after
+						span.marker-icon +
+					span.help-bubble
+						span(title="hide this single bubble &amp; marker").x-help-bubble.ff-icon-before
+						span.ff-icon-before.help-body-icon
+						span.help-title Help text title
+						span.help-body Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat. 
+							a(href="").hide-all-bubbles hide all help bubbles.
+										
+				a(href='#auctions') auctions
+								
+=======
+				a(href="#auctions") auctions
+
+				span.help-container
+					span.help-marker
+					span.help-bubble
+>>>>>>> 42617c0b645892f985bd6729119cfd4dcb5250e0
+			li
+				a(href="#dropping") dropping
+			li
+				a(href="#websites") websites
+			li
+				a(href="#history") history
+			li
+				a(href="#new-registrations") new registrations
+
+		#exchange-tab-panes.tab-content
+			#expiring.tab-pane.active
+				h2.tab-intro-heading #{contentTabs.expiring.title}
+				p.clearfix.tab-intro-text #{contentTabs.expiring.intoText}
+
+				#grid-view
+
+			#listed-for-sale.tab-pane
+				h2#complete-listing Domains listed for sale
+				p
+					| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl
+					| andit eget non lacus. Pellentesque a imperdiet diam.
+				#temp-for-sale grid view control goes in here
+
+			#expiring.tab-pane
+				h2.tab-intro-heading #{contentTabs.expiring.title}
+				p.clearfix.tab-intro-text #{contentTabs.expiring.intoText}
+
+			#auctions.tab-pane
+				h2.tab-intro-heading #{contentTabs.auctions.title}
+				p.clearfix.tab-intro-text #{contentTabs.auctions.intoText}
+
+			#dropping.tab-pane
+				h2.tab-intro-heading #{contentTabs.dropping.title}
+				p.clearfix.tab-intro-text #{contentTabs.dropping.intoText}
+
+			#websites.tab-pane
+				h2.tab-intro-heading #{contentTabs.websites.title}
+				p.clearfix.tab-intro-text #{contentTabs.websites.intoText}
+
+			#history.tab-pane
+				h2.tab-intro-heading #{contentTabs.history.title}
+				p.clearfix.tab-intro-text #{contentTabs.history.intoText}
+
+			#new-registrations.tab-pane
+				h2.tab-intro-heading #{contentTabs.newRegistrations.title}
+				p.clearfix.tab-intro-text #{contentTabs.newRegistrations.intoText}
+
+		#thetableclone
+			table.grid-table
+
+script
+	$("#grid-view").grid({
+		url: "exchange/grid",
+		stickyHeader: true
+	});

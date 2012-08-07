@@ -3384,17 +3384,21 @@ input[type=number] {
 aside {
 	z-index: 3;
 	position: fixed;
-	right: -300px;
-	
+	right: -100px;
+	opacity: 0;	
 	height: 100%;
-	/*padding: 105px 0 22px 0;
-	display: none;*/
-	pointer-events: none;
-	
-	-moz-transition: right .3s ease-in-out;
-	-webkit-transition: right .3s ease-in-out;
-   	transition: right .3s ease-in-out;		
+	display: none;
+	pointer-events: none;	
 }
+.sidebar-hidden aside {
+	right: -100px;
+	opacity: 0;
+
+    -webkit-animation: asideSlideOut 0.5s;
+    -moz-animation: asideSlideOut 0.5s;
+    -ms-animation: asideSlideOut 0.5s;
+}
+
 /* arrow */
 aside:before {
 	content: "";
@@ -3405,9 +3409,46 @@ aside:before {
 	border: 10px outset transparent;
 	border-bottom: 10px solid rgba(0,0,0,0.4);
 }
+
 aside.active {
+	display: block;
 	right: 0;
+	opacity: 1;
+   	
+    -webkit-animation: asideSlideIn 0.5s;
+    -moz-animation: asideSlideIn 0.5s;
+    -ms-animation: asideSlideIn 0.5s;	
 }
+@-webkit-keyframes asideSlideIn {
+    from { opacity: 0; right: -100px; }
+      to { opacity: 1; right: 0px; }
+}
+@-moz-keyframes asideSlideIn {
+    from { opacity: 0; right: -100px; }
+      to { opacity: 1; right: 0px; }
+}
+@-ms-keyframes asideSlideIn {
+    from { opacity: 0; right: -100px; }
+      to { opacity: 1; right: 0px; }
+}
+
+
+@-webkit-keyframes asideSlideOut {
+    from { opacity: 1; right: 0px; }
+      to { opacity: 0; right: -100px; }
+}
+@-moz-keyframes asideSlideOut {
+    from { opacity: 1; right: 0px; }
+      to { opacity: 0; right: -100px; }
+}
+@-ms-keyframes asideSlideOut {
+    from { opacity: 1; right: 0px; }
+      to { opacity: 0; right: -100px; }
+}
+
+
+
+
 
 #notifications, aside header.alerts-header {
 	right: 22px;
