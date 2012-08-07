@@ -1430,7 +1430,7 @@ header#main:before {
 	float: right;
 	margin: 0 0 0 2px;
 }
-.sectional-tabs li a {
+.sectional-tabs li > a {
 	display: block;
 	text-align: left;
 	position: relative;
@@ -1446,7 +1446,7 @@ header#main:before {
 .sectional-tabs.singular li, .sectional-tabs li.standout-tab {
 	float: right;
 }
-.sectional-tabs.singular li a, .sectional-tabs li.standout-tab a {
+.sectional-tabs.singular li > a, .sectional-tabs li.standout-tab > a {
 	margin: 0;
 	padding-top: 14px;
 	height: 62px;	
@@ -1455,7 +1455,6 @@ header#main:before {
 	background: rgb(230,230,230);
 
 	position: relative;
-	z-index: 25;			
 }
 .sectional-tabs li.active a, .sectional-tabs.singular li.active a, .sectional-tabs li.standout-tab.active a {
 	background: #fcf9f5;
@@ -1466,12 +1465,11 @@ header#main:before {
 	box-shadow: inset 0 1px 0 white;
 
 	position: relative;
-	z-index: 25;	
 }
 .sectional-tabs li.active a:before, .sectional-tabs li.standout-tab a:before {
 	top: 19px;
 }
-.sectional-tabs li a:before {
+.sectional-tabs li > a:before {
 	position: absolute;
 	top: 15px; left: 16px;
 	content: "1";
@@ -6093,10 +6091,28 @@ thead #category {
 
 /* ------------------------------ Help bubble + marker styles work ------------------------------------- */
 
-.help-bubble-container {
-	position: absolute;
-	margin: -25px 0 0 18px;
+.help-bubble-container { 
+	display: none;
 }
+.help .help-bubble-container {
+	display: block;
+	position: absolute;
+	margin: -27px 0 0 15px;
+}
+.bottom-msg.help-bubble-container, .bottom-left-msg.help-bubble-container {
+	margin: -18px 0 0 16px;
+}
+
+.sectional-tabs .help-bubble-container {
+	margin: 0 0 0 20px;
+}
+
+
+#x-side-bar .help-bubble-container {
+	margin: -5px 0 0 -46px;
+}
+
+
 .help-bubble {
 	position: absolute;
 	width: 260px;
@@ -6105,41 +6121,60 @@ thead #category {
 	border-radius: 6px;
 	background: #08a4ed;
 	font-size: 11px;
-	line-height: 1.4em;
-	bottom: -70px;
+	line-height: 1.4em;	
+	box-shadow: 0 2px 13px rgba(0,0,0,0.2);	
 	
+	top: 45px; opacity: 0;
 	display: none;
 	
-	box-shadow: 0 2px 13px rgba(0,0,0,0.2);	
 }
+.help-bubble-container:hover .help-bubble {
+	
+	opacity: 1; top: -70px;
+	display: block;
+   	
+    -webkit-animation: helpBubbleSlideIn 0.35s;
+    -moz-animation: helpBubbleSlideIn 0.35s;
+    -ms-animation: helpBubbleSlideIn 0.35s;
+}
+@-webkit-keyframes helpBubbleSlideIn {
+    from { opacity: 0; top: -100px; }
+      to { opacity: 1; top: -70px; }
+}
+@-moz-keyframes helpBubbleSlideIn {
+    from { opacity: 0; top: -100px; }
+      to { opacity: 1; top: -70px; }
+}
+@-ms-keyframes helpBubbleSlideIn {
+    from { opacity: 0; top: -100px; }
+      to { opacity: 1; top: -70px; }
+}
+
 .right-msg .help-bubble {
 	left: 12px;
 }
 .left-msg .help-bubble {
 	right: -13px;
+	margin: 32px 0 0 0;
 	padding: 10px 25px 10px 30px;	
 }
-@-webkit-keyframes fadeIn {
-    from { opacity: 0; bottom: 0px; }
-      to { opacity: 1; bottom: -70px; }
+.bottom-msg .help-bubble {
+	left: -115px;
+	padding: 16px 15px 10px 45px;
+	margin: 90px 0 0 0;
+}
+.bottom-right-msg .help-bubble {
+	left: 13px;
+	margin: 88px 0 0 0;
+	padding: 10px 15px;	
+}
+.bottom-left-msg .help-bubble {
+	right: -13px;
+	margin: 90px 0 0 0;
+	padding: 10px 15px;
 }
 
-@-moz-keyframes fadeIn {
-    from { opacity: 0; bottom: 0px; }
-      to { opacity: 1; bottom: -70px; }
-}
 
-@-ms-keyframes fadeIn {
-    from { opacity: 0; bottom: 0px; }
-      to { opacity: 1; bottom: -70px; }
-}
-.help-bubble-container:hover .help-bubble {
-	display: block;
-   	
-    -webkit-animation: fadeIn 0.35s;
-    -moz-animation: fadeIn 0.35s;
-    -ms-animation: fadeIn 0.35s;
-}
 
 .help-bubble span {
 	display: block;
@@ -6153,6 +6188,9 @@ thead #category {
 }
 .left-msg .help-body-icon {
 	margin: 5px 20px 0 -14px;	
+}
+.bottom-left-msg .help-body-icon, .bottom-right-msg .help-body-icon {
+	margin-left: 0;
 }
 .help-body-icon:before {
 	content: "4";
@@ -6207,13 +6245,14 @@ thead #category {
 	position: absolute;
 	z-index: 19;	
 	color: #08a4ed;
-	text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+	text-shadow: 0 1px 0 rgba(255,255,255,0.6), 0 -1px 0 #48bbf0;
 	cursor: pointer;	
 }
 .help-bubble-container:hover .help-marker:before {
 	color: #fff;
 	text-shadow: 0 1px 4px rgba(0,0,0,0.3);	
 }
+
 .help-marker:after {
 	content: "c";
 	font-size: 23px;
@@ -6233,6 +6272,7 @@ thead #category {
 	color: rgba(0,0,0,0.17);
 }
 
+
 .help-marker .marker-icon {
 	position: absolute;
 	z-index: 20;
@@ -6242,6 +6282,9 @@ thead #category {
 	line-height: 1;
 	top: 2px; left: 8px;
 }
+
+
+
 .help-bubble-container:hover .marker-icon {
 	color: #08a4ed;
 	font-weight: 400;

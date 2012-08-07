@@ -6,29 +6,61 @@ header#main
 			| sidebar
 		span.toggle-sub * You can also re-open from here
 
-	#sectional-func.side-open
+	#sectional-func.side-open					
+							
 		#x-side-bar(title="Toggle display of sidebar")
+			
 			span.alerts-summary 
 				span(data-alerts="2", data-title="Protrada Alerts")
 					span.ff-icon-before.hover-bubble Protrada alerts
 				span(data-alerts="4", data-title="Devname Alerts")
 					span.ff-icon-before.hover-bubble Devname alerts
 
+			
+			
+			span.help-bubble-container.bottom-left-msg
+				span.help-marker.ff-icon-before.ff-icon-after
+					span.marker-icon +
+				span.help-bubble
+					span(title="hide this single bubble &amp; marker").x-help-bubble.ff-icon-before
+					span.ff-icon-before.help-body-icon
+					span.help-title Help text title
+					span.help-body Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat. 
+						a(href="").hide-all-bubbles hide all help bubbles.			
+			
+			
+			
 			span.left-bars
 				span
-			span.right-bar
+			span.right-bar			
+			
 
 		- var klass = ( tabs.length == 1 ? "singular" : "");
-		ul.sectional-tabs(class=klass)
+		ul.sectional-tabs(class=klass)		
+		
+			li
+				span.help-bubble-container.bottom-left-msg
+					span.help-marker.ff-icon-before.ff-icon-after
+						span.marker-icon +
+					span.help-bubble
+						span(title="hide this single bubble &amp; marker").x-help-bubble.ff-icon-before
+						span.ff-icon-before.help-body-icon
+						span.help-title Help text title
+						span.help-body Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat. 
+							a(href="").hide-all-bubbles hide all help bubbles.			
+		
+		
 			- for ( var i = 0; i < tabs.length; ++i ) {
 				- var tab = tabs[ i ];
 				li(id=tab.id, class=tab.class)
 					a(href="javascript:$.pv3.panel.show( '" + tab.panel + "', {tabid: '" + tab.id + "', panel_size: '" + tab.panel_size + "'} );")
 						strong=tab.h1
 						= tab.h2
-			- }
+			- }			
+			
 
 		form#quick-search.well
+			
 			input#quick-search-keyword(value="", placeholder="Quick domain search _")
 			#sale-type.btn-group
 				a.btn.dropdown-toggle(data-toggle="dropdown", href="#")
