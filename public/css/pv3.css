@@ -6109,8 +6109,9 @@ thead #category {
 	top: 0;
 	margin: 0 0 0 20px;
 }
-#x-side-bar .help-bubble-container {
-	margin: -5px 0 0 -46px;
+#sectional-func > .help-bubble-container {
+	margin: 0;
+	right: 103px; top: 47px;
 }
 #spine-inner .help-bubble-container {
 	margin: -45px 0 0 17px
