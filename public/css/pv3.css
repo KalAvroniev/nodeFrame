@@ -2139,10 +2139,10 @@ header#main:before {
 }
 #section-headings h3 {
 	font-size: 14px;
-	line-height: 1.4em;
+	line-height: 1.5em;
 	letter-spacing: 0;
 	margin: 0;
-	padding: 15px 0 0 30px;
+	padding: 12px 0 0 30px;
 }
 #results-marker {
 	float: left;
@@ -3384,22 +3384,15 @@ input[type=number] {
 aside {
 	z-index: 3;
 	position: fixed;
-	right: -100px;
-	opacity: 0;	
+		
 	height: 100%;
 	display: none;
-	pointer-events: none;	
-}
-.sidebar-hidden aside {
-	right: -100px;
-	opacity: 0;
-
-    -webkit-animation: asideSlideOut 0.5s;
-    -moz-animation: asideSlideOut 0.5s;
-    -ms-animation: asideSlideOut 0.5s;
+	pointer-events: none;		
 }
 
-/* arrow */
+/* ---------- 
+   arrow ----------- */
+
 aside:before {
 	content: "";
 	display: block;
@@ -3431,21 +3424,6 @@ aside.active {
     from { opacity: 0; right: -100px; }
       to { opacity: 1; right: 0px; }
 }
-
-
-@-webkit-keyframes asideSlideOut {
-    from { opacity: 1; right: 0px; }
-      to { opacity: 0; right: -100px; }
-}
-@-moz-keyframes asideSlideOut {
-    from { opacity: 1; right: 0px; }
-      to { opacity: 0; right: -100px; }
-}
-@-ms-keyframes asideSlideOut {
-    from { opacity: 1; right: 0px; }
-      to { opacity: 0; right: -100px; }
-}
-
 
 
 
@@ -3687,7 +3665,7 @@ aside header.alerts-header {
 }
 
 #notifications .overview > p {
-	padding: 0 15px 24px 18px;
+	padding: 0 15px 12px 18px;
 	font-size: 12px;
 	line-height: 18px;
 }
@@ -3898,7 +3876,7 @@ aside header.alerts-header {
 	content: "9";
 	display: block;
 	float: left;
-	margin: 1px 13px 0 0;
+	margin: 2px 13px 0 0;
 	font-size: 15px;
 	font-family: 'AlexKiddReg';	
 }
@@ -6456,9 +6434,10 @@ select, input[type="file"] {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e6e6e', endColorstr='#5d5d5d',GradientType=0 ); /* IE6-9 */
 }
 
-.grid-table th .open .dropdown-toggle {
+.grid-table th .btn-group.open .dropdown-toggle {
 	box-shadow: inset 0 1px 3px rgba(0,0,0,0.35), 0 1px 0 rgba(255,255,255,0.15);
-
+	color: #b3b3b3;
+	
 	background: rgb(65,65,65); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(65,65,65,1) 0%, rgba(43,43,43,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(65,65,65,1)), color-stop(100%,rgba(43,43,43,1))); /* Chrome,Safari4+ */
