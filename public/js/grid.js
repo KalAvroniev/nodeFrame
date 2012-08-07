@@ -76,8 +76,9 @@ Grid.prototype = {
 
 		$("#main-container").on( "click", ".grid-table .sticky", { grid: this }, this.toggleSticky );
 
-		this.grid.find("tbody").on( "click", "tr:not(.parent-open, .child)", this.expandRow );
-		this.grid.find("tbody").on( "click", ".parent-open, .child", this.collapseRow );
+		this.grid.find("tbody")
+			.on( "click", "tr:not(.parent-open, .child)", this.expandRow )
+			.on( "click", ".parent-open, .child", this.collapseRow );
 
 		$(".grid-table").find("tbody").on( "click", ".domain-title-cntnr .copy-to-clipboard", function( e ) { e.preventDefault(); })
 			.on( "click", "td button.favourite", this.toggleFavourite )
@@ -96,6 +97,13 @@ Grid.prototype = {
 		$( window ).on( "resize", { grid: this }, this.windowResize ).on( "scroll", { grid: this }, this.windowScroll );
 		$( verticalScroll ).add( this.grid ).on( "resize", this.copyHeaderSize );
 		this.grid.on( "scroll.tinyscrollbar", ".scrollbar", { grid: this }, this.updateTableHeaders );
+
+		// lock in th widths for floating elements
+		this.grid.find("thead").find("th").each(function () {
+			var $this = $( this );
+
+			$this.width( $this.width() );
+		});
 
 		$( "table.floatable", this.grid ).each(function() {
 			var $this = $( this ),
