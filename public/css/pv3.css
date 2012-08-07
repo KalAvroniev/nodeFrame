@@ -371,15 +371,33 @@ a.ff-icon-before:before {
 	width: 350px;
 	position: absolute;
 	z-index: 3;
-	top: 85px; left: -378px;
+	top: 85px;
+	display: none;
 	
 	border-radius: 5px;
 	/*background: url(../img/demo-sys-menu.png);*/
 	box-shadow: 0 0 30px rgba(0,0,0,0.3);
-
-	-moz-transition: left .1s ease-in-out;
-	-webkit-transition: left .1s ease-in-out;
-   	transition: left .1s ease-in-out;	
+		
+}
+@-webkit-keyframes sysMenuSlideIn {
+    from { opacity: 0; left: -100px; }
+      to { opacity: 1; left: 10px; }
+}
+@-moz-keyframes sysMenuSlideIn {
+    from { opacity: 0; left: -100px; }
+      to { opacity: 1; left: 10px; }
+}
+@-ms-keyframes sysMenuSlideIn {
+    from { opacity: 0; left: -100px; }
+      to { opacity: 1; left: 10px; }
+}
+#sys-menu.active {
+	display: block;
+	left: 10px;
+	
+    -webkit-animation: sysMenuSlideIn 0.2s;
+    -moz-animation: sysMenuSlideIn 0.2s;
+    -ms-animation: sysMenuSlideIn 0.2s;
 }
 
 #sys-menu:before {
@@ -396,9 +414,7 @@ a.ff-icon-before:before {
 	position: relative;
 }
 
-#sys-menu.active {
-	left: 10px;
-}	
+	
 #sys-menu-title-bar {
 	border-radius: 5px 5px 0 0;
 	background: #fcf9f5;
@@ -4267,9 +4283,7 @@ aside header.alerts-header {
 #main-container .nav-tabs > .active > a:hover {
 	text-decoration: underline;
 }
-#main-container .nav-tabs > li {
-	margin: 0;
-}
+
 #main-container .nav-tabs {
 	margin: 0;
 	clear: both;
