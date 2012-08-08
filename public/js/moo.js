@@ -64,7 +64,7 @@ var Scrollbars = protrada.scrollbars,
 	HelpBubbles = protrada.helpBubbles;
 
 $( document ).ready(function() {
-	var module = document.URL.substr( document.URL.lastIndexOf("/") + 1 );
+	var module = document.URL.substr( document.URL.lastIndexOf("/") + 1 ) || "home";
 
 	if ( module !== "" ) {
 		$.pv3.state.update( "modules.selected", module );

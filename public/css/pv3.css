@@ -5325,12 +5325,13 @@ thead tr {
 	box-shadow: none;
 	border: none;
 }
-.grid-table	.container {
+.grid-table .container {
 	display: block;
 	width: auto;
 }
-.grid-table	.container > span {
+.grid-table .container > span {
 	position: relative;
+	display: block;
 }
 .filter-params .container, .zero-alert .container, .bulk-actions .bulk-wrapper {
 	padding: 15px 20px 17px;

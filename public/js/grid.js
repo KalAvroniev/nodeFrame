@@ -134,8 +134,7 @@ Grid.prototype = {
 
 		Scrollbars.add( "grid", this.grid, { axis: "x", scroll: false } );
 
-		this.positionHorizScroll();
-		this.updateTableHeaders();
+		this.windowResize();
 	},
 
 	// this function isn't used yet, will be once the
@@ -260,9 +259,12 @@ Grid.prototype = {
 	},
 
 	windowResize: function( e ) {
-		var grid = e ? e.data.grid : this;
+		var grid = e ? e.data.grid : this,
+			spanContainer = grid.grid.find("thead").find(".container").first();
 
 		Scrollbars.update("grid");
+
+		grid.grid.add("#thetableclone").find("thead").find(".container > span").width( $("#main-container").width() - (2 * spanContainer.css("padding-left").replace("px","")) );
 
 		grid.positionHorizScroll();
 		grid.updateTableHeaders();
