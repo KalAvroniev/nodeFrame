@@ -40,7 +40,7 @@
 		- if ( searchResults.state ) {
 			#section-headings.search-results
 				#member-options.btn-group
-					!= partial("partials/help-bubble", {direction: "left", title: "Help title text", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat."})
+					!= partial("partials/help-bubble", { id: "previousSearches" })
 
 					a.btn.btn-large.dropdown-toggle(href="#", data-toggle="dropdown")
 						| previous searches
@@ -74,7 +74,7 @@
 			li.active
 				a(href="#expiring") expiring
 			li
-				!= partial("partials/help-bubble", {direction: "right", title: "Help title text", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat."})
+				!= partial("partials/help-bubble", { id: "exchangeTabs" })
 				a(href="#auctions") auctions
 			li
 				a(href="#dropping") dropping
