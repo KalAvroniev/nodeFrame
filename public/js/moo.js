@@ -51,12 +51,17 @@ var protrada = {
 		hide: function() {
 			$.pv3.growl.hide();
 		}
+	},
+
+	helpBubbles: {
+		bubbles: {}
 	}
 };
 
 var Scrollbars = protrada.scrollbars,
 	TaskStatus = protrada.taskStatus,
-	Alert = protrada.alert;
+	Alert = protrada.alert,
+	HelpBubbles = protrada.helpBubbles;
 
 $( document ).ready(function() {
 	var module = document.URL.substr( document.URL.lastIndexOf("/") + 1 );
@@ -130,6 +135,16 @@ $( document ).ready(function() {
 		$( this ).addClass("active");
 	}).mouseout(function() {
 		$( this ).removeClass("active");
+	});
+
+	$( document ).on( "click", ".hide-all-bubbles", function( e ) {
+		e.preventDefault();
+		$("#toggle-help-bubbles").trigger("click");
+	});
+
+	$( document ).on( "click", ".x-help-bubble", function( e ) {
+		e.preventDefault();
+		$( this ).closest(".help-bubble-container").hide();
 	});
 });
 
