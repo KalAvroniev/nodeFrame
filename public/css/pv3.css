@@ -5796,6 +5796,9 @@ thead #category {
 
 /* ------------------------------ Dashboard default content page ------------------------------------- */
 
+#default-container {
+	max-width: 1100px;
+}
 #default-banner {
 	padding: 0 0 50px;
 }
