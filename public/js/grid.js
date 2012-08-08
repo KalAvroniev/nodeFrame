@@ -90,10 +90,6 @@ Grid.prototype = {
 				// code here
 			});
 
-		$(".grid-table").find("thead").find(".filter")
-			.on( "click", ".select", { grid: this }, this.bulkActionsHandler )
-			.on( "click", ".favourite", this.bulkFavouritesHandler );
-
 		$( window ).on( "resize", { grid: this }, this.windowResize ).on( "scroll", { grid: this }, this.windowScroll );
 		$( verticalScroll ).add( this.grid ).on( "resize", this.copyHeaderSize );
 		this.grid.on( "scroll.tinyscrollbar", ".scrollbar", { grid: this }, this.updateTableHeaders );
@@ -125,6 +121,10 @@ Grid.prototype = {
 
 			that.copyHeaderSize();
 		});
+
+		$(".grid-table").find("thead").find(".filter")
+			.on( "click", ".select", { grid: this }, this.bulkActionsHandler )
+			.on( "click", ".favourite", { grid: this }, this.bulkFavouritesHandler );
 
 		// scroll event won't fire lazy load, as there isn't a scrollbar!
 		if ( this.bottomOfTable() >= 0 ) {
@@ -189,24 +189,48 @@ Grid.prototype = {
 
 	bulkActionsHandler: function( e ) {
 		var grid = e ? e.data.grid : this,
-			checking = !$( this ).hasClass("active");
+			checking = !$( this ).hasClass("active"),
+			isClone = $( this ).closest("table").parent().is("#thetableclone");
 
 		// TODO: not DRY compliant
 		if ( checking ) {
 			$( ".btn.select", grid.grid.find("tbody") ).each(function() {
 				$( this ).addClass("active");
 			});
+
+			if ( !isClone ) {
+				$("#thetableclone .fav-sel-all .btn.select").addClass("active");
+			} else {
+				grid.grid.find(".fav-sel-all .btn.select").addClass("active");
+			}
 		} else {
 			$( ".btn.select", grid.grid.find("tbody") ).each(function() {
 				$( this ).removeClass("active");
 			});
+
+			if ( !isClone ) {
+				$("#thetableclone .fav-sel-all .btn.select").removeClass("active");
+			} else {
+				grid.grid.find(".fav-sel-all .btn.select").removeClass("active");
+			}
 		}
 
 		grid.toggleBulkHandler();
 	},
 
-	bulkFavouritesHandler: function() {
-		
+	bulkFavouritesHandler: function( e ) {
+		var grid = e ? e.data.grid : this,
+			checking = !$( this ).hasClass("active");
+
+		if ( checking ) {
+			$( ".btn.favourite", grid.grid.find("tbody") ).each(function() {
+				$( this ).addClass("active");
+			});
+		} else {
+			$( ".btn.favourite", grid.grid.find("tbody") ).each(function() {
+				$( this ).removeClass("active");
+			});
+		}
 	},
 
 	toggleSticky: function( e ) {
@@ -229,7 +253,7 @@ Grid.prototype = {
 	},
 
 	toggleBulkHandler: function() {
-		var $tr = $("#bulk-actions").parent(),
+		var $tr = $(".bulk-actions").parent(),
 			selected = $( ".btn.select", this.grid.find("tbody") ).filter(".active").length;
 
 		if ( $tr.is(":visible") && !selected ) {
