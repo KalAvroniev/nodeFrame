@@ -20,6 +20,22 @@
 		$( window ).on( "resize", windowResize );
 		$( window ).on( "scroll", windowScroll );
 
+		// protrada video
+		$("#watch-video").on( "click", function( e ) {
+			var $panelTabs = $("header#main").find(".sectional-tabs"),
+				$tabClone = $panelTabs.find(".standout-tab").clone().attr( "id", "protrada-video" ).removeClass("standout-tab");
+
+			e.preventDefault();
+
+			$tabClone.find("a")
+				.attr( "href", "javascript:$.pv3.panel.show( '/panels/protrada-video', {tabid: 'protrada-video', panel_size: 'mini-panel'} );" )
+				.html("<strong>video introduction</strong> to domain trading")
+				.end()
+				.prependTo( $panelTabs );
+
+			$.pv3.panel.show( "/panels/protrada-video", { tabid: "protrada-video", panel_size: "mini-panel" } );
+		});
+
 		setupTradingGraph();
 	}
 

@@ -3,19 +3,16 @@
 != partial("partials/panel")
 != partial("partials/connect-afternic")
 
-
-
 - if ( showDefaultContent ) {
 
 #main-container.page-default
-
 	h5#first-heading.home welcome to Protrada
 
 	h2#user-greeting hi, #{user.name}
 
 	hgroup#member-details
 		h5
-			| you are currently an 
+			| you are currently an
 			strong= user.type
 		h5#member-renewal
 			| your next membership renewal is:
@@ -24,60 +21,52 @@
 	#default-container
 		hgroup#default-banner
 			a(href="#")#watch-video.ff-icon-before
-				strong watch a video introduction 
+				strong watch a video introduction
 				| to domain trading
-				
-			h1 buy & sell domains 
-			
+
+			h1 buy & sell domains
+
 			h2#make-profits
-				| make 
+				| make
 				span profits
-		
+
 		table.default-sources
-		
 			tr
-				td 
+				td
 					span.sources-sprite(source="Snap Names")
-				td 
+				td
 					span.sources-sprite(source="Pool.com")
-				td 
+				td
 					span.sources-sprite(source="GoDaddy")
-		
 			tr
-				td 
+				td
 					span.sources-sprite(source="Afternic")
-				td 
+				td
 					span.sources-sprite(source="Namejet")
-				td 
+				td
 					span.sources-sprite(source="Sedo")
-					
-		
+
 		h3 trade domains from the worlds largest auction houses
-		
-		p 
+
+		p
 			| Protrada aggregates the world's best auctions giving you real-time access to over 6.4 million domains and 30 unique data filters to help you pick just the right domains and monetise them without having to stare at the computer screen all day long!
-		
+
 		.default-search-container
-				
 			!= partial("partials/help-bubble", { id: "defaultSearch" })
-				
+
 			form.ff-icon-before
-			
-				input(type='text', placeholder='domain search _')
+				input(type="text", placeholder="domain search _")
 				button.ff-icon-before
 					strong Search
 					| (or hit the enter key)
-				a#advanced-keyword-filter(href="#",title="Advanced keyword search")
-				
-			span#advanced-search	
-							
-				a#advanced-keyword-filter(href="#",title="Advanced keyword search")
-				strong advanced 
-				| search options
+				a#advanced-keyword-filter(href="#", title="Advanced keyword search")
 
-			
+			span#advanced-search
+				a#advanced-keyword-filter(href="#", title="Advanced keyword search")
+				strong advanced
+				|  search options
+
 - } else {
-
 
 #main-container.page-home
 	h5#first-heading.home welcome to Protrada
@@ -86,12 +75,11 @@
 
 	hgroup#member-details
 		h5
-			| you are currently an 
+			| you are currently an
 			strong= user.type
 		h5#member-renewal
 			| your next membership renewal is:
 			strong.ff-icon-before!= user.renewal
-
 
 	#health-and-status.clearfix
 		#portfolio-health
@@ -104,7 +92,7 @@
 			span.demo-spark(title="Graph currently inactive - no data to display")
 
 		h4#h4-status-summary.ff-icon-before
-			| your current trading 
+			| your current trading
 			strong status summary
 
 		#status-summary.tiny-scrollbar-horiz
@@ -161,22 +149,11 @@
 	#thetableclone
 		table.grid-table
 
-script(src="/js/home.js")
 script
 	$("#grid-view").grid({
 		url: "exchange/grid",
 		stickyHeader: true
 	});
-
-
 - }
 
-
-
-
-
-
-
-
-
-
+script(src="/js/home.js")

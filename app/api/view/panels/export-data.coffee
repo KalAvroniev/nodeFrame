@@ -2,14 +2,14 @@ class exports.Controller
 
 	validate: {
 	}
-	
+
 	options: {
 		"requireUserSession": true
 	}
-	
+
 	run: (req) ->
 		r = {}
-		
+
 		# view elements
 		r.tabs = [
 			{
@@ -38,9 +38,9 @@ class exports.Controller
 			}
 		]
 		r.active_tab = '#expiring'
-		
+
 		return req.success(r)
-		
+
 	testBasic: (test) ->
 		test.run(
 			{},
