@@ -39,8 +39,8 @@ class exports.Controller extends Controller
 
 	# user info
 		res.view.user = {}
-		res.view.user.name = "Tim"
-		res.view.user.type = "Investor member."
+		res.view.user.name = "Protrada testing"
+		res.view.user.type = "Free member."
 		res.view.user.renewal = "24<sup>th</sup> May, 2012"
 
 	# portfolio health info
