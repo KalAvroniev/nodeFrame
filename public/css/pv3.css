@@ -3875,7 +3875,7 @@ aside header.alerts-header {
 	min-width: 10px;
 	padding: 4px 8px 6px;
 	border-radius: 20px;
-	font-weight: 600;
+	font-weight: 700;
 	font-size: 16px;
 	line-height: 15px;
 	
@@ -6349,14 +6349,14 @@ table.default-sources td {
 
 .help-marker:after {
 	content: "c";
-	font-size: 23px;
+	font-size: 20px;
 	cursor: pointer;	
 	line-height: 1;
 	position: absolute;
 	z-index: 18;
-	right: -37px;
-	margin: 14px 0 0 0;
-	color: rgba(0,0,0,0.12);
+	right: -33px;
+	margin: 18px 0 0 0;
+	color: rgba(0,0,0,0.13);
 
 	-moz-transform: rotate(19deg) skewX(-45deg);
 	-webkit-transform: rotate(19deg) skewX(-45deg);
