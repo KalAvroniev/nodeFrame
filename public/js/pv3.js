@@ -116,6 +116,7 @@ NotificationsController.prototype.render = function() {
 		}
 
 		// update counter
+		$("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr( "data-alerts", ns.length );
 		$(".protrada .alert-count").attr( "data-alerts", ns.length );
 
 		Scrollbars.update("notifications");
