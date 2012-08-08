@@ -1,35 +1,43 @@
 // home.jade
 != partial("partials/header")
+
 != partial("partials/panel")
+
 != partial("partials/connect-afternic")
 
 #main-container.page-home
+
 	h5#first-heading.home welcome to Protrada
 
 	h2#user-greeting hi, #{user.name}
 
 	hgroup#member-details
+
 		h5
-			| you are currently an
+			| you are currently an 
 			strong= user.type
+
 		h5#member-renewal
-			| your next membership renewal is:
+			| your next membership renewal is: 
 			strong.ff-icon-before!= user.renewal
 
+
 	#health-and-status.clearfix
+
 		#portfolio-health
+
 			h3#health-title.ff-icon-before
-				| portfolio
+				| portfolio 
 				strong health
 
 			!= portfolioHealth.default
-
-			span.demo-spark(title="Graph currently inactive - no data to display")
+			
+			span.demo-spark(title='Graph currently inactive - no data to display')
 
 		h4#h4-status-summary.ff-icon-before
-			| your current trading
+			| your current trading 
 			strong status summary
-
+		
 		#status-summary.tiny-scrollbar-horiz
 			.scrollbar
 				.track
@@ -39,54 +47,61 @@
 				.overview
 					ul#status-data
 						li
-							h5(data-title="watching", data-value="#{satusSummary.watching}")
+							h5(data-title='watching', data-value='#{satusSummary.watching}')
 							span.status-descr domains that you're currently watching
 						li
-							h5(data-title="losing", data-value="#{satusSummary.losing}")
+							h5(data-title='losing', data-value='#{satusSummary.losing}')
 							span.status-descr auctions that you're currently losing
 						li
-							h5(data-title="winning", data-value="#{satusSummary.winning}")
+							h5(data-title='winning', data-value='#{satusSummary.winning}')
 							span.status-descr auctions that you're currently winning
 						li
-							h5(data-title="pre-auction", data-value="#{satusSummary.preAuction}")
+							h5(data-title='pre-auction', data-value='#{satusSummary.preAuction}')
 							span.status-descr register your interest for private auctions
 						li.divided
-							h5(data-title="pending", data-value="#{satusSummary.pending}")
+							h5(data-title='pending', data-value='#{satusSummary.pending}')
 							span.status-descr domains pending (not propogated)
 
-	- if ( showTradingSummary ) {
-		!= partial("partials/home-trending")
+	- if(showTradingSummary) {
+		!= partial('partials/home-trending')
 	- }
-
+	
 	ul#portfolio-data-tabs.nav.nav-tabs
 		li.active
-			a(href="#whole-portfolio") my portfolio
+			a(href='#whole-portfolio') my portfolio
 		li
-			a(href="#listed-for-sale") listed for sale (4)
-
+			a(href='#listed-for-sale') listed for sale (4)
+	
 	#dashboard-tab-panes.tab-content
+		
 		#whole-portfolio.tab-pane.active
+		
 			h2.tab-intro-heading#complete-listing #{contentTabs.wholePortfolio.title}
-
+		
 			p.tab-intro-text.clearfix
 				= contentTabs.wholePortfolio.intoText
+		
+			#grid-view.tiny-scrollbar-horiz
+				.scrollbar
+					.track
+						.thumb
+							.end
+				.viewport
+					!= partial('partials/grid-styleguide')
 
-			#grid-view
 
 		#listed-for-sale.tab-pane
+			
 			h2.tab-intro-heading#complete-listing #{contentTabs.listedForSale.title}
-
+		
 			p.tab-intro-text.clearfix
 				= contentTabs.listedForSale.intoText
-
-			#temp-for-sale grid view control goes in here
-
+			
+			#temp-for-sale grid view control goes in here 
+	
+	
 	#thetableclone
 		table.grid-table
 
 script(src="/js/home.js")
-script
-	$("#grid-view").grid({
-		url: "exchange/grid",
-		stickyHeader: true
-	});
+script(src="/js/grid-view.js")
