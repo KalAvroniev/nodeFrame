@@ -2384,6 +2384,26 @@ header#main:before {
 	color: rgba(0,0,0,0.16);
 }
 
+
+/* ---------------------- dark video panel styles ----------------- */
+
+.video #panel-content {
+	background: #292929;
+	color: #FCF9F5;
+}
+.video.mini-panel .panel-heading {
+}
+.video.mini-panel .x-panel {
+	color: #FCF9F5;
+}
+.video.mini-panel .x-panel:hover {
+	background: rgba(255,255,255,0.1);
+}
+.video.mini-panel iframe {
+	margin: 20px 0 0 -30px;
+}
+
+
 /* --------------- define icons for different panel states -------------- */ 
 
 .panel-heading .place-bid:before {
@@ -2423,6 +2443,15 @@ header#main:before {
 	font-size: 25px;
 	margin: -2px 10px 0 0;				
 }
+.panel-heading .watch-video:before {
+	content: "}";
+	font-size: 25px;
+	margin: -5px 12px 0 2px;
+	color: #FCF9F5;
+	opacity: 0.15;
+}
+
+
 
 
 /* --------------------- */
