@@ -1,9 +1,11 @@
-span(class="help-bubble-container " + direction + "-msg")
+- var helpBubbles = { spine: { direction: "bottom-right", title: "Help title text", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat." }, previousSearches: { direction: "left", title: "Help title text", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat." }, exchangeTabs: { direction: "right", title: "Help title text", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat." }, sidebar: { direction: "bottom-left", title: "Help title text", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat." }, panels: { direction: "bottom-left", title: "Help title text", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat." }, defaultSearch: { direction: "right", title: "Help title text", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat." } };
+
+span(class="help-bubble-container " + helpBubbles[id].direction + "-msg", data-bubble-id=id)
 	span.help-marker.ff-icon-before.ff-icon-after
 		span.marker-icon +
 	span.help-bubble
 		span(title="hide this single bubble &amp; marker").x-help-bubble.ff-icon-before
 		span.ff-icon-before.help-body-icon
-		span.help-title= title
-		span.help-body= body
+		span.help-title= helpBubbles[id].title
+		span.help-body= helpBubbles[id].body
 			a(href="").hide-all-bubbles hide all help bubbles
