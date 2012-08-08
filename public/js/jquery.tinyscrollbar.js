@@ -114,7 +114,7 @@
 				iScroll = Math.min((oContent[options.axis] - oViewport[options.axis]), Math.max(0, iScroll));
 				oThumb.obj.css(sDirection, iScroll / oScrollbar.ratio);
 				oContent.obj.css(sDirection, -iScroll);
-				oScrollbar.obj.trigger('tsb_scroll');
+				oScrollbar.obj.trigger("scroll.tinyscrollbar");
 				
 				oEvent = $.event.fix(oEvent);
 				oEvent.preventDefault();
@@ -133,7 +133,7 @@
 				iScroll = iPosition.now * oScrollbar.ratio;
 				oContent.obj.css(sDirection, -iScroll);
 				oThumb.obj.css(sDirection, iPosition.now);
-				oScrollbar.obj.trigger('tsb_scroll');
+				oScrollbar.obj.trigger("scroll.tinyscrollbar");
 			}
 			return false;
 		};
