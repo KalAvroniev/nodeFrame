@@ -58,14 +58,19 @@
 			| Protrada aggregates the world's best auctions giving you real-time access to over 6.4 million domains and 30 unique data filters to help you pick just the right domains and monetise them without having to stare at the computer screen all day long!
 		
 		.default-search-container
+				
+			!= partial("partials/help-bubble", {direction: "right", title: "Help title text", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi libero dui, convallis in venenatis a, bibendum et mi. Vestibulum accumsan eleifend est et consequat."})		
+				
 			form.ff-icon-before
+			
 				input(type='text', placeholder='domain search _')
 				button.ff-icon-before
 					strong Search
 					| (or hit the enter key)
 				a#advanced-keyword-filter(href="#",title="Advanced keyword search")
 				
-			span#advanced-search
+			span#advanced-search	
+							
 				a#advanced-keyword-filter(href="#",title="Advanced keyword search")
 				strong advanced 
 				| search options
