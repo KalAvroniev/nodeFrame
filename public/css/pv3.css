@@ -2598,10 +2598,10 @@ header#main:before {
 	color: #515151;
 	text-shadow: 0 0 5px rgba(81,81,81,0.65);
 }
-.light-gridview #domain-title-inputs {
+.light-gridview .domain-title-inputs {
 	width: 200px;	
 }
-.light-gridview #domain-title-inputs {
+.light-gridview .domain-title-inputs {
 	margin: 0;
 }
 .light-gridview thead input#domain-title {
@@ -5186,7 +5186,7 @@ thead tr {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3d3d3d', endColorstr='#2a2a2a',GradientType=0 ); /* IE6-9 */
 }
 .grid-table thead label {
-	display: block;
+	display: inline-block;
 	font-weight: 300;
 	white-space: nowrap;
 	margin: 0 0 19px;
@@ -5288,12 +5288,19 @@ thead tr {
 	content: 'y';
 }
 
-.grid-table #filter-params, .grid-table #zero-alert {
+.grid-table .filter-params, .grid-table .zero-alert {
 	padding: 0;
 	box-shadow: none;
 	border: none;
 }
-#filter-params span, #zero-alert span, #bulk-actions .bulk-wrapper {
+.grid-table	.container {
+	display: block;
+	width: auto;
+}
+.grid-table	.container > span {
+	position: relative;
+}
+.filter-params .container, .zero-alert .container, .bulk-actions .bulk-wrapper {
 	padding: 15px 20px 17px;
 	display: block;
 	color: rgba(0,0,0,0.6);
@@ -5311,7 +5318,7 @@ thead tr {
 	background: linear-gradient(to bottom,  #e77103 0%,#d85204 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e77103', endColorstr='#d85204',GradientType=0 ); /* IE6-9 */
 }
-#filter-params span {
+.filter-params .container {
 	border-top-color: #fff;
 	box-shadow: inset 0px -1px 0 #cdcdcd, inset 0px -2px 0 #e6e6e6;
 	background: #f5f5f5; /* Old browsers */
@@ -5323,7 +5330,7 @@ thead tr {
 	background: linear-gradient(top, #f5f5f5 0%, #e2e2e2 100%); /* W3C */
  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e2e2e2', GradientType=0 ); /* IE6-9 */
 }
-#bulk-actions .bulk-wrapper {
+.bulk-actions .bulk-wrapper {
 	border-top-color: #a9cb6e;
 	box-shadow: inset 0px -1px 0 rgba(0,0,0,0.4), inset 0px -2px 0 rgba(0,0,0,0.08);
 	
@@ -5338,14 +5345,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82b42c', end
 
 
 }
-#filter-params span:before {
+.filter-params .container:before {
 	content: "K";
 	float: left;
 	font-size: 20px;
 	line-height: 1;
 	margin: 1px 20px 5px 0;
 }
-#zero-alert span:before {
+.zero-alert .container:before {
 	content: "N";
 	font-size: 30px;
 	line-height: 1;
@@ -5353,7 +5360,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82b42c', end
 	margin: 5px 25px 0px 0;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
 }
-#bulk-actions .bulk-wrapper:before {
+.bulk-actions .bulk-wrapper:before {
 	content: "X";
 	font-size: 36px;
 	line-height: 1;
@@ -5361,11 +5368,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82b42c', end
 	margin: 3px 22px 0 -2px;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
 }
-.bulk-wrapper span {
+.bulk-wrapper > span > span {
 	display: inline-block;
 	vertical-align: top;
 }
-#bulk-action-menu {
+.bulk-action-menu {
 	display: inline-block;
 	vertical-align: top;
 	margin: 0 0 0 50px;
@@ -5539,10 +5546,10 @@ td.categ[data-title="electronics"]:before {
 .grid-table th.date .btn-group {
 	width: 130px;
 }
-#top-actions {
+.top-actions {
 	width: 105px;
 }
-#fav-sel-all {
+.fav-sel-all {
 	margin: 15px 0 0 0;
 	width: 80px;
 }
@@ -5556,7 +5563,7 @@ thead input#expire {
 thead #category {
 	width: 95px;
 }
-#domain-title-inputs {
+.domain-title-inputs {
 	vertical-align: top;
 	position: relative;
 	white-space: nowrap;
@@ -6608,13 +6615,13 @@ select, input[type="file"] {
 	color: #eff4d3;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.3);	
 }
-#save-search {
+.save-search {
 	float: right;
 	margin: -5px 0 0 30px;
 	padding: 5px 9px 5px 4px;
 	color: rgba(0,0,0,0.7);
 }
-#save-search:before {
+.save-search:before {
 	display: inline-block;
 		
 	margin: 0px 6px 0 6px;
@@ -6629,11 +6636,11 @@ select, input[type="file"] {
 	z-index: 1;
 }
 
-.grid-table th #domain-title-inputs .btn-group {
+.grid-table th .domain-title-inputs .btn-group {
 	display: inline-block;
 	margin: 0 0 0 7px;
 }
-.grid-table th #domain-title-inputs .btn-group:before, .grid-table th #domain-title-inputs .btn-group:after {
+.grid-table th .domain-title-inputs .btn-group:before, .grid-table th .domain-title-inputs .btn-group:after {
 	display: none;
 }
 .grid-table th .btn {

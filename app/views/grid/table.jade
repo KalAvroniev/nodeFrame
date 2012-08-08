@@ -26,7 +26,7 @@
 					th(scope="col", colspan=colspan, class=klass)
 						label(for=label)= column.title
 						- if ( column.title === "Bulk" )
-							#fav-sel-all
+							.fav-sel-all
 								button.btn.select(title="Select all", data-toggle="button")
 								button.btn.favourite(title="Favourite all", data-toggle="button")
 						- if ( column.filter )
@@ -34,7 +34,7 @@
 								when "text"
 									input.txt-filter(id=column.filter.id, type="text")
 								when "menu"
-									.btn-group(id=column.filter.id)
+									.btn-group(class=column.filter.id)
 										a.btn.btn-large.dropdown-toggle(href="#", data-toggle="dropdown")
 											| sort by?
 											span.caret
@@ -43,7 +43,7 @@
 												li
 													a(href="")= value
 								when "textcombo"
-									div(id=column.filter.id + "-inputs")
+									div(class=column.filter.id + "-inputs")
 										- klass = column.filter.active ? "filter-active" : "";
 										input.txt-filter(id=column.filter.id, type="text", class=klass)
 										a.disable
@@ -57,46 +57,49 @@
 														a(href="")= value
 				- }
 			tr(hidden)
-				td#bulk-actions(colspan="17")
-					.ff-icon-before.bulk-wrapper
-						a.ff-icon-after.x-zero-alert(href="#")
-						span
-							strong Bulk actions menu
-							br
-							| for all selected items
-						#bulk-action-menu.btn-group
-							a.btn.btn-large.dropdown-toggle(href="#", data-toggle="dropdown")
-								| sell all
-								span.caret
-							ul.dropdown-menu
-								li
-									a(href="") another action
-								li
-									a(href="") sell all
-								li
-									a(href="") go "moo" like a cow
+				td.bulk-actions(colspan="17")
+						.container.ff-icon-before.bulk-wrapper
+							span
+								a.ff-icon-after.x-zero-alert(href="#")
+								span
+									strong Bulk actions menu
+									br
+									| for all selected items
+								.bulk-action-menu.btn-group
+									a.btn.btn-large.dropdown-toggle(href="#", data-toggle="dropdown")
+										| sell all
+										span.caret
+									ul.dropdown-menu
+										li
+											a(href="") another action
+										li
+											a(href="") sell all
+										li
+											a(href="") go "moo" like a cow
 			tr(hidden)
-				td#zero-alert(colspan="17")
-					span.ff-icon-before
-						a.ff-icon-after.x-zero-alert(href="#")
-						strong Sorry
-						| , we couldnt find any matches for this keyword 
-						strong under expired domains.
-						br
-						| Perhaps instead try searching under 
-						strong new registrations
+				td.zero-alert(colspan="17")
+					span.container.ff-icon-before
+						span
+							a.ff-icon-after.x-zero-alert(href="#")
+							strong Sorry
+							| , we couldnt find any matches for this keyword 
+							strong under expired domains.
+							br
+							| Perhaps instead try searching under 
+							strong new registrations
 			tr
-				td#filter-params(colspan="17")
-					span.ff-icon-before
-						a#save-search.ff-icon-before.btn(href="#", data-toggle="dropdown")
-							strong save 
-							| this search
-						| Showing similar domains from 
-						strong all sources 
-						| ending 
-						strong today
-						| , containing keywords 
-						strong 'protrada'
+				td.filter-params(colspan="17")
+					span.container.ff-icon-before
+						span
+							a.save-search.ff-icon-before.btn(href="#", data-toggle="dropdown")
+								strong save 
+								| this search
+							| Showing similar domains from 
+							strong all sources 
+							| ending 
+							strong today
+							| , containing keywords 
+							strong 'protrada'
 		tbody
 		tfoot
 			tr
