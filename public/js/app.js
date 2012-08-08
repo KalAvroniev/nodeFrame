@@ -4,7 +4,8 @@ require.config({
 		jquery: "jquery-1.8rc1",
 		bootstrap: "bootstrap.min",
 		socket: "/socket.io/socket.io",
-		tinyscrollbar: "jquery.tinyscrollbar-1.8"
+		//tinyscrollbar: "jquery.tinyscrollbar-1.8"
+		tinyscrollbar: "jquery.tinyscrollbar"
 	},
 	shim: {
 		bootstrap: ["jquery"],
