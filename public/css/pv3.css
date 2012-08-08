@@ -2387,6 +2387,9 @@ header#main:before {
 
 /* ---------------------- dark video panel styles ----------------- */
 
+#section-panel.mini-panel.video { 
+	max-width: 520px;	
+}
 .video #panel-content {
 	background: #292929;
 	color: #FCF9F5;
