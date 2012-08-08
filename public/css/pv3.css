@@ -5991,7 +5991,7 @@ h2#make-profits span {
 table.default-sources {
 	float: right;
 	width: 380px;
-	margin: 0 0 0 80px;
+	margin: -10px -10px 0 80px;
 }
 
 table.default-sources td {
