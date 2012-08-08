@@ -76,12 +76,13 @@ Grid.prototype = {
 
 		$("#main-container").on( "click", ".grid-table .sticky", { grid: this }, this.toggleSticky );
 
-		this.grid.find("tbody").on( "click", "tr:not(.parent-open, .child)", this.expandRow );
-		this.grid.find("tbody").on( "click", ".parent-open, .child", this.collapseRow );
+		this.grid.find("tbody")
+			.on( "click", "tr:not(.parent-open, .child)", this.expandRow )
+			.on( "click", ".parent-open, .child", this.collapseRow );
 
 		$(".grid-table").find("tbody").on( "click", ".domain-title-cntnr .copy-to-clipboard", function( e ) { e.preventDefault(); })
 			.on( "click", "td button.favourite", this.toggleFavourite )
-			.on( "click", "td button.select", this.toggleSelect )
+			.on( "click", "td button.select", { grid: this }, this.toggleSelect )
 			.on( "click", "td.actions", function( e ) {
 				e.preventDefault();
 				e.stopPropagation();
@@ -89,11 +90,20 @@ Grid.prototype = {
 				// code here
 			});
 
-		$("#fav-sel-all").on( "click", ".select", this.bulkActionsHandler );
+		$(".grid-table").find("thead").find(".filter")
+			.on( "click", ".select", { grid: this }, this.bulkActionsHandler )
+			.on( "click", ".favourite", this.bulkFavouritesHandler );
 
 		$( window ).on( "resize", { grid: this }, this.windowResize ).on( "scroll", { grid: this }, this.windowScroll );
 		$( verticalScroll ).add( this.grid ).on( "resize", this.copyHeaderSize );
 		this.grid.on( "scroll.tinyscrollbar", ".scrollbar", { grid: this }, this.updateTableHeaders );
+
+		// lock in th widths for floating elements
+		this.grid.find("thead").find("th").each(function () {
+			var $this = $( this );
+
+			$this.width( $this.width() );
+		});
 
 		$( "table.floatable", this.grid ).each(function() {
 			var $this = $( this ),
@@ -122,6 +132,12 @@ Grid.prototype = {
 
 			that.copyHeaderSize();
 		});
+
+		// scroll event won't fire lazy load, as there isn't a scrollbar!
+		if ( this.bottomOfTable() >= 0 ) {
+			//this.loadInData();
+			this.grid.before("<a href=\"javascript:$('#grid-view').grid('loadInData');\">Load more data</a>");
+		}
 
 		Scrollbars.add( "grid", this.grid, { axis: "x", scroll: false } );
 
@@ -179,18 +195,30 @@ Grid.prototype = {
 		}
 	},
 
-	bulkActionsHandler: function() {
-		var $tr = $("#bulk-actions").parent();
+	bulkActionsHandler: function( e ) {
+		var grid = e ? e.data.grid : this,
+			checking = !$( this ).hasClass("active");
 
-		if ( $tr.is(":visible") ) {
-			$tr.fadeOut().attr("hidden");
+		// TODO: not DRY compliant
+		if ( checking ) {
+			$( ".btn.select", grid.grid.find("tbody") ).each(function() {
+				$( this ).addClass("active");
+			});
 		} else {
-			$tr.fadeIn().removeAttr("hidden");
+			$( ".btn.select", grid.grid.find("tbody") ).each(function() {
+				$( this ).removeClass("active");
+			});
 		}
+
+		grid.toggleBulkHandler();
+	},
+
+	bulkFavouritesHandler: function() {
+		
 	},
 
 	toggleSticky: function( e ) {
-		var grid = e.data.grid;
+		var grid = e ? e.data.grid : this;
 
 		e.preventDefault();
 
@@ -208,11 +236,26 @@ Grid.prototype = {
 		$( this ).button("toggle");
 	},
 
+	toggleBulkHandler: function() {
+		var $tr = $("#bulk-actions").parent(),
+			selected = $( ".btn.select", this.grid.find("tbody") ).filter(".active").length;
+
+		if ( $tr.is(":visible") && !selected ) {
+			$tr.fadeOut().attr("hidden");
+		} else {
+			$tr.fadeIn().removeAttr("hidden");
+		}
+	},
+
 	toggleSelect: function( e ) {
+		var grid = e ? e.data.grid : this;
+
 		e.preventDefault();
 		e.stopPropagation();
 
 		$( this ).button("toggle");
+
+		grid.toggleBulkHandler();
 	},
 
 	domainTitleMouseEnter: function() {
@@ -255,6 +298,13 @@ Grid.prototype = {
 
 		return ( innerOffset - scrollOffset ) - vertOffset;
 	},*/
+
+	bottomOfTable: function() {
+		var $window = $( window ),
+			$viewport = $( ".viewport", this.grid );
+
+		return ( $window.scrollTop() + $window.height() ) - ( $viewport.offset().top + $viewport.height() );
+	},
 
 	loadInData: function() {
 		var that = this,
