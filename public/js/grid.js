@@ -98,13 +98,6 @@ Grid.prototype = {
 		$( verticalScroll ).add( this.grid ).on( "resize", this.copyHeaderSize );
 		this.grid.on( "scroll.tinyscrollbar", ".scrollbar", { grid: this }, this.updateTableHeaders );
 
-		// lock in th widths for floating elements
-		this.grid.find("thead").find("th").each(function () {
-			var $this = $( this );
-
-			$this.width( $this.width() );
-		});
-
 		$( "table.floatable", this.grid ).each(function() {
 			var $this = $( this ),
 				$parent = $this.parent(),
@@ -120,7 +113,7 @@ Grid.prototype = {
 
 			originalHeaderRow = $( "thead:first", this );
 			cloneTable = $("#thetableclone").children("table");
-			clonedHeaderRow = cloneTable.append( originalHeaderRow.clone() );
+			clonedHeaderRow = cloneTable.append( originalHeaderRow.clone() ).append("<tbody>").find("tbody").append( $( "tbody tr:first", this ).clone().css( "visibility", "hidden" ) ).end(); // this keeps the thead at proper width
 
 			clonedHeaderRow.closest("#thetableclone").css({
 				top: $("header#main").height(),
