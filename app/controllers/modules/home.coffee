@@ -35,7 +35,7 @@ class exports.Controller extends Controller
 		]
 
 		res.view.showTradingSummary = false
-		res.view.showDefaultContent = false
+		res.view.showDefaultContent = true
 
 	# user info
 		res.view.user = {}

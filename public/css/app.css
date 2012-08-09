@@ -6723,7 +6723,7 @@ select, input[type="file"] {
 	background: rgba(255,255,255,0.96);
 	border: none;
 }
-#bulk-action-menu .btn {
+.btn-group.bulk-action-menu .btn {
 	color: rgba(0,0,0,0.6);
 	border-radius: 4px;
 	border: none;
@@ -6745,9 +6745,9 @@ select, input[type="file"] {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#adce58', endColorstr='#98b73c',GradientType=0 ); /* IE6-9 */
 
 }
-#bulk-action-menu.open .btn {
+.btn-group.bulk-action-menu.open .btn {
 	color: #eefdaa;
-	box-shadow: inset 0 1px 3px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.25);
+	box-shadow: inset 0 1px 3px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.3);
 	
 	background: #657f0f; /* Old browsers */
 	background: -moz-linear-gradient(top,  #657f0f 0%, #3a5603 100%); /* FF3.6+ */
@@ -6760,19 +6760,19 @@ select, input[type="file"] {
 	
 }
 
-
+#thetableclone .btn-group {
+	position: relative;
+}
 #thetableclone .dropdown-menu {
 	float: none;
-	top: -30px; left: 100px;
+	position: absolute;
+	top: -5px; left: 105%;
 }
 #thetableclone #category .dropdown-menu {
-	top: -50px; left: 75px;
 }
 #thetableclone #string-mode-selection .dropdown-menu {
-	top: -25px; left: 125px;
 }
 #thetableclone #status .dropdown-menu {
-	top: -25px; left: -170px;
 }
 .grid-table .btn.select {
 	border: none;
@@ -7102,7 +7102,7 @@ select, input[type="file"] {
 
 /* -------------------- Detuned mode styles work here -------------------------- */
 
-.mobile #spine-inner, .mobile .grid-table tbody tr, .mobile .grid-table #zero-alert span, .mobile .grid-table tbody td, .mobile .grid-table tbody tr:hover td, .mobile #spine-inner > nav li > span, .mobile #main-container .nav-tabs > .active > a, .mobile #main-container .nav-tabs > .active > a:hover, .mobile #main-container .tab-content, .mobile #sys-menu, .mobile #aside-inset-shadow, .mobile #connect-popup, .mobile #status-summary, .mobile .alerts-summary > span, .mobile .alerts-summary > span span.hover-bubble, .mobile #panel-content
+.mobile #spine-inner, .mobile .grid-table tbody tr, .mobile .grid-table .zero-alert span, .mobile .grid-table tbody td, .mobile .grid-table tbody tr:hover td, .mobile #spine-inner > nav li > span, .mobile #main-container .nav-tabs > .active > a, .mobile #main-container .nav-tabs > .active > a:hover, .mobile #main-container .tab-content, .mobile #sys-menu, .mobile #aside-inset-shadow, .mobile #connect-popup, .mobile #status-summary, .mobile .alerts-summary > span, .mobile .alerts-summary > span span.hover-bubble, .mobile #panel-content
 {
 	box-shadow: none !important;
 }
@@ -7112,7 +7112,7 @@ select, input[type="file"] {
 .mobile #quick-search input {
 	background-image: none;
 }
-.mobile #zero-alert span {
+.mobile .zero-alert span {
 	background: #E15903; 
 }
 .mobile thead tr.filter {
@@ -7124,7 +7124,7 @@ select, input[type="file"] {
 .mobile .grid-table tbody tr {
 	background: #f5f5f5;
 }
-.mobile .grid-table #zero-alert span {
+.mobile .grid-table .zero-alert span {
 	background: #e77103;
 }
 .mobile .grid-table tbody td, .mobile .grid-table tbody tr:hover td {
@@ -7254,7 +7254,7 @@ select, input[type="file"] {
 .condensed #first-heading.home {
 	display: none;
 }
-.condensed #filter-params span, .condensed #zero-alert span, .condensed #bulk-actions .bulk-wrapper {
+.condensed .filter-params span, .condensed .zero-alert span, .condensed .bulk-actions .bulk-wrapper {
 	padding: 8px 20px 10px;
 }
 .condensed .actions .action-buttons a.main-action {
