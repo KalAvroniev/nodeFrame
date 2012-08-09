@@ -4545,14 +4545,14 @@ aside header.alerts-header {
 	float: right;
 	position: relative;
 	z-index: 1;
-	margin: 20px 0 0 0;
-	padding: 23px 20px;
+	margin: 18px 0 0 20px;
+	padding: 23px 20px 25px;
 	border-radius: 4px;
 	color: #6e3312;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.25);
 	box-shadow: inset 0 2px 0 rgba(0,0,0,0.13), 0 1px 0 rgba(255,255,255,0.5);
 		
-	background: #e87f03;
+	background: #e87f03 url("../img/bg-noise.png");
 	background: url("../img/bg-noise.png"), -moz-linear-gradient(top,  #e87f03 0%, #ee9606 100%);
 	background: url("../img/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e87f03), color-stop(100%,#ee9606)); /* Chrome,Safari4+ */
 	background: url("../img/bg-noise.png"), -webkit-linear-gradient(top,  #e87f03 0%,#ee9606 100%); 
@@ -4561,14 +4561,33 @@ aside header.alerts-header {
 	background: url("../img/bg-noise.png"), linear-gradient(to bottom,  #e87f03 0%,#ee9606 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e87f03', endColorstr='#ee9606',GradientType=0 );
 }
+#go-pro:hover {
+
+	color: #37500D;
+	box-shadow: inset 0 3px 0 rgba(0,0,0,0.13), 0 1px 0 rgba(255,255,255,0.5);
+	
+
+	background: #8ebf36 url("../img/bg-noise.png"); /* Old browsers */
+	background: url("../img/bg-noise.png"), -moz-linear-gradient(top,  #8ebf36 0%, #70a220 100%); /* FF3.6+ */
+	background: url("../img/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8ebf36), color-stop(100%,#70a220)); /* Chrome,Safari4+ */
+	background: url("../img/bg-noise.png"), -webkit-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Chrome10+,Safari5.1+ */
+	background: url("../img/bg-noise.png"), -o-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Opera 11.10+ */
+	background: url("../img/bg-noise.png"), -ms-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* IE10+ */
+	background: url("../img/bg-noise.png"), linear-gradient(to bottom,  #8ebf36 0%,#70a220 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8ebf36', endColorstr='#70a220',GradientType=0 ); /* IE6-9 */
+	
+}
 #go-pro:after {
 	content: "";
 	display: block;
 	position: absolute;
-	top: 28px;	left: -20px;
+	top: 30px;	left: -20px;
 	margin: 0;
 	border: 10px outset transparent;
 	border-right: 10px solid #6e3312;
+}
+#go-pro:hover:after {
+	border-right: 10px solid #37500D;
 }
 #go-pro .title {
 	display: inline-block;
@@ -5956,7 +5975,6 @@ h2#make-profits span {
 }
 
 .default-search-container button {
-	background: #82B42C url("../img/bg-noise.png") repeat;
 	color: #37500D;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.3);
 	border: none;
@@ -5967,6 +5985,15 @@ h2#make-profits span {
 	padding: 0 0 0 90px;
 	border-radius: 5px;
 	text-align: left;
+	
+	background: #8ebf36 url("../img/bg-noise.png"); /* Old browsers */
+	background: url("../img/bg-noise.png"), -moz-linear-gradient(top,  #8ebf36 0%, #70a220 100%); /* FF3.6+ */
+	background: url("../img/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8ebf36), color-stop(100%,#70a220)); /* Chrome,Safari4+ */
+	background: url("../img/bg-noise.png"), -webkit-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Chrome10+,Safari5.1+ */
+	background: url("../img/bg-noise.png"), -o-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Opera 11.10+ */
+	background: url("../img/bg-noise.png"), -ms-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* IE10+ */
+	background: url("../img/bg-noise.png"), linear-gradient(to bottom,  #8ebf36 0%,#70a220 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8ebf36', endColorstr='#70a220',GradientType=0 ); /* IE6-9 */	
 }
 .default-search-container button:hover {
 
@@ -7603,3 +7630,21 @@ select, input[type="file"] {
   
   
 }
+
+
+
+@media only screen and (max-height: 425px) { 
+	
+	#system-help:after {
+		display: none;
+	}
+	#system-help { 
+		bottom: 15px;
+	}
+	
+}
+
+
+
+
+
