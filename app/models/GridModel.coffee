@@ -2,19 +2,23 @@ class exports.GridModel
 
 	constructor: () ->
 		@d = {
-			'headers': [],
-			'columns': [],
-			'records': []
+			headers: [],
+			columns: [],
+			records: [],
+			actions: {}
 		}
 
-	addHeaderLabel: (data) ->
-		@d.headers.push(data)
+	addHeaderLabel: ( data ) ->
+		@d.headers.push( data )
 
-	addMasterColumn: (data) ->
-		@d.columns.push(data)
+	addMasterColumn: ( data ) ->
+		@d.columns.push( data )
 
-	addRecord: (data) ->
-		@d.records.push(data)
+	addAction: ( data ) ->
+		@d.actions[ data.id ] = data
+
+	addRecord: ( data ) ->
+		@d.records.push( data )
 
 	result: () ->
 		return @d

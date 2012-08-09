@@ -34,15 +34,17 @@ Grid.prototype = {
 			$grid = this.grid;
 
 		$.jsonrpc( this.options.url, { offset: this.rowOffset }, function( data ) {
-			//console.log( data );
-
 			$.jade.getTemplate( "grid/table", function () {
 				$grid.html( $.jade.renderSync("views_grid_table", data, that.jadeError) );
 
 				$.jade.getTemplate( "grid/row", function() {
-					var records = data.records;
+					var records = data.records,
+						actions = data.actions;
 
 					for ( var i = 0; i < records.length; ++i ) {
+						// push actions onto records
+						records[ i ].actions = actions;
+
 						$grid.find("tbody").append( $.jade.renderSync("views_grid_row", records[ i ], that.jadeError) );
 					}
 
@@ -146,7 +148,7 @@ Grid.prototype = {
 	// TODO: really, really, really need to get rid of this
 	// can't believe Jade wouldn't have an in-built alternative
 	jadeError: function( error ) {
-		alert( error );
+		alert( "jadeError-> " + error );
 	},
 
 	/**
@@ -368,12 +370,14 @@ Grid.prototype = {
 		$grid.find("tfoot").removeAttr("hidden");
 
 		$.jsonrpc( this.options.url, { offset: this.rowOffset }, function( data ) {
-			//console.log( data );
-
 			$.jade.getTemplate( "grid/row", function() {
-				var records = data.records;
+				var records = data.records,
+					actions = data.actions;
 
 				for ( var i = 0; i < records.length; ++i ) {
+					// push actions onto records
+					records[ i ].actions = actions;
+
 					$grid.find("tbody").append( $.jade.renderSync("views_grid_row", records[ i ], that.jadeError) );
 				}
 

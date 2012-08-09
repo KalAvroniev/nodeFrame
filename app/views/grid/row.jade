@@ -1,36 +1,31 @@
 tr
 	td
-			button.btn.select(data-toggle="button")
-		td
-			button.btn.favourite(data-toggle="button")
-		td.actions
-			span.action-buttons
-				//a.ff-icon(href="#", data-title="Build website") X
-				
-				a.ff-icon(href="#", data-title="View domain details", data-panel-id="domain-details") G
-				
-				//a.ff-icon.main-action(href="#", data-title="List domain for sale", data-panel-id="sell-domain") ^
-				//	span.action-label Sell
-				//a.ff-icon.main-action(href="#", data-title="Buy this domain now") -
-				//	span.action-label Buy				
-				
-				a.ff-icon.main-action(href="#", data-title="Bid on this domain", data-panel-id="place-bid") W
-					span.action-label Bid
-		
-		td.domain-title
-			span.domain-title-cntnr
-				= domain
-				span.tld com
-		td 3
-		td.currency 1584
-		td n/a
-		td 8
-		td.currency 200
-		td 20%
-		td.date 1st Jan '70 10:00am
-		td.date 1st Jan '70 10:00am
-		td No
-		td 0
-		td 0
-		td 0
-		td 0
+		button.btn.select(data-toggle="button")
+	td
+		button.btn.favourite(data-toggle="button")
+	td.actions
+		span.action-buttons
+			- var lastButton = buttons.length - 1;
+			each val, key in buttons
+				- var klass = "ff-icon" + ( lastButton === key ? " main-action" : "" );
+				- var action = actions[ val ];
+				a(class=klass, href="#", data-title=action.tooltip, data-panel-id=action.id)= action.icon
+					- if ( action.text )
+						span.action-label= action.text
+	td.domain-title
+		span.domain-title-cntnr
+			= domain
+			span.tld= tld
+	td 3
+	td.currency 1584
+	td n/a
+	td 8
+	td.currency 200
+	td 20%
+	td.date 1st Jan '70 10:00am
+	td.date 1st Jan '70 10:00am
+	td No
+	td 0
+	td 0
+	td 0
+	td 0

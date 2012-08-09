@@ -1,15 +1,14 @@
-GridModel = require('../../models/GridModel.coffee').GridModel
+GridModel = require("../../models/GridModel.coffee").GridModel
 
 class exports.Controller
 
-	validate: {
-	}
+	validate: {}
 
 	options: {
-		"requireUserSession": true
+		requireUserSession: true
 	}
 
-	run: (req) ->
+	run: ( req ) ->
 		grid = new GridModel()
 
 		# header
@@ -38,7 +37,7 @@ class exports.Controller
 			span: 3,
 			title: "Domain registration info"
 		})
-		
+
 		grid.addHeaderLabel({
 			span: 4,
 			title: "Extension info"
@@ -149,13 +148,39 @@ class exports.Controller
 			title: ".edu"
 		})
 
+		###
+		some other actions:
+		
+		{ id: "make-offer", path: "/modules/exchange/panels", tooltip: "Make an offer", icon: "?", text: "Offer" }
+
+		{ id: "build-website", path: "???", tooltip: "Build website", icon: "X" }
+		{ id: "sell-domain", path: "???", tooltip: "List domain for sale", icon: "^", text: "Sell" }
+		{ id: "buy-domain", path: "???", tooltip: "Buy this domain now", icon: "-", text: "Buy" }
+		###
+
+		grid.addAction({
+			id: "domain-details",
+			path: "/",
+			tooltip: "View domain details",
+			icon: "G"
+		});
+
+		grid.addAction({
+			id: "place-bid",
+			path: "/modules/exchange/panels",
+			tooltip: "Bid on this domain",
+			icon: "W",
+			text: "Bid"
+		});
+
 		# data
 		for i in [0..9]
 			grid.addRecord({
 				selected: false,
 				star: false,
+				buttons: [ "domain-details", "place-bid" ],
 				domain: "353cards",
-				tld: ".com"
+				tld: "com"
 			})
-		
-		return req.success(grid.result())
+
+		return req.success( grid.result() )
