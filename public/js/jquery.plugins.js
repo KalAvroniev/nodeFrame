@@ -271,7 +271,9 @@ $.pv3.panel.show = function ( url, options ) {
 			}));
 
 			// fix close handler
-			$(".x-panel").unbind("click").on( "click", function() {
+			$(".x-panel").unbind("click").on( "click", function( e ) {
+				e.preventDefault();
+
 				$(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
 
 				// restore the standout tab to be the first child of the UL
