@@ -221,6 +221,12 @@ $.pv3.panel.show = function ( url, options ) {
 	// TODO: refactor this at some point, as it's duplicated below
 	// is this panel already open? then close it
 	if ( active && active.options.tabid === options.tabid ) {
+		if ( options.temporary !== undefined ) {
+			// find temporary panel tabs
+			$(".sectional-tabs").find(".temporary-panel-tab").remove();
+			$(".ajax-panel-content").empty();
+		}
+
 		$(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
 
 		// restore the standout tab to be the first child of the <ul>
@@ -239,6 +245,7 @@ $.pv3.panel.show = function ( url, options ) {
 
 		// find temporary panel tabs
 		$(".sectional-tabs").find(".temporary-panel-tab").remove();
+		$(".ajax-panel-content").empty();
 	}
 
 	// make the JSON-RPC call
@@ -272,6 +279,7 @@ $.pv3.panel.show = function ( url, options ) {
 
 				// find temporary panel tabs
 				$(".sectional-tabs").find(".temporary-panel-tab").remove();
+				$(".ajax-panel-content").empty();
 
 				return $.pv3.panel.hide();
 			});
