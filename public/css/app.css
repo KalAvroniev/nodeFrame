@@ -5173,10 +5173,10 @@ body table {
 }
 #thetableclone {
 	position: fixed;
-	visibility: hidden;
 	overflow: hidden;
 	z-index: 2;
 	margin: 1px 0 0 0;
+	display: none;
 }
 #thetableclone .grid-table {
 	position: relative;
@@ -5264,7 +5264,7 @@ thead tr {
 	display: block;
 	position: absolute;
 	right: -29px;
-	top: 4px;
+	top: 2px;
 	content: "z";
 	font-size: 9px;
 	margin: 0;
@@ -5360,6 +5360,7 @@ thead tr {
 .grid-table .container > span {
 	position: relative;
 	display: block;
+	padding: 0;
 }
 .filter-params .container, .zero-alert .container, .bulk-actions .bulk-wrapper {
 	padding: 15px 20px 17px;
@@ -5610,7 +5611,7 @@ td.categ[data-title="electronics"]:before {
 	width: 105px;
 }
 .fav-sel-all {
-	margin: 15px 0 0 0;
+	margin: 0;
 	width: 80px;
 }
 thead input#domain-title {
@@ -7281,7 +7282,7 @@ select, input[type="file"] {
 .condensed #first-heading.home {
 	display: none;
 }
-.condensed .filter-params span, .condensed .zero-alert span, .condensed .bulk-actions .bulk-wrapper {
+.condensed .filter-params > span, .condensed .zero-alert > span, .condensed .bulk-actions .bulk-wrapper {
 	padding: 8px 20px 10px;
 }
 .condensed .actions .action-buttons a.main-action {

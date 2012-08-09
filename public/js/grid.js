@@ -392,7 +392,7 @@ Grid.prototype = {
 				body = $( document.body );
 
 			if ( !that.options.stickyHeader ) {
-				theCloneContainer.css( "visibility", "hidden" );
+				theCloneContainer.css( "display", "none" );
 
 				if ( body.hasClass("sticky-thead") ) {
 					body.removeClass("sticky-thead");
@@ -406,13 +406,13 @@ Grid.prototype = {
 				viewport = $( that.grid );
 
 			if ( ((scrollTop + $("header#main").height()) - offset > 0) ) {// && (scrollTop - offset - $(this).height() < 0)) {
-				theCloneContainer.css( "visibility", "visible" );
+				theCloneContainer.css( "display", "block" );
 
 				if ( !body.hasClass("sticky-thead") ) {
 					body.addClass("sticky-thead");
 				}
 			} else {
-				theCloneContainer.css( "visibility", "hidden" );
+				theCloneContainer.css( "display", "none" );
 
 				if ( body.hasClass("sticky-thead") ) {
 					body.removeClass("sticky-thead");

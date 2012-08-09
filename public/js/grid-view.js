@@ -236,7 +236,7 @@
 				body = $( document.body );
 
 			if ( !stickyHeaderEnabled ) {
-				theCloneContainer.css( "visibility", "hidden" );
+				theCloneContainer.css( "display", "none" );
 
 				if ( body.hasClass("sticky-thead") ) {
 					body.removeClass("sticky-thead");
@@ -250,13 +250,13 @@
 				viewport = $( this ).closest(".viewport");
 
 			if ( ((scrollTop + $("header#main").height()) - offset > 0) ) {// && (scrollTop - offset - $(this).height() < 0)) {
-				theCloneContainer.css( "visibility", "visible" );
+				theCloneContainer.css( "display", "block" );
 
 				if ( !body.hasClass("sticky-thead") ) {
 					body.addClass("sticky-thead");
 				}
 			} else {
-				theCloneContainer.css( "visibility", "hidden" );
+				theCloneContainer.css( "display", "none" );
 
 				if ( body.hasClass("sticky-thead") ) {
 					body.removeClass("sticky-thead");
