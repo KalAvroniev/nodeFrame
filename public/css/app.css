@@ -3239,6 +3239,35 @@ input[type=number] {
 	background-color: #3cabf8;
 }
 
+/* ------------------------------ Advanced search form panel styles work ------------------------ */
+
+.form-horizontal .form-column {
+	float: left;
+	width: 45%;
+	right: auto;
+}
+.form-column.left {
+	margin: 0 10% 0 0;
+}
+.advanced-subhead {
+	margin: 0 0 20px;
+	font-size: 18px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5480,7 +5509,10 @@ thead tr {
 	position: relative;
 	z-index: 0;
 }
-
+#thetableclone .grid-table tbody td {
+	overflow: hidden;
+	height: 0;
+}
 .grid-table tbody tr {
 	color: #555555;
 	
