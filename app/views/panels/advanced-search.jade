@@ -4,16 +4,52 @@ h2.panel-heading
 
 p	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae massa nec nunc sagittis vehicula non et nibh. Curabitur lacus felis, gravida nec tristique non, rhoncus non ante.
 	
-form#advanced-search
+form#advanced-search.form-horizontal.panel-form.clearfix
 
-	h3.advanced-subhead domain character options
+	.form-column.left
+	
+		h3.advanced-subhead domain character options
+		
+		.control-group.txt-input-row
+			label(for="must-contain").control-label must contain 
+				strong all of 
+			.controls
+				input#must-contain-all(type="text", placeholder="must contain")	
+				p.help-block * a-z, 0-9, hyphens, spaces. eg. hotel paris
+	
+		.control-group.txt-input-row
+			label(for="must-contain").control-label must contain 
+				strong any of 
+			.controls
+				input#must-contain-any(type="text", placeholder="must contain")	
+				p.help-block * a-z, 0-9, hyphens, spaces. eg. hotel paris
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	.form-column.right
+		
+		h3.advanced-subhead domain character &amp content options
+			
+		.control-group.txt-input-row
+			label(for="max-bid-value").control-label max-bid value
+			.controls
+				input#max-bid-value(type="number", placeholder="placed in USD")		
 	
 	
-	
-	
-	
-	
-	h3.advanced-subhead domain character &amp content options
 	
 	
 	
