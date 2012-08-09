@@ -28,12 +28,12 @@
 			e.preventDefault();
 
 			$tabClone.find("a")
-				.attr( "href", "javascript:$.pv3.panel.show( '/panels/protrada-video', {tabid: 'protrada-video', panel_size: 'mini-panel video'} );" )
+				.attr( "href", "javascript:$.pv3.panel.show( '/panels/protrada-video', {tabid: 'protrada-video', panel_size: 'mini-panel video', temporary: true} );" )
 				.html("<strong>video intro</strong> to domain trading")
 				.end()
 				.prependTo( $panelTabs );
 
-			$.pv3.panel.show( "/panels/protrada-video", { tabid: "protrada-video", panel_size: "mini-panel video" } );
+			$.pv3.panel.show( "/panels/protrada-video", { tabid: "protrada-video", panel_size: "mini-panel video", temporary: true } );
 		});
 
 		setupTradingGraph();
