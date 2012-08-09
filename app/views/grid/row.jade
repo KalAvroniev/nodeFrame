@@ -6,10 +6,17 @@ tr
 		td.actions
 			span.action-buttons
 				//a.ff-icon(href="#", data-title="Build website") X
+				
 				a.ff-icon(href="#", data-title="View domain details", data-panel-id="domain-details") G
-				a.ff-icon.main-action(href="#", data-title="List domain for sale", data-panel-id="sell-domain") ^
-					span.action-label Sell
-				//a.ff-icon(href="#", data-title="Place bid / Buy") -
+				
+				//a.ff-icon.main-action(href="#", data-title="List domain for sale", data-panel-id="sell-domain") ^
+				//	span.action-label Sell
+				//a.ff-icon.main-action(href="#", data-title="Buy this domain now") -
+				//	span.action-label Buy				
+				
+				a.ff-icon.main-action(href="#", data-title="Bid on this domain", data-panel-id="place-bid") W
+					span.action-label Bid
+		
 		td.domain-title
 			span.domain-title-cntnr
 				= domain
