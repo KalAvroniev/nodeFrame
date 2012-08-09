@@ -2470,6 +2470,11 @@ header#main:before {
 	color: #FCF9F5;
 	opacity: 0.15;
 }
+.panel-heading .advanced-search:before {
+	content: "U";
+	font-size: 30px;
+	margin: -5px 13px 0 0;				
+}
 
 
 
