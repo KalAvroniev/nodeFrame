@@ -5893,6 +5893,7 @@ h2#make-profits {
 
 h2#make-profits span {
 	color: #E46503;
+	letter-spacing: -7px;	
 }
 #watch-video {
 	float: right;
@@ -5925,7 +5926,21 @@ h2#make-profits span {
 	letter-spacing: -1px;
 	color: #212121;	
 }
-
+.page-default h3 .world {
+	display: inline-block;
+	position: relative;
+	margin: 0 5px 0 2px;
+	padding: 0 0 0 35px;
+}
+.page-default h3 .world:before {
+	content: "w";
+	font-size: 32px;
+	line-height: 1;
+	position: absolute;
+	top: -2px; left: 0;
+	color: rgba(0,0,0,0.25);
+	text-shadow: 0 1px 0 white;
+}
 .page-default p {
 	font-size: 13px;
 	line-height: 20px;
