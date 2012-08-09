@@ -5542,7 +5542,7 @@ thead tr {
 	display: block;
 	float: right;
 	margin: 3px 0 0 0;
-	padding: 6px 6px 0;
+	padding: 6px;
 	color: black;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.4);
 	opacity: 0.5;
@@ -5618,7 +5618,7 @@ thead tr {
 	background: #e5e5e5;
 
 }
-.grid-table tbody tr:hover td {
+.grid-table tbody tr:not(.not-data):hover td {
 	color: #252525;
 	border-top: 1px solid rgba(255,255,255,0.3); 
 	border-left: 1px solid rgba(255,255,255,0.0);

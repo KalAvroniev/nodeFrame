@@ -357,6 +357,8 @@ Grid.prototype = {
 
 		grid.grid.add("#thetableclone").find("thead").find(".container > span").width( $("#main-container").width() - (2 * spanContainer.css("padding-left").replace("px","")) );
 
+		grid.grid.find("tbody").find(".container > span").width( $("#main-container").width() - (2 * spanContainer.css("padding-left").replace("px","")) );
+
 		grid.positionHorizScroll();
 		grid.updateTableHeaders();
 	},
