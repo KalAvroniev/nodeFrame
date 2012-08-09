@@ -118,6 +118,9 @@ Grid.prototype = {
 		Scrollbars.add( "grid", this.grid, { axis: "x", scroll: false } );
 
 		this.windowResize();
+
+		// TODO: must get rid of this, place into a nicer handler
+		this.__tempAdvancedSearch();
 	},
 
 	// this function isn't used yet, will be once the
@@ -149,6 +152,24 @@ Grid.prototype = {
 	// can't believe Jade wouldn't have an in-built alternative
 	jadeError: function( error ) {
 		alert( "jadeError-> " + error );
+	},
+
+	// TODO: refactor this, not DRY compliant
+	__tempAdvancedSearch: function() {
+		$("#advanced-keyword-filter").on( "click", function( e ) {
+			var $panelTabs = $("header#main").find(".sectional-tabs"),
+				$tabClone = $panelTabs.find(".standout-tab").clone().attr( "id", "advanced-search" ).addClass("temporary-panel-tab").removeClass("standout-tab");
+
+			e.preventDefault();
+
+			$tabClone.find("a")
+				.attr( "href", "javascript:$.pv3.panel.show( '/panels/advanced-search', {tabid: 'advanced-search', panel_size: 'mini-panel video', temporary: true} );" )
+				.html("<strong>advanced search</strong> something here")
+				.end()
+				.prependTo( $panelTabs );
+
+			$.pv3.panel.show( "/panels/advanced-search", { tabid: "advanced-search", panel_size: "mini-panel", temporary: true } );
+		});
 	},
 
 	/**

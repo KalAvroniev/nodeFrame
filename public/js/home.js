@@ -39,6 +39,22 @@
 			$.pv3.panel.show( "/panels/protrada-video", { tabid: "protrada-video", panel_size: "mini-panel video", temporary: true } );
 		});
 
+		// TODO: refactor these, not DRY compliant
+		$("#advanced-search, #advanced-keyword-filter").on( "click", function( e ) {
+			var $panelTabs = $("header#main").find(".sectional-tabs"),
+				$tabClone = $panelTabs.find(".standout-tab").clone().attr( "id", "advanced-search" ).addClass("temporary-panel-tab").removeClass("standout-tab");
+
+			e.preventDefault();
+
+			$tabClone.find("a")
+				.attr( "href", "javascript:$.pv3.panel.show( '/panels/advanced-search', {tabid: 'advanced-search', panel_size: 'mini-panel video', temporary: true} );" )
+				.html("<strong>advanced search</strong> something here")
+				.end()
+				.prependTo( $panelTabs );
+
+			$.pv3.panel.show( "/panels/advanced-search", { tabid: "advanced-search", panel_size: "mini-panel", temporary: true } );
+		});
+
 		setupTradingGraph();
 	}
 
