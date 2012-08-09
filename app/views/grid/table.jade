@@ -27,8 +27,8 @@
 						label(for=label)= column.title
 						- if ( column.title === "Bulk" )
 							.fav-sel-all
-								button.btn.select(title="Select all", data-toggle="button")
-								button.btn.favourite(title="Favourite all", data-toggle="button")
+								button.btn.select(title="Select all on-screen", data-toggle="button")
+								button.btn.favourite(title="Favourite all on-screen", data-toggle="button")
 						- if ( column.filter )
 							case column.filter.type
 								when "text"
