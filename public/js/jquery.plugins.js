@@ -231,6 +231,16 @@ $.pv3.panel.show = function ( url, options ) {
 		return;
 	}
 
+	if ( options.temporary === undefined && $(".sectional-tabs").find(".temporary-panel-tab").length ) {
+		$(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
+
+		// restore the standout tab to be the first child of the UL
+		$(".sectional-tabs").restoreStandoutElement();
+
+		// find temporary panel tabs
+		$(".sectional-tabs").find(".temporary-panel-tab").remove();
+	}
+
 	// make the JSON-RPC call
 	$.jsonrpc( options.jsonrpcMethod, {}, function( obj ) {
 		$.jade.getTemplate( url, function ( fn ) {
@@ -247,24 +257,23 @@ $.pv3.panel.show = function ( url, options ) {
 			// set the active tab to be the first child of the UL
 			$sectionalTabs.reorderActiveElement();
 
-			$sectionPanel.removeClass("hidden panel mini-panel").addClass( options.panel_size );
+			$sectionPanel.removeClass().addClass( options.panel_size );
 
 			$(".ajax-panel-content").html( $.jade.renderSync( fn, obj, function( err, file, line ) {
 				$(".ajax-panel-content").html( "Error in " + file + " at line " + line + ": " + err );
 			}));
 
 			// fix close handler
-			$(".x-panel").unbind("click").click(function() {
+			$(".x-panel").unbind("click").on( "click", function() {
 				$(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
 
 				// restore the standout tab to be the first child of the UL
 				$sectionalTabs.restoreStandoutElement();
 
-				// find
+				// find temporary panel tabs
 				$(".sectional-tabs").find(".temporary-panel-tab").remove();
 
-				return $.pv3.panel.hide();				
-				
+				return $.pv3.panel.hide();
 			});
 		});
 	});

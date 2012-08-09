@@ -20,6 +20,9 @@
 		$( window ).on( "resize", windowResize );
 		$( window ).on( "scroll", windowScroll );
 
+		// update counter
+		$("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr( "data-alerts", $(".protrada .alert-count").attr("data-alerts") );
+
 		// protrada video
 		$("#watch-video").on( "click", function( e ) {
 			var $panelTabs = $("header#main").find(".sectional-tabs"),
@@ -28,12 +31,12 @@
 			e.preventDefault();
 
 			$tabClone.find("a")
-				.attr( "href", "javascript:$.pv3.panel.show( '/panels/protrada-video', {tabid: 'protrada-video', panel_size: 'mini-panel video'} );" )
+				.attr( "href", "javascript:$.pv3.panel.show( '/panels/protrada-video', {tabid: 'protrada-video', panel_size: 'mini-panel video', temporary: true} );" )
 				.html("<strong>video intro</strong> to domain trading")
 				.end()
 				.prependTo( $panelTabs );
 
-			$.pv3.panel.show( "/panels/protrada-video", { tabid: "protrada-video", panel_size: "mini-panel video" } );
+			$.pv3.panel.show( "/panels/protrada-video", { tabid: "protrada-video", panel_size: "mini-panel video", temporary: true } );
 		});
 
 		setupTradingGraph();

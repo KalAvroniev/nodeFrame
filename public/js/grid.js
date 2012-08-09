@@ -80,7 +80,8 @@ Grid.prototype = {
 			.on( "click", "tr:not(.parent-open, .child)", this.expandRow )
 			.on( "click", ".parent-open, .child", this.collapseRow );
 
-		$(".grid-table").find("tbody").on( "click", ".domain-title-cntnr .copy-to-clipboard", function( e ) { e.preventDefault(); })
+		$(".grid-table").find("tbody")
+			.on( "click", ".domain-title-cntnr .copy-to-clipboard", function( e ) { e.preventDefault(); })
 			.on( "click", "td button.favourite", this.toggleFavourite )
 			.on( "click", "td button.select", { grid: this }, this.toggleSelect )
 			.on( "click", "td.actions", function( e ) {
@@ -220,16 +221,30 @@ Grid.prototype = {
 
 	bulkFavouritesHandler: function( e ) {
 		var grid = e ? e.data.grid : this,
-			checking = !$( this ).hasClass("active");
+			checking = !$( this ).hasClass("active"),
+			isClone = $( this ).closest("table").parent().is("#thetableclone");
 
+		// TODO: not DRY compliant
 		if ( checking ) {
 			$( ".btn.favourite", grid.grid.find("tbody") ).each(function() {
 				$( this ).addClass("active");
 			});
+
+			if ( !isClone ) {
+				$("#thetableclone .fav-sel-all .btn.favourite").addClass("active");
+			} else {
+				grid.grid.find(".fav-sel-all .btn.favourite").addClass("active");
+			}
 		} else {
 			$( ".btn.favourite", grid.grid.find("tbody") ).each(function() {
 				$( this ).removeClass("active");
 			});
+
+			if ( !isClone ) {
+				$("#thetableclone .fav-sel-all .btn.favourite").removeClass("active");
+			} else {
+				grid.grid.find(".fav-sel-all .btn.favourite").removeClass("active");
+			}
 		}
 	},
 

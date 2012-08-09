@@ -44,3 +44,8 @@
 		// stub
 	}
 })();
+
+$( document ).ready(function() {
+	// update counter
+	$("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr( "data-alerts", $(".protrada .alert-count").attr("data-alerts") );
+});
