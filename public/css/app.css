@@ -5676,14 +5676,13 @@ thead #category {
 }
 #advanced-keyword-filter {
 	display: inline-block;
-	display: none;
 	vertical-align: top;
 	text-indent: -3000em;
 	width: 30px;
 	height: 7px;
 	position: relative;
 	border-radius: 2px;
-	margin: 15px 0 0 0;
+	margin: 17px 0 0 0;
 	box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 0px rgba(0,0,0,0.25);
 	
 	background: rgb(193,193,193); /* Old browsers */
@@ -6113,6 +6112,7 @@ table.default-sources td {
 	top: 28px; right: 22px;
 	opacity: 0.85;
 	width: 26px;
+	margin-top: 15px;
 }
 .default-search-container #advanced-search {
 	display: inline-block;
@@ -6142,6 +6142,7 @@ table.default-sources td {
 
 .default-search-container #advanced-search #advanced-keyword-filter {
 	right: 20px; top: 10px;
+	margin-top: 15px;	
 }
 .default-search-container #advanced-search #advanced-keyword-filter, .default-search-container #advanced-search #advanced-keyword-filter:before, .default-search-container #advanced-search #advanced-keyword-filter:after {
 	background: #292929;
@@ -6646,7 +6647,7 @@ select, input[type="file"] {
 .btn-group .btn-success {
 	border-radius: 5px 0 0 5px;
 }
-.btn-success {
+.btn-success, .btn-group .btn-success {
 	border: none;
 	box-shadow: inset 0 3px 0 rgba(0,0,0,0.1), 0 1px 0 white, 0 -3px 0 rgba(0,0,0,0.08)	;
 	font-weight: 600;
@@ -6664,7 +6665,10 @@ select, input[type="file"] {
 	background: linear-gradient(to bottom,  #8ebf36 0%,#70a220 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8ebf36', endColorstr='#70a220',GradientType=0 ); /* IE6-9 */
 }
-.btn-success:first-of-type:before {
+.btn-success:first-of-type, .btn-group .btn-success:first-of-type {
+	border-radius: 5px 0 0 5px;
+}
+.btn-success:first-of-type:before, .btn-group .btn-success:first-of-type:before {
 	content: "D";
 	display: inline-block;
 		
@@ -6733,7 +6737,7 @@ select, input[type="file"] {
 
 .btn.btn-success.btn-large .caret {
 	color: #36520f;
-	margin: 6px 5px 0 5px;
+	margin: 0 5px;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.3);
 	font-size: 11px;
 	border: none;
@@ -6767,7 +6771,7 @@ select, input[type="file"] {
 
 .grid-table th .domain-title-inputs .btn-group {
 	display: inline-block;
-	margin: 0 0 0 7px;
+	margin: 0 7px;
 }
 .grid-table th .domain-title-inputs .btn-group:before, .grid-table th .domain-title-inputs .btn-group:after {
 	display: none;
