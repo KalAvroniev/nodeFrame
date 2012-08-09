@@ -84,11 +84,22 @@ Grid.prototype = {
 			.on( "click", ".domain-title-cntnr .copy-to-clipboard", function( e ) { e.preventDefault(); })
 			.on( "click", "td button.favourite", this.toggleFavourite )
 			.on( "click", "td button.select", { grid: this }, this.toggleSelect )
-			.on( "click", "td.actions", function( e ) {
+			.on( "click", "td.actions a", function( e ) {
 				e.preventDefault();
 				e.stopPropagation();
 
-				// code here
+				var $this = $( this ),
+					panelId = $this.data("panel-id"),
+					$panelTabs = $("header#main").find(".sectional-tabs"),
+					$tabClone = $panelTabs.find(".standout-tab").clone().attr( "id", panelId ).addClass("temporary-panel-tab").removeClass("standout-tab");
+
+				$tabClone.find("a")
+					.attr( "href", "javascript:$.pv3.panel.show( '/panels/protrada-video', {tabid: '" + panelId + "', panel_size: 'mini-panel', temporary: true} );" )
+					.html("<strong>domain details</strong> something here")
+					.end()
+					.prependTo( $panelTabs );
+
+				$.pv3.panel.show( "/panels/" + panelId, { tabid: panelId, panel_size: "mini-panel", temporary: true } );
 			});
 
 		$( window ).on( "resize", { grid: this }, this.windowResize ).on( "scroll", { grid: this }, this.windowScroll );
