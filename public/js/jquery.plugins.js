@@ -247,7 +247,7 @@ $.pv3.panel.show = function ( url, options ) {
 			// set the active tab to be the first child of the UL
 			$sectionalTabs.reorderActiveElement();
 
-			$sectionPanel.removeClass("hidden panel mini-panel").addClass( options.panel_size );
+			$sectionPanel.removeClass().addClass( options.panel_size );
 
 			$(".ajax-panel-content").html( $.jade.renderSync( fn, obj, function( err, file, line ) {
 				$(".ajax-panel-content").html( "Error in " + file + " at line " + line + ": " + err );
