@@ -3247,37 +3247,37 @@ input[type=number] {
 	right: auto;
 }
 .form-column.left {
-	margin: 0 6% 0 0;
+	margin: 0 6% 20px 0;
 }
 .form-column.right {
-	margin: 0;
+	margin: 0 0 20px;
 }
 .advanced-subhead {
-	margin: 0 0 20px;
-	font-size: 18px;
+	margin: 10px 0 30px;
+	font-size: 21px;
+	letter-spacing: -1px;
+	clear: both;
 }
-.form-horizontal .three-radios {
-	margin: 0 0 30px
-}
-.three-radios form {
-	margin: 0;
-}
-#panel-content .form-horizontal .three-radios .control-label {
+#panel-content .form-horizontal .three-in-row .control-label {
 	width: 80px;
 }
-#panel-content .form-horizontal .three-radios .controls {
+#panel-content .form-horizontal .three-in-row .controls {
 	margin-left: 120px;
 }
-.three-radios .controls label, .three-radios .controls label:first-child {
+.three-in-row .controls label, .three-in-row .controls label:first-child {
 	display: inline-block;
 	margin: 0 15px 0 0;
-	padding: 5px 20px 0 0;
+	padding: 5px 0 0 20px;
 }
-.three-radios .radio input[type="radio"] {
+.sources .controls label, .sources .controls label:first-child {
+	margin: 0 20px 0 0;		
+}
+.three-in-row .controls label input {
 	margin: 3px 7px 0 -15px;
 }
-
-
+.sources .controls label input {
+	margin: 8px 12px 0 -15px;	
+}
 
 
 

@@ -40,104 +40,186 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 				input#must-end(type="text", placeholder="ends with")	
 				p.help-block eg. online, not .com
 
-		.control-group.txt-input-row
-			label(for="must-not-contain").control-label must not contain 
-				strong any
-			.controls
-				input#must-not-contain(type="text", placeholder="must not contain")	
-				p.help-block eg. online, not .com
-
-		.control-group.txt-input-row
-			label(for="must-not-contain").control-label must not  
-				strong start with
-			.controls
-				input#must-not-contain(type="text", placeholder="doesn't start with")	
-				p.help-block a-z, 0-9, hyphens
-
-		.control-group.txt-input-row
-			label(for="must-not-contain").control-label must not  
-				strong end with
-			.controls
-				input#must-not-contain(type="text", placeholder="doesn't end with")	
-				p.help-block eg. online, not .com
-
 	
 	.form-column.right
 					
-		.control-group.three-radios	
-			
-			label(for="instant-bid").control-label 
-				strong hyphens		
-			.controls
-				form
-					label.radio include
-						input#instant-bid(name="hyphens", type="radio")
-					label.radio exclude
-						input#instant-bid(name="hyphens", type="radio")	
-					label.radio don't care
-						input#instant-bid(name="hyphens", type="radio")	
-					
-													
-			label(for="instant-bid").control-label 
-				strong digits		
-			.controls
-				form
-					label.radio include
-						input#instant-bid(name="digits", type="radio")
-					label.radio exclude
-						input#instant-bid(name="digits", type="radio")
-					label.radio don't care
-						input#instant-bid(name="digits", type="radio")
-			
-			
-			label(for="instant-bid").control-label 
-				strong foreign		
-			.controls
-				form
-					label.radio include
-						input#instant-bid(name="foreign", type="radio")
-					label.radio exclude
-						input#instant-bid(name="foreign", type="radio")
-					label.radio don't care
-						input#instant-bid(name="foreign", type="radio")
-			
-			
-			
-			label(for="instant-bid").control-label 
-				strong adult		
-			.controls
-				form
-					label.radio include
-						input#instant-bid(name="adult", type="radio")
-					label.radio exclude
-						input#instant-bid(name="adult", type="radio")
-					label.radio don't care
-						input#instant-bid(name="adult", type="radio")
-	
-	
 		.control-group.txt-input-row
 			label(for="must-not-contain").control-label minimum  
 				strong length
 			.controls
 				input#must-not-contain(type="number", placeholder="at least")
 	
-		.control-group.txt-input-row
+		.control-group.txt-input-row.divider-after
 			label(for="must-not-contain").control-label maximum  
 				strong length
 			.controls
-				input#must-not-contain(type="number", placeholder="at most")	
+				input#must-not-contain(type="number", placeholder="at most")					
+					
+					
+		.control-group.three-in-row
+			
+			label(for="").control-label 
+				strong hyphens		
+			.controls
+				label.radio include
+					input(name="hyphens", type="radio")
+				label.radio exclude
+					input(name="hyphens", type="radio")	
+				label.radio don't care
+					input(name="hyphens", type="radio")	
+					
+													
+			label(for="").control-label 
+				strong digits		
+			.controls
+				label.radio include
+					input(name="digits", type="radio")
+				label.radio exclude
+					input(name="digits", type="radio")
+				label.radio don't care
+					input(name="digits", type="radio")
+			
+			
+			label(for="").control-label 
+				strong foreign		
+			.controls
+				label.radio include
+					input(name="foreign", type="radio")
+				label.radio exclude
+					input(name="foreign", type="radio")
+				label.radio don't care
+					input(name="foreign", type="radio")
+			
+			
+			label(for="").control-label 
+				strong adult		
+			.controls
+				label.radio include
+					input(name="adult", type="radio")
+				label.radio exclude
+					input(name="adult", type="radio")
+				label.radio don't care
+					input(name="adult", type="radio")	
+		
+	
+		.control-group.three-in-row
+			
+			label(for="").control-label only domains 
+				strong in	
+			.controls
+				label.checkbox english
+					input(name="english", type="checkbox")
+				label.checkbox french
+					input(name="french", type="checkbox")	
+				label.checkbox german
+					input(name="german", type="checkbox")	
+				label.checkbox spanish
+					input(name="spanish", type="checkbox")
+				label.checkbox any arabic
+					input(name="arabic", type="checkbox")	
+				label.checkbox any asian
+					input(name="asian", type="checkbox")	
 	
 	
+		.control-group.three-in-row
+			
+			label(for="").control-label only domains 
+				strong with	
+		
+			.controls
+				label.checkbox 1 word
+					input(name="one-word", type="checkbox")
+				label.checkbox 2 words
+					input(name="two-word", type="checkbox")	
+				label.checkbox 3 words
+					input(name="three-word", type="checkbox")	
+				label.checkbox 4 or more words
+					input(name="four-word", type="checkbox")
+		
 	
 	
+	.form-column.left
 	
+		h3.advanced-subhead domain sources, categories, directories &amp backlinks
 	
-	
-	
-	
-	
-	
-	
-	
-	
+		.control-group.three-in-row.divider-after
+			
+			label(for="").control-label only domains 
+				strong that are	
+			.controls
+				label.checkbox non-exclusive deleting
+					input(name="english", type="checkbox")
+				label.checkbox exclusive
+					input(name="french", type="checkbox")	
+				label.checkbox no longer registered
+					input(name="german", type="checkbox")	
+				label.checkbox privately for-sale
+					input(name="spanish", type="checkbox")
+					
+		.control-group.three-in-row.sources
+			
+			label(for="").control-label only domains 
+				strong from	
+			.controls
+				label.checkbox
+					input(name="sedo", type="checkbox")
+					span.sources-sprite(source="Sedo")					
+				label.checkbox
+					input(name="snapnames", type="checkbox")
+					span.sources-sprite(source="Snap Names")	
+				label.checkbox
+					input(name="namejet", type="checkbox")
+					span.sources-sprite(source="Namejet")
+				label.checkbox
+					input(name="pool", type="checkbox")
+					span.sources-sprite(source="Pool.com")										
+				label.checkbox
+					input(name="godaddy", type="checkbox")
+					span.sources-sprite(source="GoDaddy")						
+				label.checkbox
+					input(name="flippa", type="checkbox")
+					span.sources-sprite(source="Flippa?")										
+				
+				p.help-block Namejet Pre-release = exclusive + Namejet
+				p.help-block Snap Names Pre-release = exclusive + Snap Names
+				p.help-block GoDaddy Closeouts = exclusive + GoDaddy
+					
+					
+	.form-column.right	
+					
+		h3.advanced-subhead domain pricing, bids &amp; type of sale
+					
+		.control-group.three-in-row.divider-after
+			
+			label(for="").control-label only these 
+				strong sale types	
+			.controls
+				label.checkbox auctions
+					input(name="auctions", type="checkbox")
+				label.checkbox buy it now
+					input(name="buy-now", type="checkbox")	
+				label.checkbox make an offer
+					input(name="make-offer", type="checkbox")										
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+										
+					
+					
+					
+					
+					
 	
