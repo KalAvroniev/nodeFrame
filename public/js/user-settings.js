@@ -10,9 +10,8 @@ $( document ).ready(function () {
 		$.pv3.state.update('modules.user-settings.tabs.' + mainTab + '.tabs.selected', e.currentTarget.id);
 	});
 
-	// External account linkage
-
-	// System notification settings
+	// update counter
+	$("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr( "data-alerts", $(".protrada .alert-count").attr("data-alerts") );
 });
 
 // --- restore state

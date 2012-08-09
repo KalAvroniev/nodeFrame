@@ -20,6 +20,9 @@
 		$( window ).on( "resize", windowResize );
 		$( window ).on( "scroll", windowScroll );
 
+		// update counter
+		$("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr( "data-alerts", $(".protrada .alert-count").attr("data-alerts") );
+
 		// protrada video
 		$("#watch-video").on( "click", function( e ) {
 			var $panelTabs = $("header#main").find(".sectional-tabs"),
