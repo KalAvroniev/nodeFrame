@@ -4,7 +4,7 @@
 			.end
 
 .viewport
-	table.grid-table.overview.floatable
+	table.grid-table.overview
 		thead
 			tr.col-grouping
 				- var grouping = headers;
@@ -76,7 +76,8 @@
 											a(href="") sell all
 										li
 											a(href="") go "moo" like a cow
-			tr(hidden)
+		tbody
+			tr.not-data(hidden)
 				td.zero-alert(colspan="17")
 					span.container.ff-icon-before
 						span
@@ -87,7 +88,7 @@
 							br
 							| Perhaps instead try searching under 
 							strong new registrations
-			tr
+			tr.not-data
 				td.filter-params(colspan="17")
 					span.container.ff-icon-before
 						span
@@ -100,7 +101,6 @@
 							strong today
 							| , containing keywords 
 							strong 'protrada'
-		tbody
 		tfoot
 			tr
 				td(colspan="17")

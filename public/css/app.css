@@ -5194,6 +5194,9 @@ body table {
 #thetableclone .grid-table {
 	position: relative;
 }
+#thetableclone tbody {
+	visibility: hidden;
+}
 .grid-table, .grid-table td, .grid-table th, .grid-table tr {
 	margin: 0;
 	padding: 0;

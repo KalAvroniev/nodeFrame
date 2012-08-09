@@ -103,36 +103,12 @@ Grid.prototype = {
 			});
 
 		$( window ).on( "resize", { grid: this }, this.windowResize ).on( "scroll", { grid: this }, this.windowScroll );
-		$( verticalScroll ).add( this.grid ).on( "resize", this.copyHeaderSize );
 		this.grid.on( "scroll.tinyscrollbar", ".scrollbar", { grid: this }, this.updateTableHeaders );
 
-		$( "table.floatable", this.grid ).each(function() {
-			var $this = $( this ),
-				$parent = $this.parent(),
-				originalHeaderRow,
-				cloneTable,
-				clonedHeaderRow;
-
-			if ( $parent.css("position") === "relative" ) {
-				$parent.addClass("divTableWithFloatingHeader");
-			} else {
-				$this.wrap("<div class=\"divTableWithFloatingHeader\" style=\"position: relative;\" />");
-			}
-
-			originalHeaderRow = $( "thead:first", this );
-			cloneTable = $("#thetableclone").children("table");
-			clonedHeaderRow = cloneTable.append( originalHeaderRow.clone() ).append("<tbody>").find("tbody").append( $( "tbody tr:first", this ).clone().css( "visibility", "hidden" ) ).end(); // this keeps the thead at proper width
-
-			clonedHeaderRow.closest("#thetableclone").css({
-				top: $("header#main").height(),
-				left: $this.css("margin-left") + $this.offset().left
-			});
-
-			clonedHeaderRow.addClass("tableFloatingHeader");
-			originalHeaderRow.addClass("tableFloatingHeaderOriginal");
-
-			that.copyHeaderSize();
-		});
+		// clone the <thead> if requested
+		if ( this.options.stickyHeader ) {
+			this.cloneTableHead();
+		}
 
 		$(".grid-table").find("thead").find(".filter")
 			.on( "click", ".select", { grid: this }, this.bulkActionsHandler )
@@ -147,6 +123,39 @@ Grid.prototype = {
 		Scrollbars.add( "grid", this.grid, { axis: "x", scroll: false } );
 
 		this.windowResize();
+	},
+
+	/**
+	 * cloneTableHead
+	 */
+	cloneTableHead: function() {
+		var table = this.grid.find("table"),
+			thead = table.find("thead"),
+			tbody = table.find("tbody"),
+			viewport = table.parent(),
+			firstDataRow = tbody.find("tr").not(".not-data").first();
+
+		// TODO: these classes aren't really useful, remove/replace?
+		table.addClass("floatable");
+		thead.addClass("tableFloatingHeaderOriginal");
+
+		// TODO: is this redundant?
+		if ( viewport.css("position") === "relative" ) {
+			viewport.addClass("divTableWithFloatingHeader");
+		} else {
+			table.wrap("<div class=\"divTableWithFloatingHeader\" style=\"position: relative;\" />"); // not a huge fan of breaking the separation of concerns...
+		}
+
+		// "clone" the relevant elements (html() method is waaaay more performant than clone())
+		$("#thetableclone")
+			.find("table").addClass("tableFloatingHeader") // TODO: is this class needed too?
+			.find("thead").html( thead.html() )
+			.next("tbody").html( firstDataRow.html() ) // "cloning" a row keeps the widths of the <th>'s the same
+			.end().end().end()
+			.css({
+				top: $("#main").height(), // position the table clone under the <header>
+				height: thead.height() // "hide" the cloned <tbody> so click events can "pass-through" to the actual <tbody>
+			});
 	},
 
 	// this function isn't used yet, will be once the
@@ -397,7 +406,7 @@ Grid.prototype = {
 	},
 
 	copyHeaderSize: function() {
-		$( "div.divTableWithFloatingHeader", this.grid ).each(function() {
+		/*$( "div.divTableWithFloatingHeader", this.grid ).each(function() {
 			var originalHeaderRow = $( ".tableFloatingHeaderOriginal", this ),
 				clonedHeaderRow = $( ".tableFloatingHeader", this );
 
@@ -405,7 +414,7 @@ Grid.prototype = {
 			$( "th", clonedHeaderRow ).each(function( i ) {
 				$( this ).css( "width", $( "th", originalHeaderRow ).eq( i ).css("width") );
 			});
-		});
+		});*/
 	},
 
 	// derived from https://bitbucket.org/cmcqueen1975/htmlfloatingtableheader/wiki/Home
