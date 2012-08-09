@@ -884,6 +884,9 @@ fieldset.login input:not(.hidden), fieldset.forgot input:not(.hidden) {
 	width: 340px; height: auto;
 	border-radius: 4px;
 }
+fieldset.login input::-webkit-input-placeholder {
+	line-height: 1.3em;	
+}
 fieldset.login input:focus, fieldset.forgot input:focus {
 	background: #939393;
 	color: rgba(0,0,0,0.8);	
@@ -1469,6 +1472,15 @@ header#main:before {
 
 	position: relative;
 }
+.sectional-tabs li#protrada-video > a {
+	background: #161413;	
+	color: #FCF9F5;
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+
+
+
 .sectional-tabs li.active a:before, .sectional-tabs li.standout-tab a:before {
 	top: 19px;
 }
@@ -1483,9 +1495,6 @@ header#main:before {
     font-weight: normal;
     text-indent: 0;	
 }
-.sectional-tabs li#import-domains a {
-	padding-left: 55px;	
-}
 .sectional-tabs li#import-domains a:before {
 	content: "v";
 	margin: 0 0 0 -2px;	
@@ -1498,14 +1507,14 @@ header#main:before {
 .sectional-tabs li#export-data a:before {
 	margin: 0 0 0 1px;
 }
-.sectional-tabs li#watchlist a {
-	padding-left: 50px;	
-}
 .sectional-tabs li#watchlist a:before {
 	content: "L";
 	margin: 0 0 0 1px;
 }
-
+.sectional-tabs li#protrada-video a:before {
+	content: "}";
+	margin: 0 0 0 1px;
+}
 
 
 
@@ -2390,19 +2399,19 @@ header#main:before {
 #section-panel.mini-panel.video { 
 	max-width: 520px;	
 }
-.video #panel-content {
-	background: #292929;
+.mini-panel.video #panel-content {
+	background: #161413;
 	color: #FCF9F5;
 }
-.video.mini-panel .panel-heading {
+.mini-panel.video .panel-heading {
 }
-.video.mini-panel .x-panel {
+.mini-panel.video .x-panel {
 	color: #FCF9F5;
 }
-.video.mini-panel .x-panel:hover {
+.mini-panel.video .x-panel:hover {
 	background: rgba(255,255,255,0.1);
 }
-.video.mini-panel iframe {
+.mini-panel.video iframe {
 	margin: 20px 0 0 -30px;
 }
 
@@ -6698,7 +6707,7 @@ select, input[type="file"] {
 }
 
 .grid-table th .btn-group.open .dropdown-toggle {
-	box-shadow: inset 0 1px 3px rgba(0,0,0,0.35), 0 1px 0 rgba(255,255,255,0.15);
+	box-shadow: inset 0 1px 3px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.15);
 	color: #b3b3b3;
 	
 	background: rgb(65,65,65); /* Old browsers */

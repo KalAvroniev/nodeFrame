@@ -254,13 +254,17 @@ $.pv3.panel.show = function ( url, options ) {
 			}));
 
 			// fix close handler
-			$("#import-export, .x-panel").unbind("click").click(function() {
+			$(".x-panel").unbind("click").click(function() {
 				$(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
 
 				// restore the standout tab to be the first child of the UL
 				$sectionalTabs.restoreStandoutElement();
 
-				return $.pv3.panel.hide();
+				// find
+				$(".sectional-tabs").find(".temporary-panel-tab").remove();
+
+				return $.pv3.panel.hide();				
+				
 			});
 		});
 	});

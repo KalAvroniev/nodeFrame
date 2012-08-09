@@ -23,17 +23,17 @@
 		// protrada video
 		$("#watch-video").on( "click", function( e ) {
 			var $panelTabs = $("header#main").find(".sectional-tabs"),
-				$tabClone = $panelTabs.find(".standout-tab").clone().attr( "id", "protrada-video" ).removeClass("standout-tab");
+				$tabClone = $panelTabs.find(".standout-tab").clone().attr( "id", "protrada-video" ).addClass("temporary-panel-tab").removeClass("standout-tab");
 
 			e.preventDefault();
 
 			$tabClone.find("a")
-				.attr( "href", "javascript:$.pv3.panel.show( '/panels/protrada-video', {tabid: 'protrada-video', panel_size: 'mini-panel'} );" )
-				.html("<strong>video introduction</strong> to domain trading")
+				.attr( "href", "javascript:$.pv3.panel.show( '/panels/protrada-video', {tabid: 'protrada-video', panel_size: 'mini-panel video'} );" )
+				.html("<strong>video intro</strong> to domain trading")
 				.end()
 				.prependTo( $panelTabs );
 
-			$.pv3.panel.show( "/panels/protrada-video", { tabid: "protrada-video", panel_size: "mini-panel" } );
+			$.pv3.panel.show( "/panels/protrada-video", { tabid: "protrada-video", panel_size: "mini-panel video" } );
 		});
 
 		setupTradingGraph();

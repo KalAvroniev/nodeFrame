@@ -177,6 +177,7 @@ $( document ).on( "click", "#toggle-side-bar, #x-side-bar", function() {
 // remove alert item from sidebar
 $( document ).on( "click", ".x-alert-msg", function() {
 	$( this ).parent().slideUp( 450, function() {
+		
 		$( this ).remove();
 
 		// update fake scrollbars
