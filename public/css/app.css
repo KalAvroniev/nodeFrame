@@ -3239,6 +3239,11 @@ input[type=number] {
 	background-color: #3cabf8;
 }
 
+
+
+
+
+
 /* ------------------------------ Advanced search form panel styles work ------------------------ */
 
 .form-horizontal .form-column {
@@ -3256,6 +3261,9 @@ input[type=number] {
 	margin: 10px 0 30px;
 	font-size: 21px;
 	letter-spacing: -1px;
+	clear: both;
+}
+.three-in-row {
 	clear: both;
 }
 #panel-content .form-horizontal .three-in-row .control-label {
@@ -3278,8 +3286,29 @@ input[type=number] {
 .sources .controls label input {
 	margin: 8px 12px 0 -15px;	
 }
-
-
+#panel-content .form-horizontal .short-input-row .control-label {
+	width: auto; 
+	float: none; 
+	text-align: left;
+	padding: 0 0 10px 0;
+} 
+#panel-content .form-horizontal .short-input-row .controls {
+	margin: 0;
+}
+.control-group.short-input-row {
+	width: 45%;
+	float: left;
+}
+.control-group.short-input-row:nth-child(2n) {
+	margin: 0 0 0 10%;
+}
+.control-group.short-input-row:nth-child(2n+1) {
+	clear: both;
+}
+.form-horizontal .control-group.short-input-row:before, .form-horizontal .control-group.short-input-row:after {
+	clear: none;
+	display: none;
+}
 
 
 
@@ -5112,7 +5141,12 @@ li.more-coming-soon .ff-icon-before:after {
 	width: auto;
 	margin-left: -25px;
 }
-
+.form-horizontal select {
+	font-size: 13px;
+	border-radius: 8px;	
+	padding: 12px 10px;	
+	height: auto; width: 90%;
+}
 .form-horizontal input:focus {
 	background: rgba(255,255,255,0.37);
 	border-color: white;
@@ -5195,6 +5229,10 @@ li.more-coming-soon .ff-icon-before:after {
 .form-horizontal .control-group.divider-after {
 	padding: 0 0 20px;
 	border-bottom: 10px solid rgba(0,0,0,0.03);
+}
+.form-horizontal .control-group.divider-before {
+	padding: 20px 0 0;
+	border-top: 10px solid rgba(0,0,0,0.03);
 }
 .form-horizontal .form-actions {
 	background: rgba(0,0,0,0.07);
