@@ -3243,22 +3243,39 @@ input[type=number] {
 
 .form-horizontal .form-column {
 	float: left;
-	width: 45%;
+	width: 47%;
 	right: auto;
 }
 .form-column.left {
-	margin: 0 10% 0 0;
+	margin: 0 6% 0 0;
+}
+.form-column.right {
+	margin: 0;
 }
 .advanced-subhead {
 	margin: 0 0 20px;
 	font-size: 18px;
 }
-
-
-
-
-
-
+.form-horizontal .three-radios {
+	margin: 0 0 30px
+}
+.three-radios form {
+	margin: 0;
+}
+#panel-content .form-horizontal .three-radios .control-label {
+	width: 80px;
+}
+#panel-content .form-horizontal .three-radios .controls {
+	margin-left: 120px;
+}
+.three-radios .controls label, .three-radios .controls label:first-child {
+	display: inline-block;
+	margin: 0 15px 0 0;
+	padding: 5px 20px 0 0;
+}
+.three-radios .radio input[type="radio"] {
+	margin: 3px 7px 0 -15px;
+}
 
 
 

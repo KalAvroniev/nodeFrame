@@ -2,67 +2,130 @@ h2.panel-heading
 	strong advanced options
 	span.ff-icon-before.advanced-search for domain searching
 
-p	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae massa nec nunc sagittis vehicula non et nibh. Curabitur lacus felis, gravida nec tristique non, rhoncus non ante.
+p	You can pick and choose which of these inputs you would like to specify, and which to leave blank. Each entry will further refine the results of your search query - making exteremly targeted domain searches a cinch!
 	
 form#advanced-search.form-horizontal.panel-form.clearfix
 
+	h3.advanced-subhead domain character options
+
+
 	.form-column.left
 	
-		h3.advanced-subhead domain character options
 		
 		.control-group.txt-input-row
 			label(for="must-contain").control-label must contain 
 				strong all of 
 			.controls
-				input#must-contain-all(type="text", placeholder="must contain")	
-				p.help-block * a-z, 0-9, hyphens, spaces. eg. hotel paris
+				input#must-contain-all(type="text", placeholder="contains all")	
+				p.help-block a-z, 0-9, hyphens, spaces. eg. hotel paris
 	
 		.control-group.txt-input-row
 			label(for="must-contain").control-label must contain 
 				strong any of 
 			.controls
-				input#must-contain-any(type="text", placeholder="must contain")	
-				p.help-block * a-z, 0-9, hyphens, spaces. eg. hotel paris
+				input#must-contain-any(type="text", placeholder="contains any")	
+				p.help-block a-z, 0-9, hyphens, spaces. eg. hotel paris
 
+		.control-group.txt-input-row
+			label(for="must-start").control-label must 
+				strong start with 
+			.controls
+				input#must-start(type="text", placeholder="starts with")	
+				p.help-block a-z, 0-9, hyphens
 
+		.control-group.txt-input-row
+			label(for="must-end").control-label must 
+				strong end with 
+			.controls
+				input#must-end(type="text", placeholder="ends with")	
+				p.help-block eg. online, not .com
 
+		.control-group.txt-input-row
+			label(for="must-not-contain").control-label must not contain 
+				strong any
+			.controls
+				input#must-not-contain(type="text", placeholder="must not contain")	
+				p.help-block eg. online, not .com
 
+		.control-group.txt-input-row
+			label(for="must-not-contain").control-label must not  
+				strong start with
+			.controls
+				input#must-not-contain(type="text", placeholder="doesn't start with")	
+				p.help-block a-z, 0-9, hyphens
 
-
-
-
-
-
-
-
-
-
-
+		.control-group.txt-input-row
+			label(for="must-not-contain").control-label must not  
+				strong end with
+			.controls
+				input#must-not-contain(type="text", placeholder="doesn't end with")	
+				p.help-block eg. online, not .com
 
 	
 	.form-column.right
-		
-		h3.advanced-subhead domain character &amp content options
+					
+		.control-group.three-radios	
 			
-		.control-group.txt-input-row
-			label(for="max-bid-value").control-label max-bid value
+			label(for="instant-bid").control-label 
+				strong hyphens		
 			.controls
-				input#max-bid-value(type="number", placeholder="placed in USD")		
+				form
+					label.radio include
+						input#instant-bid(name="hyphens", type="radio")
+					label.radio exclude
+						input#instant-bid(name="hyphens", type="radio")	
+					label.radio don't care
+						input#instant-bid(name="hyphens", type="radio")	
+					
+													
+			label(for="instant-bid").control-label 
+				strong digits		
+			.controls
+				form
+					label.radio include
+						input#instant-bid(name="digits", type="radio")
+					label.radio exclude
+						input#instant-bid(name="digits", type="radio")
+					label.radio don't care
+						input#instant-bid(name="digits", type="radio")
+			
+			
+			label(for="instant-bid").control-label 
+				strong foreign		
+			.controls
+				form
+					label.radio include
+						input#instant-bid(name="foreign", type="radio")
+					label.radio exclude
+						input#instant-bid(name="foreign", type="radio")
+					label.radio don't care
+						input#instant-bid(name="foreign", type="radio")
+			
+			
+			
+			label(for="instant-bid").control-label 
+				strong adult		
+			.controls
+				form
+					label.radio include
+						input#instant-bid(name="adult", type="radio")
+					label.radio exclude
+						input#instant-bid(name="adult", type="radio")
+					label.radio don't care
+						input#instant-bid(name="adult", type="radio")
 	
 	
+		.control-group.txt-input-row
+			label(for="must-not-contain").control-label minimum  
+				strong length
+			.controls
+				input#must-not-contain(type="number", placeholder="at least")
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		.control-group.txt-input-row
+			label(for="must-not-contain").control-label maximum  
+				strong length
+			.controls
+				input#must-not-contain(type="number", placeholder="at most")	
 	
 	
 	
