@@ -3286,7 +3286,9 @@ input[type=number] {
 	margin: 0 0 10px;
 }
 .advanced-subhead {
-	margin: 20px 0 40px;
+	margin: 20px 0;
+	padding: 0 0 14px;
+	border-bottom: 13px solid rgba(0, 0, 0, 0.04);
 	font-size: 21px;
 	line-height: 1.4em;
 	letter-spacing: -1px;
@@ -5185,6 +5187,10 @@ li.more-coming-soon .ff-icon-before:after {
 	background: transparent;
 	border-color: rgba(119,110,105,0.3);
 }
+.form-horizontal input::-webkit-input-placeholder { 
+	line-height: 1.3em;
+	color: #4c4b4a;
+}
 .radio input[type="radio"], .checkbox input[type="checkbox"] {
 	width: auto;
 	margin-left: -25px;
@@ -5666,7 +5672,7 @@ thead tr {
 .grid-table tfoot td {
 	padding: 15px 15px 30px;
 }
-.grid-table tbody tr:hover {
+.grid-table tbody tr:not(.not-data):hover {
 	background: #e5e5e5;
 
 }
@@ -5680,14 +5686,14 @@ thead tr {
 	border: none;
 	box-shadow: none;
 }
-.grid-table tbody .row-sel td, .grid-table tbody .row-sel:hover td {
+#grid-view .grid-table tbody .row-sel td, #grid-view .grid-table tbody .row-sel:hover td {
 	background: #e46503;
 	color: rgba(0,0,0,0.6);
 	font-weight: 400;
 	box-shadow: inset 0px 1px 0 rgba(0,0,0,0.3);
 	border: none;	
 }
-.grid-table tbody .row-sel.child td, .grid-table tbody .row-sel.child:hover td {
+#grid-view .grid-table tbody .row-sel.child td, #grid-view .grid-table tbody .row-sel.child:hover td {
 	border: none;
 	box-shadow: inset 0px -1px 0 rgba(0,0,0,0.23), inset 0 -2px 0 rgba(0,0,0,0.13);
 	padding: 0 15px;

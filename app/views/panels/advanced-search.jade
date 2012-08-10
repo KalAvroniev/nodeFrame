@@ -37,9 +37,17 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 			.controls
 				input#must-end(type="text", placeholder="ends with")	
 				p.help-block eg. online, not .com
+				
+		.control-group.txt-input-row
+			label(for="must-end").control-label
+				strong  must not 
+				| contain
+			.controls
+				input#must-end(type="text", placeholder="doesn't contain any")	
+				p.help-block eg. online, not .com				
 
 	
-	.form-column.right
+	.form-column.right	
 					
 		.two-controls-row-wrapper.clearfix
 			.control-group.short-input-row
@@ -135,7 +143,7 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 					
 	.form-column.left	
 	
-		.control-group.three-in-row.divider-after.tlds
+		.control-group.three-in-row.tlds
 			
 			label(for="").control-label only domains with the  
 				strong selected TLD(s)
@@ -186,7 +194,7 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 	
 	.form-column.right
 	
-		.control-group.txt-input-row.divider-after
+		.control-group
 			label(for="must-contain").control-label or specify 
 				strong other TLD(s)
 			.controls

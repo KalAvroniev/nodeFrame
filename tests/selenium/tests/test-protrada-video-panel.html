@@ -4,13 +4,18 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8182/" />
-<title>test hiding an alert works (inside the sidebar)</title>
+<title>tim-test-protrada-video-panel</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">test hiding an alert works (inside the sidebar)</td></tr>
+<tr><td rowspan="1" colspan="3">tim-test-protrada-video-panel</td></tr>
 </thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/home</td>
+	<td></td>
+</tr>
 <tr>
 	<td>storeEval</td>
 	<td>var window = this.browserbot.getUserWindow(); window.$.jsonrpcSync('user/reset-state', {}); window.$.pv3.state.get(function () {}, { 'async': false })</td>
@@ -22,28 +27,13 @@
 	<td>3000</td>
 </tr>
 <tr>
-	<td>open</td>
-	<td>/home</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForPageToLoad</td>
 	<td></td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=x-side-bar</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertXpathCount</td>
-	<td>//aside/div/div[2]/div/section/div/div/article</td>
-	<td>9</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//span[@class=&quot;x-alert-msg&quot;][1]</td>
+	<td>//a[@id='watch-video']</td>
 	<td></td>
 </tr>
 <tr>
@@ -53,14 +43,30 @@
 </tr>
 <tr>
 	<td>assertXpathCount</td>
-	<td>//div[@id=&quot;protrada-msgs&quot;]/article</td>
-	<td>8</td>
+	<td>//div[@id=&quot;section-panel&quot;][contains(@class, &quot;video&quot;)]</td>
+	<td>1</td>
 </tr>
 <tr>
-	<td>assertAttribute</td>
-	<td>//li[@class=&quot;active protrada left&quot;]/a/span[@class=&quot;alert-count&quot;]@data-alerts</td>
-	<td>8</td>
+	<td>assertXpathCount</td>
+	<td>//ul[@class=&quot;sectional-tabs &quot;]/li[@id=&quot;protrada-video&quot;][contains(@class, &quot;temporary-panel-tab active&quot;)]</td>
+	<td>1</td>
 </tr>
+<tr>
+	<td>click</td>
+	<td>//a[@class='x-panel']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertXpathCount</td>
+	<td>//div[@id=&quot;section-panel&quot;][contains(@class, &quot;hidden&quot;)]</td>
+	<td>1</td>
+</tr>
+
 </tbody></table>
 </body>
 </html>
