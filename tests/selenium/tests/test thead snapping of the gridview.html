@@ -12,6 +12,11 @@
 <tr><td rowspan="1" colspan="3">test thead snapping of the gridview</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/exchange</td>
+	<td></td>
+</tr>
+<tr>
 	<td>storeEval</td>
 	<td>var window = this.browserbot.getUserWindow(); window.$.jsonrpcSync('user/reset-state', {}); window.$.pv3.state.get(function () {}, { 'async': false })</td>
 	<td></td>
@@ -20,11 +25,6 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
 	<td>300</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/exchange</td>
-	<td></td>
 </tr>
 <tr>
 	<td>waitForPageToLoad</td>
@@ -49,7 +49,7 @@
 <tr>
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().document.getElementById(&quot;thetableclone&quot;).style.display==&quot;block&quot;</td>
-	<td>500</td>
+	<td>1000</td>
 </tr>
 <tr>
 	<td>click</td>

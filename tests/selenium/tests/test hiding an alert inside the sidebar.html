@@ -12,6 +12,11 @@
 <tr><td rowspan="1" colspan="3">test hiding an alert works (inside the sidebar)</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/home</td>
+	<td></td>
+</tr>
+<tr>
 	<td>storeEval</td>
 	<td>var window = this.browserbot.getUserWindow(); window.$.jsonrpcSync('user/reset-state', {}); window.$.pv3.state.get(function () {}, { 'async': false })</td>
 	<td></td>
@@ -20,11 +25,6 @@
 	<td>waitForCondition</td>
 	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
 	<td>3000</td>
-</tr>
-<tr>
-	<td>open</td>
-	<td>/home</td>
-	<td></td>
 </tr>
 <tr>
 	<td>waitForPageToLoad</td>
