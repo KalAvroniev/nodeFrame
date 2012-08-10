@@ -1,45 +1,6 @@
-# always declare variables first
-
-# derived from http://stackoverflow.com/a/2866613
-# if decimal is zero we must take it, it means user does not want to show any decimal
-# if no decimal separator is passed we use the comma as default decimal separator (we MUST use a decimal separator)
-
-# according to [http://stackoverflow.com/questions/411352/how-best-to-determine-if-an-argument-is-not-sent-to-the-javascript-function]
-# the fastest way to check for not defined parameter is to use typeof value === "undefined"
-# rather than doing value === undefined.
-# if you don't want ot use a thousands separator you can pass empty string as thousands_sep value
-
-# extracting the absolute value of the integer part of the number and converting to string
-
-# dropdowns
-
-# this must be assigned after the jade template is loaded in, see $.pv3.panel.show()
-#$("#import-export, .x-panel").click(function() {
-#		if ( $("#section-panel").hasClass("hidden") ) {
-#			$("#section-panel").removeClass("hidden");
-#			$( this ).addClass("active");
-#		} else {
-#			$("#section-panel").addClass("hidden")
-#			$(".sectional-tabs .active").removeClass("active");
-#		}
-#
-#		return false;
-#	});
-
-# update fake scrollbars
-
-# now setup the socket for push notifications
-
-# force logout
-
-# the first thing we need to do is fetch the recent notifications
-
-# now setup the socket for push notifications
 togglePanel = (selectorName, contentCallback) ->
   $this = $(this)
   $panel = $("#section-panel")
-  
-  # already visible
   if $panel.data("tab") is selectorName
     $panel.addClass("hidden").removeData "tab"
   else
@@ -52,10 +13,6 @@ togglePanel = (selectorName, contentCallback) ->
     $this.removeClass "active"
   else
     $this.addClass "active"
-
-# ---
-# PUSH/FETCH NOTIFICATIONS
-# ---
 NotificationsController = (notifications) ->
   @notifications = notifications
 verticalScroll = "body"
@@ -93,8 +50,6 @@ $(document).ready ->
 
 NotificationsController::render = ->
   ns = @notifications
-  
-  # if there is data, fetch the template and render
   $.jade.getTemplate "notifications/generic", ((fn) ->
     $("#protrada-msgs.no-alerts").removeClass("no-alerts").find(".alerts-listing").html " "
     i = 0
@@ -103,10 +58,9 @@ NotificationsController::render = ->
       notif = $.jade.renderSync(fn, ns[i])
       $("#protrada-msgs").append notif
       ++i
-    
-    # update counter
     $("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr "data-alerts", ns.length
     $(".protrada .alert-count").attr "data-alerts", ns.length
     Scrollbars.update "notifications"
   ), (error) ->
     alert error
+  return

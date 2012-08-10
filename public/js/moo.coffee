@@ -1,42 +1,30 @@
 # crude method of keeping track of fake scrollbars
 # will redo much better at some point when other "state machines" are worked out
-
 # toggle body class
-
 # toggle active UI state
-
 # update the state
-
 # toggle between Protrada and Devname
-
 # toggle active UI state
-
 # update the state
-
 # special class for the side-bar on mobile devices
 # we've already checked for mobile by this stage (index.jade), so rely on class present on body
-
 # init fake scrollbars on sidebar
-
 # PETE: Please don't delete this script:
 # UX improvement on the spine nav buttons
-
 # setup open/close sidebar element functions
+
 toggleSidebar = (e) ->
   $aside = $("aside")
   $aside.toggleClass "active"
-  $(document.body).toggleClass "sidebar-hidden sidebar-open"
-  
-  # animate main body (the best way to force webkit to re-render children dom elements)
-  $("#main-container, .task-status").delay((if $(document.body).hasClass("sidebar-hidden") then 200 else 0)).animate
-    width: ((if $aside.hasClass("active") then "99.999" else "100")) + "%"
-  , 200, ->
-    
-    # update fake scrollbars
-    Scrollbars.updateAll()
-    
-    # update sticky headers
-    $("#grid-view").grid "windowResize"
+  $(document.body).toggleClass ("sidebar-hidden sidebar-open")
+  $("#main-container, .task-status")
+    .delay((if $(document.body).hasClass("sidebar-hidden") then 200 else 0))
+    .animate
+        width: ((if $aside.hasClass("active") then "99.999" else "100")) + "%", 200, ->
+            # update fake scrollbars
+            Scrollbars.updateAll()
+            # update sticky headers
+            $("#grid-view").grid "windowResize"
 
 protrada =
   version: "3a2"
