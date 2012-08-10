@@ -3146,7 +3146,6 @@ input[type=number] {
 /* ----------------------------- Source / provider icon / labels work --------------------------------- */
 
 /* 	INFO ----------
-	
 	when updating sources sprite sheet, use www.spritecow.com ------------------- */
 	
 .sources-sprite {
@@ -3223,7 +3222,6 @@ input[type=number] {
 	background-position: -412px -9px;
 	background-color: #4a2354;
 }
-
 .sources-sprite[source="Expiring"] {
 	color: #626262;
 }
@@ -3238,7 +3236,6 @@ input[type=number] {
 	background-position: -39px -54px;
 	background-color: #3cabf8;
 }
-
 .sources-sprite[source="Yahoo!"] {
 	color: #4e2d8a;
 }
@@ -3246,7 +3243,6 @@ input[type=number] {
 	background-position: -161px -56px;
 	background-color: #4e2d8a;
 }
-
 .sources-sprite[source="DMOZ"] {
 	color: #5b8d3c;
 }
@@ -3280,23 +3276,24 @@ input[type=number] {
 
 .form-horizontal .form-column {
 	float: left;
-	width: 47%;
+	width: 46%;
 	right: auto;
 }
 .form-column.left {
-	margin: 0 6% 10px 0;
+	margin: 0 8% 10px 0;
 }
 .form-column.right {
 	margin: 0 0 10px;
 }
 .advanced-subhead {
-	margin: 10px 0 30px;
+	margin: 20px 0 40px;
 	font-size: 21px;
+	line-height: 1.4em;
 	letter-spacing: -1px;
 	clear: both;
 }
-.advanced-subhead.more-top-margin {
-	margin-top: 25px;	
+.advanced-subhead.more-margin {
+	padding-top: 20px;	
 }
 .three-in-row {
 	clear: both;
@@ -3311,6 +3308,7 @@ input[type=number] {
 	display: inline-block;
 	margin: 0 15px 0 0;
 	padding: 5px 0 0 20px;
+	line-height: 1.4em;
 }
 .tlds .controls label, .tlds .controls label:first-child {
 	min-width: 70px;
@@ -3320,7 +3318,7 @@ input[type=number] {
 	margin: 0 20px 0 0;		
 }
 .three-in-row .controls label input {
-	margin: 3px 7px 0 -15px;
+	margin: 2px 7px 0 -15px;
 }
 .sources .controls label input {
 	margin: 8px 12px 0 -15px;	
@@ -3351,9 +3349,18 @@ input[type=number] {
 .form-horizontal .sources .control-label {
 	padding: 0;
 }
-
-
-
+.selectbox-row label.control-label {
+	padding: 0;
+}
+.form-horizontal .selectbox-row {
+	margin-bottom: 25px;
+}
+.two-controls-row-wrapper {
+	margin-bottom: 25px;
+}
+.two-controls-row-wrapper .control-group {
+	margin: 0;
+}
 
 
 
@@ -5184,8 +5191,8 @@ li.more-coming-soon .ff-icon-before:after {
 }
 .form-horizontal select {
 	font-size: 13px;
-	border-radius: 8px;	
-	padding: 12px 10px;	
+	border-radius: 4px;	
+	padding: 0;	
 	height: auto; width: 90%;
 }
 .form-horizontal input:focus {

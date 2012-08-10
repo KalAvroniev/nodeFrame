@@ -60,80 +60,75 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 			label(for="").control-label 
 				strong hyphens		
 			.controls
-				label.radio include
+				label.radio
 					input(name="hyphens", type="radio")
-				label.radio exclude
+					| include
+				label.radio
 					input(name="hyphens", type="radio")	
-				label.radio don't care
+					| exclude
+				label.radio
 					input(name="hyphens", type="radio")	
-					
+					| don't care
 													
 			label(for="").control-label 
 				strong digits		
 			.controls
-				label.radio include
+				label.radio
 					input(name="digits", type="radio")
-				label.radio exclude
+					| include
+				label.radio
 					input(name="digits", type="radio")
-				label.radio don't care
+					| exclude
+				label.radio
 					input(name="digits", type="radio")
-			
+					| don't care
 			
 			label(for="").control-label 
 				strong foreign		
 			.controls
-				label.radio include
+				label.radio
 					input(name="foreign", type="radio")
-				label.radio exclude
+					| include
+				label.radio
 					input(name="foreign", type="radio")
-				label.radio don't care
+					| exclude
+				label.radio
 					input(name="foreign", type="radio")
+					| don't care
 			
 			
 			label(for="").control-label 
 				strong adult		
 			.controls
-				label.radio include
+				label.radio 
 					input(name="adult", type="radio")
-				label.radio exclude
+					| include					
+				label.radio
 					input(name="adult", type="radio")
-				label.radio don't care
+					| exclude
+				label.radio 
 					input(name="adult", type="radio")	
-		
-	
-		.control-group.three-in-row
-			
-			label(for="").control-label only domains 
-				strong in (not possible atm)	
-			.controls
-				label.checkbox english
-					input(name="english", type="checkbox")
-				label.checkbox french
-					input(name="french", type="checkbox")	
-				label.checkbox german
-					input(name="german", type="checkbox")	
-				label.checkbox spanish
-					input(name="spanish", type="checkbox")
-				label.checkbox any arabic
-					input(name="arabic", type="checkbox")	
-				label.checkbox any asian
-					input(name="asian", type="checkbox")	
+					| don't care	
 	
 	
-		.control-group.three-in-row
+		.control-group.three-in-row.divider-before
 			
 			label(for="").control-label only domains 
 				strong with	
 		
 			.controls
-				label.checkbox 1 word
+				label.checkbox
 					input(name="one-word", type="checkbox")
-				label.checkbox 2 words
-					input(name="two-word", type="checkbox")	
-				label.checkbox 3 words
+					| 1 word
+				label.checkbox
+					input(name="two-word", type="checkbox")
+					| 2 words	
+				label.checkbox
 					input(name="three-word", type="checkbox")	
-				label.checkbox 4 or more words
+					| 3 words
+				label.checkbox
 					input(name="four-word", type="checkbox")
+					| 4 or more words
 
 
 	h3.advanced-subhead domain TLD options
@@ -187,12 +182,11 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 					input(name=".es", type="checkbox")	
 				label.checkbox .eu
 					input(name=".eu", type="checkbox")
-					
 											
 	
 	.form-column.right
 	
-		.control-group.txt-input-row
+		.control-group.txt-input-row.divider-after
 			label(for="must-contain").control-label or specify 
 				strong other TLD(s)
 			.controls
@@ -209,14 +203,18 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 			label(for="").control-label only domains 
 				strong that are	
 			.controls
-				label.checkbox non-exclusive deleting
+				label.checkbox
 					input(name="english", type="checkbox")
-				label.checkbox exclusive
+					| non-exclusive deleting
+				label.checkbox
 					input(name="french", type="checkbox")	
-				label.checkbox no longer registered
+					| exclusive
+				label.checkbox
 					input(name="german", type="checkbox")	
-				label.checkbox privately for-sale
+					| no longer registered
+				label.checkbox
 					input(name="spanish", type="checkbox")
+					| privately for-sale
 					
 		.control-group.three-in-row.sources
 			
@@ -308,19 +306,22 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 					
 	.form-column.right	
 					
-		h3.advanced-subhead domain pricing, bids, type of sale &amp; dates
-					
+		h3.advanced-subhead domain pricing, bids &amp; type of sale
+		
 		.control-group.three-in-row
 			
 			label(for="").control-label only these 
 				strong sale types	
 			.controls
-				label.checkbox auctions
+				label.checkbox
 					input(name="auctions", type="checkbox")
-				label.checkbox buy it now
+					| auctions
+				label.checkbox
 					input(name="buy-now", type="checkbox")	
-				label.checkbox make an offer
-					input(name="make-offer", type="checkbox")										
+					| buy it now
+				label.checkbox
+					input(name="make-offer", type="checkbox")	
+					| make an offer									
 		
 		.control-group.three-in-row
 			
@@ -334,7 +335,7 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 				label.radio don't care
 					input(name="has-bids", type="radio")			
 		
-		.two-controls-row-wrapper.divider-before
+		.two-controls-row-wrapper.clearfix.divider-before
 							
 			.control-group.short-input-row
 				label(for="must-not-contain").control-label minimum price 
@@ -358,27 +359,29 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 				input#must-not-contain(type="number", placeholder="at most")					
 				
 					
-		.control-group.short-input-row
+		.control-group.short-input-row.divider-after
 			label(for="must-not-contain").control-label currency
-			.controls
+			.controls.clearfix
 				select#select01
 					option USD
 						option 2
 						option 3
 						option 4
 						option 5					
-					
-					
-		.control-group.divider-before
+
+		h3.advanced-subhead.more-margin availability, age &amp; expiry information		
+			
+		.control-group.selectbox-row
 			label(for="must-contain").control-label only available during 
 				strong the date / range 
-			.controls
+			.controls.clearfix
 				select#select01
 					option date-range
 					option tomorrow
 					option 2 days from now
 					option 3 days from now
 					option 4 days from now
+
 					
 		.two-controls-row-wrapper.divider-after.clearfix
 						
@@ -391,11 +394,8 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 				label(for="must-not-contain").control-label end date
 				.controls
 					input#must-not-contain(type="number", placeholder="finish")					
-										
-					
-		h3.advanced-subhead.more-top-margin age &amp; expiry information
-					
-		.two-controls-row-wrapper
+															
+		.two-controls-row-wrapper.divider-after.clearfix
 							
 			.control-group.short-input-row
 				label(for="must-not-contain").control-label whois domain 
@@ -411,7 +411,7 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 					input#must-not-contain(type="text", placeholder="months")
 					p.help-block we'll round up or down to the closest month
 					
-		.control-group.divider-before
+		.control-group.clearfix
 			button(type="submit").btn.btn-success.btn-large.ff-icon-before perform search						
 					
 					
