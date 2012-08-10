@@ -12,6 +12,16 @@
 <tr><td rowspan="1" colspan="3">test hiding an alert works (inside the sidebar)</td></tr>
 </thead><tbody>
 <tr>
+	<td>storeEval</td>
+	<td>var window = this.browserbot.getUserWindow(); window.$.jsonrpcSync('user/reset-state', {}); window.$.pv3.state.get(function () {}, { 'async': false })</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
+	<td>3000</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/home</td>
 	<td></td>
@@ -22,28 +32,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>storeEval</td>
-	<td>var window = this.browserbot.getUserWindow(); window.$.jsonrpcSync('user/reset-state', {}); window.$.pv3.state.get(function () {}, { 'async': false })</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
-	<td>500</td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>id=x-side-bar</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertXpathCount</td>
-	<td>//html/body/aside/div/div[2]/div/section/div/div/article</td>
+	<td>//aside/div/div[2]/div/section/div/div/article</td>
 	<td>9</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//html/body/aside/div/div[2]/div/section/div/div/article/span</td>
+	<td>//span[@class=&quot;x-alert-msg&quot;][1]</td>
 	<td></td>
 </tr>
 <tr>
@@ -53,7 +53,12 @@
 </tr>
 <tr>
 	<td>assertXpathCount</td>
-	<td>//html/body/aside/div/div[2]/div/section/div/div/article</td>
+	<td>//div[@id=&quot;protrada-msgs&quot;]/article</td>
+	<td>8</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>//li[@class=&quot;active protrada left&quot;]/a/span[@class=&quot;alert-count&quot;]@data-alerts</td>
 	<td>8</td>
 </tr>
 </tbody></table>

@@ -12,13 +12,23 @@
 <tr><td rowspan="1" colspan="3">NotificationShowHide</td></tr>
 </thead><tbody>
 <tr>
+	<td>storeEval</td>
+	<td>var window = this.browserbot.getUserWindow(); window.$.jsonrpcSync('user/reset-state', {}); window.$.pv3.state.get(function () {}, { 'async': false })</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
+	<td>3000</td>
+</tr>
+<tr>
 	<td>open</td>
 	<td>/home</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>500</td>
+	<td>waitForPageToLoad</td>
+	<td></td>
 	<td></td>
 </tr>
 <tr>
@@ -40,6 +50,31 @@
 	<td>assertXpathCount</td>
 	<td>//aside[contains(@class, &quot;active&quot;)]</td>
 	<td>0</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.left-bars &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.devname.center &gt; a.ff-icon-before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertXpathCount</td>
+	<td>//div[@id=&quot;devname-msgs&quot;][contains(@class, &quot;active&quot;)]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.archive.right &gt; a.ff-icon-before</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertXpathCount</td>
+	<td>//div[@id=&quot;archive-msgs&quot;][contains(@class, &quot;active&quot;)]</td>
+	<td>1</td>
 </tr>
 </tbody></table>
 </body>
