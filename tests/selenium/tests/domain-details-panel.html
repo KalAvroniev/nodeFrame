@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8182/" />
+<title>tim-domain-details-panel</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tim-domain-details-panel</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/exchange</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>var window = this.browserbot.getUserWindow(); window.$.jsonrpcSync('user/reset-state', {}); window.$.pv3.state.get(function () {}, { 'async': false })</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
+	<td>300</td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//table[@class=&quot;grid-table overview floatable&quot;]/tbody/tr[3]/td[3]/span/a[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertXpathCount</td>
+	<td>//div[@id=&quot;section-panel&quot;][contains(@class, &quot;mini-panel&quot;)]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=.panel-heading &gt; strong</td>
+	<td>detailed domain info on</td>
+</tr>
+<tr>
+	<td>assertXpathCount</td>
+	<td>//ul[@class=&quot;sectional-tabs &quot;]/li[@id=&quot;domain-details&quot;][contains(@class, &quot;temporary-panel-tab active&quot;)]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@class='x-panel']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertXpathCount</td>
+	<td>//div[@id=&quot;section-panel&quot;][contains(@class, &quot;hidden&quot;)]</td>
+	<td>1</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
