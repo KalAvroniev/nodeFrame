@@ -1,6 +1,6 @@
 h2.panel-heading
 	strong advanced options
-	span.ff-icon-before.advanced-search for domain searching
+	span.ff-icon-before.advanced-search for domain searches
 
 p	You can pick and choose which of these inputs you would like to specify, and which to leave blank. Each entry will further refine the results of your search query - making exteremly targeted domain searches a cinch!
 	
@@ -8,10 +8,8 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 
 	h3.advanced-subhead domain character options
 
-
 	.form-column.left
 	
-		
 		.control-group.txt-input-row
 			label(for="must-contain").control-label must contain 
 				strong all of 
@@ -106,7 +104,7 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 		.control-group.three-in-row
 			
 			label(for="").control-label only domains 
-				strong in	
+				strong in (not possible atm)	
 			.controls
 				label.checkbox english
 					input(name="english", type="checkbox")
@@ -226,11 +224,11 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 				strong from	
 			.controls
 				label.checkbox
+					input(name="bido", type="checkbox")
+					span.sources-sprite(source="Bido")			
+				label.checkbox
 					input(name="sedo", type="checkbox")
 					span.sources-sprite(source="Sedo")	
-				label.checkbox
-					input(name="bido", type="checkbox")
-					span.sources-sprite(source="Bido")									
 				label.checkbox
 					input(name="snapnames", type="checkbox")
 					span.sources-sprite(source="Snap Names")	
@@ -243,14 +241,12 @@ form#advanced-search.form-horizontal.panel-form.clearfix
 				label.checkbox
 					input(name="fabulous", type="checkbox")
 					span.sources-sprite(source="Fabulous")												
-								
 				label.checkbox
 					input(name="godaddy", type="checkbox")
 					span.sources-sprite(source="GoDaddy")	
-					
 				label.checkbox
 					input(name="flippa", type="checkbox")
-					span.sources-sprite(source="Flippa?")													
+					span.sources-sprite(source="Flippa")													
 				
 				p.help-block Namejet Pre-release = exclusive + Namejet
 				p.help-block Snap Names Pre-release = exclusive + Snap Names
