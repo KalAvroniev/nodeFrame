@@ -1,6 +1,7 @@
 util = require('util')
 
-class exports.Controller
+class Notifications_Generic
+	module.exports = @
 
 	run: (req, res) ->
 		res.view.layout = null

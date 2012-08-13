@@ -1,7 +1,8 @@
 util = require('util')
 
-class exports.Controller
-
+class Login
+	module.exports = @
+	
 	run: (req, res) ->
 		if req.query.submit
 			if req.body.username == 'protrada' and req.body.password == 'test'
@@ -13,7 +14,7 @@ class exports.Controller
 			else
 				res.redirect('/login?error=' + escape("Your login information is incorrect. Please try again or use the forgot button."))
 		else
-			res.view.layout = false
+			res.view.layout = null
 			res.view.error = ''
 			if req.query.error
 				res.view.error = req.query.error

@@ -1,4 +1,5 @@
-class exports.Controller
+class API_View_Modules_Exchange_Panels_Watchlist
+	module.exports = @
 
 	validate: {
 	}

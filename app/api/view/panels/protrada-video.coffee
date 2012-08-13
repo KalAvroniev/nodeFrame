@@ -1,4 +1,5 @@
-class exports.Controller
+class API_View_Panels_ProtradaVideo
+	module.exports = @
 
 	validate: {
 	}

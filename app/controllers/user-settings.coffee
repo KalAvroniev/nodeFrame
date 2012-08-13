@@ -1,10 +1,7 @@
-Controller = require('../lib/Controller.coffee').Controller
+Index = require('../controllers/index.coffee')
 
-class exports.Controller extends Controller
+class UserSettings extends Index			
+	module.exports = @
 	
 	run: (req, res) ->
-		res.view.layout = null
-		res.view.viewModule = false
-		res.setView('index')
-		res.view.module = 'home'
-		res.ready()
+		super

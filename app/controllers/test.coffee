@@ -1,6 +1,7 @@
 Controller = require('../lib/Controller.coffee').Controller
 
-class exports.Controller extends Controller
+class Test extends Controller
+	module.exports = @
 	
 	run: (req, res) ->
 		# get data

@@ -1,4 +1,5 @@
-class exports.Controller
+class API_User_UpdateState
+	module.exports = @
 
 	validate: {
 		"name": {

@@ -1,4 +1,5 @@
-class exports.Controller
+class API_View_Modules_Home_Panels_ImportDomains
+	module.exports = @
 
 	validate: {
 	}

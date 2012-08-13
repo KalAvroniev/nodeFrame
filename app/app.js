@@ -1,15 +1,15 @@
 require('coffee-script')
-Application = require('./lib/Application.coffee').Application
+Bootstrap = require('./Bootstrap.coffee')
 
 // production server
-app = new Application({
+app = new Bootstrap({
 	'port': 8181,
 	'config': 'staging'
 });
 app.start();
 
 // debug server
-debug = new Application({
+debug = new Bootstrap({
 	'port': 8182,
 	'config': 'development'
 });

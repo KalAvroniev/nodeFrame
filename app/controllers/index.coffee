@@ -1,12 +1,19 @@
 Controller = require("../lib/Controller.coffee").Controller
 
-class exports.Controller extends Controller
+class Index extends Controller
+	module.exports = @
+	
+	constructor: () ->
+		@params = {}
 
 	run: ( req, res ) ->
-		res.view.layout = null
-		res.view.moo = "moo goes the cow"
-
+		res.setView('index')
+		res.view[key] = val for key, val of @params
+		
 		if not req.session.user
 			return res.redirect("/login")
-
+			
 		res.ready()
+		
+	setViewParams: (params) ->
+		@params = params

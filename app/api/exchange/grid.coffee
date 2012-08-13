@@ -1,6 +1,7 @@
 GridModel = require("../../models/GridModel.coffee").GridModel
 
-class exports.Controller
+class API_Exchange_Grid
+	module.exports = @
 
 	validate: {}
 

@@ -1,4 +1,5 @@
-class exports.Controller
+class API_Test_PingPong
+	module.exports = @
 
 	validate: {
 		"name": {

@@ -1,4 +1,5 @@
-class exports.Controller
+class API_Notifications_Fetch
+	module.exports = @
 
 	validate: {
 		"limit": {

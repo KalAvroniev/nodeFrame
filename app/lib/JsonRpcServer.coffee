@@ -27,7 +27,7 @@ class exports.JsonRpcServer
 					@registerMethods(basePath, path + '/' + file)
 			)
 		catch e
-			@registerMethod(path.substr(basePath.length + 1, path.length - 8 - basePath.length), require('../' + path).Controller)
+			@registerMethod(path.substr(basePath.length + 1, path.length - 8 - basePath.length), require('../' + path))
 			
 		# print
 		if path == basePath

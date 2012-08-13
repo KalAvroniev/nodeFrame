@@ -17,7 +17,6 @@ togglePanel = (selectorName, contentCallback) ->
 NotificationsController = (notifications) ->
   @notifications = notifications
   return
-
 verticalScroll = "body"
 Number::toMoney = (decimals, decimal_sep, thousands_sep) ->
   n = this

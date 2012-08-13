@@ -1,6 +1,7 @@
 Controller = require('../../../../lib/Controller.coffee').Controller
 
-class exports.Controller extends Controller
+class Modules_Home_Panels_ImportDoimains extends Controller
+	module.exports = @
 	
 	run: (req, res) ->
 		res.view.layout = '../views/layouts/mini-panels'

@@ -1,4 +1,5 @@
-class exports.Controller
+class Logout
+	module.exports = @
 
 	run: (req, res) ->
 		sid = req.cookies.SESSIONID
