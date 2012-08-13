@@ -13,8 +13,11 @@ togglePanel = (selectorName, contentCallback) ->
     $this.removeClass "active"
   else
     $this.addClass "active"
+	
 NotificationsController = (notifications) ->
   @notifications = notifications
+  return
+
 verticalScroll = "body"
 Number::toMoney = (decimals, decimal_sep, thousands_sep) ->
   n = this
@@ -61,6 +64,7 @@ NotificationsController::render = ->
     $("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr "data-alerts", ns.length
     $(".protrada .alert-count").attr "data-alerts", ns.length
     Scrollbars.update "notifications"
+	
   ), (error) ->
     alert error
   return
