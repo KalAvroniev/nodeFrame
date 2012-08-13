@@ -34,7 +34,7 @@ $.jsonrpc = function(method, params, success, failure, options) {
   if (options.async !== undefined) {
     ajax.async = options.async;
   }
-  return $.ajax(ajax);
+  $.ajax(ajax);
 };
 
 $.jsonrpcSync = function(method, params, success, failure, options) {
@@ -47,7 +47,7 @@ $.ajaxPanel = function(url, success, failure) {
   failure = failure || function(errMsg, errCode) {
     return console.error("Error " + errCode + ": " + errMsg);
   };
-  return $.ajax({
+  $.ajax({
     type: "GET",
     url: url,
     processData: false,
@@ -68,7 +68,7 @@ $.jade.getTemplate = function(url, success, options) {
   if (document[fn] !== undefined) {
     return success(fn);
   }
-  return $.ajax({
+  $.ajax({
     url: url + ".jade",
     dataType: "script",
     success: function() {
@@ -146,7 +146,7 @@ $.pv3.state.restoreModule = function() {
   window.history.pushState("", module, "/" + module);
   $("#main-container").trigger("ajaxUnload");
   $.pv3.state.update("modules.selected", module);
-  return $.ajax("/modules/" + module + "?ajax=1", {
+  $.ajax("/modules/" + module + "?ajax=1", {
     success: function(data) {
       var modules;
       $("#ajax-container").html(data);
