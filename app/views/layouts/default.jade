@@ -14,7 +14,11 @@ html(lang='en')
 		!= CDN('/js/jquery.plugins.js')
 	body.sidebar-hidden
 		!= body
+		
+		
+		
 		!= CDN('/js/require-2.0.4.min.js', { "data-main": '/js/app' })
+		
 		script
 			var _gaq = _gaq || [];
 			_gaq.push(
