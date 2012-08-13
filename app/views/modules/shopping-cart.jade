@@ -1,0 +1,28 @@
+// shopping-cart.jade
+- if (!ajax) {
+!= partial("partials/styles")
+- }
+
+!= CDN('/js/shopping-cart.js')
+!= partial("partials/header")
+!= partial("partials/panel")
+
+#main-container.shopping-cart
+
+		h5#first-heading.ff-icon-before currently logged in as: 
+			strong #{user.fullName}
+
+		- if(user.userCanUpgrade) {
+	
+			a#go-pro(href="#")
+				strong.title.ff-icon-after Go Pro!
+				span.sub-text Soo many features,
+					strong from just $#{upgrade.monthlyCost} a month!	
+						
+		- }
+
+		div#section-headings
+
+			h1
+				strong shopping cart
+				| &amp; trading bank area
