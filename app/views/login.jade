@@ -57,8 +57,8 @@ html(lang="en")
 			if(document.location.pathname != '/login')
 				document.location = '/login';
 
-		script(src="js/bootstrap.min.js")
-		script(src="js/pv3.js")
+		!= CDN('/js/bootstrap.min.js')
+		!= CDN('/js/pv3.js')
 		script
 			var _gaq = _gaq || [];
 			_gaq.push(

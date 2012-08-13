@@ -27,7 +27,7 @@ html(lang="en")
 			.ball
 			.ball1
 
-		script(src="/js/require-2.0.4.min.js", data-main="js/app")
+		!= CDN('/js/require-2.0.4.min.js', { "data-main": 'js/app' })
 		script
 			var _gaq = _gaq || [];
 			_gaq.push(

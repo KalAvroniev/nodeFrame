@@ -1,6 +1,7 @@
 express = require('express')
-fs = require('fs')
+fs   = require('fs')
 jade = require('jade')
+path = require('path')
 JsonRpcServer = require('./JsonRpcServer.coffee').JsonRpcServer
 SessionStore = require('./SessionStore.coffee').SessionStore
 StateStore = require('./StateStore.coffee').StateStore
@@ -23,9 +24,24 @@ class exports.Application
 	
 		# create server
 		@app = express.createServer()
-		@app.use(express.static(__dirname + '/../../public'))
 		
-		# sessions
+		options = 
+			publicDir: path.join(__dirname, '/../../public'),
+			viewsDir: path.join(__dirname, '/../views'),
+			domain: 'd2liqzzjm9hyrw.cloudfront.net',
+			bucket: 'alpha-protrada-com',
+			key: 'AKIAI654DO6KCXT5K54A',
+			secret: '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',
+			hostname: 'localhost',
+			port: 8181,
+			ssl: true,
+			production: true
+					
+		
+		# initialize the CDN magic
+		CDN = require('express-cdn')(@app, options)
+        
+        # sessions
 		@app.use(express.cookieParser())
 		@app.use(express.session({
 			'secret': "protrada",
@@ -43,9 +59,13 @@ class exports.Application
 				@jsonRpcRequest(req, res)
 		)
 		@app.set('view engine', 'jade')
+		@app.use(express.static(path.join(__dirname, '/../../public')));
 		
 		# default layout
-		@app.set('view options', { pretty: true, layout: "../layouts/default.jade" });
+		@app.set('view options', { pretty: true, layout: "../views/layouts/default.jade" });
+		
+		# add the dynamic view helper
+		@app.dynamicHelpers(CDN: CDN)
 		
 		# setup socket.io
 		socketIoServer.setJsonRpcServer(@jsonRpcServer)
