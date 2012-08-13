@@ -1005,9 +1005,9 @@ fieldset.login .login-right .invisible {
 	color: rgba(0,0,0,0.5);
 }
 #process-error h3:before {
-	content: "/";
+	content: "4";
 	position: absolute;
-	left: -80px; top: 2px;
+	left: -78px; top: 2px;
 	font-size: 37px;
 	line-height: 1;	
 }
@@ -1015,9 +1015,10 @@ fieldset.login .login-right .invisible {
 #process-error span {
 	display: block;
 	padding: 3px 0 0 220px;
-	font-size: 13px;
+	font-size: 12px;
+	font-weight: 400;
 	line-height: 1.4em;
-	color: rgba(0,0,0,0.65);
+	color: rgba(0,0,0,0.6);
 
 }
 
@@ -1061,7 +1062,7 @@ fieldset.login .login-right .invisible {
 #login-facebook span {
 	display: block;
 	padding: 2px 0 0 350px;
-	font-size: 13px;
+	font-size: 12px;
 	line-height: 1.4em;
 	color: #fff;		
 }
