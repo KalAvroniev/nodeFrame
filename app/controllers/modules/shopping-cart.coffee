@@ -1,7 +1,8 @@
 Controller = require('../../lib/Controller.coffee').Controller
 
-class exports.Controller extends Controller
-	
+class Modules_ShoppingCart extends Controller
+	module.exports = @
+		
 	run: (req, res) ->
 		res.view.layout = null
 		res.view.ajax = false
