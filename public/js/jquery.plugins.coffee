@@ -27,6 +27,7 @@ $.jsonrpc = (method, params, success, failure, options) ->
 
   ajax.async = options.async  if options.async isnt `undefined`
   $.ajax ajax
+  return
 
 $.jsonrpcSync = (method, params, success, failure, options) ->
   options = options or {}
@@ -36,12 +37,13 @@ $.jsonrpcSync = (method, params, success, failure, options) ->
 $.ajaxPanel = (url, success, failure) ->
   failure = failure or (errMsg, errCode) ->
     console.error "Error " + errCode + ": " + errMsg
-
-  $.ajax
+  $.ajax({
     type: "GET"
     url: url
     processData: false
     success: success
+  })
+  return
 
 
 $.jade = {}
@@ -55,7 +57,7 @@ $.jade.getTemplate = (url, success, options) ->
   return success(fn)  if document[fn] isnt `undefined`
   
   # we need to load it
-  $.ajax
+  $.ajax({
     url: url + ".jade"
     dataType: "script"
     success: ->
@@ -67,6 +69,8 @@ $.jade.getTemplate = (url, success, options) ->
 
     failure: (error) ->
       alert error
+  })
+  return
 
 
 $.jade.renderSync = (fn, obj, failure) ->
@@ -118,7 +122,7 @@ $.pv3.state.restoreModule = ->
   window.history.pushState "", module, "/" + module
   $("#main-container").trigger "ajaxUnload"
   $.pv3.state.update "modules.selected", module
-  $.ajax "/modules/" + module + "?ajax=1",
+  $.ajax("/modules/" + module + "?ajax=1",{
     success: (data) ->
       $("#ajax-container").html data
       $(".selected").removeClass "selected"
@@ -128,7 +132,8 @@ $.pv3.state.restoreModule = ->
       # restore panels
       modules = $.pv3.state.current.modules
       $.pv3.panel.show modules[modules.selected].panel.active.url, modules[modules.selected].panel.active.options  if modules[modules.selected] isnt `undefined` and modules[modules.selected].panel isnt `undefined` and modules[modules.selected].panel.active?
-
+  })
+  return
 
 $.pv3.state.restore = ->
   $(document).ready ->
