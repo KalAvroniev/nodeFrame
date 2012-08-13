@@ -35,7 +35,7 @@ class exports.Application
 			hostname: 'localhost',
 			port: 8181,
 			ssl: true,
-			production: true
+			production: false
 					
 		
 		# initialize the CDN magic

@@ -1515,6 +1515,12 @@ header#main:before {
 	content: "}";
 	margin: 0 0 0 1px;
 }
+.sectional-tabs li#domain-details a:before {
+	content: "G";
+}
+.sectional-tabs li#place-bid a:before {
+	content: "W";
+}
 
 
 
