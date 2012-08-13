@@ -10,12 +10,8 @@ html(lang='en')
 		!= CDN('/css/bootstrap.css')
 		!= CDN('/css/app.css')
 
-		!= CDN('/js/jquery-1.7.2.min.js')
-		!= CDN('/js/jquery.plugins.js')
 	body.sidebar-hidden
-		!= body
-		
-		
+		!= body		
 		
 		!= CDN('/js/require-2.0.4.min.js', { "data-main": '/js/app' })
 		

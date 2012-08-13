@@ -11,12 +11,7 @@ html(lang='en')
 		// link(rel='stylesheet', href='/css/tipTip.css')
 
 		!= CDN('/css/bootstrap.min.css')
-		!= CDN('/css/app.css')
-
-		!= CDN('/js/jquery-1.7.2.min.js')
-		!= CDN('/js/jquery.plugins.js')
-		!= CDN('/js/jade.js')
-		!= CDN('/js/bootstrap.min.js')		
+		!= CDN('/css/app.css')	
 		
 	body.sidebar-hidden
 	
@@ -25,3 +20,20 @@ html(lang='en')
 				a.x-panel(href='#')	
 				.ajax-panel-content.clearfix
 					!= body
+					
+					
+		!= CDN('/js/require-2.0.4.min.js', { "data-main": '/js/app' })
+		
+		script
+			var _gaq = _gaq || [];
+			_gaq.push(
+				[ "_setAccount", "UA-33674085-1" ],
+				[ "_trackPageview" ],
+				[ "_setCustomVar", 1, "Module", document.URL.substr( document.URL.lastIndexOf("/") + 1 ) || "home", 3 ]
+			);
+
+			(function() {
+				var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+				ga.src = ( "https:" == document.location.protocol ? "https://ssl" : "http://www" ) + ".google-analytics.com/ga.js";
+				var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore( ga, s );
+			})();					
