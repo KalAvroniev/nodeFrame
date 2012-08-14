@@ -2,24 +2,25 @@ $(document).ready ->
   
   # --- save state
   $("#user-settings-tabs li a").click (e) ->
-    $.pv3.state.update "modules.user-settings.tabs.selected", e.currentTarget.id
-
+    $.app.state.update "modules.user-settings.tabs.selected", e.currentTarget.id
+    return
   
   # General / user settings
   $("#general-tabs li a").click (e) ->
     mainTab = $("#user-settings-tabs li.active a")[0].id
-    $.pv3.state.update "modules.user-settings.tabs." + mainTab + ".tabs.selected", e.currentTarget.id
-
+    $.app.state.update "modules.user-settings.tabs." + mainTab + ".tabs.selected", e.currentTarget.id
+    return
   
   # update counter
   $("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr "data-alerts", $(".protrada .alert-count").attr("data-alerts")
-
+  return
+  
 
 # --- restore state
 $(document).on "restore", ->
   
   # restore tabs
-  state = $.pv3.state.current
+  state = $.app.state.current
   return  if state.modules["user-settings"] is `undefined`
   tabs = state.modules["user-settings"].tabs
   return  if tabs is `undefined`
@@ -38,7 +39,7 @@ $(document).on "restore", ->
   
   # System notification settings
   return  if tabs.selected is "sys-notifications-btn"
-
+  return
 
 # external account button UI behaviour
 $(".account-selection").on "click", "li:not(.open-for-edit, .more-coming-soon)", (e) ->
@@ -47,5 +48,6 @@ $(".account-selection").on "click", "li:not(.open-for-edit, .more-coming-soon)",
     $(this).removeClass "active"
   else
     $(this).siblings().removeClass("active").end().addClass "active"
+  return
 
-$.pv3.state.get()
+$.app.state.get()

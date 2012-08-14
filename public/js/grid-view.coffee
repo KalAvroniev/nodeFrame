@@ -20,7 +20,8 @@
         # clicking on the child row
         $row.fadeOut ->
           $this.prev().removeClass("row-sel parent-open").remove()
-
+          return		
+        return						
       else
         $parent = $row.parent()
         rowIsSelected = $row.hasClass("parent-open")
@@ -28,11 +29,12 @@
         # fade out / remove all "open" child rows
         $parent.children("tr.row-sel.child").fadeOut ->
           $this.prev().removeClass("row-sel parent-open").remove()
-
+          return
         unless rowIsSelected
           $row.addClass "row-sel parent-open"
           $row.after "<tr class=\"row-sel child\" style=\"display:none;\"><td colspan=\"" + row.find("td").length + "\"><div class=\"child-inner\"> <a class=\"x-row-sel\" href=\"javascript:void(0);\">x</a><p><strong>selected domain content</strong> <br>to be placed in here …</p></div></td></tr>"
           $row.next().fadeIn()
+          return					
 
     $(window).on("resize", windowResize).on "scroll", windowScroll
     $(verticalScroll + ", " + horizontalScroll).on "resize", copyHeaderSize
@@ -59,6 +61,7 @@
       clonedHeaderRow.addClass "tableFloatingHeader"
       originalHeaderRow.addClass "tableFloatingHeaderOriginal"
       copyHeaderSize()
+      return			
 
     $(horizontalScroll).tinyscrollbar
       axis: "x"
@@ -68,6 +71,8 @@
     tableHeaderOffset = getTableHeaderOffset()
     positionHorizScroll()
     UpdateTableHeaders()
+    return
+		
   onDomUnload = ->
     $("div.divTableWithFloatingHeader").remove()
     $(document.body).not(".mobile").find("td.domain-title").off
@@ -80,12 +85,14 @@
     $(verticalScroll + ", " + horizontalScroll).off "resize", copyHeaderSize
     $(horizontalScroll).off "tsb_scroll", horizontalScroll + " > .scrollbar", UpdateTableHeaders
     exchangeDomainResults = null  if typeof exchangeDomainResults isnt "undefined"
+    return		
   
   # note that we don't bother deleting the tinyscrollbar, as it will be
   # removed when the DOM elements are.
   preventEvent = (e) ->
     e.preventDefault()
     false
+		
   toggleSticky = (e) ->
     spans = $(".grid-table th.sticky").children("span")
     if stickyHeaderEnabled
@@ -97,48 +104,63 @@
       spans.addClass("on").removeClass "off"
     UpdateTableHeaders()
     preventEvent e
+		
   toggleFavourite = (e) ->
     $(this).button "toggle"
     preventEvent e
+		
   toggleSelect = (e) ->
     $(this).button "toggle"
-    preventEvent e
+    preventEvent e		
+		
   domainTitleMouseEnter = ->
     $(this).find(".domain-title-cntnr .copy-to-clipboard").css "opacity", 1
+    return
+		
   domainTitleMouseLeave = ->
     $(this).find(".domain-title-cntnr .copy-to-clipboard").css "opacity", 0
+    return
+		
   windowResize = ->
     $(horizontalScroll).tinyscrollbar_update "relative"
     innerOuterOffset = getInnerOuterOffset()
     tableHeaderOffset = getTableHeaderOffset()
     positionHorizScroll()
     UpdateTableHeaders()
+    return		
+		
   windowScroll = ->
     $(".btn-group.open").removeClass "open"
     innerOuterOffset = getInnerOuterOffset()
     tableHeaderOffset = getTableHeaderOffset()
     positionHorizScroll()
     UpdateTableHeaders()
+    return
+		
   getInnerOuterOffset = ->
     scrollOffset = $(verticalScroll).scrollTop()
     vertOffset = $(verticalScroll).offset().top
     innerOffset = $(horizontalScroll).offset().top
     (innerOffset - scrollOffset) - vertOffset
+		
   getTableHeaderOffset = ->
     scrollOffset = $(verticalScroll).scrollTop()
     vertOffset = $(verticalScroll).offset().top
     tableOffset = $(horizontalScroll + " table").offset().top
     $("#grid-view .grid-table").offset().top
+		
   isTableOnScreen = (offset) ->
     bottomOfScreen = $(window).scrollTop() + $(window).height()
     tableOffset = $(horizontalScroll + " table").offset().top
     offset = offset or 0
     bottomOfScreen - (tableOffset + offset) >= 0
+		
   positionHorizScroll = ->
     viewHeight = $(verticalScroll).height()
     scrollOffset = $(verticalScroll).scrollTop()
     scroll = $(horizontalScroll + " > .scrollbar")
     scroll.css "display", (if isTableOnScreen() then "block" else "none")
+    return		
   
   # derived from https://bitbucket.org/cmcqueen1975/htmlfloatingtableheader/wiki/Home
   UpdateTableHeaders = ->
@@ -162,6 +184,8 @@
         body.removeClass "sticky-thead"  if body.hasClass("sticky-thead")
       theCloneTable.css left: -$(horizontalScroll).tinyscrollbar_offset() + "px"
       theCloneContainer.width viewport.width()
+      return
+    return			
 
   copyHeaderSize = ->
     $("div.divTableWithFloatingHeader").each ->
@@ -171,6 +195,9 @@
       # copy cell widths from original header
       $("th", clonedHeaderRow).each (i) ->
         $(this).css "width", $("th", originalHeaderRow).eq(i).css("width")
+        return
+      return
+    return			
 
 
   
@@ -198,6 +225,8 @@
         domain = tableData[i]
         table.append "<tr> \t\t\t\t\t<td><button class=\"btn select\" data-toggle=\"button\"></button></td> \t\t\t\t\t<td><button class=\"btn favourite\" data-toggle=\"button\"></button></td> \t\t\t\t\t<td class=\"actions\"><span class=\"action-buttons\"><a href=\"#\" title=\"Build website\"></a><a href=\"#\" title=\"List for sale\"></a></span></td> \t\t\t\t\t<td class=\"domain-title\"><span class=\"domain-title-cntnr\">" + domain.domain.nameonly + " <span class=\"tld\">" + domain.domain.tld + "</span></span></td> \t\t\t\t\t<td class=\"date\">" + domain.auction_details[0].auction_end_date + "</td> \t\t\t\t\t<td class=\"currency\">" + domain.auction_details[0].auction_price + "</td> \t\t\t\t\t<td>" + domain.auction_details[0].auction_bidders + "</td> \t\t\t\t\t<td>" + domain.domain.chars + "</td> \t\t\t\t\t<td>" + ((if domain.domain.dash then "?" else "-")) + "</td> \t\t\t\t\t<td>" + domain.domain.tld + "</td> \t\t\t\t\t<td>" + ((if domain.tld_available.com isnt "0" then "?" else "?")) + "</td> \t\t\t\t\t<td>" + ((if domain.tld_available.net isnt "0" then "?" else "?")) + "</td> \t\t\t\t\t<td>" + ((if domain.tld_available.org isnt "0" then "?" else "?")) + "</td> \t\t\t\t\t<td>" + domain.pagerank.pagerank + "</td> \t\t\t\t\t<td>" + domain.backlinks.edu + "</td> \t\t\t\t\t<td>" + domain.backlinks.gov + "</td> \t\t\t\t\t<td>" + domain.backlinks.google + "</td> \t\t\t\t</tr>"
         ++i
+    return				
+				
   horizontalScroll = "#grid-view"
   tableHead = "table.floatable"
   innerOuterOffset = undefined
@@ -208,5 +237,6 @@
   $(document).on "click", "#toggle-side-bar, #x-side-bar", (e) ->
     windowResize()
     windowScroll()
-
+    return		
+  return
 )()

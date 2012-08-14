@@ -6,11 +6,11 @@ toggleSidebar = function(e) {
   $aside = $("aside");
   $aside.toggleClass("active");
   $(document.body).toggleClass("sidebar-hidden sidebar-open");
-  return $("#main-container, .task-status").delay(($(document.body).hasClass("sidebar-hidden") ? 200 : 0)).animate({
+  $("#main-container, .task-status").delay(($(document.body).hasClass("sidebar-hidden") ? 200 : 0)).animate({
     width: ($aside.hasClass("active") ? "99.999" : "100") + "%"
   }, 200, function() {
     Scrollbars.updateAll();
-    return $("#grid-view").grid("windowResize");
+    $("#grid-view").grid("windowResize");
   });
 };
 
@@ -20,39 +20,39 @@ protrada = {
   scrollbars: {
     elements: {},
     add: function(identifier, $element, options) {
-      return this.elements[identifier] = $element.tinyscrollbar(options || {});
+      this.elements[identifier] = $element.tinyscrollbar(options || {});
     },
     update: function(identifier, type) {
-      return this.elements[identifier].tinyscrollbar_update(type || "relative");
+      this.elements[identifier].tinyscrollbar_update(type || "relative");
     },
     updateAll: function(type) {
       var that;
       that = this;
-      return $.each(this.elements, function(i, v) {
-        return that.update(i, type);
+      $.each(this.elements, function(i, v) {
+        that.update(i, type);
       });
     },
     offset: function(identifier) {
-      return this.elements[identifier].tinyscrollbar_offset();
+      this.elements[identifier].tinyscrollbar_offset();
     },
     remove: function(identifier) {
-      return this.elements[identifier].children(".scrollbar").remove();
+      this.elements[identifier].children(".scrollbar").remove();
     }
   },
   alert: {
     show: function(message) {
-      return $("#sys-alert").removeClass("hidden").find(".alertmsg-container").find("span").text(message);
+      $("#sys-alert").removeClass("hidden").find(".alertmsg-container").find("span").text(message);
     },
     hide: function() {
-      return $("#sys-alert").addClass("hidden");
+      $("#sys-alert").addClass("hidden");
     }
   },
   taskStatus: {
     show: function(type, message) {
-      return $.pv3.growl.show(type, message);
+      $.app.growl.show(type, message);
     },
     hide: function() {
-      return $.pv3.growl.hide();
+      $.app.growl.hide();
     }
   },
   helpBubbles: {
@@ -72,9 +72,9 @@ $(document).ready(function() {
   var module;
   module = document.URL.substr(document.URL.lastIndexOf("/") + 1) || "home";
   if (module !== "") {
-    $.pv3.state.update("modules.selected", module);
-    $.pv3.state.get(function() {
-      return $.pv3.state.restoreModule();
+    $.app.state.update("modules.selected", module);
+    $.app.state.get(function() {
+      $.app.state.restoreModule();
     });
   }
   $("#ui-controls").on("click", "a", function(e) {
@@ -87,23 +87,23 @@ $(document).ready(function() {
     e.preventDefault();
     $(document.body).toggleClass(classes[this.id.replace(/toggle|-/g, "")]);
     $(this).toggleClass("active");
-    return $.pv3.state.update("system_options.toggles." + this.id, $(this).hasClass("active"));
+    $.app.state.update("system_options.toggles." + this.id, $(this).hasClass("active"));
   });
   $("#toggle-condensed").toggleClass("active", $(document.body).hasClass("condensed"));
   $("#toggle-downgrade").toggleClass("active", $(document.body).hasClass("mobile"));
   $("#toggle-sys-menu").on("click", function(e) {
     e.preventDefault();
-    return $(this).add("#sys-menu").toggleClass("active");
+    $(this).add("#sys-menu").toggleClass("active");
   });
   $("#x-sys-menu").on("click", function(e) {
     e.preventDefault();
-    return $("#sys-menu, #toggle-sys-menu").removeClass("active");
+    $("#sys-menu, #toggle-sys-menu").removeClass("active");
   });
   $("#mode-rocker").on("click", function(e) {
     e.preventDefault();
     $("#system-rocker").find("h3").toggleClass("hidden");
     $(this).toggleClass("active");
-    return $.pv3.state.update("system_options.mode", $("#system-rocker").find("h3").not(".hidden").attr("id"));
+    $.app.state.update("system_options.mode", $("#system-rocker").find("h3").not(".hidden").attr("id"));
   });
   if ($(document.body).hasClass("mobile")) {
     $("#notifications").addClass("native");
@@ -112,55 +112,55 @@ $(document).ready(function() {
     lockscroll: false
   });
   $("#spine-inner").find("nav").find("a").mouseup(function() {
-    return $(this).removeClass("active");
+    $(this).removeClass("active");
   }).mousedown(function() {
-    return $(this).addClass("active");
+    $(this).addClass("active");
   }).mouseout(function() {
-    return $(this).removeClass("active");
+    $(this).removeClass("active");
   });
   $(document).on("click", ".hide-all-bubbles", function(e) {
     e.preventDefault();
-    return $("#toggle-help-bubbles").trigger("click");
+    $("#toggle-help-bubbles").trigger("click");
   });
-  return $(document).on("click", ".x-help-bubble", function(e) {
+  $(document).on("click", ".x-help-bubble", function(e) {
     e.preventDefault();
-    return $(this).closest(".help-bubble-container").hide();
+    $(this).closest(".help-bubble-container").hide();
   });
 });
 
 $(document).on("click", "#toggle-side-bar, #x-side-bar", function() {
   toggleSidebar();
-  return $.pv3.state.update("sidebar.visible", !$(document.body).hasClass("sidebar-hidden"));
+  $.app.state.update("sidebar.visible", !$(document.body).hasClass("sidebar-hidden"));
 });
 
 $(document).on("click", ".x-alert-msg", function() {
-  return $(this).parent().slideUp(450, function() {
+  $(this).parent().slideUp(450, function() {
     $(this).remove();
-    return Scrollbars.update("notifications");
+    Scrollbars.update("notifications");
   });
 });
 
 $(document).on("click", ".nav-tabs li a", function(e) {
   e.preventDefault();
-  return $(this).tab("show");
+  $(this).tab("show");
 });
 
 $(document).on("click", "#alert-msgs a", function(e) {
   e.preventDefault();
   $(this).tab("show");
-  return Scrollbars.update("notifications");
+  Scrollbars.update("notifications");
 });
 
 $(document).on("restore", function() {
   var sidebar, state;
-  state = $.pv3.state.current.system_options;
-  sidebar = $.pv3.state.current.sidebar;
+  state = $.app.state.current.system_options;
+  sidebar = $.app.state.current.sidebar;
   if (state !== undefined) {
     $.each(state.toggles, function(k, v) {
       var id;
       id = "#ui-controls #" + k;
       if ((v && !$(id).hasClass("active")) || (!v && $(id).hasClass("active"))) {
-        return $(id).click();
+        $(id).click();
       }
     });
     $("#system-rocker").find("h3").addClass("hidden").filter("#" + state.mode).removeClass("hidden");
@@ -173,6 +173,6 @@ $(document).on("restore", function() {
     });
   }
   if ((sidebar !== undefined ? sidebar.visible !== undefined : void 0) ? (sidebar.visible && $(document.body).hasClass("sidebar-hidden")) || (!sidebar.visible && !$(document.body).hasClass("sidebar-hidden")) : void 0) {
-    return toggleSidebar();
+    toggleSidebar();
   }
 });

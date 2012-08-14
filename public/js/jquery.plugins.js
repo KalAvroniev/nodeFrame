@@ -5,7 +5,7 @@ $.jsonrpc = function(method, params, success, failure, options) {
   options = options || {};
   success = success || $.noop;
   failure = failure || function(errMsg, errCode) {
-    return console.error("Error " + errCode + ": " + errMsg);
+    console.error("Error " + errCode + ": " + errMsg);
   };
   ajax = {
     type: "POST",
@@ -34,7 +34,7 @@ $.jsonrpc = function(method, params, success, failure, options) {
   if (options.async !== undefined) {
     ajax.async = options.async;
   }
-  $.ajax(ajax);
+  return $.ajax(ajax);
 };
 
 $.jsonrpcSync = function(method, params, success, failure, options) {
@@ -45,7 +45,7 @@ $.jsonrpcSync = function(method, params, success, failure, options) {
 
 $.ajaxPanel = function(url, success, failure) {
   failure = failure || function(errMsg, errCode) {
-    return console.error("Error " + errCode + ": " + errMsg);
+    console.error("Error " + errCode + ": " + errMsg);
   };
   $.ajax({
     type: "GET",
@@ -78,10 +78,10 @@ $.jade.getTemplate = function(url, success, options) {
         fnRaw = fnRaw.substr(1);
       }
       fn = "views_" + fnRaw;
-      return success(fn);
+      success(fn);
     },
     failure: function(error) {
-      return alert(error);
+      alert(error);
     }
   });
 };
@@ -92,7 +92,7 @@ $.jade.renderSync = function(fn, obj, failure) {
     var r;
     r = " ";
     $.each(o, function(i, n) {
-      return r += i + "=\"" + n + "\"";
+      r += i + "=\"" + n + "\"";
     });
     return r;
   };
@@ -101,12 +101,12 @@ $.jade.renderSync = function(fn, obj, failure) {
   }), failure);
 };
 
-$.pv3 = {};
+$.app = {};
 
-$.pv3.growl = {};
+$.app.growl = {};
 
-$.pv3.growl.hide = function() {
-  return $(".task-status").removeClass("active").css("display", "none");
+$.app.growl.hide = function() {
+  $(".task-status").removeClass("active").css("display", "none");
 };
 
 /*
@@ -115,37 +115,37 @@ $.pv3.growl.hide = function() {
 */
 
 
-$.pv3.growl.show = function(type, message) {
-  $.pv3.growl.hide();
+$.app.growl.show = function(type, message) {
+  $.app.growl.hide();
   $(".task-status." + type).css("display", "block").addClass("active");
-  return $(".status-content h2").html(type).next().html(message);
+  $(".status-content h2").html(type).next().html(message);
 };
 
-$.pv3.state = {};
+$.app.state = {};
 
-$.pv3.state.get = function(success, options) {
-  return $.jsonrpc("user/get-state", {}, (function(data) {
+$.app.state.get = function(success, options) {
+  $.jsonrpc("user/get-state", {}, (function(data) {
     if (data !== undefined) {
-      $.pv3.state.current = data;
+      $.app.state.current = data;
       if (success) {
         success();
       }
-      return $(document).ready(function() {
-        return $(this).trigger("restore");
+      $(document).ready(function() {
+        $(this).trigger("restore");
       });
     }
   }), (function(error) {
-    return console.error(error);
+    console.error(error);
   }), options);
 };
 
-$.pv3.state.restoreModule = function() {
+$.app.state.restoreModule = function() {
   var module;
-  module = (!$.pv3.state.current.modules.selected || $.pv3.state.current.modules.selected === "" ? "home" : $.pv3.state.current.modules.selected);
+  module = (!$.app.state.current.modules.selected || $.app.state.current.modules.selected === "" ? "home" : $.app.state.current.modules.selected);
   module = module.replace("#", "");
   window.history.pushState("", module, "/" + module);
   $("#main-container").trigger("ajaxUnload");
-  $.pv3.state.update("modules.selected", module);
+  $.app.state.update("modules.selected", module);
   $.ajax("/modules/" + module + "?ajax=1", {
     success: function(data) {
       var modules;
@@ -153,47 +153,47 @@ $.pv3.state.restoreModule = function() {
       $(".selected").removeClass("selected");
       $("#spine-inner nav li a#nav-" + module).parent().addClass("selected");
       $(".ajax-spinner").hide();
-      modules = $.pv3.state.current.modules;
+      modules = $.app.state.current.modules;
       if (modules[modules.selected] !== undefined && modules[modules.selected].panel !== undefined && (modules[modules.selected].panel.active != null)) {
-        return $.pv3.panel.show(modules[modules.selected].panel.active.url, modules[modules.selected].panel.active.options);
+        $.app.panel.show(modules[modules.selected].panel.active.url, modules[modules.selected].panel.active.options);
       }
     }
   });
 };
 
-$.pv3.state.restore = function() {
-  return $(document).ready(function() {
-    if ($.pv3.state.current === undefined) {
-      return $.pv3.state.get(function() {
-        if ($.pv3.state.current.modules !== undefined && $.pv3.state.current.modules.selected !== undefined) {
-          return $.pv3.state.restoreModule($.pv3.state.current.modules);
+$.app.state.restore = function() {
+  $(document).ready(function() {
+    if ($.app.state.current === undefined) {
+      $.app.state.get(function() {
+        if ($.app.state.current.modules !== undefined && $.app.state.current.modules.selected !== undefined) {
+          $.app.state.restoreModule($.app.state.current.modules);
         }
       });
     }
   });
 };
 
-$.pv3.state.update = function(stateName, stateValue) {
-  return $.jsonrpc("user/update-state", {
+$.app.state.update = function(stateName, stateValue) {
+  $.jsonrpc("user/update-state", {
     name: stateName,
     value: stateValue
   }, (function(result) {
-    return $.pv3.state.current = result;
+    $.app.state.current = result;
   }), function(error) {
-    return console.error(error);
+    console.error(error);
   });
 };
 
-$.pv3.panel = {};
+$.app.panel = {};
 
-$.pv3.panel.show = function(url, options) {
+$.app.panel.show = function(url, options) {
   var active;
   active = false;
   options = options || {};
   try {
-    active = $.pv3.state.current.modules[$.pv3.state.current.modules.selected].panel.active;
+    active = $.app.state.current.modules[$.app.state.current.modules.selected].panel.active;
   } catch (_) {
-    console.warn("$.pv3.state.current.modules.panel is still not being returned!");
+    console.warn("$.app.state.current.modules.panel is still not being returned!");
   }
   if (options.jsonrpcMethod === undefined) {
     options.jsonrpcMethod = "view" + url;
@@ -205,8 +205,7 @@ $.pv3.panel.show = function(url, options) {
     }
     $(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
     $(".sectional-tabs").restoreStandoutElement();
-    $.pv3.panel.hide();
-    return;
+    $.app.panel.hide();
   }
   if (options.temporary === undefined && $(".sectional-tabs").find(".temporary-panel-tab").length) {
     $(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
@@ -214,35 +213,35 @@ $.pv3.panel.show = function(url, options) {
     $(".sectional-tabs").find(".temporary-panel-tab").remove();
     $(".ajax-panel-content").empty();
   }
-  return $.jsonrpc(options.jsonrpcMethod, {}, function(obj) {
-    return $.jade.getTemplate(url, function(fn) {
+  $.jsonrpc(options.jsonrpcMethod, {}, function(obj) {
+    $.jade.getTemplate(url, function(fn) {
       var $sectionPanel, $sectionalTabs;
       $sectionalTabs = $(".sectional-tabs");
       $sectionPanel = $("#section-panel");
-      $.pv3.state.update("modules." + $.pv3.state.current.modules.selected + ".panel.active", {
-        url: url,
-        options: options
-      });
       $sectionalTabs.find("li").removeClass("active").filter(".standout-tab").removeClass("standout-tab").addClass("standout-disabled");
       $sectionalTabs.find("#" + options.tabid).addClass("active");
       $sectionalTabs.reorderActiveElement();
       $sectionPanel.removeClass().addClass(options.panel_size);
       $(".ajax-panel-content").html($.jade.renderSync(fn, obj, function(err, file, line) {
-        return $(".ajax-panel-content").html("Error in " + file + " at line " + line + ": " + err);
+        $(".ajax-panel-content").html("Error in " + file + " at line " + line + ": " + err);
       }));
-      return $(".x-panel").unbind("click").on("click", function(e) {
+      $.app.state.update("modules." + $.app.state.current.modules.selected + ".panel.active", {
+        url: url,
+        options: options
+      });
+      $(".x-panel").unbind("click").on("click", function(e) {
         e.preventDefault();
         $(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
         $sectionalTabs.restoreStandoutElement();
         $(".sectional-tabs").find(".temporary-panel-tab").remove();
         $(".ajax-panel-content").empty();
-        return $.pv3.panel.hide();
+        return $.app.panel.hide();
       });
     });
   });
 };
 
-$.pv3.panel.hide = function() {
+$.app.panel.hide = function() {
   var $sectionPanel;
   $sectionPanel = $("#section-panel");
   if ($sectionPanel.hasClass("hidden")) {
@@ -252,7 +251,7 @@ $.pv3.panel.hide = function() {
     $sectionPanel.addClass("hidden");
     $(".sectional-tabs .active").removeClass("active");
   }
-  return $.pv3.state.update("modules." + $.pv3.state.current.modules.selected + ".panel.active", null);
+  $.app.state.update("modules." + $.app.state.current.modules.selected + ".panel.active", null);
 };
 
 $.fn.reorderActiveElement = function() {

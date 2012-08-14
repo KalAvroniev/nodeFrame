@@ -19,7 +19,7 @@
 				var months = [ "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec" ];
 				var now = new Date();
 
-				if ( $.pv3.state.current.modules.selected !== "exchange" ) {
+				if ( $.app.state.current.modules.selected !== "exchange" ) {
 					clearInterval( refreshExchangeDateIntervalID );
 					return;
 				}

@@ -21,19 +21,19 @@
       parent = void 0;
       rowIsSelected = void 0;
       if ($row.hasClass("child")) {
-        return $row.fadeOut(function() {
-          return $this.prev().removeClass("row-sel parent-open").remove();
+        $row.fadeOut(function() {
+          $this.prev().removeClass("row-sel parent-open").remove();
         });
       } else {
         $parent = $row.parent();
         rowIsSelected = $row.hasClass("parent-open");
         $parent.children("tr.row-sel.child").fadeOut(function() {
-          return $this.prev().removeClass("row-sel parent-open").remove();
+          $this.prev().removeClass("row-sel parent-open").remove();
         });
         if (!rowIsSelected) {
           $row.addClass("row-sel parent-open");
           $row.after("<tr class=\"row-sel child\" style=\"display:none;\"><td colspan=\"" + row.find("td").length + "\"><div class=\"child-inner\"> <a class=\"x-row-sel\" href=\"javascript:void(0);\">x</a><p><strong>selected domain content</strong> <br>to be placed in here …</p></div></td></tr>");
-          return $row.next().fadeIn();
+          $row.next().fadeIn();
         }
       }
     });
@@ -61,7 +61,7 @@
       });
       clonedHeaderRow.addClass("tableFloatingHeader");
       originalHeaderRow.addClass("tableFloatingHeaderOriginal");
-      return copyHeaderSize();
+      copyHeaderSize();
     });
     $(horizontalScroll).tinyscrollbar({
       axis: "x",
@@ -70,7 +70,7 @@
     innerOuterOffset = getInnerOuterOffset();
     tableHeaderOffset = getTableHeaderOffset();
     positionHorizScroll();
-    return UpdateTableHeaders();
+    UpdateTableHeaders();
   };
   onDomUnload = function() {
     var exchangeDomainResults;
@@ -85,7 +85,7 @@
     $(verticalScroll + ", " + horizontalScroll).off("resize", copyHeaderSize);
     $(horizontalScroll).off("tsb_scroll", horizontalScroll + " > .scrollbar", UpdateTableHeaders);
     if (typeof exchangeDomainResults !== "undefined") {
-      return exchangeDomainResults = null;
+      exchangeDomainResults = null;
     }
   };
   preventEvent = function(e) {
@@ -115,10 +115,10 @@
     return preventEvent(e);
   };
   domainTitleMouseEnter = function() {
-    return $(this).find(".domain-title-cntnr .copy-to-clipboard").css("opacity", 1);
+    $(this).find(".domain-title-cntnr .copy-to-clipboard").css("opacity", 1);
   };
   domainTitleMouseLeave = function() {
-    return $(this).find(".domain-title-cntnr .copy-to-clipboard").css("opacity", 0);
+    $(this).find(".domain-title-cntnr .copy-to-clipboard").css("opacity", 0);
   };
   windowResize = function() {
     var innerOuterOffset, tableHeaderOffset;
@@ -126,7 +126,7 @@
     innerOuterOffset = getInnerOuterOffset();
     tableHeaderOffset = getTableHeaderOffset();
     positionHorizScroll();
-    return UpdateTableHeaders();
+    UpdateTableHeaders();
   };
   windowScroll = function() {
     var innerOuterOffset, tableHeaderOffset;
@@ -134,7 +134,7 @@
     innerOuterOffset = getInnerOuterOffset();
     tableHeaderOffset = getTableHeaderOffset();
     positionHorizScroll();
-    return UpdateTableHeaders();
+    UpdateTableHeaders();
   };
   getInnerOuterOffset = function() {
     var innerOffset, scrollOffset, vertOffset;
@@ -162,10 +162,10 @@
     viewHeight = $(verticalScroll).height();
     scrollOffset = $(verticalScroll).scrollTop();
     scroll = $(horizontalScroll + " > .scrollbar");
-    return scroll.css("display", (isTableOnScreen() ? "block" : "none"));
+    scroll.css("display", (isTableOnScreen() ? "block" : "none"));
   };
   UpdateTableHeaders = function() {
-    return $("div.divTableWithFloatingHeader").each(function() {
+    $("div.divTableWithFloatingHeader").each(function() {
       var body, offset, scrollTop, theClone, theCloneContainer, theCloneTable, viewport;
       theClone = $(".tableFloatingHeader");
       theCloneTable = theClone.closest("table");
@@ -195,21 +195,21 @@
       theCloneTable.css({
         left: -$(horizontalScroll).tinyscrollbar_offset() + "px"
       });
-      return theCloneContainer.width(viewport.width());
+      theCloneContainer.width(viewport.width());
     });
   };
   copyHeaderSize = function() {
-    return $("div.divTableWithFloatingHeader").each(function() {
+    $("div.divTableWithFloatingHeader").each(function() {
       var clonedHeaderRow, originalHeaderRow;
       originalHeaderRow = $(".tableFloatingHeaderOriginal", this);
       clonedHeaderRow = $(".tableFloatingHeader", this);
-      return $("th", clonedHeaderRow).each(function(i) {
-        return $(this).css("width", $("th", originalHeaderRow).eq(i).css("width"));
+      $("th", clonedHeaderRow).each(function(i) {
+        $(this).css("width", $("th", originalHeaderRow).eq(i).css("width"));
       });
     });
   };
   loadDataIntoTable = function() {
-    var domain, i, table, tableData, _results;
+    var domain, i, table, tableData;
     tableData = void 0;
     table = void 0;
     if (typeof exchangeDomainResults === "undefined" || exchangeDomainResults === null) {
@@ -226,16 +226,14 @@
       return;
     }
     if (tableData.length === 0) {
-      return table.append("<tr><td id=\"zero-alert\" colspan=\"17\"><span class=\"ff-icon-before\"><a class=\"ff-icon x-zero-alert\" href=\"javascript:void(0);\"></a><strong>Sorry</strong>, we couldn't find any exact matches for this keyword.</td></tr>");
+      table.append("<tr><td id=\"zero-alert\" colspan=\"17\"><span class=\"ff-icon-before\"><a class=\"ff-icon x-zero-alert\" href=\"javascript:void(0);\"></a><strong>Sorry</strong>, we couldn't find any exact matches for this keyword.</td></tr>");
     } else {
       i = 0;
-      _results = [];
       while (i < tableData.length) {
         domain = tableData[i];
         table.append("<tr> \t\t\t\t\t<td><button class=\"btn select\" data-toggle=\"button\"></button></td> \t\t\t\t\t<td><button class=\"btn favourite\" data-toggle=\"button\"></button></td> \t\t\t\t\t<td class=\"actions\"><span class=\"action-buttons\"><a href=\"#\" title=\"Build website\"></a><a href=\"#\" title=\"List for sale\"></a></span></td> \t\t\t\t\t<td class=\"domain-title\"><span class=\"domain-title-cntnr\">" + domain.domain.nameonly + " <span class=\"tld\">" + domain.domain.tld + "</span></span></td> \t\t\t\t\t<td class=\"date\">" + domain.auction_details[0].auction_end_date + "</td> \t\t\t\t\t<td class=\"currency\">" + domain.auction_details[0].auction_price + "</td> \t\t\t\t\t<td>" + domain.auction_details[0].auction_bidders + "</td> \t\t\t\t\t<td>" + domain.domain.chars + "</td> \t\t\t\t\t<td>" + (domain.domain.dash ? "?" : "-") + "</td> \t\t\t\t\t<td>" + domain.domain.tld + "</td> \t\t\t\t\t<td>" + (domain.tld_available.com !== "0" ? "?" : "?") + "</td> \t\t\t\t\t<td>" + (domain.tld_available.net !== "0" ? "?" : "?") + "</td> \t\t\t\t\t<td>" + (domain.tld_available.org !== "0" ? "?" : "?") + "</td> \t\t\t\t\t<td>" + domain.pagerank.pagerank + "</td> \t\t\t\t\t<td>" + domain.backlinks.edu + "</td> \t\t\t\t\t<td>" + domain.backlinks.gov + "</td> \t\t\t\t\t<td>" + domain.backlinks.google + "</td> \t\t\t\t</tr>");
-        _results.push(++i);
+        ++i;
       }
-      return _results;
     }
   };
   horizontalScroll = "#grid-view";
@@ -245,8 +243,8 @@
   domLoaded = 0;
   stickyHeaderEnabled = true;
   onDomLoad();
-  return $(document).on("click", "#toggle-side-bar, #x-side-bar", function(e) {
+  $(document).on("click", "#toggle-side-bar, #x-side-bar", function(e) {
     windowResize();
-    return windowScroll();
+    windowScroll();
   });
 })();
