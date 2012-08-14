@@ -18,7 +18,7 @@
 </tr>
 <tr>
 	<td>storeEval</td>
-	<td>var window = this.browserbot.getUserWindow(); window.$.jsonrpcSync('user/reset-state', {}); window.$.pv3.state.get(function () {}, { 'async': false })</td>
+	<td>var window = this.browserbot.getUserWindow(); window.$.jsonrpcSync('user/reset-state', {}); window.$.app.state.get(function () {}, { 'async': false })</td>
 	<td></td>
 </tr>
 <tr>
@@ -31,7 +31,26 @@
 	<td></td>
 	<td></td>
 </tr>
-
+<tr>
+	<td>mouseDownAt</td>
+	<td>//div[@id=&quot;status-summary&quot;]/div[@class=&quot;scrollbar&quot;]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseMoveAt</td>
+	<td>//div[@id=&quot;status-summary&quot;]/div[@class=&quot;scrollbar&quot;]/div/div</td>
+	<td>200,0</td>
+</tr>
+<tr>
+	<td>mouseUpAt</td>
+	<td>//div[@id=&quot;status-summary&quot;]/div[@class=&quot;scrollbar&quot;]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().document.getElementById(&quot;thetableclone&quot;)</td>
+	<td>1000</td>
+</tr>
 </tbody></table>
 </body>
 </html>
