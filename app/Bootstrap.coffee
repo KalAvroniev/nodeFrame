@@ -2,10 +2,10 @@ express = require('express')
 fs   = require('fs')
 jade = require('jade')
 path = require('path')
-JsonRpcServer = require('./lib/JsonRpcServer.coffee').JsonRpcServer
-SessionStore = require('./lib/SessionStore.coffee').SessionStore
-StateStore = require('./lib/StateStore.coffee').StateStore
-SocketIoServer = require('./lib/SocketIoServer.coffee').SocketIoServer
+JsonRpcServer = require('./lib/JsonRpcServer.coffee')
+SessionStore = require('./lib/SessionStore.coffee')
+StateStore = require('./lib/StateStore.coffee')
+SocketIoServer = require('./lib/SocketIoServer.coffee')
 
 class Bootstrap
 	module.exports = @
@@ -16,20 +16,20 @@ class Bootstrap
 		# do nothing
 	
 	start: () ->
+		# load config
+		@loadConfig(@options.config)
+		
+		# create server
+		@app = express.createServer()
+		@app.use(express.static(@config.pubDir))
+		
 		# register JSON-RPC methods
 		@jsonRpcServer = new JsonRpcServer(this)
 		@jsonRpcServer.registerMethods()
-		
-		# load config
-		@loadConfig(@options.config)
 	
-		# create server
-		@app = express.createServer()
-		@app.use(express.static(__dirname + '/../public'))
-		
 		options = 
-			publicDir: path.join(__dirname, '/../public'),
-			viewsDir: path.join(__dirname, '/views'),
+			publicDir: @config.pubDir,
+			viewsDir: path.join(@config.appDir, '/views'),
 			domain: 'd2liqzzjm9hyrw.cloudfront.net',
 			bucket: 'alpha-protrada-com',
 			key: 'AKIAI654DO6KCXT5K54A',
@@ -61,10 +61,10 @@ class Bootstrap
 				@jsonRpcRequest(req, res)
 		)
 		@app.set('view engine', 'jade')
-		@app.use(express.static(path.join(__dirname, '/../../public')));
+		@app.use(express.static(@config.pubDir));
 		
 		# default layout
-		@app.set('view options', { pretty: true, layout: "../views/layouts/default.jade" });
+		@app.set('view options', { pretty: true, layout: @config.appDir + "/views/layouts/default.jade" });
 		
 		# add the dynamic view helper
 		@app.dynamicHelpers(CDN: CDN)
@@ -105,7 +105,7 @@ class Bootstrap
 			res.end()
 		)
 	
-	handleRequest: (req, res) ->
+	handleRequest: (req, res) =>
 		url = Bootstrap.realUrl(req.url)
 		console.log(url)
 		
@@ -119,7 +119,7 @@ class Bootstrap
 				res.render(url.substr(1), res.view)
 		
 		# run
-		controller = new (require("./controllers" + url + ".coffee"))
+		controller = new (require(@config.appDir + "/controllers" + url + ".coffee"))
 		res.view = {}
 		if controller.init == undefined || controller.init(req, res)
 			controller.run(req, res)

@@ -1,1 +1,2 @@
-class exports.DatabaseAdapter
+class DatabaseAdapter
+	module.exports = @

@@ -1,4 +1,5 @@
-class exports.GridModel
+class Models_Grid
+	module.exports = @
 
 	constructor: () ->
 		@d = {

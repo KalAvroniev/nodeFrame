@@ -1,7 +1,8 @@
 jade = require('jade')
 fs = require('fs')
 
-class exports.SocketIoServer
+class SocketIoServer
+	module.exports = @
 
 	constructor: () ->
 		@clients = []

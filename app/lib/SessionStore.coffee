@@ -1,7 +1,8 @@
 fs = require('fs')
 util = require('util')
 
-class exports.SessionStore extends require('connect').session.Store
+class SessionStore extends require('connect').session.Store
+	module.exports = @
 	
 	constructor: () ->
 		@sessions = {}

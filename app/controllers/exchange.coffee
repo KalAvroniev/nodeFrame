@@ -1,4 +1,4 @@
-Index = require('../controllers/index.coffee')
+Index = require(app.config.appDir + '/controllers/index.coffee')
 
 class Exchange extends Index			
 	module.exports = @

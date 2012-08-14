@@ -1,4 +1,4 @@
-Controller = require('../../../../lib/Controller.coffee').Controller
+Controller = require(app.config.appDir + '/lib/Controller.coffee')
 
 class Modules_Exchange_Panels_Watchlist extends Controller
 	module.exports = @

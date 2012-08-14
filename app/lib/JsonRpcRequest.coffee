@@ -1,4 +1,5 @@
-class exports.JsonRpcRequest
+class JsonRpcRequest
+	module.exports = @
 
 	constructor: (call, @callback) ->
 		@version = call.jsonrpc
