@@ -1,7 +1,8 @@
 fs = require('fs')
-UserState = require('./UserState.coffee').UserState
+UserState = require('./UserState.coffee')
 
-class exports.StateStore
+class StateStore
+	module.exports = @
 	
 	constructor: () ->
 		@users = {}

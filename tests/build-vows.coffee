@@ -1,4 +1,4 @@
-JsonRpcServer = require('../app/lib/JsonRpcServer.coffee').JsonRpcServer
+JsonRpcServer = require('../app/lib/JsonRpcServer.coffee')
 fs = require('fs')
 
 # start the JSON-RPC server
@@ -12,16 +12,16 @@ console.log("JSON-RPC Server ready.\n")
 console.log("Building tests...")
 
 fout = "vows = require('vows')\nassert = require('assert')\nTestUtils = require('./TestUtils.coffee').TestUtils\n"
-fout += "JsonRpcServer = require('../app/lib/JsonRpcServer.coffee').JsonRpcServer\n\n"
+fout += "JsonRpcServer = require('../app/lib/JsonRpcServer.coffee')\n\n"
 fout += "jsonRpcServer = new JsonRpcServer()\n"
 fout += "jsonRpcServer.registerMethods('../app/api')\n\n"
 fout += "vows.describe('Test Suite')\n	.addBatch({\n"
 for endpoint, v of jsonRpcServer.registeredMethods
-	controller = new (require('../app/api/' + endpoint + '.coffee').Controller)
+	controller = new (require('../app/api/' + endpoint + '.coffee'))
 	totalTests = 0
 	fout += "\t\t'" + endpoint + "':\n"
 	fout += "\t\t\t'topic': () ->\n"
-	fout += "\t\t\t\treturn new (require('../app/api/" + endpoint + ".coffee').Controller)\n\n"
+	fout += "\t\t\t\treturn new (require('../app/api/" + endpoint + ".coffee'))\n\n"
 
 	for testName, testMethod of controller
 		if testName.substr(0, 4) != 'test'

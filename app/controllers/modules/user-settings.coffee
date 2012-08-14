@@ -1,4 +1,4 @@
-Controller = require('../../lib/Controller.coffee').Controller
+Controller = require(app.config.appDir + '/lib/Controller.coffee')
 
 class Modules_UserSettings extends Controller
 	module.exports = @

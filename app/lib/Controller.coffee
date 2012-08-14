@@ -1,4 +1,5 @@
-class exports.Controller
+class Controller
+	module.exports = @
 	
 	init: (req, res) ->
 		# check for valid login

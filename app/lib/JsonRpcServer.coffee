@@ -1,7 +1,8 @@
 fs = require('fs')
-JsonRpcRequest = new require('./JsonRpcRequest.coffee').JsonRpcRequest
+JsonRpcRequest = new require('./JsonRpcRequest.coffee')
 
-class exports.JsonRpcServer
+class JsonRpcServer
+	module.exports = @
 
 	# error codes
 	@PARSE_ERROR = -32700

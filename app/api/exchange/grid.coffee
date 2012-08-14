@@ -1,4 +1,4 @@
-GridModel = require("../../models/GridModel.coffee").GridModel
+GridModel = require(app.config.appDir + '/models/Grid.coffee')
 
 class API_Exchange_Grid
 	module.exports = @
