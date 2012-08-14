@@ -36,7 +36,7 @@ class Modules_Home extends Controller
 		]
 
 		res.view.showTradingSummary = false
-		res.view.showDefaultContent = true
+		res.view.showDefaultContent = false
 
 	# user info
 		res.view.user = {}

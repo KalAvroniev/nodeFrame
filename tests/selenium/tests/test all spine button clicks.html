@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8182/" />
-<title>tim-test-protrada-video-panel</title>
+<title>tim - test all spine nav button clicks</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">tim-test-protrada-video-panel</td></tr>
+<tr><td rowspan="1" colspan="3">tim - test all spine nav button clicks</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -33,39 +33,35 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//a[@id='watch-video']</td>
+	<td>//a[@id='nav-exchange']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>500</td>
+	<td>verifyTextPresent</td>
+	<td>the domain exchange</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertXpathCount</td>
-	<td>//div[@id=&quot;section-panel&quot;][contains(@class, &quot;video&quot;)]</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>assertXpathCount</td>
-	<td>//ul[@class=&quot;sectional-tabs &quot;]/li[@id=&quot;protrada-video&quot;][contains(@class, &quot;temporary-panel-tab active&quot;)]</td>
-	<td>1</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//a[@class='x-panel']</td>
+	<td>//a[@id='nav-user-settings']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>500</td>
+	<td>verifyTextPresent</td>
+	<td>user settings</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertXpathCount</td>
-	<td>//div[@id=&quot;section-panel&quot;][contains(@class, &quot;hidden&quot;)]</td>
-	<td>1</td>
+	<td>click</td>
+	<td>//a[@id='nav-shopping-cart']</td>
+	<td></td>
 </tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>shopping cart </td>
+	<td></td>
+</tr>
+
 </tbody></table>
 </body>
 </html>
