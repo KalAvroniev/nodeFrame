@@ -2,19 +2,19 @@
 
 $(document).ready(function() {
   $("#user-settings-tabs li a").click(function(e) {
-    return $.pv3.state.update("modules.user-settings.tabs.selected", e.currentTarget.id);
+    $.app.state.update("modules.user-settings.tabs.selected", e.currentTarget.id);
   });
   $("#general-tabs li a").click(function(e) {
     var mainTab;
     mainTab = $("#user-settings-tabs li.active a")[0].id;
-    return $.pv3.state.update("modules.user-settings.tabs." + mainTab + ".tabs.selected", e.currentTarget.id);
+    $.app.state.update("modules.user-settings.tabs." + mainTab + ".tabs.selected", e.currentTarget.id);
   });
-  return $("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr("data-alerts", $(".protrada .alert-count").attr("data-alerts"));
+  $("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr("data-alerts", $(".protrada .alert-count").attr("data-alerts"));
 });
 
 $(document).on("restore", function() {
   var state, tabs;
-  state = $.pv3.state.current;
+  state = $.app.state.current;
   if (state.modules["user-settings"] === undefined) {
     return;
   }
@@ -36,17 +36,17 @@ $(document).on("restore", function() {
     return;
   }
   if (tabs.selected === "sys-notifications-btn") {
-
+    return;
   }
 });
 
 $(".account-selection").on("click", "li:not(.open-for-edit, .more-coming-soon)", function(e) {
   e.preventDefault();
   if ($(this).hasClass("active")) {
-    return $(this).removeClass("active");
+    $(this).removeClass("active");
   } else {
-    return $(this).siblings().removeClass("active").end().addClass("active");
+    $(this).siblings().removeClass("active").end().addClass("active");
   }
 });
 
-$.pv3.state.get();
+$.app.state.get();

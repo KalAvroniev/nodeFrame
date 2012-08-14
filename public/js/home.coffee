@@ -20,12 +20,12 @@
       $panelTabs = $("header#main").find(".sectional-tabs")
       $tabClone = $panelTabs.find(".standout-tab").clone().attr("id", "protrada-video").addClass("temporary-panel-tab").removeClass("standout-tab")
       e.preventDefault()
-      $tabClone.find("a").attr("href", "javascript:$.pv3.panel.show( '/panels/protrada-video', {tabid: 'protrada-video', panel_size: 'mini-panel video', temporary: true} );").html("<strong>video intro</strong> to domain trading").end().prependTo $panelTabs
-      $.pv3.panel.show "/panels/protrada-video",
+      $tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/protrada-video', {tabid: 'protrada-video', panel_size: 'mini-panel video', temporary: true} );").html("<strong>video intro</strong> to domain trading").end().prependTo $panelTabs
+      $.app.panel.show "/panels/protrada-video",
         tabid: "protrada-video"
         panel_size: "mini-panel video"
         temporary: true
-
+      return
 
     
     # TODO: refactor these, not DRY compliant
@@ -33,14 +33,16 @@
       $panelTabs = $("header#main").find(".sectional-tabs")
       $tabClone = $panelTabs.find(".standout-tab").clone().attr("id", "advanced-search").addClass("temporary-panel-tab").removeClass("standout-tab")
       e.preventDefault()
-      $tabClone.find("a").attr("href", "javascript:$.pv3.panel.show( '/panels/advanced-search', {tabid: 'advanced-search', panel_size: 'mini-panel video', temporary: true} );").html("<strong>advanced search</strong> something here").end().prependTo $panelTabs
-      $.pv3.panel.show "/panels/advanced-search",
+      $tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/advanced-search', {tabid: 'advanced-search', panel_size: 'mini-panel video', temporary: true} );").html("<strong>advanced search</strong> something here").end().prependTo $panelTabs
+      $.app.panel.show "/panels/advanced-search",
         tabid: "advanced-search"
         panel_size: "mini-panel"
         temporary: true
-
+      return
 
     setupTradingGraph()
+    return
+		
   setupTradingGraph = ->
     return  if tradingGraph? or not $("#trading-and-trending .graph-container").is(":visible")
     createDateGraph "trading-graph", [
@@ -62,6 +64,7 @@
       markerColor: "#753504"
       data: [[new Date(2012, 0, 12), 5], [new Date(2012, 1, 12), 7], [new Date(2012, 2, 12), 15], [new Date(2012, 3, 12), 7]]
     ], "%s: <strong>$%s</strong>", "1 month", 300
+    return		
   onDomUnload = ->
     $(".ajax-spinner").show()
     $(window).off "resize", windowResize
@@ -71,13 +74,18 @@
     if tradingGraph?
       tradingGraph.destroy()
       tradingGraph = null
+    return
   
   # note that we don't bother deleting the tinyscrollbar, as it will be
   # removed when the DOM elements are.
   showWatchlist = ->
     togglePanel.call this, @id, getWatchlistContent
+    return
+		
   getWatchlistContent = ->
     "Watchlist content here"
+    return
+		
   toggleGraphVisible = ->
     container = $(this).closest("#trading-and-trending")
     if container.hasClass("graph-hidden")
@@ -89,15 +97,21 @@
       setupTradingGraph()
     else
       container.addClass "graph-hidden"
+    return			
+			
   windowResize = ->
     width = $("#main-container").width()
     resizeScrollToWidth "#status-summary", width
     resizeScrollToWidth scrollContainer, width
+    return		
+		
   resizeScrollToWidth = (scrollSelector, containerWidth) ->
     scrollContainer = $(scrollSelector)
     scrollWidth = scrollContainer.width()
     scrollContainer.css width: containerWidth + "px"  unless containerWidth is scrollWidth
     scrollContainer.tinyscrollbar_update "relative"
+    return		
+		
   windowScroll = ->
   
   # thank heavens! nothing!
@@ -267,6 +281,8 @@
     # shift the graph so the dots aren't visible on the left hand side
     tickSteps = graph.width() / tradingGraph.axes.x2axis.numberTicks
     graph.css "margin-left", "-" + (tickSteps / 2) + "px"
+    return
+
   domLoaded = 0
   tradingGraph = null
   scrollContainer = undefined
@@ -274,5 +290,6 @@
   onDomLoad()
   $(document).on "click", "#toggle-side-bar, #x-side-bar", (e) ->
     windowResize()
-
+    return
+  return
 )()

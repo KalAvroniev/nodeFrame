@@ -20,8 +20,8 @@
       $panelTabs = $("header#main").find(".sectional-tabs");
       $tabClone = $panelTabs.find(".standout-tab").clone().attr("id", "protrada-video").addClass("temporary-panel-tab").removeClass("standout-tab");
       e.preventDefault();
-      $tabClone.find("a").attr("href", "javascript:$.pv3.panel.show( '/panels/protrada-video', {tabid: 'protrada-video', panel_size: 'mini-panel video', temporary: true} );").html("<strong>video intro</strong> to domain trading").end().prependTo($panelTabs);
-      return $.pv3.panel.show("/panels/protrada-video", {
+      $tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/protrada-video', {tabid: 'protrada-video', panel_size: 'mini-panel video', temporary: true} );").html("<strong>video intro</strong> to domain trading").end().prependTo($panelTabs);
+      $.app.panel.show("/panels/protrada-video", {
         tabid: "protrada-video",
         panel_size: "mini-panel video",
         temporary: true
@@ -32,20 +32,20 @@
       $panelTabs = $("header#main").find(".sectional-tabs");
       $tabClone = $panelTabs.find(".standout-tab").clone().attr("id", "advanced-search").addClass("temporary-panel-tab").removeClass("standout-tab");
       e.preventDefault();
-      $tabClone.find("a").attr("href", "javascript:$.pv3.panel.show( '/panels/advanced-search', {tabid: 'advanced-search', panel_size: 'mini-panel video', temporary: true} );").html("<strong>advanced search</strong> something here").end().prependTo($panelTabs);
-      return $.pv3.panel.show("/panels/advanced-search", {
+      $tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/advanced-search', {tabid: 'advanced-search', panel_size: 'mini-panel video', temporary: true} );").html("<strong>advanced search</strong> something here").end().prependTo($panelTabs);
+      $.app.panel.show("/panels/advanced-search", {
         tabid: "advanced-search",
         panel_size: "mini-panel",
         temporary: true
       });
     });
-    return setupTradingGraph();
+    setupTradingGraph();
   };
   setupTradingGraph = function() {
     if ((typeof tradingGraph !== "undefined" && tradingGraph !== null) || !$("#trading-and-trending .graph-container").is(":visible")) {
       return;
     }
-    return createDateGraph("trading-graph", [
+    createDateGraph("trading-graph", [
       {
         label: "Profit",
         lineColor: "#c4c4c4",
@@ -76,30 +76,31 @@
     $("#trading-and-trending .graph-options").off("click", toggleGraphVisible);
     if (typeof tradingGraph !== "undefined" && tradingGraph !== null) {
       tradingGraph.destroy();
-      return tradingGraph = null;
+      tradingGraph = null;
     }
   };
   showWatchlist = function() {
-    return togglePanel.call(this, this.id, getWatchlistContent);
+    togglePanel.call(this, this.id, getWatchlistContent);
   };
   getWatchlistContent = function() {
-    return "Watchlist content here";
+    "Watchlist content here";
+
   };
   toggleGraphVisible = function() {
     var container;
     container = $(this).closest("#trading-and-trending");
     if (container.hasClass("graph-hidden")) {
       container.removeClass("graph-hidden");
-      return setupTradingGraph();
+      setupTradingGraph();
     } else {
-      return container.addClass("graph-hidden");
+      container.addClass("graph-hidden");
     }
   };
   windowResize = function() {
     var width;
     width = $("#main-container").width();
     resizeScrollToWidth("#status-summary", width);
-    return resizeScrollToWidth(scrollContainer, width);
+    resizeScrollToWidth(scrollContainer, width);
   };
   resizeScrollToWidth = function(scrollSelector, containerWidth) {
     var scrollContainer, scrollWidth;
@@ -110,7 +111,7 @@
         width: containerWidth + "px"
       });
     }
-    return scrollContainer.tinyscrollbar_update("relative");
+    scrollContainer.tinyscrollbar_update("relative");
   };
   windowScroll = function() {};
   createDateGraph = function(elementId, settings, tooltipFormat, tickInterval, minWidthBetweenMarks) {
@@ -257,7 +258,7 @@
       }
     });
     tickSteps = graph.width() / tradingGraph.axes.x2axis.numberTicks;
-    return graph.css("margin-left", "-" + (tickSteps / 2) + "px");
+    graph.css("margin-left", "-" + (tickSteps / 2) + "px");
   };
   domLoaded = 0;
   tradingGraph = null;
@@ -266,7 +267,7 @@
     ajaxUnload: onDomUnload
   });
   onDomLoad();
-  return $(document).on("click", "#toggle-side-bar, #x-side-bar", function(e) {
-    return windowResize();
+  $(document).on("click", "#toggle-side-bar, #x-side-bar", function(e) {
+    windowResize();
   });
 })();

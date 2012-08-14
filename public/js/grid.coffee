@@ -18,6 +18,7 @@ Grid = (element, options) ->
 
   $.extend @options, options
   @init()
+  return
 
 Grid:: =
   constructor: Grid
@@ -48,9 +49,12 @@ Grid:: =
           
           # run setup
           that.setup()
-
+          return
+        return
 
       that.rowOffset += 10
+      return			
+    return
 
 
   setup: ->
@@ -67,6 +71,7 @@ Grid:: =
     @grid.find("tbody").on("click", "tr:not(.parent-open, .child)", @expandRow).on "click", ".parent-open, .child", @collapseRow
     $(".grid-table").find("tbody").on("click", ".domain-title-cntnr .copy-to-clipboard", (e) ->
       e.preventDefault()
+      return
     ).on("click", "td button.favourite", @toggleFavourite).on("click", "td button.select",
       grid: this
     , @toggleSelect).on "click", "td.actions a", (e) ->
@@ -76,12 +81,12 @@ Grid:: =
       panelId = $this.data("panel-id")
       $panelTabs = $("header#main").find(".sectional-tabs")
       $tabClone = $panelTabs.find(".standout-tab").clone().attr("id", panelId).addClass("temporary-panel-tab").removeClass("standout-tab")
-      $tabClone.find("a").attr("href", "javascript:$.pv3.panel.show( '/panels/protrada-video', {tabid: '" + panelId + "', panel_size: 'mini-panel', temporary: true} );").html("<strong>domain details</strong> something here").end().prependTo $panelTabs
-      $.pv3.panel.show "/panels/" + panelId,
+      $tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/protrada-video', {tabid: '" + panelId + "', panel_size: 'mini-panel', temporary: true} );").html("<strong>domain details</strong> something here").end().prependTo $panelTabs
+      $.app.panel.show "/panels/" + panelId,
         tabid: panelId
         panel_size: "mini-panel"
         temporary: true
-
+      return
 
     $(window).on("resize",
       grid: this
@@ -112,6 +117,7 @@ Grid:: =
     
     # TODO: must get rid of this, place into a nicer handler
     @__tempAdvancedSearch()
+    return		
 
   
   # this function isn't used yet, will be once the
@@ -144,6 +150,7 @@ Grid:: =
   # can't believe Jade wouldn't have an in-built alternative
   jadeError: (error) ->
     alert "jadeError-> " + error
+    return
 
   
   # TODO: refactor this, not DRY compliant
@@ -152,12 +159,13 @@ Grid:: =
       $panelTabs = $("header#main").find(".sectional-tabs")
       $tabClone = $panelTabs.find(".standout-tab").clone().attr("id", "advanced-search").addClass("temporary-panel-tab").removeClass("standout-tab")
       e.preventDefault()
-      $tabClone.find("a").attr("href", "javascript:$.pv3.panel.show( '/panels/advanced-search', {tabid: 'advanced-search', panel_size: 'mini-panel video', temporary: true} );").html("<strong>advanced search</strong> something here").end().prependTo $panelTabs
-      $.pv3.panel.show "/panels/advanced-search",
+      $tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/advanced-search', {tabid: 'advanced-search', panel_size: 'mini-panel video', temporary: true} );").html("<strong>advanced search</strong> something here").end().prependTo $panelTabs
+      $.app.panel.show "/panels/advanced-search",
         tabid: "advanced-search"
         panel_size: "mini-panel"
         temporary: true
-
+      return				
+    return
 
 
   
@@ -190,6 +198,7 @@ Grid:: =
     $("#thetableclone").find("table").addClass("tableFloatingHeader").find("thead").html(thead.html()).next("tbody").html(firstDataRow.html()).end().end().end().css
       top: $("#main").height() # position the table clone under the <header>
       height: thead.height() # "hide" the cloned <tbody> so click events can "pass-through" to the actual <tbody>
+    return
 
 
   expandRow: ->
@@ -198,17 +207,20 @@ Grid:: =
     # collapse any other open rows
     $row.siblings(".parent-open").trigger "click"
     $row.addClass("row-sel parent-open").after("<tr class=\"row-sel child\" style=\"display: none;\"><td colspan=\"" + $row.find("td").length + "\"><div class=\"child-inner\"> <a class=\"x-row-sel\" href=\"javascript:void(0);\">x</a><p><strong>selected domain content</strong> <br />to be placed in here &hellip;</p></div></td></tr>").next().fadeIn()
+    return		
 
   collapseRow: ->
     $row = $(this)
     if $row.hasClass("child")
       $row.fadeOut ->
         $row.prev().removeClass("row-sel parent-open").end().remove()
+        return
 
     else
       $row.next().fadeOut ->
         $row.removeClass("row-sel parent-open").next().remove()
-
+        return
+    return
 
   bulkActionsHandler: (e) ->
     grid = (if e then e.data.grid else this)
@@ -219,6 +231,7 @@ Grid:: =
     if checking
       $(".btn.select", grid.grid.find("tbody")).each ->
         $(this).addClass "active"
+        return				
 
       unless isClone
         $("#thetableclone .fav-sel-all .btn.select").addClass "active"
@@ -227,12 +240,14 @@ Grid:: =
     else
       $(".btn.select", grid.grid.find("tbody")).each ->
         $(this).removeClass "active"
+        return
 
       unless isClone
         $("#thetableclone .fav-sel-all .btn.select").removeClass "active"
       else
         grid.grid.find(".fav-sel-all .btn.select").removeClass "active"
     grid.toggleBulkHandler e
+    return		
 
   bulkFavouritesHandler: (e) ->
     grid = (if e then e.data.grid else this)
@@ -243,6 +258,7 @@ Grid:: =
     if checking
       $(".btn.favourite", grid.grid.find("tbody")).each ->
         $(this).addClass "active"
+        return
 
       unless isClone
         $("#thetableclone .fav-sel-all .btn.favourite").addClass "active"
@@ -251,11 +267,13 @@ Grid:: =
     else
       $(".btn.favourite", grid.grid.find("tbody")).each ->
         $(this).removeClass "active"
+        return				
 
       unless isClone
         $("#thetableclone .fav-sel-all .btn.favourite").removeClass "active"
       else
         grid.grid.find(".fav-sel-all .btn.favourite").removeClass "active"
+    return
 
   toggleSticky: (e) ->
     grid = (if e then e.data.grid else this)
@@ -264,11 +282,13 @@ Grid:: =
     grid.grid.find(".sticky").find("span").toggleClass "on off"
     $(document.body).toggleClass "sticky-thead"
     grid.updateTableHeaders()
+    return
 
   toggleFavourite: (e) ->
     e.preventDefault()
     e.stopPropagation()
     $(this).button "toggle"
+    return
 
   toggleBulkHandler: (e) ->
     grid = (if e then e.data.grid else this)
@@ -277,12 +297,15 @@ Grid:: =
     if $tr.is(":visible") and not selected
       $tr.fadeOut(->
         $("#thetableclone").height grid.grid.find("thead").height()
+        return
       ).attr "hidden"
     else
       $("#thetableclone").height 500 # larger number to be safe
       $tr.fadeIn(->
         $("#thetableclone").height grid.grid.find("thead").height()
+        return
       ).removeAttr "hidden"
+    return
 
   toggleSelect: (e) ->
     grid = (if e then e.data.grid else this)
@@ -290,12 +313,15 @@ Grid:: =
     e.stopPropagation()
     $(this).button "toggle"
     grid.toggleBulkHandler e
+    return		
 
   domainTitleMouseEnter: ->
     $(this).find(".domain-title-cntnr .copy-to-clipboard").css "opacity", 1
+    return		
 
   domainTitleMouseLeave: ->
     $(this).find(".domain-title-cntnr .copy-to-clipboard").css "opacity", 0
+    return		
 
   windowResize: (e) ->
     grid = (if e then e.data.grid else this)
@@ -305,6 +331,7 @@ Grid:: =
     grid.grid.find("tbody").find(".container > span").width $("#main-container").width() - (2 * spanContainer.css("padding-left").replace("px", ""))
     grid.positionHorizScroll()
     grid.updateTableHeaders()
+    return		
 
   windowScroll: (e) ->
     grid = e.data.grid
@@ -314,6 +341,7 @@ Grid:: =
     if not grid.isWaiting and grid.distanceFromBottom() <= 150
       grid.isWaiting = true
       grid.loadInData()
+    return			
 
   bottomOfTable: ->
     $window = $(window)
@@ -346,9 +374,10 @@ Grid:: =
         
         # let the scroll listener know we're no longer waiting on data
         that.isWaiting = false
-
+        return
       that.rowOffset += 10
-
+      return
+    return
 
   distanceFromBottom: ->
     $(document).height() - ($(window).scrollTop() + $(window).height())
@@ -361,6 +390,7 @@ Grid:: =
 
   positionHorizScroll: ->
     $(".scrollbar", @grid).css "display", (if @isTableOnScreen() then "block" else "none")
+    return
 
   
   # derived from https://bitbucket.org/cmcqueen1975/htmlfloatingtableheader/wiki/Home
@@ -385,7 +415,7 @@ Grid:: =
         body.removeClass "sticky-thead"  if body.hasClass("sticky-thead")
       theCloneTable.css left: -Scrollbars.offset("grid") + "px"
       theCloneContainer.width viewport.width()
-
+      return
 
 $.fn.grid = (option) ->
   @each ->
@@ -393,3 +423,4 @@ $.fn.grid = (option) ->
     data = $this.data("grid")
     $this.data "grid", (data = new Grid(this, option))  unless data
     data[option]()  if typeof option is "string"
+    return

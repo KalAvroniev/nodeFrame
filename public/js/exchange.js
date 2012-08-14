@@ -6,27 +6,27 @@
     domLoaded++;
     $("#portfolio-data-tabs a").click(function(e) {
       e.preventDefault();
-      return $(this).tab("show");
+      $(this).tab("show");
     });
     $(".sectional-tabs li").addClass("hidden");
     $(".sectional-tabs li#watchlist").removeClass("hidden");
     $(".sectional-tabs").addClass("singular");
     $(window).on("resize", windowResize);
-    return $(window).on("scroll", windowScroll);
+    $(window).on("scroll", windowScroll);
   };
   onDomUnload = function() {
     $(".ajax-spinner").show();
     $(window).off("resize", windowResize);
-    return $(window).off("scroll", windowScroll);
+    $(window).off("scroll", windowScroll);
   };
   windowResize = function() {};
   windowScroll = function() {};
   domLoaded = 0;
-  return $("#main-container").one({
+  $("#main-container").one({
     ajaxUnload: onDomUnload
   });
 })();
 
 $(document).ready(function() {
-  return $("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr("data-alerts", $(".protrada .alert-count").attr("data-alerts"));
+  $("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr("data-alerts", $(".protrada .alert-count").attr("data-alerts"));
 });

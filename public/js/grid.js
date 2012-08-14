@@ -11,7 +11,7 @@ Grid = function(element, options) {
     fakeScrollbars: false
   };
   $.extend(this.options, options);
-  return this.init();
+  this.init();
 };
 
 Grid.prototype = {
@@ -22,12 +22,12 @@ Grid.prototype = {
     var $grid, that;
     that = this;
     $grid = this.grid;
-    return $.jsonrpc(this.options.url, {
+    $.jsonrpc(this.options.url, {
       offset: this.rowOffset
     }, function(data) {
       $.jade.getTemplate("grid/table", function() {
         $grid.html($.jade.renderSync("views_grid_table", data, that.jadeError));
-        return $.jade.getTemplate("grid/row", function() {
+        $.jade.getTemplate("grid/row", function() {
           var actions, i, records;
           records = data.records;
           actions = data.actions;
@@ -38,10 +38,10 @@ Grid.prototype = {
             ++i;
           }
           $grid.find("tfoot").attr("hidden", true);
-          return that.setup();
+          that.setup();
         });
       });
-      return that.rowOffset += 10;
+      that.rowOffset += 10;
     });
   },
   setup: function() {
@@ -52,7 +52,7 @@ Grid.prototype = {
     }, this.toggleSticky);
     this.grid.find("tbody").on("click", "tr:not(.parent-open, .child)", this.expandRow).on("click", ".parent-open, .child", this.collapseRow);
     $(".grid-table").find("tbody").on("click", ".domain-title-cntnr .copy-to-clipboard", function(e) {
-      return e.preventDefault();
+      e.preventDefault();
     }).on("click", "td button.favourite", this.toggleFavourite).on("click", "td button.select", {
       grid: this
     }, this.toggleSelect).on("click", "td.actions a", function(e) {
@@ -63,8 +63,8 @@ Grid.prototype = {
       panelId = $this.data("panel-id");
       $panelTabs = $("header#main").find(".sectional-tabs");
       $tabClone = $panelTabs.find(".standout-tab").clone().attr("id", panelId).addClass("temporary-panel-tab").removeClass("standout-tab");
-      $tabClone.find("a").attr("href", "javascript:$.pv3.panel.show( '/panels/protrada-video', {tabid: '" + panelId + "', panel_size: 'mini-panel', temporary: true} );").html("<strong>domain details</strong> something here").end().prependTo($panelTabs);
-      return $.pv3.panel.show("/panels/" + panelId, {
+      $tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/protrada-video', {tabid: '" + panelId + "', panel_size: 'mini-panel', temporary: true} );").html("<strong>domain details</strong> something here").end().prependTo($panelTabs);
+      $.app.panel.show("/panels/" + panelId, {
         tabid: panelId,
         panel_size: "mini-panel",
         temporary: true
@@ -94,20 +94,20 @@ Grid.prototype = {
       scroll: false
     });
     this.windowResize();
-    return this.__tempAdvancedSearch();
+    this.__tempAdvancedSearch();
   },
   teardown: function() {},
   jadeError: function(error) {
-    return alert("jadeError-> " + error);
+    alert("jadeError-> " + error);
   },
   __tempAdvancedSearch: function() {
-    return $("#advanced-keyword-filter").on("click", function(e) {
+    $("#advanced-keyword-filter").on("click", function(e) {
       var $panelTabs, $tabClone;
       $panelTabs = $("header#main").find(".sectional-tabs");
       $tabClone = $panelTabs.find(".standout-tab").clone().attr("id", "advanced-search").addClass("temporary-panel-tab").removeClass("standout-tab");
       e.preventDefault();
-      $tabClone.find("a").attr("href", "javascript:$.pv3.panel.show( '/panels/advanced-search', {tabid: 'advanced-search', panel_size: 'mini-panel video', temporary: true} );").html("<strong>advanced search</strong> something here").end().prependTo($panelTabs);
-      return $.pv3.panel.show("/panels/advanced-search", {
+      $tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/advanced-search', {tabid: 'advanced-search', panel_size: 'mini-panel video', temporary: true} );").html("<strong>advanced search</strong> something here").end().prependTo($panelTabs);
+      $.app.panel.show("/panels/advanced-search", {
         tabid: "advanced-search",
         panel_size: "mini-panel",
         temporary: true
@@ -133,7 +133,7 @@ Grid.prototype = {
     } else {
       table.wrap("<div class=\"divTableWithFloatingHeader\" style=\"position: relative;\" />");
     }
-    return $("#thetableclone").find("table").addClass("tableFloatingHeader").find("thead").html(thead.html()).next("tbody").html(firstDataRow.html()).end().end().end().css({
+    $("#thetableclone").find("table").addClass("tableFloatingHeader").find("thead").html(thead.html()).next("tbody").html(firstDataRow.html()).end().end().end().css({
       top: $("#main").height(),
       height: thead.height()
     });
@@ -142,18 +142,18 @@ Grid.prototype = {
     var $row;
     $row = $(this);
     $row.siblings(".parent-open").trigger("click");
-    return $row.addClass("row-sel parent-open").after("<tr class=\"row-sel child\" style=\"display: none;\"><td colspan=\"" + $row.find("td").length + "\"><div class=\"child-inner\"> <a class=\"x-row-sel\" href=\"javascript:void(0);\">x</a><p><strong>selected domain content</strong> <br />to be placed in here &hellip;</p></div></td></tr>").next().fadeIn();
+    $row.addClass("row-sel parent-open").after("<tr class=\"row-sel child\" style=\"display: none;\"><td colspan=\"" + $row.find("td").length + "\"><div class=\"child-inner\"> <a class=\"x-row-sel\" href=\"javascript:void(0);\">x</a><p><strong>selected domain content</strong> <br />to be placed in here &hellip;</p></div></td></tr>").next().fadeIn();
   },
   collapseRow: function() {
     var $row;
     $row = $(this);
     if ($row.hasClass("child")) {
-      return $row.fadeOut(function() {
-        return $row.prev().removeClass("row-sel parent-open").end().remove();
+      $row.fadeOut(function() {
+        $row.prev().removeClass("row-sel parent-open").end().remove();
       });
     } else {
-      return $row.next().fadeOut(function() {
-        return $row.removeClass("row-sel parent-open").next().remove();
+      $row.next().fadeOut(function() {
+        $row.removeClass("row-sel parent-open").next().remove();
       });
     }
   },
@@ -164,7 +164,7 @@ Grid.prototype = {
     isClone = $(this).closest("table").parent().is("#thetableclone");
     if (checking) {
       $(".btn.select", grid.grid.find("tbody")).each(function() {
-        return $(this).addClass("active");
+        $(this).addClass("active");
       });
       if (!isClone) {
         $("#thetableclone .fav-sel-all .btn.select").addClass("active");
@@ -173,7 +173,7 @@ Grid.prototype = {
       }
     } else {
       $(".btn.select", grid.grid.find("tbody")).each(function() {
-        return $(this).removeClass("active");
+        $(this).removeClass("active");
       });
       if (!isClone) {
         $("#thetableclone .fav-sel-all .btn.select").removeClass("active");
@@ -181,7 +181,7 @@ Grid.prototype = {
         grid.grid.find(".fav-sel-all .btn.select").removeClass("active");
       }
     }
-    return grid.toggleBulkHandler(e);
+    grid.toggleBulkHandler(e);
   },
   bulkFavouritesHandler: function(e) {
     var checking, grid, isClone;
@@ -190,21 +190,21 @@ Grid.prototype = {
     isClone = $(this).closest("table").parent().is("#thetableclone");
     if (checking) {
       $(".btn.favourite", grid.grid.find("tbody")).each(function() {
-        return $(this).addClass("active");
+        $(this).addClass("active");
       });
       if (!isClone) {
-        return $("#thetableclone .fav-sel-all .btn.favourite").addClass("active");
+        $("#thetableclone .fav-sel-all .btn.favourite").addClass("active");
       } else {
-        return grid.grid.find(".fav-sel-all .btn.favourite").addClass("active");
+        grid.grid.find(".fav-sel-all .btn.favourite").addClass("active");
       }
     } else {
       $(".btn.favourite", grid.grid.find("tbody")).each(function() {
-        return $(this).removeClass("active");
+        $(this).removeClass("active");
       });
       if (!isClone) {
-        return $("#thetableclone .fav-sel-all .btn.favourite").removeClass("active");
+        $("#thetableclone .fav-sel-all .btn.favourite").removeClass("active");
       } else {
-        return grid.grid.find(".fav-sel-all .btn.favourite").removeClass("active");
+        grid.grid.find(".fav-sel-all .btn.favourite").removeClass("active");
       }
     }
   },
@@ -215,12 +215,12 @@ Grid.prototype = {
     grid.options.stickyHeader = !grid.options.stickyHeader;
     grid.grid.find(".sticky").find("span").toggleClass("on off");
     $(document.body).toggleClass("sticky-thead");
-    return grid.updateTableHeaders();
+    grid.updateTableHeaders();
   },
   toggleFavourite: function(e) {
     e.preventDefault();
     e.stopPropagation();
-    return $(this).button("toggle");
+    $(this).button("toggle");
   },
   toggleBulkHandler: function(e) {
     var $tr, grid, selected;
@@ -228,13 +228,13 @@ Grid.prototype = {
     $tr = $(".bulk-actions").parent();
     selected = $(".btn.select", grid.grid.find("tbody")).filter(".active").length;
     if ($tr.is(":visible") && !selected) {
-      return $tr.fadeOut(function() {
-        return $("#thetableclone").height(grid.grid.find("thead").height());
+      $tr.fadeOut(function() {
+        $("#thetableclone").height(grid.grid.find("thead").height());
       }).attr("hidden");
     } else {
       $("#thetableclone").height(500);
-      return $tr.fadeIn(function() {
-        return $("#thetableclone").height(grid.grid.find("thead").height());
+      $tr.fadeIn(function() {
+        $("#thetableclone").height(grid.grid.find("thead").height());
       }).removeAttr("hidden");
     }
   },
@@ -244,13 +244,13 @@ Grid.prototype = {
     e.preventDefault();
     e.stopPropagation();
     $(this).button("toggle");
-    return grid.toggleBulkHandler(e);
+    grid.toggleBulkHandler(e);
   },
   domainTitleMouseEnter: function() {
-    return $(this).find(".domain-title-cntnr .copy-to-clipboard").css("opacity", 1);
+    $(this).find(".domain-title-cntnr .copy-to-clipboard").css("opacity", 1);
   },
   domainTitleMouseLeave: function() {
-    return $(this).find(".domain-title-cntnr .copy-to-clipboard").css("opacity", 0);
+    $(this).find(".domain-title-cntnr .copy-to-clipboard").css("opacity", 0);
   },
   windowResize: function(e) {
     var grid, spanContainer;
@@ -260,7 +260,7 @@ Grid.prototype = {
     grid.grid.add("#thetableclone").find("thead").find(".container > span").width($("#main-container").width() - (2 * spanContainer.css("padding-left").replace("px", "")));
     grid.grid.find("tbody").find(".container > span").width($("#main-container").width() - (2 * spanContainer.css("padding-left").replace("px", "")));
     grid.positionHorizScroll();
-    return grid.updateTableHeaders();
+    grid.updateTableHeaders();
   },
   windowScroll: function(e) {
     var grid;
@@ -270,7 +270,7 @@ Grid.prototype = {
     grid.updateTableHeaders();
     if (!grid.isWaiting && grid.distanceFromBottom() <= 150) {
       grid.isWaiting = true;
-      return grid.loadInData();
+      grid.loadInData();
     }
   },
   bottomOfTable: function() {
@@ -284,7 +284,7 @@ Grid.prototype = {
     that = this;
     $grid = this.grid;
     $grid.find("tfoot").removeAttr("hidden");
-    return $.jsonrpc(this.options.url, {
+    $.jsonrpc(this.options.url, {
       offset: this.rowOffset
     }, function(data) {
       $.jade.getTemplate("grid/row", function() {
@@ -298,9 +298,9 @@ Grid.prototype = {
           ++i;
         }
         $grid.find("tfoot").attr("hidden", true);
-        return that.isWaiting = false;
+        that.isWaiting = false;
       });
-      return that.rowOffset += 10;
+      that.rowOffset += 10;
     });
   },
   distanceFromBottom: function() {
@@ -314,7 +314,7 @@ Grid.prototype = {
     return bottomOfScreen - (tableOffset + offset) >= 0;
   },
   positionHorizScroll: function() {
-    return $(".scrollbar", this.grid).css("display", (this.isTableOnScreen() ? "block" : "none"));
+    $(".scrollbar", this.grid).css("display", (this.isTableOnScreen() ? "block" : "none"));
   },
   updateTableHeaders: function(e) {
     var that;
@@ -348,7 +348,7 @@ Grid.prototype = {
       theCloneTable.css({
         left: -Scrollbars.offset("grid") + "px"
       });
-      return theCloneContainer.width(viewport.width());
+      theCloneContainer.width(viewport.width());
     });
   }
 };
@@ -362,7 +362,7 @@ $.fn.grid = function(option) {
       $this.data("grid", (data = new Grid(this, option)));
     }
     if (typeof option === "string") {
-      return data[option]();
+      data[option]();
     }
   });
 };

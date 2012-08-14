@@ -11,4 +11,4 @@ $(document).on("restore", function() {
 
 });
 
-$.pv3.state.get();
+$.app.state.get();

@@ -1,10 +1,11 @@
 # install JSON-RPC client
 $.jsonrpc = (method, params, success, failure, options) ->
-  options = options or {}
-  success = success or $.noop
-  failure = failure or (errMsg, errCode) ->
+	options = options or {}
+	success = success or $.noop
+	failure = failure or (errMsg, errCode) ->
     console.error "Error " + errCode + ": " + errMsg
-
+    return
+		
   ajax =
     type: "POST"
     url: "/jsonrpc"
@@ -27,7 +28,6 @@ $.jsonrpc = (method, params, success, failure, options) ->
 
   ajax.async = options.async  if options.async isnt `undefined`
   $.ajax ajax
-  return
 
 $.jsonrpcSync = (method, params, success, failure, options) ->
   options = options or {}
@@ -37,6 +37,7 @@ $.jsonrpcSync = (method, params, success, failure, options) ->
 $.ajaxPanel = (url, success, failure) ->
   failure = failure or (errMsg, errCode) ->
     console.error "Error " + errCode + ": " + errMsg
+    return
   $.ajax({
     type: "GET"
     url: url
@@ -66,9 +67,11 @@ $.jade.getTemplate = (url, success, options) ->
       fnRaw = fnRaw.substr(1)  if fnRaw.charAt(0) is "_"
       fn = "views_" + fnRaw
       success fn
+      return
 
     failure: (error) ->
       alert error
+      return
   })
   return
 
@@ -78,50 +81,55 @@ $.jade.renderSync = (fn, obj, failure) ->
     r = " "
     $.each o, (i, n) ->
       r += i + "=\"" + n + "\""
-
+      return
     r
 
   document[fn] obj, attrs, ((val) ->
     val
   ), failure
 
-$.pv3 = {}
-$.pv3.growl = {}
-$.pv3.growl.hide = ->
+$.app = {}
+$.app.growl = {}
+$.app.growl.hide = ->
   $(".task-status").removeClass("active").css "display", "none"
+  return
 
 
 ###
 @param type "success" or "error"
 @param message HTML message (can be raw text)
 ###
-$.pv3.growl.show = (type, message) ->
-  $.pv3.growl.hide()
+$.app.growl.show = (type, message) ->
+  $.app.growl.hide()
   $(".task-status." + type).css("display", "block").addClass "active"
   $(".status-content h2").html(type).next().html message
+  return
 
-$.pv3.state = {}
-$.pv3.state.get = (success, options) ->
+$.app.state = {}
+$.app.state.get = (success, options) ->
   $.jsonrpc "user/get-state", {}, ((data) ->
     if data isnt `undefined`
-      $.pv3.state.current = data
+      $.app.state.current = data
       success()  if success
       $(document).ready ->
         $(this).trigger "restore"
-
+        return
+    return
   ), ((error) ->
     console.error error
+    return
   ), options
+  return
 
-$.pv3.state.restoreModule = ->
-  module = (if (not $.pv3.state.current.modules.selected or $.pv3.state.current.modules.selected is "") then "home" else $.pv3.state.current.modules.selected)
+$.app.state.restoreModule = ->
+  module = (if (not $.app.state.current.modules.selected or $.app.state.current.modules.selected is "") then "home" else $.app.state.current.modules.selected)
   
   # TODO: fix!
   # for some reason module has an # appended?
   module = module.replace("#", "")
   window.history.pushState "", module, "/" + module
   $("#main-container").trigger "ajaxUnload"
-  $.pv3.state.update "modules.selected", module
+  $.app.state.update "modules.selected", module
   $.ajax("/modules/" + module + "?ajax=1",{
     success: (data) ->
       $("#ajax-container").html data
@@ -130,39 +138,45 @@ $.pv3.state.restoreModule = ->
       $(".ajax-spinner").hide()
       
       # restore panels
-      modules = $.pv3.state.current.modules
-      $.pv3.panel.show modules[modules.selected].panel.active.url, modules[modules.selected].panel.active.options  if modules[modules.selected] isnt `undefined` and modules[modules.selected].panel isnt `undefined` and modules[modules.selected].panel.active?
+      modules = $.app.state.current.modules
+      $.app.panel.show modules[modules.selected].panel.active.url, modules[modules.selected].panel.active.options  if modules[modules.selected] isnt `undefined` and modules[modules.selected].panel isnt `undefined` and modules[modules.selected].panel.active?
+      return
   })
   return
 
-$.pv3.state.restore = ->
+$.app.state.restore = ->
   $(document).ready ->
-    if $.pv3.state.current is `undefined`
-      $.pv3.state.get ->
-        $.pv3.state.restoreModule $.pv3.state.current.modules  if $.pv3.state.current.modules isnt `undefined` and $.pv3.state.current.modules.selected isnt `undefined`
+    if $.app.state.current is `undefined`
+      $.app.state.get ->
+        $.app.state.restoreModule $.app.state.current.modules  if $.app.state.current.modules isnt `undefined` and $.app.state.current.modules.selected isnt `undefined`
+        return
+    return
+  return
 
 
-
-$.pv3.state.update = (stateName, stateValue) ->
+$.app.state.update = (stateName, stateValue) ->
   $.jsonrpc "user/update-state",
     name: stateName
     value: stateValue
   , ((result) ->
-    $.pv3.state.current = result
+    $.app.state.current = result
+    return
   ), (error) ->
     console.error error
+    return
+  return
 
 
-$.pv3.panel = {}
-$.pv3.panel.show = (url, options) ->
+$.app.panel = {}
+$.app.panel.show = (url, options) ->	
   active = false
   options = options or {}
   
   # temporary work-around for absence of panel data
   try
-    active = $.pv3.state.current.modules[$.pv3.state.current.modules.selected].panel.active
+    active = $.app.state.current.modules[$.app.state.current.modules.selected].panel.active
   catch _
-    console.warn "$.pv3.state.current.modules.panel is still not being returned!"
+    console.warn "$.app.state.current.modules.panel is still not being returned!"
   options.jsonrpcMethod = "view" + url  if options.jsonrpcMethod is `undefined`
   
   # TODO: refactor this at some point, as it's duplicated below
@@ -177,7 +191,7 @@ $.pv3.panel.show = (url, options) ->
     
     # restore the standout tab to be the first child of the <ul>
     $(".sectional-tabs").restoreStandoutElement()
-    $.pv3.panel.hide()
+    $.app.panel.hide()
     return
   if options.temporary is `undefined` and $(".sectional-tabs").find(".temporary-panel-tab").length
     $(".standout-disabled").removeClass("standout-disabled").addClass "standout-tab"
@@ -196,7 +210,7 @@ $.pv3.panel.show = (url, options) ->
       $sectionPanel = $("#section-panel")
       
       # notify the server that the active tab has changed
-      $.pv3.state.update "modules." + $.pv3.state.current.modules.selected + ".panel.active",
+      $.app.state.update "modules." + $.app.state.current.modules.selected + ".panel.active",
         url: url
         options: options
 
@@ -210,6 +224,7 @@ $.pv3.panel.show = (url, options) ->
       $sectionPanel.removeClass().addClass options.panel_size
       $(".ajax-panel-content").html $.jade.renderSync(fn, obj, (err, file, line) ->
         $(".ajax-panel-content").html "Error in " + file + " at line " + line + ": " + err
+        return
       )
       
       # fix close handler
@@ -223,12 +238,15 @@ $.pv3.panel.show = (url, options) ->
         # find temporary panel tabs
         $(".sectional-tabs").find(".temporary-panel-tab").remove()
         $(".ajax-panel-content").empty()
-        $.pv3.panel.hide()
+        $.app.panel.hide()
+      return
+    return				
+  return
 
 
 
 
-$.pv3.panel.hide = ->
+$.app.panel.hide = ->
   $sectionPanel = $("#section-panel")
   if $sectionPanel.hasClass("hidden")
     $sectionPanel.removeClass "hidden"
@@ -238,7 +256,8 @@ $.pv3.panel.hide = ->
     $(".sectional-tabs .active").removeClass "active"
   
   # notify the server that the active tab has changed
-  $.pv3.state.update "modules." + $.pv3.state.current.modules.selected + ".panel.active", null
+  $.app.state.update "modules." + $.app.state.current.modules.selected + ".panel.active", null
+  return
 
 $.fn.reorderActiveElement = ->
   @children(".active").detach().prependTo this
