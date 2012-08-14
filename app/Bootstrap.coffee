@@ -24,7 +24,7 @@ class Bootstrap
 		@app.use(express.static(@config.pubDir))
 		
 		# register JSON-RPC methods
-		@jsonRpcServer = new JsonRpcServer(this)
+		@jsonRpcServer = new JsonRpcServer()
 		@jsonRpcServer.registerMethods()
 	
 		options = 
