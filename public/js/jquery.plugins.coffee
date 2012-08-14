@@ -192,7 +192,6 @@ $.app.panel.show = (url, options) ->
     # restore the standout tab to be the first child of the <ul>
     $(".sectional-tabs").restoreStandoutElement()
     $.app.panel.hide()
-    return
   if options.temporary is `undefined` and $(".sectional-tabs").find(".temporary-panel-tab").length
     $(".standout-disabled").removeClass("standout-disabled").addClass "standout-tab"
     
@@ -209,12 +208,6 @@ $.app.panel.show = (url, options) ->
       $sectionalTabs = $(".sectional-tabs")
       $sectionPanel = $("#section-panel")
       
-      # notify the server that the active tab has changed
-      $.app.state.update "modules." + $.app.state.current.modules.selected + ".panel.active",
-        url: url
-        options: options
-
-      
       # set active tab
       $sectionalTabs.find("li").removeClass("active").filter(".standout-tab").removeClass("standout-tab").addClass "standout-disabled"
       $sectionalTabs.find("#" + options.tabid).addClass "active"
@@ -226,6 +219,11 @@ $.app.panel.show = (url, options) ->
         $(".ajax-panel-content").html "Error in " + file + " at line " + line + ": " + err
         return
       )
+	  
+	  # notify the server that the active tab has changed
+      $.app.state.update "modules." + $.app.state.current.modules.selected + ".panel.active",
+        url: url
+        options: options
       
       # fix close handler
       $(".x-panel").unbind("click").on "click", (e) ->

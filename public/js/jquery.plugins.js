@@ -206,7 +206,6 @@ $.app.panel.show = function(url, options) {
     $(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
     $(".sectional-tabs").restoreStandoutElement();
     $.app.panel.hide();
-    return;
   }
   if (options.temporary === undefined && $(".sectional-tabs").find(".temporary-panel-tab").length) {
     $(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
@@ -219,10 +218,6 @@ $.app.panel.show = function(url, options) {
       var $sectionPanel, $sectionalTabs;
       $sectionalTabs = $(".sectional-tabs");
       $sectionPanel = $("#section-panel");
-      $.app.state.update("modules." + $.app.state.current.modules.selected + ".panel.active", {
-        url: url,
-        options: options
-      });
       $sectionalTabs.find("li").removeClass("active").filter(".standout-tab").removeClass("standout-tab").addClass("standout-disabled");
       $sectionalTabs.find("#" + options.tabid).addClass("active");
       $sectionalTabs.reorderActiveElement();
@@ -230,6 +225,10 @@ $.app.panel.show = function(url, options) {
       $(".ajax-panel-content").html($.jade.renderSync(fn, obj, function(err, file, line) {
         $(".ajax-panel-content").html("Error in " + file + " at line " + line + ": " + err);
       }));
+      $.app.state.update("modules." + $.app.state.current.modules.selected + ".panel.active", {
+        url: url,
+        options: options
+      });
       $(".x-panel").unbind("click").on("click", function(e) {
         e.preventDefault();
         $(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
