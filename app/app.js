@@ -13,4 +13,4 @@ debug = new Bootstrap({
 	'port': 8182,
 	'config': 'development'
 });
-debug.start();
+debug.start()
