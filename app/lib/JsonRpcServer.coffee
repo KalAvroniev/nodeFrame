@@ -11,7 +11,7 @@ class JsonRpcServer
 	@INVALID_PARAMS = -32602
 	@INTERNAL_ERROR = -32603
 	
-	constructor: (@app = false) ->
+	constructor: () ->
 		@registeredMethods = {}
 
 	registerMethods: (basePath = 'api', path = null) ->
@@ -92,7 +92,6 @@ class JsonRpcServer
 				return callback(JSON.stringify(r))
 		)
 		req.options = options
-		req.options.application = @app
 		
 		# validate
 		obj = new @registeredMethods[call.method]

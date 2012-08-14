@@ -70,7 +70,7 @@ class JsonRpcRequest
 		if(userId == undefined)
 			return callback(null)
 		else
-			@options.application.states.get(
+			app.states.get(
 				userId,
 				(state) ->
 					return callback(state)
@@ -80,7 +80,7 @@ class JsonRpcRequest
 		if(userId == undefined)
 			return error("No user ID.")
 		else
-			@options.application.states.update(
+			app.states.update(
 				userId,
 				name,
 				value,
@@ -92,7 +92,7 @@ class JsonRpcRequest
 		if(userId == undefined)
 			return error("No user ID.")
 		else
-			@options.application.states.reset(
+			app.states.reset(
 				userId,
 				(state) ->
 					return success(state)
