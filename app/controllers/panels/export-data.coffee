@@ -5,4 +5,5 @@ class Panels_ExportData extends Controller
 	
 	run: (req, res) ->
 		res.view.layout = '../views/layouts/mini-panels'		
+		res.view.test = 'Put some text in'
 		res.ready()

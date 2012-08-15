@@ -49,16 +49,14 @@ html(lang="en")
 								br
 								| to create a Protrada account
 
-		script(src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
-		script
-			!window.jQuery && document.write("<script src=\"js/jquery-1.7.2.min.js\"><\/script>");
+		script(src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js")
+		!= CDN('/js/require.min.js', { "data-main": require_conf })
+
 		script
 			// verify that we are on the right url
 			if(document.location.pathname != '/login')
 				document.location = '/login';
 
-		!= CDN('/js/bootstrap.min.js')
-		!= CDN('/js/pv3.js')
 		script
 			var _gaq = _gaq || [];
 			_gaq.push(

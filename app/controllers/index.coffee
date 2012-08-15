@@ -4,7 +4,7 @@ class Index extends Controller
 	module.exports = @
 	
 	constructor: () ->
-		@params = {}
+		@params = {require_conf: '/js/require-config/require-conf'}
 
 	run: ( req, res ) ->
 		res.setView('index')

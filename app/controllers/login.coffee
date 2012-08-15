@@ -18,4 +18,5 @@ class Login
 			res.view.error = ''
 			if req.query.error
 				res.view.error = req.query.error
+			res.view.require_conf = '/js/require-config/login'
 			res.ready()
