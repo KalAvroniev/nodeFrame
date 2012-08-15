@@ -5686,9 +5686,9 @@ thead tr {
 }
 .grid-table tbody tr:not(.not-data):hover td {
 	color: #252525;
-	border-top: 1px solid rgba(255,255,255,0.3); 
-	border-left: 1px solid rgba(255,255,255,0.0);
-	border-right: 1px solid rgba(0,0,0,0.0);		
+	border-top: 1px solid #ededed; 
+	border-left: 1px solid #e5e5e5;
+	border-right: 1px solid #e5e5e5;		
 }
 .grid-table tbody .row-sel {
 	border: none;
@@ -7369,6 +7369,9 @@ select, input[type="file"] {
 	padding: 6px 10px;
 	line-height: 2em;
 }
+.condensed .grid-table .filter-params, .condensed .grid-table .zero-alert {
+	padding: 0;
+}
 .condensed .grid-table thead th {
 	padding: 10px 10px 12px;
 }
@@ -7386,7 +7389,7 @@ select, input[type="file"] {
 }
 .condensed #section-headings h1 {
 	float: left;
-	font-size: 38px;
+	font-size: 40px;
 	line-height: 1.05em;
 	margin: 0 40px 30px 0;
 }
@@ -7583,7 +7586,7 @@ select, input[type="file"] {
 		margin: 0 210px 40px 0;
 	}	
 	.condensed #section-headings.search-results {
-		margin-bottom: 34px;
+		/*margin-bottom: 34px;*/
 	}
 	.search-results #results-marker {
 		float: none;
