@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8182/" />
+<title>tim - test display/restore of watchlist panel</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tim - test display/restore of watchlist panel</td></tr>
+</thead><tbody>
+<tr>
+	<td>click</td>
+	<td>//li[@id='watchlist']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=.panel-heading &gt; strong</td>
+	<td>my watchlist</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/exchange</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertXpathCount</td>
+	<td>//ul[@class=&quot;sectional-tabs &quot;]/li[@id=&quot;watchlist&quot;][contains(@class, &quot;active&quot;)]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=.panel-heading &gt; strong</td>
+	<td>my watchlist</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//li[@id='watchlist']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertXpathCount</td>
+	<td>//div[@id=&quot;section-panel&quot;][contains(@class, &quot;hidden&quot;)]</td>
+	<td>1</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
