@@ -5857,11 +5857,11 @@ thead #category {
 	padding: 0 0 0 35px;
 	display: block;	
 	cursor: pointer;
-	color: rgba(252,249,245,0.8);
+	color: rgba(252,249,245,0.4);
 	font-weight: 400;	
 }
 .sticky-pin.off {
-	color: rgba(252,249,245,0.4);
+	color: rgba(252,249,245,0.8);	
 }
 .sticky-pin:after {
 	content: "V";
@@ -5887,7 +5887,7 @@ thead #category {
 .sticky-pin.on:before {
 	content: "Un-";
 }
-.sticky-pin.off:after {
+.sticky-pin.on:after {
 	color: rgba(252,249,245,0.4);
 	background: rgba(0,0,0,0.3);
 	box-shadow: inset 0 1px 3px rgba(0,0,0,0.6), 0 1px 0px rgba(255,255,255,0.2);	
