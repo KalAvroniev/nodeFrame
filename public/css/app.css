@@ -5526,6 +5526,7 @@ thead tr {
 	position: relative;
 	display: block;
 	padding: 0;
+	white-space: normal;
 }
 .filter-params .container, .zero-alert .container, .bulk-actions .bulk-wrapper {
 	padding: 15px 20px 17px;

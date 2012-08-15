@@ -63,7 +63,7 @@ Grid.prototype = {
       panelId = $this.data("panel-id");
       $panelTabs = $("header#main").find(".sectional-tabs");
       $tabClone = $panelTabs.find(".standout-tab").clone().attr("id", panelId).addClass("temporary-panel-tab").removeClass("standout-tab");
-      $tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/protrada-video', {tabid: '" + panelId + "', panel_size: 'mini-panel', temporary: true} );").html("<strong>domain details</strong> something here").end().prependTo($panelTabs);
+      $tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/protrada-video', {tabid: '" + panelId + "', panel_size: 'mini-panel', temporary: true} );").html("<strong>domain</strong> report card ").end().prependTo($panelTabs);
       $.app.panel.show("/panels/" + panelId, {
         tabid: panelId,
         panel_size: "mini-panel",
