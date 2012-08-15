@@ -56,18 +56,21 @@ Grid:: =
         return
 
       that.rowOffset += 10
-      return			
+      return
     return
 
 
   setup: ->
     that = this
-    
-    # TODO: will this ever be needed again?
-    #$( document.body ).not(".mobile").find(".domain-title").on({
-    #			mouseenter: this.domainTitleMouseEnter,
-    #			mouseleave: this.domainTitleMouseLeave
-    #		});
+
+    ###
+    TODO: will this ever be needed again?
+    $( document.body ).not(".mobile").find(".domain-title").on({
+      mouseenter: this.domainTitleMouseEnter,
+      mouseleave: this.domainTitleMouseLeave
+    });
+    ###
+
     $("#main-container").on "click", ".grid-table .sticky",
       grid: this
     , @toggleSticky
@@ -403,6 +406,7 @@ Grid:: =
   # derived from https://bitbucket.org/cmcqueen1975/htmlfloatingtableheader/wiki/Home
   updateTableHeaders: (e) ->
     that = (if e then e.data.grid else this)
+    # TODO: does this really need to be each()'d?
     $(".divTableWithFloatingHeader", that.grid).each ->
       theCloneTable = $(".tableFloatingHeader")
       theCloneContainer = theCloneTable.closest("#thetableclone")
@@ -422,7 +426,7 @@ Grid:: =
         body.removeClass "sticky-thead"  if body.hasClass("sticky-thead")
       theCloneTable.css left: -Scrollbars.offset("grid") + "px"
       theCloneContainer.width viewport.width()
-      return
+    return
 
 $.fn.grid = (option) ->
   @each ->

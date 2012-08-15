@@ -194,7 +194,7 @@ protrada = {
       });
     },
     offset: function(identifier) {
-      this.elements[identifier].tinyscrollbar_offset();
+      return this.elements[identifier].tinyscrollbar_offset();
     },
     remove: function(identifier) {
       this.elements[identifier].children(".scrollbar").remove();

@@ -319,7 +319,7 @@ Grid.prototype = {
   updateTableHeaders: function(e) {
     var that;
     that = (e ? e.data.grid : this);
-    return $(".divTableWithFloatingHeader", that.grid).each(function() {
+    $(".divTableWithFloatingHeader", that.grid).each(function() {
       var body, offset, scrollTop, theCloneContainer, theCloneTable, viewport;
       theCloneTable = $(".tableFloatingHeader");
       theCloneContainer = theCloneTable.closest("#thetableclone");

@@ -174,18 +174,20 @@ $.fn.restoreStandoutElement = ->
   @children(".standout-tab").detach().prependTo this
 
 toggleSidebar = (e) ->
+  $aside = undefined
   $aside = $("aside")
   $aside.toggleClass "active"
-  $(document.body).toggleClass ("sidebar-hidden sidebar-open")
+  $(document.body).toggleClass "sidebar-hidden sidebar-open"
   $("#main-container, .task-status")
-    .delay((if $(document.body).hasClass("sidebar-hidden") then 200 else 0))
-    .animate 
-			width: ((if $aside.hasClass("active") then "99.999" else "100")) + "%", 200, ->
-            # update fake scrollbars
-            Scrollbars.updateAll()
-            # update sticky headers
-            $("#grid-view").grid "windowResize"
-						      return
+    .delay(((if $(document.body).hasClass("sidebar-hidden") then 200 else 0)))
+    .animate
+      width: ((if $aside.hasClass("active") then "99.999" else "100")) + "%"
+    , 200, ->
+      # update fake scrollbars
+      Scrollbars.updateAll()
+      # update sticky headers
+      $("#grid-view").grid "windowResize"
+      return
   return
 
 protrada =
@@ -210,7 +212,6 @@ protrada =
 
     offset: (identifier) ->
       @elements[identifier].tinyscrollbar_offset()
-      return
 
     remove: (identifier) ->
       @elements[identifier].children(".scrollbar").remove()
@@ -220,7 +221,7 @@ protrada =
     show: (message) ->
       $("#sys-alert").removeClass("hidden").find(".alertmsg-container").find("span").text message
       return
-			
+
     hide: ->
       $("#sys-alert").addClass "hidden"
       return
