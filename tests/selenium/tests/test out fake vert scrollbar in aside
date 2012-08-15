@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8182/" />
+<title>tim - test out fake vert scrollbar inside aside</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">tim - test out fake vert scrollbar inside aside</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForCondition</td>
+	<td>var moo = selenium.browserbot.getCurrentWindow().jQuery(&quot;#notifications .viewport .overview&quot;).attr('style'); moo==&quot;top: 0px:&quot;; selenium.browserbot.getCurrentWindow().console.log(moo);</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>mouseDownAt</td>
+	<td>//div[@id=&quot;notifications&quot;]/div[@class=&quot;scrollbar&quot;]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseMoveAt</td>
+	<td>//div[@id=&quot;notifications&quot;]/div[@class=&quot;scrollbar&quot;]/div/div</td>
+	<td>0,300</td>
+</tr>
+<tr>
+	<td>mouseUpAt</td>
+	<td>//div[@id=&quot;notifications&quot;]/div[@class=&quot;scrollbar&quot;]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>var moo = selenium.browserbot.getCurrentWindow().jQuery(&quot;#notifications .viewport .overview&quot;).attr('style'); moo!==&quot;top: 0px:&quot;; selenium.browserbot.getCurrentWindow().console.log(moo);</td>
+	<td>100</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
