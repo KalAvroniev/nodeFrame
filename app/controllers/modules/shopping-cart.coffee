@@ -1,14 +1,15 @@
-Controller = require(app.config.appDir + '/lib/Controller.coffee')
+Controller = require( app.config.appDir + "/lib/Controller.coffee" )
 
 class Modules_ShoppingCart extends Controller
 	module.exports = @
-		
-	run: (req, res) ->
+
+	run: ( req, res ) ->
 		res.view.layout = null
 		res.view.ajax = false
+
 		if req.query.ajax
 			res.view.ajax = req.query.ajax
-			
+
 		# tabs
 		res.view.tabs = [
 			#{
@@ -36,9 +37,8 @@ class Modules_ShoppingCart extends Controller
 			#	'panel': '/panels/export-data'
 			#}
 		]
-			
 
-	# user info
+		# user info
 		res.view.user = {}
 		res.view.user.userCanUpgrade = true
 		res.view.user.fullName = "Andrew Chinn"	
@@ -47,26 +47,11 @@ class Modules_ShoppingCart extends Controller
 		res.view.user.membershipExpires = "(this will never expire)"
 		res.view.user.avatar = {}
 		res.view.user.avatar.hasImage = false
-		res.view.user.avatar.image = "<img src='moo.gif' alt='user avatar image' />"
-		res.view.user.avatar.default = "<span class='avatar-default'>no image linked</span>"
-		
-		
+		res.view.user.avatar.image = "<img src=\"moo.gif\" alt=\"user avatar image\" />"
+		res.view.user.avatar.default = "<span class=\"avatar-default\">no image linked</span>"
 
-
-
-
-
-
-
-
-
-		
-	
-	# user upgrade info	
+		# user upgrade info	
 		res.view.upgrade = {}
 		res.view.upgrade.monthlyCost = 49
-		
-		
-		
-		
+
 		res.ready()

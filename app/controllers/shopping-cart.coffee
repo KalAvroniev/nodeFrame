@@ -1,7 +1,7 @@
-Index = require(app.config.appDir + '/controllers/index.coffee')
+Index = require( app.config.appDir + "/controllers/index.coffee" )
 
-class UserSettings extends Index			
+class UserSettings extends Index
 	module.exports = @
-	
-	run: (req, res) ->
+
+	run: ( req, res ) ->
 		super
