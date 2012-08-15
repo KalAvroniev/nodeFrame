@@ -22,14 +22,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
-	<td>3000</td>
-</tr>
-<tr>
 	<td>waitForPageToLoad</td>
 	<td></td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
+	<td>3000</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -45,6 +45,31 @@
 	<td>assertXpathCount</td>
 	<td>//div[@id=&quot;section-panel&quot;][contains(@class, &quot;mini-panel&quot;)]</td>
 	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=.panel-heading &gt; strong</td>
+	<td>detailed domain info on</td>
+</tr>
+<tr>
+	<td>assertXpathCount</td>
+	<td>//ul[@class=&quot;sectional-tabs &quot;]/li[@id=&quot;domain-details&quot;][contains(@class, &quot;temporary-panel-tab active&quot;)]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/exchange</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
