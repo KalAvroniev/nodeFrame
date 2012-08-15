@@ -1,145 +1,109 @@
-!= CDN('/js/user-settings.js')
+!= CDN("/js/user-settings.js")
+
 != partial("partials/header")
 != partial("partials/panel")
 
 #main-container.page-settings
-
 		h5#first-heading.ff-icon-before currently logged in as: 
 			strong #{user.fullName}
 
-		- if(user.userCanUpgrade) {
-	
+		- if ( user.userCanUpgrade ) {
 			a#go-pro(href="#")
 				strong.title.ff-icon-after Go Pro!
 				span.sub-text Soo many features,
-					strong from just $#{upgrade.monthlyCost} a month!	
-						
+					strong from just $#{upgrade.monthlyCost} a month!
 		- }
 
 		div#section-headings
-
 			h1
 				strong user settings
 				| &amp; control panel area
 
 		ul#user-settings-tabs.nav.nav-tabs
-
 			li.active
-				a(href='#general')#general-btn.ff-icon-before
+				a(href="#general")#general-btn.ff-icon-before
 					| general / user settings
 			li
-				a(href='#external-accounts')#external-accounts-btn.ff-icon-before
+				a(href="#external-accounts")#external-accounts-btn.ff-icon-before
 					| external account linkage
 			li
-				a(href='#system-notifications')#sys-notifications-btn.ff-icon-before
+				a(href="#system-notifications")#sys-notifications-btn.ff-icon-before
 					| system notification settings (coming soon)
 
-
 		#user-settings-tab-panes.tab-content.tabs-in-tabs
-
 			#general.tab-pane.active
 				// h3#tab-section-heading
 
 				ul#general-tabs.nav.nav-tabs.tabs-in-tabs
-
 					li.active
-						a(href='#user-profile')#general-user-profile
+						a(href="#user-profile")#general-user-profile
 							| user profile &amp; membership
 					li
-						a(href='#login-information')#general-login-information
+						a(href="#login-information")#general-login-information
 							| login information
 					li
-						a(href='#purchase-history')#general-purchase-history
+						a(href="#purchase-history")#general-purchase-history
 							| purchase history &amp; invoicies
 
 					li
-						a(href='#credit-use')#general-credit-use
+						a(href="#credit-use")#general-credit-use
 							| credit usage / history
-							
 
 				#general-tab-panes.tab-content.tabs-in-tabs
-
 					#user-profile.tab-pane.active.clearfix
-
 						#right-col
-						
 							#account.clearfix
 								a.btn.btn-success.btn-large.ff-icon-before switch accounts
 								h4 account details
 								h5
 									strong #{user.memberType}
 									| #{user.membershipExpires}
-						
+
 							#avatar.clearfix
 								h4 your avatar
 								h5 some details about where this is seen maybe?
 
 								#avatar-img-container.ff-icon-before
-									
-									- if(user.avatar.hasImage) {
-									
+									- if ( user.avatar.hasImage ) {
 										!= user.avatar.image
-									
 									- } else {
-									
 										!= user.avatar.default
-									
 									- }
 
-
-								- if(user.avatar.hasImage) {
-								
+								- if ( user.avatar.hasImage ) {
 									a.btn.btn-success.btn-large.ff-icon-before change
 									a.btn.btn-large.btn-danger.ff-icon-before delete
-								
 								- } else {
-								
 									a.btn.btn-success.btn-large.ff-icon-before choose
-								
 								- }
-
-								
 
 							#social-media.clearfix
 								h4 link up social media accounts
 								h5 some details about Protrada can use them
 
-
-								- if(user.social.facebook.connectedAccount) {
-								
+								- if ( user.social.facebook.connectedAccount ) {
 									.social-account.facebook.ff-icon-before.active
-										// facebook shit in here		
-												
+										// facebook shit in here
 								- } else {
-								
 									.social-account.facebook.ff-icon-before
 										// facebook shit in here
-										!= user.social.facebook.default								
+										!= user.social.facebook.default
 								- }
-									
-									
-								- if(user.social.twitter.connectedAccount) {
-								
+
+								- if ( user.social.twitter.connectedAccount ) {
 									.social-account.twitter.ff-icon-before.active
-										// twitter shit in here		
-												
+										// twitter shit in here
 								- } else {
-								
 									.social-account.twitter.ff-icon-before
-										// twitter shit in here		
-										!= user.social.twitter.default							
+										// twitter shit in here
+										!= user.social.twitter.default
 								- }	
-								
-															
-								- if(user.social.hasSocialLinked) {
-								
+
+								- if ( user.social.hasSocialLinked ) {
 									a.btn.btn-success.btn-large.ff-icon-before link an account
 									a.btn.btn-large.ff-icon-before unlink all
-								
 								- } else {
-								
 									a.btn.btn-success.btn-large.ff-icon-before link an account
-								
 								- }
 
 						#left-col
@@ -148,7 +112,6 @@
 								h3 use this section to update/edit any of your personal details
 
 							form#update-details.form-horizontal
-
 								.control-group.txt-input-row
 									label(for="text").control-label this is a text input
 									.controls
@@ -159,6 +122,7 @@
 									label(for="number").control-label this input is number only
 									.controls
 										input#number(type="number", placeholder="numeric only")
+
 								.control-group
 									label(for="instant-bid").control-label place as 'instant bid'?
 									.controls
@@ -176,39 +140,32 @@
 												option 4
 												option 5
 
-
 								.form-actions
 									a.btn.btn-success.btn-large.ff-icon-before save form (submit)
 
-
-
 					#login-information.tab-pane.clearfix
-						
 						hgroup.tabs-in-tabs-headings
 							h2 manage your login information
 							h3 some helpful text could go in here.
-													
+
 						p this is a pretty standard form section, all styles should be fine already
 
-					
 					#purchase-history.tab-pane.clearfix
-
 						#show-only.btn-group
-							a.btn.btn-large.dropdown-toggle(data-toggle='dropdown', href=' ')
+							a.btn.btn-large.dropdown-toggle(data-toggle="dropdown", href="")
 								| show only
 								span.caret
 							ul.dropdown-menu
 								li
-									a(href='') tomorrow
+									a(href="") tomorrow
 								li
-									a(href='') 2 days
+									a(href="") 2 days
 								li
-									a(href='') date range
+									a(href="") date range
 
 						hgroup.tabs-in-tabs-headings
 							h2 view all of your purchase history
 							h3 you can also download invoices for all purchases, no matter how old.
-
 
 						table.simple-data-grid
 							thead
@@ -255,16 +212,14 @@
 										p Aenean sollicitudin, lorem quis
 
 					#credit-use.tab-pane.clearfix
-
 						#your-credits-area
 							#actual-credits 
 								h3.credits
 									| your system
 									strong.ff-icon-before credits
 								span.credits-count #{user.availableCredits}
-							
-							a.btn.btn-success.btn-large.ff-icon-before buy more
 
+							a.btn.btn-success.btn-large.ff-icon-before buy more
 
 						hgroup.tabs-in-tabs-headings
 							h2 view all credit based transactions
@@ -317,29 +272,24 @@
 										p Aenean sollicitudin, lorem quis
 
 			#external-accounts.tab-pane
-
 				hgroup.tabs-in-tabs-headings
 					h2 link your external accounts below
 					h3 to automate and perform services on your belhaf, our trading system needs to be able to link up with several of your external monetization and auction accounts.
 
 				ul#external-acc-tabs.nav.nav-tabs.tabs-in-tabs
 					li.active
-						a(href='#all-linkable')#external-acc-user-profile
+						a(href="#all-linkable")#external-acc-user-profile
 							| all linkable accounts
 					li
-						a(href='#only-trading')#external-acc-only-trading
+						a(href="#only-trading")#external-acc-only-trading
 							| only trading accounts
 					li
-						a(href='#only-development')#external-acc-only-development
+						a(href="#only-development")#external-acc-only-development
 							| only development accounts
 
-
 				#external-acc-tab-panes.tab-content.tabs-in-tabs
-
 					#all-linkable.tab-pane.active.clearfix
-
 						.buying.account-groups
-						
 							hgroup.account-types
 								h4 buying accounts
 								h5 external buying accounts are needed to purchase any domain within our trading system
@@ -347,69 +297,53 @@
 							ul.account-selection.has-open-edit.clearfix
 								li.open-for-edit.clearfix
 									a.x-open-for-edit.ff-icon-before(href="")
-	
 									.sources-sprite(source="GoDaddy")
-	
 									h5 GoDaddy auctions
-	
 									a.btn.btn-success.btn-large.ff-icon-before change
-	
+
 									span.account-username username:
 										strong everblaze@gmail.com
-	
+
 								each account, i in user.externalAccounts.buying
-									- if(account.isShown) {
-										
+									- if ( account.isShown ) {
 										li
-											- if(account.isAlreadyLinked) {
-												span.linked.ff-icon-before(title='already linked')
+											- if ( account.isAlreadyLinked ) {
+												span.linked.ff-icon-before(title="already linked")
 											- }
-											
+
 											a.sources-sprite(source="#{account.sourceSprite}")
-									- }								
-								
-	
+									- }
+
 								li.more-coming-soon
 									span.ff-icon-before more providers 
 										strong coming soon...
 
-
 						.selling.account-groups
-						
 							hgroup.account-types
 								h4 selling accounts
 								h5 lorem ipsum dolor samet, moo goes the cow, this is some superhelpful hint text that normaly goes in here, innit.
-	
+
 							ul.account-selection.clearfix
-	
 								each account, i in user.externalAccounts.selling
-									- if(account.isShown) {
-										
+									- if ( account.isShown ) {
 										li
-											- if(account.isAlreadyLinked) {
-												span.linked.ff-icon-before(title='already linked')
+											- if ( account.isAlreadyLinked ) {
+												span.linked.ff-icon-before(title="already linked")
 											- }
-											
+
 											a.sources-sprite(source="#{account.sourceSprite}")
-									- }								
-								
-	
+									- }
+
 								li.more-coming-soon
 									span.ff-icon-before more providers 
 										strong coming soon...
-
-
-
-
-
 
 					#only-trading.tab-pane.clearfix
 
 					#only-dev.tab-pane.clearfix
 
-
 			#system-notifications.tab-pane
-			
+
 				hgroup.tabs-in-tabs-headings
 					h2 configure how the system notifies, and what about
 					h3 some helper text in here, about just what kinds of things can be setup as notifications etc etc.
