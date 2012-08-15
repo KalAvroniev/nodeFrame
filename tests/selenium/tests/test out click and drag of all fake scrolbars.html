@@ -12,26 +12,6 @@
 <tr><td rowspan="1" colspan="3">test out click and drag on all 'fake' scrollbars</td></tr>
 </thead><tbody>
 <tr>
-	<td>open</td>
-	<td>/home</td>
-	<td></td>
-</tr>
-<tr>
-	<td>storeEval</td>
-	<td>var window = this.browserbot.getUserWindow(); window.$.jsonrpcSync('user/reset-state', {}); window.$.app.state.get(function () {}, { 'async': false })</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().$.active == 0</td>
-	<td>3000</td>
-</tr>
-<tr>
-	<td>waitForPageToLoad</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForCondition</td>
 	<td>var moo = selenium.browserbot.getCurrentWindow().jQuery(&quot;#status-summary .viewport .overview&quot;).attr('style'); moo==&quot;left: 0px;&quot;;</td>
 	<td>100</td>
