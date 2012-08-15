@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8182/" />
-<title>NotificationShowHide</title>
+<title>tim - test for display/state-restore of the panels (export panel)</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">NotificationShowHide</td></tr>
+<tr><td rowspan="1" colspan="3">tim - test for display/state-restore of the panels (export panel)</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -33,53 +33,63 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=#x-side-bar</td>
+	<td>//li[@id='export-data']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>download xls file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertXpathCount</td>
-	<td>//aside[contains(@class, &quot;active&quot;)]</td>
+	<td>//ul[@class=&quot;sectional-tabs &quot;]/li[@id=&quot;export-data&quot;][contains(@class, &quot;active&quot;)]</td>
 	<td>1</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>css=.panel-heading &gt; strong</td>
+	<td>export on-screen</td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>css=#toggle-side-bar</td>
+	<td>//li[@id='export-data']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertXpathCount</td>
-	<td>//aside[contains(@class, &quot;active&quot;)]</td>
-	<td>0</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#x-side-bar</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertXpathCount</td>
-	<td>//div[@id=&quot;protrada-msgs&quot;][contains(@class, &quot;active&quot;)]</td>
+	<td>//div[@id=&quot;section-panel&quot;][contains(@class, &quot;hidden&quot;)]</td>
 	<td>1</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=li.devname &gt; a.ff-icon-before</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertXpathCount</td>
-	<td>//div[@id=&quot;devname-msgs&quot;][contains(@class, &quot;active&quot;)]</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=li.archive &gt; a.ff-icon-before</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertXpathCount</td>
-	<td>//div[@id=&quot;archive-msgs&quot;][contains(@class, &quot;active&quot;)]</td>
-	<td>1</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
