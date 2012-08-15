@@ -7,4 +7,4 @@ require.config({
   }
 });
 
-requirejs(["bootstrap"]);
+requirejs(["bootstrap", "jsonrpc"]);

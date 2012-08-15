@@ -1012,7 +1012,7 @@ fieldset.login .login-right .invisible {
 	line-height: 1;	
 }
 
-#process-error span {
+#process-error > span {
 	display: block;
 	padding: 3px 0 0 220px;
 	font-size: 12px;
