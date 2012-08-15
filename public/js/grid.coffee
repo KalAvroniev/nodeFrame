@@ -1,12 +1,15 @@
-#
-#$("#grid-view").grid({
-#    url: "uri/to/grid/data", // ajax endpoint for grid data
-#	data: [], // use this array of data for the grid instead of ajaxing it in
-#	type: "detailed", // is this grid detailed or simple
-#	stickyHeader: true, // utilise the sticky header
-#	fakeScrollbars: true // utilise fake scrollbars for table navigation
-#});
-#
+###
+Example usage:
+
+$("#grid-view").grid({
+	url: "uri/to/grid/data", // ajax endpoint for grid data
+	data: [], // use this array of data for the grid instead of ajaxing it in
+	type: "detailed", // is this grid detailed or simple
+	stickyHeader: true, // utilise the sticky header
+	fakeScrollbars: true // utilise fake scrollbars for table navigation
+});
+###
+
 Grid = (element, options) ->
   @grid = $(element)
   @options =
@@ -207,7 +210,7 @@ Grid:: =
     # collapse any other open rows
     $row.siblings(".parent-open").trigger "click"
     $row.addClass("row-sel parent-open").after("<tr class=\"row-sel child\" style=\"display: none;\"><td colspan=\"" + $row.find("td").length + "\"><div class=\"child-inner\"> <a class=\"x-row-sel\" href=\"javascript:void(0);\">x</a><p><strong>selected domain content</strong> <br />to be placed in here &hellip;</p></div></td></tr>").next().fadeIn()
-    return		
+    return
 
   collapseRow: ->
     $row = $(this)
@@ -231,7 +234,7 @@ Grid:: =
     if checking
       $(".btn.select", grid.grid.find("tbody")).each ->
         $(this).addClass "active"
-        return				
+        return
 
       unless isClone
         $("#thetableclone .fav-sel-all .btn.select").addClass "active"
@@ -247,7 +250,7 @@ Grid:: =
       else
         grid.grid.find(".fav-sel-all .btn.select").removeClass "active"
     grid.toggleBulkHandler e
-    return		
+    return
 
   bulkFavouritesHandler: (e) ->
     grid = (if e then e.data.grid else this)
@@ -267,7 +270,7 @@ Grid:: =
     else
       $(".btn.favourite", grid.grid.find("tbody")).each ->
         $(this).removeClass "active"
-        return				
+        return
 
       unless isClone
         $("#thetableclone .fav-sel-all .btn.favourite").removeClass "active"
@@ -313,25 +316,29 @@ Grid:: =
     e.stopPropagation()
     $(this).button "toggle"
     grid.toggleBulkHandler e
-    return		
+    return
 
   domainTitleMouseEnter: ->
     $(this).find(".domain-title-cntnr .copy-to-clipboard").css "opacity", 1
-    return		
+    return
 
   domainTitleMouseLeave: ->
     $(this).find(".domain-title-cntnr .copy-to-clipboard").css "opacity", 0
-    return		
+    return
 
-  windowResize: (e) ->
-    grid = (if e then e.data.grid else this)
-    spanContainer = grid.grid.find("thead").find(".container").first()
+  windowResize: ( e ) ->
+    grid = ( if e then e.data.grid else this )
+    spanContainerPadding = parseInt( grid.grid.find("thead").find(".container").first().css("padding-left"), 10 )
+    adjustedWidth = $("#main-container").width() - ( 2 * spanContainerPadding )
+
     Scrollbars.update "grid"
-    grid.grid.add("#thetableclone").find("thead").find(".container > span").width $("#main-container").width() - (2 * spanContainer.css("padding-left").replace("px", ""))
-    grid.grid.find("tbody").find(".container > span").width $("#main-container").width() - (2 * spanContainer.css("padding-left").replace("px", ""))
+
+    grid.grid.add("#thetableclone").find("thead, tbody").find(".container > span").width adjustedWidth
+
     grid.positionHorizScroll()
     grid.updateTableHeaders()
-    return		
+
+    return
 
   windowScroll: (e) ->
     grid = e.data.grid
@@ -341,7 +348,7 @@ Grid:: =
     if not grid.isWaiting and grid.distanceFromBottom() <= 150
       grid.isWaiting = true
       grid.loadInData()
-    return			
+    return
 
   bottomOfTable: ->
     $window = $(window)

@@ -253,12 +253,12 @@ Grid.prototype = {
     $(this).find(".domain-title-cntnr .copy-to-clipboard").css("opacity", 0);
   },
   windowResize: function(e) {
-    var grid, spanContainer;
+    var adjustedWidth, grid, spanContainerPadding;
     grid = (e ? e.data.grid : this);
-    spanContainer = grid.grid.find("thead").find(".container").first();
+    spanContainerPadding = parseInt(grid.grid.find("thead").find(".container").first().css("padding-left"), 10);
+    adjustedWidth = $("#main-container").width() - (2 * spanContainerPadding);
     Scrollbars.update("grid");
-    grid.grid.add("#thetableclone").find("thead").find(".container > span").width($("#main-container").width() - (2 * spanContainer.css("padding-left").replace("px", "")));
-    grid.grid.find("tbody").find(".container > span").width($("#main-container").width() - (2 * spanContainer.css("padding-left").replace("px", "")));
+    grid.grid.add("#thetableclone").find("thead, tbody").find(".container > span").width(adjustedWidth);
     grid.positionHorizScroll();
     grid.updateTableHeaders();
   },
