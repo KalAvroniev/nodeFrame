@@ -48,8 +48,48 @@
 </tr>
 <tr>
 	<td>waitForCondition</td>
-	<td>selenium.browserbot.getCurrentWindow().document.getElementById(&quot;status-summary&quot;).style.left!==&quot;-235px&quot;</td>
-	<td>1000</td>
+	<td>var moo = selenium.browserbot.getCurrentWindow().jQuery(&quot;#status-summary .viewport .overview&quot;).attr('style'); moo!==&quot;left: 0px:&quot;; selenium.browserbot.getCurrentWindow().console.log(moo);</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>mouseDownAt</td>
+	<td>//div[@id=&quot;grid-view&quot;]/div[@class=&quot;scrollbar&quot;]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseMoveAt</td>
+	<td>//div[@id=&quot;grid-view&quot;]/div[@class=&quot;scrollbar&quot;]/div/div</td>
+	<td>500,0</td>
+</tr>
+<tr>
+	<td>mouseUpAt</td>
+	<td>//div[@id=&quot;grid-view&quot;]/div[@class=&quot;scrollbar&quot;]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>var moo = selenium.browserbot.getCurrentWindow().jQuery(&quot;#grid-view .viewport .grid-table&quot;).attr('style'); moo!==&quot;left: 0px:&quot;; selenium.browserbot.getCurrentWindow().console.log(moo);</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>mouseDownAt</td>
+	<td>//div[@id=&quot;grid-view&quot;]/div[@class=&quot;scrollbar&quot;]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseMoveAt</td>
+	<td>//div[@id=&quot;grid-view&quot;]/div[@class=&quot;scrollbar&quot;]/div/div</td>
+	<td>-500,0</td>
+</tr>
+<tr>
+	<td>mouseUpAt</td>
+	<td>//div[@id=&quot;grid-view&quot;]/div[@class=&quot;scrollbar&quot;]/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>var moo = selenium.browserbot.getCurrentWindow().jQuery(&quot;#grid-view .viewport .grid-table&quot;).attr('style'); moo==&quot;left: 0px:&quot;; selenium.browserbot.getCurrentWindow().console.log(moo);</td>
+	<td>100</td>
 </tr>
 </tbody></table>
 </body>
