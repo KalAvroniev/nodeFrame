@@ -6,16 +6,24 @@ $(document).ready ->
       $.app.state.restoreModule()
       return
 
-  $("#ui-controls").on "click", "a", (e) ->
+  $("#ui-controls").on "click", "a", ( e ) ->
     classes =
       condensed: "condensed"
       downgrade: "mobile"
       helpbubbles: "help"
-
+    classNormalised = classes[@id.replace( /toggle|-/g, "" )]
+    isActive = $( this ).hasClass("active")
+    
     e.preventDefault()
-    $(document.body).toggleClass classes[@id.replace(/toggle|-/g, "")]
-    $(this).toggleClass "active"
-    $.app.state.update "system_options.toggles." + @id, $(this).hasClass("active")
+    
+    $( document.body ).toggleClass classNormalised
+    $( this ).toggleClass "active"
+
+    if classNormalised == "help" and not isActive
+      $(".help-bubble-container").show();
+    
+    $.app.state.update "system_options.toggles." + @id, $( this ).hasClass("active")
+
     return
 
   $("#toggle-condensed").toggleClass "active", $(document.body).hasClass("condensed")

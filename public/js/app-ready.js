@@ -10,15 +10,20 @@ $(document).ready(function() {
     });
   }
   $("#ui-controls").on("click", "a", function(e) {
-    var classes;
+    var classNormalised, classes, isActive;
     classes = {
       condensed: "condensed",
       downgrade: "mobile",
       helpbubbles: "help"
     };
+    classNormalised = classes[this.id.replace(/toggle|-/g, "")];
+    isActive = $(this).hasClass("active");
     e.preventDefault();
-    $(document.body).toggleClass(classes[this.id.replace(/toggle|-/g, "")]);
+    $(document.body).toggleClass(classNormalised);
     $(this).toggleClass("active");
+    if (classNormalised === "help" && !isActive) {
+      $(".help-bubble-container").show();
+    }
     $.app.state.update("system_options.toggles." + this.id, $(this).hasClass("active"));
   });
   $("#toggle-condensed").toggleClass("active", $(document.body).hasClass("condensed"));
