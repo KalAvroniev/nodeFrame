@@ -1938,7 +1938,7 @@ header#main:before {
 	
 }
 #health-and-status {	
-	padding: 27px 0;
+	padding: 0 0 27px 0;
 }
 #trading-and-trending .graph-options {
 	float: left;
