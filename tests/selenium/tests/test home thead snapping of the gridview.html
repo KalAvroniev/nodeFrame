@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8182/" />
+<title>test thead snapping of the gridview</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">test thead snapping of the gridview</td></tr>
+</thead><tbody>
+<tr>
+	<td>storeEval</td>
+	<td>var document = this.browserbot.getUserWindow().document; var window = this.browserbot.getUserWindow(); window.scrollTo(0, document.body.scrollHeight);</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>var document = this.browserbot.getUserWindow().document; var window = this.browserbot.getUserWindow(); window.scrollTo(0, document.body.scrollHeight);</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().document.getElementById(&quot;thetableclone&quot;).style.display==&quot;block&quot;</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.sticky-pin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForCondition</td>
+	<td>selenium.browserbot.getCurrentWindow().document.getElementById(&quot;thetableclone&quot;).style.display==&quot;none&quot;</td>
+	<td>500</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=span.sticky-pin</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
