@@ -65,56 +65,104 @@
 			table.simple-data-grid
 				thead
 					tr
-						th date
-						th type
-						th invoice
-						th amount paid
-						th description
+						th &nbsp;
+						th item details
+						th unit price
+						th quantity
+						th total cost
+						
 				tbody
 					tr
-						td.date 20
-							sup th
-							| May, 2012
+						td
+							span.ff-icon-before.x-cart-item
+							
+						td
+							span.item-details.ff-icon-before
+								span.item-title 50 credits top-up pack
+								span.item-descr Details on what kinds of things this can be used for?
 
-						td Purchase
-						td
-							a(href="").default Download
-						td.currency 150.00
-						td
-							p This is Photoshop's version of Lorem Ipsum. Proin gravida
+						td.currency 50
+							sup .00
+						td.interactive
+							input(type="number",placeholder="1")
+							
+						td.currency 100
+							sup .00
 
 					tr
-						td.date 20
-							sup th
-							| May, 2012
+						td
+							span.ff-icon-before.x-cart-item
+							
+						td
+							span.item-details.ff-icon-before.credit-pack
+								span.item-title 100 credits top-up pack
+								span.item-descr Details on what kinds of things this can be used for?
 
-						td Purchase
-						td
-							a(href="").default Download
-						td.currency 150.00
-						td
-							p Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin.
+						td.currency 50
+							sup .00
+						td.interactive
+							input(type="number",placeholder="1")
+							
+						td.currency 100
+							sup .00
+
 					tr
-						td.date 20
-							sup th
-							| May, 2012
-
-						td Somthing else
 						td
-							a(href="").default Download
-						td.currency 150.00
+							span.ff-icon-before.x-cart-item
+							
 						td
-							p Aenean sollicitudin, lorem quis
+							span.item-details.ff-icon-before.bid-autho
+								span.item-title auction bid authorisation by credit card
+								span.item-descr * note this will only hold the funds on your credit card, we will not deduct this amount unless yoau win the auction
+
+						td.currency 125
+							sup .00
+						td.interactive
+							input(type="number",placeholder="1").disabled
+							
+						td.currency 125
+							sup .00
 
 
+					tr
+						td
+							span.ff-icon-before.x-cart-item
+							
+						td
+							span.item-details.ff-icon-before.list-forsale
+								span.item-title list 5 domains for sale
+								span.item-descr details on which domains, and which channels
 
+						td.currency 50
+							sup .00
+						td.interactive
+							input(type="number",placeholder="1").disabled
+							
+						td.currency 50
+							sup .00
+						
+				tfoot
+					tr
+						td(colspan="5")
+							span.cart-totals
+								span.subtotal
+									span.currency 250
+										sup .00
+									span.total-label items subtotal
+									
+								span.tax
+									span.currency 25
+										sup .00	
+									span.total-label tax
+									
+								span.final-total
+									span.currency 275
+										sup .00	
+									span.total-label final total
 
-
-
-
-
-
-			
+			a.btn.btn-success.btn-large.ff-icon-before checkout items	
+									
+																						
 			
 		#purchase-history.tab-pane.clearfix
 			#show-only.btn-group
@@ -176,6 +224,8 @@
 						td.currency 150.00
 						td
 							p Aenean sollicitudin, lorem quis
+
+
 
 		#credit-use.tab-pane.clearfix
 
