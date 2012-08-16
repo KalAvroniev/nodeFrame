@@ -1,12 +1,7 @@
 require.config
-  baseUrl: "/js"
+	baseUrl: '/js'
 	
-  paths:    
-    #jquery: "jquery-1.7.2.min",
-    jquery: "jquery-1.8rc1"
-    bootstrap: "bootstrap.min"
-    
-  shim:
-    bootstrap: ["jquery"]
+	paths:
+		bootstrap: "bootstrap.min"
 
-requirejs ["jquery", "bootstrap"]
+require ["bootstrap"]
