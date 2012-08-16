@@ -16,16 +16,16 @@
     $(window).on("scroll", windowScroll);
     $("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr("data-alerts", $(".protrada .alert-count").attr("data-alerts"));
     $("#watch-video").on("click", function(e) {
-      var $panelTabs, $tabClone;
-      $panelTabs = $("header#main").find(".sectional-tabs");
-      $tabClone = $panelTabs.find(".standout-tab").clone().attr("id", "protrada-video").addClass("temporary-panel-tab").removeClass("standout-tab");
       e.preventDefault();
-      $tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/protrada-video', {tabid: 'protrada-video', panel_size: 'mini-panel video', temporary: true} );").html("<strong>video intro</strong> to domain trading").end().prependTo($panelTabs);
-      $.app.panel.show("/panels/protrada-video", {
-        tabid: "protrada-video",
-        panel_size: "mini-panel video",
-        temporary: true
-      });
+      Panels.add({
+        id: "protrada-video",
+        url: "/panels/protrada-video",
+        size: "mini",
+        temporary: true,
+        extraClasses: "video",
+        h1: "video intro",
+        h2: "to domain trading"
+      }, true);
     });
     $("#advanced-search, #advanced-keyword-filter").on("click", function(e) {
       var $panelTabs, $tabClone;

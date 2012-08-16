@@ -1,37 +1,38 @@
-Controller = require(app.config.appDir + '/lib/Controller.coffee')
+Controller = require( app.config.appDir + "/lib/Controller.coffee" )
 
 class Modules_Home extends Controller
 	module.exports = @
 	
-	run: (req, res) ->
+	run: ( req, res ) ->
 		res.view.layout = null
 		res.view.ajax = false
+
 		if req.query.ajax
 			res.view.ajax = req.query.ajax
 
 		# tabs
 		res.view.tabs = [
 			{
-				'id': 'import-domains',
-				'class': 'standout-tab',
-				'h1': 'import domains',
-				'h2': 'into portfolio',
-				'panel': '/modules/home/panels/import-domains',
-				'panel_size': 'mini-panel'
+				id: "import-domains",
+				url: "/modules/home/panels/import-domains",
+				default: true,
+				size: "mini",
+				h1: "import domains",
+				h2: "into portfolio"
 			},
 			{
-				'id': 'export-data',
-				'h1': 'export all',
-				'h2': 'on-screen data',
-				'panel': '/panels/export-data',
-				'panel_size': 'mini-panel'
+				id: "export-data",
+				url: "/panels/export-data",
+				size: "mini",
+				h1: "export all",
+				h2: "on-screen data"
 			},
 			{
-				'id': 'list-forsale',
-				'h1': 'list domains',
-				'h2': 'for-sale',
-				'panel': '/modules/home/panels/list-forsale',
-				'panel_size': 'panel'
+				id: "list-forsale",
+				url: "/modules/home/panels/list-forsale",
+				size: "full",
+				h1: "list domains",
+				h2: "for sale"
 			}
 		]
 
