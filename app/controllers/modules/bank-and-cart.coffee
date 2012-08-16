@@ -49,6 +49,7 @@ class Modules_ShoppingCart extends Controller
 		res.view.user.avatar.hasImage = false
 		res.view.user.avatar.image = "<img src=\"moo.gif\" alt=\"user avatar image\" />"
 		res.view.user.avatar.default = "<span class=\"avatar-default\">no image linked</span>"
+		
 
 		# user upgrade info	
 		res.view.upgrade = {}

@@ -340,30 +340,69 @@ a.ff-icon-before:before {
 
 #spine-inner #nav-home:before {
 	content: "*";
-	top: 9px;
-	left: 7px;
+	top: 9px; left: 7px;
 }
 #spine-inner #nav-exchange:before {
 	content: "+";
-	top: 10px;
-	left: 10px;
+	top: 10px; left: 10px;
 }
 #spine-inner #nav-user-settings:before {
 	content: "f";
-	top: 11px;
-	left: 8px;
+	top: 11px; left: 8px;
 	font-size: 30px;
 }
 #spine-inner #nav-education:before {
 	content: ",";
-	top: 12px;
-	left: 8px;
+	top: 12px; left: 8px;
 }
-#spine-inner #nav-shopping-cart:before {
+#spine-inner #nav-bank-and-cart.shopping-cart:before {
 	content: "-";
-	top: 11px;
-	left: 9px;
+	top: 13px; left: 8px;
 	font-size: 30px;	
+}
+#spine-inner #nav-bank-and-cart.trading-bank:before {
+	content: "\00C5";
+	top: 12px; left: 9px;
+	font-size: 30px;	
+}
+#cart-count {
+	display: block;
+	position: absolute;
+	z-index: -1;
+	right: 7px; top: 8px;
+	font-size: 11px;
+    font-weight: 700;
+    line-height: 10px;
+    min-width: 10px;
+    padding: 2px 4px;	
+    text-align: center;
+    border-radius: 20px;
+              
+	background: #FCF9F5;
+	color: #adaba8;    
+    box-shadow:
+    0 0 0 2px #ceccc8,
+    0 0 0 4px #FCF9F5;
+}
+#cart-count[data-count="0"] {
+	display: none;
+}
+#cart-count:before {
+	content: attr(data-count)
+}
+.selected #cart-count, #spine-inner li:hover a #cart-count {
+	background: #FCF9F5;
+	color: #141211;
+    box-shadow:
+    0 0 0 2px #141211,
+    0 0 0 4px #FCF9F5;	
+}	
+a.active #cart-count, .selected .active #cart-count, #spine-inner li:hover a.active #cart-count {
+	background: #cec9c5;
+	color: #7b7978;
+    box-shadow:
+    0 0 0 2px #7b7978,
+    0 0 0 4px #cec9c5;
 }
 
 
@@ -4618,6 +4657,18 @@ aside header.alerts-header {
 #main-container .nav-tabs a#sys-notifications-btn:before {
 	content: "r";
 }
+
+#main-container .nav-tabs a#shopping-cart-btn:before {
+	content: "-";
+}
+#main-container .nav-tabs a#purchase-history-btn:before {
+	content: "\00C7";
+}
+#main-container .nav-tabs a#credit-use-btn:before {
+	content: "R";
+}
+
+
 #main-container .tab-content .tabs-in-tabs {
 	box-shadow: none;		
 }
@@ -4890,58 +4941,8 @@ aside header.alerts-header {
 .simple-data-grid td p {
 	margin: 0;
 }
-#show-only {
-	float: right;
-}
-#your-credits-area {
-	float: right;
-	margin: 4px 0 0 0;
-}
-#actual-credits {
-	float: left;
-	position: relative;
-	white-space: nowrap;
-	z-index: 1;
-	margin: 0 10px 0 0;
-	padding: 10px 15px 15px;
-	border-radius: 4px;
-	color: #575553;
-	text-shadow: 0 1px 0 rgba(255,255,255,0.25);
-	background: #dcd9d6;
-	box-shadow: inset 0 2px 0 rgba(0,0,0,0.13), 0 1px 0 rgba(255,255,255,0.5);
-}
-#actual-credits .credits {
-	display: inline-block;
-	line-height: 1.4em;
-	font-size: 14px;	
-}
-#actual-credits .credits-count {
-	display: inline-block;
-	vertical-align: top;
-	margin: 0 0 0 15px;
-	font-size: 42px;
-	font-weight: 700;
-	letter-spacing: -3px;
-}
-#actual-credits .credits strong {
-	display: block;
-	font-size: 21px;
-	font-weight: 400;
-}
-#actual-credits .credits strong:before {
-	content: "R";
-	display: inline-block;
-		
-	margin: 0px 7px 0 0;
-}
-#your-credits-area .btn-success {
-	float: right;
-	padding: 18px 14px 12px;
-}
-#your-credits-area .btn:before {
-	content: "-";
-	display: block;
-}
+
+
 
 
 #credit-use > table .ff-icon-before {
@@ -5168,6 +5169,172 @@ li.more-coming-soon .ff-icon-before:after {
 #external-acc-tab-panes .account-groups {
 	padding: 5px 0 30px;
 }
+
+
+
+/* --------------------- Shopping cart and trading bank styles work ------------------------- */ 
+
+#credits-headsup {
+	float: right;
+	position: relative;
+	z-index: 2;
+	margin: 0 0 15px 30px;	
+}
+#show-only {
+	float: right;
+}
+#your-credits-area {
+	float: right;
+	margin: 4px 0 0 0;
+}
+#actual-credits {
+	float: left;
+	position: relative;
+	white-space: nowrap;
+	z-index: 1;
+	padding: 13px 15px 15px;
+	border-radius: 4px;
+	color: #575553;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+	background: rgba(0,0,0,0.1);
+	box-shadow: inset 0 3px 0 rgba(0,0,0,0.06), 0 1px 0 rgba(255,255,255,0.8);
+}
+#actual-credits .credits {
+	display: inline-block;
+	line-height: 1.4em;
+	font-size: 13px;	
+}
+#actual-credits .credits-count {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 0 0 25px;
+	font-size: 38px;
+	font-weight: 700;
+	letter-spacing: -3px;
+}
+#actual-credits .credits-count:before {
+	content: "S";
+	margin: -8px 5px 0 0;
+	font-size: 29px;
+	display: inline-block;
+}
+#actual-credits .credits strong {
+	display: block;
+	font-size: 18px;
+	letter-spacing: -1px;
+	font-weight: 400;
+}
+#actual-credits .credits strong:before {
+	content: "\00C5";
+	display: inline-block;
+	font-size: 16px;
+	margin: 0 7px 0 0;
+}
+
+#buy-credits-quick-menu {
+	display: block;
+	text-align: right;
+	clear: both;
+	padding: 18px 0 0 0;	
+}	
+#buy-credits-quick-menu .btn {
+	padding: 15px 20px 16px 15px;
+	margin: 0;
+	border-radius: 4px 0 0 4px;
+	color: #6e3312;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+	box-shadow: inset 0 3px 0 rgba(0,0,0,0.1), inset -1px 0 0 rgba(0,0,0,0.1), 1px 0 0 rgba(255,255,255,0.8);
+	font-weight: 600;
+		
+	background: #e87f03 url("../img/bg-noise.png");
+	background: url("../img/bg-noise.png"), -moz-linear-gradient(top,  #e87f03 0%, #ee9606 100%);
+	background: url("../img/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e87f03), color-stop(100%,#ee9606)); /* Chrome,Safari4+ */
+	background: url("../img/bg-noise.png"), -webkit-linear-gradient(top,  #e87f03 0%,#ee9606 100%); 
+	background: url("../img/bg-noise.png"), -o-linear-gradient(top,  #e87f03 0%,#ee9606 100%); 
+	background: url("../img/bg-noise.png"), -ms-linear-gradient(top,  #e87f03 0%,#ee9606 100%); 
+	background: url("../img/bg-noise.png"), linear-gradient(to bottom,  #e87f03 0%,#ee9606 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e87f03', endColorstr='#ee9606',GradientType=0 );
+}
+#buy-credits-quick-menu .btn span { 
+	font-weight: 700;
+}
+#buy-credits-quick-menu .btn .ff-icon-before:before {
+	display: inline-block;
+	content: "R";
+	margin: -4px 5px 0 0;
+} 
+#buy-credits-quick-menu .btn.dropdown-toggle {
+	box-shadow: inset 0 -3px 0 rgba(0,0,0,0.1), inset 1px 0 0 rgba(255,255,255,0.3), 0 1px 0 rgba(255,255,255,0.8);
+	border-radius: 0 4px 4px 0;
+	padding: 15px 12px 16px;
+
+	background: #ee9606 url("../img/bg-noise.png"),; /* Old browsers */
+	background: url("../img/bg-noise.png"), -moz-linear-gradient(top,  #ee9606 0%, #e87f03 100%); /* FF3.6+ */
+	background: url("../img/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ee9606), color-stop(100%,#e87f03)); /* Chrome,Safari4+ */
+	background: url("../img/bg-noise.png"), -webkit-linear-gradient(top,  #ee9606 0%,#e87f03 100%); /* Chrome10+,Safari5.1+ */
+	background: url("../img/bg-noise.png"), -o-linear-gradient(top,  #ee9606 0%,#e87f03 100%); /* Opera 11.10+ */
+	background: url("../img/bg-noise.png"), -ms-linear-gradient(top,  #ee9606 0%,#e87f03 100%); /* IE10+ */
+	background: url("../img/bg-noise.png"), linear-gradient(to bottom,  #ee9606 0%,#e87f03 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ee9606', endColorstr='#e87f03',GradientType=0 ); /* IE6-9 */
+}
+#buy-credits-quick-menu .btn:hover {
+
+	color: #37500D;
+	box-shadow: inset 0 3px 0 rgba(0,0,0,0.1), inset -1px 0 0 rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.8);
+	
+	background: #8ebf36 url("../img/bg-noise.png"); /* Old browsers */
+	background: url("../img/bg-noise.png"), -moz-linear-gradient(top,  #8ebf36 0%, #70a220 100%); /* FF3.6+ */
+	background: url("../img/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8ebf36), color-stop(100%,#70a220)); /* Chrome,Safari4+ */
+	background: url("../img/bg-noise.png"), -webkit-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Chrome10+,Safari5.1+ */
+	background: url("../img/bg-noise.png"), -o-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Opera 11.10+ */
+	background: url("../img/bg-noise.png"), -ms-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* IE10+ */
+	background: url("../img/bg-noise.png"), linear-gradient(to bottom,  #8ebf36 0%,#70a220 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8ebf36', endColorstr='#70a220',GradientType=0 ); /* IE6-9 */
+	
+}
+#buy-credits-quick-menu .btn.dropdown-toggle:hover {
+	
+	box-shadow: inset 0 -3px 0 rgba(0,0,0,0.1), inset 1px 0 0 rgba(255,255,255,0.4), 0 1px 0 rgba(255,255,255,0.8);
+	
+}
+#buy-credits-quick-menu:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 3px;	left: 45%;
+	margin: 0;
+	border: 8px outset transparent;
+	border-bottom: 8px solid #6e3312;
+}
+
+#bank-and-cart-tab-panes .tabs-in-tabs-headings {
+	border-bottom: 12px solid #e8e5e2;	
+	margin: 0 220px 2px 0;
+}
+#shopping-cart .btn-success {
+	float: right;
+	padding: 15px 14px 12px;
+}
+#shopping-cart .btn:before {
+	content: "\00C9";
+	font-size: 25px;
+	line-height: 1;
+	display: block;
+	margin: 0 0 6px 0;
+}
+	
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6860,13 +7027,14 @@ select, input[type="file"] {
 	background: linear-gradient(to bottom,  #3a5603 0%,#657f0f 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a5603', endColorstr='#657f0f',GradientType=0 ); /* IE6-9 */	
 }
-
-.btn.btn-success.btn-large .caret {
-	color: #36520f;
+.btn.btn-large .caret {
 	margin: 0 5px;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.3);
 	font-size: 11px;
 	border: none;
+}
+.btn.btn-success.btn-large .caret {
+	color: #36520f;
 }
 .dropup .caret {
 }
