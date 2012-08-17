@@ -1,5 +1,5 @@
 #!/bin/bash
 
 
-cd /home/alpha.live/app
+cd /home/vhost/sites/alpha.protrada.com/app
 /usr/bin/node app.js
