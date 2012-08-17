@@ -331,7 +331,7 @@ protrada =
 
       $.ajax data.url, {
         success: ( html ) ->
-          $("#panel-content").find(".ajax-panel-content").html( html )
+          $("#ajax-container").prepend( html )
           $("#main").find(".sectional-tabs").find( "#" + data.id ).addClass("active")
           $("#section-panel").removeClass("hidden")
 
@@ -347,27 +347,10 @@ protrada =
       return
 
     hide: ->
-      temporaryTab = $("#main").find(".sectional-tabs").find(".temporary-tab")
 
-      $("#main").find(".sectional-tabs").find(".active").removeClass("active")
-      $("#section-panel").addClass("hidden")
 
-      # add the standout-tab class back to the default panel
-      # must perform check as variable is not set on first click
-      if @defaultPanel
-        @defaultPanel.addClass("standout-tab")
 
-      # update the panel tracking IDs
-      @prevPanelID = @curPanelID
-      @curPanelID = null
 
-      # remove temporary tab if existent
-      if temporaryTab.length and @prevPanelID == temporaryTab.attr "id"
-        @remove @prevPanelID, true
-
-      @shuffle()
-
-      return
 
     shuffle: ->
       tabContainer = $("#main").find(".sectional-tabs")
