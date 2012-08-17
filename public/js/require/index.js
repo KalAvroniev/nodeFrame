@@ -7846,9 +7846,10 @@ protrada = {
         empty = true;
         this.hide();
       }
+      /* do we need this? 
       if (empty) {
         $("#p").remove();
-      }
+      }*/ 
       tabToClose.remove();
     },
     show: function(data) {
@@ -7858,28 +7859,35 @@ protrada = {
       }
       $.ajax(data.url, {
         success: function(html) {
+          $("#section-panel").addClass("hidden");
           $("#ajax-container").prepend(html);
           $("#main").find(".sectional-tabs").find("#" + data.id).addClass("active");
-          $("#section-panel").removeClass("hidden");
           Panels.defaultPanel = $("#main").find(".sectional-tabs").find(".standout-tab").removeClass("standout-tab");
           Panels.curPanelID = data.id;
-        }
-      });
+          Panels.shuffle();
+        }        
+      });          
+    },
+    shuffle: function() {
+      var tabContainer;
+      tabContainer = $("#main").find(".sectional-tabs");
+      tabContainer.find(".standout-tab, .active").detach().prependTo(tabContainer);
     },
     hide: function() {
 
       var temporaryTab;
       temporaryTab = $("#main").find(".sectional-tabs").find(".temporary-tab");
+      
       $("#main").find(".sectional-tabs").find(".active").removeClass("active");
       
       $("#section-panel").addClass("hidden");
-      var sectionPanel = $("#ajax-container").find("#section-panel")
       
-      if (sectionPanel != null) {
-	      setTimeout(function(){sectionPanel.remove()},300)
-      }
-      
-       
+      $("#section-panel").delay(300).queue(function() {
+      	
+		    $("#section-panel.hidden").remove();
+
+	  });
+    
       if (this.defaultPanel) {
         this.defaultPanel.addClass("standout-tab");
       }
@@ -7888,13 +7896,7 @@ protrada = {
       if (temporaryTab.length && this.prevPanelID === temporaryTab.attr("id")) {
         this.remove(this.prevPanelID, true);
       }
-      this.shuffle();
       
-    },
-    shuffle: function() {
-      var tabContainer;
-      tabContainer = $("#main").find(".sectional-tabs");
-      tabContainer.find(".standout-tab, .active").detach().prependTo(tabContainer);
     }
   }
 };
