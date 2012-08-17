@@ -30,7 +30,7 @@ class Bootstrap
 		@jsonRpcServer.registerMethods()
 		
 		# initialize the CDN magic
-		CDN = require('./lib/cdn.coffee')(@app, @config.cdn)
+		CDN = require('./lib/Cdn.coffee')(@app, @config.cdn)
 		
 		# add the dynamic view helper
 		@app.dynamicHelpers(CDN: CDN)
