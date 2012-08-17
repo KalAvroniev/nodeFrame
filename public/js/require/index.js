@@ -7884,9 +7884,8 @@ protrada = {
       
       $("#section-panel").delay(300).queue(function() {
       	
-		    var moo = $("#section-panel.hidden");
-		    console.log(moo);
-		    moo.remove();
+		    $("#section-panel.hidden").remove();
+
 	  });
     
       if (this.defaultPanel) {
