@@ -23,9 +23,11 @@ class Bootstrap
 		@app = express.createServer()
 		@app.use(express.static(@config.pubDir))
 		
+		@config.cdn.production = if @app.settings.env == 'development' then false else true
+		
 		# register JSON-RPC methods
 		@jsonRpcServer = new JsonRpcServer()
-		@jsonRpcServer.registerMethods()					
+		@jsonRpcServer.registerMethods()
 		
 		# initialize the CDN magic
 		CDN = require('./lib/cdn.coffee')(@app, @config.cdn)
