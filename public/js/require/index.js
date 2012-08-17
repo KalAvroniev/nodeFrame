@@ -7846,9 +7846,10 @@ protrada = {
         empty = true;
         this.hide();
       }
+      /* do we need this? 
       if (empty) {
         $("#p").remove();
-      }
+      }*/ 
       tabToClose.remove();
     },
     show: function(data) {
@@ -7858,9 +7859,9 @@ protrada = {
       }
       $.ajax(data.url, {
         success: function(html) {
+          $("#section-panel").addClass("hidden");
           $("#ajax-container").prepend(html);
           $("#main").find(".sectional-tabs").find("#" + data.id).addClass("active");
-          $("#section-panel").removeClass("hidden");
           Panels.defaultPanel = $("#main").find(".sectional-tabs").find(".standout-tab").removeClass("standout-tab");
           Panels.curPanelID = data.id;
           Panels.shuffle();
@@ -7880,13 +7881,14 @@ protrada = {
       $("#main").find(".sectional-tabs").find(".active").removeClass("active");
       
       $("#section-panel").addClass("hidden");
-      var sectionPanel = $("#ajax-container").find("#section-panel");
       
-      if (typeof sectionPanel[0] !== 'undefined' && sectionPanel[0] !== null) {
-	      setTimeout(function(){$("#ajax-container").find("#section-panel").remove()},300);
-      }
-      
-       
+      $("#section-panel").delay(300).queue(function() {
+      	
+		    var moo = $("#section-panel.hidden");
+		    console.log(moo);
+		    moo.remove();
+	  });
+    
       if (this.defaultPanel) {
         this.defaultPanel.addClass("standout-tab");
       }
