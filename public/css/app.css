@@ -4909,9 +4909,7 @@ aside header.alerts-header {
 }
 
 
-#purchase-history .tabs-in-tabs-headings, #credit-use .tabs-in-tabs-headings {
-	margin: 0 340px 2px 0;
-}
+
 
 .simple-data-grid {
 	width: 100%;
@@ -5484,7 +5482,9 @@ li.more-coming-soon .ff-icon-before:after {
 	margin: 9px 17px 0 0;
 	font-size: 10px;
 }
-
+#purchase-history .tabs-in-tabs-headings {
+	margin: 0 280px 2px 0;
+}
 
 
 

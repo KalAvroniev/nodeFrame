@@ -4,3 +4,4 @@ tests/vows.coffee
 app/state_data
 tests/selenium/results/
 /nbproject/private/
+public/js/require/
