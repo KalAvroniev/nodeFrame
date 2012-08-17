@@ -76,6 +76,9 @@ class Bootstrap
 			socketIoServer.addClient(socket)
 		)
 		
+		# delete minified files in case of updates
+		@deleteMinified(@config.pubDir + '/js/require')
+		
 		# listen
 		@app.listen(@options.port)
 		console.log("Server started on port " + @options.port + ".")
@@ -146,3 +149,18 @@ class Bootstrap
 	
 	loadConfig: (config) ->
 		@config = require('./config/' + config + '.coffee').config
+		
+	deleteMinified: (path) ->
+		#read the directory
+		try
+			files = fs.readdirSync(path)
+			files.forEach((file) =>
+				if file.substr(0, 1) != '.'
+					@deleteMinified(path + '/' + file)
+			)
+		catch e
+			console.log('Now deleting ' + path)
+			if (fs.statSync(path).isFile())
+				fs.unlinkSync(path)
+			else
+				fs.rmdirSync(path)
