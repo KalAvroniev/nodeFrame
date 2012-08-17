@@ -256,8 +256,7 @@ a.ff-icon-before:before {
 	position: absolute;
 	z-index: -1;	
 	text-indent: 0;
-	top: 7px;
-	left: 7px;
+	top: 7px; left: 8px;
 	width: 50px;
 	height: 50px;
 	border-radius: 4px;
@@ -5464,6 +5463,26 @@ li.more-coming-soon .ff-icon-before:after {
 }
 .final-total {
 
+}
+
+#bank-and-cart-tab-panes .btn-group > .btn {
+	background: #f9f9f9;
+	color: #4c4b4a;
+	box-shadow: inset 0 1px 0 white, 0 1px 2px rgba(0,0,0,0.3);
+	font-size: 18px;
+	padding: 14px 15px;
+	width: 240px;	
+	border: none;
+}
+#bank-and-cart-tab-panes .btn-group.open > .btn {
+	background: rgba(0,0,0,0.12);
+	box-shadow: 0 1px 0 rgba(255,255,255,0.5), inset 0 1px 2px rgba(0,0,0,0.3);
+}
+#bank-and-cart-tab-panes .btn-group > .btn > .caret {
+	position: absolute;
+	right: 0;
+	margin: 9px 17px 0 0;
+	font-size: 10px;
 }
 
 
