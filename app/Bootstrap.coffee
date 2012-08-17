@@ -25,23 +25,13 @@ class Bootstrap
 		
 		# register JSON-RPC methods
 		@jsonRpcServer = new JsonRpcServer()
-		@jsonRpcServer.registerMethods()
-	
-		options = 
-			publicDir: @config.pubDir,
-			viewsDir: path.join(@config.appDir, '/views'),
-			domain: 'd2liqzzjm9hyrw.cloudfront.net',
-			bucket: 'alpha-protrada-com',
-			key: 'AKIAI654DO6KCXT5K54A',
-			secret: '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',
-			hostname: 'localhost',
-			port: 8181,
-			ssl: true,
-			production: false
-					
+		@jsonRpcServer.registerMethods()					
 		
 		# initialize the CDN magic
-		CDN = require('express-cdn')(@app, options)
+		CDN = require('./lib/cdn.coffee')(@app, @config.cdn)
+		
+		# add the dynamic view helper
+		@app.dynamicHelpers(CDN: CDN)
         
         # sessions
 		@app.use(express.cookieParser())
@@ -65,9 +55,6 @@ class Bootstrap
 		
 		# default layout
 		@app.set('view options', { pretty: true, layout: @config.appDir + "/views/layouts/default.jade" });
-		
-		# add the dynamic view helper
-		@app.dynamicHelpers(CDN: CDN)
 		
 		# setup socket.io
 		socketIoServer.setJsonRpcServer(@jsonRpcServer)
