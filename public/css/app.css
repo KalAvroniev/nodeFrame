@@ -7179,9 +7179,6 @@ select, input[type="file"] {
 .btn.btn-warning.btn-large:hover .caret {
 	color: #36520F;
 }
-.btn.btn-success.btn-large .caret {
-	color: #36520f;
-}
 .dropup .caret {
 }
 .btn-success.btn-large:active .caret, .open .btn-success.btn-large .caret {
