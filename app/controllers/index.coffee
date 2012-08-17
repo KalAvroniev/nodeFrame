@@ -33,8 +33,8 @@ class Index extends Controller
 			out: '../public/js/require/' + @params.require_conf + '.js'
 			optimize: 'none'		
 			excludeShallow: ["require-config/" + @params.require_conf]
-			fs.exists app.config.pubDir + '/js/require/' + @params.require_conf + '.js', (exists) ->
-				if not exists
-					requirejs.optimize config, () ->
-				return
+			
+			fs.readFile app.config.pubDir + '/js/require/' + @params.require_conf + '.js', 'utf8', (err, data) ->
+                if err
+                    requirejs.optimize config, () ->
 			return

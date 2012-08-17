@@ -45,10 +45,8 @@ class Login
 
         fs.readFile app.config.pubDir + '/js/require/' + @params.require_conf + '.js', 'utf8', (err, data) ->
             if err
-                console.log(err)
                 requirejs.optimize config, () ->
-            else
-                console.log(data)
+            
             
 
         ###
