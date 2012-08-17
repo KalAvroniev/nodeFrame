@@ -7863,20 +7863,27 @@ protrada = {
           $("#section-panel").removeClass("hidden");
           Panels.defaultPanel = $("#main").find(".sectional-tabs").find(".standout-tab").removeClass("standout-tab");
           Panels.curPanelID = data.id;
-        }
-      });
+          Panels.shuffle();
+        }        
+      });          
+    },
+    shuffle: function() {
+      var tabContainer;
+      tabContainer = $("#main").find(".sectional-tabs");
+      tabContainer.find(".standout-tab, .active").detach().prependTo(tabContainer);
     },
     hide: function() {
 
       var temporaryTab;
       temporaryTab = $("#main").find(".sectional-tabs").find(".temporary-tab");
+      
       $("#main").find(".sectional-tabs").find(".active").removeClass("active");
       
       $("#section-panel").addClass("hidden");
-      var sectionPanel = $("#ajax-container").find("#section-panel")
+      var sectionPanel = $("#ajax-container").find("#section-panel");
       
-      if (sectionPanel != null) {
-	      setTimeout(function(){sectionPanel.remove()},300)
+      if (typeof sectionPanel[0] !== 'undefined' && sectionPanel[0] !== null) {
+	      setTimeout(function(){$("#ajax-container").find("#section-panel").remove()},300);
       }
       
        
@@ -7888,13 +7895,7 @@ protrada = {
       if (temporaryTab.length && this.prevPanelID === temporaryTab.attr("id")) {
         this.remove(this.prevPanelID, true);
       }
-      this.shuffle();
       
-    },
-    shuffle: function() {
-      var tabContainer;
-      tabContainer = $("#main").find(".sectional-tabs");
-      tabContainer.find(".standout-tab, .active").detach().prependTo(tabContainer);
     }
   }
 };
