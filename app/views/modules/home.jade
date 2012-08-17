@@ -3,7 +3,7 @@
 != partial("partials/panel")
 != partial("partials/connect-afternic")
 
-- if ( showDefaultContent ) {
+- if ( !showDefaultContent ) {
 
 #main-container.page-default
 	h5#first-heading.home welcome to Protrada
@@ -160,4 +160,4 @@ script
 		stickyHeader: true
 	});
 	
-!= CDN('/js/home.js')
+!= CDN("/js/home.js")

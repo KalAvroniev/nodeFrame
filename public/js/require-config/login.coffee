@@ -4,4 +4,4 @@ require.config
 	paths:
 		bootstrap: "bootstrap.min"
 
-require ["bootstrap"]
+require ["bootstrap", "jsonrpc"]

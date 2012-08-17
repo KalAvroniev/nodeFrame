@@ -174,18 +174,20 @@ $.fn.restoreStandoutElement = ->
   @children(".standout-tab").detach().prependTo this
 
 toggleSidebar = (e) ->
+  $aside = undefined
   $aside = $("aside")
   $aside.toggleClass "active"
-  $(document.body).toggleClass ("sidebar-hidden sidebar-open")
+  $(document.body).toggleClass "sidebar-hidden sidebar-open"
   $("#main-container, .task-status")
-    .delay((if $(document.body).hasClass("sidebar-hidden") then 200 else 0))
-    .animate 
-			width: ((if $aside.hasClass("active") then "99.999" else "100")) + "%", 200, ->
-            # update fake scrollbars
-            Scrollbars.updateAll()
-            # update sticky headers
-            $("#grid-view").grid "windowResize"
-						      return
+    .delay(((if $(document.body).hasClass("sidebar-hidden") then 200 else 0)))
+    .animate
+      width: ((if $aside.hasClass("active") then "99.999" else "100")) + "%"
+    , 200, ->
+      # update fake scrollbars
+      Scrollbars.updateAll()
+      # update sticky headers
+      $("#grid-view").grid "windowResize"
+      return
   return
 
 protrada =
@@ -210,7 +212,6 @@ protrada =
 
     offset: (identifier) ->
       @elements[identifier].tinyscrollbar_offset()
-      return
 
     remove: (identifier) ->
       @elements[identifier].children(".scrollbar").remove()
@@ -220,7 +221,7 @@ protrada =
     show: (message) ->
       $("#sys-alert").removeClass("hidden").find(".alertmsg-container").find("span").text message
       return
-			
+
     hide: ->
       $("#sys-alert").addClass "hidden"
       return
@@ -237,10 +238,151 @@ protrada =
   helpBubbles:
     bubbles: {}
 
+  panels:
+  panels:
+    store: {}
+
+    curPanelID: null
+    prevPanelID: null
+
+    defaultPanel: null
+
+    defaults:
+      default: false
+      temporary: false
+      extraClasses: null
+
+    init: ->
+      $( document ).on "click", ".panel-tab", ( e ) ->
+        e.preventDefault()
+        Panels.show( $(this).data() )
+        return
+
+      $( document ).on "click", ".x-panel", ( e ) ->
+        e.preventDefault()
+        Panels.hide()
+        return
+
+      return
+
+    add: ( options, showImmediately=false ) ->
+      options = $.extend {}, @defaults, options
+
+      # these are required values
+      return if options.id == undefined or options.url == undefined or options.size == undefined
+
+      # panel already exists
+      return if $( "#" + options.id ).length
+
+      # temporary tabs cannot be a default tab
+      if options.temporary
+        options.default = false
+
+      tabContainer = $("#main").find(".sectional-tabs")
+
+      # TODO: move HTML string to a Jade template
+      # or clone existing tab and overwrite values
+      tabHTML = '<li id="' + options.id + '" class="' + (if options.default or showImmediately then "standout-tab" else "") +
+        (if options.temporary then " temporary-tab" else "") + '"><a href="#" data-id="' +
+        options.id + '" data-url="' + options.url + '" data-size="' +
+        options.size + '"' + (if options.temporary then ' data-temporary="true"' else "") +
+        (if options.extraClasses then ' data-extra-classes="' + options.extraClasses + '"' else "") +
+        ' class="panel-tab"><strong>' + options.h1 + '</strong>' + options.h2 + '</a></li>'
+
+      # must prepend - tabs are floated right
+      tabContainer.prepend( tabHTML )
+
+      # remove existing default tab if necessary
+      if options.default
+        @defaultPanel = $( "#" + options.id )
+        tabContainer.find(".standout-tab").not( @defaultPanel ).removeClass("standout-tab")
+
+      # show the panel straight away?
+      if showImmediately
+        @show( options )
+      else
+        @shuffle()
+
+      return
+
+    remove: ( id, empty=false ) ->
+      tabToClose = $("#main").find(".sectional-tabs").find( "#" + id )
+
+      # is the panel we want to remove currently open?
+      # then make sure to close the panel
+      if tabToClose.hasClass("active")
+        empty = true # fall through to block below
+        @hide()
+
+      # usually only necessary if removing an active temporary tab
+      if empty
+        $("#panel-content").find(".ajax-panel-content").empty()
+
+      tabToClose.remove()
+
+      return
+
+    show: ( data ) ->
+      # hide any open panels
+      @hide()
+
+      # are we clicking on the previous panel? then exit
+      return if @prevPanelID == data.id
+
+      $.ajax data.url, {
+        success: ( html ) ->
+          $("#panel-content").find(".ajax-panel-content").html( html )
+          $("#main").find(".sectional-tabs").find( "#" + data.id ).addClass("active")
+          $("#section-panel").removeClass("hidden")
+
+          # no tab should have the .standout-tab class when a panel is open
+          Panels.defaultPanel = $("#main").find(".sectional-tabs").find(".standout-tab").removeClass("standout-tab")
+
+          # TODO: should we be accessing the global Panels to do this?
+          Panels.curPanelID = data.id
+
+          return
+      }
+
+      return
+
+    hide: ->
+      temporaryTab = $("#main").find(".sectional-tabs").find(".temporary-tab")
+
+      $("#main").find(".sectional-tabs").find(".active").removeClass("active")
+      $("#section-panel").addClass("hidden")
+
+      # add the standout-tab class back to the default panel
+      # must perform check as variable is not set on first click
+      if @defaultPanel
+        @defaultPanel.addClass("standout-tab")
+
+      # update the panel tracking IDs
+      @prevPanelID = @curPanelID
+      @curPanelID = null
+
+      # remove temporary tab if existent
+      if temporaryTab.length and @prevPanelID == temporaryTab.attr "id"
+        @remove @prevPanelID, true
+
+      @shuffle()
+
+      return
+
+    shuffle: ->
+      tabContainer = $("#main").find(".sectional-tabs")
+  
+      # standout and/or active tab must always be the first element
+      # we are presuming that there will only every be one tab found
+      tabContainer.find(".standout-tab, .active").detach().prependTo( tabContainer )
+
+      return
+
 Scrollbars = protrada.scrollbars
 TaskStatus = protrada.taskStatus
 Alert = protrada.alert
 HelpBubbles = protrada.helpBubbles
+Panels = protrada.panels
 
 $(document).on "click", "#toggle-side-bar, #x-side-bar", ->
   toggleSidebar()

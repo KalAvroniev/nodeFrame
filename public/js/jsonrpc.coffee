@@ -1,11 +1,11 @@
 # install JSON-RPC client
 $.jsonrpc = (method, params, success, failure, options) ->
-	options = options or {}
-	success = success or $.noop
-	failure = failure or (errMsg, errCode) ->
+  options = options or {}
+  success = success or $.noop
+  failure = failure or (errMsg, errCode) ->
     console.error "Error " + errCode + ": " + errMsg
     return
-		
+
   ajax =
     type: "POST"
     url: "/jsonrpc"
@@ -33,3 +33,15 @@ $.jsonrpcSync = (method, params, success, failure, options) ->
   options = options or {}
   options.async = false
   $.jsonrpc method, params, success, failure, options
+
+$.fn.serializeJSON = ->
+  o = {}
+  a = @serializeArray()
+  $.each a, ->
+    if o[@name]
+      o[@name] = [o[@name]]  unless o[@name].push
+      o[@name].push @value or ""
+    else
+      o[@name] = @value or ""
+
+  o

@@ -22,9 +22,10 @@ header#main
 		ul.sectional-tabs(class=klass)
 			- for ( var i = 0; i < tabs.length; ++i ) {
 				- var tab = tabs[ i ];
-				li(id=tab.id, class=tab.class)
-					a(href="javascript:$.app.panel.show( '" + tab.panel + "', {tabid: '" + tab.id + "', panel_size: '" + tab.panel_size + "'} );")
-						strong=tab.h1
+				- var standout = ( tab.default ? "standout-tab" : "" );
+				li(id=tab.id, class=standout)
+					a.panel-tab(href="#", data-id=tab.id, data-url=tab.url, data-size=tab.size)
+						strong= tab.h1
 						= tab.h2
 			- }
 
@@ -51,3 +52,7 @@ header#main
 					li
 						a(href="") Websites only
 			button.btn.ff-icon-before(type="submit") Submit
+
+// only temporary!!!
+script
+	Panels.init();

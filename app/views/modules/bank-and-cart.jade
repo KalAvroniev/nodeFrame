@@ -1,0 +1,284 @@
+// bank-and-cart.jade
+- if ( !ajax ) {
+	!= partial("partials/styles")
+- }
+
+!= CDN("/js/bank-and-cart.js")
+!= partial("partials/header")
+!= partial("partials/panel")
+
+#main-container.bank-and-cart
+
+
+	#credits-headsup
+		#your-credits-area
+			#actual-credits 
+				h3.credits
+					| your current
+					strong.ff-icon-before trading bank
+				span.credits-count.ff-icon-before #{user.availableCredits}
+
+		#buy-credits-quick-menu.btn-group
+			a.btn.btn-warning.btn-large.ff-icon-before buy a 
+				span.ff-icon-before 50 
+				| credit pack
+			a.btn.btn-warning.btn-large.dropdown-toggle(data-toggle='dropdown')
+				span.caret
+			ul.dropdown-menu.pull-right
+				li
+					a(href="#") just watch
+				li.divider
+				li
+					a(href="#") do something else entirely!
+
+	h5#first-heading.ff-icon-before currently logged in as: 
+		strong #{user.fullName}
+
+	div#section-headings
+		h1
+			strong shopping cart
+			| &amp; trading bank area
+			
+						
+	ul#bank-and-cart-tabs.nav.nav-tabs
+		li.active
+			a(href="#shopping-cart")#shopping-cart-btn.ff-icon-before
+				| items in cart (5)
+		li
+			a(href="#purchase-history")#purchase-history-btn.ff-icon-before
+				| purchase history &amp; invoices
+		li
+			a(href="#credit-use")#credit-use-btn.ff-icon-before
+				| credits usage / history
+
+
+	#bank-and-cart-tab-panes.tab-content.tabs-in-tabs
+
+		#shopping-cart.tab-pane.clearfix.active
+
+			a.btn.btn-success.btn-large.ff-icon-before checkout items
+			
+			hgroup.tabs-in-tabs-headings
+				h2 items currently in your cart
+				h3 some helper text in here, about just what kinds of things can be setup as notifications etc etc.
+
+			table.simple-data-grid
+				thead
+					tr
+						th &nbsp;
+						th item details
+						th unit price
+						th quantity
+						th total cost
+						
+				tbody
+					tr
+						td
+							span.ff-icon-before.x-cart-item
+							
+						td
+							span.item-details.ff-icon-before
+								span.item-title 50 credits top-up pack
+								span.item-descr Details on what kinds of things this can be used for?
+
+						td.currency 50
+							sup .00
+						td.interactive
+							input(type="number",placeholder="1")
+							
+						td.currency 100
+							sup .00
+
+					tr
+						td
+							span.ff-icon-before.x-cart-item
+							
+						td
+							span.item-details.ff-icon-before.credit-pack
+								span.item-title 100 credits top-up pack
+								span.item-descr Details on what kinds of things this can be used for?
+
+						td.currency 50
+							sup .00
+						td.interactive
+							input(type="number",placeholder="1")
+							
+						td.currency 100
+							sup .00
+
+					tr
+						td
+							span.ff-icon-before.x-cart-item
+							
+						td
+							span.item-details.ff-icon-before.bid-autho
+								span.item-title auction bid authorisation by credit card
+								span.item-descr * note this will only hold the funds on your credit card, we will not deduct this amount unless yoau win the auction
+
+						td.currency 125
+							sup .00
+						td.interactive
+							span.disabled
+								input(type="number",placeholder="1")
+							
+						td.currency 125
+							sup .00
+
+
+					tr
+						td
+							span.ff-icon-before.x-cart-item
+							
+						td
+							span.item-details.ff-icon-before.list-forsale
+								span.item-title list 5 domains for sale
+								span.item-descr details on which domains, and which channels
+
+						td.currency 50
+							sup .00
+						td.interactive
+							.disabled
+								input(type="number",placeholder="1")
+							
+						td.currency 50
+							sup .00
+						
+				tfoot
+					tr
+						td(colspan="5")
+							span.cart-totals
+								span.subtotal
+									span.currency 250
+										sup .00
+									span.total-label items subtotal
+									
+								span.tax
+									span.currency 25
+										sup .00	
+									span.total-label tax
+									
+								span.final-total
+									span.currency 275
+										sup .00	
+									span.total-label final total
+
+			a.btn.btn-success.btn-large.ff-icon-before checkout items	
+									
+																						
+			
+		#purchase-history.tab-pane.clearfix
+			#show-only.btn-group
+				a.btn.btn-large.dropdown-toggle(data-toggle="dropdown", href="")
+					| show only
+					span.caret
+				ul.dropdown-menu
+					li
+						a(href="") tomorrow
+					li
+						a(href="") 2 days
+					li
+						a(href="") date range
+
+			hgroup.tabs-in-tabs-headings
+				h2 view all of your purchase history
+				h3 you can also download invoices for all purchases, no matter how old.
+
+			table.simple-data-grid
+				thead
+					tr
+						th date
+						th type
+						th invoice
+						th amount paid
+						th description
+				tbody
+					tr
+						td.date 20
+							sup th
+							| May, 2012
+
+						td Purchase
+						td
+							a(href="").default Download
+						td.currency 150.00
+						td
+							p This is Photoshop's version of Lorem Ipsum. Proin gravida
+
+					tr
+						td.date 20
+							sup th
+							| May, 2012
+
+						td Purchase
+						td
+							a(href="").default Download
+						td.currency 150.00
+						td
+							p Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin.
+					tr
+						td.date 20
+							sup th
+							| May, 2012
+
+						td Somthing else
+						td
+							a(href="").default Download
+						td.currency 150.00
+						td
+							p Aenean sollicitudin, lorem quis
+
+
+
+		#credit-use.tab-pane.clearfix
+
+		
+
+			hgroup.tabs-in-tabs-headings
+				h2 view all credit based transactions
+				h3 anything you have done within the system that costs credits appears in here.
+
+			table.simple-data-grid
+				thead
+					tr
+						th date / time
+						th action
+						th debt
+						th credit
+						th balance
+						th details
+				tbody
+					tr
+						td.date 21
+							sup st 
+							| May, 2012
+							| @ 18:53
+						td Trading hosting website
+						td.ff-icon-before -20
+						td
+						td.ff-icon-before 580
+						td
+							p This is Photoshop's version of Lorem Ipsum. Proin gravida
+
+					tr
+						td.date 19
+							sup th 
+							| May, 2012
+							| @ 18:53
+						td Trading hosting website
+						td.ff-icon-before -20
+						td
+						td.ff-icon-before 600
+						td
+							p Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin.
+
+					tr
+						td.date 19
+							sup th 
+							| May, 2012
+							| @ 18:53
+						td Something else
+						td.ff-icon-before -60
+						td
+						td.ff-icon-before 620
+						td
+							p Aenean sollicitudin, lorem quis			

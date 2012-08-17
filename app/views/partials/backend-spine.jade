@@ -60,11 +60,19 @@
 					span user settings
 					
 				li
-					a#nav-shopping-cart.ff-icon-before(href="javascript:$.app.state.current.modules.selected = 'shopping-cart'; $.app.state.restoreModule()")
-					span shopping cart					
+					a#nav-bank-and-cart.shopping-cart.ff-icon-before(href="javascript:$.app.state.current.modules.selected = 'bank-and-cart'; $.app.state.restoreModule()")	
+						span#cart-count(data-count="4")
+					span cart &amp; trading bank					
 
 
 				// not active/in-use yet ----------
+				
+				//li
+				//	a#nav-bank-and-cart.trading-bank.ff-icon-before(href="javascript:$.app.state.current.modules.selected = 'bank-and-cart'; $.app.state.restoreModule()")	
+				//		span#cart-count(data-count="4")
+				//	span cart &amp; trading bank					
+				
+				
 				//
 				//li
 				//	a#nav-education.ff-icon-before(href="#")

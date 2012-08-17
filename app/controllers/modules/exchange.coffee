@@ -11,18 +11,18 @@ class Modules_Exchange extends Controller
 		res.view.tabs = [
 			{
 				id: "watchlist",
-				class: "standout-tab",
+				url: "/modules/exchange/panels/watchlist",
+				"default": true,
+				size: "full",
 				h1: "my watchlist",
-				h2: "domains you star",
-				panel: "/modules/exchange/panels/watchlist",
-				panel_size: "panel"
+				h2: "domains you star"
 			},
 			{
 				id: "export-data",
+				url: "/panels/export-data",
+				size: "mini",
 				h1: "export all",
-				h2: "on-screen data",
-				panel: "/panels/export-data",
-				panel_size: "mini-panel"
+				h2: "on-screen data"
 			}
 		]
 

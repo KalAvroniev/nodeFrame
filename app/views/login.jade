@@ -1,20 +1,17 @@
 !!! 5
-
 html(lang="en")
-	
 	head
-	
 		meta(charset="utf-8")
 		meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
 		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
-		
+
 		title Login to Protrada (Bananaman release)
-		
+
 		!= partial("partials/styles")
-		
+
 	body.login
 		#main-container
-			- var klass = (error == "" ? "" : "error");
+			- var klass = ( error === "" ? "" : "error" );
 				#login-container(class=klass)
 					h1#beta-logo.ff-icon-before alpha
 					#login-content
@@ -28,7 +25,7 @@ html(lang="en")
 
 								.login-right
 									input(type="submit", value="").invisible
-									a.go-login.ff-icon-after(href="#", onclick="$('#login-body').submit()") go login
+									a.go-login.ff-icon-after(href="#") go login
 									a#forgot(href="#") forgot?
 
 						- if ( error !== "" )
@@ -42,8 +39,8 @@ html(lang="en")
 
 						#login-facebook.clearfix
 							h3.ff-icon-before
-								| login via 
-								strong Facebook 
+								| login via
+								strong Facebook
 							span
 								| Use your facebook profile
 								br
@@ -53,9 +50,18 @@ html(lang="en")
 		!= CDN('/js/require/' + require_conf + '.js')
 
 		script
-			// verify that we are on the right url
-			if(document.location.pathname != '/login')
-				document.location = '/login';
+			// verify that we are at the right URL
+			if ( window.location.pathname !== "/login" ) {
+				window.location = "/login";
+			}
+
+			// inline Javascript is bad practice, keep in DOMContentLoaded
+			$( document ).ready(function() {
+				$(".go-login").on( "click", function( e ) {
+					e.preventDefault();
+					$("#login-body").trigger("submit");
+				});
+			});
 
 		script
 			var _gaq = _gaq || [];
