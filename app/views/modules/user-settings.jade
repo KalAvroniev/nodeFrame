@@ -1,7 +1,6 @@
 != CDN("/js/user-settings.js")
 
 != partial("partials/header")
-!= partial("partials/panel")
 
 #main-container.page-settings
 		h5#first-heading.ff-icon-before currently logged in as: 
@@ -41,13 +40,6 @@
 					li
 						a(href="#login-information")#general-login-information
 							| login information
-					li
-						a(href="#purchase-history")#general-purchase-history
-							| purchase history &amp; invoicies
-
-					li
-						a(href="#credit-use")#general-credit-use
-							| credit usage / history
 
 				#general-tab-panes.tab-content.tabs-in-tabs
 					#user-profile.tab-pane.active.clearfix
@@ -150,126 +142,7 @@
 
 						p this is a pretty standard form section, all styles should be fine already
 
-					#purchase-history.tab-pane.clearfix
-						#show-only.btn-group
-							a.btn.btn-large.dropdown-toggle(data-toggle="dropdown", href="")
-								| show only
-								span.caret
-							ul.dropdown-menu
-								li
-									a(href="") tomorrow
-								li
-									a(href="") 2 days
-								li
-									a(href="") date range
 
-						hgroup.tabs-in-tabs-headings
-							h2 view all of your purchase history
-							h3 you can also download invoices for all purchases, no matter how old.
-
-						table.simple-data-grid
-							thead
-								tr
-									th date
-									th type
-									th invoice
-									th amount paid
-									th description
-							tbody
-								tr
-									td.date 20
-										sup th
-										| May, 2012
-
-									td Purchase
-									td
-										a(href="").default Download
-									td.currency 150.00
-									td
-										p This is Photoshop's version of Lorem Ipsum. Proin gravida
-
-								tr
-									td.date 20
-										sup th
-										| May, 2012
-
-									td Purchase
-									td
-										a(href="").default Download
-									td.currency 150.00
-									td
-										p Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin.
-								tr
-									td.date 20
-										sup th
-										| May, 2012
-
-									td Somthing else
-									td
-										a(href="").default Download
-									td.currency 150.00
-									td
-										p Aenean sollicitudin, lorem quis
-
-					#credit-use.tab-pane.clearfix
-						#your-credits-area
-							#actual-credits 
-								h3.credits
-									| your system
-									strong.ff-icon-before credits
-								span.credits-count #{user.availableCredits}
-
-							a.btn.btn-success.btn-large.ff-icon-before buy more
-
-						hgroup.tabs-in-tabs-headings
-							h2 view all credit based transactions
-							h3 anything you have done within the system that costs credits appears in here.
-
-						table.simple-data-grid
-							thead
-								tr
-									th date / time
-									th action
-									th debt
-									th credit
-									th balance
-									th details
-							tbody
-								tr
-									td.date 21
-										sup st 
-										| May, 2012
-										| @ 18:53
-									td Trading hosting website
-									td.ff-icon-before -20
-									td
-									td.ff-icon-before 580
-									td
-										p This is Photoshop's version of Lorem Ipsum. Proin gravida
-
-								tr
-									td.date 19
-										sup th 
-										| May, 2012
-										| @ 18:53
-									td Trading hosting website
-									td.ff-icon-before -20
-									td
-									td.ff-icon-before 600
-									td
-										p Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin.
-
-								tr
-									td.date 19
-										sup th 
-										| May, 2012
-										| @ 18:53
-									td Something else
-									td.ff-icon-before -60
-									td
-									td.ff-icon-before 620
-									td
-										p Aenean sollicitudin, lorem quis
 
 			#external-accounts.tab-pane
 				hgroup.tabs-in-tabs-headings

@@ -23,25 +23,17 @@ class Bootstrap
 		@app = express.createServer()
 		@app.use(express.static(@config.pubDir))
 		
+		@config.cdn.production = if @app.settings.env == 'development' then false else true
+		
 		# register JSON-RPC methods
 		@jsonRpcServer = new JsonRpcServer()
 		@jsonRpcServer.registerMethods()
-	
-		options = 
-			publicDir: @config.pubDir,
-			viewsDir: path.join(@config.appDir, '/views'),
-			domain: 'd2liqzzjm9hyrw.cloudfront.net',
-			bucket: 'alpha-protrada-com',
-			key: 'AKIAI654DO6KCXT5K54A',
-			secret: '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',
-			hostname: 'localhost',
-			port: 8181,
-			ssl: true,
-			production: false
-					
 		
 		# initialize the CDN magic
-		CDN = require('express-cdn')(@app, options)
+		CDN = require('./lib/cdn.coffee')(@app, @config.cdn)
+		
+		# add the dynamic view helper
+		@app.dynamicHelpers(CDN: CDN)
         
         # sessions
 		@app.use(express.cookieParser())
@@ -66,15 +58,15 @@ class Bootstrap
 		# default layout
 		@app.set('view options', { pretty: true, layout: @config.appDir + "/views/layouts/default.jade" });
 		
-		# add the dynamic view helper
-		@app.dynamicHelpers(CDN: CDN)
-		
 		# setup socket.io
 		socketIoServer.setJsonRpcServer(@jsonRpcServer)
 		io = require('socket.io').listen(@app)
 		io.sockets.on('connection', (socket) ->
 			socketIoServer.addClient(socket)
 		)
+		
+		# delete minified files in case of updates
+		@deleteMinified(@config.pubDir + '/js/require')
 		
 		# listen
 		@app.listen(@options.port)
@@ -146,3 +138,18 @@ class Bootstrap
 	
 	loadConfig: (config) ->
 		@config = require('./config/' + config + '.coffee').config
+		
+	deleteMinified: (path) ->
+		#read the directory
+		try
+			files = fs.readdirSync(path)
+			files.forEach((file) =>
+				if file.substr(0, 1) != '.'
+					@deleteMinified(path + '/' + file)
+			)
+		catch e
+			console.log('Now deleting ' + path)
+			if (fs.statSync(path).isFile())
+				fs.unlinkSync(path)
+			else
+				fs.rmdirSync(path)

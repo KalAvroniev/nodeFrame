@@ -1,8 +1,7 @@
 require.config
-  baseUrl: "/js"
+	baseUrl: '/js'
+	
+	paths:
+		bootstrap: "bootstrap.min"
 
-  paths:
-    #jquery: "jquery-1.8rc1"
-    bootstrap: "bootstrap.min"
-
-requirejs ["bootstrap", "jsonrpc"]
+require ["bootstrap", "jsonrpc"]
