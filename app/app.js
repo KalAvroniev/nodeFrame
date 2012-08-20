@@ -3,7 +3,7 @@ Bootstrap = require('./Bootstrap.coffee')
 
 // production server
 app = new Bootstrap({
-	'port': 8080,
+	'port': 80,
 	'config': 'staging'
 });
 app.start();

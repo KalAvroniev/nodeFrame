@@ -2,4 +2,4 @@
 
 
 cd /home/vhost/sites/alpha.protrada.com/app
-/usr/bin/node app.js
+NODE_ENV=production /usr/bin/node app.js
