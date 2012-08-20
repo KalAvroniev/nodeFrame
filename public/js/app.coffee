@@ -239,7 +239,6 @@ protrada =
     bubbles: {}
 
   panels:
-  panels:
     store: {}
 
     curPanelID: null

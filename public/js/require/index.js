@@ -7723,14 +7723,6 @@ $.app.state.update = function(stateName, stateValue) {
   });
 };
 
-$.fn.reorderActiveElement = function() {
-  return this.children(".active").detach().prependTo(this);
-};
-
-$.fn.restoreStandoutElement = function() {
-  return this.children(".standout-tab").detach().prependTo(this);
-};
-
 toggleSidebar = function(e) {
   var $aside;
   $aside = $("aside");
@@ -7870,7 +7862,7 @@ protrada = {
     shuffle: function() {
       var tabContainer;
       tabContainer = $("#main").find(".sectional-tabs");
-      tabContainer.find(".active").detach().prependTo(tabContainer);
+      tabContainer.find(".active, .standout-tab").detach().prependTo(tabContainer);
     },
     hide: function() {
 
