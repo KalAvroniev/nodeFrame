@@ -1,0 +1,90 @@
+h2.panel-heading
+	strong place a backorder
+	| on 
+	span.ff-icon-before.backorder 'benderama.com'
+
+p	
+	strong Bids will be placed immediately by default, 
+	| unless you choose to 'Sniper' (only available to 
+	a(href="").default	pro-users 
+	| ). 'Sniper' bids are placed 5 minutes before the end of the auction. 
+	br
+	strong * You will be charged (by the winning platform) only if you win the domain.
+
+
+form#backorder-form.form-horizontal.panel-form.mini-panel-form
+	
+	.control-group.txt-input-row
+		.control-label.source(source="Namejet") back-order on 
+		.controls
+			h4.sources-sprite(source="Namejet")
+					
+	.control-group.txt-input-row
+		label(for="max-bid-value").control-label bid amount
+		.controls
+			input#max-bid-value(type="number", placeholder="placed in USD")
+			p.help-block * the minimum bid is $59
+	
+	.control-group.divider-after		
+		label(for="instant-bid").control-label place as 'sniper' bid?		
+		.controls
+			label.checkbox
+				input#instant-bid(type="checkbox")						
+		
+		
+	.control-group.txt-input-row
+		.control-label.source(source="Snap Names") back-order on 
+		.controls
+			h4.sources-sprite(source="Snap Names")
+					
+	.control-group.txt-input-row
+		label(for="max-bid-value").control-label bid amount
+		.controls
+			input#max-bid-value(type="number", placeholder="placed in USD")
+			p.help-block * the minimum bid is $69
+	
+	.control-group.divider-after		
+		label(for="instant-bid").control-label place as 'sniper' bid?		
+		.controls
+			label.checkbox
+				input#instant-bid(type="checkbox")						
+
+	.control-group.txt-input-row
+		.control-label.source(source="Protrada") back-order on 
+		.controls
+			h4.sources-sprite(source="Protrada")
+					
+	.control-group.txt-input-row.divider-after
+		label(for="max-bid-value").control-label bid amount
+		.controls
+			input#max-bid-value(type="number", placeholder="placed in USD")
+			p.help-block * the minimum bid is $20
+			p.help-block all Protrada backorders are sniper bids
+		
+		
+		
+	// mobile notification stuff	
+				
+	.control-group.txt-input-row		
+		label(for="cell-number-captcha").control-label txt me with updates		
+		.controls
+			input#cell-number-captcha(type="number", placeholder="incl. area code")
+
+	.control-group		
+		label(for="txt-me").control-label txt me with updates		
+		.controls
+			label.checkbox
+				input#txt-me(type="checkbox")	
+				| words in here about kinds of alerts they will get
+				
+				
+#submit-bid-button.btn-group.dropup
+	a.btn.btn-success.btn-large.ff-icon-before place backorder(s) &amp; watch
+	a.btn.btn-success.btn-large.dropdown-toggle(data-toggle='dropdown')
+		span.caret
+	ul.dropdown-menu.pull-right
+		li
+			a(href="#") just watch
+		li.divider
+		li
+			a(href="#") do something else entirely!

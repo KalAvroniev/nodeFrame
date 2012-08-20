@@ -426,7 +426,7 @@ a.active #cart-count, .selected .active #cart-count, #spine-inner li:hover a.act
 	
 	border-radius: 5px;
 	/*background: url(../img/demo-sys-menu.png);*/
-	box-shadow: 0 0 30px rgba(0,0,0,0.3);
+	box-shadow: 0 0 30px rgba(0,0,0,0.4);
 		
     -webkit-animation: sysMenuSlideOut 0.15s ease-in-out;
     -moz-animation: sysMenuSlideOut 0.15s ease-in-out;
