@@ -10,12 +10,6 @@
 
 
 	#credits-headsup
-		#your-credits-area
-			#actual-credits 
-				h3.credits
-					| your current
-					strong.ff-icon-before trading bank
-				span.credits-count.ff-icon-before #{user.availableCredits}
 
 		#buy-credits-quick-menu.btn-group
 			a.btn.btn-warning.btn-large.ff-icon-before buy a 
@@ -29,6 +23,15 @@
 				li.divider
 				li
 					a(href="#") do something else entirely!
+					
+		#your-credits-area
+			#actual-credits 
+				h3.credits
+					| your current
+					strong.ff-icon-before trading bank
+				span.credits-count.ff-icon-before #{user.availableCredits}
+
+
 
 	h5#first-heading.ff-icon-before currently logged in as: 
 		strong #{user.fullName}
