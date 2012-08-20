@@ -2,6 +2,7 @@ express = require('express')
 fs   = require('fs')
 jade = require('jade')
 path = require('path')
+gzippo = require('gzippo');
 JsonRpcServer = require('./lib/JsonRpcServer.coffee')
 SessionStore = require('./lib/SessionStore.coffee')
 StateStore = require('./lib/StateStore.coffee')
@@ -21,8 +22,8 @@ class Bootstrap
 		
 		# create server
 		@app = express.createServer()
-		@app.use(express.static(@config.pubDir))
-		
+
+		# set cdn into production mode or not.
 		@config.cdn.production = if @app.settings.env == 'development' then false else true
 		
 		# register JSON-RPC methods
@@ -53,7 +54,10 @@ class Bootstrap
 				@jsonRpcRequest(req, res)
 		)
 		@app.set('view engine', 'jade')
-		@app.use(express.static(@config.pubDir));
+		
+		# Setup Static cache directory
+		@app.use(gzippo.staticGzip(@config.pubDir));
+		
 		
 		# default layout
 		@app.set('view options', { pretty: true, layout: @config.appDir + "/views/layouts/default.jade" });
