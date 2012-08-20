@@ -173,8 +173,8 @@ $.fn.reorderActiveElement = ->
 $.fn.restoreStandoutElement = ->
   @children(".standout-tab").detach().prependTo this
 
+
 toggleSidebar = (e) ->
-  $aside = undefined
   $aside = $("aside")
   $aside.toggleClass "active"
   $(document.body).toggleClass "sidebar-hidden sidebar-open"
@@ -189,7 +189,7 @@ toggleSidebar = (e) ->
       $("#grid-view").grid "windowResize"
       return
   return
-
+	
 protrada =
   version: "3a2"
   cachedAt: 1343982244107
@@ -330,34 +330,40 @@ protrada =
 
       $.ajax data.url, {
         success: ( html ) ->
+          $("#section-panel").addClass("hidden")
           $("#ajax-container").prepend( html )
           $("#main").find(".sectional-tabs").find( "#" + data.id ).addClass("active")
-          $("#section-panel").removeClass("hidden")
 
           # no tab should have the .standout-tab class when a panel is open
-          Panels.defaultPanel = $("#main").find(".sectional-tabs").find(".standout-tab").removeClass("standout-tab")
+          Panels.defaultPanel = @defaultPanel#$("#main").find(".sectional-tabs").find(".standout-tab").removeClass("standout-tab")
 
           # TODO: should we be accessing the global Panels to do this?
           Panels.curPanelID = data.id
-
           return
       }
-
+      @shuffle()
       return
 
     hide: ->
-
-
-
-
+      temporaryTab = $("#main").find(".sectional-tabs").find(".temporary-tab")
+      $("#main").find(".sectional-tabs").find(".active").removeClass "active"
+      $("#section-panel").addClass "hidden"
+      $("#section-panel").delay(300).queue ->
+        $("#section-panel.hidden").remove()
+        return
+      console.log @defaultPanel
+      @defaultPanel.addClass "standout-tab" if @defaultPanel
+      @prevPanelID = @curPanelID
+      @curPanelID = null
+      @remove @prevPanelID, true  if temporaryTab.length and @prevPanelID is temporaryTab.attr("id")
+      return			
 
     shuffle: ->
       tabContainer = $("#main").find(".sectional-tabs")
-  
+			
       # standout and/or active tab must always be the first element
       # we are presuming that there will only every be one tab found
       tabContainer.find(".standout-tab, .active").detach().prependTo( tabContainer )
-
       return
 
 Scrollbars = protrada.scrollbars
