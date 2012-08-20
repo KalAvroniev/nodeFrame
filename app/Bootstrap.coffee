@@ -22,10 +22,8 @@ class Bootstrap
 		
 		# create server
 		@app = express.createServer()
-		#@app.use(express.static(@config.pubDir))
-		@app.use(gzippo.staticGzip(@config.pubDir));
-		@app.use(gzippo.compress());
-		
+
+		# set cdn into production mode or not.
 		@config.cdn.production = if @app.settings.env == 'development' then false else true
 		
 		# register JSON-RPC methods
@@ -57,6 +55,8 @@ class Bootstrap
 		)
 		@app.set('view engine', 'jade')
 		
+		# Setup Static cache directory
+		@app.use(gzippo.staticGzip(@config.pubDir));
 		
 		
 		# default layout
