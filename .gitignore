@@ -6,3 +6,4 @@ tests/selenium/results/
 /nbproject/private/
 public/js/require/
 /app/.DS_Store
+/public/img/.DS_Store
