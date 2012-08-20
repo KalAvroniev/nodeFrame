@@ -3,6 +3,7 @@ fs   = require('fs')
 jade = require('jade')
 path = require('path')
 gzippo = require('gzippo');
+mc = require('mc');
 JsonRpcServer = require('./lib/JsonRpcServer.coffee')
 SessionStore = require('./lib/SessionStore.coffee')
 StateStore = require('./lib/StateStore.coffee')
