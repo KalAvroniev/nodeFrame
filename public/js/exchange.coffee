@@ -11,7 +11,6 @@
       e.preventDefault()
       $(this).tab "show"
       return			
-
     
     # show the two tabs for this page
     $(".sectional-tabs li").addClass "hidden"
