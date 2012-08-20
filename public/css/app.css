@@ -4101,22 +4101,23 @@ aside header.alerts-header {
 	border-bottom: 7px solid #141211;
 }
 .alert-count {
-	display: block;
 	position: absolute;
 	text-align: center;
 	top: -9px; right: 30px;
 	min-width: 10px;
-	padding: 4px 8px 6px;
-	border-radius: 20px;
+	min-height: 25px;
+	padding: 0 8px;
 	font-weight: 700;
 	font-size: 16px;
-	line-height: 15px;
+	line-height: 23px;	
+	border-radius: 20px;
 	
 	background: #a3a2a2;
 	color: #1d1b1a; 
 }
 .alert-count:before {
 	content: attr(data-alerts);
+
 }
 .alert-count[data-alerts="0"] {
 	display: none;
@@ -4772,12 +4773,12 @@ aside header.alerts-header {
 	
 
 	background: #8ebf36 url("../img/bg-noise.png"); /* Old browsers */
-	background: url("../img/bg-noise.png"), -moz-linear-gradient(top,  #8ebf36 0%, #70a220 100%); /* FF3.6+ */
-	background: url("../img/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8ebf36), color-stop(100%,#70a220)); /* Chrome,Safari4+ */
-	background: url("../img/bg-noise.png"), -webkit-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Chrome10+,Safari5.1+ */
-	background: url("../img/bg-noise.png"), -o-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Opera 11.10+ */
-	background: url("../img/bg-noise.png"), -ms-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* IE10+ */
-	background: url("../img/bg-noise.png"), linear-gradient(to bottom,  #8ebf36 0%,#70a220 100%); /* W3C */
+	background: -moz-linear-gradient(top,  #8ebf36 0%, #70a220 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8ebf36), color-stop(100%,#70a220)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #8ebf36 0%,#70a220 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8ebf36', endColorstr='#70a220',GradientType=0 ); /* IE6-9 */
 	
 }
@@ -5230,7 +5231,7 @@ li.more-coming-soon .ff-icon-before:after {
 	position: relative;
 	white-space: nowrap;
 	z-index: 1;
-	padding: 13px 15px 15px;
+	padding: 12px 15px 15px;
 	border-radius: 4px;
 	color: #575553;
 	text-shadow: 0 1px 0 rgba(255,255,255,0.25);
@@ -5321,12 +5322,12 @@ li.more-coming-soon .ff-icon-before:after {
 	box-shadow: inset 0 3px 0 rgba(0,0,0,0.15), inset -1px 0 0 rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.8);
 	
 	background: #8ebf36 url("../img/bg-noise.png"); /* Old browsers */
-	background: url("../img/bg-noise.png"), -moz-linear-gradient(top,  #8ebf36 0%, #70a220 100%); /* FF3.6+ */
-	background: url("../img/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8ebf36), color-stop(100%,#70a220)); /* Chrome,Safari4+ */
-	background: url("../img/bg-noise.png"), -webkit-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Chrome10+,Safari5.1+ */
-	background: url("../img/bg-noise.png"), -o-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Opera 11.10+ */
-	background: url("../img/bg-noise.png"), -ms-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* IE10+ */
-	background: url("../img/bg-noise.png"), linear-gradient(to bottom,  #8ebf36 0%,#70a220 100%); /* W3C */
+	background: -moz-linear-gradient(top,  #8ebf36 0%, #70a220 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8ebf36), color-stop(100%,#70a220)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #8ebf36 0%,#70a220 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #8ebf36 0%,#70a220 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8ebf36', endColorstr='#70a220',GradientType=0 ); /* IE6-9 */
 	
 }
@@ -6467,6 +6468,9 @@ h2#make-profits span {
 	border-radius: 5px;
 
 	box-shadow: inset 0 1px 0 white, 0 0 4px rgba(0,0,0,0.1);
+	-moz-transition: all .25s ease-in-out;
+	-webkit-transition: all .25s ease-in-out;
+   	transition: all .25s ease-in-out;	
 }
 
 .default-search-container input::-webkit-input-placeholder { 
@@ -6476,6 +6480,7 @@ h2#make-profits span {
 
 .default-search-container input:focus {
 	box-shadow: inset 0 1px 0 white, 0 0 20px rgba(0,0,0,0.15);
+	background: #FCF9F5;
 }
 
 .default-search-container button {

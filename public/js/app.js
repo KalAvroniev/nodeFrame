@@ -189,7 +189,6 @@ protrada = {
       tabContainer.prepend(tabHTML);
       if (options["default"]) {
         this.defaultPanel = $("#" + options.id);
-        tabContainer.find(".standout-tab").not(this.defaultPanel).removeClass("standout-tab");
       }
       if (showImmediately) {
         this.show(options);
@@ -223,7 +222,7 @@ protrada = {
           $("#section-panel").addClass("hidden");
           $("#ajax-container").prepend(html);
           $("#main").find(".sectional-tabs").find("#" + data.id).addClass("active");
-          Panels.defaultPanel = $("#main").find(".sectional-tabs").find(".standout-tab").removeClass("standout-tab");
+          Panels.defaultPanel = $("#main").find(".sectional-tabs");
           Panels.curPanelID = data.id;
           Panels.shuffle();
         }        
@@ -232,7 +231,7 @@ protrada = {
     shuffle: function() {
       var tabContainer;
       tabContainer = $("#main").find(".sectional-tabs");
-      tabContainer.find(".standout-tab, .active").detach().prependTo(tabContainer);
+      tabContainer.find(".active").detach().prependTo(tabContainer);
     },
     hide: function() {
 
@@ -246,7 +245,7 @@ protrada = {
       $("#section-panel").delay(300).queue(function() {
       	
 		    $("#section-panel.hidden").remove();
-
+		    
 	  });
     
       if (this.defaultPanel) {
