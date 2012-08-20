@@ -21,7 +21,11 @@
       }, true
 
       return
-
+  onDomUnload = ->
+    $(".ajax-spinner").show()
+    $(window).off "resize", windowResize
+    $(window).off "scroll", windowScroll
+    return
   domLoaded = 0
   $("#main-container").one ajaxUnload: onDomUnload
   onDomLoad()
@@ -31,6 +35,3 @@
   return
 
 )()
-
-
-
