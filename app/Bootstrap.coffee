@@ -3,6 +3,7 @@ fs   = require('fs')
 jade = require('jade')
 path = require('path')
 gzippo = require('gzippo');
+mc = require('mc');
 JsonRpcServer = require('./lib/JsonRpcServer.coffee')
 SessionStore = require('./lib/SessionStore.coffee')
 StateStore = require('./lib/StateStore.coffee')
@@ -31,7 +32,7 @@ class Bootstrap
 		@jsonRpcServer.registerMethods()
 		
 		# initialize the CDN magic
-		CDN = require('./lib/cdn.coffee')(@app, @config.cdn)
+		CDN = require('./lib/Cdn.coffee')(@app, @config.cdn)
 		
 		# add the dynamic view helper
 		@app.dynamicHelpers(CDN: CDN)
@@ -57,6 +58,8 @@ class Bootstrap
 		
 		# Setup Static cache directory
 		@app.use(gzippo.staticGzip(@config.pubDir));
+		#oneYear = 31557600000;
+		#@app.use(gzippo.staticGzip(@config.pubDir, { maxAge: oneYear }));
 		
 		
 		# default layout
@@ -68,6 +71,11 @@ class Bootstrap
 		io.sockets.on('connection', (socket) ->
 			socketIoServer.addClient(socket)
 		)
+		
+		# setup memcache cluster
+		memcache = new mc.Client('107.23.31.119', mc.Adapter.json);
+		memcache.connect ->
+			console.log "Connected to the 107.23.31.119 memcache on port 11211!"
 		
 		# delete minified files in case of updates
 		@deleteMinified(@config.pubDir + '/js/require')

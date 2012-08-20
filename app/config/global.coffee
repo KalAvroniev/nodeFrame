@@ -4,4 +4,4 @@ exports.config =
   cdn: 
     domain: 'protrada.cachefly.net/v3',
     hostname: 'localhost',
-    port: 8181,
+    port: 8181
