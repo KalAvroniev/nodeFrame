@@ -2,7 +2,7 @@
 # they were at when they last visited Protrada
 class UserState
 	module.exports = @
-	
+
 	constructor: () ->
 		# setup the default state
 		@modules = {}

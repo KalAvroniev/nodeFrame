@@ -9,7 +9,7 @@ class API_Notifications_Fetch
 			"default": 10
 		}
 	}
-	
+
 	run: (req) ->
 		# will return the same static notifcations for everyone
 		notifs = [
@@ -79,7 +79,7 @@ class API_Notifications_Fetch
 					"2012 @ 5:40pm, and you are currently winning! Remember though, this " +
 					'can change very quickly however. <a title="view preview now" href="">Watch this auction live</a>'
 			},
-						
+
 			{
 				'type': 'losing',
 				'title': 'Preview',
@@ -113,9 +113,8 @@ class API_Notifications_Fetch
 					"2012 @ 5:40pm, and you are currently winning! Remember though, this " +
 					'can change very quickly however. <a title="view preview now" href="">Watch this auction live</a>'
 			}		
-			
 		]
-		
+
 		return req.success({
 			'notifications': notifs
 		})

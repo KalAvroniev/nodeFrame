@@ -3,7 +3,7 @@ class API_User_ResetState
 
 	validate: {
 	}
-	
+
 	run: (req) ->
 		req.resetState(
 			(state) ->
@@ -11,4 +11,4 @@ class API_User_ResetState
 			, (error) ->
 				return req.error(error)
 			, req.getUserId()
-		);
+		)

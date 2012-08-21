@@ -10,16 +10,17 @@ class JsonRpcServer
 	@METHOD_NOT_FOUND = -32601
 	@INVALID_PARAMS = -32602
 	@INTERNAL_ERROR = -32603
-	
+
 	constructor: () ->
 		@registeredMethods = {}
 
 	registerMethods: (basePath = 'api', path = null) ->
 		if path == null
 			path = basePath
+			
 		if path == basePath
 			console.log("Registering JSON-RPC methods...")
-		
+
 		# read the directory
 		try
 			files = fs.readdirSync(path)
@@ -29,24 +30,25 @@ class JsonRpcServer
 			)
 		catch e
 			@registerMethod(path.substr(basePath.length + 1, path.length - 8 - basePath.length), require('../' + path))
-			
+
 		# print
 		if path == basePath
 			console.log()
-		
+
 	registerMethod: (name, func) ->
 		console.log("  JSON-RPC Method '" + name + "'")
 		@registeredMethods[name] = func
-	
+
 	handleRequest: (req, res) ->
 		data = ''
 		req.setEncoding('utf8')
 		req.on 'data', (chunk) ->
 			data += chunk
+			
 		req.on 'end', () =>
 			console.log(JSON.parse(data))
 			@handleCall(JSON.parse(data), res, req)
-			
+
 	call: (method, params, callback) ->
 		return @handleRawCall(
 			{
@@ -54,58 +56,58 @@ class JsonRpcServer
 				'method': method,
 				'params': params,
 				'id': 1
-			},
-			(data) ->
+			}
+			, (data) ->
 				res = JSON.parse(data)
 				return callback(res.result, res.error)
 		)
-			
+
 	handleRawCall: (call, callback, options = {}) ->
 		# validate
 		if call.id == undefined
 			result = JsonRpcServer.Error(null, "No 'id' provided.", JsonRpcServer.INVALID_REQUEST)
 		else if call.jsonrpc == undefined || call.jsonrpc != '2.0'
-			result = JsonRpcServer.Error(call.id, "Only accepted JSON-RPC version is '2.0'",
-				JsonRpcServer.INVALID_REQUEST)
+			result = JsonRpcServer.Error(call.id, "Only accepted JSON-RPC version is '2.0'"
+				, JsonRpcServer.INVALID_REQUEST)
 		else if call.method == undefined
-			result = JsonRpcServer.Error(null, "No 'method' provided.",
-				JsonRpcServer.INVALID_REQUEST)
+			result = JsonRpcServer.Error(null, "No 'method' provided."
+				, JsonRpcServer.INVALID_REQUEST)
 		else if call.params == undefined
-			result = JsonRpcServer.Error(null, "No 'params' provided.",
-				JsonRpcServer.INVALID_REQUEST)
+			result = JsonRpcServer.Error(null, "No 'params' provided."
+				, JsonRpcServer.INVALID_REQUEST)
 		else if (@registeredMethods)[call.method] == undefined
-			result = JsonRpcServer.Error(null, "No such method '" + call.method + "'.",
-				JsonRpcServer.METHOD_NOT_FOUND)
-		
+			result = JsonRpcServer.Error(null, "No such method '" + call.method + "'."
+				, JsonRpcServer.METHOD_NOT_FOUND)
+
 		if result
 			return callback(JSON.stringify(result))
-			
+
 		# build the request
 		req = new JsonRpcRequest(
-			call,
-			(result, error = null) =>
+			call
+			, (result, error = null) =>
 				if error
 					r = JsonRpcServer.Error(call.id, error, JsonRpcServer.INTERNAL_ERROR)
 				else
 					r = JsonRpcServer.Success(call.id, result)
-				
+
 				return callback(JSON.stringify(r))
 		)
 		req.options = options
-		
+
 		# validate
 		obj = new @registeredMethods[call.method]
 		req.validate(
-			obj,
-			() ->
+			obj
+			, () ->
 				# execute the method
 				obj.run(req)
 		)
-	
+
 	handleCall: (call, res, req) ->
 		return @handleRawCall(
-			call,
-			(raw_result) ->
+			call
+			, (raw_result) ->
 				res.write(raw_result)
 				res.end()
 			, {
@@ -120,7 +122,7 @@ class JsonRpcServer
 			'result': result,
 			'id': id
 		}
-		
+
 	@Error: (id, errorMsg, errorCode = JsonRpcServer.INTERNAL_ERROR) ->
 		return {
 			'jsonrpc': '2.0',

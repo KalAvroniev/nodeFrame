@@ -3,16 +3,16 @@ class API_View_Modules_Exchange_Panels_Watchlist
 
 	validate: {
 	}
-	
+
 	options: {
 		"requireUserSession": true
 	}
-	
+
 	run: (req) ->
 		r = {}
-		
+
 		# restore state here
-		
+
 		# view elements
 		r.tabs = [
 			{
@@ -41,5 +41,5 @@ class API_View_Modules_Exchange_Panels_Watchlist
 			}
 		]
 		r.active_tab = '#expiring'
-		
+
 		return req.success(r)

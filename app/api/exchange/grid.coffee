@@ -151,7 +151,7 @@ class API_Exchange_Grid
 
 		###
 		some other actions:
-		
+
 		{ id: "make-offer", path: "/modules/exchange/panels", tooltip: "Make an offer", icon: "?", text: "Offer" }
 
 		{ id: "build-website", path: "???", tooltip: "Build website", icon: "X" }

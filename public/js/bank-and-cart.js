@@ -8,7 +8,7 @@
       return;
     }
     $("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr("data-alerts", $(".protrada .alert-count").attr("data-alerts"));
-    return $(".go-checkout").on("click", function(e) {
+    $(".go-checkout").on("click", function(e) {
       e.preventDefault();
       Panels.add({
         id: "checkout",

@@ -44,8 +44,8 @@ class API_View_Panels_ExportData
 
 	testBasic: (test) ->
 		test.run(
-			{},
-			(result) ->
+			{}
+			, (result) ->
 				test.assert.equal(result.tabs.length, 6)
 			, (error) ->
 				test.fail(error)

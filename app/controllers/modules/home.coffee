@@ -2,7 +2,7 @@ Controller = require( app.config.appDir + "/lib/Controller.coffee" )
 
 class Modules_Home extends Controller
 	module.exports = @
-	
+
 	run: ( req, res ) ->
 		res.view.layout = null
 		res.view.ajax = false
@@ -39,17 +39,17 @@ class Modules_Home extends Controller
 		res.view.showTradingSummary = req.query.tradingSummary or false
 		res.view.showDefaultContent = req.query.defaultContent or false
 
-	# user info
+		# user info
 		res.view.user = {}
 		res.view.user.name = "Protrada testing"
 		res.view.user.type = "Free membership"
 		res.view.user.renewal = "24<sup>th</sup> May, 2012"
 
-	# portfolio health info
+		# portfolio health info
 		res.view.portfolioHealth = {}
 		res.view.portfolioHealth.default = "<p class='ff-icon-before'>This section can show you at a glance, how healthy your portfolio is (by charting it's ROI%), and also how it is trending. <a href='#'>Read more</a> to learn how to take advantage of this feature.</p>"
 
-	# status summary info
+		# status summary info
 		res.view.satusSummary = {}
 		res.view.satusSummary.watching = "24"
 		res.view.satusSummary.losing = "2"
@@ -57,7 +57,7 @@ class Modules_Home extends Controller
 		res.view.satusSummary.preAuction = "3"
 		res.view.satusSummary.pending = "1"
 
-	# tab titles and content
+		# tab titles and content
 		res.view.contentTabs = {}
 		res.view.contentTabs.wholePortfolio = {}
 		res.view.contentTabs.wholePortfolio.title = "Complete domain listing"

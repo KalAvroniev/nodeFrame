@@ -3,14 +3,14 @@ class API_User_GetState
 
 	validate: {
 	}
-	
+
 	options: {
 		"requireUserSession": true
 	}
-	
+
 	run: (req) ->
 		req.getState(
 			(state) ->
 				return req.success(state)
 			, req.getUserId()
-		);
+		)

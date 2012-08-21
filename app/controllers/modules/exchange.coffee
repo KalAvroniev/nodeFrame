@@ -2,7 +2,7 @@ Controller = require(app.config.appDir + '/lib/Controller.coffee')
 
 class Modules_Exchange extends Controller
 	module.exports = @
-	
+
 	run: ( req, res ) ->
 		if req.query.ajax
 			res.view.layout = null

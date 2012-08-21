@@ -13,18 +13,18 @@ class API_User_UpdateState
 			"required": true
 		}
 	}
-	
+
 	options: {
 		"requireUserSession": true
 	}
-	
+
 	run: (req) ->
 		req.updateState(
-			req.params.name,
-			req.params.value,
-			(state) ->
+			req.params.name
+			, req.params.value
+			, (state) ->
 				return req.success(state)
 			, (error) ->
 				return req.error(error)
 			, req.getUserId()
-		);
+		)

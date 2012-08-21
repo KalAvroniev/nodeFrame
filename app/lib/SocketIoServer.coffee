@@ -6,10 +6,10 @@ class SocketIoServer
 
 	constructor: () ->
 		@clients = []
-		
+
 	setJsonRpcServer: (jsonRpcServer) ->
 		@jsonRpcServer = jsonRpcServer
-		
+
 	setupListeners: (client) ->
 		#client.on('update-state', (data) =>
 		#	data.user_id = 123
@@ -27,7 +27,7 @@ class SocketIoServer
 		console.log("SocketIOServer: addClient " + client)
 		@setupListeners(client)
 		@clients.push(client)
-		
+
 	receive: (data) ->
 		console.log(data)
 

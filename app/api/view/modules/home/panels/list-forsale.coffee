@@ -3,11 +3,11 @@ class API_View_Modules_Home_Panels_ListForsale
 
 	validate: {
 	}
-	
+
 	options: {
 		"requireUserSession": true
 	}
-	
+
 	run: (req) ->
 		r = {}
 		return req.success(r)
