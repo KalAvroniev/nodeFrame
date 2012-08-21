@@ -1015,7 +1015,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	background: #141211
 }
 .login-right a {	
-	padding: 13px 0 16px 20px;
+	padding: 13px 50px 16px 20px;
 	background: #f5f5f5;
 	color: #353535;
 	border-radius: 5px;
@@ -1023,6 +1023,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	font-size: 18px;
 	font-weight: 600;
 	display: block;
+	position: relative;
+}
+.login-right a#forgot:after {	
+	content: "\00D1";
+	color: #c9c9c9;
+	font-size: 26px;
+	line-height: 1;
+	position: absolute;
+	top: 9px; right: 20px;
 }
 fieldset.login .login-right .invisible {
 	width: 0; height: 0;
