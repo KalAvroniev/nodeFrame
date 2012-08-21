@@ -244,8 +244,9 @@ protrada = {
       if (showImmediately == null) {
         showImmediately = false;
       }
+      console.log("Add");
       options = $.extend({}, this.defaults, options);
-      if (options.id === void 0 || options.url === void 0 || options.size === void 0) {
+      if (options.id === void 0 || options.url === void 0) {
         return;
       }
       if ($("#" + options.id).length) {

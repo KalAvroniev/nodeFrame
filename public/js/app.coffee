@@ -293,14 +293,15 @@ protrada =
 			return
 
 		add: ( options, showImmediately=false ) ->
-			options = $.extend {}, @defaults, options
-
+			console.log("Add")
+			options = $.extend({}, @defaults, options)
+			
 			# these are required values
-			return if options.id == undefined or options.url == undefined or options.size == undefined
+			return if options.id == undefined or options.url == undefined
 
 			# panel already exists
 			return if $( "#" + options.id ).length
-
+			
 			# temporary tabs cannot be a default tab
 			if options.temporary
 				options.default = false
