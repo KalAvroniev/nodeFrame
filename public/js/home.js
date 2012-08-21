@@ -18,7 +18,6 @@
       $("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr("data-alerts", $(".protrada .alert-count").attr("data-alerts"));
       $("#watch-video").on("click", function(e) {
         e.preventDefault();
-        console.log("watch video");
         Panels.add({
           id: "protrada-video",
           url: "/panels/protrada-video",
