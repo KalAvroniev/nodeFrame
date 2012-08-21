@@ -27,6 +27,7 @@
   
   # stub
   windowScroll = ->
+  
   onDomUnload = ->
     $(".ajax-spinner").show()
     $(window).off "resize", windowResize
