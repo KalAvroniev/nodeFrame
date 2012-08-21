@@ -1,7 +1,7 @@
 (->
 	onDomLoad = ->
 		++domLoaded
-		return  if domLoaded > 1
+		return	if domLoaded > 1
 		$("#status-summary").tinyscrollbar
 			axis: "x"
 			scroll: false
@@ -32,27 +32,105 @@
 				)
 				return
 			)
+			
+			
+			
+		# TEMPORARY INSERT OF ALL MODULE PANELS
+			
+		$("#temp-list-forsale").on "click", ( e ) ->
+			e.preventDefault()
+			console.log("list for sale")
 
-		# TODO: refactor these, not DRY compliant
-		$("#advanced-search, #advanced-keyword-filter").on("click"
-			, (e) ->
-				$panelTabs = $("header#main").find(".sectional-tabs")
-				$tabClone = $panelTabs.find(".standout-tab").clone().attr("id", "advanced-search").addClass("temporary-panel-tab").removeClass("standout-tab")
-				e.preventDefault()
-				$tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/advanced-search', {tabid: 'advanced-search', panel_size: 'mini-panel video', temporary: true} );").html("<strong>advanced search</strong> something here").end().prependTo $panelTabs
-				$.app.panel.show("/panels/advanced-search",
-					tabid: "advanced-search"
-					panel_size: "mini-panel"
-					temporary: true
-				)
-				return
-		)		
+			Panels.add {
+				id: "list-forsale"
+				url: "/modules/home/panels/list-forsale"
+				temporary: true
+				h1: "list-forsale"
+				h2: "moo in here"
+			}, true
+
+			return			
+			
+		$("#temp-import-domains").on "click", ( e ) ->
+			e.preventDefault()
+			console.log("import domains")
+
+			Panels.add {
+				id: "import-domains"
+				url: "/modules/home/panels/import-domains"
+				temporary: true
+				h1: "import-domains"
+				h2: "moo in here"
+			}, true
+
+			return			 
+			
+			
+		$("#temp-export-data").on "click", ( e ) ->
+			e.preventDefault()
+			console.log("export data")
+
+			Panels.add {
+				id: "export-data"
+				url: "/panels/export-data"
+				temporary: true
+				h1: "export-data"
+				h2: "moo in here"
+			}, true
+
+			return				
+			
+			
+		$("#temp-protrada-video").on "click", ( e ) ->
+			e.preventDefault()
+			console.log("protrada video")			
+
+			Panels.add {
+				id: "temp-protrada-video"
+				url: "/panels/protrada-video"
+				temporary: true
+				h1: "protrada-video"
+				h2: "moo in here"
+			}, true
+
+			return			 
+			
+		$("#temp-advanced-search").on "click", ( e ) ->
+			e.preventDefault()
+			console.log("advanced search")						
+
+			Panels.add {
+				id: "advanced-search"
+				url: "/panels/advanced-search"
+				temporary: true
+				h1: "advanced-search"
+				h2: "moo in here"
+			}, true
+
+			return	 
+
+		$("#temp-domain-details").on "click", ( e ) ->
+			e.preventDefault()
+			console.log("temp domain details")						
+
+			Panels.add {
+				id: "temp-domain-details"
+				url: "/panels/domain-details"
+				temporary: true
+				h1: "temp-domain-details"
+				h2: "moo in here"
+			}, true
+
+			return				
+			
+			
+					
 		setupTradingGraph()
 
 		return
 
 	setupTradingGraph = ->
-		return  if tradingGraph? or not $("#trading-and-trending .graph-container").is(":visible")
+		return	if tradingGraph? or not $("#trading-and-trending .graph-container").is(":visible")
 		createDateGraph("trading-graph"
 			, [
 				label: "Profit"
@@ -122,7 +200,7 @@
 	resizeScrollToWidth = (scrollSelector, containerWidth) ->
 		scrollContainer = $(scrollSelector)
 		scrollWidth = scrollContainer.width()
-		scrollContainer.css width: containerWidth + "px"  unless containerWidth is scrollWidth
+		scrollContainer.css width: containerWidth + "px"	unless containerWidth is scrollWidth
 		scrollContainer.tinyscrollbar_update "relative"
 		return		
 
@@ -154,7 +232,7 @@
 		# scrolling area
 
 		# recalculate the difference between the graph marks
-		minWidthBetweenMarks = containerWidth / dataMarks  if minWidthBetweenMarks * dataMarks < containerWidth
+		minWidthBetweenMarks = containerWidth / dataMarks	if minWidthBetweenMarks * dataMarks < containerWidth
 		scrollContainer = $("<div class=\"tiny-scrollbar-horiz\" style=\"position: relative; width: " + containerWidth + "px; height: " + containerHeight + "px\"><div class=\"viewport\"><div class=\"overview\"></div></div></div>")
 		graphContainer.wrap(scrollContainer)
 		scrollContainer = graphContainer.closest(".tiny-scrollbar-horiz")
