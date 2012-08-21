@@ -13,7 +13,7 @@
 
       Panels.add {
         id: "checkout"
-        url: "modules/bank-and-cart/panels/checkout"
+        url: "/modules/bank-and-cart/panels/checkout"
         size: "mini"
         temporary: true
         h1: "checkout"
@@ -21,6 +21,12 @@
       }, true
 
       return
+  # note that we don't bother deleting the tinyscrollbar, as it will be
+  # removed when the DOM elements are.
+  windowResize = ->
+  
+  # stub
+  windowScroll = ->
   onDomUnload = ->
     $(".ajax-spinner").show()
     $(window).off "resize", windowResize
