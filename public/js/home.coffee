@@ -31,17 +31,112 @@
 
       return
 
-    # TODO: refactor these, not DRY compliant
-    $("#advanced-search, #advanced-keyword-filter").on "click", (e) ->
-      $panelTabs = $("header#main").find(".sectional-tabs")
-      $tabClone = $panelTabs.find(".standout-tab").clone().attr("id", "advanced-search").addClass("temporary-panel-tab").removeClass("standout-tab")
+
+    # TEMPORARY INSERT OF ALL MODULE PANELS
+      
+    $("#list-forsale").on "click", ( e ) ->
       e.preventDefault()
-      $tabClone.find("a").attr("href", "javascript:$.app.panel.show( '/panels/advanced-search', {tabid: 'advanced-search', panel_size: 'mini-panel video', temporary: true} );").html("<strong>advanced search</strong> something here").end().prependTo $panelTabs
-      $.app.panel.show "/panels/advanced-search",
-        tabid: "advanced-search"
-        panel_size: "mini-panel"
+
+      Panels.add {
+        id: "list-forsale"
+        url: "/modules/home/panels/list-forsale"
+        size: "mini"
         temporary: true
-      return
+        extraClasses: "video"
+        h1: "list-forsale"
+        h2: "moo in here"
+      }, true
+
+      return      
+      
+    $("#import-domains").on "click", ( e ) ->
+      e.preventDefault()
+
+      Panels.add {
+        id: "import-domains"
+        url: "/modules/home/panels/import-domains"
+        size: "mini"
+        temporary: true
+        extraClasses: "video"
+        h1: "import-domains"
+        h2: "moo in here"
+      }, true
+
+      return       
+      
+      
+    $("#export-data").on "click", ( e ) ->
+      e.preventDefault()
+
+      Panels.add {
+        id: "export-data"
+        url: "/panels/export-data"
+        size: "mini"
+        temporary: true
+        extraClasses: "video"
+        h1: "export-data"
+        h2: "moo in here"
+      }, true
+
+      return        
+      
+      
+    $("#protrada-video").on "click", ( e ) ->
+      e.preventDefault()
+
+      Panels.add {
+        id: "protrada-video"
+        url: "/panels/protrada-video"
+        size: "mini"
+        temporary: true
+        extraClasses: "video"
+        h1: "protrada-video"
+        h2: "moo in here"
+      }, true
+
+      return       
+      
+    $("#advanced-search").on "click", ( e ) ->
+      e.preventDefault()
+
+      Panels.add {
+        id: "advanced-search"
+        url: "/panels/advanced-search"
+        size: "mini"
+        temporary: true
+        extraClasses: "video"
+        h1: "advanced-search"
+        h2: "moo in here"
+      }, true
+
+      return   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     setupTradingGraph()
 
