@@ -13,7 +13,7 @@
 				e.preventDefault()
 
 				Panels.add(
-					id: "checkout"
+					id: "moo"
 					url: "modules/bank-and-cart/panels/checkout"
 					size: "mini"
 					temporary: true
@@ -32,7 +32,7 @@
 				console.log("temp checkout")
 
 				Panels.add(
-					id: "temp-checkout"
+					id: "moo1"
 					url: "/modules/bank-and-cart/panels/checkout"
 					temporary: true
 					h1: "temp-checkout"
@@ -48,7 +48,7 @@
 				console.log("export data")
 
 				Panels.add(
-					id: "export-data"
+					id: "moo2"
 					url: "/panels/export-data"
 					temporary: true
 					h1: "export-data"

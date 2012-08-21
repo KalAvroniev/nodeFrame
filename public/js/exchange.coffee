@@ -18,7 +18,7 @@
 				console.log("temp make offer")
 
 				Panels.add(
-					id: "temp-make-offer"
+					id: "moo1"
 					url: "/modules/exchange/panels/make-offer"
 					temporary: true
 					h1: "temp-make-offer"
@@ -34,7 +34,7 @@
 				console.log("temp place bid")
 
 				Panels.add(
-					id: "temp-place-bid"
+					id: "moo2"
 					url: "/modules/exchange/panels/place-bid"
 					temporary: true
 					h1: "temp-place-bid"
@@ -50,7 +50,7 @@
 				console.log("temp backorder")
 
 				Panels.add(
-					id: "temp-backorder"
+					id: "moo3"
 					url: "/modules/exchange/panels/backorder"
 					temporary: true
 					h1: "temp-backorder"
@@ -66,7 +66,7 @@
 				console.log("temp watchlist")			
 
 				Panels.add(
-					id: "temp-watchlist"
+					id: "moo4"
 					url: "/modules/exchange/panels/watchlist"
 					temporary: true
 					h1: "temp-watchlist"
@@ -82,7 +82,7 @@
 				console.log("advanced search")						
 
 				Panels.add(
-					id: "advanced-search"
+					id: "moo5"
 					url: "/panels/advanced-search"
 					temporary: true
 					h1: "advanced-search"
@@ -98,7 +98,7 @@
 				console.log("export data")
 
 				Panels.add(
-					id: "export-data"
+					id: "moo6"
 					url: "/panels/export-data"
 					temporary: true
 					h1: "export-data"
@@ -114,7 +114,7 @@
 				console.log("temp domain details")						
 
 				Panels.add(
-					id: "temp-domain-details"
+					id: "moo7"
 					url: "/panels/domain-details"
 					temporary: true
 					h1: "temp-domain-details"

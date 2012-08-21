@@ -41,7 +41,7 @@
 				console.log("list for sale")
 
 				Panels.add(
-					id: "list-forsale"
+					id: "moo"
 					url: "/modules/home/panels/list-forsale"
 					temporary: true
 					h1: "list-forsale"
@@ -57,7 +57,7 @@
 				console.log("import domains")
 
 				Panels.add(
-					id: "import-domains"
+					id: "moo2"
 					url: "/modules/home/panels/import-domains"
 					temporary: true
 					h1: "import-domains"
@@ -73,7 +73,7 @@
 				console.log("export data")
 
 				Panels.add(
-					id: "export-data"
+					id: "moo3"
 					url: "/panels/export-data"
 					temporary: true
 					h1: "export-data"
@@ -89,7 +89,7 @@
 				console.log("protrada video")			
 
 				Panels.add(
-					id: "temp-protrada-video"
+					id: "moo4"
 					url: "/panels/protrada-video"
 					temporary: true
 					h1: "protrada-video"
@@ -105,7 +105,7 @@
 				console.log("advanced search")						
 
 				Panels.add(
-					id: "advanced-search"
+					id: "moo5"
 					url: "/panels/advanced-search"
 					temporary: true
 					h1: "advanced-search"
@@ -121,7 +121,7 @@
 				console.log("temp domain details")						
 
 				Panels.add(
-					id: "temp-domain-details"
+					id: "moo6"
 					url: "/panels/domain-details"
 					temporary: true
 					h1: "temp-domain-details"
