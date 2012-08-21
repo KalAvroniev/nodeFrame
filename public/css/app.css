@@ -1015,7 +1015,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	background: #141211
 }
 .login-right a {	
-	padding: 13px 0 16px 20px;
+	padding: 13px 50px 16px 20px;
 	background: #f5f5f5;
 	color: #353535;
 	border-radius: 5px;
@@ -1023,6 +1023,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ecb909', end
 	font-size: 18px;
 	font-weight: 600;
 	display: block;
+	position: relative;
+}
+.login-right a#forgot:after {	
+	content: "\00D1";
+	color: #c9c9c9;
+	font-size: 26px;
+	line-height: 1;
+	position: absolute;
+	top: 9px; right: 20px;
 }
 fieldset.login .login-right .invisible {
 	width: 0; height: 0;
@@ -2858,8 +2867,13 @@ header#main:before {
 a.default {
 	display: inline-block;
 	padding: 0;
-	border-bottom: 3px solid #e6e6e6;
+	line-height: 1.5em;
+	border-bottom: 3px solid rgba(0,0,0,0.07);
 	color: #49AFCD;
+}
+a.default:hover {
+	border-bottom: 3px solid #71a00e;	
+	color: #71a00e;	
 }
 a.download {
 	border-bottom: 3px solid #e6e6e6;
@@ -5426,7 +5440,8 @@ li.more-coming-soon .ff-icon-before:after {
 }
 .x-cart-item:hover {
 	color: #FCF9F5;
-	background: #898785;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+	background: #E46503;
 }
 .cart-totals {
 	float: right;
@@ -5538,9 +5553,9 @@ li.more-coming-soon .ff-icon-before:after {
 	height: auto; width: 90%;
 }
 .form-horizontal input:focus {
-	background: rgba(255,255,255,0.37);
+	background: rgba(255,255,255,0.55);
 	border-color: white;
-	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
+	box-shadow: 0 0 13px rgba(141,139,137, 0.25), 0 3px 0 rgba(119,110,105,0.12);
 	color: #161413;
 }
 .form-horizontal textarea {
@@ -5556,9 +5571,9 @@ li.more-coming-soon .ff-icon-before:after {
 	border-color: rgba(119,110,105,0.3);
 }
 .form-horizontal textarea:focus {
-	background: rgba(255,255,255,0.37);
+	background: rgba(255,255,255,0.55);
 	border-color: white;
-	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
+	box-shadow: 0 0 13px rgba(141,139,137, 0.25), 0 3px 0 rgba(119,110,105,0.12);
 	color: #161413;
 }
 .form-horizontal .controls {
@@ -6389,7 +6404,7 @@ h2#make-profits span {
 	position: relative;
 	background-color: rgba(0,0,0,0.08);
 	color: #212121;
-	margin: 16px 0 0 30px;
+	margin: 14px 0 0 30px;
 	padding: 40px 30px 40px 105px;
 	font-size: 14px;
 	line-height: 20px;
