@@ -1,7 +1,7 @@
 (->
 	onDomLoad = ->
 		++domLoaded
-		return  if domLoaded > 1
+		return	if domLoaded > 1
 
 
 		# update counter
@@ -25,6 +25,39 @@
 				return
 		)
 		return
+		
+		
+		# TEMPORARY INSERT OF ALL MODULE PANELS
+		
+		$("#temp-checkout").on "click", ( e ) ->
+			e.preventDefault()
+			console.log("temp checkout")
+		
+			Panels.add {
+				id: "temp-checkout"
+				url: "/modules/bank-and-cart/panels/checkout"
+				temporary: true
+				h1: "temp-checkout"
+				h2: "moo in here"
+			}, true
+		
+			return			
+		 
+			
+		$("#temp-export-data").on "click", ( e ) ->
+			e.preventDefault()
+			console.log("export data")
+		
+			Panels.add {
+				id: "export-data"
+				url: "/panels/export-data"
+				temporary: true
+				h1: "export-data"
+				h2: "moo in here"
+			}, true
+		
+			return						
+		
 		
 	onDomUnload = ->
 		$(".ajax-spinner").show()
