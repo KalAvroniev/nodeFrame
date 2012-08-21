@@ -1,10 +1,7 @@
 (->
 	onDomLoad = ->
 		domLoaded++
-
-		#if (domLoaded > 1) {
-		#			return;
-		#		}
+		return	if domLoaded > 1
 
 		# tabs
 		$("#portfolio-data-tabs a").click((e) ->
@@ -150,6 +147,7 @@
 	
 	domLoaded = 0
 	$("#main-container").one(ajaxUnload: onDomUnload)
+	onDomLoad()
 	return
 )()
 	

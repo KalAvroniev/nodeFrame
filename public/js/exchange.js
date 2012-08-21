@@ -4,6 +4,9 @@
   var domLoaded, onDomLoad, onDomUnload, windowResize, windowScroll;
   onDomLoad = function() {
     domLoaded++;
+    if (domLoaded > 1) {
+      return;
+    }
     $("#portfolio-data-tabs a").click(function(e) {
       e.preventDefault();
       $(this).tab("show");
@@ -102,6 +105,7 @@
   $("#main-container").one({
     ajaxUnload: onDomUnload
   });
+  onDomLoad();
 })();
 
 $(document).ready(function() {

@@ -65,12 +65,22 @@
 		$(window).off("scroll", windowScroll)
 		return
 		
+	# note that we don't bother deleting the tinyscrollbar, as it will be
+	# removed when the DOM elements are.
+	windowResize = ->
+
+	# stub
+	windowScroll = ->
+		
 	domLoaded = 0
-	$("#main-container").one ajaxUnload: onDomUnload
+	$("#main-container").one(ajaxUnload: onDomUnload)
 	onDomLoad()
-	$(document).on "click", "#toggle-side-bar, #x-side-bar", (e) ->
-		windowResize()
-		return
+	$(document).on("click"
+		, "#toggle-side-bar, #x-side-bar"
+		, (e) ->
+			windowResize()
+			return
+	)
 	
 	return
 )()

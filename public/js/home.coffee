@@ -163,10 +163,10 @@
 		
 	onDomUnload = ->
 		$(".ajax-spinner").show()
-		$(window).off "resize", windowResize
-		$(window).off "scroll", windowScroll
-		$(".sectional-tabs").off "click", "li#watchlist", showWatchlist
-		$("#trading-and-trending .graph-options").off "click", toggleGraphVisible
+		$(window).off("resize", windowResize)
+		$(window).off("scroll", windowScroll)
+		$(".sectional-tabs").off("click", "li#watchlist", showWatchlist)
+		$("#trading-and-trending .graph-options").off("click", toggleGraphVisible)
 		if tradingGraph?
 			tradingGraph.destroy()
 			tradingGraph = null
@@ -381,11 +381,14 @@
 	domLoaded = 0
 	tradingGraph = null
 	scrollContainer = undefined
-	$("#main-container").one ajaxUnload: onDomUnload
+	$("#main-container").one(ajaxUnload: onDomUnload)
 	onDomLoad()
-	$(document).on "click", "#toggle-side-bar, #x-side-bar", (e) ->
-		windowResize()
-		return
+	$(document).on("click"
+		, "#toggle-side-bar, #x-side-bar"
+		, (e) ->
+			windowResize()
+			return
+	)
 
 	return
 )()
