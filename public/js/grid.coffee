@@ -77,7 +77,7 @@ Grid:: =
 			, grid: this
 			, @toggleSticky
 		)
-		@grid.find("tbody").on("click", "tr:not(.parent-open, .child)", @expandRow).on("click", ".parent-open, .child", @collapseRow)
+		@grid.find("tbody").on("click", "tr:not(.parent-open, .child, .not-data)", @expandRow).on("click", ".parent-open, .child", @collapseRow)
 		$(".grid-table").find("tbody").on("click"
 			, ".domain-title-cntnr .copy-to-clipboard"
 			, (e) ->
