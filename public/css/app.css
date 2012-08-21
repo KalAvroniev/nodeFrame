@@ -40,7 +40,7 @@
 	PROJECT: 	Protrada V3 (Codename: AlexKidd) main stylesheet
 	
 	AUTHOR(s): 	Tim Paul, Jess Telford, Peter 'sargent' Kavanagh, Andrew 'the chinn-dog' Chinn, 
-				Elliot 'nessy' Chance 
+				Elliot 'nessy' Chance, Kaloyan 'durka-durka' Avroniev
 	
 	UX/RESPONSIVE/INTERACTION DESIGN: Tim Paul (Stay tuned, much, much more to come…)
 	
@@ -55,6 +55,12 @@
 /* ----------------------------------- Global styles work --------------------------------- */
 
 
+::selection {
+	background: rgba(0,0,0,0.13); /* Firefox */	
+}
+::-moz-selection {
+	background: rgba(0,0,0,0.13); /* Firefox */
+}
 
 * { 
 	-webkit-box-sizing: border-box;
@@ -737,15 +743,12 @@ a.active #cart-count, .selected .active #cart-count, #spine-inner li:hover a.act
 	padding: 17px 0 0 64px;
 	color: #d66108;
     text-shadow: 0 0 10px rgba(214,97,8,0.5), 0 1px 0 rgba(0,0,0,0.4);			
-
 }
 #system-rocker h3.devname {
 	padding: 17px 0 0 50px;
 	color: rgb(41,127,205);
     text-shadow: 0 0 10px rgba(41,127,205,1), 0 1px 0 rgba(0,0,0,0.4);	
 }
-
-
 #system-rocker h3:after {
 	width: 20px;
 	height: 1px;
