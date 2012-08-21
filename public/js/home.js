@@ -84,6 +84,17 @@
           h2: "moo in here"
         }, true);
       });
+      $("#temp-domain-details").on("click", function(e) {
+        e.preventDefault();
+        console.log("temp domain details");
+        Panels.add({
+          id: "temp-domain-details",
+          url: "/panels/domain-details",
+          temporary: true,
+          h1: "temp-domain-details",
+          h2: "moo in here"
+        }, true);
+      });
       setupTradingGraph();
     };
     setupTradingGraph = function() {
