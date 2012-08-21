@@ -37,7 +37,7 @@ class Modules_Home extends Controller
 		]
 
 		res.view.showTradingSummary = req.query.tradingSummary or false
-		res.view.showDefaultContent = req.query.defaultContent or false
+		res.view.showDefaultContent = false
 
 	# user info
 		res.view.user = {}

@@ -5426,7 +5426,8 @@ li.more-coming-soon .ff-icon-before:after {
 }
 .x-cart-item:hover {
 	color: #FCF9F5;
-	background: #898785;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+	background: #E46503;
 }
 .cart-totals {
 	float: right;
