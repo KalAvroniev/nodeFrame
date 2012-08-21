@@ -5,8 +5,9 @@ $("#grid-view").grid({
 	url: "uri/to/grid/data", // ajax endpoint for grid data
 	data: [], // use this array of data for the grid instead of ajaxing it in
 	type: "detailed", // is this grid detailed or simple
-	stickyHeader: true, // utilise the sticky header
-	fakeScrollbars: true // utilise fake scrollbars for table navigation
+	stickyHeader: false, // utilise the sticky header
+	fakeScrollbars: false, // utilise fake scrollbars for table navigation
+	lazyLoad: true // load in additional content automatically
 });
 ###
 
@@ -47,7 +48,7 @@ Grid:: =
 							++i
 
 						# hide spinner
-						$grid.find("tfoot").attr "hidden", true
+						$grid.find("#foot-pager").closest("tr").attr "hidden", true
 
 						# run setup
 						that.setup()
@@ -133,7 +134,7 @@ Grid:: =
 		# scroll event won't fire lazy load, as there isn't a scrollbar!
 
 		#this.loadInData();
-		@grid.before("<a href=\"javascript:$('#grid-view').grid('loadInData');\">Load more data</a>") if @bottomOfTable() >= 0
+		@grid.find("tfoot").append("<tr id=\"load-more-data\"><td colspan=\"17\"><span class=\"container\"><span><a class=\"save-search ff-icon-before btn\" href=\"javascript:$('#grid-view').grid('loadInData');\"><strong>load</strong> more data</a></span></span></td></tr>") if @bottomOfTable() >= 0
 		Scrollbars.add("grid"
 			, @grid
 			,
@@ -392,7 +393,7 @@ Grid:: =
 		$grid = @grid
 
 		# show spinner
-		$grid.find("tfoot").removeAttr("hidden")
+		$grid.find("#foot-pager").closest("tr").removeAttr("hidden")
 		$.jsonrpc(@options.url
 			, offset: @rowOffset
 			, (data) ->	
@@ -410,7 +411,10 @@ Grid:: =
 							++i
 
 						# hide spinner
-						$grid.find("tfoot").attr "hidden", true
+						$grid.find("#foot-pager").closest("tr").attr "hidden", true
+
+						# remove the load more data button if we've stretched down past the window
+						$grid.find("#load-more-data").attr "hidden", true if that.bottomOfTable() < 0
 
 						# let the scroll listener know we're no longer waiting on data
 						that.isWaiting = false

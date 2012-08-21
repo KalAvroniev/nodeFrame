@@ -21,7 +21,7 @@ $.app.state.get = (success, options) ->
 		, ((data) ->
 			if data isnt `undefined`
 				$.app.state.current = data
-				success()  if success
+				success() if success
 				$(document).ready ->
 					$(this).trigger("restore")
 					return
@@ -54,7 +54,7 @@ $.app.state.restoreModule = ->
 
 				# restore panels
 				modules = $.app.state.current.modules
-				$.app.panel.show modules[modules.selected].panel.active.url, modules[modules.selected].panel.active.options  if modules[modules.selected] isnt `undefined` and modules[modules.selected].panel isnt `undefined` and modules[modules.selected].panel.active?
+				$.app.panel.show modules[modules.selected].panel.active.url, modules[modules.selected].panel.active.options if modules[modules.selected] isnt `undefined` and modules[modules.selected].panel isnt `undefined` and modules[modules.selected].panel.active?
 				return
 	)
 	return
@@ -63,7 +63,7 @@ $.app.state.restore = ->
 	$(document).ready ->
 		if $.app.state.current is `undefined`
 			$.app.state.get ->
-				$.app.state.restoreModule $.app.state.current.modules  if $.app.state.current.modules isnt `undefined` and $.app.state.current.modules.selected isnt `undefined`
+				$.app.state.restoreModule $.app.state.current.modules if $.app.state.current.modules isnt `undefined` and $.app.state.current.modules.selected isnt `undefined`
 				return
 				
 		return
@@ -96,7 +96,7 @@ $.app.panel.show = (url, options) ->
 	catch _
 		console.warn("$.app.state.current.modules.panel is still not being returned!")
 	
-	options.jsonrpcMethod = "view" + url  if options.jsonrpcMethod is `undefined`
+	options.jsonrpcMethod = "view" + url if options.jsonrpcMethod is `undefined`
 
 	# TODO: refactor this at some point, as it's duplicated below
 	# is this panel already open? then close it
@@ -274,21 +274,15 @@ protrada =
 			extraClasses: null
 
 		init: ->
-			$( document ).on("click"
-				, ".panel-tab"
-				, ( e ) ->
+			$( document ).on "click", ".panel-tab", ( e ) ->
 					e.preventDefault()
-					Panels.show( $(this).data() )
+					Panels.show $( this ).data()
 					return
-			)
 
-			$( document ).on("click"
-				, ".x-panel"
-				, ( e ) ->
+			$( document ).on "click", ".x-panel", ( e ) ->
 					e.preventDefault()
 					Panels.hide()
 					return
-			)
 
 			return
 
@@ -381,11 +375,11 @@ protrada =
 			$("#section-panel").delay(300).queue ->
 				$("#section-panel.hidden").remove()
 				return
-				
+
 			@defaultPanel.addClass("standout-tab") if @defaultPanel
 			@prevPanelID = @curPanelID
 			@curPanelID = null
-			@remove @prevPanelID, true  if temporaryTab.length and @prevPanelID is temporaryTab.attr("id")
+			@remove @prevPanelID, true if temporaryTab.length and @prevPanelID is temporaryTab.attr("id")
 			return			
 
 		shuffle: ->
@@ -433,7 +427,7 @@ $(document).on("click"
 	, (e) ->
 		e.preventDefault()
 		$(this).tab("show")
-		return    
+		return
 )
 
 $(document).on("click"
@@ -457,7 +451,7 @@ $(document).on("restore"
 			$.each(state.toggles
 				, (k, v) ->
 					id = "#ui-controls #" + k
-					$(id).click()  if (v and not $(id).hasClass("active")) or (not v and $(id).hasClass("active"))
+					$(id).click() if (v and not $(id).hasClass("active")) or (not v and $(id).hasClass("active"))
 					return			
 			)
 			# trading/devname
@@ -468,7 +462,7 @@ $(document).on("restore"
 		# sidebar
 
 		# show/hide
-		toggleSidebar()  if (sidebar.visible and $(document.body).hasClass("sidebar-hidden")) or (not sidebar.visible and not $(document.body).hasClass("sidebar-hidden"))  if sidebar.visible isnt `undefined`  if sidebar isnt `undefined`
+		toggleSidebar() if (sidebar.visible and $(document.body).hasClass("sidebar-hidden")) or (not sidebar.visible and not $(document.body).hasClass("sidebar-hidden")) if sidebar.visible isnt `undefined` if sidebar isnt `undefined`
 		return
 )
 
@@ -575,7 +569,7 @@ $(document).ready ->
 			return
 	)
 
-	$("#notifications").addClass("native")  if $(document.body).hasClass("mobile")
+	$("#notifications").addClass("native") if $(document.body).hasClass("mobile")
 	Scrollbars.add("notifications"
 		, $("#notifications").not(".native")
 		,

@@ -6,8 +6,9 @@ $("#grid-view").grid({
 	url: "uri/to/grid/data", // ajax endpoint for grid data
 	data: [], // use this array of data for the grid instead of ajaxing it in
 	type: "detailed", // is this grid detailed or simple
-	stickyHeader: true, // utilise the sticky header
-	fakeScrollbars: true // utilise fake scrollbars for table navigation
+	stickyHeader: false, // utilise the sticky header
+	fakeScrollbars: false, // utilise fake scrollbars for table navigation
+	lazyLoad: true // load in additional content automatically
 });
 */
 
@@ -20,7 +21,8 @@ Grid = function(element, options) {
     data: null,
     type: "detailed",
     stickyHeader: false,
-    fakeScrollbars: false
+    fakeScrollbars: false,
+    lazyLoad: true
   };
   $.extend(this.options, options);
   this.init();
@@ -49,7 +51,7 @@ Grid.prototype = {
             $grid.find("tbody").append($.jade.renderSync("views_grid_row", records[i], that.jadeError));
             ++i;
           }
-          $grid.find("tfoot").attr("hidden", true);
+          $grid.find("#foot-pager").closest("tr").attr("hidden", true);
           that.setup();
         });
       });
@@ -107,7 +109,7 @@ Grid.prototype = {
       grid: this
     }, this.bulkFavouritesHandler);
     if (this.bottomOfTable() >= 0) {
-      this.grid.before("<a href=\"javascript:$('#grid-view').grid('loadInData');\">Load more data</a>");
+      this.grid.find("tfoot").append("<tr id=\"load-more-data\"><td colspan=\"17\"><span class=\"container\"><span><a class=\"save-search ff-icon-before btn\" href=\"javascript:$('#grid-view').grid('loadInData');\"><strong>load</strong> more data</a></span></span></td></tr>");
     }
     Scrollbars.add("grid", this.grid, {
       axis: "x",
@@ -303,7 +305,7 @@ Grid.prototype = {
     var $grid, that;
     that = this;
     $grid = this.grid;
-    $grid.find("tfoot").removeAttr("hidden");
+    $grid.find("#foot-pager").closest("tr").removeAttr("hidden");
     $.jsonrpc(this.options.url, {
       offset: this.rowOffset
     }, function(data) {
@@ -317,7 +319,10 @@ Grid.prototype = {
           $grid.find("tbody").append($.jade.renderSync("views_grid_row", records[i], that.jadeError));
           ++i;
         }
-        $grid.find("tfoot").attr("hidden", true);
+        $grid.find("#foot-pager").closest("tr").attr("hidden", true);
+        if (that.bottomOfTable() < 0) {
+          $grid.find("#load-more-data").attr( "hidden", true );
+        }
         that.isWaiting = false;
       });
       that.rowOffset += 10;
