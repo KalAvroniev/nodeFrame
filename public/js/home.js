@@ -18,6 +18,7 @@
       $("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr("data-alerts", $(".protrada .alert-count").attr("data-alerts"));
       $("#watch-video").on("click", function(e) {
         e.preventDefault();
+        console.log("watch video");
         Panels.add({
           id: "protrada-video",
           url: "/panels/protrada-video",
@@ -28,8 +29,9 @@
           h2: "to domain trading"
         }, true);
       });
-      $("#list-forsale").on("click", function(e) {
+      $("#temp-list-forsale").on("click", function(e) {
         e.preventDefault();
+        console.log("list for sale");
         Panels.add({
           id: "list-forsale",
           url: "/modules/home/panels/list-forsale",
@@ -40,8 +42,9 @@
           h2: "moo in here"
         }, true);
       });
-      $("#import-domains").on("click", function(e) {
+      $("#temp-import-domains").on("click", function(e) {
         e.preventDefault();
+        console.log("import domains");
         Panels.add({
           id: "import-domains",
           url: "/modules/home/panels/import-domains",
@@ -52,8 +55,9 @@
           h2: "moo in here"
         }, true);
       });
-      $("#export-data").on("click", function(e) {
+      $("#temp-export-data").on("click", function(e) {
         e.preventDefault();
+        console.log("export data");
         Panels.add({
           id: "export-data",
           url: "/panels/export-data",
@@ -64,10 +68,11 @@
           h2: "moo in here"
         }, true);
       });
-      $("#protrada-video").on("click", function(e) {
+      $("#temp-protrada-video").on("click", function(e) {
         e.preventDefault();
+        console.log("protrada video");
         Panels.add({
-          id: "protrada-video",
+          id: "temp-protrada-video",
           url: "/panels/protrada-video",
           size: "mini",
           temporary: true,
@@ -76,8 +81,9 @@
           h2: "moo in here"
         }, true);
       });
-      $("#advanced-search").on("click", function(e) {
+      $("#temp-advanced-search").on("click", function(e) {
         e.preventDefault();
+        console.log("advanced search");
         Panels.add({
           id: "advanced-search",
           url: "/panels/advanced-search",

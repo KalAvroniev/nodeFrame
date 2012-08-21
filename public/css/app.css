@@ -2858,8 +2858,13 @@ header#main:before {
 a.default {
 	display: inline-block;
 	padding: 0;
-	border-bottom: 3px solid #e6e6e6;
+	line-height: 1.5em;
+	border-bottom: 3px solid rgba(0,0,0,0.07);
 	color: #49AFCD;
+}
+a.default:hover {
+	border-bottom: 3px solid #71a00e;	
+	color: #71a00e;	
 }
 a.download {
 	border-bottom: 3px solid #e6e6e6;
@@ -6390,7 +6395,7 @@ h2#make-profits span {
 	position: relative;
 	background-color: rgba(0,0,0,0.08);
 	color: #212121;
-	margin: 16px 0 0 30px;
+	margin: 14px 0 0 30px;
 	padding: 40px 30px 40px 105px;
 	font-size: 14px;
 	line-height: 20px;
