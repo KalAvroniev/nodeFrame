@@ -13,30 +13,9 @@
     $(".sectional-tabs").addClass "singular"
     $(window).on "resize", windowResize
     $(window).on "scroll", windowScroll
-    return
-		
-		
-		
-  onDomUnload = ->
-    $(".ajax-spinner").show()
-    $(window).off "resize", windowResize
-    $(window).off "scroll", windowScroll
-    return		
-  
-  # note that we don't bother deleting the tinyscrollbar, as it will be
-  # removed when the DOM elements are.
-  windowResize = ->
-  
-  # stub
-  windowScroll = ->
-  domLoaded = 0
-  $("#main-container").one ajaxUnload: onDomUnload
-  return
-# stub
-)()
-
-$(document).ready ->
-
+    
+    
+    
 	# TEMPORARY INSERT OF ALL MODULE PANELS
 	  
 	$("#temp-make-offer").on "click", ( e ) ->
@@ -127,15 +106,32 @@ $(document).ready ->
 	  }, true
 	
 	  return  	  
+    
+    
+    
+    
+    return
+
+		
+  onDomUnload = ->
+    $(".ajax-spinner").show()
+    $(window).off "resize", windowResize
+    $(window).off "scroll", windowScroll
+    return		
   
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	
+  # note that we don't bother deleting the tinyscrollbar, as it will be
+  # removed when the DOM elements are.
+  windowResize = ->
+  
+  # stub
+  windowScroll = ->
+  domLoaded = 0
+  $("#main-container").one ajaxUnload: onDomUnload
+  return
+# stub
+)()
+
+$(document).ready ->
 	
 	# update counter
 	$("header#main").find(".alerts-summary").find("span[data-title^=\"Protrada\"]").attr "data-alerts", $(".protrada .alert-count").attr("data-alerts")
