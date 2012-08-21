@@ -31,102 +31,107 @@
 					, true
 				)
 				return
-			)
-			
-			
+			)		
 			
 		# TEMPORARY INSERT OF ALL MODULE PANELS
 			
-		$("#temp-list-forsale").on "click", ( e ) ->
-			e.preventDefault()
-			console.log("list for sale")
+		$("#temp-list-forsale").on("click"
+			, ( e ) ->
+				e.preventDefault()
+				console.log("list for sale")
 
-			Panels.add {
-				id: "list-forsale"
-				url: "/modules/home/panels/list-forsale"
-				temporary: true
-				h1: "list-forsale"
-				h2: "moo in here"
-			}, true
-
-			return			
+				Panels.add(
+					id: "list-forsale"
+					url: "/modules/home/panels/list-forsale"
+					temporary: true
+					h1: "list-forsale"
+					h2: "moo in here"
+					, true
+				)
+				return			
+		)
 			
-		$("#temp-import-domains").on "click", ( e ) ->
-			e.preventDefault()
-			console.log("import domains")
+		$("#temp-import-domains").on("click"
+			, ( e ) ->
+				e.preventDefault()
+				console.log("import domains")
 
-			Panels.add {
-				id: "import-domains"
-				url: "/modules/home/panels/import-domains"
-				temporary: true
-				h1: "import-domains"
-				h2: "moo in here"
-			}, true
-
-			return			 
+				Panels.add(
+					id: "import-domains"
+					url: "/modules/home/panels/import-domains"
+					temporary: true
+					h1: "import-domains"
+					h2: "moo in here"
+					, true
+				)
+				return			 
+		)		
 			
+		$("#temp-export-data").on("click"
+			, ( e ) ->
+				e.preventDefault()
+				console.log("export data")
+
+				Panels.add(
+					id: "export-data"
+					url: "/panels/export-data"
+					temporary: true
+					h1: "export-data"
+					h2: "moo in here"
+					, true
+				)
+				return				
+		)
 			
-		$("#temp-export-data").on "click", ( e ) ->
-			e.preventDefault()
-			console.log("export data")
+		$("#temp-protrada-video").on("click"
+			, ( e ) ->
+				e.preventDefault()
+				console.log("protrada video")			
 
-			Panels.add {
-				id: "export-data"
-				url: "/panels/export-data"
-				temporary: true
-				h1: "export-data"
-				h2: "moo in here"
-			}, true
+				Panels.add(
+					id: "temp-protrada-video"
+					url: "/panels/protrada-video"
+					temporary: true
+					h1: "protrada-video"
+					h2: "moo in here"
+					, true
+				)
+				return			 
+		)
+		
+		$("#temp-advanced-search").on("click"
+			, ( e ) ->
+				e.preventDefault()
+				console.log("advanced search")						
 
-			return				
-			
-			
-		$("#temp-protrada-video").on "click", ( e ) ->
-			e.preventDefault()
-			console.log("protrada video")			
+				Panels.add(
+					id: "advanced-search"
+					url: "/panels/advanced-search"
+					temporary: true
+					h1: "advanced-search"
+					h2: "moo in here"
+					, true
+				)
+				return	 
+		)
+		
+		$("#temp-domain-details").on("click"
+			, ( e ) ->
+				e.preventDefault()
+				console.log("temp domain details")						
 
-			Panels.add {
-				id: "temp-protrada-video"
-				url: "/panels/protrada-video"
-				temporary: true
-				h1: "protrada-video"
-				h2: "moo in here"
-			}, true
-
-			return			 
-			
-		$("#temp-advanced-search").on "click", ( e ) ->
-			e.preventDefault()
-			console.log("advanced search")						
-
-			Panels.add {
-				id: "advanced-search"
-				url: "/panels/advanced-search"
-				temporary: true
-				h1: "advanced-search"
-				h2: "moo in here"
-			}, true
-
-			return	 
-
-		$("#temp-domain-details").on "click", ( e ) ->
-			e.preventDefault()
-			console.log("temp domain details")						
-
-			Panels.add {
-				id: "temp-domain-details"
-				url: "/panels/domain-details"
-				temporary: true
-				h1: "temp-domain-details"
-				h2: "moo in here"
-			}, true
-
-			return				
-			
-			
+				Panels.add(
+					id: "temp-domain-details"
+					url: "/panels/domain-details"
+					temporary: true
+					h1: "temp-domain-details"
+					h2: "moo in here"
+					, true
+				)
+				return				
+		)
 					
 		setupTradingGraph()
-
 		return
 
 	setupTradingGraph = ->
