@@ -15,7 +15,7 @@
     $(window).on "scroll", windowScroll
     
     
-    
+        
 	# TEMPORARY INSERT OF ALL MODULE PANELS
 	  
 	$("#temp-make-offer").on "click", ( e ) ->
@@ -89,7 +89,7 @@
 	    h1: "advanced-search"
 	    h2: "moo in here"
 	  }, true
-	
+	  
 	  return	  
 	  
 	  
@@ -104,14 +104,10 @@
 	    h1: "export-data"
 	    h2: "moo in here"
 	  }, true
-	
+	  
 	  return  	  
-    
-    
-    
-    
-    return
-
+	  
+	  
 		
   onDomUnload = ->
     $(".ajax-spinner").show()

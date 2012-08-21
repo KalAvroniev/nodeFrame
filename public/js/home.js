@@ -35,9 +35,7 @@
         Panels.add({
           id: "list-forsale",
           url: "/modules/home/panels/list-forsale",
-          size: "mini",
           temporary: true,
-          extraClasses: "video",
           h1: "list-forsale",
           h2: "moo in here"
         }, true);
@@ -48,9 +46,7 @@
         Panels.add({
           id: "import-domains",
           url: "/modules/home/panels/import-domains",
-          size: "mini",
           temporary: true,
-          extraClasses: "video",
           h1: "import-domains",
           h2: "moo in here"
         }, true);
@@ -61,9 +57,7 @@
         Panels.add({
           id: "export-data",
           url: "/panels/export-data",
-          size: "mini",
           temporary: true,
-          extraClasses: "video",
           h1: "export-data",
           h2: "moo in here"
         }, true);
@@ -74,9 +68,7 @@
         Panels.add({
           id: "temp-protrada-video",
           url: "/panels/protrada-video",
-          size: "mini",
           temporary: true,
-          extraClasses: "video",
           h1: "protrada-video",
           h2: "moo in here"
         }, true);
@@ -87,9 +79,7 @@
         Panels.add({
           id: "advanced-search",
           url: "/panels/advanced-search",
-          size: "mini",
           temporary: true,
-          extraClasses: "video",
           h1: "advanced-search",
           h2: "moo in here"
         }, true);
