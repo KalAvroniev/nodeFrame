@@ -24,7 +24,7 @@
       console.log("temp checkout");
       Panels.add({
         id: "temp-checkout",
-        url: "/modules/bank-and-cart/panels/checkout",
+        url: "modules/bank-and-cart/panels/checkout",
         temporary: true,
         h1: "temp-checkout",
         h2: "moo in here"
@@ -35,7 +35,7 @@
       console.log("export data");
       Panels.add({
         id: "export-data",
-        url: "/panels/export-data",
+        url: "panels/export-data",
         temporary: true,
         h1: "export-data",
         h2: "moo in here"
