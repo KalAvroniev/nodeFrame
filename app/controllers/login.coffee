@@ -10,6 +10,7 @@ class Login
 			require_conf: 'login'
 
 	run: (req, res) ->
+			res.view.layout = null
 			res.view[key] = val for key, val of @params
 
 			@minifyJS()
