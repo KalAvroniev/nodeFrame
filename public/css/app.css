@@ -3078,11 +3078,11 @@ table.edit-data-grid {
 	overflow-x: scroll;
 }
 .edit-data-grid tbody tr:first-child td {
-	padding: 10px 12px 5px;
+	padding: 16px 12px 8px;
 
 }
 .edit-data-grid td {
-	padding: 5px 12px;
+	padding: 8px 12px;
 	color: rgba(0,0,0,0.7);	
 }
 .edit-data-grid tbody tr:hover {
@@ -3126,7 +3126,7 @@ table .interactive input {
 	line-height: 1;
 	font-weight: 400;	
 	width: 88px; height: auto;
-	color: #4c4b4a;
+	color:rgba(0,0,0,0.2); 
 	border-radius: 8px;
 	padding: 7px 7px 8px;
 	margin: 0;
@@ -3140,8 +3140,10 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-table .interactive input::-webkit-input-placeholder  { color:rgba(0,0,0,0.2); }
-table .interactive input:-moz-placeholder { color:rgba(0,0,0,0.2); }
+table .interactive input::-webkit-input-placeholder  { 
+	color:rgba(0,0,0,0.2); 
+	line-height: 1.3em;	
+}
 
 noindex:-o-prefocus,
 input[type=number] {
@@ -3149,9 +3151,9 @@ input[type=number] {
 }
 
 table .interactive input:focus {
-	background: rgba(255,255,255,0.37);
+	background: rgba(255,255,255,0.5);
 	border-color: white;
-	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 1px 0 rgba(119,110,105,0.217);
+	box-shadow: 0 0 10px rgba(141,139,137, 0.2), 0 3px 0 rgba(119,110,105,0.15);
 	color: #161413;
 }
 .domain-name label {
@@ -5004,8 +5006,18 @@ aside header.alerts-header {
 .simple-data-grid tfoot tr {
 	background: #DCD9D6;
 }
-
-
+.simple-data-grid tfoot tr.coupon-codes {
+	background: #e9e6e4;
+}
+.simple-data-grid tfoot tr.cash-credit-split {
+	background: #e9e6e4;
+}
+.simple-data-grid tfoot td:not(.currency):not(.interactive) {
+	text-align: right;
+}
+.simple-data-grid td.interactive {
+	vertical-align: top;
+}
 #credit-use > table .ff-icon-before {
 	white-space: nowrap;
 }
@@ -5015,10 +5027,24 @@ aside header.alerts-header {
 	line-height: 1;
 	font-weight: 400;
 	margin: -2px 6px 0 0;
-	display: inline-block;
-		
+	display: inline-block;	
 }
-
+.simple-data-grid tfoot tr.coupon-codes td {
+	padding-top: 20px;
+}
+.simple-data-grid tfoot tr.cash-credit-split td { 
+	padding-bottom: 20px;
+}
+.simple-data-grid tfoot tr td:first-child {
+	padding-right: 30px;
+}  
+.simple-data-grid tfoot tr.coupon-codes td label, .simple-data-grid tfoot tr.cash-credit-split td label {
+	font-weight: 600;
+	font-size: 14px;
+}
+.simple-data-grid tfoot tr.cash-credit-split td:first-child {
+	font-size: 14px;
+}
 #user-settings-tab-panes .btn-group > .btn {
 	background: #f9f9f9;
 	color: #4c4b4a;
@@ -5381,19 +5407,27 @@ li.more-coming-soon .ff-icon-before:after {
 }
 #shopping-cart .btn-success:first-child {
 	margin: 0;
-	padding: 17px 14px 12px;
+	padding: 20px 16px 17px;
 }
 #shopping-cart .btn:first-child:before {
 	font-size: 20px;
 	line-height: 1;
 	display: block;
-	margin: 0 0 6px 0;
+	padding: 0 0 10px;
 }
-#shopping-cart .btn:before {
+#shopping-cart .btn.go-checkout:before {
 	content: "\00C9";
 	font-size: inherit;
 	line-height: 1;
+	font-size: 20px;
 	margin: 0 15px 0 0;
+}
+#shopping-cart .btn.complete:before {
+	content: "D";
+	font-size: inherit;
+	line-height: 1;
+	font-size: 23px;
+	margin: 0 15px 0 0;	
 }
 .item-details, .item-details span {
 	display: block;
@@ -5430,7 +5464,7 @@ li.more-coming-soon .ff-icon-before:after {
 	border-radius: 20px;
 	display: inline-block;
 	margin: -1px 0 0 12px;
-	padding: 5px 7px 7px;
+	padding: 6px 7px 7px;
 	cursor: pointer;
 	font-size: 10px;
 	line-height: 1;	
@@ -5446,49 +5480,35 @@ li.more-coming-soon .ff-icon-before:after {
 	text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 	background: #E46503;
 }
-.cart-totals {
-	float: right;
-	padding: 10px;
-}
-.cart-totals > span {
-	display: block;
-	padding: 0 0 15px;
-}
-.cart-totals > span .currency {
-	float: right;
-	margin: 0 10px 0 0;
-	font-size: 20px;
-	font-weight: 400;
-}
-.cart-totals > span .currency sup {
-	top: -0.3em;
-}
-.cart-totals > span .total-label {
-	display: block;
-	margin: 0 120px 0 0;
-	text-align: right;
-	padding: 0;
-	background: transparent;
-	font-weight: 400;
+.simple-data-grid td.total-label {
+	font-weight: 600;
 	text-shadow: none;
-	font-size: 15px;
+	font-size: 16px;
 }
-.cart-totals > .final-total {
-	padding: 10px; 
+.simple-data-grid td.highlight {
 	color: #3c4920;
 	background: #80b22b;
-}
-.cart-totals > .final-total .total-label {
-	margin: 0 110px 0 0;
-	font-weight: 700;
+	font-weight: 700;	
+	font-size: 20px;	
 }
-.cart-totals > .final-total .currency {
-	margin: 0;
-	font-weight: 700;
+.simple-data-grid td.highlight.currency {
+	font-size: 22px;
 }
-.final-total {
+.cash-credit-split strong.current-credit-count {
+	display: inline-block;
+	padding: 3px 5px;
+	margin: -3px 0 0 0;
+	border-radius: 3px;
+	background: rgba(0,0,0,0.07);
+	vertical-align: middle;
+}
+.current-credit-count .ff-icon-after:after {
+	display: inline-block;
+	content: "R";
+	margin: -2px 3px 0 0;
+	font-size: 15px;
+}
 
-}
 
 #bank-and-cart-tab-panes .btn-group > .btn {
 	background: #f9f9f9;
@@ -5513,11 +5533,34 @@ li.more-coming-soon .ff-icon-before:after {
 	margin: 0 280px 2px 0;
 }
 
-
-
-
-
-
+.shopping-cart .interactive input {
+	padding: 9px 40px 9px 9px;
+	width: 120px;
+}
+.shopping-cart .interactive .apply-input {
+	position: absolute;
+	margin: 10px 0 0 -33px;
+	color: rgba(0,0,0,0.3);
+	padding: 4px;
+	font-size: 16px;
+	line-height: 1;
+	border-radius: 4px;
+}
+.shopping-cart .interactive .apply-input:hover {
+	background: rgba(0,0,0,0.1);
+}
+.shopping-cart .interactive .applied {
+	margin: 8px 0 0 -31px;	
+	color: rgba(0,0,0,0.6);
+}
+.shopping-cart .interactive .apply-input:before {
+	content: "O";
+}
+.shopping-cart .interactive .applied:before {
+	content: "x";
+	font-size: 14px;
+	line-height: 1;
+}
 
 
 
@@ -6065,7 +6108,7 @@ thead tr {
 tbody td.currency:before {
 	content: "$";
 	vertical-align: super;
-	font-size: 12px;
+	font-size: 13px;
 	line-height: 0;
 }
 .domain-title-cntnr {

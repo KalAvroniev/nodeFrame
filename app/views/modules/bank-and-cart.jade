@@ -71,7 +71,7 @@
 				h2 items currently in your cart
 				h3 some helper text in here, about just what kinds of things can be setup as notifications etc etc.
 
-			table.simple-data-grid
+			table.simple-data-grid.shopping-cart
 				thead
 					tr
 						th &nbsp;
@@ -94,6 +94,7 @@
 							sup .00
 						td.interactive
 							input(type="number",placeholder="1")
+							a(href="#").apply-input.ff-icon
 							
 						td.currency 100
 							sup .00
@@ -111,6 +112,7 @@
 							sup .00
 						td.interactive
 							input(type="number",placeholder="1")
+							a(href="#").apply-input.ff-icon
 							
 						td.currency 100
 							sup .00
@@ -129,6 +131,7 @@
 						td.interactive
 							span.disabled
 								input(type="number",placeholder="1")
+								a(href="#").apply-input.applied.ff-icon
 							
 						td.currency 125
 							sup .00
@@ -148,30 +151,67 @@
 						td.interactive
 							.disabled
 								input(type="number",placeholder="1")
+								a(href="#").apply-input.applied.ff-icon
 							
 						td.currency 50
 							sup .00
 						
 				tfoot
-					tr
-						td(colspan="5")
-							span.cart-totals
-								span.subtotal
-									span.currency 250
-										sup .00
-									span.total-label items subtotal
+					tr.coupon-codes
+					
+						td(colspan="3")
+							label(for="coupon-code") enter coupon code	
 									
-								span.tax
-									span.currency 25
-										sup .00	
-									span.total-label tax
-									
-								span.final-total
-									span.currency 275
-										sup .00	
-									span.total-label final total
+						td.interactive
+							input(id="coupon-code",type="number",placeholder="coupon #")	
+							a(href="#").apply-input.ff-icon
+						
+						td.currency - 
+							sup $
+							| 23
+							sup .00
+					
+					
+					tr.cash-credit-split
+					
+						td(colspan="3") you currently have 
+							strong.current-credit-count
+								span.ff-icon-after 657 
+								| credits
+							label(for="credits-use") please specify how many credits to use to pay for cart items	
+						
+						td.interactive
+							input(id="credits-use",type="number",placeholder="use # credits")
+							a(href="#").apply-input.applied.ff-icon
 
-			a.btn.btn-success.btn-large.ff-icon-before.go-checkout checkout items	
+						td.currency - 
+							sup $
+							| 0
+							sup .00
+						
+						
+						
+
+					tr.totals
+						td(colspan="4").total-label items subtotal
+						td.currency 250
+							sup .00
+
+					tr.totals
+						td(colspan="4").total-label tax
+						td.currency 25
+							sup .00
+
+					tr.totals
+						td(colspan="3")
+						td.total-label.highlight final total
+						td.currency.highlight 275
+							sup .00
+																
+
+			a.btn.btn-success.btn-large.ff-icon-before.go-checkout checkout items
+
+			a.btn.btn-success.btn-large.ff-icon-before.complete complete transaction	
 									
 																						
 			
