@@ -1,10 +1,17 @@
+# persistent data
 app/session_data
+app/state_data
+
+# test cases
 tests/vows-results.txt
 tests/vows.coffee
-app/state_data
 tests/selenium/results/
-/nbproject/private/
+
+# minified files
 public/js/require/
+
+# misc
+/nbproject/private/
 
 # FUCK OFF ANNOYING DS_Store files!!!
 /app/.DS_Store
