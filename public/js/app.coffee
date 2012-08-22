@@ -182,7 +182,7 @@ protrada =
       options = $.extend({}, @defaults, options)
       
       # these are required values
-      return if options.id == undefined or options.url == undefined
+      return if options.id is undefined or options.url is undefined or options.size is undefined
 
       # panel already exists
       return if $( "#" + options.id ).length
@@ -240,23 +240,21 @@ protrada =
       @hide()
 
       # are we clicking on the previous panel? then exit
-      return if @prevPanelID == data.id
+      return if @prevPanelID is data.id
 
-      $.ajax(data.url
-        , 
-          success: ( html ) ->
-            $("#section-panel").addClass("hidden")
-            $("#ajax-container").prepend( html )
-            $("#main").find(".sectional-tabs").find( "#" + data.id ).addClass("active")
+      $.ajax data.url, success: ( html ) ->
+        $("#section-panel").addClass("hidden")
+        $("#ajax-container").prepend( html )
+        $("#main").find(".sectional-tabs").find( "#" + data.id ).addClass("active")
 
-            # no tab should have the .standout-tab class when a panel is open
-            Panels.defaultPanel = @defaultPanel#$("#main").find(".sectional-tabs").find(".standout-tab").removeClass("standout-tab")
+        # no tab should have the .standout-tab class when a panel is open
+        Panels.defaultPanel = $("#main").find(".sectional-tabs").find(".standout-tab").removeClass("standout-tab")
+        Panels.shuffle()
 
-            # TODO: should we be accessing the global Panels to do this?
-            Panels.curPanelID = data.id
-            return
-      )
-      @shuffle()
+        # TODO: should we be accessing the global Panels to do this?
+        Panels.curPanelID = data.id
+        return
+
       return
 
     hide: ->

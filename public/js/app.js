@@ -167,7 +167,7 @@ protrada = {
         showImmediately = false;
       }
       options = $.extend({}, this.defaults, options);
-      if (options.id === void 0 || options.url === void 0) {
+      if (options.id === void 0 || options.url === void 0 || options.size === void 0) {
         return;
       }
       if ($("#" + options.id).length) {
@@ -211,23 +211,23 @@ protrada = {
       }
       $.ajax(data.url, {
         success: function(html) {
-          $("#section-panel").addClass("hidden");
-          $("#ajax-container").prepend(html);
+          $("#section-panel").addClass("hidden");//git:added,git:removed:$("#panel-content").find(".ajax-panel-content").html(html);
+          $("#ajax-container").prepend(html);//git:added
           $("#main").find(".sectional-tabs").find("#" + data.id).addClass("active");
-          Panels.defaultPanel = this.defaultPanel;
+          Panels.defaultPanel = $("#main").find(".sectional-tabs").find(".standout-tab").removeClass("standout-tab");
+          Panels.shuffle();
           Panels.curPanelID = data.id;
         }
       });
-      this.shuffle();
     },
     hide: function() {
       var temporaryTab;
       temporaryTab = $("#main").find(".sectional-tabs").find(".temporary-tab");
       $("#main").find(".sectional-tabs").find(".active").removeClass("active");
       $("#section-panel").addClass("hidden");
-      $("#section-panel").delay(300).queue(function() {
-        $("#section-panel.hidden").remove();
-      });
+      $("#section-panel").delay(300).queue(function() {//git:added
+        $("#section-panel.hidden").remove();//git:added
+      });//git:added
       if (this.defaultPanel) {
         this.defaultPanel.addClass("standout-tab");
       }

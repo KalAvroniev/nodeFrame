@@ -43,6 +43,7 @@
 				Panels.add(
 					id: "moo"
 					url: "/modules/home/panels/list-forsale"
+          size: "full"
 					temporary: true
 					h1: "list-forsale"
 					h2: "moo in here"
@@ -59,6 +60,7 @@
 				Panels.add(
 					id: "moo2"
 					url: "/modules/home/panels/import-domains"
+          size: "mini"
 					temporary: true
 					h1: "import-domains"
 					h2: "moo in here"
@@ -75,6 +77,7 @@
 				Panels.add(
 					id: "moo3"
 					url: "/panels/export-data"
+          size: "mini"
 					temporary: true
 					h1: "export-data"
 					h2: "moo in here"
@@ -91,6 +94,7 @@
 				Panels.add(
 					id: "moo4"
 					url: "/panels/protrada-video"
+          size: "mini"
 					temporary: true
 					h1: "protrada-video"
 					h2: "moo in here"
