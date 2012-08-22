@@ -11,8 +11,7 @@ html(lang="en")
 
 	body.login
 		#main-container
-			- var klass = ( error === "" ? "" : "error" );
-				#login-container(class=klass)
+				#login-container
 					h1#beta-logo.ff-icon-before alpha
 					#login-content
 						#login-title
@@ -28,18 +27,17 @@ html(lang="en")
 									a.go-login.ff-icon-after(href="#") go login
 									a#forgot.ff-icon-after(href="#") forgot?
 
-						- if ( error !== "" )
-							#process-error
-								h3.ff-icon-before
-									| error
+						#process-error(hidden)
+							h3.ff-icon-before
+								| error
+							span
 								span
-									= error
-									br
-									| &nbsp;
+								br
+								| &nbsp;
 
 						#login-facebook.clearfix
 							h3.ff-icon-before
-								| login via
+								| login via 
 								strong Facebook
 							span
 								| Use your facebook profile
@@ -59,7 +57,21 @@ html(lang="en")
 			$( document ).ready(function() {
 				$(".go-login").on( "click", function( e ) {
 					e.preventDefault();
-					$("#login-body").trigger("submit");
+
+					// clean slate in case of retry
+					$("#login-container").removeClass("error");
+					$("#process-error").attr( "hidden", true );
+
+					$.jsonrpc( "user/check-login", $("#login-body").serializeJSON(), function( data ) {
+						console.log(data);
+
+						if ( data.checked === true ) {
+							window.location = "/home";
+						} else {
+							$("#login-container").addClass("error");
+							$("#process-error").removeAttr("hidden").find("span").find("span").text( data.errorMsg );
+						}
+					});
 				});
 			});
 
