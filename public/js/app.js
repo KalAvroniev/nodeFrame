@@ -84,7 +84,7 @@ $.app.state.update = function(stateName, stateValue) {
   });
 };
 
-toggleSidebar = function(e) {
+toggleSidebar = function() {
   var $aside;
   $aside = $("aside");
   $aside.toggleClass("active");
@@ -166,7 +166,6 @@ protrada = {
       if (showImmediately == null) {
         showImmediately = false;
       }
-      console.log("Add");
       options = $.extend({}, this.defaults, options);
       if (options.id === void 0 || options.url === void 0) {
         return;
@@ -247,13 +246,9 @@ protrada = {
 };
 
 Scrollbars = protrada.scrollbars;
-
 TaskStatus = protrada.taskStatus;
-
 Alert = protrada.alert;
-
 HelpBubbles = protrada.helpBubbles;
-
 Panels = protrada.panels;
 
 $(document).on("click", "#toggle-side-bar, #x-side-bar", function() {
@@ -283,7 +278,7 @@ $(document).on("restore", function() {
   var sidebar, state;
   state = $.app.state.current.system_options;
   sidebar = $.app.state.current.sidebar;
-  if (state !== undefined) {
+  if (state !== void 0) {
     $.each(state.toggles, function(k, v) {
       var id;
       id = "#ui-controls #" + k;
@@ -300,7 +295,7 @@ $(document).on("restore", function() {
       }
     });
   }
-  if ((sidebar !== undefined ? sidebar.visible !== undefined : void 0) ? (sidebar.visible && $(document.body).hasClass("sidebar-hidden")) || (!sidebar.visible && !$(document.body).hasClass("sidebar-hidden")) : void 0) {
+  if (sidebar !== void 0 && sidebar.visible !== void 0) {
     toggleSidebar();
   }
 });
