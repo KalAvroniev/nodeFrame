@@ -84,85 +84,7 @@ $.app.state.update = function(stateName, stateValue) {
   });
 };
 
-$.app.panel = {};
-
-$.app.panel.show = function(url, options) {
-  var active;
-  active = false;
-  options = options || {};
-  try {
-    active = $.app.state.current.modules[$.app.state.current.modules.selected].panel.active;
-  } catch (_) {
-    console.warn("$.app.state.current.modules.panel is still not being returned!");
-  }
-  if (options.jsonrpcMethod === undefined) {
-    options.jsonrpcMethod = "view" + url;
-  }
-  if (active && active.options.tabid === options.tabid) {
-    if (options.temporary !== undefined) {
-      $(".sectional-tabs").find(".temporary-panel-tab").remove();
-      $(".ajax-panel-content").empty();
-    }
-    $(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
-    $(".sectional-tabs").restoreStandoutElement();
-    $.app.panel.hide();
-  }
-  if (options.temporary === undefined && $(".sectional-tabs").find(".temporary-panel-tab").length) {
-    $(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
-    $(".sectional-tabs").restoreStandoutElement();
-    $(".sectional-tabs").find(".temporary-panel-tab").remove();
-    $(".ajax-panel-content").empty();
-  }
-  $.jsonrpc(options.jsonrpcMethod, {}, function(obj) {
-    $.jade.getTemplate(url, function(fn) {
-      var $sectionPanel, $sectionalTabs;
-      $sectionalTabs = $(".sectional-tabs");
-      $sectionPanel = $("#section-panel");
-      $sectionalTabs.find("li").removeClass("active").filter(".standout-tab").removeClass("standout-tab").addClass("standout-disabled");
-      $sectionalTabs.find("#" + options.tabid).addClass("active");
-      $sectionalTabs.reorderActiveElement();
-      $sectionPanel.removeClass().addClass(options.panel_size);
-      $(".ajax-panel-content").html($.jade.renderSync(fn, obj, function(err, file, line) {
-        $(".ajax-panel-content").html("Error in " + file + " at line " + line + ": " + err);
-      }));
-      $.app.state.update("modules." + $.app.state.current.modules.selected + ".panel.active", {
-        url: url,
-        options: options
-      });
-      $(".x-panel").unbind("click").on("click", function(e) {
-        e.preventDefault();
-        $(".standout-disabled").removeClass("standout-disabled").addClass("standout-tab");
-        $sectionalTabs.restoreStandoutElement();
-        $(".sectional-tabs").find(".temporary-panel-tab").remove();
-        $(".ajax-panel-content").empty();
-        return $.app.panel.hide();
-      });
-    });
-  });
-};
-
-$.app.panel.hide = function() {
-  var $sectionPanel;
-  $sectionPanel = $("#section-panel");
-  if ($sectionPanel.hasClass("hidden")) {
-    $sectionPanel.removeClass("hidden");
-    $(this).addClass("active");
-  } else {
-    $sectionPanel.addClass("hidden");
-    $(".sectional-tabs .active").removeClass("active");
-  }
-  $.app.state.update("modules." + $.app.state.current.modules.selected + ".panel.active", null);
-};
-
-$.fn.reorderActiveElement = function() {
-  return this.children(".active").detach().prependTo(this);
-};
-
-$.fn.restoreStandoutElement = function() {
-  return this.children(".standout-tab").detach().prependTo(this);
-};
-
-toggleSidebar = function(e) {
+toggleSidebar = function() {
   var $aside;
   $aside = $("aside");
   $aside.toggleClass("active");
@@ -244,7 +166,6 @@ protrada = {
       if (showImmediately == null) {
         showImmediately = false;
       }
-      console.log("Add");
       options = $.extend({}, this.defaults, options);
       if (options.id === void 0 || options.url === void 0) {
         return;
@@ -325,13 +246,9 @@ protrada = {
 };
 
 Scrollbars = protrada.scrollbars;
-
 TaskStatus = protrada.taskStatus;
-
 Alert = protrada.alert;
-
 HelpBubbles = protrada.helpBubbles;
-
 Panels = protrada.panels;
 
 $(document).on("click", "#toggle-side-bar, #x-side-bar", function() {
@@ -361,7 +278,7 @@ $(document).on("restore", function() {
   var sidebar, state;
   state = $.app.state.current.system_options;
   sidebar = $.app.state.current.sidebar;
-  if (state !== undefined) {
+  if (state !== void 0) {
     $.each(state.toggles, function(k, v) {
       var id;
       id = "#ui-controls #" + k;
@@ -378,7 +295,7 @@ $(document).on("restore", function() {
       }
     });
   }
-  if ((sidebar !== undefined ? sidebar.visible !== undefined : void 0) ? (sidebar.visible && $(document.body).hasClass("sidebar-hidden")) || (!sidebar.visible && !$(document.body).hasClass("sidebar-hidden")) : void 0) {
+  if (sidebar !== void 0 && sidebar.visible !== void 0) {
     toggleSidebar();
   }
 });
