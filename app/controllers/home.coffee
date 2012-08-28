@@ -3,5 +3,6 @@ Index = require(app.config.appDir + '/controllers/index.coffee')
 class Home extends Index			
 	module.exports = @
 
-	run: (req, res) ->
+	run: (req, res) ->	
+		@setViewParams(id: "defaultSearch")
 		super

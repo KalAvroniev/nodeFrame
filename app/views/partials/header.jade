@@ -6,7 +6,7 @@ header#main
 		span.toggle-sub * You can also re-open from here
 
 	#sectional-func
-		!= partial("partials/help-bubble", { id: "sidebar" })
+		include help-bubble   
 
 		#x-side-bar(title="Toggle display of sidebar")
 			span.alerts-summary
@@ -29,7 +29,8 @@ header#main
 						= tab.h2
 			- }
 
-			!= partial("partials/help-bubble", { id: "panels" })
+			include help-bubble
+			//{ id: "panels" }
 
 		form#quick-search.well
 			input#quick-search-keyword(value="", placeholder="Quick domain search _")

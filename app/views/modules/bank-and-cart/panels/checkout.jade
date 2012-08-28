@@ -1,7 +1,10 @@
-h2.panel-heading
-	strong checkout all items
-	| in
-	span.ff-icon-before.checkout shopping cart
+extends layouts/mini-panels
+
+block body
+	h2.panel-heading
+		strong checkout all items
+		| in
+		span.ff-icon-before.checkout shopping cart
 
 
 
@@ -15,15 +18,15 @@ h2.panel-heading
 
 
 
-				
-				
-#submit-bid-button.btn-group.dropup
-	a.btn.btn-success.btn-large.ff-icon-before place backorder(s) &amp; watch
-	a.btn.btn-success.btn-large.dropdown-toggle(data-toggle='dropdown')
-		span.caret
-	ul.dropdown-menu.pull-right
-		li
-			a(href="#") just watch
-		li.divider
-		li
-			a(href="#") do something else entirely!
+
+
+	#submit-bid-button.btn-group.dropup
+		a.btn.btn-success.btn-large.ff-icon-before place backorder(s) &amp; watch
+		a.btn.btn-success.btn-large.dropdown-toggle(data-toggle='dropdown')
+			span.caret
+		ul.dropdown-menu.pull-right
+			li
+				a(href="#") just watch
+			li.divider
+			li
+				a(href="#") do something else entirely!

@@ -23,24 +23,40 @@ $.app.growl.show = function(type, message) {
 
 $.app.state = {};
 
+$.app.state.modules = {};
+
+$.app.state.modules.selected = 'home';
+
+$.app.state.current = {};
+
+$.app.state.current.modules = {};
+
 $.app.state.get = function(success, options) {
-  $.jsonrpc("user/get-state", {}, (function(data) {
-    if (data !== undefined) {
-      $.app.state.current = data;
-      if (success) {
-        success();
-      }
-      $(document).ready(function() {
-        $(this).trigger("restore");
-      });
-    }
-  }), (function(error) {
-    console.error(error);
-  }), options);
+  /*
+    $.jsonrpc("user/get-state"
+      , {}
+      , ((data) ->
+        if data isnt `undefined`
+          $.app.state.current = data
+          success() if success
+          $(document).ready ->
+            $(this).trigger("restore")
+            return
+        return
+      )
+      , ((error) ->
+        console.error error
+        return
+      )
+      , options
+    )
+  */
+
 };
 
 $.app.state.restoreModule = function() {
   var module;
+  console.log($.app.state);
   module = (!$.app.state.current.modules.selected || $.app.state.current.modules.selected === "" ? "home" : $.app.state.current.modules.selected);
   module = module.replace("#", "");
   window.history.pushState("", module, "/" + module);
@@ -48,15 +64,10 @@ $.app.state.restoreModule = function() {
   $.app.state.update("modules.selected", module);
   $.ajax("/modules/" + module + "?ajax=1", {
     success: function(data) {
-      var modules;
       $("#ajax-container").html(data);
       $(".selected").removeClass("selected");
       $("#spine-inner nav li a#nav-" + module).parent().addClass("selected");
-      $(".ajax-spinner").hide();
-      modules = $.app.state.current.modules;
-      if (modules[modules.selected] !== undefined && modules[modules.selected].panel !== undefined && (modules[modules.selected].panel.active != null)) {
-        $.app.panel.show(modules[modules.selected].panel.active.url, modules[modules.selected].panel.active.options);
-      }
+      return $(".ajax-spinner").hide();
     }
   });
 };
@@ -74,14 +85,21 @@ $.app.state.restore = function() {
 };
 
 $.app.state.update = function(stateName, stateValue) {
-  $.jsonrpc("user/update-state", {
-    name: stateName,
-    value: stateValue
-  }, (function(result) {
-    $.app.state.current = result;
-  }), function(error) {
-    console.error(error);
-  });
+  /*
+  	$.jsonrpc("user/update-state"
+      ,  
+        name: stateName
+        value: stateValue
+      , ((result) ->
+        $.app.state.current = result
+        return
+      )
+      , (error) ->
+        console.error error
+        return
+    )
+  */
+
 };
 
 toggleSidebar = function() {
@@ -211,8 +229,8 @@ protrada = {
       }
       $.ajax(data.url, {
         success: function(html) {
-          $("#section-panel").addClass("hidden");//git:added,git:removed:$("#panel-content").find(".ajax-panel-content").html(html);
-          $("#ajax-container").prepend(html);//git:added
+          $("#section-panel").addClass("hidden");
+          $("#ajax-container").prepend(html);
           $("#main").find(".sectional-tabs").find("#" + data.id).addClass("active");
           Panels.defaultPanel = $("#main").find(".sectional-tabs").find(".standout-tab").removeClass("standout-tab");
           Panels.shuffle();
@@ -225,9 +243,9 @@ protrada = {
       temporaryTab = $("#main").find(".sectional-tabs").find(".temporary-tab");
       $("#main").find(".sectional-tabs").find(".active").removeClass("active");
       $("#section-panel").addClass("hidden");
-      $("#section-panel").delay(300).queue(function() {//git:added
-        $("#section-panel.hidden").remove();//git:added
-      });//git:added
+      $("#section-panel").delay(300).queue(function() {
+        $("#section-panel.hidden").remove();
+      });
       if (this.defaultPanel) {
         this.defaultPanel.addClass("standout-tab");
       }
@@ -246,9 +264,13 @@ protrada = {
 };
 
 Scrollbars = protrada.scrollbars;
+
 TaskStatus = protrada.taskStatus;
+
 Alert = protrada.alert;
+
 HelpBubbles = protrada.helpBubbles;
+
 Panels = protrada.panels;
 
 $(document).on("click", "#toggle-side-bar, #x-side-bar", function() {
@@ -361,113 +383,113 @@ NotificationsController.prototype.render = function() {
 
 /*
 $(document).ready ->
-	module = document.URL.substr(document.URL.lastIndexOf("/") + 1) or "home"
-	if module isnt ""
-		$.app.state.update("modules.selected", module)
-		$.app.state.get ->
-			$.app.state.restoreModule()
-			return
+  module = document.URL.substr(document.URL.lastIndexOf("/") + 1) or "home"
+  if module isnt ""
+    $.app.state.update("modules.selected", module)
+    $.app.state.get ->
+      $.app.state.restoreModule()
+      return
 
-	$("#ui-controls").on("click"
-		, "a"
-		, (e) ->
-			classes =
-				condensed: "condensed"
-				downgrade: "mobile"
-				helpbubbles: "help"
+  $("#ui-controls").on("click"
+    , "a"
+    , (e) ->
+      classes =
+        condensed: "condensed"
+        downgrade: "mobile"
+        helpbubbles: "help"
 
-			e.preventDefault()
-			$(document.body).toggleClass(classes[@id.replace(/toggle|-/g, "")])
-			$(this).toggleClass("active")
-			$.app.state.update("system_options.toggles." + @id, $(this).hasClass("active"))
-			return
-	)
-	$("#toggle-condensed").toggleClass("active", $(document.body).hasClass("condensed"))
-	$("#toggle-downgrade").toggleClass("active", $(document.body).hasClass("mobile"))
-	$("#toggle-sys-menu").on("click"
-		, (e) ->
-			e.preventDefault()
-			$(this).add("#sys-menu").toggleClass("active")
-			return
-	)
-	$("#x-sys-menu").on("click"
-		, (e) ->
-			e.preventDefault()
-			$("#sys-menu, #toggle-sys-menu").removeClass("active")
-			return
-	)
-	$("#mode-rocker").on("click"
-		, (e) ->
-			e.preventDefault()
-			$("#system-rocker").find("h3").toggleClass("hidden")
-			$(this).toggleClass("active")
-			$.app.state.update("system_options.mode", $("#system-rocker").find("h3").not(".hidden").attr("id"))
-			return
-	)
+      e.preventDefault()
+      $(document.body).toggleClass(classes[@id.replace(/toggle|-/g, "")])
+      $(this).toggleClass("active")
+      $.app.state.update("system_options.toggles." + @id, $(this).hasClass("active"))
+      return
+  )
+  $("#toggle-condensed").toggleClass("active", $(document.body).hasClass("condensed"))
+  $("#toggle-downgrade").toggleClass("active", $(document.body).hasClass("mobile"))
+  $("#toggle-sys-menu").on("click"
+    , (e) ->
+      e.preventDefault()
+      $(this).add("#sys-menu").toggleClass("active")
+      return
+  )
+  $("#x-sys-menu").on("click"
+    , (e) ->
+      e.preventDefault()
+      $("#sys-menu, #toggle-sys-menu").removeClass("active")
+      return
+  )
+  $("#mode-rocker").on("click"
+    , (e) ->
+      e.preventDefault()
+      $("#system-rocker").find("h3").toggleClass("hidden")
+      $(this).toggleClass("active")
+      $.app.state.update("system_options.mode", $("#system-rocker").find("h3").not(".hidden").attr("id"))
+      return
+  )
 
-	$("#notifications").addClass("native")  if $(document.body).hasClass("mobile")
-	Scrollbars.add("notifications"
-		, $("#notifications").not(".native")
-		,
-			lockscroll: false
-	)
-	$("#spine-inner").find("nav").find("a").mouseup(->
-		$(this).removeClass("active")
-		return
-	).mousedown(->
-		$(this).addClass("active")
-		return		
-	).mouseout(->
-		$(this).removeClass("active")
-		return		
-	)
+  $("#notifications").addClass("native") if $(document.body).hasClass("mobile")
+  Scrollbars.add("notifications"
+    , $("#notifications").not(".native")
+    ,
+      lockscroll: false
+  )
+  $("#spine-inner").find("nav").find("a").mouseup(->
+    $(this).removeClass("active")
+    return
+  ).mousedown(->
+    $(this).addClass("active")
+    return    
+  ).mouseout(->
+    $(this).removeClass("active")
+    return    
+  )
 
-	$(document).on("click"
-		, ".hide-all-bubbles"
-		, (e) ->
-			e.preventDefault()
-			$("#toggle-help-bubbles").trigger("click")
-			return
-	)
-	$(document).on("click"
-		, ".x-help-bubble"
-		, (e) ->
-			e.preventDefault()
-			$(this).closest(".help-bubble-container").hide()
-			return
-	)
-	$(".dropdown-toggle").dropdown()
-	$(window).resize ->
-		Scrollbars.update("notifications")
-		return
-		
+  $(document).on("click"
+    , ".hide-all-bubbles"
+    , (e) ->
+      e.preventDefault()
+      $("#toggle-help-bubbles").trigger("click")
+      return
+  )
+  $(document).on("click"
+    , ".x-help-bubble"
+    , (e) ->
+      e.preventDefault()
+      $(this).closest(".help-bubble-container").hide()
+      return
+  )
+  $(".dropdown-toggle").dropdown()
+  $(window).resize ->
+    Scrollbars.update("notifications")
+    return
+    
 
-	$("#system-help, #live-help-status, #live-help-info > a").on("click"
-		, (e) ->
-			e.preventDefault()
-			TaskStatus.show("error", "The Live Help system is coming soon.")
-			return
-	)
+  $("#system-help, #live-help-status, #live-help-info > a").on("click"
+    , (e) ->
+      e.preventDefault()
+      TaskStatus.show("error", "The Live Help system is coming soon.")
+      return
+  )
 
-	document.socketio = io.connect("http://" + location.host)
-	document.socketio.on("logout"
-		, ->
-			document.location = "/login"
-			return		
-	)
+  document.socketio = io.connect("http://" + location.host)
+  document.socketio.on("logout"
+    , ->
+      document.location = "/login"
+      return    
+  )
 
-	$.jsonrpc("notifications/fetch"
-		, {}
-		, (data) ->
-			notif = new NotificationsController(data.notifications)
-			notif.render()
-			document.socketio.on("notification"
-				, (msg) ->
-					notif.notifications.unshift(msg.data)
-					notif.render()
-					return		
-			)
-			return
-	)
-	return
+  $.jsonrpc("notifications/fetch"
+    , {}
+    , (data) ->
+      notif = new NotificationsController(data.notifications)
+      notif.render()
+      document.socketio.on("notification"
+        , (msg) ->
+          notif.notifications.unshift(msg.data)
+          notif.render()
+          return    
+      )
+      return
+  )
+  return
 */

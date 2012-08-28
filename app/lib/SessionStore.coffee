@@ -1,4 +1,3 @@
-fs = require('fs')
 util = require('util')
 
 class SessionStore extends require('connect').session.Store
@@ -6,15 +5,15 @@ class SessionStore extends require('connect').session.Store
 
 	constructor: () ->
 		@sessions = {}
-
-	# try and load the previous session
-	fs.readFile('session_data', 'utf8', (err, data) =>
-		if err
-			return console.error(err)
-		else
-			@sessions = JSON.parse(data)
-	)
-
+	
+		@Store = new (if app.config.store is 'memcache' then require('./MemcacheStore.coffee') else require('./FileStore.coffee'))
+		@Store.read('session_data', (err, data) =>
+			if err
+				console.error(err)
+			else
+				@sessions = JSON.parse(data)
+		)
+		
 	defaultCallback: (err) ->
 		# nothing
 
@@ -28,12 +27,12 @@ class SessionStore extends require('connect').session.Store
 		)
 
 	save: (cb) ->
-		fs.writeFile("session_data", JSON.stringify(@sessions), (err) ->
+		@Store.write("session_data", JSON.stringify(@sessions), (err) ->
 			if err
+				console.log(err)
 				console.error("Session data could not be saved: " + err)
 			else
 				console.log("Session data saved.")
-				
 			cb()
 		)
 

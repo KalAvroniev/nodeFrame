@@ -1,426 +1,428 @@
-h2.panel-heading
-	strong advanced options
-	span.ff-icon-before.advanced-search for domain searches
+extends layouts/panels
 
-p	You can pick and choose which of these inputs you would like to specify, and which to leave blank. Each entry will further refine the results of your search query - making exteremly targeted domain searches a cinch!
-	
-form#advanced-search.form-horizontal.panel-form.clearfix
+block body
+	h2.panel-heading
+		strong advanced options
+		span.ff-icon-before.advanced-search for domain searches
 
-	h3.advanced-subhead domain character options
+	p	You can pick and choose which of these inputs you would like to specify, and which to leave blank. Each entry will further refine the results of your search query - making exteremly targeted domain searches a cinch!
 
-	.form-column.left
-	
-		.control-group.txt-input-row
-			label(for="must-contain").control-label must contain 
-				strong all of 
-			.controls
-				input#must-contain-all(type="text", placeholder="contains all")	
-				p.help-block a-z, 0-9, hyphens, spaces. eg. hotel paris
-	
-		.control-group.txt-input-row
-			label(for="must-contain").control-label must contain 
-				strong any of 
-			.controls
-				input#must-contain-any(type="text", placeholder="contains any")	
-				p.help-block a-z, 0-9, hyphens, spaces. eg. hotel paris
+	form#advanced-search.form-horizontal.panel-form.clearfix
 
-		.control-group.txt-input-row
-			label(for="must-start").control-label must 
-				strong start with 
-			.controls
-				input#must-start(type="text", placeholder="starts with")	
-				p.help-block a-z, 0-9, hyphens
+		h3.advanced-subhead domain character options
 
-		.control-group.txt-input-row
-			label(for="must-end").control-label must 
-				strong end with 
-			.controls
-				input#must-end(type="text", placeholder="ends with")	
-				p.help-block eg. online, not .com
-				
-		.control-group.txt-input-row
-			label(for="must-end").control-label
-				strong  must not 
-				| contain
-			.controls
-				input#must-end(type="text", placeholder="doesn't contain any")	
-				p.help-block eg. online, not .com				
+		.form-column.left
 
-	
-	.form-column.right	
-					
-		.two-controls-row-wrapper.clearfix
+			.control-group.txt-input-row
+				label(for="must-contain").control-label must contain 
+					strong all of 
+				.controls
+					input#must-contain-all(type="text", placeholder="contains all")	
+					p.help-block a-z, 0-9, hyphens, spaces. eg. hotel paris
+
+			.control-group.txt-input-row
+				label(for="must-contain").control-label must contain 
+					strong any of 
+				.controls
+					input#must-contain-any(type="text", placeholder="contains any")	
+					p.help-block a-z, 0-9, hyphens, spaces. eg. hotel paris
+
+			.control-group.txt-input-row
+				label(for="must-start").control-label must 
+					strong start with 
+				.controls
+					input#must-start(type="text", placeholder="starts with")	
+					p.help-block a-z, 0-9, hyphens
+
+			.control-group.txt-input-row
+				label(for="must-end").control-label must 
+					strong end with 
+				.controls
+					input#must-end(type="text", placeholder="ends with")	
+					p.help-block eg. online, not .com
+
+			.control-group.txt-input-row
+				label(for="must-end").control-label
+					strong  must not 
+					| contain
+				.controls
+					input#must-end(type="text", placeholder="doesn't contain any")	
+					p.help-block eg. online, not .com				
+
+
+		.form-column.right	
+
+			.two-controls-row-wrapper.clearfix
+				.control-group.short-input-row
+					label(for="must-not-contain").control-label minimum  
+						strong length
+					.controls
+						input#must-not-contain(type="number", placeholder="at least")
+
+				.control-group.short-input-row
+					label(for="must-not-contain").control-label maximum  
+						strong length
+					.controls
+						input#must-not-contain(type="number", placeholder="at most")					
+
+
+			.control-group.three-in-row.divider-before
+
+				label(for="").control-label 
+					strong hyphens		
+				.controls
+					label.radio
+						input(name="hyphens", type="radio")
+						| include
+					label.radio
+						input(name="hyphens", type="radio")	
+						| exclude
+					label.radio
+						input(name="hyphens", type="radio")	
+						| don't care
+
+				label(for="").control-label 
+					strong digits		
+				.controls
+					label.radio
+						input(name="digits", type="radio")
+						| include
+					label.radio
+						input(name="digits", type="radio")
+						| exclude
+					label.radio
+						input(name="digits", type="radio")
+						| don't care
+
+				label(for="").control-label 
+					strong foreign		
+				.controls
+					label.radio
+						input(name="foreign", type="radio")
+						| include
+					label.radio
+						input(name="foreign", type="radio")
+						| exclude
+					label.radio
+						input(name="foreign", type="radio")
+						| don't care
+
+
+				label(for="").control-label 
+					strong adult		
+				.controls
+					label.radio 
+						input(name="adult", type="radio")
+						| include					
+					label.radio
+						input(name="adult", type="radio")
+						| exclude
+					label.radio 
+						input(name="adult", type="radio")	
+						| don't care	
+
+
+			.control-group.three-in-row.divider-before
+
+				label(for="").control-label only domains 
+					strong with	
+
+				.controls
+					label.checkbox
+						input(name="one-word", type="checkbox")
+						| 1 word
+					label.checkbox
+						input(name="two-word", type="checkbox")
+						| 2 words	
+					label.checkbox
+						input(name="three-word", type="checkbox")	
+						| 3 words
+					label.checkbox
+						input(name="four-word", type="checkbox")
+						| 4 or more words
+
+
+		h3.advanced-subhead domain TLD options
+
+		.form-column.left	
+
+			.control-group.three-in-row.tlds
+
+				label(for="").control-label only domains with the  
+					strong selected TLD(s)
+				.controls.clearfix
+					label.checkbox .com
+						input(name=".com", type="checkbox")
+					label.checkbox .net
+						input(name=".net", type="checkbox")	
+					label.checkbox .org
+						input(name=".org", type="checkbox")	
+					label.checkbox .info
+						input(name=".info", type="checkbox")	
+					label.checkbox .biz
+						input(name=".biz", type="checkbox")
+					label.checkbox .us
+						input(name=".us", type="checkbox")	
+					label.checkbox .mobi
+						input(name=".mobi", type="checkbox")	
+					label.checkbox .ca
+						input(name=".ca", type="checkbox")
+
+					label.checkbox .me
+						input(name=".me", type="checkbox")
+					label.checkbox .tv
+						input(name=".tv", type="checkbox")	
+					label.checkbox .de
+						input(name=".de", type="checkbox")	
+					label.checkbox .asia
+						input(name=".asia", type="checkbox")	
+					label.checkbox .ws
+						input(name=".ws", type="checkbox")
+					label.checkbox .name
+						input(name=".name", type="checkbox")	
+					label.checkbox .cc
+						input(name=".cc", type="checkbox")	
+					label.checkbox .tel
+						input(name=".tel", type="checkbox")					
+
+					label.checkbox .fr
+						input(name=".fr", type="checkbox")
+					label.checkbox .co.uk
+						input(name=".co.uk", type="checkbox")	
+					label.checkbox .es
+						input(name=".es", type="checkbox")	
+					label.checkbox .eu
+						input(name=".eu", type="checkbox")
+
+
+		.form-column.right
+
+			.control-group
+				label(for="must-contain").control-label or specify 
+					strong other TLD(s)
+				.controls
+					input#must-contain-all(type="text", placeholder="other extensions")	
+					p.help-block seperate with spaces eg. .com .cc. net			
+
+
+		.form-column.left
+
+			h3.advanced-subhead domain sources, categories, directories &amp backlinks
+
+			.control-group.three-in-row.divider-after
+
+				label(for="").control-label only domains 
+					strong that are	
+				.controls
+					label.checkbox
+						input(name="english", type="checkbox")
+						| non-exclusive deleting
+					label.checkbox
+						input(name="french", type="checkbox")	
+						| exclusive
+					label.checkbox
+						input(name="german", type="checkbox")	
+						| no longer registered
+					label.checkbox
+						input(name="spanish", type="checkbox")
+						| privately for-sale
+
+			.control-group.three-in-row.sources
+
+				label(for="").control-label only domains 
+					strong from	
+				.controls
+					label.checkbox
+						input(name="bido", type="checkbox")
+						span.sources-sprite(source="Bido")			
+					label.checkbox
+						input(name="sedo", type="checkbox")
+						span.sources-sprite(source="Sedo")	
+					label.checkbox
+						input(name="snapnames", type="checkbox")
+						span.sources-sprite(source="Snap Names")	
+					label.checkbox
+						input(name="namejet", type="checkbox")
+						span.sources-sprite(source="Namejet")					
+					label.checkbox
+						input(name="pool", type="checkbox")
+						span.sources-sprite(source="Pool.com")
+					label.checkbox
+						input(name="fabulous", type="checkbox")
+						span.sources-sprite(source="Fabulous")												
+					label.checkbox
+						input(name="godaddy", type="checkbox")
+						span.sources-sprite(source="GoDaddy")	
+					label.checkbox
+						input(name="flippa", type="checkbox")
+						span.sources-sprite(source="Flippa")													
+
+					p.help-block Namejet Pre-release = exclusive + Namejet
+					p.help-block Snap Names Pre-release = exclusive + Snap Names
+					p.help-block GoDaddy Closeouts = exclusive + GoDaddy
+
+
+			.control-group.three-in-row.sources.divider-before
+
+				label(for="").control-label only domains 
+					strong directory listed by 
+				.controls
+					label.checkbox
+						input(name="yahoo", type="checkbox")
+						span.sources-sprite(source="Yahoo!")	
+					label.checkbox
+						input(name="dmoz", type="checkbox")
+						span.sources-sprite(source="DMOZ")	
+
+			.two-controls-row-wrapper.divider-before
+
+				.control-group.sources
+
+					label(for="").control-label only domains with 
+						strong the page rank
+
+					.controls
+						span.sources-sprite(source="Google")
+						select#select01
+							option 0 or more
+							option 1 or more
+							option 2 or more
+							option 3
+							option 4
+							option 5
+
+			.two-controls-row-wrapper.divider-before
+
+				.control-group.short-input-row
+					label(for="must-not-contain").control-label has 
+						strong web backlinks 
+					.controls
+						input#must-not-contain(type="text", placeholder="# of backlinks")				
+						p.help-block you can use modifyers like >= 20 and < 10
+
+				.control-group.short-input-row
+					label(for="must-not-contain").control-label has 
+						strong edu backlinks
+					.controls
+						input#must-not-contain(type="text", placeholder="# of backlinks")				
+						p.help-block you can use modifyers like >= 20 and < 10
+
+				.control-group.short-input-row
+					label(for="must-not-contain").control-label has 
+						strong gov backlinks
+					.controls
+						input#must-not-contain(type="text", placeholder="# of backlinks")
+						p.help-block you can use modifyers like >= 20 and < 10						
+
+
+		.form-column.right	
+
+			h3.advanced-subhead domain pricing, bids &amp; type of sale
+
+			.control-group.three-in-row
+
+				label(for="").control-label only these 
+					strong sale types	
+				.controls
+					label.checkbox
+						input(name="auctions", type="checkbox")
+						| auctions
+					label.checkbox
+						input(name="buy-now", type="checkbox")	
+						| buy it now
+					label.checkbox
+						input(name="make-offer", type="checkbox")	
+						| make an offer									
+
+			.control-group.three-in-row
+
+				label(for="").control-label only auctions with 
+					strong bids		
+				.controls.clearfix
+					label.radio 0 bids
+						input(name="has-bids", type="radio")
+					label.radio 1 or more bids
+						input(name="has-bids", type="radio")	
+					label.radio don't care
+						input(name="has-bids", type="radio")			
+
+			.two-controls-row-wrapper.clearfix.divider-before
+
+				.control-group.short-input-row
+					label(for="must-not-contain").control-label minimum price 
+					.controls
+						input#must-not-contain(type="number", placeholder="at least")
+
+				.control-group.short-input-row
+					label(for="must-not-contain").control-label maximum price
+					.controls
+						input#must-not-contain(type="number", placeholder="at most")					
+
+
 			.control-group.short-input-row
-				label(for="must-not-contain").control-label minimum  
-					strong length
+				label(for="must-not-contain").control-label minimum value 
 				.controls
 					input#must-not-contain(type="number", placeholder="at least")
-		
+
 			.control-group.short-input-row
-				label(for="must-not-contain").control-label maximum  
-					strong length
+				label(for="must-not-contain").control-label maximum value
 				.controls
 					input#must-not-contain(type="number", placeholder="at most")					
-					
-					
-		.control-group.three-in-row.divider-before
-			
-			label(for="").control-label 
-				strong hyphens		
-			.controls
-				label.radio
-					input(name="hyphens", type="radio")
-					| include
-				label.radio
-					input(name="hyphens", type="radio")	
-					| exclude
-				label.radio
-					input(name="hyphens", type="radio")	
-					| don't care
-													
-			label(for="").control-label 
-				strong digits		
-			.controls
-				label.radio
-					input(name="digits", type="radio")
-					| include
-				label.radio
-					input(name="digits", type="radio")
-					| exclude
-				label.radio
-					input(name="digits", type="radio")
-					| don't care
-			
-			label(for="").control-label 
-				strong foreign		
-			.controls
-				label.radio
-					input(name="foreign", type="radio")
-					| include
-				label.radio
-					input(name="foreign", type="radio")
-					| exclude
-				label.radio
-					input(name="foreign", type="radio")
-					| don't care
-			
-			
-			label(for="").control-label 
-				strong adult		
-			.controls
-				label.radio 
-					input(name="adult", type="radio")
-					| include					
-				label.radio
-					input(name="adult", type="radio")
-					| exclude
-				label.radio 
-					input(name="adult", type="radio")	
-					| don't care	
-	
-	
-		.control-group.three-in-row.divider-before
-			
-			label(for="").control-label only domains 
-				strong with	
-		
-			.controls
-				label.checkbox
-					input(name="one-word", type="checkbox")
-					| 1 word
-				label.checkbox
-					input(name="two-word", type="checkbox")
-					| 2 words	
-				label.checkbox
-					input(name="three-word", type="checkbox")	
-					| 3 words
-				label.checkbox
-					input(name="four-word", type="checkbox")
-					| 4 or more words
 
 
-	h3.advanced-subhead domain TLD options
-					
-	.form-column.left	
-	
-		.control-group.three-in-row.tlds
-			
-			label(for="").control-label only domains with the  
-				strong selected TLD(s)
-			.controls.clearfix
-				label.checkbox .com
-					input(name=".com", type="checkbox")
-				label.checkbox .net
-					input(name=".net", type="checkbox")	
-				label.checkbox .org
-					input(name=".org", type="checkbox")	
-				label.checkbox .info
-					input(name=".info", type="checkbox")	
-				label.checkbox .biz
-					input(name=".biz", type="checkbox")
-				label.checkbox .us
-					input(name=".us", type="checkbox")	
-				label.checkbox .mobi
-					input(name=".mobi", type="checkbox")	
-				label.checkbox .ca
-					input(name=".ca", type="checkbox")
-				
-				label.checkbox .me
-					input(name=".me", type="checkbox")
-				label.checkbox .tv
-					input(name=".tv", type="checkbox")	
-				label.checkbox .de
-					input(name=".de", type="checkbox")	
-				label.checkbox .asia
-					input(name=".asia", type="checkbox")	
-				label.checkbox .ws
-					input(name=".ws", type="checkbox")
-				label.checkbox .name
-					input(name=".name", type="checkbox")	
-				label.checkbox .cc
-					input(name=".cc", type="checkbox")	
-				label.checkbox .tel
-					input(name=".tel", type="checkbox")					
-					
-				label.checkbox .fr
-					input(name=".fr", type="checkbox")
-				label.checkbox .co.uk
-					input(name=".co.uk", type="checkbox")	
-				label.checkbox .es
-					input(name=".es", type="checkbox")	
-				label.checkbox .eu
-					input(name=".eu", type="checkbox")
-											
-	
-	.form-column.right
-	
-		.control-group
-			label(for="must-contain").control-label or specify 
-				strong other TLD(s)
-			.controls
-				input#must-contain-all(type="text", placeholder="other extensions")	
-				p.help-block seperate with spaces eg. .com .cc. net			
-	
-	
-	.form-column.left
-	
-		h3.advanced-subhead domain sources, categories, directories &amp backlinks
-	
-		.control-group.three-in-row.divider-after
-			
-			label(for="").control-label only domains 
-				strong that are	
-			.controls
-				label.checkbox
-					input(name="english", type="checkbox")
-					| non-exclusive deleting
-				label.checkbox
-					input(name="french", type="checkbox")	
-					| exclusive
-				label.checkbox
-					input(name="german", type="checkbox")	
-					| no longer registered
-				label.checkbox
-					input(name="spanish", type="checkbox")
-					| privately for-sale
-					
-		.control-group.three-in-row.sources
-			
-			label(for="").control-label only domains 
-				strong from	
-			.controls
-				label.checkbox
-					input(name="bido", type="checkbox")
-					span.sources-sprite(source="Bido")			
-				label.checkbox
-					input(name="sedo", type="checkbox")
-					span.sources-sprite(source="Sedo")	
-				label.checkbox
-					input(name="snapnames", type="checkbox")
-					span.sources-sprite(source="Snap Names")	
-				label.checkbox
-					input(name="namejet", type="checkbox")
-					span.sources-sprite(source="Namejet")					
-				label.checkbox
-					input(name="pool", type="checkbox")
-					span.sources-sprite(source="Pool.com")
-				label.checkbox
-					input(name="fabulous", type="checkbox")
-					span.sources-sprite(source="Fabulous")												
-				label.checkbox
-					input(name="godaddy", type="checkbox")
-					span.sources-sprite(source="GoDaddy")	
-				label.checkbox
-					input(name="flippa", type="checkbox")
-					span.sources-sprite(source="Flippa")													
-				
-				p.help-block Namejet Pre-release = exclusive + Namejet
-				p.help-block Snap Names Pre-release = exclusive + Snap Names
-				p.help-block GoDaddy Closeouts = exclusive + GoDaddy
-
-
-		.control-group.three-in-row.sources.divider-before
-			
-			label(for="").control-label only domains 
-				strong directory listed by 
-			.controls
-				label.checkbox
-					input(name="yahoo", type="checkbox")
-					span.sources-sprite(source="Yahoo!")	
-				label.checkbox
-					input(name="dmoz", type="checkbox")
-					span.sources-sprite(source="DMOZ")	
-
-		.two-controls-row-wrapper.divider-before
-
-			.control-group.sources
-				
-				label(for="").control-label only domains with 
-					strong the page rank
-					
-				.controls
-					span.sources-sprite(source="Google")
+			.control-group.short-input-row.divider-after
+				label(for="must-not-contain").control-label currency
+				.controls.clearfix
 					select#select01
-						option 0 or more
-						option 1 or more
-						option 2 or more
-						option 3
-						option 4
-						option 5
-						
-		.two-controls-row-wrapper.divider-before
-							
-			.control-group.short-input-row
-				label(for="must-not-contain").control-label has 
-					strong web backlinks 
-				.controls
-					input#must-not-contain(type="text", placeholder="# of backlinks")				
-					p.help-block you can use modifyers like >= 20 and < 10
-		
-			.control-group.short-input-row
-				label(for="must-not-contain").control-label has 
-					strong edu backlinks
-				.controls
-					input#must-not-contain(type="text", placeholder="# of backlinks")				
-					p.help-block you can use modifyers like >= 20 and < 10
-						
-			.control-group.short-input-row
-				label(for="must-not-contain").control-label has 
-					strong gov backlinks
-				.controls
-					input#must-not-contain(type="text", placeholder="# of backlinks")
-					p.help-block you can use modifyers like >= 20 and < 10						
-															
-					
-	.form-column.right	
-					
-		h3.advanced-subhead domain pricing, bids &amp; type of sale
-		
-		.control-group.three-in-row
-			
-			label(for="").control-label only these 
-				strong sale types	
-			.controls
-				label.checkbox
-					input(name="auctions", type="checkbox")
-					| auctions
-				label.checkbox
-					input(name="buy-now", type="checkbox")	
-					| buy it now
-				label.checkbox
-					input(name="make-offer", type="checkbox")	
-					| make an offer									
-		
-		.control-group.three-in-row
-			
-			label(for="").control-label only auctions with 
-				strong bids		
-			.controls.clearfix
-				label.radio 0 bids
-					input(name="has-bids", type="radio")
-				label.radio 1 or more bids
-					input(name="has-bids", type="radio")	
-				label.radio don't care
-					input(name="has-bids", type="radio")			
-		
-		.two-controls-row-wrapper.clearfix.divider-before
-							
-			.control-group.short-input-row
-				label(for="must-not-contain").control-label minimum price 
-				.controls
-					input#must-not-contain(type="number", placeholder="at least")
-		
-			.control-group.short-input-row
-				label(for="must-not-contain").control-label maximum price
-				.controls
-					input#must-not-contain(type="number", placeholder="at most")					
-					
+						option USD
+							option 2
+							option 3
+							option 4
+							option 5					
 
-		.control-group.short-input-row
-			label(for="must-not-contain").control-label minimum value 
-			.controls
-				input#must-not-contain(type="number", placeholder="at least")
-	
-		.control-group.short-input-row
-			label(for="must-not-contain").control-label maximum value
-			.controls
-				input#must-not-contain(type="number", placeholder="at most")					
-				
-					
-		.control-group.short-input-row.divider-after
-			label(for="must-not-contain").control-label currency
-			.controls.clearfix
-				select#select01
-					option USD
-						option 2
-						option 3
-						option 4
-						option 5					
+			h3.advanced-subhead.more-margin availability, age &amp; expiry information		
 
-		h3.advanced-subhead.more-margin availability, age &amp; expiry information		
-			
-		.control-group.selectbox-row
-			label(for="must-contain").control-label only available during 
-				strong the date / range 
-			.controls.clearfix
-				select#select01
-					option date-range
-					option tomorrow
-					option 2 days from now
-					option 3 days from now
-					option 4 days from now
+			.control-group.selectbox-row
+				label(for="must-contain").control-label only available during 
+					strong the date / range 
+				.controls.clearfix
+					select#select01
+						option date-range
+						option tomorrow
+						option 2 days from now
+						option 3 days from now
+						option 4 days from now
 
-					
-		.two-controls-row-wrapper.divider-after.clearfix
-						
-			.control-group.short-input-row
-				label(for="must-not-contain").control-label start date
-				.controls
-					input#must-not-contain(type="number", placeholder="begin")
-		
-			.control-group.short-input-row
-				label(for="must-not-contain").control-label end date
-				.controls
-					input#must-not-contain(type="number", placeholder="finish")					
-															
-		.two-controls-row-wrapper.divider-after.clearfix
-							
-			.control-group.short-input-row
-				label(for="must-not-contain").control-label whois domain 
-					strong age 
-				.controls
-					input#must-not-contain(type="text", placeholder="in years")				
-					p.help-block you can use modifyers like >= 2 and > 10
-		
-			.control-group.short-input-row
-				label(for="must-not-contain").control-label domain will  
-					strong expire in
-				.controls
-					input#must-not-contain(type="text", placeholder="months")
-					p.help-block we'll round up or down to the closest month
-					
-		.control-group.clearfix
-			button(type="submit").btn.btn-success.btn-large.ff-icon-before perform search						
-					
-					
-	
+
+			.two-controls-row-wrapper.divider-after.clearfix
+
+				.control-group.short-input-row
+					label(for="must-not-contain").control-label start date
+					.controls
+						input#must-not-contain(type="number", placeholder="begin")
+
+				.control-group.short-input-row
+					label(for="must-not-contain").control-label end date
+					.controls
+						input#must-not-contain(type="number", placeholder="finish")					
+
+			.two-controls-row-wrapper.divider-after.clearfix
+
+				.control-group.short-input-row
+					label(for="must-not-contain").control-label whois domain 
+						strong age 
+					.controls
+						input#must-not-contain(type="text", placeholder="in years")				
+						p.help-block you can use modifyers like >= 2 and > 10
+
+				.control-group.short-input-row
+					label(for="must-not-contain").control-label domain will  
+						strong expire in
+					.controls
+						input#must-not-contain(type="text", placeholder="months")
+						p.help-block we'll round up or down to the closest month
+
+			.control-group.clearfix
+				button(type="submit").btn.btn-success.btn-large.ff-icon-before perform search						
+
+

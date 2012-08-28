@@ -19,12 +19,12 @@ class JsonRpcRequest
 				if @params[field] == undefined
 					return @error("Parameter '" + field + "' is required.")
 
-		# options
+		### options 
 			if obj.options
 				if obj.options.requireUserSession
 					if not @validateUserSession()
 						return
-
+		###
 		# run success handler
 		success()
 

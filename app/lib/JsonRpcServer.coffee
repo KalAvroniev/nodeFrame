@@ -40,14 +40,7 @@ class JsonRpcServer
 		@registeredMethods[name] = func
 
 	handleRequest: (req, res) ->
-		data = ''
-		req.setEncoding('utf8')
-		req.on 'data', (chunk) ->
-			data += chunk
-			
-		req.on 'end', () =>
-			console.log(JSON.parse(data))
-			@handleCall(JSON.parse(data), res, req)
+		return @handleCall(req.body, res, req)
 
 	call: (method, params, callback) ->
 		return @handleRawCall(

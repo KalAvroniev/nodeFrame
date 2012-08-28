@@ -15,7 +15,13 @@ $.app.growl.show = (type, message) ->
   return
 
 $.app.state = {}
+$.app.state.modules = {}
+$.app.state.modules.selected = 'home'
+$.app.state.current = {}
+$.app.state.current.modules = {}
+
 $.app.state.get = (success, options) ->
+  ###
   $.jsonrpc("user/get-state"
     , {}
     , ((data) ->
@@ -33,9 +39,11 @@ $.app.state.get = (success, options) ->
     )
     , options
   )
+  ###
   return
 
 $.app.state.restoreModule = ->
+  console.log($.app.state)
   module = (if (not $.app.state.current.modules.selected or $.app.state.current.modules.selected is "") then "home" else $.app.state.current.modules.selected)
 
   # TODO: fix!
@@ -53,9 +61,9 @@ $.app.state.restoreModule = ->
         $(".ajax-spinner").hide()
 
         # restore panels
-        modules = $.app.state.current.modules
-        $.app.panel.show modules[modules.selected].panel.active.url, modules[modules.selected].panel.active.options if modules[modules.selected] isnt `undefined` and modules[modules.selected].panel isnt `undefined` and modules[modules.selected].panel.active?
-        return
+        #modules = $.app.state.current.modules
+        #$.app.panel.show modules[modules.selected].panel.active.url, modules[modules.selected].panel.active.options if modules[modules.selected] isnt `undefined` and modules[modules.selected].panel isnt `undefined` and modules[modules.selected].panel.active?
+        #return
   )
   return
 
@@ -71,7 +79,8 @@ $.app.state.restore = ->
   return
 
 $.app.state.update = (stateName, stateValue) ->
-  $.jsonrpc("user/update-state"
+  ###
+	$.jsonrpc("user/update-state"
     ,  
       name: stateName
       value: stateValue
@@ -83,8 +92,8 @@ $.app.state.update = (stateName, stateValue) ->
       console.error error
       return
   )
+  ###
   return
-
 toggleSidebar = () ->
   $aside = $("aside")
   $aside.toggleClass("active")

@@ -8,21 +8,20 @@ class Index extends Controller
 	constructor: () ->
 		@params = 
 			require_conf: 'index'
+			id: "spine"
+			layout: true
 
-
-	run: ( req, res ) ->
+	run: ( req, res ) ->		
+		res.redirect('/login') if not res.locals.everyauth.loggedIn
 		res.setView('index')
 		res.view[key] = val for key, val of @params
-
-		if not req.session.user
-			return res.redirect("/login")
 
 		@minifyJS()
 
 		res.ready()
 
 	setViewParams: (params) ->
-		@params = params
+		@params[key] = val for key, val of params
 
 	minifyJS: () ->
 		config =

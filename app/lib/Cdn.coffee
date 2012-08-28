@@ -54,7 +54,7 @@ createTag = (src, asset, attributes) ->
 CDN = (app, options) ->
 
 	# Validate express
-	throwError "requires express"  if typeof app isnt "object"
+	throwError "requires express"  if typeof app isnt "function"
 
 	# Validate options
 	required = ["domain", "hostname", "port",  "production"]

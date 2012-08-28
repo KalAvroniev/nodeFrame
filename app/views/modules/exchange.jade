@@ -1,4 +1,4 @@
-!= partial("partials/header")
+include partials/header
 
 #main-container.page-exchange.search-results
 	h5#first-heading.ff-icon-before
@@ -146,4 +146,4 @@ script
 		stickyHeader: true
 	});
 
-!= CDN("/js/exchange.js")
+script(src="/js/exchange.js")

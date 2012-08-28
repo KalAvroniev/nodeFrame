@@ -12,6 +12,7 @@ $.jsonrpc = function(method, params, success, failure, options) {
     url: "/jsonrpc",
     processData: false,
     dataType: "json",
+    contentType: "application/json",
     data: JSON.stringify({
       jsonrpc: "2.0",
       method: method,

@@ -1,117 +1,120 @@
-h2.panel-heading
-	strong list domains
-	| in your porfolio
-	span.ff-icon-before.forsale for-sale
+extends layouts/panels
 
-#forsale-header.clearfix
-	table#min-amounts
-		thead
-			tr
-				th selling channel
-				th min amount (usd)
-				th commission
-		tbody
-			tr
-				td 
-					label.sources-sprite(source="GoDaddy")
-				td no-limit 
-				td 30
-					sup %
-			tr
-				td 
-					label.sources-sprite(source="Sedo")
-				td.currency 100
-				td 0
-					sup %
-			tr
-				td 
-					label.sources-sprite(source="Afternic")
-				td.currency 250 
-				td 15
-					sup %
-			tr
-				td 
-					label.sources-sprite(source="Protrada")
-				td.currency 100 
-				td 20
-					sup %
-	
-	p
-		| To complete listing the selected domains for-sale, you simply need to specify a price for each selling channel. 
-		strong Any channel entry that is left blank will not be used in the listing. 
-	p	
-		strong * Please note: 
-		| the minimum amount on each selling channel is shown in the table to the right: 
-	
+block body
+	h2.panel-heading
+		strong list domains
+		| in your porfolio
+		span.ff-icon-before.forsale for-sale
 
-form#forsale-listing-amounts
+	#forsale-header.clearfix
+		table#min-amounts
+			thead
+				tr
+					th selling channel
+					th min amount (usd)
+					th commission
+			tbody
+				tr
+					td 
+						label.sources-sprite(source="GoDaddy")
+					td no-limit 
+					td 30
+						sup %
+				tr
+					td 
+						label.sources-sprite(source="Sedo")
+					td.currency 100
+					td 0
+						sup %
+				tr
+					td 
+						label.sources-sprite(source="Afternic")
+					td.currency 250 
+					td 15
+						sup %
+				tr
+					td 
+						label.sources-sprite(source="Protrada")
+					td.currency 100 
+					td 20
+						sup %
 
-	table.edit-data-grid
-		thead
-			tr
-				th(colspan="2") domain details
-				th(colspan="4") listing amounts (usd)
-			
-			tr
-				th.sortable.domain-name 
-					label domain name
-				th.sortable.domain-value 
-					label est. value
-				th 
-					label.sources-sprite(source="GoDaddy")
-				th 
-					label.sources-sprite(source="Sedo")
-				th 
-					label.sources-sprite(source="Afternic")
-				th 
-					label.sources-sprite(source="Protrada")
-		tbody
-			tr
-				td 
-					span.domain-title-cntnr
-						| cats
-						span.tld com
-				td.currency 560 
-				td.interactive
-					input(type="number",placeholder="not used")
-				td.interactive
-					input(type="number",placeholder="not used")
-				td.interactive
-					input(type="number",placeholder="not used")
-				td.interactive
-					input(type="number",placeholder="not used")
- 
-			tr
-				td 
-					span.domain-title-cntnr
-						| longer-domain-name-up-in-this-shiz
-						span.tld com
-				td.currency 560 
-				td.interactive
-					input(type="number",placeholder="not used")
-				td.interactive
-					input(type="number",placeholder="not used")
-				td.interactive
-					input(type="number",placeholder="not used")
-				td.interactive
-					input(type="number",placeholder="not used")
- 
-			tr
-				td 
-					span.domain-title-cntnr
-						| this-is-an-epic-long-domain-name-right-in-here
-						span.tld com
-				td.currency 560 
-				td.interactive
-					input(type="number",placeholder="not used")
-				td.interactive
-					input(type="number",placeholder="not used")
-				td.interactive
-					input(type="number",placeholder="not used")
-				td.interactive
-					input(type="number",placeholder="not used")
- 
-a.btn.btn-success.btn-large.ff-icon-before list sites for-sale	
+		p
+			| To complete listing the selected domains for-sale, you simply need to specify a price for each selling channel. 
+			strong Any channel entry that is left blank will not be used in the listing. 
+		p	
+			strong * Please note: 
+			| the minimum amount on each selling channel is shown in the table to the right: 
+
+
+	form#forsale-listing-amounts
+
+		table.edit-data-grid
+			thead
+				tr
+					th(colspan="2") domain details
+					th(colspan="4") listing amounts (usd)
+
+				tr
+					th.sortable.domain-name 
+						label domain name
+					th.sortable.domain-value 
+						label est. value
+					th 
+						label.sources-sprite(source="GoDaddy")
+					th 
+						label.sources-sprite(source="Sedo")
+					th 
+						label.sources-sprite(source="Afternic")
+					th 
+						label.sources-sprite(source="Protrada")
+			tbody
+				tr
+					td 
+						span.domain-title-cntnr
+							| cats
+							span.tld com
+					td.currency 560 
+					td.interactive
+						input(type="number",placeholder="not used")
+					td.interactive
+						input(type="number",placeholder="not used")
+					td.interactive
+						input(type="number",placeholder="not used")
+					td.interactive
+						input(type="number",placeholder="not used")
+
+				tr
+					td 
+						span.domain-title-cntnr
+							| longer-domain-name-up-in-this-shiz
+							span.tld com
+					td.currency 560 
+					td.interactive
+						input(type="number",placeholder="not used")
+					td.interactive
+						input(type="number",placeholder="not used")
+					td.interactive
+						input(type="number",placeholder="not used")
+					td.interactive
+						input(type="number",placeholder="not used")
+
+				tr
+					td 
+						span.domain-title-cntnr
+							| this-is-an-epic-long-domain-name-right-in-here
+							span.tld com
+					td.currency 560 
+					td.interactive
+						input(type="number",placeholder="not used")
+					td.interactive
+						input(type="number",placeholder="not used")
+					td.interactive
+						input(type="number",placeholder="not used")
+					td.interactive
+						input(type="number",placeholder="not used")
+
+	a.btn.btn-success.btn-large.ff-icon-before list sites for-sale	
 
 
 

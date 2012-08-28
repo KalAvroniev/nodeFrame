@@ -1,89 +1,139 @@
-express = require('express')
-fs   = require('fs')
+util = require('util')
+express = require("express")
+everyauth = require("everyauth")
+fs	 = require('fs')
 jade = require('jade')
 path = require('path')
-gzippo = require('gzippo')
 mc = require('mc')
 JsonRpcServer = require('./lib/JsonRpcServer.coffee')
-SessionStore = require('./lib/SessionStore.coffee')
-StateStore = require('./lib/StateStore.coffee')
 SocketIoServer = require('./lib/SocketIoServer.coffee')
-
+	
 class Bootstrap
 	module.exports = @
-
+		
 	socketIoServer = new SocketIoServer()
-
+	
 	constructor: (@options = {}) ->
-		# do nothing
-
+	
 	start: () ->
-		# load config
 		@loadConfig(@options.config)
+		
+		everyauth.debug = true
+		
+		@usersById = {}
+		@nextUserId = 0		
+			
+		usersByLogin = "protrada": @addUser(
+			login: "protrada"
+			password: "test"
+		)
+		
+		everyauth.everymodule.findUserById (id, callback) =>
+			callback null, @usersById[id]
+			
+		everyauth.everymodule.logoutRedirectPath('/login');
+			
+		everyauth.everymodule.handleLogout (req, res) ->
+			req.logout()
+			@redirect(res, @logoutRedirectPath())
 
-		# create server
-		@app = express.createServer()
+		everyauth.password
+			#.loginWith("email")
+			.getLoginPath("/login")
+			.postLoginPath("/login")
+			.loginView("login")
+			.loginLocals((req, res, done) ->
+				setTimeout (->
+					done null,
+						title: "Async login"
 
-		# set cdn into production mode or not.
-		@config.cdn.production = if @app.settings.env == 'development' then false else true
+				), 200
+			)
+			.authenticate((login, password) ->
+				errors = []
+				errors.push "Missing login"	unless login
+				errors.push "Missing password"	unless password
+				return errors	if errors.length
+				user = usersByLogin[login]
+				return ["Login failed"]	unless user
+				return ["Login failed"]	if user.password isnt password
+				user
+			)
+			.getRegisterPath("/register")
+			.postRegisterPath("/register")
+			.registerView("register.jade")
+			.registerLocals((req, res, done) ->
+				setTimeout (->
+					done null,
+						title: "Async Register"
 
-		# register JSON-RPC methods
+				), 200
+			)
+			.validateRegistration((newUserAttrs, errors) ->
+				login = newUserAttrs.login
+				errors.push "Login already taken"	if usersByLogin[login]
+				errors
+			)
+			.registerUser((newUserAttrs) ->
+				login = newUserAttrs[@loginKey()]
+				usersByLogin[login] = addUser(newUserAttrs)
+			)
+			.loginSuccessRedirect("/home")
+			.registerSuccessRedirect("/home")
+		
+		# setup memcache cluster
+		@options.memcache = new mc.Client(@config.memcache.ip, mc.Adapter.json);
+		@options.memcache.connect () =>
+        console.log "Connected to the " + @config.memcache.ip + " memcache!"
+
+		
+		@app = express()
+		
+		@app.use(express.bodyParser())
+		@app.use(express.methodOverride())
+		
+		@app.use(express.static(@config.pubDir))
+		
+		@app.use(express.cookieParser())
+		@app.use(express.session(
+			'secret': 'protrada'
+			'maxAge': 1209600000
+		))
+		@app.use(express.errorHandler())
+		@app.use(express.favicon())
+		@app.use(@preEveryauthMiddlewareHack())
+		@app.use(everyauth.middleware())
+		@app.use(@postEveryauthMiddlewareHack())
+		
+		@registerControllers()
+		@deleteMinified(@config.pubDir + '/js/require')
+		
+		# register JSON-RPC methods must be before the bodyParser
 		@jsonRpcServer = new JsonRpcServer()
 		@jsonRpcServer.registerMethods()
-
-		# initialize the CDN magic
-		CDN = require('./lib/Cdn.coffee')(@app, @config.cdn)
-
-		# add the dynamic view helper
-		@app.dynamicHelpers(CDN: CDN)
-
-		# sessions
-		@app.use(express.cookieParser())
-		@app.use(express.session({
-			'secret': "protrada",
-			'store': new SessionStore(),
-			'maxAge': 1209600000
-		}))
-
-		# prepare user states
-		@states = new StateStore()
-
-		@registerControllers()
-		@app.post(
-			'/jsonrpc',
-			(req, res) =>
-				@jsonRpcRequest(req, res)
+		
+		@app.post('/jsonrpc', (req, res) =>
+			@jsonRpcServer.handleRequest(req, res)
 		)
-		@app.set('view engine', 'jade')
-
-		# Setup Static cache directory
-		@app.use(gzippo.staticGzip(@config.pubDir))
-		#oneYear = 31557600000;
-		#@app.use(gzippo.staticGzip(@config.pubDir, { maxAge: oneYear }));
-
-
-		# default layout
-		@app.set('view options', { pretty: true, layout: @config.appDir + "/views/layouts/default.jade" })
-
+		
+		@app.configure( =>
+			@app.set("view engine", "jade")
+			@app.set("views", @config.appDir + "/views/")
+			@app.set('view options', { pretty: true })
+		)
+		
+		@app.use(@app.router)
+		
+		server = @app.listen(@options.port)
+		console.log("Server started on port " + @options.port + ".")
+		
 		# setup socket.io
 		socketIoServer.setJsonRpcServer(@jsonRpcServer)
-		io = require('socket.io').listen(@app)
+		io = require('socket.io').listen(server)
 		io.sockets.on('connection', (socket) ->
 			socketIoServer.addClient(socket)
 		)
-
-		# setup memcache cluster
-		memcache = new mc.Client('107.23.31.119', mc.Adapter.json);
-		memcache.connect () ->
-			console.log "Connected to the 107.23.31.119 memcache on port 11211!"
-
-		# delete minified files in case of updates
-		@deleteMinified(@config.pubDir + '/js/require')
-
-		# listen
-		@app.listen(@options.port)
-		console.log("Server started on port " + @options.port + ".")
-
+		
 	@realUrl: (url) ->
 		if url.indexOf('?') >= 0
 			url = url.substr(0, url.indexOf('?'))
@@ -131,13 +181,10 @@ class Bootstrap
 		if controller.init == undefined || controller.init(req, res)
 			controller.run(req, res)
 
-	jsonRpcRequest: (req, res) ->
-		@jsonRpcServer.handleRequest(req, res)
-
 	registerControllers: (path = 'controllers') ->
 		if path == 'controllers'
 			console.log("Registering Controllers...")
-			@app.all('/', express.bodyParser(), @handleRequest)
+			@app.all('/', @handleRequest)
 
 		# read the directory
 		try
@@ -148,8 +195,8 @@ class Bootstrap
 			)
 		catch e
 			console.log("Registering controller '" + path.substr(11, path.length - 18) + "'")
-			@app.all(path.substr(11, path.length - 18), express.bodyParser(), @handleRequest)
-			@app.all(path.substr(11, path.length - 18) + ".jade", express.bodyParser(), @handleJadeRequest)
+			@app.all(path.substr(11, path.length - 18), @handleRequest)
+			@app.all(path.substr(11, path.length - 18) + ".jade", @handleJadeRequest)
 
 	loadConfig: (config) ->
 		@config = require('./config/' + config + '.coffee').config
@@ -168,3 +215,39 @@ class Bootstrap
 				fs.unlinkSync(path)
 			else
 				fs.rmdirSync(path)
+		
+	addUser: (source, sourceUser) ->
+		user = undefined
+		if arguments.length is 1 # password-based
+			user = sourceUser = source
+			user.id = ++@nextUserId
+			return @usersById[@nextUserId] = user
+		else # non-password-based
+			user = @usersById[++@nextUserId] = id: @nextUserId
+			user[source] = sourceUser
+		user
+		
+	preEveryauthMiddlewareHack: ->
+		(req, res, next) ->
+			sess = req.session
+			auth = sess.auth
+			ea = loggedIn: !!(auth and auth.loggedIn)
+
+			# Copy the session.auth properties over
+			for k of auth
+				ea[k] = auth[k]
+			if everyauth.enabled.password
+
+				# Add in access to loginFormFieldName() + passwordFormFieldName()
+				ea.password or (ea.password = {})
+				ea.password.loginFormFieldName = everyauth.password.loginFormFieldName()
+				ea.password.passwordFormFieldName = everyauth.password.passwordFormFieldName()
+				res.locals.everyauth = ea
+			next()
+
+	postEveryauthMiddlewareHack: ->
+		userAlias = everyauth.expressHelperUserAlias or "user"
+		(req, res, next) ->
+			res.locals.everyauth.user = req.user
+			res.locals[userAlias] = req.user
+			next()

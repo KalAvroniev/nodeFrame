@@ -1,10 +1,5 @@
-// bank-and-cart.jade
-- if ( !ajax ) {
-	!= partial("partials/styles")
-- }
-
-!= CDN("/js/bank-and-cart.js")
-!= partial("partials/header")
+script(src="/js/bank-and-cart.js")
+include partials/header
 
 #main-container.bank-and-cart
 
