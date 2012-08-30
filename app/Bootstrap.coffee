@@ -185,8 +185,7 @@ class Bootstrap
 	flushCache: (url) ->
 		if @config.flush? and (@config.flush == 'all' or url in @config.flush)
 			controller = new (require(@config.appDir + "/controllers" + url + ".coffee"))	
-			controller.delPageFromCache(url)
-		
+			controller.delPageFromCache(url)		
 
 	loadConfig: (config) ->
 		@config = require('./config/' + config + '.coffee').config

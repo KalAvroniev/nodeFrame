@@ -38,6 +38,12 @@ class JsonRpcServer
 	registerMethod: (name, func) ->
 		console.log("  JSON-RPC Method '" + name + "'")
 		@registeredMethods[name] = func
+		@flushCache(name)
+		
+	flushCache: (url) ->
+		if app.config.flush? and (app.config.flush == 'all' or url in app.config.flush)
+			method = new @registeredMethods[url]
+			method.delDataFromCache(url)
 
 	handleRequest: (req, res) ->
 		return @handleCall(req.body, res, req)

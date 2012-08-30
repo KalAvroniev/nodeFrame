@@ -1,16 +1,16 @@
-class API_User_GetState
+APIController = require(app.config.appDir + '/lib/APIController.coffee')
+
+class API_User_GetState extends APIController
 	module.exports = @
 
-	validate: {
-	}
+	constructor: () ->
+		super
+		options =
+			"requireUserSession": true
 
-	options: {
-		"requireUserSession": true
-	}
-
-	run: (req) ->
+	render: (req, cb) ->
 		req.getState(
 			(state) ->
-				return req.success(state)
+				cb(null,state)
 			, req.getUserId()
 		)

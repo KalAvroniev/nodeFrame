@@ -48,10 +48,9 @@ class APIController
 		)	
 		
 	delDataFromCache: (ns) ->
-		@defaultView(ns)
-		Store.flushNameSpace(@view, (err) =>
+		Store.flushNameSpace(ns, (err) =>
 			if not err 
-				console.log(@view + " cache data deleted.")
+				console.log(ns + " cache data deleted.")
 		)
 		
 	render: (cb) ->
@@ -63,7 +62,7 @@ class APIController
 				console.log("Data cache used.")
 				req.success(content)
 			else
-				@render((err, content) =>
+				@render(req, (err, content) =>
 					return req.next(err) if err
 					@setDataToCache(index, content, @params.expires)
 					req.success(content)

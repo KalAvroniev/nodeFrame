@@ -1,14 +1,14 @@
-class API_View_Panels_ExportData
+APIController = require(app.config.appDir + '/lib/APIController.coffee')
+
+class API_View_Panels_ExportData extends APIController
 	module.exports = @
 
-	validate: {
-	}
+	constructor: () ->
+		super
+		options =
+			"requireUserSession": true
 
-	options: {
-		"requireUserSession": true
-	}
-
-	run: (req) ->
+	render: (req, cb) ->
 		r = {}
 
 		# view elements
@@ -40,7 +40,7 @@ class API_View_Panels_ExportData
 		]
 		r.active_tab = '#expiring'
 
-		return req.success(r)
+		cb(null, r)
 
 	testBasic: (test) ->
 		test.run(

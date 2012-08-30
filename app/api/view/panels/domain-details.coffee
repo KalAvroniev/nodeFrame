@@ -1,13 +1,13 @@
-class API_View_Panels_DomainDetails
+APIController = require(app.config.appDir + '/lib/APIController.coffee')
+
+class API_View_Panels_DomainDetails extends APIController
 	module.exports = @
 
-	validate: {
-	}
+	constructor: () ->
+		super
+		options =
+			"requireUserSession": true
 
-	options: {
-		"requireUserSession": true
-	}
-
-	run: (req) ->
+	render: (req, cb) ->
 		r = {}
-		return req.success(r)
+		cb(null, r)

@@ -1,14 +1,13 @@
-class API_User_ResetState
+APIController = require(app.config.appDir + '/lib/APIController.coffee')
+
+class API_User_ResetState extends APIController
 	module.exports = @
 
-	validate: {
-	}
-
-	run: (req) ->
+	render: (req, cb) ->
 		req.resetState(
 			(state) ->
-				return req.success(state)
+				cb(null,state)
 			, (error) ->
-				return req.error(error)
+				cb(error)
 			, req.getUserId()
 		)

@@ -1,15 +1,15 @@
+APIController = require(app.config.appDir + '/lib/APIController.coffee')
 GridModel = require(app.config.appDir + '/models/Grid.coffee')
 
-class API_Exchange_Grid
+class API_Exchange_Grid extends APIController
 	module.exports = @
 
-	validate: {}
+	constructor: () ->
+		super
+		options =
+			requireUserSession: true
 
-	options: {
-		requireUserSession: true
-	}
-
-	run: ( req ) ->
+	render: (req, cb) ->
 		grid = new GridModel()
 
 		# header
@@ -183,5 +183,5 @@ class API_Exchange_Grid
 				domain: "353cards",
 				tld: "com"
 			})
-
-		return req.success( grid.result() )
+			
+		cb(null, grid.result())

@@ -12,7 +12,7 @@ class API_Notifications_Fetch extends APIController
 				"required": false,
 				"default": 10
 
-	render: (cb) ->
+	render: (req, cb) ->
 		# will return the same static notifcations for everyone
 		notifs = [
 			{

@@ -1,16 +1,18 @@
-class API_Test_PingPong
+APIController = require(app.config.appDir + '/lib/APIController.coffee')
+
+class API_Test_PingPong extends APIController
 	module.exports = @
 
-	validate: {
-		"name": {
-			"description": "A persons name.",
-			"type": "string"
-			"required": true
-		}	
-	}
+	constructor: () ->
+		super
+		validate =
+			"name": 
+				"description": "A persons name.",
+				"type": "string"
+				"required": true
 
-	run: (req) ->
-		return req.success("Hello " + req.params.name)
+	render: (req, cb) ->
+		cb(null, "Hello " + req.params.name)
 
 	testWithName: (test) ->
 		params = {

@@ -1,10 +1,9 @@
-class API_User_ResetSession
+APIController = require(app.config.appDir + '/lib/APIController.coffee')
+
+class API_User_ResetSession extends APIController
 	module.exports = @
 
-	validate: {
-	}
-
-	run: (req) ->
+	render: (req, cb) ->
 		req.resetSession(() ->
-			return req.success(true)
+			cb(null,true)
 		)

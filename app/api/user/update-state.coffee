@@ -1,30 +1,29 @@
-class API_User_UpdateState
+APIController = require(app.config.appDir + '/lib/APIController.coffee')
+
+class API_User_UpdateState extends APIController
 	module.exports = @
 
-	validate: {
-		"name": {
-			"description": "State key.",
-			"type": "string",
-			"required": true
-		},
-		"value": {
-			"description": "New value for state key.",
-			"type": "any",
-			"required": true
-		}
-	}
-
-	options: {
+	constructor: () ->
+		super
+		validate =
+			"name":
+				"description": "State key.",
+				"type": "string",
+				"required": true
+			"value":
+				"description": "New value for state key.",
+				"type": "any",
+				"required": true
+	options = 
 		"requireUserSession": true
-	}
 
-	run: (req) ->
+	render: (req, cb) ->
 		req.updateState(
 			req.params.name
 			, req.params.value
 			, (state) ->
-				return req.success(state)
+				cb(null,state)
 			, (error) ->
-				return req.error(error)
+				cb(error)
 			, req.getUserId()
 		)

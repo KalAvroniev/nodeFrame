@@ -1,12 +1,14 @@
-class API_User_CheckLogin
+APIController = require(app.config.appDir + '/lib/APIController.coffee')
+
+class API_User_CheckLogin extends APIController
 	module.exports = @
 
-	validate: {}
+	constructor: () ->
+		super
+		options =
+			requireUserSession: false
 
-	options:
-		requireUserSession: false
-
-	run: ( req ) ->
+	render: (req, cb) ->
 		checked = false
 		errorMsg = null
 		###
