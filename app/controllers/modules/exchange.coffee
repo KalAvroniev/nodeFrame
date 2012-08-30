@@ -3,9 +3,15 @@ Controller = require(app.config.appDir + '/lib/Controller.coffee')
 class Modules_Exchange extends Controller
 	module.exports = @
 
-	run: ( req, res ) ->
+	constructor: () ->
+		super
+		
+	run: (req, res, url) ->
 		if req.query.ajax
 			res.view.layout = null
+			
+		#res.view.id = 'previousSearches'
+		res.view.id = 'exchangeTabs'
 
 		# tabs
 		res.view.tabs = [
@@ -52,4 +58,4 @@ class Modules_Exchange extends Controller
 		res.view.contentTabs.newRegistrations.title = "new domains listing"
 		res.view.contentTabs.newRegistrations.intoText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl andit eget non lacus. Pellentesque a imperdiet diam."
 
-		res.ready()
+		super

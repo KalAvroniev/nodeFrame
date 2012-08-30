@@ -94,7 +94,7 @@ class JsonRpcServer
 			obj
 			, () ->
 				# execute the method
-				obj.run(req)
+				obj.run(req, call.method)
 		)
 
 	handleCall: (call, res, req) ->

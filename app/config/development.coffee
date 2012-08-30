@@ -7,4 +7,7 @@ exports.config.database =
 		'port': 3306
 		
 exports.config.memcache =
-		'ip': 'backupdev:11211'
+		ips: ['192.168.10.42:11211']
+		options: 
+			maxExpiration: 0
+			poolSize: 1000

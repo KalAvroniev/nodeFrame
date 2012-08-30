@@ -3,9 +3,11 @@ Controller = require( app.config.appDir + "/lib/Controller.coffee" )
 class Modules_ShoppingCart extends Controller
 	module.exports = @
 
-	run: ( req, res ) ->
+	run: (req, res, url) ->
 		if req.query.ajax
 			res.view.layout = null
+			
+		res.view.id = 'sidebar'
 
 		# tabs
 		res.view.tabs = [
@@ -51,4 +53,4 @@ class Modules_ShoppingCart extends Controller
 		res.view.upgrade = {}
 		res.view.upgrade.monthlyCost = 49
 
-		res.ready()
+		super

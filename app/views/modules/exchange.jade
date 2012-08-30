@@ -1,4 +1,4 @@
-include partials/header
+include ../partials/header
 
 #main-container.page-exchange.search-results
 	h5#first-heading.ff-icon-before
@@ -34,7 +34,7 @@ include partials/header
 	- if ( searchResults.state ) {
 		#section-headings.search-results
 			#member-options.btn-group
-				!= partial("partials/help-bubble", { id: "previousSearches" })
+				include ../partials/help-bubble
 
 				a.btn.btn-large.dropdown-toggle(href="#", data-toggle="dropdown")
 					| previous searches
@@ -86,7 +86,7 @@ include partials/header
 		li.active
 			a(href="#expiring") expiring
 		li
-			!= partial("partials/help-bubble", { id: "exchangeTabs" })
+			include ../partials/help-bubble
 			a(href="#auctions") auctions
 		li
 			a(href="#dropping") dropping

@@ -1,7 +1,7 @@
-Index = require(app.config.appDir + '/controllers/index.coffee')
+Admin = require(app.config.appDir + '/controllers/admin.coffee')
 
-class Exchange extends Index			
+class Exchange extends Admin			
 	module.exports = @
 
-	run: (req, res) ->
+	run: (req, res, url) ->
 		super

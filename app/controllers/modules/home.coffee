@@ -2,11 +2,18 @@ Controller = require( app.config.appDir + "/lib/Controller.coffee" )
 
 class Modules_Home extends Controller
 	module.exports = @
-
-	run: ( req, res ) ->
-		res.view.id = "sidebar"
+	
+	constructor: () ->
+		super
+		@modMasterParams(
+			expires: 10
+		)
+	
+	run: (req, res, url) ->
 		if req.query.ajax
 			res.view.layout = null
+		
+		res.view.id = 'sidebar'
 
 		# tabs
 		res.view.tabs = [
@@ -35,7 +42,7 @@ class Modules_Home extends Controller
 		]
 
 		res.view.showTradingSummary = req.query.tradingSummary or false
-		res.view.showDefaultContent = req.query.defaultContent or false
+		res.view.showDefaultContent = true#req.query.defaultContent or false
 
 		# user info
 		res.view.user = {}
@@ -65,4 +72,4 @@ class Modules_Home extends Controller
 		res.view.contentTabs.listedForSale.title = "Domains listed for sale"
 		res.view.contentTabs.listedForSale.intoText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id augue vitae libero ultricies bl andit eget non lacus. Pellentesque a imperdiet diam."
 
-		res.ready()
+		super

@@ -1,16 +1,18 @@
-class API_Notifications_Fetch
+APIController = require(app.config.appDir + '/lib/APIController.coffee')
+
+class API_Notifications_Fetch extends APIController
 	module.exports = @
 
-	validate: {
-		"limit": {
-			"description": "The maximum number of recent notifications to return.",
-			"type": "integer"
-			"required": false,
-			"default": 10
-		}
-	}
+	constructor: () ->
+		super
+		@validate =
+			"limit": 
+				"description": "The maximum number of recent notifications to return.",
+				"type": "integer"
+				"required": false,
+				"default": 10
 
-	run: (req) ->
+	render: (cb) ->
 		# will return the same static notifcations for everyone
 		notifs = [
 			{
@@ -115,6 +117,7 @@ class API_Notifications_Fetch
 			}		
 		]
 
-		return req.success({
+		cb(null
+		, 
 			'notifications': notifs
-		})
+		)

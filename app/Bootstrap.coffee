@@ -4,7 +4,7 @@ everyauth = require("everyauth")
 fs	 = require('fs')
 jade = require('jade')
 path = require('path')
-mc = require('mc')
+memcached = require('memcached')
 JsonRpcServer = require('./lib/JsonRpcServer.coffee')
 SocketIoServer = require('./lib/SocketIoServer.coffee')
 	
@@ -80,13 +80,7 @@ class Bootstrap
 			)
 			.loginSuccessRedirect("/home")
 			.registerSuccessRedirect("/home")
-		
-		# setup memcache cluster
-		@options.memcache = new mc.Client(@config.memcache.ip, mc.Adapter.json);
-		@options.memcache.connect () =>
-        console.log "Connected to the " + @config.memcache.ip + " memcache!"
-
-		
+			
 		@app = express()
 		
 		@app.use(express.bodyParser())
@@ -105,13 +99,17 @@ class Bootstrap
 		@app.use(everyauth.middleware())
 		@app.use(@postEveryauthMiddlewareHack())
 		
+		# setup memcache cluster
+		if @config.store == 'memcache'
+			@options.memcache = new memcached(@config.memcache.ips, @config.memcache.options)		
+		
 		@registerControllers()
 		@deleteMinified(@config.pubDir + '/js/require')
-		
+
 		# register JSON-RPC methods must be before the bodyParser
 		@jsonRpcServer = new JsonRpcServer()
 		@jsonRpcServer.registerMethods()
-		
+
 		@app.post('/jsonrpc', (req, res) =>
 			@jsonRpcServer.handleRequest(req, res)
 		)
@@ -140,9 +138,7 @@ class Bootstrap
 
 		url = url.replace(/\/+$/, '')
 		if url == ''
-			url = '/index'
-
-		console.log(url)
+			url = '/login'
 		return url
 
 	handleJadeRequest: (req, res) ->
@@ -163,23 +159,10 @@ class Bootstrap
 
 	handleRequest: (req, res) =>
 		url = Bootstrap.realUrl(req.url)
-		console.log(url)
-
-		# setup ready handler
-		res.setView = (view) ->
-			res.renderView = view
-
-		res.ready = () ->
-			if res.renderView
-				res.render(res.renderView, res.view)
-			else
-				res.render(url.substr(1), res.view)
-
 		# run
 		controller = new (require(@config.appDir + "/controllers" + url + ".coffee"))
 		res.view = {}
-		if controller.init == undefined || controller.init(req, res)
-			controller.run(req, res)
+		controller.run(req, res, url)
 
 	registerControllers: (path = 'controllers') ->
 		if path == 'controllers'
@@ -197,6 +180,13 @@ class Bootstrap
 			console.log("Registering controller '" + path.substr(11, path.length - 18) + "'")
 			@app.all(path.substr(11, path.length - 18), @handleRequest)
 			@app.all(path.substr(11, path.length - 18) + ".jade", @handleJadeRequest)
+			@flushCache(path.substr(11, path.length - 18))
+			
+	flushCache: (url) ->
+		if @config.flush? and (@config.flush == 'all' or url in @config.flush)
+			controller = new (require(@config.appDir + "/controllers" + url + ".coffee"))	
+			controller.delPageFromCache(url)
+		
 
 	loadConfig: (config) ->
 		@config = require('./config/' + config + '.coffee').config
@@ -213,7 +203,7 @@ class Bootstrap
 			console.log('Now deleting ' + path)
 			if (fs.statSync(path).isFile())
 				fs.unlinkSync(path)
-			else
+			else 
 				fs.rmdirSync(path)
 		
 	addUser: (source, sourceUser) ->

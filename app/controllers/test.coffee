@@ -3,7 +3,7 @@ Controller = require(app.config.appDir + '/lib/Controller.coffee')
 class Test extends Controller
 	module.exports = @
 
-	run: (req, res) ->
+	run: (req, res, url) ->
 		# get data
 		req.jsonRpcServer.call(
 			req.query.view
@@ -13,5 +13,5 @@ class Test extends Controller
 					console.error(error)
 					
 				console.log(result)
-				res.ready()
+				super
 		)

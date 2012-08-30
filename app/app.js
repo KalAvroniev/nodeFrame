@@ -15,11 +15,12 @@ if(process.env.NODE_ENV === 'production') {
 		'config': 'staging'
 	});
 	app.start();
-
+/*
 	// debug server
 	debug = new Bootstrap({
 		'port': 8182,
 		'config': 'development'
 	});
 	debug.start()
+*/
 }
