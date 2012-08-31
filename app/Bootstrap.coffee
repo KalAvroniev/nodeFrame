@@ -100,7 +100,7 @@ class Bootstrap
 		@app.use(@postEveryauthMiddlewareHack())
 		
 		# setup memcache cluster
-		if @config.store == 'memcache'
+		if 'memcache' in @config.cacheStore
 			@options.memcache = new memcached(@config.memcache.ips, @config.memcache.options)		
 		
 		@registerControllers()

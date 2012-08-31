@@ -43,7 +43,6 @@ $.app.state.get = (success, options) ->
   return
 
 $.app.state.restoreModule = ->
-  console.log($.app.state)
   module = (if (not $.app.state.current.modules.selected or $.app.state.current.modules.selected is "") then "home" else $.app.state.current.modules.selected)
 
   # TODO: fix!

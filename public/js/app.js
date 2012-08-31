@@ -56,7 +56,6 @@ $.app.state.get = function(success, options) {
 
 $.app.state.restoreModule = function() {
   var module;
-  console.log($.app.state);
   module = (!$.app.state.current.modules.selected || $.app.state.current.modules.selected === "" ? "home" : $.app.state.current.modules.selected);
   module = module.replace("#", "");
   window.history.pushState("", module, "/" + module);

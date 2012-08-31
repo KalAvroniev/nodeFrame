@@ -13,6 +13,9 @@ public/js/require/
 # misc
 /nbproject/private/
 
+# cache
+cache/
+
 # FUCK OFF ANNOYING DS_Store files!!!
 /app/.DS_Store
 /public/img/.DS_Store

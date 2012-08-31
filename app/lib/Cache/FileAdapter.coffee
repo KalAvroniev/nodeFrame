@@ -2,9 +2,9 @@ fs = require('fs')
 crypto = require('crypto')
 path = require('path')
 
-class FileStore
+class FileAdapter
 	module.exports = @
-	
+		
 	tag: (file, folder) ->
 		file = folder + '/' + file
 		
@@ -12,7 +12,7 @@ class FileStore
 		file = crypto.createHash('md5').update(file).digest('hex')
 	
 	hashTag: (file, folder) ->
-		@tag(FileStore.hash(file), folder)
+		@tag(FileAdapter.hash(file), folder)
 	
 	read: (file, cb) ->
 		fs.readFile(app.config.cacheDir + '/' + file, 'utf8', cb)
@@ -32,30 +32,32 @@ class FileStore
 		fs.unlink(app.config.cacheDir + '/' + file, cb)
 		
 	getNameSpace: (file, cb) ->
-		FileStore.static_read(FileStore.hash(file), cb)
+		FileAdapter.static_read(FileAdapter.hash(file), cb)
 		
 	setNameSpace: (file, cb, res) ->
 		date = new Date()
 		ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
-		@write(FileStore.hash(file), ts, (err) ->
+		@write(FileAdapter.hash(file), ts, (err) ->
 			if not err
 				#fs.mkdir(app.config.cacheDir + '/' + ts, '0777', (err) ->
 				#	if not err
-				cb(file, (err, data) ->
-					res(err, data)
-				)
+				#cb(file, (err, data) ->
+				#	console.log(err, res)
+				#	res(err, data)
+				#)
+				cb(file, res)
 				#)
 		)
 	
 	flushNameSpace: (file, cb) ->
 		date = new Date()
 		ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
-		@read(FileStore.hash(file), (err, data) =>
+		@read(FileAdapter.hash(file), (err, data) =>
 			if not err and data != ''
 				@deleteNameSpaceCache(app.config.cacheDir + '/' + data, (err, path) ->
 					fs.rmdir(path, (err) ->)
 				)
-			@flush(FileStore.hash(file), cb)
+			@flush(FileAdapter.hash(file), cb)
 		)
 		
 	deleteNameSpaceCache: (path, cb) ->

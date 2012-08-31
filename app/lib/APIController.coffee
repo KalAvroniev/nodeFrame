@@ -1,5 +1,4 @@
-Store = new (if app.config.store is 'memcache' then require('./MemcacheStore.coffee') else require('./FileStore.coffee'))
-crypto = require('crypto')
+Cache = new (require('./CacheStore.coffee'))
 
 class APIController
 	module.exports = @
@@ -13,9 +12,9 @@ class APIController
 
 	run: (req, url) ->		
 		#namespace
-		Store.getNameSpace(url, (err, data) =>
+		Cache.getNameSpace(url, (err, data) =>
 			if err
-				Store.setNameSpace(url, Store.getNameSpace, (err, data) =>
+				Cache.setNameSpace(url, Cache.cs.getNameSpace, (err, data) =>
 					if not err
 						@namespace = data
 						@ready(req, url)
@@ -29,7 +28,7 @@ class APIController
 		@params[key] = val for key, val of params
 					
 	getDataFromCache: (url, cb) ->
-		Store.read(url, (err, data) ->
+		Cache.read(url, (err, data, change) ->
 			if err
 				cb(err)
 			else
@@ -37,9 +36,9 @@ class APIController
 		)
 
 	setDataToCache: (url, content, expire) ->
-		Store.write(url
+		Cache.write(url
 			, content
-			, (err) ->
+			, (err, data, change) ->
 				if err
 					console.error("Data cache could not be saved: " + err)
 				else
@@ -48,7 +47,7 @@ class APIController
 		)	
 		
 	delDataFromCache: (ns) ->
-		Store.flushNameSpace(ns, (err) =>
+		Cache.flushNameSpace(ns, (err, data, change) =>
 			if not err 
 				console.log(ns + " cache data deleted.")
 		)
@@ -56,7 +55,7 @@ class APIController
 	render: (cb) ->
 	
 	ready: (req, index) ->
-		index = Store.hashTag(index, @namespace)
+		index = Cache.hashTag(index, @namespace)
 		@getDataFromCache(index, (err, content) =>
 			if content
 				console.log("Data cache used.")

@@ -1,5 +1,4 @@
-Store = new (if app.config.store is 'memcache' then require('./MemcacheStore.coffee') else require('./FileStore.coffee'))
-crypto = require('crypto')
+Cache = new (require('./CacheStore.coffee'))
 
 class Controller
 	module.exports = @
@@ -17,9 +16,9 @@ class Controller
 		res.view[key] = val for key, val of @params	
 		
 		#namespace
-		Store.getNameSpace(res.renderView, (err, data) =>
+		Cache.getNameSpace(res.renderView, (err, data) =>
 			if err
-				Store.setNameSpace(res.renderView, Store.getNameSpace, (err, data) =>
+				Cache.setNameSpace(res.renderView, Cache.cs.getNameSpace, (err, data) =>
 					if not err
 						@namespace = data
 						@ready(req, res, req.url)
@@ -37,7 +36,7 @@ class Controller
 		@params[key] = val for key, val of params
 		
 	getPageFromCache: (url, cb) ->
-		Store.read(url, (err, data) ->
+		Cache.read(url, (err, data, change) ->
 			if err
 				cb(err)
 			else
@@ -45,9 +44,9 @@ class Controller
 		)
 
 	setPageToCache: (url, content, expire) ->
-		Store.write(url
+		Cache.write(url
 			, content
-			, (err) ->
+			, (err, data, change) ->
 				if err
 					console.error("Page cache could not be saved: " + err)
 				else
@@ -57,13 +56,13 @@ class Controller
 		
 	delPageFromCache: (ns) ->
 		@defaultView(ns)
-		Store.flushNameSpace(@view, (err) =>
+		Cache.flushNameSpace(@view, (err, data, change) =>
 			if not err 
 				console.log(@view + " cache data deleted.")
 		)
 		
 	ready: (req, res, index) ->
-		index = Store.hashTag(index, @namespace)
+		index = Cache.hashTag(index, @namespace)
 		@getPageFromCache(index, (err, content) =>
 			if content
 				console.log("Page cache used.")
