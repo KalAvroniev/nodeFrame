@@ -1,5 +1,3 @@
-Cache = new (require('./CacheStore.coffee'))
-
 class Controller
 	module.exports = @
 	
@@ -16,11 +14,13 @@ class Controller
 		res.view[key] = val for key, val of @params	
 		
 		#namespace
-		Cache.getNameSpace(res.renderView, (err, data) =>
+		app.options.cache.getNameSpace(res.renderView, (err, data) =>
 			if err
-				Cache.setNameSpace(res.renderView, Cache.cs.getNameSpace, (err, data) =>
+				app.options.cache.setNameSpace(res.renderView, app.options.cache.cs.getNameSpace, (err, data) =>
 					if not err
 						@namespace = data
+						@ready(req, res, req.url)
+					else
 						@ready(req, res, req.url)
 				)
 			else
@@ -36,7 +36,7 @@ class Controller
 		@params[key] = val for key, val of params
 		
 	getPageFromCache: (url, cb) ->
-		Cache.read(url, (err, data, change) ->
+		app.options.cache.read(url, (err, data, change) ->
 			if err
 				cb(err)
 			else
@@ -44,7 +44,7 @@ class Controller
 		)
 
 	setPageToCache: (url, content, expire) ->
-		Cache.write(url
+		app.options.cache.write(url
 			, content
 			, (err, data, change) ->
 				if err
@@ -56,22 +56,27 @@ class Controller
 		
 	delPageFromCache: (ns) ->
 		@defaultView(ns)
-		Cache.flushNameSpace(@view, (err, data, change) =>
+		app.options.cache.flushNameSpace(@view, (err, data, change) =>
 			if not err 
 				console.log(@view + " cache data deleted.")
 		)
 		
 	ready: (req, res, index) ->
-		index = Cache.hashTag(index, @namespace)
-		@getPageFromCache(index, (err, content) =>
-			if content
-				console.log("Page cache used.")
-				res.send(content)
-			else
-				res.render(res.renderView, res.view , (err, content) =>
-					return req.next(err) if err
-					@setPageToCache(index, content, res.view.expires)
+		if @namespace?
+			index = app.options.cache.hashTag(index, @namespace)
+			@getPageFromCache(index, (err, content) =>
+				if content
+					console.log("Page cache used.")
 					res.send(content)
-				)
-		)
-			
+				else
+					res.render(res.renderView, res.view , (err, content) =>
+						return req.next(err) if err
+						@setPageToCache(index, content, res.view.expires)
+						res.send(content)
+					)
+			)
+		else
+			res.render(res.renderView, res.view , (err, content) ->
+				return req.next(err) if err
+				res.send(content)
+			)

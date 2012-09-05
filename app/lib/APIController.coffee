@@ -1,5 +1,3 @@
-Cache = new (require('./CacheStore.coffee'))
-
 class APIController
 	module.exports = @
 	
@@ -10,13 +8,15 @@ class APIController
 		@options = {}
 		@namespace = ''
 
-	run: (req, url) ->		
+	run: (req, url) ->	
 		#namespace
-		Cache.getNameSpace(url, (err, data) =>
+		app.options.cache.getNameSpace(url, (err, data) =>
 			if err
-				Cache.setNameSpace(url, Cache.cs.getNameSpace, (err, data) =>
+				app.options.cache.setNameSpace(url, app.options.cache.cs.getNameSpace, (err, data) =>
 					if not err
 						@namespace = data
+						@ready(req, url)
+					else
 						@ready(req, url)
 				)
 			else
@@ -28,16 +28,16 @@ class APIController
 		@params[key] = val for key, val of params
 					
 	getDataFromCache: (url, cb) ->
-		Cache.read(url, (err, data, change) ->
+		app.options.cache.read(url, (err, data, change) ->
 			if err
 				cb(err)
 			else
-				cb(undefined, data)
+				cb(undefined, JSON.parse(data))
 		)
 
 	setDataToCache: (url, content, expire) ->
-		Cache.write(url
-			, content
+		app.options.cache.write(url
+			, JSON.stringify(content)
 			, (err, data, change) ->
 				if err
 					console.error("Data cache could not be saved: " + err)
@@ -47,7 +47,7 @@ class APIController
 		)	
 		
 	delDataFromCache: (ns) ->
-		Cache.flushNameSpace(ns, (err, data, change) =>
+		app.options.cache.flushNameSpace(ns, (err, data, change) =>
 			if not err 
 				console.log(ns + " cache data deleted.")
 		)
@@ -55,16 +55,21 @@ class APIController
 	render: (cb) ->
 	
 	ready: (req, index) ->
-		index = Cache.hashTag(index, @namespace)
-		@getDataFromCache(index, (err, content) =>
-			if content
-				console.log("Data cache used.")
-				req.success(content)
-			else
-				@render(req, (err, content) =>
-					return req.next(err) if err
-					@setDataToCache(index, content, @params.expires)
+		if @namespace?
+			index = app.options.cache.hashTag(index, @namespace)
+			@getDataFromCache(index, (err, content) =>
+				if content
+					console.log("Data cache used.", index)
 					req.success(content)
-				)
-		)
-			
+				else
+					@render(req, (err, content) =>
+						return req.next(err) if err
+						@setDataToCache(index, content, @params.expires)
+						req.success(content)
+					)
+			)
+		else
+			@render(req, (err, content) ->
+				return req.next(err) if err
+				req.success(content)
+			)

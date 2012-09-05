@@ -5,6 +5,8 @@ fs	 = require('fs')
 jade = require('jade')
 path = require('path')
 memcached = require('memcached')
+cronJob = require('cron').CronJob
+DBWrapper = require('node-dbi').DBWrapper
 JsonRpcServer = require('./lib/JsonRpcServer.coffee')
 SocketIoServer = require('./lib/SocketIoServer.coffee')
 	
@@ -99,9 +101,20 @@ class Bootstrap
 		@app.use(everyauth.middleware())
 		@app.use(@postEveryauthMiddlewareHack())
 		
-		# setup memcache cluster
-		if 'memcache' in @config.cacheStore
+		# setup cache
+		if 'memcache' in @config.cache.stores 
 			@options.memcache = new memcached(@config.memcache.ips, @config.memcache.options)		
+		
+		if 'db' in @config.cache.stores
+			dbConfig = 
+				host: app.config.sql.host
+				user: app.config.sql.user
+				password: app.config.sql.pass
+				database: 'cache'
+			@options.dbcache = new DBWrapper(@config.sql.type, dbConfig)
+			#@options.dbcache.connect()	
+	
+		@options.cache = new (require('./lib/CacheStore.coffee'))
 		
 		@registerControllers()
 		@deleteMinified(@config.pubDir + '/js/require')
@@ -130,6 +143,15 @@ class Bootstrap
 		io = require('socket.io').listen(server)
 		io.sockets.on('connection', (socket) ->
 			socketIoServer.addClient(socket)
+		)
+		
+		#crons
+		new cronJob('*/10 * * * * *'
+			, () => 
+				@options.cache.cacheCheck()
+			, null
+			, true
+			, 'Australia/Sydney'
 		)
 		
 	@realUrl: (url) ->

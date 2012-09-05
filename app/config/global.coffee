@@ -6,8 +6,10 @@ exports.config =
 			domain: 'protrada.cachefly.net/v3'
 			hostname: 'localhost'
 			port: 8181
-		cache: true
-		cacheStore: ['memcache', 'file']
+		cache:
+			enabled: true
+			stores: ['memcache', 'db', 'file']
+			index: 0
 		service: 'protrada'
 		apis:
 			exchange: 'api.protrada.com:8080'

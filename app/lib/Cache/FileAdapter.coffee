@@ -4,7 +4,9 @@ path = require('path')
 
 class FileAdapter
 	module.exports = @
-		
+	
+	constructor: () ->
+				
 	tag: (file, folder) ->
 		file = folder + '/' + file
 		
@@ -37,16 +39,11 @@ class FileAdapter
 	setNameSpace: (file, cb, res) ->
 		date = new Date()
 		ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
-		@write(FileAdapter.hash(file), ts, (err) ->
+		@write(FileAdapter.hash(file), ts, (err, response) ->
 			if not err
-				#fs.mkdir(app.config.cacheDir + '/' + ts, '0777', (err) ->
-				#	if not err
-				#cb(file, (err, data) ->
-				#	console.log(err, res)
-				#	res(err, data)
-				#)
 				cb(file, res)
-				#)
+			else
+				res(err, response)
 		)
 	
 	flushNameSpace: (file, cb) ->

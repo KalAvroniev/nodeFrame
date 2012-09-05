@@ -3,6 +3,8 @@ crypto = require('crypto')
 class MemcacheAdapter
 	module.exports = @
 			
+	constructor: () ->
+			
 	tag: (key, tag) ->
 		key = tag + '/' + key
 		
@@ -65,13 +67,11 @@ class MemcacheAdapter
 	setNameSpace: (ns, cb, res) ->
 		date = new Date()
 		ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
-		@write(MemcacheAdapter.hash(ns), ts, (err) ->
-			#console.log('@write', err, data, change)
+		@write(MemcacheAdapter.hash(ns), ts, (err, response) ->
 			if not err
-				#cb(ns, (err, data) ->
-				#	res(err, data)
-				#)
 				cb(ns, res)
+			else
+				res(err, response)
 		)
 	
 	flushNameSpace: (ns, cb) ->

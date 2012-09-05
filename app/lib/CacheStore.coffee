@@ -1,129 +1,105 @@
+util = require('util')
+
 class CacheStore
 
 	module.exports = @
 	
-	constructor: () -> #index = 0
-		@index = 0 #index
-		store = app.config.cacheStore[@index]
+	constructor: () -> 
+		store = app.config.cache.stores[app.config.cache.index]
 		@CS = require(app.config.appDir + '/lib/Cache/' + store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter.coffee')
 		@cs = new @CS()
-		
+				
 	changeStore: (index) ->
-		###
-		if index
-			@index -= index
-		if @index + 1 < app.config.cacheStore.length
-			@constructor(++@index)
-		else
-			app.config.cache = false
-		###
-		if index + 1 < app.config.cacheStore.length
-			store = app.config.cacheStore[++index]
+		if index < app.config.cache.stores.length
+			store = app.config.cache.stores[index]
 			@CS = require(app.config.appDir + '/lib/Cache/' + store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter.coffee')
+			#@cs.destructor()
 			@cs = new @CS()
+			app.config.cache.index = index
 		else
-			app.config.cache = false
-		return index
+			app.config.cache.enabled = false
+		return
 		
 	tag: (key, tag) ->
-		if app.config.cache
+		if app.config.cache.enabled
 			@cs.tag(key, tag)
 		
 	@hash: (key) ->
-		if app.config.cache
+		if app.config.cache.enabled
 			@CS.hash(key)
 	
 	hashTag: (key, tag) ->
-		if app.config.cache
+		if app.config.cache.enabled
 			@cs.hashTag(key,tag)
 		
 	read: (key, cb) ->
-		index = @index
-		if app.config.cache
-			@cs.read(key, (err, response, change) =>
-				if change && app.config.cache
-					@index = @changeStore(index)
-					@read(key, cb)
-				else
-					cb(err, response)
-			)
+		if app.config.cache.enabled
+			@cs.read(key, cb)
 		else
 			cb(true)
 	
 	@static_read: (key, cb) ->
-		index = @index
-		if app.config.cache
-			@CS.static_read(key, (err, response, change) =>
-				if change
-					@index = @changeStore(index)
-					CacheStore.static_read(key, cb)
-				else
-					cb(err, response)
-			)
+		if app.config.cache.enabled
+			@CS.static_read(key, cb)
 		else
 			cb(true)
 		
 	write: (key, val, cb) ->
-		index = @index
-		if app.config.cache
-			@cs.write(key, val, (err, response, change) =>
-				if change
-					@index = @changeStore(index)
-					@write(key, cb)
-				else
-					cb(err, response)
-			)
+		if app.config.cache.enabled
+			@cs.write(key, val, cb)
 		else
 			cb(true)
 	
 	flush: (key, cb) ->
-		index = @index
-		if app.config.cache
-			@cs.flush(key, (err, response, change) =>
-				if change
-					@index = @changeStore(index)
-					@flush(key, cb)
-				else
-					cb(err, response)
-			)
+		if app.config.cache.enabled
+			@cs.flush(key, cb)
 		else
 			cb(true)
 		
 	getNameSpace: (key, cb) ->	
-		index = @index
-		if app.config.cache
-			@cs.getNameSpace(key, (err, response, change) =>
-				if change
-					@index = @changeStore(index)
-					@getNameSpace(key, cb)
-				else
-					cb(err, response)
-			)
+		if app.config.cache.enabled
+			@cs.getNameSpace(key, cb)
 		else
 			cb(false)	
 		
 	setNameSpace: (key, cb, res) ->		
-		index = @index
-		if app.config.cache
-			@cs.setNameSpace(key, cb, (err, response, change) =>
-				if change
-					@index = @changeStore(index)
-					@setNameSpace(key, cb, res)
-				else
-					res(err, response)
-			)
+		if app.config.cache.enabled
+			@cs.setNameSpace(key, cb, res)
 		else
 			res(true)
 		
 	flushNameSpace: (key, cb) ->	
-		index = @index
-		if app.config.cache
-			@cs.flushNameSpace(key, (err, response, change) =>
-				if change
-					@index = @changeStore(index)
-					@flushNameSpace(key, cb)
-				else
-					cb(err, response)
-			)
+		if app.config.cache.enabled
+			@cs.flushNameSpace(key, cb)
 		else
 			cb(true)
+			
+	cacheCheck: () -> 
+		start = if not app.config.cache.enabled then app.config.cache.stores.length - 1 else app.config.cache.index
+		if start < 0
+			return
+		val = 'test'
+		for i in [start..0] by -1
+			((i) =>
+				store = app.config.cache.stores[i]
+				Store = require(app.config.appDir + '/lib/Cache/' + store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter.coffee')
+				store = new Store()
+				key = Store.hash(val)
+				store.write(key, val, (err, res, change) =>
+					if change 
+						if i + 1 > app.config.cache.index
+							app.options.cache.changeStore(i + 1)
+							@cacheCheck()
+					else if not err
+						store.flush(key, (err, res, change) =>
+							if change 
+								if i + 1 > app.config.cache.index
+									app.options.cache.changeStore(i + 1)
+									@cacheCheck()
+							else if not err
+								if i < app.config.cache.index
+									app.options.cache.changeStore(i)									
+								app.config.cache.enabled = true
+						)
+				)
+			)(i)	
