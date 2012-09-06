@@ -21,8 +21,7 @@ Grid = function(element, options) {
     data: null,
     type: "detailed",
     stickyHeader: false,
-    fakeScrollbars: false,
-    lazyLoad: true
+    fakeScrollbars: false
   };
   $.extend(this.options, options);
   this.init();
@@ -39,16 +38,16 @@ Grid.prototype = {
     $.jsonrpc(this.options.url, {
       offset: this.rowOffset
     }, function(data) {
-      $.jade.getTemplate("grid/table", function() {
-        $grid.html($.jade.renderSync("views_grid_table", data, that.jadeError));
-        $.jade.getTemplate("grid/row", function() {
+      $.jade.getTemplate("grid/table", function(fn) {
+        $grid.html($.jade.renderSync(fn, data, that.jadeError));
+        $.jade.getTemplate("grid/row", function(fn) {
           var actions, i, records;
           records = data.records;
           actions = data.actions;
           i = 0;
           while (i < records.length) {
             records[i].actions = actions;
-            $grid.find("tbody").append($.jade.renderSync("views_grid_row", records[i], that.jadeError));
+            $grid.find("tbody").append($.jade.renderSync(fn, records[i], that.jadeError));
             ++i;
           }
           $grid.find("#foot-pager").closest("tr").attr("hidden", true);
@@ -309,19 +308,19 @@ Grid.prototype = {
     $.jsonrpc(this.options.url, {
       offset: this.rowOffset
     }, function(data) {
-      $.jade.getTemplate("grid/row", function() {
+      $.jade.getTemplate("grid/row", function(fn) {
         var actions, i, records;
         records = data.records;
         actions = data.actions;
         i = 0;
         while (i < records.length) {
           records[i].actions = actions;
-          $grid.find("tbody").append($.jade.renderSync("views_grid_row", records[i], that.jadeError));
+          $grid.find("tbody").append($.jade.renderSync(fn, records[i], that.jadeError));
           ++i;
         }
         $grid.find("#foot-pager").closest("tr").attr("hidden", true);
         if (that.bottomOfTable() < 0) {
-          $grid.find("#load-more-data").attr( "hidden", true );
+          $grid.find("#load-more-data").attr("hidden", true);
         }
         that.isWaiting = false;
       });

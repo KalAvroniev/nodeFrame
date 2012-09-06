@@ -1,6 +1,6 @@
 Controller = require(app.config.appDir + '/lib/Controller.coffee')
 
-class Test extends Controller
+class Modules_Test extends Controller
 	module.exports = @
 
 	run: (req, res, url) ->

@@ -14,7 +14,7 @@
 
 				Panels.add(
 					id: "moo"
-					url: "modules/bank-and-cart/panels/checkout"
+					url: "/bank-and-cart/panels/checkout"
 					size: "mini"
 					temporary: true
 					h1: "checkout"
@@ -33,7 +33,7 @@
 
 				Panels.add(
 					id: "moo1"
-					url: "/modules/bank-and-cart/panels/checkout"
+					url: "/bank-and-cart/panels/checkout"
 					temporary: true
 					h1: "temp-checkout"
 					h2: "moo in here"

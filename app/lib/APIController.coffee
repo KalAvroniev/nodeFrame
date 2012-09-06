@@ -59,7 +59,7 @@ class APIController
 			index = app.options.cache.hashTag(index, @namespace)
 			@getDataFromCache(index, (err, content) =>
 				if content
-					console.log("Data cache used.", index)
+					console.log("Data cache used.")
 					req.success(content)
 				else
 					@render(req, (err, content) =>

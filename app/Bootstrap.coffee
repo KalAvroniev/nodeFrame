@@ -3,7 +3,7 @@ express = require("express")
 everyauth = require("everyauth")
 fs	 = require('fs')
 jade = require('jade')
-path = require('path')
+path_module = require('path')
 memcached = require('memcached')
 cronJob = require('cron').CronJob
 DBWrapper = require('node-dbi').DBWrapper
@@ -102,19 +102,25 @@ class Bootstrap
 		@app.use(@postEveryauthMiddlewareHack())
 		
 		# setup cache
-		if 'memcache' in @config.cache.stores 
-			@options.memcache = new memcached(@config.memcache.ips, @config.memcache.options)		
-		
-		if 'db' in @config.cache.stores
-			dbConfig = 
-				host: app.config.sql.host
-				user: app.config.sql.user
-				password: app.config.sql.pass
-				database: 'cache'
-			@options.dbcache = new DBWrapper(@config.sql.type, dbConfig)
-			#@options.dbcache.connect()	
-	
 		@options.cache = new (require('./lib/CacheStore.coffee'))
+		if @config.cache.enabled
+			if 'memcache' in @config.cache.stores 
+				@options.memcache = new memcached(@config.memcache.ips, @config.memcache.options)		
+
+			if 'db' in @config.cache.stores
+				dbConfig = 
+					host: app.config.sql.host
+					user: app.config.sql.user
+					password: app.config.sql.pass
+					database: 'cache'
+				@options.dbcache = new DBWrapper(@config.sql.type, dbConfig)
+			new cronJob('*/10 * * * * *'
+				, () => 
+					@options.cache.cacheCheck()
+				, null
+				, true
+				, 'Australia/Sydney'
+			)
 		
 		@registerControllers()
 		@deleteMinified(@config.pubDir + '/js/require')
@@ -129,7 +135,7 @@ class Bootstrap
 		
 		@app.configure( =>
 			@app.set("view engine", "jade")
-			@app.set("views", @config.appDir + "/views/")
+			@app.set("views", @config.appDir + "/views")
 			@app.set('view options', { pretty: true })
 		)
 		
@@ -145,14 +151,6 @@ class Bootstrap
 			socketIoServer.addClient(socket)
 		)
 		
-		#crons
-		new cronJob('*/10 * * * * *'
-			, () => 
-				@options.cache.cacheCheck()
-			, null
-			, true
-			, 'Australia/Sydney'
-		)
 		
 	@realUrl: (url) ->
 		if url.indexOf('?') >= 0
@@ -162,9 +160,19 @@ class Bootstrap
 		if url == ''
 			url = '/login'
 		return url
+		
+	realPath: (path, cb) ->
+		controller = @config.appDir + "/controllers/modules" + path
+		fs.stat(controller + ".coffee", (err, stat) =>
+			if err
+				controller += '/index'
+			controller += '.coffee'
+			cb(path, controller)
+		)
+				
 
 	handleJadeRequest: (req, res) ->
-		url = 'views' + Bootstrap.realUrl(req.url)
+		url = 'views/modules' + Bootstrap.realUrl(req.url)
 
 		# fetch the raw jade
 		fs.readFile(url, 'utf8', (err, data) ->
@@ -182,12 +190,14 @@ class Bootstrap
 	handleRequest: (req, res) =>
 		url = Bootstrap.realUrl(req.url)
 		# run
-		controller = new (require(@config.appDir + "/controllers" + url + ".coffee"))
-		res.view = {}
-		controller.run(req, res, url)
+		@realPath(url, (url, path) ->
+			controller = new (require(path))
+			res.view = {}
+			controller.run(req, res, url)
+		)
 
-	registerControllers: (path = 'controllers') ->
-		if path == 'controllers'
+	registerControllers: (path = 'controllers/modules') ->
+		if path == 'controllers/modules'
 			console.log("Registering Controllers...")
 			@app.all('/', @handleRequest)
 
@@ -199,15 +209,22 @@ class Bootstrap
 					@registerControllers(path + '/' + file)
 			)
 		catch e
-			console.log("Registering controller '" + path.substr(11, path.length - 18) + "'")
-			@app.all(path.substr(11, path.length - 18), @handleRequest)
-			@app.all(path.substr(11, path.length - 18) + ".jade", @handleJadeRequest)
-			@flushCache(path.substr(11, path.length - 18))
+			ext = path_module.extname(path)
+			controller = path.replace(/controllers\/modules/, '').replace(ext, '')			
+			dest = path_module.basename(controller, ext)
+			if dest == 'index'
+				controller = path_module.dirname(controller)
+			console.log("Registering controller '" + controller + "'")
+			@app.all(controller, @handleRequest)
+			@app.all(controller + ".jade", @handleJadeRequest)
+			@flushCache(controller)
 			
 	flushCache: (url) ->
 		if @config.flush? and (@config.flush == 'all' or url in @config.flush)
-			controller = new (require(@config.appDir + "/controllers" + url + ".coffee"))	
-			controller.delPageFromCache(url)		
+			@realPath(url, (url, path) ->
+				controller = new (require(path))
+				controller.delPageFromCache(url)		
+			)
 
 	loadConfig: (config) ->
 		@config = require('./config/' + config + '.coffee').config

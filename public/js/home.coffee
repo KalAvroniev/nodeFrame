@@ -42,7 +42,7 @@
 
 				Panels.add(
 					id: "moo"
-					url: "/modules/home/panels/list-forsale"
+					url: "/home/panels/list-forsale"
           size: "full"
 					temporary: true
 					h1: "list-forsale"
@@ -59,7 +59,7 @@
 
 				Panels.add(
 					id: "moo2"
-					url: "/modules/home/panels/import-domains"
+					url: "/home/panels/import-domains"
           size: "mini"
 					temporary: true
 					h1: "import-domains"

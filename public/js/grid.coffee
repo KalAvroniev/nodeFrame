@@ -34,9 +34,9 @@ Grid:: =
 		$.jsonrpc(@options.url
 			, offset: @rowOffset
 			, (data) ->
-				$.jade.getTemplate("grid/table", ->
-					$grid.html $.jade.renderSync("views_grid_table", data, that.jadeError)
-					$.jade.getTemplate("grid/row", ->
+				$.jade.getTemplate("grid/table", (fn) ->
+					$grid.html $.jade.renderSync(fn, data, that.jadeError)
+					$.jade.getTemplate("grid/row", (fn) ->
 						records = data.records
 						actions = data.actions
 						i = 0
@@ -44,7 +44,7 @@ Grid:: =
 						while i < records.length
 							# push actions onto records
 							records[i].actions = actions
-							$grid.find("tbody").append $.jade.renderSync("views_grid_row", records[i], that.jadeError)
+							$grid.find("tbody").append $.jade.renderSync(fn, records[i], that.jadeError)
 							++i
 
 						# hide spinner
@@ -398,7 +398,7 @@ Grid:: =
 			, offset: @rowOffset
 			, (data) ->	
 				$.jade.getTemplate("grid/row"
-					, ->
+					, (fn) ->
 						records = data.records
 						actions = data.actions
 						i = 0
@@ -407,7 +407,7 @@ Grid:: =
 
 							# push actions onto records
 							records[i].actions = actions
-							$grid.find("tbody").append $.jade.renderSync("views_grid_row", records[i], that.jadeError)
+							$grid.find("tbody").append $.jade.renderSync(fn, records[i], that.jadeError)
 							++i
 
 						# hide spinner

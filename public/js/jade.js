@@ -9,7 +9,7 @@ $.jade.getTemplate = function(url, success, options) {
   if (fnRaw.charAt(0) === "_") {
     fnRaw = fnRaw.substr(1);
   }
-  fn = "views_" + fnRaw;
+  fn = "views_modules_" + fnRaw;
   if (document[fn] !== undefined) {
     return success(fn);
   }
@@ -22,7 +22,7 @@ $.jade.getTemplate = function(url, success, options) {
       if (fnRaw.charAt(0) === "_") {
         fnRaw = fnRaw.substr(1);
       }
-      fn = "views_" + fnRaw;
+      fn = "views_modules_" + fnRaw;
       success(fn);
     },
     failure: function(error) {

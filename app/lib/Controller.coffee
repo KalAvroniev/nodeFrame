@@ -30,7 +30,7 @@ class Controller
 		
 	defaultView: (url) ->
 		if @view == ''
-			@view = url.substr(1)
+			@view = 'modules/' + url.substr(1)
 			
 	modMasterParams: (params) ->
 		@params[key] = val for key, val of params

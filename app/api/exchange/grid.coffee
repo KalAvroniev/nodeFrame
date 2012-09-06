@@ -1,5 +1,5 @@
 APIController = require(app.config.appDir + '/lib/APIController.coffee')
-GridModel = require(app.config.appDir + '/models/Grid.coffee')
+GridModel = require(app.config.appDir + '/lib/Grid.coffee')
 
 class API_Exchange_Grid extends APIController
 	module.exports = @
@@ -168,7 +168,7 @@ class API_Exchange_Grid extends APIController
 
 		grid.addAction({
 			id: "place-bid",
-			path: "/modules/exchange/panels",
+			path: "/exchange/panels",
 			tooltip: "Bid on this domain",
 			icon: "W",
 			text: "Bid"

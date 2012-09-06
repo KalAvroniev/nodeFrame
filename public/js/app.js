@@ -61,7 +61,7 @@ $.app.state.restoreModule = function() {
   window.history.pushState("", module, "/" + module);
   $("#main-container").trigger("ajaxUnload");
   $.app.state.update("modules.selected", module);
-  $.ajax("/modules/" + module + "?ajax=1", {
+  $.ajax("/" + module + "/ajax?ajax=1", {
     success: function(data) {
       $("#ajax-container").html(data);
       $(".selected").removeClass("selected");

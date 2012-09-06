@@ -5,9 +5,10 @@ class CacheStore
 	module.exports = @
 	
 	constructor: () -> 
-		store = app.config.cache.stores[app.config.cache.index]
-		@CS = require(app.config.appDir + '/lib/Cache/' + store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter.coffee')
-		@cs = new @CS()
+		if app.config.cache.enabled
+			store = app.config.cache.stores[app.config.cache.index]
+			@CS = require(app.config.appDir + '/lib/Cache/' + store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter.coffee')
+			@cs = new @CS()
 				
 	changeStore: (index) ->
 		if index < app.config.cache.stores.length
@@ -98,7 +99,7 @@ class CacheStore
 									@cacheCheck()
 							else if not err
 								if i < app.config.cache.index
-									app.options.cache.changeStore(i)									
+									app.options.cache.changeStore(i)	
 								app.config.cache.enabled = true
 						)
 				)

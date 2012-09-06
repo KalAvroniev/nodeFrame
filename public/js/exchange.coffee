@@ -19,7 +19,7 @@
 
 				Panels.add(
 					id: "moo1"
-					url: "/modules/exchange/panels/make-offer"
+					url: "/exchange/panels/make-offer"
 					temporary: true
 					h1: "temp-make-offer"
 					h2: "moo in here"
@@ -35,7 +35,7 @@
 
 				Panels.add(
 					id: "moo2"
-					url: "/modules/exchange/panels/place-bid"
+					url: "/exchange/panels/place-bid"
 					temporary: true
 					h1: "temp-place-bid"
 					h2: "moo in here"
@@ -51,7 +51,7 @@
 
 				Panels.add(
 					id: "moo3"
-					url: "/modules/exchange/panels/backorder"
+					url: "/exchange/panels/backorder"
 					temporary: true
 					h1: "temp-backorder"
 					h2: "moo in here"
@@ -67,7 +67,7 @@
 
 				Panels.add(
 					id: "moo4"
-					url: "/modules/exchange/panels/watchlist"
+					url: "/exchange/panels/watchlist"
 					temporary: true
 					h1: "temp-watchlist"
 					h2: "moo in here"

@@ -4,7 +4,7 @@ $.jade.getTemplate = (url, success, options) ->
 	fnRaw = url.replace(/[\/-]/g, "_")
 	fn = undefined
 	fnRaw = fnRaw.substr(1)  if fnRaw.charAt(0) is "_"
-	fn = "views_" + fnRaw
+	fn = "views_modules_" + fnRaw
 	return success(fn)  if document[fn] isnt `undefined`
 
 	# we need to load it
@@ -15,7 +15,7 @@ $.jade.getTemplate = (url, success, options) ->
 			fnRaw = url.replace(/[\/-]/g, "_")
 			fn = undefined
 			fnRaw = fnRaw.substr(1)  if fnRaw.charAt(0) is "_"
-			fn = "views_" + fnRaw
+			fn = "views_modules_" + fnRaw
 			success fn
 			return
 
