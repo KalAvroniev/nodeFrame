@@ -33,21 +33,21 @@ class CacheStore
 		if app.config.cache.enabled
 			@cs.hashTag(key,tag)
 		
-	read: (key, cb) ->
+	read: (key, cb, expire = 0) ->
 		if app.config.cache.enabled
-			@cs.read(key, cb)
+			@cs.read(key, cb, expire)
 		else
 			cb(true)
 	
-	@static_read: (key, cb) ->
+	@static_read: (key, cb, expire = 0) ->
 		if app.config.cache.enabled
-			@CS.static_read(key, cb)
+			@CS.static_read(key, cb, expire)
 		else
 			cb(true)
 		
-	write: (key, val, cb) ->
+	write: (key, val, cb, expire = 0) ->
 		if app.config.cache.enabled
-			@cs.write(key, val, cb)
+			@cs.write(key, val, cb, expire)
 		else
 			cb(true)
 	

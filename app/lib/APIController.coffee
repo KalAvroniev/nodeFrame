@@ -27,12 +27,13 @@ class APIController
 	modMasterParams: (params) ->
 		@params[key] = val for key, val of params
 					
-	getDataFromCache: (url, cb) ->
+	getDataFromCache: (url, expire, cb) ->
 		app.options.cache.read(url, (err, data, change) ->
-			if err
-				cb(err)
-			else
-				cb(undefined, JSON.parse(data))
+				if err
+					cb(err)
+				else
+					cb(undefined, JSON.parse(data))
+			, expire
 		)
 
 	setDataToCache: (url, content, expire) ->
@@ -55,9 +56,10 @@ class APIController
 	render: (cb) ->
 	
 	ready: (req, index) ->
+		url = index
 		if @namespace?
 			index = app.options.cache.hashTag(index, @namespace)
-			@getDataFromCache(index, (err, content) =>
+			@getDataFromCache(index, @params.expires, (err, content) =>
 				if content
 					console.log("Data cache used.")
 					req.success(content)

@@ -16,13 +16,40 @@ class FileAdapter
 	hashTag: (file, folder) ->
 		@tag(FileAdapter.hash(file), folder)
 	
-	read: (file, cb) ->
-		fs.readFile(app.config.cacheDir + '/' + file, 'utf8', cb)
+	read: (file, cb, expire = 0) ->
+		fs.stat(app.config.cacheDir + '/' + file, (err, stat) ->
+			if stat
+				if expire != 0
+					expire = Math.round(stat.mtime.getTime() / 1000) + stat.mtime.getTimezoneOffset() * 60 + expire
+				
+				date = new Date()
+				now = Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60
+				if expire == 0 or expire >= now
+					fs.readFile(app.config.cacheDir + '/' + file, 'utf8', cb)
+				else
+					cb(true)
+			
+			else
+				cb(true)
+		)
 		
-	@static_read: (file, cb) ->
-		fs.readFile(app.config.cacheDir + '/' + file, 'utf8', cb)
+	@static_read: (file, cb, expire = 0) ->
+		fs.stat(app.config.cacheDir + '/' + file, (err, stat) ->
+			if stat
+				if expire != 0
+					expire = Math.round(stat.mtime.getTime() / 1000) + stat.mtime.getTimezoneOffset() * 60 + expire
+				date = new Date()
+				now = Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60
+				if expire == 0 or expire >= now
+					fs.readFile(app.config.cacheDir + '/' + file, 'utf8', cb)
+				else
+					cb(true)
+			
+			else
+				cb(true)
+		)
 	
-	write: (file, data, cb) -> 
+	write: (file, data, cb, expire = 0) -> 
 		fs.writeFile(app.config.cacheDir + '/' + file, data, (err) ->
 			if err
 				fs.mkdir(app.config.cacheDir + '/' + file.split(path.sep)[0], '0777', cb)

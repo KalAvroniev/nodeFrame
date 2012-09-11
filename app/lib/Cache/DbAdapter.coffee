@@ -17,14 +17,16 @@ class DbAdapter
 	hashTag: (key, tag) ->
 		@tag(DbAdapter.hash(key), tag)
 		
-	read: (key, cb) ->
+	read: (key, cb, expire = 0) ->
 		split_key = key.split(path.sep)
 		table = if split_key.length > 1 then split_key[0] else 'namespace'
 		key = if split_key.length > 1 then split_key[1] else key
 		if not app.options.dbcache.isConnected() 
 			cb(null, null, true)
 		else
-			app.options.dbcache.fetchOne('SELECT val FROM `' + table + '` WHERE id = ?', [key], (err, res) ->		
+			date = new Date()
+			expire = Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60
+			app.options.dbcache.fetchOne('SELECT val FROM `' + table + '` WHERE id = ? AND (expires = 0 OR expires >= ?)', [key, expire], (err, res) ->		
 				if err and (err.code == 'ECONNREFUSED' or err.number == 1049)
 					cb(err, res, true)
 				else if not res
@@ -33,14 +35,16 @@ class DbAdapter
 					cb(err, res)			
 			)
 	
-	@static_read: (key, cb) ->
+	@static_read: (key, cb, expire = 0) ->
 		split_key = key.split(path.sep)
 		table = if split_key.length > 1 then split_key[0] else 'namespace'
 		key = if split_key.length > 1 then split_key[1] else key
 		if not app.options.dbcache.isConnected() 
 			cb(null, null, true)
 		else
-			app.options.dbcache.fetchOne('SELECT val FROM `' + table + '` WHERE id = ?', [key], (err, res) ->
+			date = new Date()
+			expire = Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60
+			app.options.dbcache.fetchOne('SELECT val FROM `' + table + '` WHERE id = ? AND (expires = 0 OR expires >= ?)', [key, expire], (err, res) ->
 				if err and (err.code == 'ECONNREFUSED' or err.number == 1049)
 					cb(err, res, true)
 				else if not res
@@ -49,21 +53,27 @@ class DbAdapter
 					cb(err, res)			
 			)
 	
-	write: (key, value, cb) -> 
+	write: (key, value, cb, expire = 0) -> 
 		split_key = key.split(path.sep)
 		table = if split_key.length > 1 then split_key[0] else 'namespace'
 		id = if split_key.length > 1 then split_key[1] else key
 		if not app.options.dbcache.isConnected() 
 			cb(null, null, true)
 		else
-			app.options.dbcache.query('REPLACE INTO `' + table + '` VALUES (?, ?)', [id, value], (err, res) =>
+			if expire != 0
+				date = new Date()
+				expires = Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60 + expire
+			else
+				expires = expire
+			
+			app.options.dbcache.query('REPLACE INTO `' + table + '` VALUES (?, ?, ?)', [id, value, expires], (err, res) =>
 				if err 
 					if err.code == 'ECONNREFUSED' or err.number == 1049
 						cb(err, res, true)
 					else
-						app.options.dbcache.query('CREATE TABLE IF NOT EXISTS `' + table + '` (id binary(32) NOT NULL, val blob NOT NULL, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8', null, (err) =>
+						app.options.dbcache.query('CREATE TABLE IF NOT EXISTS `' + table + '` (id binary(32) NOT NULL, val blob NOT NULL, expires int(11) NOT NULL DEFAULT 0, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8', null, (err) =>
 							if not err
-								@write(key, value, cb)
+								@write(key, value, cb, expire)
 						)
 				else if not res
 					cb(true)

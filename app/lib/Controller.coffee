@@ -35,12 +35,13 @@ class Controller
 	modMasterParams: (params) ->
 		@params[key] = val for key, val of params
 		
-	getPageFromCache: (url, cb) ->
+	getPageFromCache: (url, expire, cb) ->
 		app.options.cache.read(url, (err, data, change) ->
-			if err
-				cb(err)
-			else
-				cb(undefined, data)
+				if err
+					cb(err)
+				else
+					cb(undefined, data)
+			, expire
 		)
 
 	setPageToCache: (url, content, expire) ->
@@ -62,9 +63,10 @@ class Controller
 		)
 		
 	ready: (req, res, index) ->
+		url = index
 		if @namespace?
 			index = app.options.cache.hashTag(index, @namespace)
-			@getPageFromCache(index, (err, content) =>
+			@getPageFromCache(index, res.view.expires, (err, content) =>
 				if content
 					console.log("Page cache used.")
 					res.send(content)

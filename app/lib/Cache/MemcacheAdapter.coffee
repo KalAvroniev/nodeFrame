@@ -14,7 +14,7 @@ class MemcacheAdapter
 	hashTag: (key, tag) ->
 		@tag(MemcacheAdapter.hash(key), tag)
 		
-	read: (key, cb) ->
+	read: (key, cb, expire = 0) ->
 		app.options.memcache.get(key, (err, res) ->
 			if err
 				cb(err, res, true)
@@ -24,7 +24,7 @@ class MemcacheAdapter
 				cb(err, res)			
 		)
 	
-	@static_read: (key, cb) ->
+	@static_read: (key, cb, expire = 0) ->
 		app.options.memcache.get(key, (err, res) ->
 			if err
 				cb(err, res, true)

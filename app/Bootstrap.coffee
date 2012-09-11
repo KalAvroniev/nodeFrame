@@ -102,7 +102,6 @@ class Bootstrap
 		@app.use(@postEveryauthMiddlewareHack())
 		
 		# setup cache
-		@options.cache = new (require('./lib/CacheStore.coffee'))
 		if @config.cache.enabled
 			if 'memcache' in @config.cache.stores 
 				@options.memcache = new memcached(@config.memcache.ips, @config.memcache.options)		
@@ -114,6 +113,7 @@ class Bootstrap
 					password: app.config.sql.pass
 					database: 'cache'
 				@options.dbcache = new DBWrapper(@config.sql.type, dbConfig)
+
 			new cronJob('*/10 * * * * *'
 				, () => 
 					@options.cache.cacheCheck()
@@ -121,7 +121,8 @@ class Bootstrap
 				, true
 				, 'Australia/Sydney'
 			)
-		
+		@options.cache = new (require('./lib/CacheStore.coffee'))
+			
 		@registerControllers()
 		@deleteMinified(@config.pubDir + '/js/require')
 
