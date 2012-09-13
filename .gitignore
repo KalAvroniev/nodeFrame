@@ -21,3 +21,6 @@ cache/
 /public/img/.DS_Store
 /.DS_Store
 .DS_Store
+
+#code coverage
+/app-cov/

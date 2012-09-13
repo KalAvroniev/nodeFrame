@@ -1,6 +1,4 @@
-Controller = require(app.config.appDir + '/lib/Controller.coffee')
-
-class Modules_Notifications_Generic extends Controller
+class Modules_Notifications_Generic extends app.modules.lib.Controller
 	module.exports = @
 
 	run: (req, res, url) ->

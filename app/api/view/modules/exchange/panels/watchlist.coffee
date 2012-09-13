@@ -1,6 +1,4 @@
-APIController = require(app.config.appDir + '/lib/APIController.coffee')
-
-class API_View_Modules_Exchange_Panels_Watchlist extends APIController
+class API_View_Modules_Exchange_Panels_Watchlist extends app.modules.lib.APIController
 	module.exports = @
 
 	constructor: () ->

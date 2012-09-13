@@ -1,6 +1,6 @@
 util = require('util')
 
-class SessionStore extends require('connect').session.Store
+class SessionStore extends require('express').session.Store
 	module.exports = @
 
 	constructor: () ->

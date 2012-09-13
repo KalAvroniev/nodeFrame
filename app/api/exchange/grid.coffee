@@ -1,7 +1,4 @@
-APIController = require(app.config.appDir + '/lib/APIController.coffee')
-GridModel = require(app.config.appDir + '/lib/Grid.coffee')
-
-class API_Exchange_Grid extends APIController
+class API_Exchange_Grid extends app.modules.lib.APIController
 	module.exports = @
 
 	constructor: () ->
@@ -10,7 +7,7 @@ class API_Exchange_Grid extends APIController
 			requireUserSession: true
 
 	render: (req, cb) ->
-		grid = new GridModel()
+		grid = new app.modules.lib.Grid()
 
 		# header
 		grid.addHeaderLabel({

@@ -5,20 +5,27 @@ fs	 = require('fs')
 jade = require('jade')
 path_module = require('path')
 memcached = require('memcached')
+modules = require('./modules')
 cronJob = require('cron').CronJob
 DBWrapper = require('node-dbi').DBWrapper
-JsonRpcServer = require('./lib/JsonRpcServer.coffee')
-SocketIoServer = require('./lib/SocketIoServer.coffee')
 	
 class Bootstrap
 	module.exports = @
-		
-	socketIoServer = new SocketIoServer()
 	
 	constructor: (@options = {}) ->
+		@modules = {}
+		@config = {}
 	
-	start: () ->
+	start: () ->		
 		@loadConfig(@options.config)
+		
+		#register all modules
+		if process.env.COVERAGE
+			modules.registerModules('../app-cov/lib', @modules)
+			modules.registerModules('../app-cov', @modules)
+		else
+			modules.registerModules('./lib', @modules)
+			modules.registerModules('./', @modules)
 		
 		everyauth.debug = true
 		
@@ -121,13 +128,13 @@ class Bootstrap
 				, true
 				, 'Australia/Sydney'
 			)
-		@options.cache = new (require('./lib/CacheStore.coffee'))
+		@options.cache = new @modules.lib.CacheStore
 			
 		@registerControllers()
 		@deleteMinified(@config.pubDir + '/js/require')
 
 		# register JSON-RPC methods must be before the bodyParser
-		@jsonRpcServer = new JsonRpcServer()
+		@jsonRpcServer = new @modules.lib.JsonRpcServer()
 		@jsonRpcServer.registerMethods()
 
 		@app.post('/jsonrpc', (req, res) =>
@@ -145,13 +152,14 @@ class Bootstrap
 		server = @app.listen(@options.port)
 		console.log("Server started on port " + @options.port + ".")
 		
-		# setup socket.io
+		### setup socket.io
+		socketIoServer = new @modules.lib.SocketIoServer()
 		socketIoServer.setJsonRpcServer(@jsonRpcServer)
 		io = require('socket.io').listen(server)
 		io.sockets.on('connection', (socket) ->
 			socketIoServer.addClient(socket)
 		)
-		
+		###
 		
 	@realUrl: (url) ->
 		if url.indexOf('?') >= 0
@@ -170,7 +178,21 @@ class Bootstrap
 			controller += '.coffee'
 			cb(path, controller)
 		)
-				
+		
+	getController: (path) ->
+		controller = @modules
+		path = path_module.resolve(path)
+		ext = path_module.extname(path)
+		module = path_module.basename(path, ext)
+		path = path_module.dirname(path)				
+		folders = path.split(path_module.sep)
+		start = folders.indexOf('app')
+		if start >= 0
+			for i in [++start..folders.length - 1]
+				controller = controller[folders[i]]
+			return controller[module]
+		else
+			return false				
 
 	handleJadeRequest: (req, res) ->
 		url = 'views/modules' + Bootstrap.realUrl(req.url)
@@ -191,10 +213,12 @@ class Bootstrap
 	handleRequest: (req, res) =>
 		url = Bootstrap.realUrl(req.url)
 		# run
-		@realPath(url, (url, path) ->
-			controller = new (require(path))
-			res.view = {}
-			controller.run(req, res, url)
+		@realPath(url, (url, path) =>
+			controller = @getController(path)
+			if controller
+				controller = new controller
+				res.view = {}
+				controller.run(req, res, url)
 		)
 
 	registerControllers: (path = 'controllers/modules') ->
@@ -222,9 +246,12 @@ class Bootstrap
 			
 	flushCache: (url) ->
 		if @config.flush? and (@config.flush == 'all' or url in @config.flush)
-			@realPath(url, (url, path) ->
-				controller = new (require(path))
-				controller.delPageFromCache(url)		
+			controller = @modules
+			@realPath(url, (url, path) =>
+				controller = @getController(path)
+				if controller
+					controller = new controller
+					controller.delPageFromCache(url)		
 			)
 
 	loadConfig: (config) ->

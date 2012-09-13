@@ -1,6 +1,4 @@
-Controller = require(app.config.appDir + '/lib/Controller.coffee')
-
-class Modules_Grid_Table extends Controller
+class Modules_Grid_Table extends app.modules.lib.Controller
 	module.exports = @
 
 	run: (req, res, url) ->

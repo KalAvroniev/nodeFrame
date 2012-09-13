@@ -1,9 +1,8 @@
-Controller = require(app.config.appDir + '/lib/Controller.coffee')
 requirejs = require('requirejs')
 fs = require('fs')
 util = require('util')
 
-class Modules_Admin extends Controller
+class Modules_Admin extends app.modules.lib.Controller
 	module.exports = @
 
 	constructor: () ->

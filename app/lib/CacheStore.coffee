@@ -7,13 +7,13 @@ class CacheStore
 	constructor: () -> 
 		if app.config.cache.enabled
 			store = app.config.cache.stores[app.config.cache.index]
-			@CS = require(app.config.appDir + '/lib/Cache/' + store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter.coffee')
+			@CS = app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
 			@cs = new @CS()
 				
 	changeStore: (index) ->
 		if index < app.config.cache.stores.length
 			store = app.config.cache.stores[index]
-			@CS = require(app.config.appDir + '/lib/Cache/' + store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter.coffee')
+			@CS = app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
 			#@cs.destructor()
 			@cs = new @CS()
 			app.config.cache.index = index
@@ -83,7 +83,7 @@ class CacheStore
 		for i in [start..0] by -1
 			((i) =>
 				store = app.config.cache.stores[i]
-				Store = require(app.config.appDir + '/lib/Cache/' + store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter.coffee')
+				Store = app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
 				store = new Store()
 				key = Store.hash(val)
 				store.write(key, val, (err, res, change) =>

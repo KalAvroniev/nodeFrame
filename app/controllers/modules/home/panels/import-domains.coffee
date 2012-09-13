@@ -1,6 +1,4 @@
-Controller = require(app.config.appDir + '/lib/Controller.coffee')
-
-class Modules_Home_Panels_ImportDoimains extends Controller
+class Modules_Home_Panels_ImportDoimains extends app.modules.lib.Controller
 	module.exports = @
 
 	run: (req, res, url) ->

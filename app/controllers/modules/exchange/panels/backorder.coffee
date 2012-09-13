@@ -1,6 +1,4 @@
-Controller = require(app.config.appDir + '/lib/Controller.coffee')
-
-class Modules_Exchange_Panels_Backorder extends Controller
+class Modules_Exchange_Panels_Backorder extends app.modules.lib.Controller
 	module.exports = @
 
 	run: (req, res, url) ->

@@ -1,5 +1,4 @@
 fs = require('fs')
-UserState = require('./UserState.coffee')
 
 class StateStore
 	module.exports = @
@@ -22,7 +21,7 @@ class StateStore
 		# go fetch the state from a database...
 		# but for now well just create a default state if it doesnt exist
 		if not @users[user_id]
-			@users[user_id] = new UserState()
+			@users[user_id] = new app.modules.lib.UserState()
 			@save()
 
 		cb(@users[user_id])
@@ -34,14 +33,14 @@ class StateStore
 		)
 
 	reset: (user_id, cb) ->
-		@users[user_id] = new UserState()
+		@users[user_id] = new app.modules.lib.UserState()
 		@save(() =>
 			cb(@users[user_id])
 		)
 
 	update: (user_id, name, value, cb) ->
 		if not @users[user_id]
-			@users[user_id] = new UserState()
+			@users[user_id] = new app.modules.lib.UserState()
 
 		parts = name.split(/\./)
 		for part, i in parts

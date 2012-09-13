@@ -1,6 +1,4 @@
-APIController = require(app.config.appDir + '/lib/APIController.coffee')
-
-class API_User_GetState extends APIController
+class API_User_GetState extends app.modules.lib.APIController
 	module.exports = @
 
 	constructor: () ->

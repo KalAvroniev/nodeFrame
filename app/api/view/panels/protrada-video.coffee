@@ -1,6 +1,4 @@
-APIController = require(app.config.appDir + '/lib/APIController.coffee')
-
-class API_View_Panels_ProtradaVideo extends APIController
+class API_View_Panels_ProtradaVideo extends app.modules.lib.APIController
 	module.exports = @
 
 	constructor: () ->

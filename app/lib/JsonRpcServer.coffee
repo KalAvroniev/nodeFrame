@@ -1,5 +1,5 @@
 fs = require('fs')
-JsonRpcRequest = new require('./JsonRpcRequest.coffee')
+path_module = require('path')
 
 class JsonRpcServer
 	module.exports = @
@@ -29,15 +29,31 @@ class JsonRpcServer
 					@registerMethods(basePath, path + '/' + file)
 			)
 		catch e
-			@registerMethod(path.substr(basePath.length + 1, path.length - 8 - basePath.length), require('../' + path))
+			@registerMethod(path.substr(basePath.length + 1, path.length - 8 - basePath.length), path)
 
 		# print
 		if path == basePath
 			console.log()
 
-	registerMethod: (name, func) ->
+	getController: (path) ->
+		controller = app.modules
+		path = path_module.resolve(path)
+		ext = path_module.extname(path)
+		module = path_module.basename(path, ext)
+		path = path_module.dirname(path)				
+		folders = path.split(path_module.sep)
+		start = folders.indexOf('api')
+		if start >= 0
+			for i in [start..folders.length - 1]
+				controller = controller[folders[i]]
+			return controller[module]
+		else
+			return false		
+
+	registerMethod: (name, path) ->
 		console.log("  JSON-RPC Method '" + name + "'")
-		@registeredMethods[name] = func
+		controller = @getController(path)
+		@registeredMethods[name] = controller
 		@flushCache(name)
 		
 	flushCache: (url) ->
@@ -82,7 +98,7 @@ class JsonRpcServer
 			return callback(JSON.stringify(result))
 
 		# build the request
-		req = new JsonRpcRequest(
+		req = new app.modules.lib.JsonRpcRequest(
 			call
 			, (result, error = null) =>
 				if error

@@ -1,6 +1,4 @@
-APIController = require(app.config.appDir + '/lib/APIController.coffee')
-
-class API_Notifications_Push extends APIController
+class API_Notifications_Push extends app.modules.lib.APIController
 	module.exports = @
 
 	constructor: () ->

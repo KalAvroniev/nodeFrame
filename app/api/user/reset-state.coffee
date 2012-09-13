@@ -1,6 +1,4 @@
-APIController = require(app.config.appDir + '/lib/APIController.coffee')
-
-class API_User_ResetState extends APIController
+class API_User_ResetState extends app.modules.lib.APIController
 	module.exports = @
 
 	render: (req, cb) ->

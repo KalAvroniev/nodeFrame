@@ -1,6 +1,4 @@
-Admin = require( app.config.appDir + "/controllers/admin.coffee" )
-
-class Modules_BankAndCart extends Admin
+class Modules_BankAndCart extends app.modules.controllers.admin
 	module.exports = @
 
 	run: (req, res, url) ->

@@ -1,7 +1,6 @@
-Admin = require(app.config.appDir + '/controllers/admin.coffee')
 util = require('util')
 
-class Modules_Home extends Admin			
+class Modules_Home extends app.modules.controllers.admin			
 	module.exports = @
 	
 	constructor: () ->
