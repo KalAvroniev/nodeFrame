@@ -1,11 +1,11 @@
 util = require('util')
-express = require("express")
-everyauth = require("everyauth")
+express = require('express')
+everyauth = require('everyauth')
 fs	 = require('fs')
 jade = require('jade')
 path_module = require('path')
 memcached = require('memcached')
-modules = require('./modules')
+modules = require('../modules')
 cronJob = require('cron').CronJob
 DBWrapper = require('node-dbi').DBWrapper
 	
@@ -20,12 +20,8 @@ class Bootstrap
 		@loadConfig(@options.config)
 		
 		#register all modules
-		if process.env.COVERAGE
-			modules.registerModules('../app-cov/lib', @modules)
-			modules.registerModules('../app-cov', @modules)
-		else
-			modules.registerModules('./lib', @modules)
-			modules.registerModules('./', @modules)
+		modules.registerModules(__dirname + '/lib', @modules)
+		modules.registerModules(__dirname + '/', @modules)
 		
 		everyauth.debug = true
 		
@@ -152,14 +148,13 @@ class Bootstrap
 		server = @app.listen(@options.port)
 		console.log("Server started on port " + @options.port + ".")
 		
-		### setup socket.io
+		# setup socket.io
 		socketIoServer = new @modules.lib.SocketIoServer()
 		socketIoServer.setJsonRpcServer(@jsonRpcServer)
 		io = require('socket.io').listen(server)
 		io.sockets.on('connection', (socket) ->
 			socketIoServer.addClient(socket)
 		)
-		###
 		
 	@realUrl: (url) ->
 		if url.indexOf('?') >= 0
@@ -195,8 +190,9 @@ class Bootstrap
 			return false				
 
 	handleJadeRequest: (req, res) ->
-		url = 'views/modules' + Bootstrap.realUrl(req.url)
-
+		url = __dirname + '/views/modules' + Bootstrap.realUrl(req.url)
+		
+		console.log(url)
 		# fetch the raw jade
 		fs.readFile(url, 'utf8', (err, data) ->
 			if err
@@ -204,7 +200,7 @@ class Bootstrap
 			else
 				# compile the jade
 				jc = jade.compile(data, { client: true, filename: url, debug: false, compileDebug: true }).toString()
-				fn = url.replace(/\.jade$/, '').replace(/[\/-]/g, '_')
+				fn = url.replace(/^.*?app\//, '').replace(/\.jade$/, '').replace(/[\/-]/g, '_')
 				res.write('document.' + fn + ' = ' + jc)
 
 			res.end()
@@ -221,8 +217,8 @@ class Bootstrap
 				controller.run(req, res, url)
 		)
 
-	registerControllers: (path = 'controllers/modules') ->
-		if path == 'controllers/modules'
+	registerControllers: (path = __dirname + '/controllers/modules') ->
+		if path == __dirname + '/controllers/modules'
 			console.log("Registering Controllers...")
 			@app.all('/', @handleRequest)
 
@@ -235,7 +231,7 @@ class Bootstrap
 			)
 		catch e
 			ext = path_module.extname(path)
-			controller = path.replace(/controllers\/modules/, '').replace(ext, '')			
+			controller = path.replace(/.*?controllers\/modules/, '').replace(ext, '')			
 			dest = path_module.basename(controller, ext)
 			if dest == 'index'
 				controller = path_module.dirname(controller)

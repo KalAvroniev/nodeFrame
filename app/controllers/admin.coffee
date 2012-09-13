@@ -29,11 +29,11 @@ class Modules_Admin extends app.modules.lib.Controller
 
 	minifyJS: () ->
 		config =
-			baseUrl: '../public/js'
-			mainConfigFile: '../public/js/require-config/' + @params.require_conf + '.js'
+			baseUrl: './public/js'
+			mainConfigFile: './public/js/require-config/' + @params.require_conf + '.js'
 			skipModuleInsertion: true
 			name: './require-config/' + @params.require_conf
-			out: '../public/js/require/' + @params.require_conf + '.js'
+			out: './public/js/require/' + @params.require_conf + '.js'
 			optimize: 'none'		
 			excludeShallow: ["require-config/" + @params.require_conf]
 

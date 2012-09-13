@@ -14,7 +14,7 @@ class JsonRpcServer
 	constructor: () ->
 		@registeredMethods = {}
 
-	registerMethods: (basePath = 'api', path = null) ->
+	registerMethods: (basePath = __dirname + '/../api', path = null) ->
 		if path == null
 			path = basePath
 			

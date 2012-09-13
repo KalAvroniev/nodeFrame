@@ -6,10 +6,10 @@ $.jade.getTemplate = (url, success, options) ->
 	fnRaw = fnRaw.substr(1)  if fnRaw.charAt(0) is "_"
 	fn = "views_modules_" + fnRaw
 	return success(fn)  if document[fn] isnt `undefined`
-
+	
 	# we need to load it
 	$.ajax({
-		url: url + ".jade"
+		url: "/" + url + ".jade"
 		dataType: "script"
 		success: ->
 			fnRaw = url.replace(/[\/-]/g, "_")
