@@ -1,20 +1,20 @@
 require('coffee-script')
 
 if(process.env.COVERAGE) {
-	Bootstrap = require('./app-cov/Bootstrap.coffee');
+	Bootstrap = require('./app-cov/Bootstrap');
 } else {
-	Bootstrap = require('./app/Bootstrap.coffee');
+	Bootstrap = require('./app/Bootstrap');
 }
 
 // production server
 if(process.env.NODE_ENV === 'production') {
-	module.exports.app = app = new Bootstrap({
+	module.exports = app = new Bootstrap({
 		'port': 8080,
 		'config': 'production'
 	});
 	app.start();
 } else {
-	module.exports.app = app = new Bootstrap({
+	module.exports = app = new Bootstrap({
 		'port': 8181,
 		'config': 'staging'
 	});

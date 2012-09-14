@@ -6,7 +6,7 @@ class SessionStore extends require('express').session.Store
 	constructor: () ->
 		@sessions = {}
 	
-		@Store = new (if app.config.store is 'memcache' then require('./MemcacheStore.coffee') else require('./FileStore.coffee'))
+		@Store = new (if app.config.store is 'memcache' then require('./MemcacheStore') else require('./FileStore'))
 		@Store.read('session_data', (err, data) =>
 			if err
 				console.error(err)

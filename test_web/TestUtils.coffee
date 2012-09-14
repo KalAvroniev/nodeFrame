@@ -1,5 +1,5 @@
 assert = require('assert')
-JsonRpcServer = require('../app/lib/JsonRpcServer.coffee')
+JsonRpcServer = require('../app/lib/JsonRpcServer')
 
 class exports.TestUtils
 

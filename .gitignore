@@ -24,3 +24,5 @@ cache/
 
 #code coverage
 /app-cov/
+/src/
+coverage.html

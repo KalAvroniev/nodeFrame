@@ -29,7 +29,7 @@ class Modules
 					file = path + '/' + file
 					stat = fs.statSync(file)
 					if stat and stat.isFile()
-						if not /Bootstrap\.coffee/.test(file) #|app\.js|modules\.coffee|start_node\.sh
+						if not /Bootstrap/.test(file) #|app\.js|modules\.coffee|start_node\.sh
 							ext = path_module.extname(file)
 							module = path_module.basename(file, ext)
 							modules[parent][module] = require(file)

@@ -15,7 +15,10 @@ class Bootstrap
 	constructor: (@options = {}) ->
 		@modules = {}
 		@config = {}
-	
+		@usersById = {}
+		@nextUserId = 0	
+		@jsonRpcServer = null
+
 	start: () ->		
 		@loadConfig(@options.config)
 		
@@ -23,10 +26,9 @@ class Bootstrap
 		modules.registerModules(__dirname + '/lib', @modules)
 		modules.registerModules(__dirname + '/', @modules)
 		
-		everyauth.debug = true
+		module.exports = @modules
 		
-		@usersById = {}
-		@nextUserId = 0		
+		everyauth.debug = true	
 			
 		usersByLogin = "protrada": @addUser(
 			login: "protrada"
@@ -167,11 +169,26 @@ class Bootstrap
 		
 	realPath: (path, cb) ->
 		controller = @config.appDir + "/controllers/modules" + path
-		fs.stat(controller + ".coffee", (err, stat) =>
+		fs.stat(controller + '.coffee', (err, stat) ->
 			if err
-				controller += '/index'
-			controller += '.coffee'
-			cb(path, controller)
+				fs.stat(controller + '/index.coffee', (err, stat) ->
+					if err
+						fs.stat(controller + '.js', (err, stat) ->
+							if err
+								controller += '/index.js'
+							else
+								controller += '.js'
+								console.log(controller)
+							
+							cb(path, controller)
+						)
+					else
+						controller += '/index.coffee'
+						cb(path, controller)
+				)
+			else
+				controller += '.coffee'
+				cb(path, controller)
 		)
 		
 	getController: (path) ->
@@ -181,7 +198,7 @@ class Bootstrap
 		module = path_module.basename(path, ext)
 		path = path_module.dirname(path)				
 		folders = path.split(path_module.sep)
-		start = folders.indexOf('app')
+		start = if process.env.COVERAGE then folders.indexOf('app-cov') else folders.indexOf('app')
 		if start >= 0
 			for i in [++start..folders.length - 1]
 				controller = controller[folders[i]]
@@ -251,7 +268,7 @@ class Bootstrap
 			)
 
 	loadConfig: (config) ->
-		@config = require('./config/' + config + '.coffee').config
+		@config = require('./config/' + config).config
 
 	deleteMinified: (path) ->
 		#read the directory

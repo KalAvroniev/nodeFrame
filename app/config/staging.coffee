@@ -1,4 +1,4 @@
-exports.config = require('./global.coffee').config
+exports.config = require('./global').config
 
 exports.config.memcache =
 	ips: ['192.168.10.42:11211']

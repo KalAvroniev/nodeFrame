@@ -1,4 +1,4 @@
-exports.config = require('./global.coffee').config
+exports.config = require('./global').config
 
 exports.config.database =
 	'host': 'development-db'
