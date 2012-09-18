@@ -4,6 +4,7 @@ class Controller
 	constructor: () ->
 		@params = 
 			'expires': 60
+			'cache': true
 		@namespace = ''
 		@view = ''
 
@@ -13,20 +14,23 @@ class Controller
 		
 		res.view[key] = val for key, val of @params	
 		
-		#namespace
-		app.options.cache.getNameSpace(res.renderView, (err, data) =>
-			if err
-				app.options.cache.setNameSpace(res.renderView, app.options.cache.cs.getNameSpace, (err, data) =>
-					if not err
-						@namespace = data
-						@ready(req, res, req.url)
-					else
-						@ready(req, res, req.url)
-				)
-			else
-				@namespace = data
-				@ready(req, res, req.url)
-		)
+		if @params.cache
+			#namespace
+			app.options.cache.getNameSpace(res.renderView, (err, data) =>
+				if err
+					app.options.cache.setNameSpace(res.renderView, app.options.cache.cs.getNameSpace, (err, data) =>
+						if not err
+							@namespace = data
+							@ready(req, res, req.url)
+						else
+							@ready(req, res, req.url)
+					)
+				else
+					@namespace = data
+					@ready(req, res, req.url)
+			)
+		else
+			@ready(req, res, req.url)
 		
 	defaultView: (url) ->
 		if @view == ''
@@ -64,7 +68,7 @@ class Controller
 		
 	ready: (req, res, index) ->
 		url = index
-		if @namespace?
+		if @namespace != ''
 			index = app.options.cache.hashTag(index, @namespace)
 			@getPageFromCache(index, res.view.expires, (err, content) =>
 				if content

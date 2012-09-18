@@ -4,25 +4,29 @@ class APIController
 	constructor: () ->
 		@params = 
 			'expires': 60
+			'cache': true
 		@validate = {}
 		@options = {}
 		@namespace = ''
 
 	run: (req, url) ->	
-		#namespace
-		app.options.cache.getNameSpace(url, (err, data) =>
-			if err
-				app.options.cache.setNameSpace(url, app.options.cache.cs.getNameSpace, (err, data) =>
-					if not err
-						@namespace = data
-						@ready(req, url)
-					else
-						@ready(req, url)
-				)
-			else
-				@namespace = data
-				@ready(req, url)
-		)
+		if @params.cache
+			#namespace
+			app.options.cache.getNameSpace(url, (err, data) =>
+				if err
+					app.options.cache.setNameSpace(url, app.options.cache.cs.getNameSpace, (err, data) =>
+						if not err
+							@namespace = data
+							@ready(req, url)
+						else
+							@ready(req, url)
+					)
+				else
+					@namespace = data
+					@ready(req, url)
+			)
+		else
+			@ready(req, url)
 		
 	modMasterParams: (params) ->
 		@params[key] = val for key, val of params
@@ -57,7 +61,7 @@ class APIController
 	
 	ready: (req, index) ->
 		url = index
-		if @namespace?
+		if @namespace != ''
 			index = app.options.cache.hashTag(index, @namespace)
 			@getDataFromCache(index, @params.expires, (err, content) =>
 				if content

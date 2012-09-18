@@ -29,9 +29,11 @@ describe('app:', () ->
 		app.modules.should.have.property('controllers')
 		app.modules.should.have.property('api')
 	)
-	it('all modules should be loaded', () ->
-		cache = new app.modules.lib.CacheStore()
-		cache.changeStore(1)
-	)
+	it('cache adapter should be memcache')
+	it('cache failover')
+	it('cache recover')
+	it('all modules should be loaded')
+	it('delete minified files')
+	it('all api modules should be loaded')
 )
 

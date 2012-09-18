@@ -1,0 +1,15 @@
+app = require('../app')
+chai = require('chai')
+should = chai.should()
+
+describe('jsonrpcserver:', () ->
+	it('modules registered')
+	it('controller found')
+	it('controller not found')
+	it('method registered')
+	it('cache flushed')
+	it('call returned valid json')
+	it('input validation')
+	it('success')
+	it('error')
+)
