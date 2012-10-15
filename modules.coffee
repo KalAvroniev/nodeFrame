@@ -1,11 +1,13 @@
 fs	 = require('fs')
 path_module = require('path')
 util = require('util')
+asunc = require('async')
 
 class Modules
 	module.exports = @
 	
-	@registerModules = (path, modules) ->
+	#recursively go through a folder and register all modules it could find
+	@registerModulesSync = (path, modules) ->
 		parent = path.split(path_module.sep).pop()
 		if parent != ''
 			modules[parent] = {}		
@@ -29,7 +31,7 @@ class Modules
 					file = path + '/' + file
 					stat = fs.statSync(file)
 					if stat and stat.isFile()
-						if not /Bootstrap/.test(file) #|app\.js|modules\.coffee|start_node\.sh
+						if not /Bootstrap/.test(file)
 							ext = path_module.extname(file)
 							module = path_module.basename(file, ext)
 							modules[parent][module] = require(file)
@@ -37,8 +39,14 @@ class Modules
 					else
 						if not /views|node_modules|config/.test(file)
 							if parent != ''
-								Modules.registerModules(file, modules[parent])
+								Modules.registerModulesSync(file, modules[parent])
 							else
-								Modules.registerModules(file, modules)
-
+								Modules.registerModulesSync(file, modules)
 			)
+		else
+			stat = fs.statSync(file)
+			if stat and stat.isFile()
+				if not /Bootstrap/.test(file)
+					ext = path_module.extname(file)
+					module = path_module.basename(file, ext)
+					modules[parent][module] = require(file)

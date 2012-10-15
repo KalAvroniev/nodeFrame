@@ -8,16 +8,16 @@ class DbAdapter
 	constructor: () -> 
 		app.options.dbcache.connect()
 				
-	tag: (key, tag) ->
+	tagSync: (key, tag) ->
 		key = tag + '/' + key
 		
-	@hash: (key) ->
+	@hashSync: (key) ->
 		key = crypto.createHash('md5').update(key).digest('hex')
 	
-	hashTag: (key, tag) ->
-		@tag(DbAdapter.hash(key), tag)
+	hashTagSync: (key, tag) ->
+		@tagSync(DbAdapter.hashSync(key), tag)
 		
-	read: (key, cb, expire = 0) ->
+	read: (key, expire = 0, cb) ->
 		split_key = key.split(path.sep)
 		table = if split_key.length > 1 then split_key[0] else 'namespace'
 		key = if split_key.length > 1 then split_key[1] else key
@@ -35,7 +35,7 @@ class DbAdapter
 					cb(err, res)			
 			)
 	
-	@static_read: (key, cb, expire = 0) ->
+	@static_read: (key, expire = 0, cb) ->
 		split_key = key.split(path.sep)
 		table = if split_key.length > 1 then split_key[0] else 'namespace'
 		key = if split_key.length > 1 then split_key[1] else key
@@ -53,7 +53,7 @@ class DbAdapter
 					cb(err, res)			
 			)
 	
-	write: (key, value, cb, expire = 0) -> 
+	write: (key, value, expire = 0, cb) -> 
 		split_key = key.split(path.sep)
 		table = if split_key.length > 1 then split_key[0] else 'namespace'
 		id = if split_key.length > 1 then split_key[1] else key
@@ -73,7 +73,7 @@ class DbAdapter
 					else
 						app.options.dbcache.query('CREATE TABLE IF NOT EXISTS `' + table + '` (id binary(32) NOT NULL, val blob NOT NULL, expires int(11) NOT NULL DEFAULT 0, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8', null, (err) =>
 							if not err
-								@write(key, value, cb, expire)
+								@write(key, value, expire, cb)
 						)
 				else if not res
 					cb(true)
@@ -98,12 +98,12 @@ class DbAdapter
 			)
 		
 	getNameSpace: (ns, cb) ->
-		DbAdapter.static_read(DbAdapter.hash(ns), cb)
+		DbAdapter.static_read(DbAdapter.hashSync(ns), 0, cb)
 		
 	setNameSpace: (ns, cb, res) ->
 		date = new Date()
 		ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
-		@write(DbAdapter.hash(ns), ts, (err, response) ->
+		@write(DbAdapter.hashSync(ns), ts, 0, (err, response) ->
 			if not err
 				cb(ns, res)
 			else
@@ -111,8 +111,8 @@ class DbAdapter
 		)
 	
 	flushNameSpace: (ns, cb) ->
-		@read(DbAdapter.hash(ns), (err, data) =>
+		@read(null, DbAdapter.hashSync(ns), 0, (err, data) =>
 			if not err and data?
 				app.options.dbcache.query('DROP TABLE `' + data + '`', null, (err)->)
-				@flush(DbAdapter.hash(ns), cb)
+				@flush(DbAdapter.hashSync(ns), cb)
 		)

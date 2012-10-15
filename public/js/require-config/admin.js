@@ -4,7 +4,7 @@ require.config({
   baseUrl: '/js',
   paths: {
     bootstrap: "bootstrap.min",
-    socket: "../../app/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io",
+    socket: "../../node_modules/socket.io/node_modules/socket.io-client/dist/socket.io",
     tinyscrollbar: "jquery.tinyscrollbar"
   },
   shim: {

@@ -13,4 +13,10 @@ exports.config =
 		service: 'protrada'
 		apis:
 			exchange: 'api.protrada.com:8080'
-			user: 'user.mashhub.com:8080'
+			user:			'user.mashhub.com:8080'
+			runner:		'staging.runner.mashhub.com:80'
+		mail:
+			host: 'mail.geekhub.com'
+			tls: true
+			username:	'gsupport'
+			password: 'Fatman45'

@@ -7,16 +7,16 @@ class FileAdapter
 	
 	constructor: () ->
 				
-	tag: (file, folder) ->
+	tagSync: (file, folder) ->
 		file = folder + '/' + file
 		
-	@hash: (file) ->
+	@hashSync: (file) ->
 		file = crypto.createHash('md5').update(file).digest('hex')
 	
-	hashTag: (file, folder) ->
-		@tag(FileAdapter.hash(file), folder)
+	hashTagSync: (file, folder) ->
+		@tagSync(FileAdapter.hashSync(file), folder)
 	
-	read: (file, cb, expire = 0) ->
+	read: (file, expire = 0, cb) ->
 		fs.stat(app.config.cacheDir + '/' + file, (err, stat) ->
 			if stat
 				if expire != 0
@@ -33,7 +33,7 @@ class FileAdapter
 				cb(true)
 		)
 		
-	@static_read: (file, cb, expire = 0) ->
+	@static_read: (file, expire = 0, cb) ->
 		fs.stat(app.config.cacheDir + '/' + file, (err, stat) ->
 			if stat
 				if expire != 0
@@ -49,7 +49,7 @@ class FileAdapter
 				cb(true)
 		)
 	
-	write: (file, data, cb, expire = 0) -> 
+	write: (file, data, expire = 0, cb) -> 
 		fs.writeFile(app.config.cacheDir + '/' + file, data, (err) ->
 			if err
 				fs.mkdir(app.config.cacheDir + '/' + file.split(path.sep)[0], '0777', cb)
@@ -61,12 +61,12 @@ class FileAdapter
 		fs.unlink(app.config.cacheDir + '/' + file, cb)
 		
 	getNameSpace: (file, cb) ->
-		FileAdapter.static_read(FileAdapter.hash(file), cb)
+		FileAdapter.static_read(FileAdapter.hashSync(file), 0, cb)
 		
 	setNameSpace: (file, cb, res) ->
 		date = new Date()
 		ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
-		@write(FileAdapter.hash(file), ts, (err, response) ->
+		@write(FileAdapter.hashSync(file), ts, 0, (err, response) ->
 			if not err
 				cb(file, res)
 			else
@@ -76,12 +76,12 @@ class FileAdapter
 	flushNameSpace: (file, cb) ->
 		date = new Date()
 		ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
-		@read(FileAdapter.hash(file), (err, data) =>
+		@read(FileAdapter.hashSync(file), 0, (err, data) =>
 			if not err and data != ''
 				@deleteNameSpaceCache(app.config.cacheDir + '/' + data, (err, path) ->
 					fs.rmdir(path, (err) ->)
 				)
-			@flush(FileAdapter.hash(file), cb)
+			@flush(FileAdapter.hashSync(file), cb)
 		)
 		
 	deleteNameSpaceCache: (path, cb) ->

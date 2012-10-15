@@ -24,15 +24,15 @@ class SocketIoServer
 		#)
 
 	addClient: (client) ->
-		console.log("SocketIOServer: addClient " + client)
+		app.logger("SocketIOServer: addClient " + client)
 		@setupListeners(client)
 		@clients.push(client)
 
 	receive: (data) ->
-		console.log(data)
+		app.logger(data)
 
 	broadcastToAll: () ->
-		console.log("BROADCASTING TO " + @clients.length + " CLIENTS")
+		app.logger("BROADCASTING TO " + @clients.length + " CLIENTS")
 		@clients.forEach((client) =>
 			client.emit('notification', {
 				'data': {

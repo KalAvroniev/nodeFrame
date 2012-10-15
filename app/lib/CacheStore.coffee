@@ -10,44 +10,43 @@ class CacheStore
 			@CS = app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
 			@cs = new @CS()
 				
-	changeStore: (index) ->
+	changeStoreSync: (index) ->
 		if index < app.config.cache.stores.length
 			store = app.config.cache.stores[index]
 			@CS = app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
-			#@cs.destructor()
 			@cs = new @CS()
 			app.config.cache.index = index
 		else
 			app.config.cache.enabled = false
 		return
 		
-	tag: (key, tag) ->
+	tagSync: (key, tag) ->
 		if app.config.cache.enabled
-			@cs.tag(key, tag)
+			@cs.tagSync(key, tag)
 		
-	@hash: (key) ->
+	@hashSync: (key) ->
 		if app.config.cache.enabled
-			@CS.hash(key)
+			@CS.hashSync(key)
 	
-	hashTag: (key, tag) ->
+	hashTagSync: (key, tag) ->
 		if app.config.cache.enabled
-			@cs.hashTag(key,tag)
+			@cs.hashTagSync(key,tag)
 		
-	read: (key, cb, expire = 0) ->
+	read: (key, expire = 0, cb) ->
 		if app.config.cache.enabled
-			@cs.read(key, cb, expire)
+			@cs.read(key, expire, cb)
 		else
 			cb(true)
 	
-	@static_read: (key, cb, expire = 0) ->
+	@static_read: (key, expire = 0, cb) ->
 		if app.config.cache.enabled
-			@CS.static_read(key, cb, expire)
+			@CS.static_read(key, expire, cb)
 		else
 			cb(true)
 		
-	write: (key, val, cb, expire = 0) ->
+	write: (key, val, expire = 0, cb) ->
 		if app.config.cache.enabled
-			@cs.write(key, val, cb, expire)
+			@cs.write(key, val, expire, cb)
 		else
 			cb(true)
 	
@@ -85,21 +84,21 @@ class CacheStore
 				store = app.config.cache.stores[i]
 				Store = app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
 				store = new Store()
-				key = Store.hash(val)
-				store.write(key, val, (err, res, change) =>
+				key = Store.hashSync(val)
+				store.write(key, val, 0, (err, res, change) =>
 					if change 
 						if i + 1 > app.config.cache.index
-							app.options.cache.changeStore(i + 1)
+							app.options.cache.changeStoreSync(i + 1)
 							@cacheCheck()
 					else if not err
 						store.flush(key, (err, res, change) =>
 							if change 
 								if i + 1 > app.config.cache.index
-									app.options.cache.changeStore(i + 1)
+									app.options.cache.changeStoreSync(i + 1)
 									@cacheCheck()
 							else if not err
 								if i < app.config.cache.index
-									app.options.cache.changeStore(i)	
+									app.options.cache.changeStoreSync(i)	
 								app.config.cache.enabled = true
 						)
 				)

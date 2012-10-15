@@ -7,9 +7,9 @@ describe('app:', () ->
 		app.should.have.property('app')
 	)
 	
-	it('app lenght should be 8', () ->
+	it('app lenght should be 10', () ->
 		tmp = Object.keys(app).length
-		tmp.should.equal(8)
+		tmp.should.equal(10)
 	)
 	it('app should have options, modules and config properties', () ->
 		app.should.have.property('options')

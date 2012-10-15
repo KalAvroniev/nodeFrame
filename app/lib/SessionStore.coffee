@@ -29,10 +29,9 @@ class SessionStore extends require('express').session.Store
 	save: (cb) ->
 		@Store.write("session_data", JSON.stringify(@sessions), (err) ->
 			if err
-				console.log(err)
 				console.error("Session data could not be saved: " + err)
 			else
-				console.log("Session data saved.")
+				app.logger("Session data saved.")
 			cb()
 		)
 

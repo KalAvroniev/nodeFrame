@@ -61,7 +61,7 @@ class StateStore
 			if err
 				console.error("State data could not be saved: " + err)
 			else
-				console.log("State data saved.")
+				app.logger("State data saved.")
 				
 			cb()
 		)

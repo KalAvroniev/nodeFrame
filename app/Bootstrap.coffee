@@ -5,6 +5,7 @@ fs	 = require('fs')
 jade = require('jade')
 path_module = require('path')
 memcached = require('memcached')
+async = require('async')
 modules = require('../modules')
 cronJob = require('cron').CronJob
 DBWrapper = require('node-dbi').DBWrapper
@@ -17,20 +18,12 @@ class Bootstrap
 		@config = {}
 		@usersById = {}
 		@nextUserId = 0	
-		@jsonRpcServer = null
+		@jsonRpcServer = @logger = @error = null
 
 	start: () ->		
-		@loadConfig(@options.config)
-		
-		#register all modules
-		modules.registerModules(__dirname + '/lib', @modules)
-		modules.registerModules(__dirname + '/', @modules)
-		
-		module.exports = @modules
-		
 		everyauth.debug = true	
 			
-		usersByLogin = "protrada": @addUser(
+		usersByLogin = "protrada": @addUserSync(
 			login: "protrada"
 			password: "test"
 		)
@@ -83,7 +76,7 @@ class Bootstrap
 			)
 			.registerUser((newUserAttrs) ->
 				login = newUserAttrs[@loginKey()]
-				usersByLogin[login] = addUser(newUserAttrs)
+				usersByLogin[login] = addUserSync(newUserAttrs)
 			)
 			.loginSuccessRedirect("/home")
 			.registerSuccessRedirect("/home")
@@ -93,47 +86,85 @@ class Bootstrap
 		@app.use(express.bodyParser())
 		@app.use(express.methodOverride())
 		
-		@app.use(express.static(@config.pubDir))
-		
 		@app.use(express.cookieParser())
 		@app.use(express.session(
 			'secret': 'protrada'
 			'maxAge': 1209600000
 		))
-		@app.use(express.errorHandler())
 		@app.use(express.favicon())
 		@app.use(@preEveryauthMiddlewareHack())
 		@app.use(everyauth.middleware())
 		@app.use(@postEveryauthMiddlewareHack())
 		
-		# setup cache
-		if @config.cache.enabled
-			if 'memcache' in @config.cache.stores 
-				@options.memcache = new memcached(@config.memcache.ips, @config.memcache.options)		
+		async.auto(
+				config: (callback) =>
+					try
+						@loadConfigSync(@options.config)
+						callback()
+					catch err
+						callback(err)
+				modules: ['config', (callback) =>
+					try
+						#register all modules
+						modules.registerModulesSync(__dirname + '/lib', @modules)
+						modules.registerModulesSync(__dirname + '/', @modules)	
+						@logger = @modules.lib.ErrorHandler.appLoggerSync
+						@error  = @modules.lib.ErrorHandler.appError
+						callback()
+					catch err
+						callback(err)
+				]
+				cache: ['modules', (callback) =>
+					# setup cache
+					if @config.cache.enabled
+						if 'memcache' in @config.cache.stores 
+							@options.memcache = new memcached(@config.memcache.ips, @config.memcache.options)		
 
-			if 'db' in @config.cache.stores
-				dbConfig = 
-					host: app.config.sql.host
-					user: app.config.sql.user
-					password: app.config.sql.pass
-					database: 'cache'
-				@options.dbcache = new DBWrapper(@config.sql.type, dbConfig)
+						if 'db' in @config.cache.stores
+							dbConfig = 
+								host: app.config.sql.host
+								user: app.config.sql.user
+								password: app.config.sql.pass
+								database: 'cache'
+							@options.dbcache = new DBWrapper(@config.sql.type, dbConfig)
 
-			new cronJob('*/10 * * * * *'
-				, () => 
-					@options.cache.cacheCheck()
-				, null
-				, true
-				, 'Australia/Sydney'
-			)
-		@options.cache = new @modules.lib.CacheStore
-			
-		@registerControllers()
-		@deleteMinified(@config.pubDir + '/js/require')
-
-		# register JSON-RPC methods must be before the bodyParser
-		@jsonRpcServer = new @modules.lib.JsonRpcServer()
-		@jsonRpcServer.registerMethods()
+						new cronJob('* * * * * *'
+							, () => 
+								@options.cache.cacheCheck()
+							, null
+							, true
+							, 'Australia/Sydney'
+						)
+					try 
+						@options.cache = new @modules.lib.CacheStore
+						callback()
+					catch err
+						callback(err)
+				]
+				register_controllers: ['modules', (callback) =>
+					try
+						@registerControllers()
+						callback()
+					catch err
+						callback err
+				]
+				clear_minified: ['modules', (callback) =>
+					try
+						@deleteMinifiedSync(@config.pubDir + '/js/require')
+						callback()
+					catch err
+						callback(err)
+				]
+				clear_api_cache: ['modules', (callback) =>
+					@jsonRpcServer = new @modules.lib.JsonRpc.Server()
+					@jsonRpcServer.flushingCache()
+					callback()
+				]
+			, (err, result) =>
+				if err
+					console.log(err)
+					#throw @logger(err, 'fatal')
+		)		
 
 		@app.post('/jsonrpc', (req, res) =>
 			@jsonRpcServer.handleRequest(req, res)
@@ -145,7 +176,10 @@ class Bootstrap
 			@app.set('view options', { pretty: true })
 		)
 		
+		@app.use(express.static(@config.pubDir))
 		@app.use(@app.router)
+		#@app.use(@modules.lib.ErrorHandler.errorHandler)
+		#@app.use(Bootstrap.errorHandler)
 		
 		server = @app.listen(@options.port)
 		console.log("Server started on port " + @options.port + ".")
@@ -158,15 +192,21 @@ class Bootstrap
 			socketIoServer.addClient(socket)
 		)
 		
-	@realUrl: (url) ->
+	# Return stripped out url without parameters
+	@realUrlSync: (url, loggedIn=false) ->
 		if url.indexOf('?') >= 0
 			url = url.substr(0, url.indexOf('?'))
 
 		url = url.replace(/\/+$/, '')
 		if url == ''
-			url = '/login'
+			if loggedIn
+				url = '/home'
+			else
+				url = '/login'
+		
 		return url
 		
+	# Mainly used to convert the url to a coffee/js file and return the file path
 	realPath: (path, cb) ->
 		controller = @config.appDir + "/controllers/modules" + path
 		fs.stat(controller + '.coffee', (err, stat) ->
@@ -178,38 +218,38 @@ class Bootstrap
 								controller += '/index.js'
 							else
 								controller += '.js'
-								console.log(controller)
 							
-							cb(path, controller)
+							cb(null, path, controller)
 						)
 					else
 						controller += '/index.coffee'
-						cb(path, controller)
+						cb(null, path, controller)
 				)
 			else
 				controller += '.coffee'
-				cb(path, controller)
+				cb(null, path, controller)
 		)
 		
-	getController: (path) ->
-		controller = @modules
-		path = path_module.resolve(path)
-		ext = path_module.extname(path)
-		module = path_module.basename(path, ext)
-		path = path_module.dirname(path)				
-		folders = path.split(path_module.sep)
-		start = if process.env.COVERAGE then folders.indexOf('app-cov') else folders.indexOf('app')
-		if start >= 0
-			for i in [++start..folders.length - 1]
-				controller = controller[folders[i]]
-			return controller[module]
-		else
-			return false				
+	# Find and return a controller basd on path
+	getControllerSync: (path) ->
+		try
+			controller = @modules
+			path = path_module.resolve(path)
+			ext = path_module.extname(path)
+			module = path_module.basename(path, ext)
+			path = path_module.dirname(path)				
+			folders = path.split(path_module.sep)
+			start = if process.env.COVERAGE then folders.indexOf('app-cov') else folders.indexOf('app')
+			if start >= 0
+				for i in [++start..folders.length - 1]
+					controller = controller[folders[i]]
+				return controller[module]
+		catch err
+			throw @logger(err, 'fatal')
 
-	handleJadeRequest: (req, res) ->
-		url = __dirname + '/views/modules' + Bootstrap.realUrl(req.url)
-		
-		console.log(url)
+	# The middleware that handles all .jade requests
+	handleJadeRequestSync: (req, res) ->
+		url = __dirname + '/views/modules' + Bootstrap.realUrlSync(req.url, res.locals.everyauth.loggedIn)		
 		# fetch the raw jade
 		fs.readFile(url, 'utf8', (err, data) ->
 			if err
@@ -223,69 +263,96 @@ class Bootstrap
 			res.end()
 		)
 
-	handleRequest: (req, res) =>
-		url = Bootstrap.realUrl(req.url)
+	# The middleware that handles all app urls
+	handleRequestSync: (req, res) =>
+		url = Bootstrap.realUrlSync(req.url, res.locals.everyauth.loggedIn)
+		# need a better handler for / when logged in and when not
+		if url == '/login'	
+			res.redirect('/login')		
+			return
+		
 		# run
-		@realPath(url, (url, path) =>
-			controller = @getController(path)
-			if controller
-				controller = new controller
-				res.view = {}
-				controller.run(req, res, url)
-		)
-
-	registerControllers: (path = __dirname + '/controllers/modules') ->
-		if path == __dirname + '/controllers/modules'
-			console.log("Registering Controllers...")
-			@app.all('/', @handleRequest)
-
-		# read the directory
-		try
-			files = fs.readdirSync(path)
-			files.forEach((file) =>
-				if file.substr(0, 1) != '.'
-					@registerControllers(path + '/' + file)
-			)
-		catch e
-			ext = path_module.extname(path)
-			controller = path.replace(/.*?controllers\/modules/, '').replace(ext, '')			
-			dest = path_module.basename(controller, ext)
-			if dest == 'index'
-				controller = path_module.dirname(controller)
-			console.log("Registering controller '" + controller + "'")
-			@app.all(controller, @handleRequest)
-			@app.all(controller + ".jade", @handleJadeRequest)
-			@flushCache(controller)
-			
-	flushCache: (url) ->
-		if @config.flush? and (@config.flush == 'all' or url in @config.flush)
-			controller = @modules
-			@realPath(url, (url, path) =>
-				controller = @getController(path)
+		@realPath(url, (err, url, path) =>
+			if not err 
+				controller = @getControllerSync(path)
 				if controller
 					controller = new controller
-					controller.delPageFromCache(url)		
+					res.view = {}
+					controller.run(req, res, url)
+		)
+
+	# This functions configures all the routes based on the controller modules	
+	registerControllers: (path = __dirname + '/controllers/modules', queue = null) ->
+		if queue == null
+			queue = async.queue((path, callback) =>
+					fs.stat(path, (err, stat) =>
+						if not err
+							if stat.isDirectory()
+								@registerControllers(path, queue)
+							else
+								ext = path_module.extname(path)
+								controller = path.replace(/.*?controllers\/modules/, '').replace(ext, '')			
+								dest = path_module.basename(controller, ext)
+								if dest == 'index'
+									controller = path_module.dirname(controller)
+								@logger("Registering route '" + controller + "'")
+								@app.all(controller, @handleRequestSync)
+								@app.all(controller + ".jade", @handleJadeRequestSync)
+								@flushCacheSync(controller)								
+					)
+					callback()
+				, 10
+			)
+	
+		if path == __dirname + '/controllers/modules'
+			@logger("Registering Routes ...")
+			@app.all('/', @handleRequestSync)
+
+		# read the directory
+		fs.readdir(path, (err, files) =>
+			if not err
+				files.forEach((file) =>
+					if file.substr(0, 1) != '.'
+						queue.push(path + '/' + file, (err) =>
+							if err
+								throw @logger(err, 'fatal')
+						)
+				)
+		)
+			
+	# Handles cache flushing based on configuration/modified controllers
+	flushCacheSync: (url) ->
+		if @config.flush? and (@config.flush == 'all' or url in @config.flush)
+			controller = @modules
+			@realPath(url, (err, url, path) =>
+				if not err
+					controller = @getControllerSync(path)
+					if controller
+						controller = new controller
+						controller.delPageFromCache(url)		
 			)
 
-	loadConfig: (config) ->
+	# Loads the application configuration
+	loadConfigSync: (config) ->
 		@config = require('./config/' + config).config
 
-	deleteMinified: (path) ->
+	# Deletes any minified javasript	
+	deleteMinifiedSync: (path) ->
 		#read the directory
 		try
 			files = fs.readdirSync(path)
 			files.forEach((file) =>
 				if file.substr(0, 1) != '.'
-					@deleteMinified(path + '/' + file)
+					@deleteMinifiedSync(path + '/' + file)
 			)
 		catch e
-			console.log('Now deleting ' + path)
+			@logger('Now deleting ' + path)
 			if (fs.statSync(path).isFile())
 				fs.unlinkSync(path)
 			else 
 				fs.rmdirSync(path)
 		
-	addUser: (source, sourceUser) ->
+	addUserSync: (source, sourceUser) ->
 		user = undefined
 		if arguments.length is 1 # password-based
 			user = sourceUser = source
@@ -294,7 +361,8 @@ class Bootstrap
 		else # non-password-based
 			user = @usersById[++@nextUserId] = id: @nextUserId
 			user[source] = sourceUser
-		user
+			
+		return user
 		
 	preEveryauthMiddlewareHack: ->
 		(req, res, next) ->
