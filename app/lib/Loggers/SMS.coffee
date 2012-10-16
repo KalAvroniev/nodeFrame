@@ -15,7 +15,10 @@ class SMSLogger extends winston.Transport
 				text: msg
 				from: path.basename(path.resolve(__dirname + '/../../../'))
 
-			error = new app.modules.lib.JsonRpc.Request('runner', 'clickatell/send-message', data, (err, res) ->)
+			error = new app.modules.lib.JsonRpc.Request('runner', 'clickatell/send-message', data, (err, res) ->
+				if err
+					app.logger(err)
+			)
 			
 			error.send()
 		)

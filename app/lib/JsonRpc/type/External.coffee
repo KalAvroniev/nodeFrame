@@ -24,6 +24,12 @@ class JsonRpcExternalRequest extends app.modules.lib.JsonRpc.Abstract
 		req = http.request(options, (result) =>
 			result.setEncoding('utf8');
 			result.on('data', (chunk) =>
+				try 
+					data = JSON.parse(chunk)
+					if data.error?
+						throw new app.error(@url + @path + '/' + @call.method + ' | ' +data.error.message, @, 'error', data.error.code)
+				catch err
+					return req.emit('error', err)
 				@callback(null, chunk)
 			)
 			
@@ -31,7 +37,6 @@ class JsonRpcExternalRequest extends app.modules.lib.JsonRpc.Abstract
 		
 		# On error
 		req.on('error', (err) =>
-			console.log('OPS', err)
 			@callback(err)
 		)
 		
