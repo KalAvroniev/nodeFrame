@@ -13,12 +13,13 @@ class Controller
 		@defaultView(url)
 		res.renderView = @view		
 		res.view[key] = val for key, val of @params	
+		url = app.config.service + url
 		
 		if @params.cache
 			#namespace
-			app.options.cache.getNameSpace(res.renderView, (err, data) =>
+			app.options.cache.getNameSpace(url, (err, data) =>
 				if err
-					app.options.cache.setNameSpace(res.renderView, app.options.cache.cs.getNameSpace, (err, data) =>
+					app.options.cache.setNameSpace(url, app.options.cache.cs.getNameSpace, (err, data) =>
 						if not err
 							@namespace = data
 							@ready(req, res, req.url)
@@ -61,15 +62,14 @@ class Controller
 		
 	# Delete data from cache
 	delPageFromCache: (ns) ->
-		@defaultView(ns)
-		app.options.cache.flushNameSpace(@view, (err, data, change) =>
+		#@defaultView(ns)
+		app.options.cache.flushNameSpace(ns, (err, data, change) =>
 			if not err 
-				app.logger(@view + " cache data deleted.")
+				app.logger(ns + " cache data deleted.")
 		)
 		
 	# Send back to requestor
 	ready: (req, res, index) ->
-		url = index
 		if @namespace != ''
 			index = app.options.cache.hashTagSync(index, @namespace)
 			@getPageFromCache(index, res.view.expires, (err, content) =>

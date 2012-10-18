@@ -13,7 +13,7 @@ class JsonRpcServer
 	@INTERNAL_ERROR = -32603
 
 	# Handles cache flushing based on configuration/modified apis
-	flushingCache: (basePath = __dirname + '/../api', path = null, queue = null) ->
+	flushingCache: (basePath = __dirname + '/../../api', path = null, queue = null) ->
 		if path == null
 			path = basePath
 
@@ -63,55 +63,67 @@ class JsonRpcServer
 		if app.config.flush? and (app.config.flush == 'all' or url in app.config.flush)
 			try
 				method = new (@getControllerSync(url))
+				url = app.config.service + '/jsonrpc/' + url
 				method.delDataFromCache(url)
 			catch err			
 				#do nothing
 
 	# The middleware that handles all api urls
 	handleRequest: (req, res) ->
-		return @handleRawCall(
-			req.body
-			, (raw_result) ->
-				#view can go here
-				res.write(raw_result)
-				res.end()
-			, {
-				'res': res,
-				'req': req
-			}
+		if req.body.method == 'bulk'
+			return @handleBulkCall(req.body
+				, {
+					'res': res,
+					'req': req
+				}
+				, (raw_result) ->
+					#view can go here
+					res.write(raw_result)
+					res.end()
+			)
+		else
+			return @handleRawCall(req.body
+				, {
+					'res': res,
+					'req': req
+				}
+				, (raw_result) ->
+					#view can go here
+					res.write(raw_result)
+					res.end()
 			)
 
 	# Jsonrpc call gets validated and handled
-	handleRawCall: (request, callback, options = {}) ->
+	handleRawCall: (request, options = {}, callback) ->
 		# validate
 		try
 			controller = @getControllerSync(request.method)
 		catch err
-			controller = undefined			
+			controller = undefined
 		if request.id == undefined
-			result = JsonRpcServer.Error(null, "No 'id' provided.", JsonRpcServer.INVALID_REQUEST)
+			result = JsonRpcServer.Error(request.id, "No 'id' provided.", JsonRpcServer.INVALID_REQUEST)
 		else if request.jsonrpc == undefined || request.jsonrpc != '2.0'
 			result = JsonRpcServer.Error(request.id, "Only accepted JSON-RPC version is '2.0'"
 				, JsonRpcServer.INVALID_REQUEST)
 		else if request.method == undefined
-			result = JsonRpcServer.Error(null, "No 'method' provided."
+			result = JsonRpcServer.Error(request.id, "No 'method' provided."
 				, JsonRpcServer.INVALID_REQUEST)
 		else if request.params == undefined
-			result = JsonRpcServer.Error(null, "No 'params' provided."
+			result = JsonRpcServer.Error(request.id, "No 'params' provided."
 				, JsonRpcServer.INVALID_REQUEST)
 		else if controller == undefined
-			result = JsonRpcServer.Error(null, "No such method '" + request.method + "'."
+			result = JsonRpcServer.Error(request.id, "No such method '" + request.method + "'."
 				, JsonRpcServer.METHOD_NOT_FOUND)
 
 		if result
 			return callback(JSON.stringify(result))
 
 		# build the request
-		req = new app.modules.lib.JsonRpc.Request(null, request.method, request.params, (error, result) ->
+		req = new app.modules.lib.JsonRpc.Request(null, request.method, request.params, {}, (error, id, result) ->
 			if error
-				r = JsonRpcServer.Error(request.id, error, JsonRpcServer.INTERNAL_ERROR)
+				r = JsonRpcServer.Error(id, error.message, JsonRpcServer.INTERNAL_ERROR)
 			else
-				r = JsonRpcServer.Success(request.id, result)
+				r = JsonRpcServer.Success(id, result)
 			return callback(JSON.stringify(r))
 		)
 		req.options = options
@@ -120,7 +132,37 @@ class JsonRpcServer
 		obj = new controller()
 		req.validate(obj, () ->
 			# execute the method
-			obj.run(req, request.method)
+			url = app.config.service + '/jsonrpc/' + request.method
+			obj.run(req, url)
+		)
+		
+	# This is to handle bulk calls
+	handleBulkCall: (request, options = {}, callback) ->
+		# validate	
+		if request.id == undefined
+			result = JsonRpcServer.Error(request.id, "No 'id' provided.", JsonRpcServer.INVALID_REQUEST)
+		else if request.jsonrpc == undefined || request.jsonrpc != '2.0'
+			result = JsonRpcServer.Error(request.id, "Only accepted JSON-RPC version is '2.0'"
+				, JsonRpcServer.INVALID_REQUEST)
+		else if request.method == undefined
+			result = JsonRpcServer.Error(request.id, "No 'method' provided."
+				, JsonRpcServer.INVALID_REQUEST)
+		else if request.params == undefined
+			result = JsonRpcServer.Error(request.id, "No 'params' provided."
+				, JsonRpcServer.INVALID_REQUEST)
+
+		if result
+			return callback(JSON.stringify(result))
+
+		result = null
+		counter = request.params.length
+		request.params.forEach((call) =>
+			@handleRawCall(call, options, (response) ->
+				result = JsonRpcServer.BulkResponse(request.id, result, response) 
+				counter--
+				if counter <= 0
+					callback(JSON.stringify(result))
+			)
 		)
 
 	@Success: (id, result) ->
@@ -139,3 +181,13 @@ class JsonRpcServer
 			},
 			'id': id
 		}
+		
+	@BulkResponse: (id, result, single) ->
+		if not result?
+			result = {
+				'jsonrpc': '2.0',
+				'result': [],
+				'id': id
+			}
+		result.result = result.result.concat(JSON.parse(single))
+		return result

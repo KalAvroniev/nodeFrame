@@ -141,6 +141,11 @@ class Bootstrap
 					catch err
 						callback(err)
 				]
+				clear_api_cache: ['modules', (callback) =>
+					@jsonRpcServer = new @modules.lib.JsonRpc.Server()
+					@jsonRpcServer.flushingCache()
+					callback()
+				]
 				register_controllers: ['modules', (callback) =>
 					try
 						@registerControllers()
@@ -154,11 +159,6 @@ class Bootstrap
 						callback()
 					catch err
 						callback(err)
-				]
-				clear_api_cache: ['modules', (callback) =>
-					@jsonRpcServer = new @modules.lib.JsonRpc.Server()
-					@jsonRpcServer.flushingCache()
-					callback()
 				]
 			, (err, result) =>
 				if err
@@ -329,6 +329,7 @@ class Bootstrap
 					controller = @getControllerSync(path)
 					if controller
 						controller = new controller
+						url = @config.service + url
 						controller.delPageFromCache(url)		
 			)
 

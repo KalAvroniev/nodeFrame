@@ -111,7 +111,7 @@ class DbAdapter
 		)
 	
 	flushNameSpace: (ns, cb) ->
-		@read(null, DbAdapter.hashSync(ns), 0, (err, data) =>
+		@read(DbAdapter.hashSync(ns), 0, (err, data) =>
 			if not err and data?
 				app.options.dbcache.query('DROP TABLE `' + data + '`', null, (err)->)
 				@flush(DbAdapter.hashSync(ns), cb)

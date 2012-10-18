@@ -21,4 +21,25 @@ class JsonRpcInternalRequest extends app.modules.lib.JsonRpc.Abstract
 		super
 
 	send: (error, result) ->
-		@callback(error, result)
+		return if not super?
+		if error? or result?
+			@callback(error, @call.id, result)
+		else
+			if @call.method == 'bulk'
+				app.jsonRpcServer.handleBulkCall(@call, {}, (response) =>
+					try 
+						@checkForError(response)
+						@callback(null, @call.id, response)
+					catch err
+						@callback(err, @call.id)
+				)
+			else
+				app.jsonRpcServer.handleRawCall(@call, {}, (response) =>
+					try 
+						@checkForError(response)
+						@callback(null, @call.id, response)
+					catch err
+						@callback(err, @call.id)
+				)
+				
+		

@@ -18,6 +18,4 @@ exports.config.sql =
 	
 exports.config.mail.from = 'andrew.chinn@wingedmedia.com'
 exports.config.mail.to = ['kaloyan.avroniev@wingedmedia.com']
-exports.config.sms = ['61412188969']
-
-exports.config.apis.protrada = null
+exports.config.sms = ['61412188969', '61437974175']

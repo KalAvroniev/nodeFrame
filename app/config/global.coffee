@@ -1,3 +1,5 @@
+path = require('path')
+
 exports.config = 
 		appDir: __dirname + "/../../app"
 		pubDir: __dirname + "/../../public"
@@ -10,7 +12,6 @@ exports.config =
 			enabled: true
 			stores: ['memcache', 'db', 'file']
 			index: 0
-		service: 'protrada'
 		apis:
 			exchange: 'api.protrada.com:8080'
 			user:			'user.mashhub.com:8080'
@@ -20,3 +21,4 @@ exports.config =
 			tls: true
 			username:	'gsupport'
 			password: 'Fatman45'
+		service: path.basename(path.resolve(__dirname + '/../../'))

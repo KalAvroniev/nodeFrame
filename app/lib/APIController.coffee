@@ -63,7 +63,6 @@ class APIController
 	
 	# Send back to requestor
 	ready: (req, index) ->
-		url = index
 		if @namespace != ''
 			index = app.options.cache.hashTagSync(index, @namespace)
 			@getDataFromCache(index, @params.expires, (err, content) =>

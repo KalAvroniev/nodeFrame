@@ -88,10 +88,10 @@ module.exports.appLoggerSync = (err, type = 'debug') ->
 	
 	# set or overwrite err.type based on if it exists and if overwrite level higher than current
 	err.type = if (err.type? and (if config.levels[err.type]? then config.levels[err.type] else config.levels['warn']) >= config.levels[type]) then err.type else type
-	#if process.env.NODE_ENV == 'production'
-	logger = winston.loggers.get(err.type)
-	#else
-	#	logger = winston.loggers.get('debug')
+	if process.env.NODE_ENV == 'production'
+		logger = winston.loggers.get(err.type)
+	else
+		logger = winston.loggers.get('debug')
 
 	logger.setLevels(config.levels)
 	switch err.type
