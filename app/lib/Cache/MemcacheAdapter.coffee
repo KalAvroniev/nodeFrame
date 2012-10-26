@@ -36,9 +36,7 @@ class MemcacheAdapter
 	
 	write: (key, value, expire = 0, cb) -> 
 		app.options.memcache.replace(key, value, expire, (err, res) ->
-			if err
-				cb(err, res, true)
-			else if not res
+			if not res
 				app.options.memcache.set(key, value, expire, (err, res) ->
 					if err
 						cb(err, res, true)
@@ -47,6 +45,8 @@ class MemcacheAdapter
 					else
 						cb(err)					
 				)
+			else if err
+				cb(err, res, true)
 			else
 				cb(err)
 		)
@@ -61,18 +61,28 @@ class MemcacheAdapter
 				cb(err)
 		)
 		
-	getNameSpace: (ns, cb) ->
-		MemcacheAdapter.static_read(MemcacheAdapter.hashSync(ns), 0, cb)
+	getNameSpace: (ns, ts = null, cb) ->
+		if not ts?
+			ns = MemcacheAdapter.hashSync(ns)
+			
+		MemcacheAdapter.static_read(ns, 0, cb)
 		
-	setNameSpace: (ns, cb, res) ->
+	setNameSpace: (ns, ts = null, cb, res) ->
 		date = new Date()
-		ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
-		@write(MemcacheAdapter.hashSync(ns), ts, 0, (err, response) ->
+		if not ts?
+			ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60) 
+			ns = MemcacheAdapter.hashSync(ns)
+		
+		@write(ns, ts, 0, (err, response) ->
 			if not err
-				cb(ns, res)
+				cb(ns, ts, res)
 			else
 				res(err, response)
 		)
 	
-	flushNameSpace: (ns, cb) ->
-		@flush(MemcacheAdapter.hashSync(ns), cb)
+	flushNameSpace: (ns, ts = null, cb) ->
+		if ts?
+			@flush(ns, cb)
+		else
+			@flush(MemcacheAdapter.hashSync(ns), cb)
+		

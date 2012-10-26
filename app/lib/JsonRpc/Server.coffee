@@ -34,10 +34,7 @@ class JsonRpcServer
 			if not err
 				files.forEach((file) ->
 					if file.substr(0, 1) != '.'
-						queue.push(path + '/' + file, (err) ->
-							if err
-								throw app.logger(err, @, 'fatal')
-						)
+						queue.push(path + '/' + file, () ->)
 				)
 		)
 
@@ -119,15 +116,15 @@ class JsonRpcServer
 			return callback(JSON.stringify(result))
 
 		# build the request
-		req = new app.modules.lib.JsonRpc.Request(null, request.method, request.params, {}, (error, id, result) ->
+		req = new app.modules.lib.JsonRpc.Request(null, request.method, request.params, {}, (error, id, service, result) ->
 			if error
-				r = JsonRpcServer.Error(id, error.message, JsonRpcServer.INTERNAL_ERROR)
+				r = JsonRpcServer.Error(request.id, error.message, JsonRpcServer.INTERNAL_ERROR)
 			else
-				r = JsonRpcServer.Success(id, result)
+				r = JsonRpcServer.Success(request.id, result)
 			return callback(JSON.stringify(r))
 		)
 		req.options = options
-
+		
 		# validate
 		obj = new controller()
 		req.validate(obj, () ->
@@ -158,7 +155,7 @@ class JsonRpcServer
 		counter = request.params.length
 		request.params.forEach((call) =>
 			@handleRawCall(call, options, (response) ->
-				result = JsonRpcServer.BulkResponse(request.id, result, response) 
+				result = JsonRpcServer.BulkResponse(request.id, result, response)
 				counter--
 				if counter <= 0
 					callback(JSON.stringify(result))
@@ -189,5 +186,8 @@ class JsonRpcServer
 				'result': [],
 				'id': id
 			}
-		result.result = result.result.concat(JSON.parse(single))
+		if single instanceof Array
+			result.result = result.result.concat(single)
+		else
+			result.result = result.result.concat(JSON.parse(single))
 		return result

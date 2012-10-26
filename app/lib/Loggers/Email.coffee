@@ -10,10 +10,7 @@ class EmailLogger extends winston.Transport
 	constructor: (options) ->
 		@name = 'emailLogger'
 		@level = if options.level? then options.level else 'error'
-		@ses = new Ses(
-			'accessKeyId'     : 'AKIAI654DO6KCXT5K54A'
-			'secretAccessKey' : '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'
-		)
+		@ses = new Ses(app.config.aws)
 		
 	log: (level, msg, meta, callback) ->
 		data = 

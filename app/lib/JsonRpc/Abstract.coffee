@@ -1,5 +1,5 @@
 crypto = require('crypto')
-http = require('http')
+URL = require('url')
 
 class JsonRpcAbstractRequest
 	module.exports = @
@@ -10,11 +10,21 @@ class JsonRpcAbstractRequest
 		
 	# Format the call to be a valid jsonrpc 2.0 
 	format: (method, params) ->
+		tmp = []	
+		if @url?
+			tmp = @url.split(':')
+		else
+			tmp[0] = @url
+			
+		full_url = URL.format(
+			hostname: tmp[0] + @path + '/' + method
+			query: params
+		).replace('//', '')			
 		return {
 			'jsonrpc': '2.0'
 			'method': method
 			'params': params
-			'id': crypto.createHash('md5').update(@url + @path + '/' + method + '?' + JSON.stringify(params)).digest('hex')
+			'id': crypto.createHash('md5').update(full_url).digest('hex')
 		}
 	
 	validate: (obj, success) ->

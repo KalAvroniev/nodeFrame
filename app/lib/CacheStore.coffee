@@ -1,7 +1,6 @@
 util = require('util')
 
 class CacheStore
-
 	module.exports = @
 	
 	constructor: () -> 
@@ -56,21 +55,21 @@ class CacheStore
 		else
 			cb(true)
 		
-	getNameSpace: (key, cb) ->	
+	getNameSpace: (key, ts = null, cb) ->	
 		if app.config.cache.enabled
-			@cs.getNameSpace(key, cb)
+			@cs.getNameSpace(key, ts, cb)
 		else
 			cb(false)	
 		
-	setNameSpace: (key, cb, res) ->		
+	setNameSpace: (key, ts = null, cb, res) ->		
 		if app.config.cache.enabled
-			@cs.setNameSpace(key, cb, res)
+			@cs.setNameSpace(key, ts, cb, res)
 		else
 			res(true)
 		
-	flushNameSpace: (key, cb) ->	
+	flushNameSpace: (key, ts = null, cb) ->	
 		if app.config.cache.enabled
-			@cs.flushNameSpace(key, cb)
+			@cs.flushNameSpace(key, ts, cb)
 		else
 			cb(true)
 			

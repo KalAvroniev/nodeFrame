@@ -60,29 +60,40 @@ class FileAdapter
 	flush: (file, cb) ->
 		fs.unlink(app.config.cacheDir + '/' + file, cb)
 		
-	getNameSpace: (file, cb) ->
-		FileAdapter.static_read(FileAdapter.hashSync(file), 0, cb)
+	getNameSpace: (file, ts = null, cb) ->
+		if not ts?
+			file = FileAdapter.hashSync(file)
+			
+		FileAdapter.static_read(file, 0, cb)
 		
-	setNameSpace: (file, cb, res) ->
+	setNameSpace: (file, ts = null, cb, res) ->
 		date = new Date()
-		ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
-		@write(FileAdapter.hashSync(file), ts, 0, (err, response) ->
+		if not ts?
+			ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
+			file = FileAdapter.hashSync(file)
+			
+		@write(file, ts, 0, (err, response) ->
 			if not err
-				cb(file, res)
+				cb(file, ts, res)
 			else
 				res(err, response)
 		)
 	
-	flushNameSpace: (file, cb) ->
+	flushNameSpace: (file, ts = null, cb) ->
 		date = new Date()
-		ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
-		@read(FileAdapter.hashSync(file), 0, (err, data) =>
-			if not err and data != ''
-				@deleteNameSpaceCache(app.config.cacheDir + '/' + data, (err, path) ->
-					fs.rmdir(path, (err) ->)
-				)
-			@flush(FileAdapter.hashSync(file), cb)
-		)
+		if ts?
+			@deleteNameSpaceCache(app.config.cacheDir + '/' + ts, (err, path) ->
+				fs.rmdir(path, (err) ->)
+			)
+			@flush(file, cb)
+		else
+			@read(FileAdapter.hashSync(file), 0, (err, data) =>
+				if not err and data != ''
+					@deleteNameSpaceCache(app.config.cacheDir + '/' + data, (err, path) ->
+						fs.rmdir(path, (err) ->)
+					)
+				@flush(FileAdapter.hashSync(file), cb)
+			)
 		
 	deleteNameSpaceCache: (path, cb) ->
 		fs.stat(path, (err, stat) =>

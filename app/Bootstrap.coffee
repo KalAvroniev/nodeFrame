@@ -128,7 +128,7 @@ class Bootstrap
 								database: 'cache'
 							@options.dbcache = new DBWrapper(@config.sql.type, dbConfig)
 
-						new cronJob('* * * * * *'
+						new cronJob('*/10 * * * * *'
 							, () => 
 								@options.cache.cacheCheck()
 							, null
@@ -182,7 +182,7 @@ class Bootstrap
 		#@app.use(Bootstrap.errorHandler)
 		
 		server = @app.listen(@options.port)
-		console.log("Server started on port " + @options.port + ".")
+		@logger("Server started on port " + @options.port + ".")
 		
 		# setup socket.io
 		socketIoServer = new @modules.lib.SocketIoServer()
@@ -191,6 +191,14 @@ class Bootstrap
 		io.sockets.on('connection', (socket) ->
 			socketIoServer.addClient(socket)
 		)
+		
+		new cronJob('*/10 * * * * *'
+			, () => 
+				@getNamespaces()
+			, null
+			, true
+			, 'Australia/Sydney'
+		)		
 		
 	# Return stripped out url without parameters
 	@realUrlSync: (url, loggedIn=false) ->
@@ -313,10 +321,7 @@ class Bootstrap
 			if not err
 				files.forEach((file) =>
 					if file.substr(0, 1) != '.'
-						queue.push(path + '/' + file, (err) =>
-							if err
-								throw @logger(err, 'fatal')
-						)
+						queue.push(path + '/' + file, () ->)
 				)
 		)
 			
@@ -364,7 +369,7 @@ class Bootstrap
 			user[source] = sourceUser
 			
 		return user
-		
+	
 	preEveryauthMiddlewareHack: ->
 		(req, res, next) ->
 			sess = req.session
@@ -389,3 +394,50 @@ class Bootstrap
 			res.locals.everyauth.user = req.user
 			res.locals[userAlias] = req.user
 			next()
+			
+	getNamespaces: () ->
+		if not @config.namespaces?
+			@config.namespaces = {}
+			
+		cc = new app.modules.lib.CacheConfig()
+		queue = async.queue((service, callback) =>
+				modified = if @config.namespaces[service.key]? then @config.namespaces[service.key]['modified'] else null
+				cc.read(service.file, modified, (err, data) =>
+					if not err and data?
+						@updateExternalCache(service.key, JSON.parse(data))
+					callback()
+				)
+			, 10
+		)
+		
+		Object.keys(@config.apis).forEach((key) =>
+			service = @config.apis[key].split(':')
+			service = 
+				key	: key
+				file: service[0]
+				
+			queue.push(service, () ->)
+		)		
+		
+	updateExternalCache: (key, new_data) ->
+		#if @config.namespaces[key]?
+		queue = async.queue((controller, callback) =>
+				#flush cache by old namespace
+				@options.cache.flushNameSpace(controller.key, controller.ts, (err, data) =>
+					if not err 
+						@logger('Data for namespace ' + controller.ts + ' deleted.')
+				)
+				callback()
+			, 10
+		)
+		Object.keys(new_data).forEach((controller) =>
+			if @config.namespaces[key]? and @config.namespaces[key][controller]? and new_data[controller] > @config.namespaces[key][controller] 
+				controller = 
+					key	: controller
+					ts	: @config.namespaces[key][controller]
+				queue.push(controller, () ->)
+		)
+			
+		@config.namespaces[key] = new_data
+		@config.namespaces[key]['modified'] = new Date().toUTCString()
+		

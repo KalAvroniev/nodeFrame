@@ -12,13 +12,5 @@ exports.config =
 			enabled: true
 			stores: ['memcache', 'db', 'file']
 			index: 0
-		apis:
-			exchange: 'api.protrada.com:8080'
-			user:			'user.mashhub.com:8080'
-			runner:		'staging.runner.mashhub.com:80'
-		mail:
-			host: 'mail.geekhub.com'
-			tls: true
-			username:	'gsupport'
-			password: 'Fatman45'
+			config: 's3'
 		service: path.basename(path.resolve(__dirname + '/../../'))

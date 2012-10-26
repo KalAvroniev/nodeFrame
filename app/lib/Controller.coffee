@@ -17,9 +17,9 @@ class Controller
 		
 		if @params.cache
 			#namespace
-			app.options.cache.getNameSpace(url, (err, data) =>
+			app.options.cache.getNameSpace(url, null, (err, data) =>
 				if err
-					app.options.cache.setNameSpace(url, app.options.cache.cs.getNameSpace, (err, data) =>
+					app.options.cache.setNameSpace(url, null, app.options.cache.cs.getNameSpace, (err, data) =>
 						if not err
 							@namespace = data
 							@ready(req, res, req.url)
@@ -63,7 +63,7 @@ class Controller
 	# Delete data from cache
 	delPageFromCache: (ns) ->
 		#@defaultView(ns)
-		app.options.cache.flushNameSpace(ns, (err, data, change) =>
+		app.options.cache.flushNameSpace(ns, null, (err, data, change) ->
 			if not err 
 				app.logger(ns + " cache data deleted.")
 		)

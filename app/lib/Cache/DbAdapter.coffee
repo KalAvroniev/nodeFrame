@@ -97,22 +97,32 @@ class DbAdapter
 					cb(err, res)			
 			)
 		
-	getNameSpace: (ns, cb) ->
-		DbAdapter.static_read(DbAdapter.hashSync(ns), 0, cb)
+	getNameSpace: (ns, ts = null, cb) ->
+		if not ts?
+			ns = DbAdapter.hashSync(ns)
+			
+		DbAdapter.static_read(ns, 0, cb)
 		
-	setNameSpace: (ns, cb, res) ->
+	setNameSpace: (ns, ts = null, cb, res) ->
 		date = new Date()
-		ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
-		@write(DbAdapter.hashSync(ns), ts, 0, (err, response) ->
+		if not ts?
+			ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
+			ns = DbAdapter.hashSync(ns)
+			
+		@write(ns, ts, 0, (err, response) ->
 			if not err
-				cb(ns, res)
+				cb(ns, ts, res)
 			else
 				res(err, response)
 		)
 	
-	flushNameSpace: (ns, cb) ->
-		@read(DbAdapter.hashSync(ns), 0, (err, data) =>
-			if not err and data?
-				app.options.dbcache.query('DROP TABLE `' + data + '`', null, (err)->)
-				@flush(DbAdapter.hashSync(ns), cb)
-		)
+	flushNameSpace: (ns, ts = null, cb) ->
+		if ts?
+			app.options.dbcache.query('DROP TABLE `' + ts + '`', null, (err)->)
+			@flush(ns, cb)
+		else
+			@read(DbAdapter.hashSync(ns), 0, (err, data) =>
+				if not err and data?
+					app.options.dbcache.query('DROP TABLE `' + data + '`', null, (err)->)
+					@flush(DbAdapter.hashSync(ns), cb)
+			)
