@@ -18,9 +18,9 @@ class DbAdapter
 		@tagSync(DbAdapter.hashSync(key), tag)
 		
 	read: (key, expire = 0, cb) ->
-		split_key = key.split(path.sep)
-		table = if split_key.length > 1 then split_key[0] else 'namespace'
-		key = if split_key.length > 1 then split_key[1] else key
+		split_key 	= key.split(path.sep)
+		table 		= if split_key.length > 1 then split_key[0] else 'namespace'
+		key 		= if split_key.length > 1 then split_key[1] else key
 		if not app.options.dbcache.isConnected() 
 			cb(null, null, true)
 		else
@@ -36,14 +36,14 @@ class DbAdapter
 			)
 	
 	@static_read: (key, expire = 0, cb) ->
-		split_key = key.split(path.sep)
-		table = if split_key.length > 1 then split_key[0] else 'namespace'
-		key = if split_key.length > 1 then split_key[1] else key
+		split_key 	= key.split(path.sep)
+		table 		= if split_key.length > 1 then split_key[0] else 'namespace'
+		key 		= if split_key.length > 1 then split_key[1] else key
 		if not app.options.dbcache.isConnected() 
 			cb(null, null, true)
 		else
-			date = new Date()
-			expire = Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60
+			date 	= new Date()
+			expire 	= Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60
 			app.options.dbcache.fetchOne('SELECT val FROM `' + table + '` WHERE id = ? AND (expires = 0 OR expires >= ?)', [key, expire], (err, res) ->
 				if err and (err.code == 'ECONNREFUSED' or err.number == 1049)
 					cb(err, res, true)
@@ -54,9 +54,9 @@ class DbAdapter
 			)
 	
 	write: (key, value, expire = 0, cb) -> 
-		split_key = key.split(path.sep)
-		table = if split_key.length > 1 then split_key[0] else 'namespace'
-		id = if split_key.length > 1 then split_key[1] else key
+		split_key 	= key.split(path.sep)
+		table 		= if split_key.length > 1 then split_key[0] else 'namespace'
+		id 			= if split_key.length > 1 then split_key[1] else key
 		if not app.options.dbcache.isConnected() 
 			cb(null, null, true)
 		else
@@ -82,9 +82,9 @@ class DbAdapter
 			)
 		
 	flush: (key, cb) ->
-		split_key = key.split(path.sep)
-		table = if split_key.length > 1 then split_key[0] else 'namespace'
-		key = if split_key.length > 1 then split_key[1] else key
+		split_key 	= key.split(path.sep)
+		table 		= if split_key.length > 1 then split_key[0] else 'namespace'
+		key 		= if split_key.length > 1 then split_key[1] else key
 		if not app.options.dbcache.isConnected() 
 			cb(null, null, true)
 		else

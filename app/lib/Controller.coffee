@@ -2,19 +2,20 @@ class Controller
 	module.exports = @
 	
 	constructor: () ->
-		@params = 
+		@params 	= 
 			'expires': 60
 			'cache': true
-		@namespace = ''
-		@view = ''
+		@namespace 	= ''
+		@view 		= ''
+		@id 		= ''
 
 	# Prepare the controller
-	run: (req, res, url) ->
+	run: (req, res, url, cb) ->
 		@defaultView(url)
-		res.renderView = @view		
-		res.view[key] = val for key, val of @params	
-		url = app.config.service + url
-		
+		res.renderView 	= @view		
+		res.view[key] 	= val for key, val of @params	
+		url 			= app.config.service + url
+		@id 			= app.options.cache.CS.hashSync(url)
 		if @params.cache
 			#namespace
 			app.options.cache.getNameSpace(url, null, (err, data) =>
@@ -22,16 +23,16 @@ class Controller
 					app.options.cache.setNameSpace(url, null, app.options.cache.cs.getNameSpace, (err, data) =>
 						if not err
 							@namespace = data
-							@ready(req, res, req.url)
+							@ready(req, res, req.url, cb)
 						else
-							@ready(req, res, req.url)
+							@ready(req, res, req.url, cb)
 					)
 				else
 					@namespace = data
-					@ready(req, res, req.url)
+					@ready(req, res, req.url, cb)
 			)
 		else
-			@ready(req, res, req.url)
+			@ready(req, res, req.url, cb)
 		
 	# Set up the view
 	defaultView: (url) ->
@@ -69,25 +70,25 @@ class Controller
 		)
 		
 	# Send back to requestor
-	ready: (req, res, index) ->
+	ready: (req, res, index, cb) ->
 		if @namespace != ''
 			index = app.options.cache.hashTagSync(index, @namespace)
 			@getPageFromCache(index, res.view.expires, (err, content) =>
 				if content
 					app.logger("Page cache used.")
-					res.send(content)
+					cb(null, content)
 				else
 					res.render(res.renderView, res.view , (err, content) =>
-						return req.next(err) if err
+						return cb(err) if err
 						try
 							@setPageToCache(index, content, res.view.expires)
 						catch err
 							# maybe initiate a cache failover
-						res.send(content)
+						cb(null, content)
 					)
 			)
 		else
 			res.render(res.renderView, res.view , (err, content) ->
-				return req.next(err) if err
-				res.send(content)
+				return cb(err) if err
+				cb(null, content)
 			)

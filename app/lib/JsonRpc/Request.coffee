@@ -61,9 +61,9 @@ class JsonRpcRequest
 			@retry(err, id, res)			
 			
 	getChildrenRequests: (bulk_id, cb) ->
-		children = []
-		bulk = @getRequestById(bulk_id)
-		counter = bulk.request.call.params.length
+		children 	= []
+		bulk 		= @getRequestById(bulk_id)
+		counter 	= bulk.request.call.params.length
 		bulk.request.call.params.forEach((call) =>
 			counter--
 			children.push(@getRequestById(call.id))
@@ -105,11 +105,11 @@ class JsonRpcRequest
 	storeLocalCache: (service, request, data) ->
 		if data? and data.cache
 			if service? and app.config.namespaces[service]?
-				tmp = JsonRpcRequest.getServiceUrl(service).split(':')
-				controller = URL.format(
+				tmp 		= JsonRpcRequest.getServiceUrl(service).split(':')
+				controller 	= URL.format(
 					hostname: tmp[0] + request.path + '/' + request.call.method
 				).replace('//', '')			
-				namespace = app.config.namespaces[service][app.options.cache.CS.hashSync(controller)]
+				namespace 	= app.config.namespaces[service][app.options.cache.CS.hashSync(controller)]
 
 				if namespace?
 					#look for cache

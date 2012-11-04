@@ -1,6 +1,6 @@
-awssum = require('awssum')
-amazon = awssum.load('amazon/amazon')
-S3 = awssum.load('amazon/s3').S3
+awssum 	= require('awssum')
+amazon 	= awssum.load('amazon/amazon')
+S3 		= awssum.load('amazon/s3').S3
 
 class S3Store
 	module.exports = @

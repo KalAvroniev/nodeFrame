@@ -1,7 +1,7 @@
 class Modules_UserSettings_Ajax extends app.modules.lib.Controller
 	module.exports = @
 
-	run: (req, res, url) ->
+	run: (req, res, url, cb) ->
 		if req.query.ajax
 			res.view.layout = null
 			

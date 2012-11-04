@@ -5,5 +5,5 @@ class UserState
 
 	constructor: () ->
 		# setup the default state
-		@modules = {}
-		@modules.selected = 'home'
+		@modules 			= {}
+		@modules.selected 	= 'home'

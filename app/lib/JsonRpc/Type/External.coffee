@@ -1,15 +1,15 @@
-http = require('http')
-URL = require('url')
-async = require('async')
+http 	= require('http')
+URL 	= require('url')
+async 	= require('async')
 
 class JsonRpcExternalRequest extends app.modules.lib.JsonRpc.Abstract
 	module.exports = @
 
 	constructor: (@service, @url, method, params, @callback) ->
-		@path = '/jsonrpc'
-		@headers = 
+		@path 		= '/jsonrpc'
+		@headers 	= 
 			'Content-Type': 'application/json'
-			'Accept': 'application/json'
+			'Accept': 		'application/json'
 
 		super(@url, method, params, @callback)
 		
@@ -31,21 +31,21 @@ class JsonRpcExternalRequest extends app.modules.lib.JsonRpc.Abstract
 					)
 			send: ['cache_check', (callback) =>
 					if @call.params instanceof Array and @call.params.length == 0 
-						@cache = app.modules.lib.JsonRpc.Server.BulkResponse(@call.id, null, @cache)
-						@call = orig_call
+						@cache 	= app.modules.lib.JsonRpc.Server.BulkResponse(@call.id, null, @cache)
+						@call 	= orig_call
 						@callback(null, @call.id, @service, JSON.stringify(@cache))
 					else if not @cache instanceof Array and @cache
 						@call = orig_call
 						@callback(null, @call.id, @service, JSON.stringify(@cache))
 					else
-						tmp = @url.split(':')
+						tmp 	= @url.split(':')
 						options = 
 							'hostname': tmp[0]
-							'port': tmp[1]
-							'path': @path
-							'method': 'POST'
-							'headers': @headers
-							'agent': http.globalAgent
+							'port': 	tmp[1]
+							'path': 	@path
+							'method': 	'POST'
+							'headers': 	@headers
+							'agent': 	http.globalAgent
 
 						req = http.request(options, (result) =>
 							result.setEncoding('utf8');
@@ -80,11 +80,11 @@ class JsonRpcExternalRequest extends app.modules.lib.JsonRpc.Abstract
 	checkForCache: (call, cb) ->
 		if app.config.namespaces[@service]?
 			#get namespace
-			tmp = @url.split(':')
-			controller = URL.format(
+			tmp 		= @url.split(':')
+			controller 	= URL.format(
 				hostname: tmp[0] + @path + '/' + call.method
 			).replace('//', '')			
-			namespace = app.config.namespaces[@service][app.options.cache.CS.hashSync(controller)]
+			namespace 	= app.config.namespaces[@service][app.options.cache.CS.hashSync(controller)]
 			
 			if namespace?
 				#look for cache
@@ -95,10 +95,10 @@ class JsonRpcExternalRequest extends app.modules.lib.JsonRpc.Abstract
 				index = app.options.cache.hashTagSync(full_url, namespace)
 				@getCache(index, (err, data) =>
 					if err
-						cache = false
+						cache 	= false
 					else
-						cache = app.modules.lib.JsonRpc.Server.Success(call.id, @alreadyCached(data))
-						call = undefined
+						cache 	= app.modules.lib.JsonRpc.Server.Success(call.id, @alreadyCached(data))
+						call 	= undefined
 					cb(cache)
 				)
 			else
@@ -107,9 +107,9 @@ class JsonRpcExternalRequest extends app.modules.lib.JsonRpc.Abstract
 			cb(false)
 	
 	checkBulkCache: (call, cb) ->
-		cache = []
-		no_local_cache_calls = []
-		counter = call.params.length
+		cache 					= []
+		no_local_cache_calls 	= []
+		counter 				= call.params.length
 		if counter > 0
 			call.params.forEach((single) =>
 				@checkForCache(single, (res) =>
@@ -138,6 +138,6 @@ class JsonRpcExternalRequest extends app.modules.lib.JsonRpc.Abstract
 	
 	# Marks the result as cached so that we do not cache it again
 	alreadyCached: (content) ->
-		content = JSON.parse(content)
-		content.cache = false
+		content 		= JSON.parse(content)
+		content.cache 	= false
 		return content

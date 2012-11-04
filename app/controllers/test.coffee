@@ -1,7 +1,7 @@
 class Modules_Test extends app.modules.lib.Controller
 	module.exports = @
 
-	run: (req, res, url) ->
+	run: (req, res, url, cb) ->
 		# get data
 		req.jsonRpcServer.call(
 			req.query.view

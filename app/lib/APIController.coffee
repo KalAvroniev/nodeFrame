@@ -4,19 +4,22 @@ class APIController
 	module.exports = @
 	
 	constructor: () ->
-		@params = 
+		@params 	= 
 			'expires': 60
 			'cache': true
-		@validate = {}
-		@options = {}
-		@namespace = ''
+		@validate 	= {}
+		@options 	= {}
+		@namespace 	= ''
+		@id 		= ''
 
 	# Prepare the controller
 	run: (req, url) ->	
-		full_url = URL.format(
+		full_url 	= URL.format(
 			hostname: url
 			query: req.request.call.params
 		).replace('//', '')
+		@id 		= app.options.cache.CS.hashSync(url)
+		
 		if @params.cache 
 			#namespace
 			app.options.cache.getNameSpace(url, null, (err, data) =>
@@ -73,7 +76,7 @@ class APIController
 	# Add cache information
 	cacheInfo: (content) ->
 		content.expires = @params.expires
-		content.cache	  = @params.cache
+		content.cache 	= @params.cache
 		return content
 	
 	# Send back to requestor

@@ -16,6 +16,9 @@ public/js/require/
 # cache
 cache/
 
+# cache
+profiler/
+
 # FUCK OFF ANNOYING DS_Store files!!!
 /app/.DS_Store
 /public/img/.DS_Store
@@ -26,3 +29,10 @@ cache/
 /app-cov/
 /src/
 coverage.html
+
+###SublimeText###
+ 
+# SublimeText project files
+/*.sublime-project
+*.sublime-workspace
+sftp-config*.json

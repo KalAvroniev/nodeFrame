@@ -1,26 +1,30 @@
 util = require('util')
 express = require('express')
-everyauth = require('everyauth')
-fs	 = require('fs')
-jade = require('jade')
+everyauth 	= require('everyauth')
+fs	 		= require('fs')
+jade 		= require('jade')
 path_module = require('path')
-memcached = require('memcached')
-async = require('async')
-modules = require('../modules')
-cronJob = require('cron').CronJob
-DBWrapper = require('node-dbi').DBWrapper
+memcached 	= require('memcached')
+async 		= require('async')
+mongoose 	= require('mongoose')
+modules 	= require('../modules')
+cronJob 	= require('cron').CronJob
+DBWrapper 	= require('node-dbi').DBWrapper
 	
 class Bootstrap
 	module.exports = @
 	
 	constructor: (@options = {}) ->
-		@modules = {}
-		@config = {}
-		@usersById = {}
-		@nextUserId = 0	
-		@jsonRpcServer = @logger = @error = null
+		@modules 		= {}
+		@config 		= {}
+		@usersById 		= {}
+		@nextUserId 	= 0	
+		@jsonRpcServer 	= @logger = @error = @pstore = null
 
-	start: () ->		
+	start: () ->	
+		#create a MongoDB connection
+		@pstore = mongoose.createConnection('localhost', 'profiler')	
+
 		everyauth.debug = true	
 			
 		usersByLogin = "protrada": @addUserSync(
@@ -82,9 +86,9 @@ class Bootstrap
 			.registerSuccessRedirect("/home")
 			
 		@app = express()
-		
-		@app.use(express.bodyParser())
+		#@app.use(express.compress())
 		@app.use(express.methodOverride())
+		@app.use(express.bodyParser())
 		
 		@app.use(express.cookieParser())
 		@app.use(express.session(
@@ -122,13 +126,13 @@ class Bootstrap
 
 						if 'db' in @config.cache.stores
 							dbConfig = 
-								host: app.config.sql.host
-								user: app.config.sql.user
-								password: app.config.sql.pass
-								database: 'cache'
+								host: 		app.config.sql.host
+								user: 		app.config.sql.user
+								password: 	app.config.sql.pass
+								database: 	'cache'
 							@options.dbcache = new DBWrapper(@config.sql.type, dbConfig)
 
-						new cronJob('*/10 * * * * *'
+						new cronJob('0 * * * * *'
 							, () => 
 								@options.cache.cacheCheck()
 							, null
@@ -165,7 +169,7 @@ class Bootstrap
 					console.log(err)
 					#throw @logger(err, 'fatal')
 		)		
-
+				
 		@app.post('/jsonrpc', (req, res) =>
 			@jsonRpcServer.handleRequest(req, res)
 		)
@@ -192,7 +196,7 @@ class Bootstrap
 			socketIoServer.addClient(socket)
 		)
 		
-		new cronJob('*/10 * * * * *'
+		new cronJob('10 * * * * *'
 			, () => 
 				@getNamespaces()
 			, null
@@ -241,13 +245,13 @@ class Bootstrap
 	# Find and return a controller basd on path
 	getControllerSync: (path) ->
 		try
-			controller = @modules
-			path = path_module.resolve(path)
-			ext = path_module.extname(path)
-			module = path_module.basename(path, ext)
-			path = path_module.dirname(path)				
-			folders = path.split(path_module.sep)
-			start = if process.env.COVERAGE then folders.indexOf('app-cov') else folders.indexOf('app')
+			controller 	= @modules
+			path 		= path_module.resolve(path)
+			ext 		= path_module.extname(path)
+			module 		= path_module.basename(path, ext)
+			path 		= path_module.dirname(path)				
+			folders 	= path.split(path_module.sep)
+			start 		= if process.env.COVERAGE then folders.indexOf('app-cov') else folders.indexOf('app')
 			if start >= 0
 				for i in [++start..folders.length - 1]
 					controller = controller[folders[i]]
@@ -268,11 +272,13 @@ class Bootstrap
 				fn = url.replace(/^.*?app\//, '').replace(/\.jade$/, '').replace(/[\/-]/g, '_')
 				res.write('document.' + fn + ' = ' + jc)
 
-			res.end()
+			res.send()
 		)
 
 	# The middleware that handles all app urls
 	handleRequestSync: (req, res) =>
+		profiler = new @modules.lib.Profiler()
+		profiler.startProfiling()
 		url = Bootstrap.realUrlSync(req.url, res.locals.everyauth.loggedIn)
 		# need a better handler for / when logged in and when not
 		if url == '/login'	
@@ -284,9 +290,15 @@ class Bootstrap
 			if not err 
 				controller = @getControllerSync(path)
 				if controller
-					controller = new controller
-					res.view = {}
-					controller.run(req, res, url)
+					controller 	= new controller
+					res.view 	= {}
+					controller.run(req, res, url, (err, result) ->
+						return req.next(ett) if err
+						profiler.stopProfiling(() ->
+							profiler.store(controller.id)
+						)
+						res.send(result)
+					)
 		)
 
 	# This functions configures all the routes based on the controller modules	
@@ -298,9 +310,9 @@ class Bootstrap
 							if stat.isDirectory()
 								@registerControllers(path, queue)
 							else
-								ext = path_module.extname(path)
-								controller = path.replace(/.*?controllers\/modules/, '').replace(ext, '')			
-								dest = path_module.basename(controller, ext)
+								ext 		= path_module.extname(path)
+								controller 	= path.replace(/.*?controllers\/modules/, '').replace(ext, '')			
+								dest 		= path_module.basename(controller, ext)
 								if dest == 'index'
 									controller = path_module.dirname(controller)
 								@logger("Registering route '" + controller + "'")
@@ -333,8 +345,8 @@ class Bootstrap
 				if not err
 					controller = @getControllerSync(path)
 					if controller
-						controller = new controller
-						url = @config.service + url
+						controller 	= new controller
+						url 		= @config.service + url
 						controller.delPageFromCache(url)		
 			)
 
@@ -361,20 +373,20 @@ class Bootstrap
 	addUserSync: (source, sourceUser) ->
 		user = undefined
 		if arguments.length is 1 # password-based
-			user = sourceUser = source
+			user 	= sourceUser = source
 			user.id = ++@nextUserId
 			return @usersById[@nextUserId] = user
 		else # non-password-based
-			user = @usersById[++@nextUserId] = id: @nextUserId
-			user[source] = sourceUser
+			user 			= @usersById[++@nextUserId] = id: @nextUserId
+			user[source] 	= sourceUser
 			
 		return user
 	
 	preEveryauthMiddlewareHack: ->
 		(req, res, next) ->
-			sess = req.session
-			auth = sess.auth
-			ea = loggedIn: !!(auth and auth.loggedIn)
+			sess 	= req.session
+			auth 	= sess.auth
+			ea 		= loggedIn: !!(auth and auth.loggedIn)
 
 			# Copy the session.auth properties over
 			for k of auth
@@ -399,8 +411,8 @@ class Bootstrap
 		if not @config.namespaces?
 			@config.namespaces = {}
 			
-		cc = new app.modules.lib.CacheConfig()
-		queue = async.queue((service, callback) =>
+		cc 		= new app.modules.lib.CacheConfig()
+		queue 	= async.queue((service, callback) =>
 				modified = if @config.namespaces[service.key]? then @config.namespaces[service.key]['modified'] else null
 				cc.read(service.file, modified, (err, data) =>
 					if not err and data?

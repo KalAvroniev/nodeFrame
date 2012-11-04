@@ -1,6 +1,6 @@
 winston = require('winston')
-Email = require('./Loggers/Email')
-SMS = require('./Loggers/SMS')
+Email 	= require('./Loggers/Email')
+SMS 	= require('./Loggers/SMS')
 	
 config =
 	levels:
@@ -113,8 +113,8 @@ class appError extends Error
 	constructor: (msg, caller, type, code = null) ->
 		Error.call(@)
 		Error.captureStackTrace(@, @constructor)
-		@name = caller.constructor.name + 'Error'
-		@message = msg
-		@type = type
-		@code = code
+		@name 		= caller.constructor.name + 'Error'
+		@message 	= msg
+		@type 		= type
+		@code 		= code
 		

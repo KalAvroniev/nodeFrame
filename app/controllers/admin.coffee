@@ -13,7 +13,7 @@ class Modules_Admin extends app.modules.lib.Controller
 		)
 		@view = 'admin'
 		
-	run: (req, res, url) ->
+	run: (req, res, url, cb) ->
 		res.redirect('/login') if not res.locals.everyauth.loggedIn
 		#res.renderView = 'admin'
 		

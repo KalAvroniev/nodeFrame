@@ -7,5 +7,5 @@ class Modules_Home extends app.modules.controllers.admin
 		super
 		@modMasterParams(id: "defaultSearch")
 
-	run: (req, res, url) ->	
+	run: (req, res, url, cb) ->	
 		super

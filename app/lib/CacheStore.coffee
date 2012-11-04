@@ -5,15 +5,15 @@ class CacheStore
 	
 	constructor: () -> 
 		if app.config.cache.enabled
-			store = app.config.cache.stores[app.config.cache.index]
-			@CS = app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
-			@cs = new @CS()
+			store 	= app.config.cache.stores[app.config.cache.index]
+			@CS 	= app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
+			@cs 	= new @CS()
 				
 	changeStoreSync: (index) ->
 		if index < app.config.cache.stores.length
-			store = app.config.cache.stores[index]
-			@CS = app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
-			@cs = new @CS()
+			store 	= app.config.cache.stores[index]
+			@CS 	= app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
+			@cs 	= new @CS()
 			app.config.cache.index = index
 		else
 			app.config.cache.enabled = false
@@ -80,10 +80,10 @@ class CacheStore
 		val = 'test'
 		for i in [start..0] by -1
 			((i) =>
-				store = app.config.cache.stores[i]
-				Store = app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
-				store = new Store()
-				key = Store.hashSync(val)
+				store 	= app.config.cache.stores[i]
+				Store 	= app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
+				store 	= new Store()
+				key 	= Store.hashSync(val)
 				store.write(key, val, 0, (err, res, change) =>
 					if change 
 						if i + 1 > app.config.cache.index

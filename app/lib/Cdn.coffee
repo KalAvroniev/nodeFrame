@@ -13,8 +13,8 @@ renderTag = (options, assets, attributes) ->
 	attributes = attributes or {}
 
 	# In production mode
-	src = ""
-	position = undefined
+	src 		= ""
+	position 	= undefined
 	if options.production
 		src = "//" + options.domain
 
@@ -39,14 +39,14 @@ createTag = (src, asset, attributes) ->
 	switch urlItems[0]
 		when "js"
 			attributes.type = attributes.type or "text/javascript"
-			attributes.src = src + asset
+			attributes.src 	= src + asset
 			"<script " + renderAttributes(attributes) + "></script>"
 		when "css"
-			attributes.rel = attributes.rel or "stylesheet"
+			attributes.rel 	= attributes.rel or "stylesheet"
 			attributes.href = src + asset
 			"<link " + renderAttributes(attributes) + " />"
 		when "img"
-			attributes.src = src + asset
+			attributes.src 	= src + asset
 			"<img " + renderAttributes(attributes) + " />"
 		else
 			throwError "unknown asset type"

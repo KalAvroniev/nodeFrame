@@ -22,8 +22,8 @@ class FileAdapter
 				if expire != 0
 					expire = Math.round(stat.mtime.getTime() / 1000) + stat.mtime.getTimezoneOffset() * 60 + expire
 				
-				date = new Date()
-				now = Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60
+				date 	= new Date()
+				now 	= Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60
 				if expire == 0 or expire >= now
 					fs.readFile(app.config.cacheDir + '/' + file, 'utf8', cb)
 				else
@@ -38,8 +38,8 @@ class FileAdapter
 			if stat
 				if expire != 0
 					expire = Math.round(stat.mtime.getTime() / 1000) + stat.mtime.getTimezoneOffset() * 60 + expire
-				date = new Date()
-				now = Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60
+				date 	= new Date()
+				now 	= Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60
 				if expire == 0 or expire >= now
 					fs.readFile(app.config.cacheDir + '/' + file, 'utf8', cb)
 				else
@@ -69,8 +69,8 @@ class FileAdapter
 	setNameSpace: (file, ts = null, cb, res) ->
 		date = new Date()
 		if not ts?
-			ts = String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
-			file = FileAdapter.hashSync(file)
+			ts 		= String(Math.round(date.getTime() / 1000) + date.getTimezoneOffset() * 60)
+			file 	= FileAdapter.hashSync(file)
 			
 		@write(file, ts, 0, (err, response) ->
 			if not err
