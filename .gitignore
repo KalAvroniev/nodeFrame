@@ -12,6 +12,8 @@ public/js/require/
 
 # misc
 /nbproject/private/
+.idea
+atlassian-ide-plugin.xml
 
 # cache
 cache/
@@ -31,7 +33,7 @@ profiler/
 coverage.html
 
 ###SublimeText###
- 
+
 # SublimeText project files
 /*.sublime-project
 *.sublime-workspace

@@ -1,4 +1,4 @@
-fs	 = require('fs')
+fs = require('fs')
 path_module = require('path')
 util = require('util')
 asunc = require('async')
@@ -17,18 +17,18 @@ class Modules
 			files = fs.readdirSync(path)
 			#push files before folders
 			files.sort((a, b) ->
-				aIsFile = fs.statSync(path + '/' + a).isFile()
-				bIsFile = fs.statSync(path + '/' + b).isFile()
+				aIsFile = fs.statSync(path + path_module.sep + a).isFile()
+				bIsFile = fs.statSync(path + path_module.sep + b).isFile()
 				if aIsFile and bIsFile
 					return 0
 				else if aIsFile and not bIsFile
 					return -1
 				else
 					return 1
-			)		
+			)
 			files.forEach((file) =>
 				if file.substr(0, 1) != '.'
-					file = path + '/' + file
+					file = path + path_module.sep + file
 					stat = fs.statSync(file)
 					if stat and stat.isFile()
 						if not /Bootstrap/.test(file)

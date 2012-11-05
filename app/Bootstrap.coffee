@@ -110,8 +110,8 @@ class Bootstrap
 				modules: ['config', (callback) =>
 					try
 						#register all modules
-						modules.registerModulesSync(__dirname + '/lib', @modules)
-						modules.registerModulesSync(__dirname + '/', @modules)	
+						modules.registerModulesSync(__dirname + path_module.sep + 'lib', @modules)
+						modules.registerModulesSync(__dirname + path_module.sep, @modules)
 						@logger = @modules.lib.ErrorHandler.appLoggerSync
 						@error  = @modules.lib.ErrorHandler.appError
 						callback()
@@ -311,7 +311,7 @@ class Bootstrap
 								@registerControllers(path, queue)
 							else
 								ext 		= path_module.extname(path)
-								controller 	= path.replace(/.*?controllers\/modules/, '').replace(ext, '')			
+								controller 	= path.replace(/.*?controllers\/modules/, '').replace(ext, '').replace(/[\\]+/g, '/')
 								dest 		= path_module.basename(controller, ext)
 								if dest == 'index'
 									controller = path_module.dirname(controller)
@@ -333,7 +333,7 @@ class Bootstrap
 			if not err
 				files.forEach((file) =>
 					if file.substr(0, 1) != '.'
-						queue.push(path + '/' + file, () ->)
+						queue.push(path + path_module.sep + file, () ->)
 				)
 		)
 			
@@ -361,7 +361,7 @@ class Bootstrap
 			files = fs.readdirSync(path)
 			files.forEach((file) =>
 				if file.substr(0, 1) != '.'
-					@deleteMinifiedSync(path + '/' + file)
+					@deleteMinifiedSync(path + path_module.sep + file)
 			)
 		catch e
 			@logger('Now deleting ' + path)
