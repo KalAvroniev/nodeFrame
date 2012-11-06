@@ -21,7 +21,7 @@ class Bootstrap
 		@nextUserId 	= 0	
 		@jsonRpcServer 	= @logger = @error = @pstore = null
 
-	start: () ->	
+	start: () ->			
 		#create a MongoDB connection
 		@pstore = mongoose.createConnection('localhost', 'profiler')	
 
@@ -131,8 +131,7 @@ class Bootstrap
 								password: 	app.config.sql.pass
 								database: 	'cache'
 							@options.dbcache = new DBWrapper(@config.sql.type, dbConfig)
-
-						new cronJob('0 * * * * *'
+						new cronJob('* * * * * *'
 							, () => 
 								@options.cache.cacheCheck()
 							, null
@@ -195,14 +194,15 @@ class Bootstrap
 		io.sockets.on('connection', (socket) ->
 			socketIoServer.addClient(socket)
 		)
-		
-		new cronJob('10 * * * * *'
+		#snapshot = prof.takeSnapshot('namespace')
+		#console.log(snapshot)
+		new cronJob('* * * * * *'
 			, () => 
 				@getNamespaces()
 			, null
 			, true
 			, 'Australia/Sydney'
-		)		
+		)
 		
 	# Return stripped out url without parameters
 	@realUrlSync: (url, loggedIn=false) ->
@@ -410,11 +410,11 @@ class Bootstrap
 	getNamespaces: () ->
 		if not @config.namespaces?
 			@config.namespaces = {}
-			
-		cc 		= new app.modules.lib.CacheConfig()
+		if not @options.cc?
+			@options.cc	= new app.modules.lib.CacheConfig()
 		queue 	= async.queue((service, callback) =>
 				modified = if @config.namespaces[service.key]? then @config.namespaces[service.key]['modified'] else null
-				cc.read(service.file, modified, (err, data) =>
+				@options.cc.read(service.file, modified, (err, data) =>
 					if not err and data?
 						@updateExternalCache(service.key, JSON.parse(data))
 					callback()

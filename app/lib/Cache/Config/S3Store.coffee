@@ -28,9 +28,8 @@ class S3Store
 			
 		@s3.GetObject(options, (err, data) =>
 			if err
-				if @retry <= 0
-					cb(err)
-					
+				return cb(err) if @retry <= 0		
+				
 				@read(bucket, file, data, cb)
 				@retry--
 			else
@@ -49,9 +48,8 @@ class S3Store
 			
 		@s3.PutObject(options, (err, data) =>
 			if err
-				if @retry <= 0
-					cb(err)
-					
+				return cb(err) if @retry <= 0
+				
 				@write(bucket, file, data, cb)
 				@retry--
 			else

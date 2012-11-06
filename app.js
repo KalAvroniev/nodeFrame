@@ -1,4 +1,4 @@
-require('coffee-script')
+require('coffee-script');
 
 if(process.env.COVERAGE) {
 	Bootstrap = require('./app-cov/Bootstrap');

@@ -108,14 +108,15 @@ class APIController
 			
 	# store the namespace in a global configuration file
 	updateNamespaceConfig: (index) ->
-		cc = new app.modules.lib.CacheConfig()
-		cc.read(app.config.service, null, (err, data) =>
+		if not app.options.cc?
+			app.options.cc = new app.modules.lib.CacheConfig()
+		app.options.cc.read(app.config.service, null, (err, data) =>
 			if err
 				data = {}
 			else
 				data = JSON.parse(data)
 			data[app.options.cache.CS.hashSync(index)] = @namespace
-			cc.write(app.config.service, JSON.stringify(data), (err, data) ->
+			app.options.cc.write(app.config.service, JSON.stringify(data), (err, data) ->
 				if err
 					app.logger(err, 'error')
 			)

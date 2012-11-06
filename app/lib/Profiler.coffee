@@ -8,7 +8,7 @@ mongoose = require('mongoose')
 class Profiler
 	module.exports = @
 	
-	constructor: () ->
+	constructor: (@log = true) ->
 		@start 	= {}
 		@end 	= {}
 		
@@ -50,14 +50,20 @@ class Profiler
 					time: 	[@calcAvg(res.time[0], res.count, time[0]), @calcAvg(res.time[1], res.count, time[1])]
 					cpu: 	@calcAvg(res.cpu, res.count, cpu)
 					count: 	res.count + 1
-				Performance.update({_id: id}, tmp, {upsert:true}, (err, num, raw) ->
-					console.log(tmp)
-				)
+				if @log
+					Performance.update({_id: id}, tmp, {upsert:true}, (err, num, raw) ->
+						console.log(tmp)
+					)
+					
+				console.log(tmp)
 			else
 				tmp = new Performance({_id: id, memory: memory, time: time, cpu: cpu, count: 1})
-				tmp.save((err) ->
-					console.log(tmp)
-				)
+				if @log
+					tmp.save((err) ->
+						console.log(tmp)
+					)
+					
+				console.log(tmp)
 		)
 	
 	cpuUsage: (usage, cb) ->
