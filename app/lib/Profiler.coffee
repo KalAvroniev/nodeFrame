@@ -3,12 +3,12 @@ fs	 	= require('fs')
 async 	= require('async')
 shell 	= require('shelljs')
 
-mongoose = require('mongoose')
+
 
 class Profiler
 	module.exports = @
 	
-	constructor: (@log = true) ->
+	constructor: (@print = false) ->
 		@start 	= {}
 		@end 	= {}
 		
@@ -23,17 +23,8 @@ class Profiler
 		@cpuUsage(@end, cb)
 
 	store: (id) ->
-		schema = new mongoose.Schema(
-				memory: Number
-				time: 	Array
-				cpu: 	Number
-				count: 	Number
-				_id: 	String
-		)
-
-		Performance = app.pstore.model('Performance', schema)
-
-		memory 		= @end.memory - @start.memory
+		store		= new app.modules.lib.ProfilerStore[app.config.profiler.charAt(0).toUpperCase() + app.config.profiler.substr(1)]()
+		memory 	= @end.memory - @start.memory
 		time 		= @end.time
 		cpu 		= 0
 		if @start.cpu
@@ -42,28 +33,23 @@ class Profiler
 			if total_diff > 0
 				cpu =  parseFloat(user_diff / total_diff)
 			
-		Performance.findOne({_id: id}, (err, res) =>
+		store.read(id, (err, res) =>
 			return app.logger(err, 'warn') if err
 			if res?
 				tmp = 
 					memory: @calcAvg(res.memory, res.count, memory)
 					time: 	[@calcAvg(res.time[0], res.count, time[0]), @calcAvg(res.time[1], res.count, time[1])]
-					cpu: 	@calcAvg(res.cpu, res.count, cpu)
+					cpu:		@calcAvg(res.cpu, res.count, cpu)
 					count: 	res.count + 1
-				if @log
-					Performance.update({_id: id}, tmp, {upsert:true}, (err, num, raw) ->
-						console.log(tmp)
-					)
-					
-				console.log(tmp)
+					_id:		id
+				
+				store.write(tmp, true)
+				if @print	or process.env.NODE_ENV != 'production'
+					console.log(tmp)
 			else
-				tmp = new Performance({_id: id, memory: memory, time: time, cpu: cpu, count: 1})
-				if @log
-					tmp.save((err) ->
-						console.log(tmp)
-					)
-					
-				console.log(tmp)
+				store.write(tmp)
+				if @print	or process.env.NODE_ENV != 'production'	
+					console.log(tmp)
 		)
 	
 	cpuUsage: (usage, cb) ->

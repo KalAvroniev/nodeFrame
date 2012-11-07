@@ -13,4 +13,5 @@ exports.config =
 			stores: ['memcache', 'db', 'file']
 			index: 0
 			config: 's3'
+		profiler: 'mongoDB'
 		service: path.basename(path.resolve(__dirname + '/../../'))
