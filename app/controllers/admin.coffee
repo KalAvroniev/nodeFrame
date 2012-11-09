@@ -14,15 +14,17 @@ class Modules_Admin extends app.modules.lib.Controller
 		@view = 'admin'
 		
 	run: (req, res, url, cb) ->
-		res.redirect('/login') if not res.locals.everyauth.loggedIn
+		if not res.locals.everyauth.loggedIn
+			@releaseResourcesSync()
+			return res.redirect('/login') 
 		#res.renderView = 'admin'
 		
 		res.view = 
 			id: "spine"
 			layout: true
-			
-		@minifyJS()
 
+		@minifyJS()
+		
 		#need to add user id to the url
 		#req.url = req.url + ? + user_id
 		super

@@ -1,5 +1,5 @@
-util = require('util')
-express = require('express')
+util		= require('util')
+express		= require('express')
 everyauth 	= require('everyauth')
 fs	 		= require('fs')
 jade 		= require('jade')
@@ -19,12 +19,9 @@ class Bootstrap
 		@config 		= {}
 		@usersById 		= {}
 		@nextUserId 	= 0	
-		@jsonRpcServer 	= @logger = @error = @pstore = null
+		@jsonRpcServer 	= @logger = @error = @pstore = @profiler = null
 
 	start: () ->			
-		#create a MongoDB connection
-		@pstore = mongoose.createConnection('localhost', 'profiler')	
-
 		everyauth.debug = true	
 			
 		usersByLogin = "protrada": @addUserSync(
@@ -163,6 +160,26 @@ class Bootstrap
 					catch err
 						callback(err)
 				]
+				resources: ['modules', (callback) =>
+					#create a MongoDB connection
+					@pstore = mongoose.createConnection('localhost', 'profiler')	
+					@profiler = new @modules.lib.Profiler()
+					@config.resources = {}
+					###@config.resources = 
+						cpu: 800
+						memory: 1024
+					###
+					@modules.lib.Profiler.numCpus((code, output) =>
+						if not code
+							@config.resources.cpu = parseInt(output) * 100
+							
+						@modules.lib.Profiler.totalMemory((code, output) =>
+							if not code
+								@config.resources.memory = parseInt(output) * 1024 * 75 / 100
+								callback()
+						)
+					)
+				]					
 			, (err, result) =>
 				if err
 					console.log(err)
@@ -277,8 +294,7 @@ class Bootstrap
 
 	# The middleware that handles all app urls
 	handleRequestSync: (req, res) =>
-		profiler = new @modules.lib.Profiler()
-		profiler.startProfiling()
+		@profiler.startProfiling()
 		url = Bootstrap.realUrlSync(req.url, res.locals.everyauth.loggedIn)
 		# need a better handler for / when logged in and when not
 		if url == '/login'	
@@ -292,10 +308,10 @@ class Bootstrap
 				if controller
 					controller 	= new controller
 					res.view 	= {}
-					controller.run(req, res, url, (err, result) ->
-						return req.next(ett) if err
-						profiler.stopProfiling(() ->
-							profiler.store(controller.id)
+					controller.checkResourcesAndRun(req, res, url, (err, result) =>
+						return req.next(err) if err
+						@profiler.stopProfiling(() =>
+							@profiler.store(controller.id)
 						)
 						res.send(result)
 					)

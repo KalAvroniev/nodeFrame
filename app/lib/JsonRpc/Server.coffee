@@ -90,8 +90,7 @@ class JsonRpcServer
 
 	# Jsonrpc call gets validated and handled
 	handleRawCall: (request, options = {}, callback) ->
-		profiler = new app.modules.lib.Profiler()
-		profiler.startProfiling()
+		app.profiler.startProfiling()
 		# validate
 		try
 			controller = @getControllerSync(request.method)
@@ -122,8 +121,8 @@ class JsonRpcServer
 				r = JsonRpcServer.Error(request.id, error.message, JsonRpcServer.INTERNAL_ERROR)
 			else
 				r = JsonRpcServer.Success(request.id, result)
-			profiler.stopProfiling(() ->
-				profiler.store(obj.id)
+			app.profiler.stopProfiling(() ->
+				app.profiler.store(obj.id)
 			)
 			return callback(JSON.stringify(r))
 		)
@@ -133,7 +132,7 @@ class JsonRpcServer
 		req.validate(obj, () ->
 			# execute the method
 			url = app.config.service + '/jsonrpc/' + request.method
-			obj.run(req, url)
+			obj.checkResourcesAndRun(req, url)
 		)
 		
 	# This is to handle bulk calls

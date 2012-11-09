@@ -11,6 +11,7 @@ class Profiler
 	constructor: (@print = false) ->
 		@start 	= {}
 		@end 	= {}
+		@storage	= new app.modules.lib.ProfilerStore[app.config.profiler.charAt(0).toUpperCase() + app.config.profiler.substr(1)]()
 		
 	startProfiling: (cb) ->
 		@start.memory 	= process.memoryUsage().rss
@@ -23,8 +24,7 @@ class Profiler
 		@cpuUsage(@end, cb)
 
 	store: (id) ->
-		store		= new app.modules.lib.ProfilerStore[app.config.profiler.charAt(0).toUpperCase() + app.config.profiler.substr(1)]()
-		memory 	= @end.memory - @start.memory
+		memory		= @end.memory - @start.memory
 		time 		= @end.time
 		cpu 		= 0
 		if @start.cpu
@@ -33,23 +33,30 @@ class Profiler
 			if total_diff > 0
 				cpu =  parseFloat(user_diff / total_diff)
 			
-		store.read(id, (err, res) =>
+		@storage.read(id, (err, res) =>
 			return app.logger(err, 'warn') if err
 			if res?
 				tmp = 
 					memory: @calcAvg(res.memory, res.count, memory)
 					time: 	[@calcAvg(res.time[0], res.count, time[0]), @calcAvg(res.time[1], res.count, time[1])]
-					cpu:		@calcAvg(res.cpu, res.count, cpu)
+					cpu:	@calcAvg(res.cpu, res.count, cpu)
 					count: 	res.count + 1
-					_id:		id
+					_id:	id
 				
-				store.write(tmp, true)
-				if @print	or process.env.NODE_ENV != 'production'
-					console.log(tmp)
+				@storage.write(tmp, true)
+				if @print or process.env.NODE_ENV != 'production'
+					app.logger('Performance: ' + util.inspect(tmp))
 			else
-				store.write(tmp)
-				if @print	or process.env.NODE_ENV != 'production'	
-					console.log(tmp)
+				tmp =
+					memory: memory
+					time:	time
+					cpu:	cpu 
+					count:	1
+					_id:	id
+					
+				@storage.write(tmp)
+				if @print or process.env.NODE_ENV != 'production'	
+					app.logger('Performance: ' + util.inspect(tmp))
 		)
 	
 	cpuUsage: (usage, cb) ->
@@ -83,8 +90,7 @@ class Profiler
 							callback(err)
 					)
 				, cpus: (callback) ->
-					shell.silent(true)
-					shell.exec('cat /proc/cpuinfo | grep processor | wc -l', (code, output) ->
+					Profiler.numCpus((code, output) ->
 						if not code
   							callback(null, parseInt(output))
 					)
@@ -97,4 +103,18 @@ class Profiler
 		)
 
 	calcAvg: (cur_avg, count, new_val) ->
-			return (cur_avg * count + new_val) / (count + 1)
+		return (cur_avg * count + new_val) / (count + 1)
+			
+	# Get cpu count for the server
+	@numCpus: (cb) ->
+		shell.silent(true)
+		shell.exec('cat /proc/cpuinfo | grep processor | wc -l', (code, output) ->
+			cb(code, output)
+		)
+		
+	# Get memory count for the server in KB
+	@totalMemory: (cb) ->
+		shell.silent(true)
+		shell.exec('cat /proc/meminfo | awk "/MemTotal/ {print \\\$2}"', (code, output) ->
+			cb(code, output)
+		)

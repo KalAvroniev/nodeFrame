@@ -1,4 +1,5 @@
-URL = require('url')
+URL		= require('url')
+async	= require('async')
 
 class APIController
 	module.exports = @
@@ -9,8 +10,20 @@ class APIController
 			'cache': true
 		@validate 	= {}
 		@options 	= {}
-		@namespace 	= ''
-		@id 		= ''
+		@namespace 	= @id = @needed_res = null
+		
+	# Check if server has resources
+	checkResourcesAndRun: (req, url) ->
+		@id 			= app.options.cache.CS.hashSync(url)
+		@assignResources((err, execute) =>
+			if execute
+				@run(req, url)
+			else
+				process.nextTick(() =>
+					@checkResourcesAndRun(req, url)
+					app.logger(new app.error('No resources available for this controller', @, 'error'))
+				)		
+		)
 
 	# Prepare the controller
 	run: (req, url) ->	
@@ -18,28 +31,34 @@ class APIController
 			hostname: url
 			query: req.request.call.params
 		).replace('//', '')
-		@id 		= app.options.cache.CS.hashSync(url)
 		
-		if @params.cache 
-			#namespace
-			app.options.cache.getNameSpace(url, null, (err, data) =>
-				if err
-					app.options.cache.setNameSpace(url, null, app.options.cache.cs.getNameSpace, (err, data) =>
-						if not err
-							@namespace = data
-							@ready(req, full_url)
-							setTimeout(() =>
-									@updateNamespaceConfig(url)
-								, Math.round(Math.random()*60)*1000)
-						else
-							@ready(req, full_url)
-					)
-				else
-					@namespace = data
-					@ready(req, full_url)
-			)
-		else
-			@ready(req, full_url)
+		async.waterfall([
+				(callback) =>
+					if @params.cache 
+						#namespace
+						app.options.cache.getNameSpace(url, null, (err, data) =>
+							if err
+								app.options.cache.setNameSpace(url, null, app.options.cache.cs.getNameSpace, (err, data) =>
+									if not err
+										@namespace = data
+										setTimeout(() =>
+												@updateNamespaceConfig(url)
+											, Math.round(Math.random()*60)*1000)
+									
+									callback(null, req, full_url)
+								)
+							else
+								@namespace = data
+								callback(null, req, full_url)
+						)
+					else
+						callback(null, req, full_url)
+				, (req, url, callback) =>
+					@ready(req, url)
+					callback()
+			], (err, result) ->
+				return app.logger(err, 'error') if err
+		)
 		
 	# Used to overwrite parent parameters
 	modMasterParams: (params) ->
@@ -81,7 +100,7 @@ class APIController
 	
 	# Send back to requestor
 	ready: (req, index) ->
-		if @namespace != ''
+		if @namespace?
 			index = app.options.cache.hashTagSync(index, @namespace)
 			@getDataFromCache(index, @params.expires, (err, content) =>
 				if err
@@ -106,6 +125,8 @@ class APIController
 				req.send(err, @cacheInfo(content))
 			)
 			
+		@releaseResourcesSync()
+			
 	# store the namespace in a global configuration file
 	updateNamespaceConfig: (index) ->
 		if not app.options.cc?
@@ -121,3 +142,28 @@ class APIController
 					app.logger(err, 'error')
 			)
 		)
+		
+	assignResources: (cb) ->
+		app.profiler.storage.read(@id, (err, res) =>
+			return cb(err) if err
+			@needed_res = res
+			execute = true
+			if @needed_res?
+				app.config.resources.cpu -= @needed_res.cpu
+				if app.config.resources.cpu < 0
+					execute = false 
+
+				app.config.resources.memory -= @needed_res.memory
+				if app.config.resources.memory < 0
+					execute = false 
+
+				if not execute
+					@releaseResourcesSync()
+				
+			return cb(null, execute)
+		)
+	
+	releaseResourcesSync: () ->
+		if @needed_res?
+			app.config.resources.cpu	+= @needed_res.cpu
+			app.config.resources.memory += @needed_res.memory

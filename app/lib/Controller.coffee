@@ -1,3 +1,5 @@
+async = require('async')
+
 class Controller
 	module.exports = @
 	
@@ -5,38 +7,56 @@ class Controller
 		@params 	= 
 			'expires': 60
 			'cache': true
-		@namespace 	= ''
-		@view 		= ''
-		@id 		= ''
+		@namespace	= @view = @id = @needed_res = null
+		
+	# Check if server has resources
+	checkResourcesAndRun: (req, res, url, cb) ->
+		service_url 	= app.config.service + url
+		@id 			= app.options.cache.CS.hashSync(service_url)
+		@assignResources((err, execute) =>
+			if execute
+				@run(req, res, url, cb)
+			else
+				process.nextTick(() =>
+					@checkResourcesAndRun(req, res, url, cb)
+					app.logger(new app.error('No resources available for this controller', @, 'error'))
+				)		
+		)
 
 	# Prepare the controller
 	run: (req, res, url, cb) ->
 		@defaultView(url)
 		res.renderView 	= @view		
 		res.view[key] 	= val for key, val of @params	
-		url 			= app.config.service + url
-		@id 			= app.options.cache.CS.hashSync(url)
-		if @params.cache
-			#namespace
-			app.options.cache.getNameSpace(url, null, (err, data) =>
-				if err
-					app.options.cache.setNameSpace(url, null, app.options.cache.cs.getNameSpace, (err, data) =>
-						if not err
-							@namespace = data
-							@ready(req, res, req.url, cb)
-						else
-							@ready(req, res, req.url, cb)
-					)
-				else
-					@namespace = data
-					@ready(req, res, req.url, cb)
-			)
-		else
-			@ready(req, res, req.url, cb)
+		service_url 	= app.config.service + url
+		async.waterfall([
+				(callback) =>
+					if @params.cache
+						#namespace
+						app.options.cache.getNameSpace(service_url, null, (err, data) =>
+							if err
+								app.options.cache.setNameSpace(service_url, null, app.options.cache.cs.getNameSpace, (err, data) =>
+									if not err
+										@namespace = data
+
+									callback(null, req, res, req.url, cb)
+								)		
+							else
+								@namespace = data
+								callback(null, req, res, req.url, cb)
+						)
+					else			
+						callback(null, req, res, req.url, cb)
+				, (req, res, url, cb, callback) =>
+					@ready(req, res, url, cb)
+					callback()
+			], (err, result) ->
+				return app.logger(err, 'error') if err
+		)
 		
 	# Set up the view
 	defaultView: (url) ->
-		if @view == ''
+		if not @view?
 			@view = 'modules/' + url.substr(1)
 			
 	# Used to overwrite parent parameters
@@ -71,7 +91,7 @@ class Controller
 		
 	# Send back to requestor
 	ready: (req, res, index, cb) ->
-		if @namespace != ''
+		if not @namespace?
 			index = app.options.cache.hashTagSync(index, @namespace)
 			@getPageFromCache(index, res.view.expires, (err, content) =>
 				if content
@@ -92,3 +112,31 @@ class Controller
 				return cb(err) if err
 				cb(null, content)
 			)
+			
+		@releaseResourcesSync()
+	
+			
+	assignResources: (cb) ->
+		app.profiler.storage.read(@id, (err, res) =>
+			return cb(err) if err
+			@needed_res = res
+			execute = true
+			if @needed_res?
+				app.config.resources.cpu -= @needed_res.cpu
+				if app.config.resources.cpu < 0
+					execute = false 
+
+				app.config.resources.memory -= @needed_res.memory
+				if app.config.resources.memory < 0
+					execute = false 
+
+				if not execute
+					@releaseResourcesSync()
+				
+			return cb(null, execute)
+		)
+	
+	releaseResourcesSync: () ->
+		if @needed_res?
+			app.config.resources.cpu	+= @needed_res.cpu
+			app.config.resources.memory += @needed_res.memory
