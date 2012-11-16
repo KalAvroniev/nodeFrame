@@ -7,6 +7,9 @@ path_module = require('path')
 memcached 	= require('memcached')
 async 		= require('async')
 mongoose 	= require('mongoose')
+awssum		= require('awssum')
+amazon		= awssum.load('amazon/amazon')
+https		= require('https')
 modules 	= require('../modules')
 cronJob 	= require('cron').CronJob
 DBWrapper 	= require('node-dbi').DBWrapper
@@ -220,6 +223,7 @@ class Bootstrap
 			, true
 			, 'Australia/Sydney'
 		)
+		@setupAsyncWorkflow()
 		
 	# Return stripped out url without parameters
 	@realUrlSync: (url, loggedIn=false) ->
@@ -469,3 +473,109 @@ class Bootstrap
 		@config.namespaces[key] = new_data
 		@config.namespaces[key]['modified'] = new Date().toUTCString()
 		
+	setupAsyncWorkflow: () ->
+		@options.swf = {}
+		Swf	= awssum.load('amazon/swf').Swf
+		@options.swf.connect = new Swf(
+			'accessKeyId'		: app.config.aws.accessKeyId
+			'secretAccessKey'	: app.config.aws.secretAccessKey			
+			'region'			: amazon.US_EAST_1
+			'agent'				: new https.Agent({ maxSockets: 100 }) #read http://nodejs.org/api/all.html#all_class_http_agent
+		)
+	
+		###@options.swf.connect.RegisterDomain({Name: @config.service, WorkflowExecutionRetentionPeriodInDays: '7'}, (err, res) =>
+			@options.swf.connect.RegisterWorkflowType({
+					Domain:									@config.service 
+					Name:									'AsyncSend'
+					Version:								'2.2'
+					DefaultTaskList:						
+						name: 'AsyncSend'
+					DefaultExecutionStartToCloseTimeout:	'86400'
+					DefaultTaskStartToCloseTimeout:			'86400'
+				}
+				, (err, res) ->
+					console.log('RegisterWorkflowType', err, res)
+			)
+			@options.swf.connect.RegisterActivityType({Domain: @config.service, Name: 'GetJob', Version: '2.0'}, (err, res) ->
+				console.log('RegisterActivityType', err, res)
+			)
+			@options.swf.connect.RegisterActivityType({Domain: @config.service, Name: 'SendResult', Version: '2.0'}, (err, res) ->
+				console.log('RegisterActivityType', err, res)
+			)
+		)###
+		
+		# Prepare decisions
+		asyncDecisions = 
+			AsyncSend: [
+				decisionType: 'ScheduleActivityTask'
+				scheduleActivityTaskDecisionAttributes: 
+					activityType: 
+						name:		'GetJob'
+						version:	'2.0'
+					activityId:				'' + Math.floor((Math.random()*10)+1)
+					input:					null
+					scheduleToCloseTimeout:	'60'
+					taskList:
+						name: 'GetJob'
+					scheduleToStartTimeout:	'5'
+					startToCloseTimeout:	'55'
+					heartbeatTimeout:		'10'
+			]
+			GetJob: [
+				decisionType: 'ScheduleActivityTask'
+				scheduleActivityTaskDecisionAttributes: 
+					activityType: 
+						name:		'SendResult'
+						version:	'2.0'
+					activityId:				'' + Math.floor((Math.random()*10)+1)
+					input:					null
+					scheduleToCloseTimeout:	'60'
+					taskList:
+						name: 'SendResult'
+					scheduleToStartTimeout:	'5'
+					startToCloseTimeout:	'55'
+					heartbeatTimeout:		'10'
+			]
+			SendResult: [
+				decisionType: 'CompleteWorkflowExecution'
+			]
+		
+		async.parallel([
+				(callback) =>
+					# Setup worker
+					@options.swf.worker		= new @modules.lib.Worker()
+					@options.swf.worker.addTasks('asyncWorker', ['AsyncSend', 'GetJob', 'SendResult'])
+					@options.swf.worker.pollForTask()
+					callback()
+				, (callback) =>		
+					# Setup decider
+					@options.swf.decider	= new @modules.lib.Decider()
+					@options.swf.decider.addTasks('asyncDecider', ['AsyncSend'])
+					@options.swf.decider.addDecisions(asyncDecisions)
+					@options.swf.decider.pollForTask()
+					callback()
+				, (callback) =>	
+					average_exec_time = '60'
+					@options.swf.connect.StartWorkflowExecution({
+							Domain: @config.service
+							WorkflowId:						'' + Math.floor((Math.random()*10)+1)
+							WorkflowType:					{name: 'AsyncSend', version: '2.2'}
+							ExecutionStartToCloseTimeout:	average_exec_time
+							TaskStartToCloseTimeout:		average_exec_time	
+							ChildPolicy:					'REQUEST_CANCEL'
+							Input:							'Input as String'
+						}
+						, (err, res) ->
+							console.log('StartWorkflowExecution', err, res)
+					)
+					callback()				
+			]
+			, (err, result) ->
+		)
+	workerCallback: (err, task) =>
+		if not err
+			@options.swf.worker.pollForTask(task, @workerCallback)
+			
+	deciderCallback: (err, task) =>
+		if not err
+			@options.swf.decider.pollForTask(task, @deciderCallback)

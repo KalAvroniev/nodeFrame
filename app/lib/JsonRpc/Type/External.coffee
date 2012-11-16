@@ -45,7 +45,7 @@ class JsonRpcExternalRequest extends app.modules.lib.JsonRpc.Abstract
 							'path': 	@path
 							'method': 	'POST'
 							'headers': 	@headers
-							'agent': 	http.globalAgent
+							'agent': 	http.globalAgent # read http://nodejs.org/api/all.html#all_class_http_agent
 
 						req = http.request(options, (result) =>
 							result.setEncoding('utf8');

@@ -1,5 +1,8 @@
 crypto 	= require('crypto')
 URL 	= require('url')
+awssum 	= require('awssum')
+amazon 	= awssum.load('amazon/amazon')
+Swf		= awssum.load('amazon/swf').Swf
 
 class JsonRpcAbstractRequest
 	module.exports = @
@@ -32,16 +35,13 @@ class JsonRpcAbstractRequest
 		success()
 		
 	send: (error, result) ->
-		if error
-			# retry only on error
-			if @retries == 0 
-				app.logger(new app.error('Retry limit reached | ' + error.message, @, 'warn'))
-				@callback(error, @call.id, 'Stop')
+		switch typeof @callback
+			when 'function' # sync case
+				@sendSync(error, result)
+			when 'object' # async case
+				return false
 			else
-				@retries -= 1
-		else 
-			# continue with script
-			true
+				return false
 	
 	setRetries: (num) ->
 		@retries = num
@@ -50,3 +50,24 @@ class JsonRpcAbstractRequest
 		data = JSON.parse(data)
 		if data.error?
 			throw new app.error(@url + @path + '/' + @call.method + ' | ' + data.error.message, @, 'error', data.error.code)
+			
+	sendSync: (error, result) ->
+		if error
+			# retry only on error
+			if @retries == 0 
+				app.logger(new app.error('Retry limit reached | ' + error.message, @, 'warn'))
+				@callback(error, @call.id, 'Stop')
+				return false
+			else
+				@retries -= 1
+
+		# continue with script
+		return true
+
+	sendAsync: () ->
+		swf = new Swf(
+			'accessKeyId'		: app.config.aws.accessKeyId
+			'secretAccessKey'	: app.config.aws.secretAccessKey			
+			'region'			: amazon.US_EAST_1
+		)
+		
