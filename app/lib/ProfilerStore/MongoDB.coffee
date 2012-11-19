@@ -5,11 +5,11 @@ class MongoDB
 	
 	constructor: () ->
 		schema = new mongoose.Schema(
-				memory: Number
-				time: 	Array
-				cpu:		Number
-				count: 	Number
-				_id:		String
+				memory	: Number
+				time	: Array
+				cpu		: Number
+				count	: Number
+				_id		: String
 		)
 		
 		@Performance = app.pstore.model('Performance', schema)

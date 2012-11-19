@@ -4,14 +4,14 @@ class API_User_UpdateState extends app.modules.lib.APIController
 	constructor: () ->
 		super
 		validate =
-			"name":
-				"description": "State key.",
-				"type": "string",
-				"required": true
-			"value":
-				"description": "New value for state key.",
-				"type": "any",
-				"required": true
+			"name"				:
+				"description"	: "State key."
+				"type"			: "string"
+				"required"		: true
+			"value"				:
+				"description"	: "New value for state key."
+				"type"			: "any"
+				"required"		: true
 	options = 
 		"requireUserSession": true
 

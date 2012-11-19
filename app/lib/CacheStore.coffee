@@ -5,11 +5,11 @@ class CacheStore
 	
 	constructor: () -> 
 		if app.config.cache.enabled
-			store 	= app.config.cache.stores[app.config.cache.index]
-			@CS			= app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
-			@stores = {}
-			@stores[store] = new @CS()
-			@cs			= @stores[store]
+			store			= app.config.cache.stores[app.config.cache.index]
+			@CS				= app.modules.lib.Cache[store.charAt(0).toUpperCase() + store.substr(1) + 'Adapter']
+			@stores			= {}
+			@stores[store]	= new @CS()
+			@cs				= @stores[store]
 				
 	changeStoreSync: (index) ->
 		if index < app.config.cache.stores.length

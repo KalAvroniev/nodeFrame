@@ -9,7 +9,7 @@ class Modules_Admin extends app.modules.lib.Controller
 		super
 		@modMasterParams(
 			require_conf: 'admin'
-			expires: 10
+			expires		: 10
 		)
 		@view = 'admin'
 		
@@ -20,8 +20,8 @@ class Modules_Admin extends app.modules.lib.Controller
 		#res.renderView = 'admin'
 		
 		res.view = 
-			id: "spine"
-			layout: true
+			id		: "spine"
+			layout	: true
 
 		@minifyJS()
 		
@@ -31,13 +31,13 @@ class Modules_Admin extends app.modules.lib.Controller
 
 	minifyJS: () ->
 		config =
-			baseUrl: './public/js'
-			mainConfigFile: './public/js/require-config/' + @params.require_conf + '.js'
-			skipModuleInsertion: true
-			name: './require-config/' + @params.require_conf
-			out: './public/js/require/' + @params.require_conf + '.js'
-			optimize: 'none'		
-			excludeShallow: ["require-config/" + @params.require_conf]
+			baseUrl				: './public/js'
+			mainConfigFile		: './public/js/require-config/' + @params.require_conf + '.js'
+			skipModuleInsertion	: true
+			name				: './require-config/' + @params.require_conf
+			out					: './public/js/require/' + @params.require_conf + '.js'
+			optimize			: 'none'		
+			excludeShallow		: ["require-config/" + @params.require_conf]
 
 		fs.readFile app.config.pubDir + '/js/require/' + @params.require_conf + '.js', 'utf8', (err, data) ->
 			if err

@@ -115,7 +115,7 @@ class JsonRpcRequest
 					#look for cache
 					full_url = URL.format(
 						hostname: tmp[0] + request.path + '/' + request.call.method
-						query: request.call.params
+						query	: request.call.params
 					).replace('//', '')	
 					index = app.options.cache.hashTagSync(full_url, namespace)
 					app.options.cache.write(index, JSON.stringify(data), data.expire, (err, data, change) =>

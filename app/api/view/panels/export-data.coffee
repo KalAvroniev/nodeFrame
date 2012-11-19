@@ -12,28 +12,28 @@ class API_View_Panels_ExportData extends app.modules.lib.APIController
 		# view elements
 		r.tabs = [
 			{
-				'title': 'Expiring',
-				'href': '#expiring',
-			},
+				'title'	: 'Expiring'
+				'href'	: '#expiring'
+			}
 			{
-				'title': 'Pre-auctions',
-				'href': '#pre-auction'
-			},
+				'title'	: 'Pre-auctions'
+				'href'	: '#pre-auction'
+			}
 			{
-				'title': 'Auctions',
-				'href': '#auction'
-			},
+				'title'	: 'Auctions'
+				'href'	: '#auction'
+			}
 			{
-				'title': 'Buy it now',
-				'href': '#buy-it-now'
-			},
+				'title'	: 'Buy it now'
+				'href'	: '#buy-it-now'
+			}
 			{
-				'title': 'Websites',
-				'href': '#websites'
-			},
+				'title'	: 'Websites'
+				'href'	: '#websites'
+			}
 			{
-				'title': 'History',
-				'href': '#history'
+				'title'	: 'History'
+				'href'	: '#history'
 			}
 		]
 		r.active_tab = '#expiring'

@@ -36,19 +36,19 @@ class Modules_BankAndCart_Ajax extends app.modules.lib.Controller
 		]
 
 		# user info
-		res.view.user = {}
-		res.view.user.userCanUpgrade = true
-		res.view.user.fullName = "Andrew Chinn"	
-		res.view.user.availableCredits = "657"
-		res.view.user.memberType = "free member"	
+		res.view.user					= {}
+		res.view.user.userCanUpgrade	= true
+		res.view.user.fullName			= "Andrew Chinn"	
+		res.view.user.availableCredits	= "657"
+		res.view.user.memberType		= "free member"	
 		res.view.user.membershipExpires = "(this will never expire)"
-		res.view.user.avatar = {}
-		res.view.user.avatar.hasImage = false
-		res.view.user.avatar.image = "<img src=\"moo.gif\" alt=\"user avatar image\" />"
-		res.view.user.avatar.default = "<span class=\"avatar-default\">no image linked</span>"
+		res.view.user.avatar			= {}
+		res.view.user.avatar.hasImage	= false
+		res.view.user.avatar.image		= "<img src=\"moo.gif\" alt=\"user avatar image\" />"
+		res.view.user.avatar.default	= "<span class=\"avatar-default\">no image linked</span>"
 
 		# user upgrade info	
-		res.view.upgrade = {}
-		res.view.upgrade.monthlyCost = 49
+		res.view.upgrade				= {}
+		res.view.upgrade.monthlyCost	= 49
 
 		super

@@ -13,7 +13,7 @@ class SMSLogger extends winston.Transport
 			request = new app.modules.lib.JsonRpc.Request()
 			app.config.sms.forEach((number) ->
 				data = 
-					to:		number
+					to	: number
 					text: msg
 					from: app.config.service
 

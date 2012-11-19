@@ -9,8 +9,8 @@ class Profiler
 	module.exports = @
 	
 	constructor: (@print = false) ->
-		@start 	= {}
-		@end 	= {}
+		@start		= {}
+		@end		= {}
 		@storage	= new app.modules.lib.ProfilerStore[app.config.profiler.charAt(0).toUpperCase() + app.config.profiler.substr(1)]()
 		
 	startProfiling: (cb) ->
@@ -37,22 +37,22 @@ class Profiler
 			return app.logger(err, 'warn') if err
 			if res?
 				tmp = 
-					memory: @calcAvg(res.memory, res.count, memory)
-					time: 	[@calcAvg(res.time[0], res.count, time[0]), @calcAvg(res.time[1], res.count, time[1])]
-					cpu:	@calcAvg(res.cpu, res.count, cpu)
-					count: 	res.count + 1
-					_id:	id
+					memory	: @calcAvg(res.memory, res.count, memory)
+					time	: [@calcAvg(res.time[0], res.count, time[0]), @calcAvg(res.time[1], res.count, time[1])]
+					cpu		: @calcAvg(res.cpu, res.count, cpu)
+					count	: res.count + 1
+					_id		: id
 				
 				@storage.write(tmp, true)
 				if @print or process.env.NODE_ENV != 'production'
 					app.logger('Performance: ' + util.inspect(tmp))
 			else
 				tmp =
-					memory: memory
-					time:	time
-					cpu:	cpu 
-					count:	1
-					_id:	id
+					memory	: memory
+					time	: time
+					cpu		: cpu 
+					count	: 1
+					_id		: id
 					
 				@storage.write(tmp)
 				if @print or process.env.NODE_ENV != 'production'	
@@ -67,7 +67,7 @@ class Profiler
 						if not err
 							dRaw 	= data.toString().split('\n')[0].split(' ')
 							total 	= 0
-							count	 = 0
+							count	= 0
 							for time in dRaw
 								time = parseInt(time)
 								if time

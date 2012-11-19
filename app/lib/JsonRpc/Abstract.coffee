@@ -1,8 +1,5 @@
 crypto 	= require('crypto')
 URL 	= require('url')
-awssum 	= require('awssum')
-amazon 	= awssum.load('amazon/amazon')
-Swf		= awssum.load('amazon/swf').Swf
 
 class JsonRpcAbstractRequest
 	module.exports = @
@@ -24,10 +21,10 @@ class JsonRpcAbstractRequest
 			query: 		params
 		).replace('//', '')			
 		return {
-			'jsonrpc': 	'2.0'
-			'method': 	method
-			'params': 	params
-			'id': 		crypto.createHash('md5').update(full_url).digest('hex')
+			'jsonrpc'	: '2.0'
+			'method'	: method
+			'params'	: params
+			'id'		: crypto.createHash('md5').update(full_url).digest('hex')
 		}
 	
 	validate: (obj, success) ->
@@ -65,9 +62,19 @@ class JsonRpcAbstractRequest
 		return true
 
 	sendAsync: () ->
-		swf = new Swf(
-			'accessKeyId'		: app.config.aws.accessKeyId
-			'secretAccessKey'	: app.config.aws.secretAccessKey			
-			'region'			: amazon.US_EAST_1
+		average_exec_time = '60'
+		app.options.swf.connect.StartWorkflowExecution({
+				Domain						: app.config.service
+				WorkflowId					: '' + Math.floor((Math.random()*10)+1)
+				WorkflowType				: 
+					name					: app.config.async.name
+					version					: app.config.async.version
+				ExecutionStartToCloseTimeout: average_exec_time
+				TaskStartToCloseTimeout		: average_exec_time	
+				ChildPolicy					: 'REQUEST_CANCEL'
+				Input						: 'Input as String'
+			}
+			, (err, res) ->
+				console.log('StartWorkflowExecution', err, res)
 		)
 		

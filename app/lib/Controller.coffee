@@ -5,8 +5,8 @@ class Controller
 	
 	constructor: () ->
 		@params 	= 
-			'expires': 60
-			'cache': true
+			'expires'	: 60
+			'cache'		: true
 		@namespace	= @view = @id = @needed_res = null
 		
 	# Check if server has resources

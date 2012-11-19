@@ -7,9 +7,9 @@ class S3Store
 	
 	constructor: () ->
 		@s3 = new S3(
-			'accessKeyId'     : app.config.aws.accessKeyId
-			'secretAccessKey' : app.config.aws.secretAccessKey			
-			'region'					: amazon.US_EAST_1
+			'accessKeyId'		: app.config.aws.accessKeyId
+			'secretAccessKey'	: app.config.aws.secretAccessKey			
+			'region'			: app.config.aws.region
 		)
 		@s3.CheckBucket({ BucketName : app.config.aws.bucket }, (err, data) =>
 			if err
@@ -22,8 +22,8 @@ class S3Store
 		
 	read: (bucket, file, modified = null, cb) ->
 		options =
-			BucketName			: bucket
-			ObjectName			: file
+			BucketName		: bucket
+			ObjectName		: file
 			IfModifiedSince	: modified
 			
 		@s3.GetObject(options, (err, data) =>

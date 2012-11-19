@@ -2,8 +2,8 @@ class JsonRpcInternalRequest extends app.modules.lib.JsonRpc.Abstract
 	module.exports = @
 
 	constructor: (@url, method, params, @callback) ->
-		@path = null
-		@cache = false
+		@path	= null
+		@cache	= false
 		super
 
 	# Validate parameters

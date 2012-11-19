@@ -28,7 +28,7 @@ class Bootstrap
 		everyauth.debug = true	
 			
 		usersByLogin = "protrada": @addUserSync(
-			login: "protrada"
+			login	: "protrada"
 			password: "test"
 		)
 		
@@ -126,10 +126,10 @@ class Bootstrap
 
 						if 'db' in @config.cache.stores
 							dbConfig = 
-								host: 		app.config.sql.host
-								user: 		app.config.sql.user
-								password: 	app.config.sql.pass
-								database: 	'cache'
+								host	: app.config.sql.host
+								user	: app.config.sql.user
+								password: app.config.sql.pass
+								database: 'cache'
 							@options.dbcache = new DBWrapper(@config.sql.type, dbConfig)
 						new cronJob('* * * * * *'
 							, () => 
@@ -476,30 +476,31 @@ class Bootstrap
 	setupAsyncWorkflow: () ->
 		@options.swf = {}
 		Swf	= awssum.load('amazon/swf').Swf
+		console.log(@config.maxSockets)
 		@options.swf.connect = new Swf(
-			'accessKeyId'		: app.config.aws.accessKeyId
-			'secretAccessKey'	: app.config.aws.secretAccessKey			
-			'region'			: amazon.US_EAST_1
-			'agent'				: new https.Agent({ maxSockets: 100 }) #read http://nodejs.org/api/all.html#all_class_http_agent
+			'accessKeyId'		: @config.aws.accessKeyId
+			'secretAccessKey'	: @config.aws.secretAccessKey			
+			'region'			: @config.aws.region
+			'agent'				: new https.Agent({ maxSockets: @config.maxSockets }) #read http://nodejs.org/api/all.html#all_class_http_agent
 		)
 	
 		###@options.swf.connect.RegisterDomain({Name: @config.service, WorkflowExecutionRetentionPeriodInDays: '7'}, (err, res) =>
 			@options.swf.connect.RegisterWorkflowType({
-					Domain:									@config.service 
-					Name:									'AsyncSend'
-					Version:								'2.2'
-					DefaultTaskList:						
-						name: 'AsyncSend'
-					DefaultExecutionStartToCloseTimeout:	'86400'
-					DefaultTaskStartToCloseTimeout:			'86400'
+					Domain								: @config.service 
+					Name								: @config.async.version
+					Version								: @config.async.version
+					DefaultTaskList						:						
+						name							: @config.async.name
+					DefaultExecutionStartToCloseTimeout	: '86400'
+					DefaultTaskStartToCloseTimeout		: '86400'
 				}
 				, (err, res) ->
 					console.log('RegisterWorkflowType', err, res)
 			)
-			@options.swf.connect.RegisterActivityType({Domain: @config.service, Name: 'GetJob', Version: '2.0'}, (err, res) ->
+			@options.swf.connect.RegisterActivityType({Domain: @config.service, Name: 'GetJob', Version: @config.async.getJob}, (err, res) ->
 				console.log('RegisterActivityType', err, res)
 			)
-			@options.swf.connect.RegisterActivityType({Domain: @config.service, Name: 'SendResult', Version: '2.0'}, (err, res) ->
+			@options.swf.connect.RegisterActivityType({Domain: @config.service, Name: 'SendResult', Version: @config.async.sendResult}, (err, res) ->
 				console.log('RegisterActivityType', err, res)
 			)
 		)###
@@ -510,72 +511,68 @@ class Bootstrap
 				decisionType: 'ScheduleActivityTask'
 				scheduleActivityTaskDecisionAttributes: 
 					activityType: 
-						name:		'GetJob'
-						version:	'2.0'
-					activityId:				'' + Math.floor((Math.random()*10)+1)
-					input:					null
-					scheduleToCloseTimeout:	'60'
-					taskList:
-						name: 'GetJob'
-					scheduleToStartTimeout:	'5'
-					startToCloseTimeout:	'55'
-					heartbeatTimeout:		'10'
+						name				: 'GetJob'
+						version				: @config.async.getJob
+					activityId				: '' + Math.floor((Math.random()*10)+1)
+					input					: null
+					scheduleToCloseTimeout	: '86400'
+					taskList				:
+						name				: 'GetJob'
+					scheduleToStartTimeout	: '86400'
+					startToCloseTimeout		: '86400'
+					heartbeatTimeout		: '86400'
 			]
 			GetJob: [
 				decisionType: 'ScheduleActivityTask'
 				scheduleActivityTaskDecisionAttributes: 
-					activityType: 
-						name:		'SendResult'
-						version:	'2.0'
-					activityId:				'' + Math.floor((Math.random()*10)+1)
-					input:					null
-					scheduleToCloseTimeout:	'60'
-					taskList:
-						name: 'SendResult'
-					scheduleToStartTimeout:	'5'
-					startToCloseTimeout:	'55'
-					heartbeatTimeout:		'10'
+					activityType			: 
+						name				: 'SendResult'
+						version				: @config.async.sendResult
+					activityId				: '' + Math.floor((Math.random()*10)+1)
+					input					: null
+					scheduleToCloseTimeout	: '86400'
+					taskList				:
+						name				: 'SendResult'
+					scheduleToStartTimeout	: '86400'
+					startToCloseTimeout		: '86400'
+					heartbeatTimeout		: '86400'
 			]
 			SendResult: [
-				decisionType: 'CompleteWorkflowExecution'
+				decisionType				: 'CompleteWorkflowExecution'
 			]
 		
 		async.parallel([
 				(callback) =>
 					# Setup worker
 					@options.swf.worker		= new @modules.lib.Worker()
-					@options.swf.worker.addTasks('asyncWorker', ['AsyncSend', 'GetJob', 'SendResult'])
+					@options.swf.worker.addTasks('asyncWorker', ['GetJob', 'SendResult'])
 					@options.swf.worker.pollForTask()
 					callback()
 				, (callback) =>		
 					# Setup decider
 					@options.swf.decider	= new @modules.lib.Decider()
-					@options.swf.decider.addTasks('asyncDecider', ['AsyncSend'])
+					@options.swf.decider.addTasks('asyncDecider', [@config.async.name])
 					@options.swf.decider.addDecisions(asyncDecisions)
 					@options.swf.decider.pollForTask()
 					callback()
-				, (callback) =>	
-					average_exec_time = '60'
+				, (callback) =>
+					average_exec_time = '15'
 					@options.swf.connect.StartWorkflowExecution({
-							Domain: @config.service
-							WorkflowId:						'' + Math.floor((Math.random()*10)+1)
-							WorkflowType:					{name: 'AsyncSend', version: '2.2'}
-							ExecutionStartToCloseTimeout:	average_exec_time
-							TaskStartToCloseTimeout:		average_exec_time	
-							ChildPolicy:					'REQUEST_CANCEL'
-							Input:							'Input as String'
+							Domain						: @config.service
+							WorkflowId					: '' + Math.floor((Math.random()*10)+1)
+							WorkflowType				: 
+								name					: @config.async.name
+								version					: @config.async.version
+							ExecutionStartToCloseTimeout: average_exec_time
+							TaskStartToCloseTimeout		: average_exec_time	
+							ChildPolicy					: 'REQUEST_CANCEL'
+							Input						: 'Input as String'
 						}
 						, (err, res) ->
 							console.log('StartWorkflowExecution', err, res)
 					)
-					callback()				
+					callback()
 			]
 			, (err, result) ->
 		)
-	workerCallback: (err, task) =>
-		if not err
-			@options.swf.worker.pollForTask(task, @workerCallback)
-			
-	deciderCallback: (err, task) =>
-		if not err
-			@options.swf.decider.pollForTask(task, @deciderCallback)
+		######

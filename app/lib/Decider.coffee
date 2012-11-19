@@ -21,7 +21,7 @@ class Decider
 							Domain: app.config.service
 							TaskList: {name: task}
 							Identity: id
-							MaximumPageSize: 5
+							MaximumPageSize: 10
 							ReverseOrder: true
 						}
 						, (err, res) =>
@@ -29,11 +29,18 @@ class Decider
 							taskToken = res.Body.taskToken if res.Body.taskToken?
 							if taskToken?
 								data = @getData(res.Body.events)	
-								if data.status == 'completed'
-									decision = if @decisions[data.lastEvent]? then @decisions[data.lastEvent] else null
+								console.log("DATA", data)
+								if data.status == 'completed' or data.status == 'ready'
+									decision = if @decisions[data.lastTask]? then @decisions[data.lastTask] else null
 									if decision?
 										decision[0].scheduleActivityTaskDecisionAttributes.input = data.input if decision[0].scheduleActivityTaskDecisionAttributes?
-										app.options.swf.connect.RespondDecisionTaskCompleted({TaskToken: taskToken, Decisions: decision}, (err, res) ->	)	
+										app.options.swf.connect.RespondDecisionTaskCompleted({TaskToken: taskToken, Decisions: decision}, (err, res) ->	
+											console.log(err, res)
+										)
+								else
+									app.options.swf.connect.RespondDecisionTaskCompleted({TaskToken: taskToken, Decisions: decision}, (err, res) ->	
+											console.log(err, res)
+										)
 							else
 								@active[id][task] -= 1	
 								return if @active[id][task] > 1
@@ -54,30 +61,45 @@ class Decider
 		@decisions = app.modules.lib.Functions.clone(decisions)
 		
 	getData: (history) ->
+		console.log("HISTORY", history)
 		data = 
-			lastEvent:	null
-			input:		null
-			status:		null
+			lastTask	: null
+			input		: null
+			status		: null
+			reason		: null
+			details		: null
+			cause		: null
+			eventType	: null
 		
-		activity = history[2]
+		# get lastTask
+		lookFor = ['ActivityTaskScheduled'
+			, 'StartChildWorkflowExecutionInitiated'
+			, 'WorkflowExecutionContinuedAsNew'
+			, 'WorkflowExecutionStarted'
+		]
+		for activity in history
+			for event in lookFor
+				if activity.eventType == event
+					attributes = event.charAt(0).toLowerCase() + event.substr(1) + 'EventAttributes'
+					data.lastTask = activity[attributes].taskList.name
+					break					
 		
-		if history[4]?
-			data.lastEvent = history[4].activityTaskScheduledEventAttributes.taskList.name
+		lastActivity	= history[2]
+		data.eventType	= lastActivity.eventType
+		
+		attributes = lastActivity.eventType.charAt(0).toLowerCase() + lastActivity.eventType.substr(1) + 'EventAttributes'
+		if /completed/i.test(lastActivity.eventType)
+			data.status = 'completed'
+			data.input	= lastActivity[attributes].result if lastActivity[attributes].result
+		else if /(scheduled|initiated|continued|signaled|started)/i.test(lastActivity.eventType)
+			data.status = 'ready'
+			data.input	= lastActivity[attributes].input if lastActivity[attributes].input
 		else
-			data.lastEvent = activity.workflowExecutionStartedEventAttributes.taskList.name
-		
-		switch activity.eventType
-			when 'WorkflowExecutionStarted'
-				data.status = 'completed'
-				data.input = activity.workflowExecutionStartedEventAttributes.input
-			when 'ActivityTaskCompleted'
-				data.status = 'completed'
-				data.input = activity.activityTaskCompletedEventAttributes.result
-			when 'ActivityTaskCanceled'
-				data.status = 'canceled'
-			when 'ActivityTaskFailed'
-				data.status	= 'failed'
-				
+			data.status = 'failed'
+			data.reason	= lastActivity[attributes].reason if lastActivity[attributes].reason
+			data.details= lastActivity[attributes].details if lastActivity[attributes].details
+			data.cause	= lastActivity[attributes].cause if lastActivity[attributes].cause
+			
 		return data
 		
 	

@@ -32,8 +32,8 @@ class Modules
 					stat = fs.statSync(file)
 					if stat and stat.isFile()
 						if not /Bootstrap/.test(file)
-							ext = path_module.extname(file)
-							module = path_module.basename(file, ext)
+							ext						= path_module.extname(file)
+							module					= path_module.basename(file, ext)
 							modules[parent][module] = require(file)
 
 					else
@@ -47,6 +47,6 @@ class Modules
 			stat = fs.statSync(file)
 			if stat and stat.isFile()
 				if not /Bootstrap/.test(file)
-					ext = path_module.extname(file)
-					module = path_module.basename(file, ext)
+					ext						= path_module.extname(file)
+					module					= path_module.basename(file, ext)
 					modules[parent][module] = require(file)

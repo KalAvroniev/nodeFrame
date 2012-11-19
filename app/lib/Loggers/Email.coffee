@@ -14,11 +14,11 @@ class EmailLogger extends winston.Transport
 		
 	log: (level, msg, meta, callback) ->
 		data = 
-			ToAddresses : 	app.config.mail.to
-			Text : 			msg
-			Html : 			'<p>' + msg + '</p>'
-			Subject : 		level.charAt(0).toUpperCase() + level.substr(1) + ' status in ' + app.config.service
-			Source : 		app.config.mail.from
+			ToAddresses : app.config.mail.to
+			Text		: msg
+			Html		: '<p>' + msg + '</p>'
+			Subject		: level.charAt(0).toUpperCase() + level.substr(1) + ' status in ' + app.config.service
+			Source		: app.config.mail.from
 
 		@ses.SendEmail(data, (err, data) ->
 			if err

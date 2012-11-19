@@ -6,8 +6,8 @@ class APIController
 	
 	constructor: () ->
 		@params 	= 
-			'expires': 60
-			'cache': true
+			'expires'	: 60
+			'cache'		: true
 		@validate 	= {}
 		@options 	= {}
 		@namespace 	= @id = @needed_res = null
@@ -29,7 +29,7 @@ class APIController
 	run: (req, url) ->	
 		full_url 	= URL.format(
 			hostname: url
-			query: req.request.call.params
+			query	: req.request.call.params
 		).replace('//', '')
 		
 		async.waterfall([

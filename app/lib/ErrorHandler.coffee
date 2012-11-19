@@ -3,25 +3,25 @@ Email 	= require('./Loggers/Email')
 SMS 	= require('./Loggers/SMS')
 	
 config =
-	levels:
-		debug: 0
-		info:  1
-		warn:  2
-		error: 3
-		fatal: 4
-	colors:
-		debug: 'cyan'
-		info:  'green'
-		warn:  'grey'
-		error: 'yellow'
-		fatal: 'red'
+	levels		:
+		debug	: 0
+		info	: 1
+		warn	: 2
+		error	: 3
+		fatal	: 4
+	colors		:
+		debug	: 'cyan'
+		info	: 'green'
+		warn	: 'grey'
+		error	: 'yellow'
+		fatal	: 'red'
 	
 winston.loggers.add('debug',
 	transports: [
 		new winston.transports.Console(
-			level:     'debug'
-			colorize:  true
-			timestamp: true
+			level		: 'debug'
+			colorize	: true
+			timestamp	: true
 			#handleExceptions: true
 		)
 	]
@@ -30,11 +30,11 @@ winston.loggers.add('debug',
 winston.loggers.add('warn',
 	transports: [
 		new winston.transports.File(
-			level:     'warn'
-			timestamp: true
-			filename:  '/var/log/nodejs/error.log'
-			maxsize:   104857600
-			maxFiles:  7
+			level		: 'warn'
+			timestamp	: true
+			filename	: '/var/log/nodejs/error.log'
+			maxsize		: 104857600
+			maxFiles	: 7
 		)
 	]
 )
@@ -42,15 +42,15 @@ winston.loggers.add('warn',
 winston.loggers.add('error',
 	transports: [
 		new winston.transports.File(
-			level:     'error'
-			timestamp: true
-			filename:  '/var/log/nodejs/error.log'
-			maxsize:   104857600
-			maxFiles:  7
+			level		: 'error'
+			timestamp	: true
+			filename	: '/var/log/nodejs/error.log'
+			maxsize		: 104857600
+			maxFiles	: 7
 			#handleExceptions: true
 		),
 		new Email(
-			level:     'error'
+			level		: 'error'
 		)
 	]
 )
@@ -58,17 +58,17 @@ winston.loggers.add('error',
 winston.loggers.add('fatal',
 	transports: [
 		new winston.transports.File(
-			level:     'fatal'
-			timestamp: true
-			filename: '/var/log/nodejs/error.log'
-			maxsize: 104857600
-			maxFiles: 7
+			level		: 'fatal'
+			timestamp	: true
+			filename	: '/var/log/nodejs/error.log'
+			maxsize		: 104857600
+			maxFiles	: 7
 		),
 		new Email(
-			level:     'fatal'
+			level		: 'fatal'
 		),
 		new SMS(
-			level:     'fatal'
+			level		: 'fatal'
 		)
 	]
 )

@@ -31,3 +31,4 @@ exports.config.aws =
 	accessKeyId     : 'AKIAI654DO6KCXT5K54A'
 	secretAccessKey : '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'
 	bucket			: 'config-bucket-test'
+	region			: 'US_EAST_1'

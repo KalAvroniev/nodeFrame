@@ -166,30 +166,31 @@ class JsonRpcServer
 
 	@Success: (id, result) ->
 		return {
-			'jsonrpc': 	'2.0',
-			'result': 	result,
-			'id': 		id
+			'jsonrpc'	: '2.0',
+			'result'	: result,
+			'id'		: id
 		}
 
 	@Error: (id, errorMsg, errorCode = JsonRpcServer.INTERNAL_ERROR) ->
 		return {
-			'jsonrpc': '2.0',
-			'error': {
-				'message': 	errorMsg,
-				'code': 	errorCode
-			},
-			'id': 		id
+			'jsonrpc'		: '2.0'
+			'error'			: 
+				'message'	: errorMsg
+				'code'		: errorCode
+			'id'			: id
 		}
 		
 	@BulkResponse: (id, result, single) ->
 		if not result?
 			result = {
-				'jsonrpc': 	'2.0',
-				'result': 	[],
-				'id': 		id
+				'jsonrpc'	: '2.0'
+				'result'	: []
+				'id'		: id
 			}
+			
 		if single instanceof Array
 			result.result = result.result.concat(single)
 		else
 			result.result = result.result.concat(JSON.parse(single))
+			
 		return result

@@ -4,10 +4,10 @@ class API_Test_PingPong extends app.modules.lib.APIController
 	constructor: () ->
 		super
 		validate =
-			"name": 
-				"description": "A persons name.",
-				"type": "string"
-				"required": true
+			"name"				: 
+				"description"	: "A persons name."
+				"type"			: "string"
+				"required"		: true
 
 	render: (req, cb) ->
 		cb(null, "Hello " + req.params.name)

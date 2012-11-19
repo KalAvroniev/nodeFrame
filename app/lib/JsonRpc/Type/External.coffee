@@ -8,8 +8,8 @@ class JsonRpcExternalRequest extends app.modules.lib.JsonRpc.Abstract
 	constructor: (@service, @url, method, params, @callback) ->
 		@path 		= '/jsonrpc'
 		@headers 	= 
-			'Content-Type': 'application/json'
-			'Accept': 		'application/json'
+			'Content-Type'	: 'application/json'
+			'Accept'		: 'application/json'
 
 		super(@url, method, params, @callback)
 		
@@ -40,12 +40,12 @@ class JsonRpcExternalRequest extends app.modules.lib.JsonRpc.Abstract
 					else
 						tmp 	= @url.split(':')
 						options = 
-							'hostname': tmp[0]
-							'port': 	tmp[1]
-							'path': 	@path
-							'method': 	'POST'
-							'headers': 	@headers
-							'agent': 	http.globalAgent # read http://nodejs.org/api/all.html#all_class_http_agent
+							'hostname'	: tmp[0]
+							'port'		: tmp[1]
+							'path'		: @path
+							'method'	: 'POST'
+							'headers'	: @headers
+							'agent'		: new http.Agent({ maxSockets: app.config.maxSockets }) # read http://nodejs.org/api/all.html#all_class_http_agent
 
 						req = http.request(options, (result) =>
 							result.setEncoding('utf8');
@@ -90,7 +90,7 @@ class JsonRpcExternalRequest extends app.modules.lib.JsonRpc.Abstract
 				#look for cache
 				full_url = URL.format(
 					hostname: tmp[0] + @path + '/' + call.method
-					query: call.params
+					query	: call.params
 				).replace('//', '')	
 				index = app.options.cache.hashTagSync(full_url, namespace)
 				@getCache(index, (err, data) =>
