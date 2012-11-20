@@ -507,72 +507,60 @@ class Bootstrap
 		
 		# Prepare decisions
 		asyncDecisions = 
-			AsyncSend: [
-				decisionType: 'ScheduleActivityTask'
-				scheduleActivityTaskDecisionAttributes: 
-					activityType: 
-						name				: 'GetJob'
-						version				: @config.async.getJob
-					activityId				: '' + Math.floor((Math.random()*10)+1)
-					input					: null
-					scheduleToCloseTimeout	: '86400'
-					taskList				:
-						name				: 'GetJob'
-					scheduleToStartTimeout	: '86400'
-					startToCloseTimeout		: '86400'
-					heartbeatTimeout		: '86400'
+			AsyncSend											: [
+				decisionType									: 'ScheduleActivityTask'
+				scheduleActivityTaskDecisionAttributes			: 
+					activityType								: 
+						name									: 'GetJob'
+						version									: @config.async.getJob
+					activityId									: '' + Math.floor((Math.random()*10)+1)
+					taskList									:
+						name									: 'GetJob'
 			]
-			GetJob: [
-				decisionType: 'ScheduleActivityTask'
-				scheduleActivityTaskDecisionAttributes: 
-					activityType			: 
-						name				: 'SendResult'
-						version				: @config.async.sendResult
-					activityId				: '' + Math.floor((Math.random()*10)+1)
-					input					: null
-					scheduleToCloseTimeout	: '86400'
-					taskList				:
-						name				: 'SendResult'
-					scheduleToStartTimeout	: '86400'
-					startToCloseTimeout		: '86400'
-					heartbeatTimeout		: '86400'
+			GetJob												: [
+				decisionType									: 'ScheduleActivityTask'
+				scheduleActivityTaskDecisionAttributes			: 
+					activityType								: 
+						name									: 'SendResult'
+						version									: @config.async.sendResult
+					activityId									: '' + Math.floor((Math.random()*10)+1)
+					taskList									:
+						name									: 'SendResult'
 			]
-			SendResult: [
-				decisionType				: 'CompleteWorkflowExecution'
+			SendResult											: [
+				decisionType									: 'CompleteWorkflowExecution'
+			]
+			Fail												: [
+				decisionType									: 'ContinueAsNewWorkflowExecution'
+				continueAsNewWorkflowExecutionDecisionAttributes:
+					executionStartToCloseTimeout				: '60'
+					taskStartToCloseTimeout						: '60'
 			]
 		
-		async.parallel([
-				(callback) =>
+		async.auto(
+				worker: (callback) =>
 					# Setup worker
 					@options.swf.worker		= new @modules.lib.Worker()
 					@options.swf.worker.addTasks('asyncWorker', ['GetJob', 'SendResult'])
 					@options.swf.worker.pollForTask()
 					callback()
-				, (callback) =>		
+				decider: (callback) =>		
 					# Setup decider
 					@options.swf.decider	= new @modules.lib.Decider()
 					@options.swf.decider.addTasks('asyncDecider', [@config.async.name])
 					@options.swf.decider.addDecisions(asyncDecisions)
 					@options.swf.decider.pollForTask()
 					callback()
-				, (callback) =>
-					average_exec_time = '15'
-					@options.swf.connect.StartWorkflowExecution({
-							Domain						: @config.service
-							WorkflowId					: '' + Math.floor((Math.random()*10)+1)
-							WorkflowType				: 
-								name					: @config.async.name
-								version					: @config.async.version
-							ExecutionStartToCloseTimeout: average_exec_time
-							TaskStartToCloseTimeout		: average_exec_time	
-							ChildPolicy					: 'REQUEST_CANCEL'
-							Input						: 'Input as String'
-						}
-						, (err, res) ->
-							console.log('StartWorkflowExecution', err, res)
+				workflow: ['decider', (callback) =>
+					@options.swf.decider.startWorkflow('' + Math.floor((Math.random()*10)+1)
+						, 'Input as String'
+						, @config.service
+						, @config.async.name
+						, @config.async.version
+						, '60'
 					)
 					callback()
-			]
+				]
 			, (err, result) ->
 		)
 		######

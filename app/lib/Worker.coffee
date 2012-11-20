@@ -21,7 +21,7 @@ class Worker
 						taskToken = res.Body.taskToken if res.Body.taskToken?
 						if taskToken?
 							input = res.Body.input
-							app.options.swf.connect.RespondActivityTaskCompleted({TaskToken: taskToken, Result: input + " Result as String"}, (err, res) ->	)
+							app.options.swf.connect.RespondActivityTaskCompleted({TaskToken: taskToken, Result: input + " Result as String"}, (err, res) -> )
 						else
 							@active[id][task] -= 1
 							return if @active[id][task] > 1
