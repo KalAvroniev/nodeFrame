@@ -28,7 +28,7 @@ exports.config.apis =
 	runner	: 'staging.runner.mashhub.com:80'	
 
 exports.config.aws = 
-	accessKeyId     : 'AKIAI654DO6KCXT5K54A'
-	secretAccessKey : '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'
+	accessKeyId     : ''
+	secretAccessKey : ''
 	bucket			: 'config-bucket-test'
 	region			: 'US_EAST_1'
